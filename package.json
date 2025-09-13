@@ -1,0 +1,36 @@
+{
+  "name": "@the-architech/marketplace",
+  "version": "1.0.0",
+  "description": "The Architech CLI Marketplace - Adapters and Integrations",
+  "type": "module",
+  "main": "manifest.json",
+  "scripts": {
+    "generate-manifest": "node scripts/generate-marketplace-manifest.js",
+    "test": "echo 'No tests specified'",
+    "build": "npm run generate-manifest"
+  },
+  "keywords": [
+    "architech",
+    "cli",
+    "marketplace",
+    "adapters",
+    "integrations",
+    "blueprints"
+  ],
+  "author": "The Architech Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/the-architech/marketplace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/the-architech/marketplace/issues"
+  },
+  "homepage": "https://the-architech.dev/marketplace",
+  "files": [
+    "adapters/",
+    "integrations/",
+    "manifest.json",
+    "README.md"
+  ]
+}

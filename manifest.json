@@ -1,0 +1,401 @@
+{
+  "modules": [
+    {
+      "id": "auth/better-auth",
+      "version": "0.18.0",
+      "path": "adapters/auth/better-auth/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "blockchain/web3",
+      "version": "1.0.0",
+      "path": "adapters/blockchain/web3/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "content/next-intl",
+      "version": "1.0.0",
+      "path": "adapters/content/next-intl/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [
+        "framework/nextjs"
+      ],
+      "tags": []
+    },
+    {
+      "id": "database/drizzle",
+      "version": "0.29.0",
+      "path": "adapters/database/drizzle/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "database/prisma",
+      "version": "5.0.0",
+      "path": "adapters/database/prisma/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "database/sequelize",
+      "version": "6.0.0",
+      "path": "adapters/database/sequelize/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "database/typeorm",
+      "version": "0.3.0",
+      "path": "adapters/database/typeorm/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "deployment/docker",
+      "version": "1.0.0",
+      "path": "adapters/deployment/docker/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "email/resend",
+      "version": "1.0.0",
+      "path": "adapters/email/resend/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "framework/nextjs",
+      "version": "14.0.0",
+      "path": "adapters/framework/nextjs/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "observability/sentry",
+      "version": "1.0.0",
+      "path": "adapters/observability/sentry/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "payment/stripe",
+      "version": "1.0.0",
+      "path": "adapters/payment/stripe/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "state/zustand",
+      "version": "1.0.0",
+      "path": "adapters/state/zustand/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "testing/vitest",
+      "version": "1.0.0",
+      "path": "adapters/testing/vitest/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [
+        "framework/nextjs"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ui/shadcn-ui",
+      "version": "latest",
+      "path": "adapters/ui/shadcn-ui/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "better-auth-drizzle-integration",
+      "version": "1.0.0",
+      "path": "integrations/better-auth-drizzle-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "better-auth-nextjs-integration",
+      "version": "1.0.0",
+      "path": "integrations/better-auth-nextjs-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "docker-drizzle-integration",
+      "version": "1.0.0",
+      "path": "integrations/docker-drizzle-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "docker-nextjs-integration",
+      "version": "1.0.0",
+      "path": "integrations/docker-nextjs-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "drizzle-nextjs-integration",
+      "version": "1.0.0",
+      "path": "integrations/drizzle-nextjs-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "prisma-nextjs-integration",
+      "version": "1.0.0",
+      "path": "integrations/prisma-nextjs-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "resend-nextjs-integration",
+      "version": "1.0.0",
+      "path": "integrations/resend-nextjs-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "resend-shadcn-integration",
+      "version": "1.0.0",
+      "path": "integrations/resend-shadcn-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "sentry-drizzle-nextjs-integration",
+      "version": "1.0.0",
+      "path": "integrations/sentry-drizzle-nextjs-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "sentry-nextjs-integration",
+      "version": "1.0.0",
+      "path": "integrations/sentry-nextjs-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "shadcn-nextjs-integration",
+      "version": "1.0.0",
+      "path": "integrations/shadcn-nextjs-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "shadcn-zustand-integration",
+      "version": "1.0.0",
+      "path": "integrations/shadcn-zustand-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "stripe-drizzle-integration",
+      "version": "1.0.0",
+      "path": "integrations/stripe-drizzle-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [
+        "stripe",
+        "drizzle"
+      ],
+      "tags": []
+    },
+    {
+      "id": "stripe-nextjs-integration",
+      "version": "1.0.0",
+      "path": "integrations/stripe-nextjs-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "stripe-shadcn-integration",
+      "version": "1.0.0",
+      "path": "integrations/stripe-shadcn-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [
+        "stripe",
+        "shadcn-ui"
+      ],
+      "tags": []
+    },
+    {
+      "id": "vitest-nextjs-integration",
+      "version": "1.0.0",
+      "path": "integrations/vitest-nextjs-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "vitest-zustand-integration",
+      "version": "1.0.0",
+      "path": "integrations/vitest-zustand-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "web3-nextjs-integration",
+      "version": "1.0.0",
+      "path": "integrations/web3-nextjs-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "web3-shadcn-integration",
+      "version": "1.0.0",
+      "path": "integrations/web3-shadcn-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "zustand-nextjs-integration",
+      "version": "1.0.0",
+      "path": "integrations/zustand-nextjs-integration/integration.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "integration",
+      "dependencies": [],
+      "tags": []
+    }
+  ],
+  "lastUpdated": "2025-09-13T12:37:34.478Z",
+  "totalModules": 35
+}
