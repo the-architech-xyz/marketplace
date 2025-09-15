@@ -66,12 +66,12 @@ export const shadcnUiBlueprint: Blueprint = {
     // Initialize Shadcn/ui
     {
       type: 'RUN_COMMAND',
-      command: 'npx shadcn@latest init --yes --defaults'
+      command: 'npx shadcn@latest init --yes --defaults --force --legacy-peer-deps'
     },
     // Install core components only (minimal base installation)
     {
       type: 'RUN_COMMAND',
-      command: 'npx shadcn@latest add button input card'
+      command: 'npx shadcn@latest add button input card --yes --force --legacy-peer-deps'
     },
     // Create comprehensive components.json
     {
