@@ -27,6 +27,7 @@
     "api_routes": "src/app/api/",
     "database_config": "src/lib/db",
     "auth_config": "src/lib/auth",
+    "payment_config": "src/lib/payment",
     "email_config": "src/lib/email",
     "observability_config": "src/lib/observability",
     "state_config": "src/lib/state",
