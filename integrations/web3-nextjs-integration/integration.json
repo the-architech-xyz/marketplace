@@ -1,8 +1,9 @@
 {
   "id": "web3-nextjs-integration",
   "name": "Web3 Next.js Integration",
-  "description": "Complete Web3 integration for Next.js with wallet connection, smart contract interaction, and blockchain utilities",
+  "description": "Modern Web3 integration for Next.js using viem with React Query, TypeScript, and Next.js optimizations",
   "category": "integration",
+  "version": "2.0.0",
   "tech_stack": {
     "framework": "nextjs",
     "adapters": ["web3"]
@@ -13,37 +14,21 @@
   },
   "provides": {
     "files": [
-      "src/lib/web3/wallet.ts",
-      "src/lib/web3/contracts.ts",
-      "src/lib/web3/transactions.ts",
-      "src/lib/web3/network.ts",
-      "src/lib/web3/events.ts",
-      "src/lib/web3/utils.ts",
-      "src/lib/web3/types.ts",
-      "src/lib/web3/constants.ts",
-      "src/hooks/useWallet.ts",
-      "src/hooks/useContract.ts",
-      "src/hooks/useTransaction.ts",
-      "src/hooks/useNetwork.ts",
+      "src/lib/web3/config.ts",
+      "src/lib/web3/core.ts",
       "src/hooks/useWeb3.ts",
-      "src/components/web3/WalletProvider.tsx",
-      "src/components/web3/WalletButton.tsx",
-      "src/components/web3/WalletModal.tsx",
-      "src/components/web3/NetworkSwitcher.tsx",
-      "src/components/web3/TransactionStatus.tsx",
-      "src/components/web3/ContractInterface.tsx",
       "src/app/api/web3/balance/route.ts",
-      "src/app/api/web3/transaction/route.ts",
-      "src/app/api/web3/contract/route.ts",
       "src/middleware.ts"
     ],
-    "components": [
-      "WalletProvider",
-      "WalletButton",
-      "WalletModal",
-      "NetworkSwitcher",
-      "TransactionStatus",
-      "ContractInterface"
+    "hooks": [
+      "useWeb3",
+      "useBalance",
+      "useBlockNumber",
+      "useGasPrice",
+      "useSendTransaction",
+      "useWaitForTransactionReceipt",
+      "useContract",
+      "useWalletContract"
     ],
     "pages": [
       "src/app/web3/page.tsx",
@@ -53,6 +38,24 @@
     ]
   },
   "sub_features": {
+    "viemIntegration": {
+      "name": "Viem Integration",
+      "description": "Modern Web3 library with type safety and performance",
+      "type": "boolean",
+      "default": true
+    },
+    "reactQuery": {
+      "name": "React Query",
+      "description": "Data fetching, caching, and synchronization for Web3 data",
+      "type": "boolean",
+      "default": true
+    },
+    "typeScript": {
+      "name": "TypeScript Support",
+      "description": "Full TypeScript support with strict type checking",
+      "type": "boolean",
+      "default": true
+    },
     "walletConnection": {
       "name": "Wallet Connection",
       "description": "Connect to various Web3 wallets (MetaMask, WalletConnect, etc.)",
@@ -61,7 +64,7 @@
     },
     "smartContracts": {
       "name": "Smart Contracts",
-      "description": "Smart contract interaction and deployment utilities",
+      "description": "Smart contract interaction with type safety",
       "type": "boolean",
       "default": true
     },
@@ -77,12 +80,6 @@
       "type": "boolean",
       "default": true
     },
-    "eventListening": {
-      "name": "Event Listening",
-      "description": "Listen to blockchain events and contract events",
-      "type": "boolean",
-      "default": true
-    },
     "apiRoutes": {
       "name": "API Routes",
       "description": "Next.js API routes for Web3 operations",
@@ -91,25 +88,19 @@
     },
     "middleware": {
       "name": "Middleware",
-      "description": "Web3 middleware for authentication and validation",
-      "type": "boolean",
-      "default": true
-    },
-    "uiComponents": {
-      "name": "UI Components",
-      "description": "React components for Web3 interactions",
-      "type": "boolean",
-      "default": true
-    },
-    "typeScript": {
-      "name": "TypeScript Support",
-      "description": "Full TypeScript support for Web3 operations",
+      "description": "Web3 security middleware for Next.js",
       "type": "boolean",
       "default": true
     },
     "errorHandling": {
       "name": "Error Handling",
-      "description": "Comprehensive error handling for Web3 operations",
+      "description": "Comprehensive error handling with custom error classes",
+      "type": "boolean",
+      "default": true
+    },
+    "validation": {
+      "name": "Validation",
+      "description": "Zod schema validation for Web3 data",
       "type": "boolean",
       "default": true
     }

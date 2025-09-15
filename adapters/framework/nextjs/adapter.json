@@ -3,7 +3,7 @@
   "name": "Next.js",
   "description": "The React Framework for Production",
   "category": "framework",
-  "version": "14.0.0",
+  "version": "15.0.0",
   "blueprint": "blueprint.ts",
   "dependencies": [],
   "capabilities": [
@@ -16,7 +16,13 @@
     "tailwind",
     "eslint",
     "src-dir",
-    "import-alias"
+    "import-alias",
+    "performance-optimization",
+    "security-headers",
+    "bundle-analysis",
+    "image-optimization",
+    "seo-optimization",
+    "modern-dev-tools"
   ],
   "limitations": "Requires Node.js 18+ and npm/yarn/pnpm/bun",
   "paths": {

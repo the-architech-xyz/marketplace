@@ -77,6 +77,84 @@
       "description": "Release tracking and deployment monitoring",
       "type": "boolean",
       "default": true
+    },
+    "sessionReplay": {
+      "name": "Session Replay",
+      "description": "User session recording and replay for debugging",
+      "type": "boolean",
+      "default": false
+    },
+    "customMetrics": {
+      "name": "Custom Metrics",
+      "description": "Custom business metrics and KPIs tracking",
+      "type": "boolean",
+      "default": false
+    },
+    "errorGrouping": {
+      "name": "Error Grouping",
+      "description": "Advanced error grouping and deduplication",
+      "type": "boolean",
+      "default": false
+    },
+    "crashReporting": {
+      "name": "Crash Reporting",
+      "description": "Detailed crash reports with stack traces",
+      "type": "boolean",
+      "default": true
+    },
+    "breadcrumbs": {
+      "name": "Breadcrumbs",
+      "description": "User action breadcrumbs for error context",
+      "type": "boolean",
+      "default": true
+    },
+    "sourceMaps": {
+      "name": "Source Maps",
+      "description": "Source map support for better error debugging",
+      "type": "boolean",
+      "default": false
+    },
+    "integrations": {
+      "name": "Third-party Integrations",
+      "description": "Integrations with Slack, Discord, PagerDuty, etc.",
+      "type": "boolean",
+      "default": false
+    },
+    "customTags": {
+      "name": "Custom Tags",
+      "description": "Custom tagging and filtering for errors and performance",
+      "type": "boolean",
+      "default": false
+    },
+    "sampling": {
+      "name": "Sampling",
+      "description": "Intelligent sampling for high-volume applications",
+      "type": "boolean",
+      "default": false
+    },
+    "privacy": {
+      "name": "Privacy Controls",
+      "description": "Data privacy controls and PII scrubbing",
+      "type": "boolean",
+      "default": false
+    },
+    "webhooks": {
+      "name": "Webhooks",
+      "description": "Webhook notifications for critical errors",
+      "type": "boolean",
+      "default": false
+    },
+    "analytics": {
+      "name": "Analytics",
+      "description": "Advanced analytics and reporting features",
+      "type": "boolean",
+      "default": false
+    },
+    "testing": {
+      "name": "Testing Tools",
+      "description": "Testing utilities and mock Sentry for development",
+      "type": "boolean",
+      "default": false
     }
   },
   "blueprint": {

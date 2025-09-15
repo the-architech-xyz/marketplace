@@ -1,9 +1,9 @@
 {
   "id": "shadcn-nextjs-integration",
   "name": "Shadcn Next.js Integration",
-  "description": "Complete Shadcn/ui integration for Next.js with components, theming, and layout utilities",
+  "description": "Complete Shadcn/ui integration for Next.js with modern components, optimizations, and Next.js-specific features",
   "category": "integration",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "tech_stack": {
     "framework": "nextjs",
     "adapters": ["shadcn-ui"]
@@ -38,6 +38,11 @@
       "src/components/theme/theme-provider.tsx",
       "src/components/theme/theme-toggle.tsx",
       "src/components/theme/theme-switcher.tsx",
+      "src/components/nextjs/next-image.tsx",
+      "src/components/nextjs/next-link.tsx",
+      "src/components/nextjs/forms.tsx",
+      "src/components/nextjs/pages.tsx",
+      "src/components/nextjs/seo.tsx",
       "src/styles/globals.css",
       "tailwind.config.js",
       "components.json"
@@ -65,7 +70,17 @@
       "Navigation",
       "ThemeProvider",
       "ThemeToggle",
-      "ThemeSwitcher"
+      "ThemeSwitcher",
+      "NextImage",
+      "NextLink",
+      "FormInput",
+      "FormTextarea",
+      "FormSelect",
+      "FormSubmit",
+      "PageContainer",
+      "PageHeader",
+      "PageSection",
+      "SEO"
     ],
     "pages": [
       "src/app/components/page.tsx",
@@ -131,6 +146,36 @@
     "dataDisplay": {
       "name": "Data Display",
       "description": "Tables, lists, and data visualization components",
+      "type": "boolean",
+      "default": true
+    },
+    "nextjsOptimizations": {
+      "name": "Next.js Optimizations",
+      "description": "Next.js specific optimizations and components",
+      "type": "boolean",
+      "default": true
+    },
+    "seoComponents": {
+      "name": "SEO Components",
+      "description": "SEO and meta tag management components",
+      "type": "boolean",
+      "default": true
+    },
+    "formValidation": {
+      "name": "Form Validation",
+      "description": "Type-safe form validation with Zod and React Hook Form",
+      "type": "boolean",
+      "default": true
+    },
+    "imageOptimization": {
+      "name": "Image Optimization",
+      "description": "Next.js Image component optimizations",
+      "type": "boolean",
+      "default": true
+    },
+    "linkOptimization": {
+      "name": "Link Optimization",
+      "description": "Next.js Link component optimizations",
       "type": "boolean",
       "default": true
     }

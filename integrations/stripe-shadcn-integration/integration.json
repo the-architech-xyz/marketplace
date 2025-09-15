@@ -1,18 +1,153 @@
 {
   "id": "stripe-shadcn-integration",
   "name": "Stripe Shadcn Integration",
-  "description": "Integrates Stripe with Shadcn UI components for payment forms and UI",
-  "version": "1.0.0",
+  "description": "Complete Stripe integration with Shadcn/ui components for payments, subscriptions, and billing management",
+  "version": "2.0.0",
   "category": "integration",
-  "type": "feature",
-  "dependencies": [
-    "stripe",
-    "shadcn-ui"
-  ],
-  "features": [
-    "payment-forms",
-    "subscription-cards",
-    "invoice-tables",
-    "pricing-cards"
-  ]
+  "tech_stack": {
+    "framework": "agnostic",
+    "adapters": ["stripe", "shadcn-ui"]
+  },
+  "requirements": {
+    "modules": ["stripe", "shadcn-ui"],
+    "dependencies": ["@stripe/stripe-js", "@stripe/react-stripe-js", "react-hook-form", "zod"]
+  },
+  "provides": {
+    "files": [
+      "src/components/payment/PaymentForm.tsx",
+      "src/components/payment/SubscriptionCard.tsx",
+      "src/components/payment/InvoiceTable.tsx",
+      "src/components/payment/PricingCard.tsx",
+      "src/components/payment/CheckoutButton.tsx",
+      "src/components/payment/PaymentMethodSelector.tsx",
+      "src/components/payment/BillingHistory.tsx",
+      "src/components/payment/SubscriptionManager.tsx",
+      "src/components/payment/InvoiceViewer.tsx",
+      "src/components/payment/PaymentStatus.tsx",
+      "src/lib/stripe/config.ts",
+      "src/lib/stripe/webhooks.ts",
+      "src/lib/stripe/subscriptions.ts",
+      "src/lib/stripe/invoices.ts",
+      "src/hooks/useStripe.ts",
+      "src/hooks/useSubscription.ts",
+      "src/hooks/usePaymentMethods.ts"
+    ],
+    "components": [
+      "PaymentForm",
+      "SubscriptionCard",
+      "InvoiceTable",
+      "PricingCard",
+      "CheckoutButton",
+      "PaymentMethodSelector",
+      "BillingHistory",
+      "SubscriptionManager",
+      "InvoiceViewer",
+      "PaymentStatus"
+    ],
+    "pages": []
+  },
+  "sub_features": {
+    "basicPayments": {
+      "name": "Basic Payments",
+      "description": "One-time payment forms and processing",
+      "type": "boolean",
+      "default": true
+    },
+    "subscriptions": {
+      "name": "Subscriptions",
+      "description": "Recurring subscription management and billing",
+      "type": "boolean",
+      "default": true
+    },
+    "invoicing": {
+      "name": "Invoicing",
+      "description": "Invoice generation, management, and display",
+      "type": "boolean",
+      "default": true
+    },
+    "pricing": {
+      "name": "Pricing Cards",
+      "description": "Pricing display and comparison components",
+      "type": "boolean",
+      "default": true
+    },
+    "paymentMethods": {
+      "name": "Payment Methods",
+      "description": "Payment method management and selection",
+      "type": "boolean",
+      "default": false
+    },
+    "billingHistory": {
+      "name": "Billing History",
+      "description": "Transaction and billing history display",
+      "type": "boolean",
+      "default": false
+    },
+    "subscriptionManagement": {
+      "name": "Subscription Management",
+      "description": "Advanced subscription management interface",
+      "type": "boolean",
+      "default": false
+    },
+    "webhooks": {
+      "name": "Webhooks",
+      "description": "Stripe webhook handling and processing",
+      "type": "boolean",
+      "default": false
+    },
+    "coupons": {
+      "name": "Coupons & Discounts",
+      "description": "Coupon and discount code management",
+      "type": "boolean",
+      "default": false
+    },
+    "taxes": {
+      "name": "Tax Management",
+      "description": "Tax calculation and management",
+      "type": "boolean",
+      "default": false
+    },
+    "refunds": {
+      "name": "Refunds",
+      "description": "Refund processing and management",
+      "type": "boolean",
+      "default": false
+    },
+    "analytics": {
+      "name": "Analytics",
+      "description": "Payment and subscription analytics",
+      "type": "boolean",
+      "default": false
+    },
+    "testing": {
+      "name": "Testing Tools",
+      "description": "Test payment processing and validation",
+      "type": "boolean",
+      "default": false
+    },
+    "multiCurrency": {
+      "name": "Multi-Currency",
+      "description": "Support for multiple currencies",
+      "type": "boolean",
+      "default": false
+    },
+    "mobilePayments": {
+      "name": "Mobile Payments",
+      "description": "Mobile-optimized payment components",
+      "type": "boolean",
+      "default": false
+    },
+    "accessibility": {
+      "name": "Accessibility",
+      "description": "WCAG AA compliant payment components",
+      "type": "boolean",
+      "default": true
+    },
+    "theming": {
+      "name": "Theming",
+      "description": "Custom theming and branding support",
+      "type": "boolean",
+      "default": true
+    }
+  }
 }

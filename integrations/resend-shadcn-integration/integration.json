@@ -32,15 +32,27 @@
     "pages": []
   },
   "sub_features": {
-    "emailForm": {
-      "name": "Email Form",
-      "description": "Beautiful email sending form with validation",
+    "basicEmail": {
+      "name": "Basic Email",
+      "description": "Simple email sending form with validation",
       "type": "boolean",
       "default": true
     },
     "emailTemplates": {
       "name": "Email Templates",
       "description": "Template management and preview components",
+      "type": "boolean",
+      "default": true
+    },
+    "emailComposer": {
+      "name": "Email Composer",
+      "description": "Rich text email composer with template support",
+      "type": "boolean",
+      "default": true
+    },
+    "emailSettings": {
+      "name": "Email Settings",
+      "description": "Email configuration and preferences interface",
       "type": "boolean",
       "default": true
     },
@@ -56,15 +68,87 @@
       "type": "boolean",
       "default": false
     },
-    "emailComposer": {
-      "name": "Email Composer",
-      "description": "Rich text email composer with template support",
+    "emailAnalytics": {
+      "name": "Email Analytics",
+      "description": "Email performance tracking and analytics dashboard",
+      "type": "boolean",
+      "default": false
+    },
+    "emailScheduling": {
+      "name": "Email Scheduling",
+      "description": "Schedule emails for future delivery",
+      "type": "boolean",
+      "default": false
+    },
+    "emailAutomation": {
+      "name": "Email Automation",
+      "description": "Automated email workflows and triggers",
+      "type": "boolean",
+      "default": false
+    },
+    "emailSegmentation": {
+      "name": "Email Segmentation",
+      "description": "Advanced audience segmentation and targeting",
+      "type": "boolean",
+      "default": false
+    },
+    "emailPersonalization": {
+      "name": "Email Personalization",
+      "description": "Dynamic content and personalization features",
+      "type": "boolean",
+      "default": false
+    },
+    "emailTesting": {
+      "name": "Email Testing",
+      "description": "A/B testing and email preview tools",
+      "type": "boolean",
+      "default": false
+    },
+    "emailCompliance": {
+      "name": "Email Compliance",
+      "description": "GDPR, CAN-SPAM compliance tools and features",
+      "type": "boolean",
+      "default": false
+    },
+    "emailWebhooks": {
+      "name": "Email Webhooks",
+      "description": "Webhook handling for email events",
+      "type": "boolean",
+      "default": false
+    },
+    "emailBatching": {
+      "name": "Email Batching",
+      "description": "Batch email sending and processing",
+      "type": "boolean",
+      "default": false
+    },
+    "emailTemplates": {
+      "name": "Advanced Templates",
+      "description": "Advanced template system with variables and logic",
+      "type": "boolean",
+      "default": false
+    },
+    "emailAttachments": {
+      "name": "Email Attachments",
+      "description": "File attachment support and management",
+      "type": "boolean",
+      "default": false
+    },
+    "emailTracking": {
+      "name": "Email Tracking",
+      "description": "Open rates, click tracking, and engagement metrics",
+      "type": "boolean",
+      "default": false
+    },
+    "accessibility": {
+      "name": "Accessibility",
+      "description": "WCAG AA compliant email components",
       "type": "boolean",
       "default": true
     },
-    "emailSettings": {
-      "name": "Email Settings",
-      "description": "Email configuration and preferences interface",
+    "theming": {
+      "name": "Theming",
+      "description": "Custom theming and branding support",
       "type": "boolean",
       "default": true
     }

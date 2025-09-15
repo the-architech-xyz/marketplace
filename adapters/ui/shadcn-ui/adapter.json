@@ -3,7 +3,7 @@
   "name": "Shadcn/ui",
   "description": "Beautifully designed components built with Radix UI and Tailwind CSS",
   "category": "ui",
-  "version": "latest",
+  "version": "1.0.0",
   "blueprint": "blueprint.ts",
   "requirements": {
     "capabilities": ["react-framework"]
@@ -16,7 +16,13 @@
     "dark-mode",
     "theming",
     "responsive",
-    "typescript"
+    "typescript",
+    "form-validation",
+    "animations",
+    "icons",
+    "theme-switching",
+    "comprehensive-utils",
+    "production-ready"
   ],
   "limitations": "Requires React framework and Tailwind CSS",
   "parameters": {
@@ -160,7 +166,7 @@
           "required": false
         }
       }
-    }
+    },
   },
   "constraints": {}
 }

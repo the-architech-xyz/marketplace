@@ -3,9 +3,25 @@ import { Blueprint } from '@thearchitech.xyz/types';
 export const blueprint: Blueprint = {
   id: 'shadcn-nextjs-integration',
   name: 'Shadcn Next.js Integration',
-  description: 'Complete Next.js integration for Shadcn/ui',
-  version: '2.0.0',
+  description: 'Complete Next.js integration for Shadcn/ui with modern components and optimizations',
+  version: '3.0.0',
   actions: [
+    // Install Next.js specific dependencies
+    {
+      type: 'INSTALL_PACKAGES',
+      packages: [
+        'next-themes',
+        'next-seo',
+        'next-sitemap',
+        'sharp',
+        '@next/bundle-analyzer',
+        'react-hook-form',
+        '@hookform/resolvers',
+        'zod',
+        'sonner'
+      ],
+      isDev: false
+    },
     // Install additional Shadcn packages for Next.js
     {
       type: 'INSTALL_PACKAGES',
@@ -204,6 +220,484 @@ export const blueprint: Blueprint = {
         },
         mergeStrategy: 'deep'
       }
+    },
+    
+    // Create Next.js optimized components
+    {
+      type: 'CREATE_FILE',
+      path: 'src/components/nextjs/next-image.tsx',
+      content: `import React from 'react'
+import Image from 'next/image'
+import { cn } from '@/lib/utils'
+
+interface NextImageProps {
+  src: string
+  alt: string
+  width?: number
+  height?: number
+  className?: string
+  priority?: boolean
+  placeholder?: 'blur' | 'empty'
+  blurDataURL?: string
+  quality?: number
+  sizes?: string
+  fill?: boolean
+  style?: React.CSSProperties
+}
+
+export function NextImage({
+  src,
+  alt,
+  width,
+  height,
+  className,
+  priority = false,
+  placeholder = 'empty',
+  blurDataURL,
+  quality = 75,
+  sizes,
+  fill = false,
+  style,
+  ...props
+}: NextImageProps) {
+  return (
+    <div className={cn('relative overflow-hidden', className)}>
+      <Image
+        src={src}
+        alt={alt}
+        width={fill ? undefined : width}
+        height={fill ? undefined : height}
+        priority={priority}
+        placeholder={placeholder}
+        blurDataURL={blurDataURL}
+        quality={quality}
+        sizes={sizes}
+        fill={fill}
+        style={style}
+        {...props}
+      />
+    </div>
+  )
+}`
+    },
+    
+    // Create Next.js Link component
+    {
+      type: 'CREATE_FILE',
+      path: 'src/components/nextjs/next-link.tsx',
+      content: `import React from 'react'
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
+
+interface NextLinkProps {
+  href: string
+  children: React.ReactNode
+  className?: string
+  prefetch?: boolean
+  replace?: boolean
+  scroll?: boolean
+  shallow?: boolean
+  passHref?: boolean
+  legacyBehavior?: boolean
+}
+
+export function NextLink({
+  href,
+  children,
+  className,
+  prefetch = true,
+  replace = false,
+  scroll = true,
+  shallow = false,
+  passHref = false,
+  legacyBehavior = false,
+  ...props
+}: NextLinkProps) {
+  return (
+    <Link
+      href={href}
+      prefetch={prefetch}
+      replace={replace}
+      scroll={scroll}
+      shallow={shallow}
+      passHref={passHref}
+      legacyBehavior={legacyBehavior}
+      className={cn('transition-colors hover:text-primary', className)}
+      {...props}
+    >
+      {children}
+    </Link>
+  )
+}`
+    },
+    
+    // Create Next.js optimized form components
+    {
+      type: 'CREATE_FILE',
+      path: 'src/components/nextjs/forms.tsx',
+      content: `'use client'
+
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { Checkbox } from '@/components/ui/checkbox'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Switch } from '@/components/ui/switch'
+import { Slider } from '@/components/ui/slider'
+import { cn } from '@/lib/utils'
+
+// Form field wrapper
+interface FormFieldProps {
+  children: React.ReactNode
+  error?: string
+  className?: string
+}
+
+export function FormField({ children, error, className }: FormFieldProps) {
+  return (
+    <div className={cn('space-y-2', className)}>
+      {children}
+      {error && (
+        <p className="text-sm text-destructive">{error}</p>
+      )}
+    </div>
+  )
+}
+
+// Form input with validation
+interface FormInputProps {
+  label: string
+  error?: string
+  className?: string
+  required?: boolean
+  [key: string]: any
+}
+
+export function FormInput({ 
+  label, 
+  error, 
+  className, 
+  required = false,
+  ...props 
+}: FormInputProps) {
+  return (
+    <FormField error={error} className={className}>
+      <Label htmlFor={props.id || props.name}>
+        {label}
+        {required && <span className="text-destructive ml-1">*</span>}
+      </Label>
+      <Input {...props} />
+    </FormField>
+  )
+}
+
+// Form textarea with validation
+interface FormTextareaProps {
+  label: string
+  error?: string
+  className?: string
+  required?: boolean
+  [key: string]: any
+}
+
+export function FormTextarea({ 
+  label, 
+  error, 
+  className, 
+  required = false,
+  ...props 
+}: FormTextareaProps) {
+  return (
+    <FormField error={error} className={className}>
+      <Label htmlFor={props.id || props.name}>
+        {label}
+        {required && <span className="text-destructive ml-1">*</span>}
+      </Label>
+      <Textarea {...props} />
+    </FormField>
+  )
+}
+
+// Form select with validation
+interface FormSelectProps {
+  label: string
+  error?: string
+  className?: string
+  required?: boolean
+  options: Array<{ value: string; label: string }>
+  placeholder?: string
+  [key: string]: any
+}
+
+export function FormSelect({ 
+  label, 
+  error, 
+  className, 
+  required = false,
+  options,
+  placeholder = "Select an option",
+  ...props 
+}: FormSelectProps) {
+  return (
+    <FormField error={error} className={className}>
+      <Label htmlFor={props.id || props.name}>
+        {label}
+        {required && <span className="text-destructive ml-1">*</span>}
+      </Label>
+      <Select {...props}>
+        <SelectTrigger>
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </FormField>
+  )
+}
+
+// Form submit button
+interface FormSubmitProps {
+  children: React.ReactNode
+  loading?: boolean
+  disabled?: boolean
+  className?: string
+  [key: string]: any
+}
+
+export function FormSubmit({ 
+  children, 
+  loading = false, 
+  disabled = false,
+  className,
+  ...props 
+}: FormSubmitProps) {
+  return (
+    <Button
+      type="submit"
+      disabled={disabled || loading}
+      className={cn('w-full', className)}
+      {...props}
+    >
+      {loading && (
+        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+      )}
+      {children}
+    </Button>
+  )
+}
+
+// Hook for form validation
+export function useFormValidation<T extends z.ZodType>(schema: T) {
+  return useForm<z.infer<T>>({
+    resolver: zodResolver(schema),
+    mode: 'onChange',
+  })
+}`
+    },
+    
+    // Create Next.js optimized page components
+    {
+      type: 'CREATE_FILE',
+      path: 'src/components/nextjs/pages.tsx',
+      content: `import React from 'react'
+import { Metadata } from 'next'
+import { cn } from '@/lib/utils'
+
+// Page container
+interface PageContainerProps {
+  children: React.ReactNode
+  className?: string
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'
+}
+
+export function PageContainer({ 
+  children, 
+  className,
+  maxWidth = 'xl'
+}: PageContainerProps) {
+  const maxWidthClasses = {
+    sm: 'max-w-sm',
+    md: 'max-w-md',
+    lg: 'max-w-lg',
+    xl: 'max-w-xl',
+    '2xl': 'max-w-2xl',
+    full: 'max-w-full'
+  }
+
+  return (
+    <div className={cn(
+      'mx-auto px-4 py-8',
+      maxWidthClasses[maxWidth],
+      className
+    )}>
+      {children}
+    </div>
+  )
+}
+
+// Page header
+interface PageHeaderProps {
+  title: string
+  description?: string
+  className?: string
+  children?: React.ReactNode
+}
+
+export function PageHeader({ 
+  title, 
+  description, 
+  className,
+  children 
+}: PageHeaderProps) {
+  return (
+    <div className={cn('space-y-4', className)}>
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
+        {description && (
+          <p className="text-muted-foreground mt-2">{description}</p>
+        )}
+      </div>
+      {children && (
+        <div className="flex items-center space-x-2">
+          {children}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Page section
+interface PageSectionProps {
+  children: React.ReactNode
+  className?: string
+  title?: string
+  description?: string
+}
+
+export function PageSection({ 
+  children, 
+  className,
+  title,
+  description 
+}: PageSectionProps) {
+  return (
+    <section className={cn('space-y-4', className)}>
+      {(title || description) && (
+        <div>
+          {title && (
+            <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
+          )}
+          {description && (
+            <p className="text-muted-foreground mt-1">{description}</p>
+          )}
+        </div>
+      )}
+      {children}
+    </section>
+  )
+}`
+    },
+    
+    // Create Next.js SEO components
+    {
+      type: 'CREATE_FILE',
+      path: 'src/components/nextjs/seo.tsx',
+      content: `import React from 'react'
+import Head from 'next/head'
+import { NextSeo } from 'next-seo'
+
+interface SEOProps {
+  title: string
+  description: string
+  canonical?: string
+  openGraph?: {
+    title?: string
+    description?: string
+    url?: string
+    siteName?: string
+    images?: Array<{
+      url: string
+      width?: number
+      height?: number
+      alt?: string
+    }>
+    locale?: string
+    type?: string
+  }
+  twitter?: {
+    card?: 'summary' | 'summary_large_image'
+    title?: string
+    description?: string
+    images?: string[]
+    creator?: string
+  }
+  robots?: string
+  keywords?: string[]
+  author?: string
+  publishedTime?: string
+  modifiedTime?: string
+  section?: string
+  tags?: string[]
+}
+
+export function SEO({
+  title,
+  description,
+  canonical,
+  openGraph,
+  twitter,
+  robots = 'index,follow',
+  keywords = [],
+  author,
+  publishedTime,
+  modifiedTime,
+  section,
+  tags = [],
+}: SEOProps) {
+  const seoConfig = {
+    title,
+    description,
+    canonical,
+    openGraph: {
+      title: title,
+      description: description,
+      url: openGraph?.url,
+      siteName: openGraph?.siteName || title,
+      images: openGraph?.images || [],
+      locale: openGraph?.locale || 'en_US',
+      type: openGraph?.type || 'website',
+    },
+    twitter: {
+      card: twitter?.card || 'summary_large_image',
+      title: twitter?.title || title,
+      description: twitter?.description || description,
+      images: twitter?.images || [],
+      creator: twitter?.creator,
+    },
+    robots,
+    additionalMetaTags: [
+      ...(keywords.length > 0 ? [{ name: 'keywords', content: keywords.join(', ') }] : []),
+      ...(author ? [{ name: 'author', content: author }] : []),
+      ...(publishedTime ? [{ property: 'article:published_time', content: publishedTime }] : []),
+      ...(modifiedTime ? [{ property: 'article:modified_time', content: modifiedTime }] : []),
+      ...(section ? [{ property: 'article:section', content: section }] : []),
+      ...(tags.length > 0 ? [{ property: 'article:tag', content: tags.join(', ') }] : []),
+    ],
+  }
+
+  return <NextSeo {...seoConfig} />
+}`
     }
   ]
 };

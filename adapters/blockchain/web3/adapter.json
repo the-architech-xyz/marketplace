@@ -1,7 +1,7 @@
 {
   "id": "web3",
-  "name": "Web3.js Ethereum Integration",
-  "description": "Complete Web3.js integration for Ethereum blockchain interactions",
+  "name": "Viem Ethereum Integration",
+  "description": "Modern, type-safe Web3 integration using viem for Ethereum blockchain interactions",
   "category": "blockchain",
   "version": "1.0.0",
   "blueprint": "blueprint.ts",
@@ -14,9 +14,13 @@
     "multi-network",
     "ethereum",
     "polygon",
-    "arbitrum"
+    "arbitrum",
+    "type-safety",
+    "error-handling",
+    "react-hooks",
+    "query-caching"
   ],
-  "limitations": "Requires Web3 wallet and RPC endpoints",
+  "limitations": "Requires Web3 wallet and RPC endpoints. Browser environment required for wallet operations.",
   "parameters": {
     "networks": {
       "type": "array",
@@ -30,9 +34,7 @@
       "options": [
         "mainnet",
         "sepolia",
-        "goerli",
         "polygon",
-        "bsc",
         "arbitrum"
       ]
     },

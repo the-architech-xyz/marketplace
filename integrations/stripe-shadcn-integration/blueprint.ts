@@ -3,8 +3,8 @@ import { Blueprint } from '@thearchitech.xyz/types';
 const stripeShadcnIntegrationBlueprint: Blueprint = {
   id: 'stripe-shadcn-integration',
   name: 'Stripe Shadcn Integration',
-  description: 'Integrates Stripe with Shadcn UI components for payment forms and UI',
-  version: '1.0.0',
+  description: 'Complete Stripe integration with Shadcn/ui components for payments, subscriptions, and billing management',
+  version: '2.0.0',
   actions: [
     // PURE MODIFIER: Create Stripe payment form component
     {

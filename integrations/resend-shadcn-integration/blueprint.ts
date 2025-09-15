@@ -3,8 +3,8 @@ import { Blueprint } from '@thearchitech.xyz/types';
 const resendShadcnIntegrationBlueprint: Blueprint = {
   id: 'resend-shadcn-integration',
   name: 'Resend Shadcn Integration',
-  description: 'Beautiful email UI components using Shadcn/ui',
-  version: '1.0.0',
+  description: 'Complete email management integration with Shadcn/ui components for campaigns, analytics, and automation',
+  version: '2.0.0',
   actions: [
     // Email Form Component
     {
