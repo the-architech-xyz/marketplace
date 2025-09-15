@@ -5,7 +5,7 @@
  * Advanced features are available as separate features
  */
 
-import { Blueprint } from '../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 export const nextjsBlueprint: Blueprint = {
   id: 'nextjs-base-setup',
@@ -13,7 +13,7 @@ export const nextjsBlueprint: Blueprint = {
   actions: [
     {
       type: 'RUN_COMMAND',
-      command: 'rm -rf /tmp/temp-nextjs && mkdir -p /tmp/temp-nextjs && cd /tmp/temp-nextjs && npx create-next-app@latest . --typescript{{#if module.parameters.tailwind}} --tailwind{{/if}} --eslint --app --src-dir --import-alias "{{module.parameters.importAlias}}" --yes'
+      command: 'npx create-next-app@latest . --typescript{{#if module.parameters.tailwind}} --tailwind{{/if}} --eslint --app --src-dir --import-alias "{{module.parameters.importAlias}}" --yes'
     },
     {
       type: 'RUN_COMMAND',

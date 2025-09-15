@@ -5,7 +5,7 @@
  * This feature can be added to projects that already have Stripe configured
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const subscriptionsFeatureBlueprint: Blueprint = {
   id: 'stripe-subscriptions-feature',
@@ -72,7 +72,7 @@ export class SubscriptionManager {
   static async createBillingPortalSession(customerId: string, returnUrl?: string) {
     const session = await stripe.billingPortal.sessions.create({
       customer: customerId,
-      return_url: returnUrl || process.env.NEXT_PUBLIC_APP_URL + '/dashboard/billing',
+      return_url: returnUrl || process.env.APP_URL + '/dashboard/billing',
     });
 
     return session;
@@ -255,45 +255,37 @@ interface User {
 
 ## Integration Examples
 
-### With Better Auth
+### With Authentication System
 
 \`\`\`typescript
-// src/app/api/subscriptions/create/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+// Example integration with any authentication system
 import { SubscriptionManager } from '@/lib/stripe/subscriptions';
-import { auth } from '@/lib/auth';
 
-export async function POST(request: NextRequest) {
+export async function createSubscription(
+  userId: string,
+  priceId: string,
+  trialDays?: number
+) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const { priceId, trialDays } = await request.json();
-
-    // Get or create Stripe customer
-    const customerId = session.user.stripeCustomerId;
-    if (!customerId) {
-      return NextResponse.json({ error: 'No Stripe customer found' }, { status: 400 });
+    // Get user from your authentication system
+    const user = await getUserById(userId);
+    if (!user?.stripeCustomerId) {
+      throw new Error('No Stripe customer found');
     }
 
     const subscription = await SubscriptionManager.createSubscription(
-      customerId,
+      user.stripeCustomerId,
       priceId,
       trialDays
     );
 
     // Update user in database
-    // await updateUser(session.user.id, { subscriptionId: subscription.id });
+    await updateUser(userId, { subscriptionId: subscription.id });
 
-    return NextResponse.json({ subscription });
+    return subscription;
   } catch (error) {
     console.error('Error creating subscription:', error);
-    return NextResponse.json(
-      { error: 'Failed to create subscription' },
-      { status: 500 }
-    );
+    throw error;
   }
 }
 \`\`\`
@@ -324,25 +316,24 @@ export async function updateUserSubscription(
 ## Webhook Handling
 
 \`\`\`typescript
-// src/app/api/webhooks/stripe/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+// Framework-agnostic webhook handler
 import { SubscriptionWebhooks } from '@/lib/stripe/subscriptions';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
-export async function POST(request: NextRequest) {
-  const body = await request.text();
-  const signature = request.headers.get('stripe-signature')!;
-
+export async function handleStripeWebhook(
+  body: string,
+  signature: string
+) {
   let event: Stripe.Event;
 
   try {
     event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
   } catch (err) {
     console.error('Webhook signature verification failed:', err);
-    return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
+    throw new Error('Invalid signature');
   }
 
   switch (event.type) {
@@ -357,7 +348,7 @@ export async function POST(request: NextRequest) {
       break;
   }
 
-  return NextResponse.json({ received: true });
+  return { received: true };
 }
 \`\`\`
 
@@ -450,16 +441,11 @@ export function getSubscriptionPlan(user: User): string | null {
 ### Access Control
 
 \`\`\`typescript
-export function requireSubscription(handler: Function) {
-  return async (req: NextRequest, ...args: any[]) => {
-    const session = await auth();
-    
-    if (!hasActiveSubscription(session.user)) {
-      return NextResponse.json({ error: 'Subscription required' }, { status: 403 });
-    }
-    
-    return handler(req, ...args);
-  };
+export function requireSubscription(user: User) {
+  if (!hasActiveSubscription(user)) {
+    throw new Error('Subscription required');
+  }
+  return true;
 }
 \`\`\`
 `

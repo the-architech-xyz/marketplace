@@ -4,7 +4,7 @@
  * Lazy loading of translations and locale-specific content
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const dynamicImportsBlueprint: Blueprint = {
   id: 'next-intl-dynamic-imports',

@@ -4,7 +4,7 @@
  * Adds email verification system with templates to Better Auth
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const emailVerificationBlueprint: Blueprint = {
   id: 'better-auth-email-verification',
@@ -228,7 +228,7 @@ This guide shows how to integrate Better Auth email verification with your email
 
 \`\`\`bash
 # .env.local
-NEXTAUTH_URL="http://localhost:3000"
+AUTH_URL="{{env.APP_URL}}"
 NEXTAUTH_SECRET="your-secret-key"
 
 # Email service (example with Resend)
@@ -355,27 +355,19 @@ export class EmailService {
 
 \`\`\`typescript
 // src/app/api/auth/verify-email/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+// Framework-agnostic email verification
 import { EmailVerificationManager } from '@/lib/auth/email-verification';
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const token = searchParams.get('token');
-
+export async function verifyEmail(token: string) {
   if (!token) {
-    return NextResponse.json({ error: 'Verification token is required' }, { status: 400 });
+    return { success: false, error: 'Verification token is required' };
   }
 
   try {
     const result = await EmailVerificationManager.verifyEmail(token);
-    
-    if (result.success) {
-      return NextResponse.redirect(new URL('/auth/verification-success', req.url));
-    } else {
-      return NextResponse.redirect(new URL(\`/auth/verification-error?error=\${encodeURIComponent(result.error)}\`, req.url));
-    }
+    return result;
   } catch (error) {
-    return NextResponse.redirect(new URL(\`/auth/verification-error?error=\${encodeURIComponent('Verification failed')}\`, req.url));
+    return { success: false, error: 'Verification failed' };
   }
 }
 

@@ -4,7 +4,7 @@
  * Adds WCAG compliance, screen reader support, and accessibility tools
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const accessibilityBlueprint: Blueprint = {
   id: 'shadcn-ui-accessibility',

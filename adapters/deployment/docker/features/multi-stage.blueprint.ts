@@ -4,7 +4,7 @@
  * Optimized multi-stage Docker builds for production
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const multiStageBlueprint: Blueprint = {
   id: 'docker-multi-stage',

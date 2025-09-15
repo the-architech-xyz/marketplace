@@ -4,7 +4,7 @@
  * Production-ready configuration with security and monitoring
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const productionReadyBlueprint: Blueprint = {
   id: 'docker-production-ready',

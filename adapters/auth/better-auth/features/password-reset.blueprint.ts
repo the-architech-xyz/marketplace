@@ -4,7 +4,7 @@
  * Adds secure password reset flow to Better Auth
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const passwordResetBlueprint: Blueprint = {
   id: 'better-auth-password-reset',
@@ -120,84 +120,6 @@ export class PasswordResetManager {
       default:
         return '<p>Email template not found</p>';
     }
-  }
-}`
-    },
-    {
-      type: 'CREATE_FILE',
-      path: 'src/app/api/auth/request-password-reset/route.ts',
-      content: `import { NextRequest, NextResponse } from 'next/server';
-import { PasswordResetManager } from '@/lib/auth/password-reset';
-
-export async function POST(req: NextRequest) {
-  try {
-    const { email } = await req.json();
-    
-    if (!email) {
-      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
-    }
-
-    const result = await PasswordResetManager.requestPasswordReset(email);
-    
-    // Always return success to prevent email enumeration
-    return NextResponse.json({ 
-      message: 'If an account with that email exists, we\'ve sent a password reset link.' 
-    });
-  } catch (error) {
-    return NextResponse.json({ 
-      message: 'If an account with that email exists, we\'ve sent a password reset link.' 
-    });
-  }
-}`
-    },
-    {
-      type: 'CREATE_FILE',
-      path: 'src/app/api/auth/reset-password/route.ts',
-      content: `import { NextRequest, NextResponse } from 'next/server';
-import { PasswordResetManager } from '@/lib/auth/password-reset';
-
-export async function POST(req: NextRequest) {
-  try {
-    const { token, password } = await req.json();
-    
-    if (!token || !password) {
-      return NextResponse.json({ error: 'Token and password are required' }, { status: 400 });
-    }
-
-    if (password.length < 8) {
-      return NextResponse.json({ error: 'Password must be at least 8 characters long' }, { status: 400 });
-    }
-
-    const result = await PasswordResetManager.resetPassword(token, password);
-    
-    if (result.success) {
-      return NextResponse.json({ message: 'Password reset successfully' });
-    } else {
-      return NextResponse.json({ error: result.error }, { status: 400 });
-    }
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to reset password' }, { status: 500 });
-  }
-}
-
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const token = searchParams.get('token');
-
-  if (!token) {
-    return NextResponse.json({ error: 'Token is required' }, { status: 400 });
-  }
-
-  try {
-    const result = await PasswordResetManager.validateResetToken(token);
-    
-    if (result.success && result.valid) {
-      return NextResponse.json({ valid: true });
-    } else {
-      return NextResponse.json({ valid: false, error: result.error }, { status: 400 });
-    }
-  } catch (error) {
-    return NextResponse.json({ valid: false, error: 'Invalid token' }, { status: 400 });
   }
 }`
     },

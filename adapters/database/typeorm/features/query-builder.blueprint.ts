@@ -4,7 +4,7 @@
  * Adds advanced query building and optimization tools
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const queryBuilderBlueprint: Blueprint = {
   id: 'typeorm-query-builder',

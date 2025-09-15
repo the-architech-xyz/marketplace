@@ -4,7 +4,7 @@
  * Adds middleware for auth, redirects, and more to Next.js
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const middlewareBlueprint: Blueprint = {
   id: 'nextjs-middleware',

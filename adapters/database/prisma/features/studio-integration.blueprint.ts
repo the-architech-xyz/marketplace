@@ -4,7 +4,7 @@
  * Adds database management interface and admin tools
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const studioIntegrationBlueprint: Blueprint = {
   id: 'prisma-studio-integration',

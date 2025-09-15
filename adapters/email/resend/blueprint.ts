@@ -5,7 +5,7 @@
  * Advanced features are available as separate features
  */
 
-import { Blueprint } from '../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 export const resendBlueprint: Blueprint = {
   id: 'resend-base-setup',
@@ -27,7 +27,7 @@ export const resend = new Resend(process.env.RESEND_API_KEY);
 export const EMAIL_CONFIG = {
   from: process.env.EMAIL_FROM || '{{module.parameters.fromEmail}}',
   replyTo: process.env.EMAIL_REPLY_TO || 'support@{{project.name}}.com',
-  baseUrl: process.env.APP_URL || 'http://localhost:3000',
+  baseUrl: process.env.APP_URL || '{{env.APP_URL}}',
 };
 
 // Email templates
@@ -842,7 +842,7 @@ export default SubscriptionCancelledEmail;`,
     {
       type: 'ADD_ENV_VAR',
       key: 'APP_URL',
-      value: 'http://localhost:3000',
+      value: '{{env.APP_URL}}',
       description: 'Public app URL for email links'
     }
   ]

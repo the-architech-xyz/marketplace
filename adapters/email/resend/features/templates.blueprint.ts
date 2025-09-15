@@ -4,7 +4,7 @@
  * Adds advanced email template system with React components
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const templatesBlueprint: Blueprint = {
   id: 'resend-templates',
@@ -500,67 +500,44 @@ export default {
 
 ## API Integration
 
-### Template Management API
+### Template Management Functions
 
 \`\`\`typescript
-// src/app/api/email/templates/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+// Framework-agnostic template management
 import { TemplateManager } from '@/lib/email/templates/template-manager';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const templateManager = new TemplateManager(resend);
 
-export async function GET(req: NextRequest) {
+export async function listTemplates() {
   try {
     const templates = await templateManager.listTemplates();
-    return NextResponse.json({ templates });
+    return { success: true, templates };
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to list templates' }, { status: 500 });
+    return { success: false, error: 'Failed to list templates' };
   }
 }
 
-export async function POST(req: NextRequest) {
+export async function sendTemplateEmail(to: string, templateName: string, variables?: Record<string, any>) {
   try {
-    const { to, templateName, variables } = await req.json();
-    
     if (!to || !templateName) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+      return { success: false, error: 'Missing required fields' };
     }
 
     const result = await templateManager.sendTemplate(to, templateName, variables);
-    
-    if (result.success) {
-      return NextResponse.json({ messageId: result.messageId });
-    } else {
-      return NextResponse.json({ error: result.error }, { status: 500 });
-    }
+    return result;
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+    return { success: false, error: 'Failed to send email' };
   }
 }
-\`\`\`
 
-### Template Validation API
-
-\`\`\`typescript
-// src/app/api/email/templates/[name]/validate/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { TemplateManager } from '@/lib/email/templates/template-manager';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-const templateManager = new TemplateManager(resend);
-
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { name: string } }
-) {
+export async function validateTemplate(templateName: string) {
   try {
-    const result = await templateManager.validateTemplate(params.name);
-    return NextResponse.json(result);
+    const result = await templateManager.validateTemplate(templateName);
+    return result;
   } catch (error) {
-    return NextResponse.json({ error: 'Validation failed' }, { status: 500 });
+    return { success: false, error: 'Validation failed' };
   }
 }
 \`\`\`

@@ -4,7 +4,7 @@
  * DEX, lending, staking and other DeFi protocols
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const defiIntegrationBlueprint: Blueprint = {
   id: 'web3-defi-integration',

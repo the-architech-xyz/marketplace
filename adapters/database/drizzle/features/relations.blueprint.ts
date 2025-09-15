@@ -4,7 +4,7 @@
  * Adds comprehensive relationship management for Drizzle ORM
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const relationsBlueprint: Blueprint = {
   id: 'drizzle-relations',
@@ -559,22 +559,18 @@ const popularPosts = await db
 
 ## API Integration
 
-### API Routes with Relations
+### Database Functions with Relations
 
 \`\`\`typescript
-// src/app/api/posts/[id]/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+// Framework-agnostic database functions
 import { db } from '@/lib/db';
 import { posts } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function getPostWithRelations(postId: string) {
   try {
     const post = await db.query.posts.findFirst({
-      where: eq(posts.id, params.id),
+      where: eq(posts.id, postId),
       with: {
         author: {
           columns: {
@@ -603,12 +599,12 @@ export async function GET(
     });
 
     if (!post) {
-      return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+      return { success: false, error: 'Post not found' };
     }
 
-    return NextResponse.json({ post });
+    return { success: true, post };
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to fetch post' }, { status: 500 });
+    return { success: false, error: 'Failed to fetch post' };
   }
 }
 \`\`\`

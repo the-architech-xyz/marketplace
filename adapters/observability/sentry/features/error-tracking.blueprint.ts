@@ -1,4 +1,4 @@
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const errorTrackingBlueprint: Blueprint = {
   id: "sentry-error-tracking",

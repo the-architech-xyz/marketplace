@@ -21,7 +21,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/the-architech/marketplace.git"
+    "url": "git+https://github.com/the-architech/marketplace.git"
   },
   "bugs": {
     "url": "https://github.com/the-architech/marketplace/issues"
@@ -32,5 +32,8 @@
     "integrations/",
     "manifest.json",
     "README.md"
-  ]
+  ],
+  "dependencies": {
+    "@thearchitech.xyz/types": "^1.0.0"
+  }
 }

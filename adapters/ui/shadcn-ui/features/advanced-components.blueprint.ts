@@ -1,4 +1,4 @@
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const advancedComponentsBlueprint: Blueprint = {
   id: "shadcn-ui-advanced-components",

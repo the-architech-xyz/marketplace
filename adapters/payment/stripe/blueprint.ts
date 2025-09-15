@@ -5,8 +5,7 @@
  * Creates payment components, API routes, and webhook handling
  */
 
-import { Blueprint } from '../../../types/adapter.js';
-import { IntegrationGuideGenerator } from '../../../core/services/integration/integration-guide-generator.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 export const stripeBlueprint: Blueprint = {
   id: 'stripe-payment-setup',
@@ -19,7 +18,7 @@ export const stripeBlueprint: Blueprint = {
     {
       type: 'ADD_SCRIPT',
       name: 'stripe:listen',
-      command: 'stripe listen --forward-to localhost:3000/api/payment/webhook'
+      command: 'stripe listen --forward-to {{env.APP_URL}}/api/payment/webhook'
     },
     {
       type: 'ADD_SCRIPT',
@@ -186,7 +185,7 @@ export const createCustomerPortalSession = async (customerId: string) => {
     {
       type: 'ADD_ENV_VAR',
       key: 'APP_URL',
-      value: 'http://localhost:3000',
+      value: '{{env.APP_URL}}',
       description: 'Application URL for Stripe redirects'
     },
     {
@@ -245,7 +244,7 @@ No specific prerequisites required.
 STRIPE_PUBLISHABLE_KEY=pk_test_...
 STRIPE_SECRET_KEY=sk_test_...
 STRIPE_WEBHOOK_SECRET=whsec_...
-APP_URL=http://localhost:3000
+APP_URL={{env.APP_URL}}
 \`\`\`
 
 ### Framework Integration

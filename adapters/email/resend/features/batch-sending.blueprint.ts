@@ -4,7 +4,7 @@
  * Adds bulk email sending, list management, and campaign tools
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const batchSendingBlueprint: Blueprint = {
   id: 'resend-batch-sending',

@@ -4,7 +4,7 @@
  * Sets up Vitest testing framework with coverage
  */
 
-import { Blueprint } from '../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 export const vitestBlueprint: Blueprint = {
   id: 'vitest-base-setup',

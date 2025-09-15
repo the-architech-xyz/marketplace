@@ -4,7 +4,7 @@
  * Persist state to localStorage, sessionStorage, or custom storage
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const persistenceBlueprint: Blueprint = {
   id: 'zustand-persistence',

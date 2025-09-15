@@ -4,7 +4,7 @@
  * Adds 2FA/TOTP support to Better Auth
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const multiFactorBlueprint: Blueprint = {
   id: 'better-auth-multi-factor',

@@ -4,7 +4,7 @@
  * MetaMask, WalletConnect and other wallet integrations
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const walletIntegrationBlueprint: Blueprint = {
   id: 'web3-wallet-integration',

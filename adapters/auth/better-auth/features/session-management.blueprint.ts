@@ -4,7 +4,7 @@
  * Adds advanced session management capabilities to Better Auth
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const sessionManagementBlueprint: Blueprint = {
   id: 'better-auth-session-management',
@@ -48,7 +48,7 @@ export const sessionConfig = {
       windowMs: 15 * 60 * 1000, // 15 minutes
     },
     trustedOrigins: [
-      process.env.NEXTAUTH_URL || "http://localhost:3000",
+      process.env.AUTH_URL || "{{env.APP_URL}}",
     ],
   },
 };`
@@ -136,97 +136,42 @@ export function withSession(handler: any) {
     {
       type: 'CREATE_FILE',
       path: 'src/lib/auth/session-middleware.ts',
-      content: `import { NextRequest, NextResponse } from 'next/server';
-import { SessionManager } from './session-utils';
+      content: `import { SessionManager } from './session-utils';
 
 // Rate limiting store (in production, use Redis)
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
 export function rateLimitMiddleware(maxAttempts: number = 5, windowMs: number = 15 * 60 * 1000) {
-  return (req: NextRequest) => {
-    const ip = req.ip || req.headers.get('x-forwarded-for') || 'unknown';
+  return (ip: string) => {
     const now = Date.now();
     
     const current = rateLimitStore.get(ip);
     
     if (!current || now > current.resetTime) {
       rateLimitStore.set(ip, { count: 1, resetTime: now + windowMs });
-      return NextResponse.next();
+      return { allowed: true };
     }
     
     if (current.count >= maxAttempts) {
-      return new NextResponse('Too Many Requests', { status: 429 });
+      return { allowed: false, error: 'Too Many Requests' };
     }
     
     current.count++;
-    return NextResponse.next();
+    return { allowed: true };
   };
 }
 
-export function sessionMiddleware(req: NextRequest) {
-  const sessionId = req.cookies.get('better-auth.session_token')?.value;
-  
+export function sessionMiddleware(sessionId: string) {
   if (!sessionId) {
-    return NextResponse.next();
+    return { valid: false };
   }
 
-  // Validate session in middleware
-  SessionManager.validateSession(sessionId).then(isValid => {
-    if (!isValid) {
-      // Clear invalid session cookie
-      const response = NextResponse.next();
-      response.cookies.delete('better-auth.session_token');
-      return response;
-    }
+  // Validate session
+  return SessionManager.validateSession(sessionId).then(isValid => {
+    return { valid: isValid };
   });
-
-  return NextResponse.next();
 }`
     },
-    {
-      type: 'CREATE_FILE',
-      path: 'src/app/api/auth/session/route.ts',
-      content: `import { NextRequest, NextResponse } from 'next/server';
-import { SessionManager } from '@/lib/auth/session-utils';
-import { rateLimitMiddleware } from '@/lib/auth/session-middleware';
-
-export async function GET(req: NextRequest) {
-  const rateLimit = rateLimitMiddleware();
-  const rateLimitResponse = rateLimit(req);
-  if (rateLimitResponse.status === 429) return rateLimitResponse;
-
-  const sessionId = req.cookies.get('better-auth.session_token')?.value;
-  
-  if (!sessionId) {
-    return NextResponse.json({ error: 'No session found' }, { status: 401 });
-  }
-
-  try {
-    const session = await SessionManager.getSession(sessionId);
-    return NextResponse.json({ session });
-  } catch (error) {
-    return NextResponse.json({ error: 'Session not found' }, { status: 404 });
-  }
-}
-
-export async function DELETE(req: NextRequest) {
-  const sessionId = req.cookies.get('better-auth.session_token')?.value;
-  
-  if (!sessionId) {
-    return NextResponse.json({ error: 'No session found' }, { status: 401 });
-  }
-
-  try {
-    await SessionManager.deleteSession(sessionId);
-    
-    const response = NextResponse.json({ success: true });
-    response.cookies.delete('better-auth.session_token');
-    return response;
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to delete session' }, { status: 500 });
-  }
-}`
-    }
   ]
 };
 export default sessionManagementBlueprint;

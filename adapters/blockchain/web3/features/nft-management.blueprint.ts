@@ -4,7 +4,7 @@
  * Mint, transfer, and manage NFTs (ERC721, ERC1155)
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const nftManagementBlueprint: Blueprint = {
   id: 'web3-nft-management',

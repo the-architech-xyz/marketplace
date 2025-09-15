@@ -4,7 +4,7 @@
  * Adds advanced theming, color schemes, and design system
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const themingBlueprint: Blueprint = {
   id: 'shadcn-ui-theming',

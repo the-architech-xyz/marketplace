@@ -50,3 +50,4 @@ This marketplace is automatically used by The Architech CLI. No manual installat
 ## License
 
 MIT License - see LICENSE file for details.
+

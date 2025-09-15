@@ -4,7 +4,7 @@
  * Adds interactive web-based test runner interface
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const uiBlueprint: Blueprint = {
   id: 'vitest-ui',

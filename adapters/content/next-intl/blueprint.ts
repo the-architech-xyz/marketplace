@@ -5,7 +5,7 @@
  * Includes pluralization, rich text, dynamic imports, and more
  */
 
-import { Blueprint } from '../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 export const nextIntlBlueprint: Blueprint = {
   id: 'next-intl-base-setup',

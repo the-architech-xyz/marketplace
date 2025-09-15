@@ -4,7 +4,7 @@
  * Adds OAuth providers (Google, GitHub, Discord, Twitter) to Better Auth
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const oauthProvidersBlueprint: Blueprint = {
   id: 'better-auth-oauth-providers',
@@ -34,7 +34,7 @@ export const oauthSetupInstructions = {
   {{this}}: {
     name: '{{toUpperCase this}}',
     setupUrl: '{{#if (eq this "google")}}https://console.developers.google.com/{{else if (eq this "github")}}https://github.com/settings/applications/new{{else if (eq this "discord")}}https://discord.com/developers/applications{{else if (eq this "twitter")}}https://developer.twitter.com/en/portal/dashboard{{/if}}',
-    redirectUri: '{{#if (eq this "google")}}http://localhost:3000/api/auth/callback/google{{else if (eq this "github")}}http://localhost:3000/api/auth/callback/github{{else if (eq this "discord")}}http://localhost:3000/api/auth/callback/discord{{else if (eq this "twitter")}}http://localhost:3000/api/auth/callback/twitter{{/if}}',
+    redirectUri: '{{#if (eq this "google")}}{{env.APP_URL}}/api/auth/callback/google{{else if (eq this "github")}}{{env.APP_URL}}/api/auth/callback/github{{else if (eq this "discord")}}{{env.APP_URL}}/api/auth/callback/discord{{else if (eq this "twitter")}}{{env.APP_URL}}/api/auth/callback/twitter{{/if}}',
   },
   {{/each}}
 };`

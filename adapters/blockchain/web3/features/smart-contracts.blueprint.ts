@@ -4,7 +4,7 @@
  * Deploy and interact with smart contracts (ERC20, ERC721, ERC1155)
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const smartContractsBlueprint: Blueprint = {
   id: 'web3-smart-contracts',

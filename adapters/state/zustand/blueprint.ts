@@ -5,7 +5,7 @@
  * Creates stores, hooks, and state persistence
  */
 
-import { Blueprint } from '../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 export const zustandBlueprint: Blueprint = {
   id: 'zustand-base-setup',

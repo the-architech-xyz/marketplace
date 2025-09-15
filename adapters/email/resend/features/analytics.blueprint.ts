@@ -4,7 +4,7 @@
  * Adds detailed email tracking, open rates, and click analytics
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const analyticsBlueprint: Blueprint = {
   id: 'resend-analytics',
@@ -489,81 +489,6 @@ export function AnalyticsDashboard({ analyticsManager }: AnalyticsDashboardProps
 }
 {{/if}}`
     },
-    {
-      type: 'CREATE_FILE',
-      path: 'src/app/api/email/track/opened/route.ts',
-      content: `{{#if module.parameters.track-opens}}
-import { NextRequest, NextResponse } from 'next/server';
-import { AnalyticsManager } from '@/lib/email/analytics/analytics-manager';
-import { resend } from '@/lib/email/config';
-
-export async function GET(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const emailId = searchParams.get('emailId');
-    const recipient = searchParams.get('recipient');
-    const userAgent = request.headers.get('user-agent');
-
-    if (!emailId || !recipient) {
-      return NextResponse.json({ error: 'Missing required parameters' }, { status: 400 });
-    }
-
-    const analyticsManager = new AnalyticsManager(resend);
-    await analyticsManager.trackEmailOpened(emailId, recipient, userAgent || undefined);
-
-    // Return a 1x1 transparent pixel
-    const pixel = Buffer.from(
-      'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
-      'base64'
-    );
-
-    return new NextResponse(pixel, {
-      status: 200,
-      headers: {
-        'Content-Type': 'image/png',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0',
-      },
-    });
-  } catch (error) {
-    console.error('Error tracking email open:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
-}
-{{/if}}`
-    },
-    {
-      type: 'CREATE_FILE',
-      path: 'src/app/api/email/track/clicked/route.ts',
-      content: `{{#if module.parameters.track-clicks}}
-import { NextRequest, NextResponse } from 'next/server';
-import { AnalyticsManager } from '@/lib/email/analytics/analytics-manager';
-import { resend } from '@/lib/email/config';
-
-export async function GET(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const emailId = searchParams.get('emailId');
-    const recipient = searchParams.get('recipient');
-    const linkUrl = searchParams.get('url');
-
-    if (!emailId || !recipient || !linkUrl) {
-      return NextResponse.json({ error: 'Missing required parameters' }, { status: 400 });
-    }
-
-    const analyticsManager = new AnalyticsManager(resend);
-    await analyticsManager.trackEmailClicked(emailId, recipient, linkUrl);
-
-    // Redirect to the original URL
-    return NextResponse.redirect(linkUrl);
-  } catch (error) {
-    console.error('Error tracking email click:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
-}
-{{/if}}`
-    }
   ]
 };
 export default analyticsBlueprint;

@@ -4,7 +4,7 @@
  * Adds advanced schema management with Prisma schema and migrations
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const schemaManagementBlueprint: Blueprint = {
   id: 'prisma-schema-management',

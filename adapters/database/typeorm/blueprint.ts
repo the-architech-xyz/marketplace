@@ -5,7 +5,7 @@
  * Advanced features are available as separate features
  */
 
-import { Blueprint } from '../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 export const typeormBlueprint: Blueprint = {
   id: 'typeorm-base-setup',

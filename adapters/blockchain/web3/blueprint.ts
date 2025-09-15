@@ -5,7 +5,7 @@
  * Creates wallet connection, contract interaction, and blockchain utilities
  */
 
-import { Blueprint } from '../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 export const web3Blueprint: Blueprint = {
   id: 'web3-base-setup',

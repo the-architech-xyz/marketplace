@@ -5,7 +5,7 @@
  * Framework-agnostic implementation
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const alertsDashboardBlueprint: Blueprint = {
   id: 'sentry-alerts-dashboard',

@@ -4,7 +4,7 @@
  * Adds visual database browser and query interface to Drizzle
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const studioBlueprint: Blueprint = {
   id: 'drizzle-studio',

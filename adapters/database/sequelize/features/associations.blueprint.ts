@@ -4,7 +4,7 @@
  * Advanced model relationships and associations
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const associationsBlueprint: Blueprint = {
   id: 'sequelize-associations',

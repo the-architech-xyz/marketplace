@@ -4,7 +4,7 @@
  * Adds admin utilities and management functions for Better Auth
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const adminPanelBlueprint: Blueprint = {
   id: 'better-auth-admin-panel',
@@ -267,7 +267,7 @@ This guide shows how to integrate Better Auth admin utilities with your admin da
 
 \`\`\`bash
 # .env.local
-NEXTAUTH_URL="http://localhost:3000"
+AUTH_URL="{{env.APP_URL}}"
 NEXTAUTH_SECRET="your-secret-key"
 
 # Admin configuration
@@ -419,53 +419,34 @@ export class DatabaseAuditLogger extends AuditLogger {
 ### Admin Users Route
 
 \`\`\`typescript
-// src/app/api/admin/users/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+// Framework-agnostic admin functions
 import { DatabaseAdminManager } from '@/lib/db/admin';
-import { requireAdmin } from '@/lib/auth/middleware';
 
-export const GET = requireAdmin(async (req: NextRequest) => {
+export async function getAllUsers(options: {
+  limit?: number;
+  offset?: number;
+  search?: string;
+}) {
   try {
-    const { searchParams } = new URL(req.url);
-    const limit = parseInt(searchParams.get('limit') || '50');
-    const offset = parseInt(searchParams.get('offset') || '0');
-    const search = searchParams.get('search') || undefined;
-
-    const result = await DatabaseAdminManager.getAllUsers({
-      limit,
-      offset,
-      search,
-    });
-
-    if (result.success) {
-      return NextResponse.json({ users: result.users });
-    } else {
-      return NextResponse.json({ error: result.error }, { status: 500 });
-    }
+    const result = await DatabaseAdminManager.getAllUsers(options);
+    return result;
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to fetch users' }, { status: 500 });
+    return { success: false, error: 'Failed to fetch users' };
   }
-});
+}
 
-export const POST = requireAdmin(async (req: NextRequest) => {
+export async function updateUser(userId: string, updates: any) {
   try {
-    const { userId, updates } = await req.json();
-
     if (!userId) {
-      return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
+      return { success: false, error: 'User ID is required' };
     }
 
     const result = await DatabaseAdminManager.updateUser(userId, updates);
-
-    if (result.success) {
-      return NextResponse.json({ user: result.user });
-    } else {
-      return NextResponse.json({ error: result.error }, { status: 500 });
-    }
+    return result;
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to update user' }, { status: 500 });
+    return { success: false, error: 'Failed to update user' };
   }
-});
+}
 \`\`\`
 
 ### Admin Stats Route

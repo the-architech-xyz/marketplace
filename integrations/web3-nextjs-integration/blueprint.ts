@@ -1,4 +1,4 @@
-import { Blueprint } from '../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 export const blueprint: Blueprint = {
   id: 'web3-nextjs-integration',

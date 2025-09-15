@@ -4,7 +4,7 @@
  * Adds advanced entity management with decorators and relationships
  */
 
-import { Blueprint } from '../../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 const entityManagementBlueprint: Blueprint = {
   id: 'typeorm-entity-management',

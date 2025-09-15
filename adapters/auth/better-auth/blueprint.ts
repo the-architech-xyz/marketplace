@@ -5,8 +5,7 @@
  * Advanced features are available as separate features
  */
 
-import { Blueprint } from '../../../types/adapter.js';
-import { IntegrationGuideGenerator } from '../../../core/services/integration/integration-guide-generator.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 export const betterAuthBlueprint: Blueprint = {
   id: 'better-auth-base-setup',
@@ -33,7 +32,7 @@ export const auth = betterAuth({
     updateAge: 60 * 60 * 24, // 1 day
   },
   trustedOrigins: [
-    process.env.AUTH_URL || "http://localhost:3000",
+    process.env.AUTH_URL || "{{env.APP_URL}}",
   ],
 });
 
@@ -68,7 +67,7 @@ export { auth, authHandler };
       content: `import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-  baseURL: process.env.AUTH_URL || "http://localhost:3000",
+  baseURL: process.env.AUTH_URL || "{{env.APP_URL}}",
 });
 
 export const {
@@ -88,7 +87,7 @@ export const {
     {
       type: 'ADD_ENV_VAR',
       key: 'AUTH_URL',
-      value: 'http://localhost:3000',
+      value: '{{env.APP_URL}}',
       description: 'Authentication base URL'
     },
     {

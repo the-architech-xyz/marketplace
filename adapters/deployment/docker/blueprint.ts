@@ -5,7 +5,7 @@
  * Creates Dockerfile, docker-compose.yml, and deployment configuration
  */
 
-import { Blueprint } from '../../../types/adapter.js';
+import { Blueprint } from '@thearchitech.xyz/types';
 
 export const dockerBlueprint: Blueprint = {
   id: 'docker-base-setup',
