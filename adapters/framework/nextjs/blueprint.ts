@@ -30,8 +30,9 @@ export const nextjsBlueprint: Blueprint = {
       isDev: true
     },
     {
-      type: 'RUN_COMMAND',
-      command: 'npm install @tailwindcss/typography@^0.5.0 @tailwindcss/forms@^0.5.0 @tailwindcss/aspect-ratio@^0.4.0 --save-dev',
+      type: 'INSTALL_PACKAGES',
+      packages: ['@tailwindcss/typography@^0.5.0', '@tailwindcss/forms@^0.5.0', '@tailwindcss/aspect-ratio@^0.4.0'],
+      isDev: true,
       condition: '{{#if module.parameters.tailwind}}'
     },
     {
