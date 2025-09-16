@@ -26,12 +26,18 @@ export const nextjsBlueprint: Blueprint = {
     },
     {
       type: 'INSTALL_PACKAGES',
-      packages: ['@types/node', 'eslint-config-next', 'prettier', 'prettier-plugin-tailwindcss', 'husky', 'lint-staged', '@commitlint/cli', '@commitlint/config-conventional'],
+      packages: ['@types/node', 'eslint-config-next', 'prettier', 'husky', 'lint-staged', '@commitlint/cli', '@commitlint/config-conventional'],
       isDev: true
     },
     {
       type: 'INSTALL_PACKAGES',
-      packages: ['@tailwindcss/typography@^0.5.0', '@tailwindcss/forms@^0.5.0', '@tailwindcss/aspect-ratio@^0.4.0'],
+      packages: ['prettier-plugin-tailwindcss'],
+      isDev: true,
+      condition: '{{#if module.parameters.tailwind}}'
+    },
+    {
+      type: 'INSTALL_PACKAGES',
+      packages: ['@tailwindcss/typography', '@tailwindcss/forms', '@tailwindcss/aspect-ratio'],
       isDev: true,
       condition: '{{#if module.parameters.tailwind}}'
     },
@@ -707,8 +713,8 @@ export default function Home() {
   "printWidth": 80,
   "bracketSpacing": true,
   "arrowParens": "avoid",
-  "endOfLine": "lf",
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "endOfLine": "lf"{{#if module.parameters.tailwind}},
+  "plugins": ["prettier-plugin-tailwindcss"]{{/if}}
 }`
     },
     {
@@ -798,8 +804,8 @@ Thumbs.db
   },
   "dependencies": {
     "next": "^15.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "@next/bundle-analyzer": "^15.0.0",
     "next-seo": "^6.4.0",
     "next-sitemap": "^4.2.3",
@@ -811,22 +817,22 @@ Thumbs.db
   "devDependencies": {
     "typescript": "^5.0.0",
     "@types/node": "^20.0.0",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "eslint": "^8.0.0",
     "eslint-config-next": "^15.0.0",
     "prettier": "^3.0.0",
-    "prettier-plugin-tailwindcss": "^0.5.0",
     "husky": "^8.0.0",
     "lint-staged": "^15.0.0",
     "@commitlint/cli": "^18.0.0",
-    "@commitlint/config-conventional": "^18.0.0",
+    "@commitlint/config-conventional": "^18.0.0"{{#if module.parameters.tailwind}},
+    "prettier-plugin-tailwindcss": "^0.5.0",
     "tailwindcss": "^3.4.0",
     "postcss": "^8.0.0",
     "autoprefixer": "^10.0.0",
     "@tailwindcss/typography": "^0.5.0",
     "@tailwindcss/forms": "^0.5.0",
-    "@tailwindcss/aspect-ratio": "^0.4.0"
+    "@tailwindcss/aspect-ratio": "^0.4.0"{{/if}}
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

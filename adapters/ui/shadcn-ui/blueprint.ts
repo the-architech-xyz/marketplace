@@ -27,7 +27,6 @@ export const shadcnUiBlueprint: Blueprint = {
         '@radix-ui/react-label',
         '@radix-ui/react-select',
         '@radix-ui/react-separator',
-        '@radix-ui/react-sheet',
         '@radix-ui/react-switch',
         '@radix-ui/react-tabs',
         '@radix-ui/react-toast',
@@ -63,16 +62,16 @@ export const shadcnUiBlueprint: Blueprint = {
       packages: ['@types/node'],
       isDev: true
     },
-    // Initialize Shadcn/ui
-    {
-      type: 'RUN_COMMAND',
-      command: 'npx shadcn@latest init --yes --defaults --force --silent --src-dir --css-variables'
-    },
-    // Install core components only (minimal base installation)
-    {
-      type: 'RUN_COMMAND',
-      command: 'npx shadcn@latest add button input card --yes --overwrite --silent --src-dir --css-variables'
-    },
+     // Initialize Shadcn/ui
+     {
+       type: 'RUN_COMMAND',
+       command: 'npx shadcn@2.6.4 init --yes --defaults --force --silent --src-dir --css-variables'
+     },
+     // Install core components only (minimal base installation)
+     {
+       type: 'RUN_COMMAND',
+       command: 'npx shadcn@2.6.4 add button input card --yes --overwrite --silent'
+     },
     // Create comprehensive components.json
     {
       type: 'CREATE_FILE',

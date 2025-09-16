@@ -45,10 +45,10 @@ export const advancedComponentsBlueprint: Blueprint = {
         'sonner'
       ]
     },
-    // Install requested components
-    {
-      type: 'RUN_COMMAND',
-      command: 'npx shadcn@latest add {{#each module.features.advanced-components.parameters.components}}{{this}} {{/each}} --yes --overwrite --silent --src-dir --css-variables'
-    }
+     // Install requested components
+     {
+       type: 'RUN_COMMAND',
+       command: 'npx shadcn@2.6.4 add {{#each module.features.advanced-components.parameters.components}}{{this}} {{/each}} --yes --overwrite --silent'
+     }
   ]
 };
