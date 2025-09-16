@@ -165,6 +165,27 @@
         }
       }
     },
+    "seo": {
+      "id": "seo",
+      "name": "SEO Optimization",
+      "description": "Next.js SEO tools with next-seo and sitemap generation",
+      "blueprint": "features/seo.blueprint.ts",
+      "category": "premium",
+      "parameters": {
+        "next-seo": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable next-seo for meta tags",
+          "required": false
+        },
+        "sitemap": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable automatic sitemap generation",
+          "required": false
+        }
+      }
+    },
     "deployment": {
       "id": "deployment",
       "name": "Deployment Configuration",

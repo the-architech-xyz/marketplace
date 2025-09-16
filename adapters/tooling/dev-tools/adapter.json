@@ -1,0 +1,56 @@
+{
+  "id": "dev-tools",
+  "name": "Development Tools",
+  "description": "Essential development tools for code quality, formatting, and git hooks",
+  "category": "tooling",
+  "version": "1.0.0",
+  "blueprint": "blueprint.ts",
+  "requirements": {
+    "capabilities": ["javascript", "typescript"]
+  },
+  "capabilities": [
+    "code-formatting",
+    "linting",
+    "git-hooks",
+    "commit-linting",
+    "prettier",
+    "husky",
+    "lint-staged",
+    "eslint",
+    "typescript"
+  ],
+  "limitations": "Requires Node.js and Git",
+  "parameters": {
+    "prettier": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Prettier for code formatting",
+      "required": false
+    },
+    "husky": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Husky for git hooks",
+      "required": false
+    },
+    "lintStaged": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable lint-staged for pre-commit hooks",
+      "required": false
+    },
+    "commitlint": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable commitlint for commit message validation",
+      "required": false
+    },
+    "eslint": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable ESLint configuration",
+      "required": false
+    }
+  },
+  "constraints": {}
+}

@@ -1,0 +1,43 @@
+{
+  "id": "forms",
+  "name": "Forms",
+  "description": "Form handling with validation using Zod and React Hook Form",
+  "category": "ui",
+  "version": "1.0.0",
+  "blueprint": "blueprint.ts",
+  "requirements": {
+    "capabilities": ["react-framework"]
+  },
+  "capabilities": [
+    "form-validation",
+    "schema-validation",
+    "react-hook-form",
+    "zod",
+    "typescript",
+    "form-handling",
+    "validation",
+    "error-handling"
+  ],
+  "limitations": "Requires React framework",
+  "parameters": {
+    "zod": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Zod for schema validation",
+      "required": false
+    },
+    "reactHookForm": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable React Hook Form for form handling",
+      "required": false
+    },
+    "resolvers": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable @hookform/resolvers for Zod integration",
+      "required": false
+    }
+  },
+  "constraints": {}
+}

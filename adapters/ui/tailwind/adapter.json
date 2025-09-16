@@ -1,0 +1,50 @@
+{
+  "id": "tailwind",
+  "name": "Tailwind CSS",
+  "description": "Utility-first CSS framework with plugins and optimizations",
+  "category": "ui",
+  "version": "1.0.0",
+  "blueprint": "blueprint.ts",
+  "requirements": {
+    "capabilities": ["css", "postcss"]
+  },
+  "capabilities": [
+    "utility-first",
+    "responsive-design",
+    "dark-mode",
+    "typography",
+    "forms",
+    "aspect-ratio",
+    "animations",
+    "custom-properties",
+    "purge-optimization"
+  ],
+  "limitations": "Requires PostCSS and CSS support",
+  "parameters": {
+    "typography": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable @tailwindcss/typography plugin",
+      "required": false
+    },
+    "forms": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable @tailwindcss/forms plugin",
+      "required": false
+    },
+    "aspectRatio": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable @tailwindcss/aspect-ratio plugin",
+      "required": false
+    },
+    "darkMode": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable dark mode support",
+      "required": false
+    }
+  },
+  "constraints": {}
+}
