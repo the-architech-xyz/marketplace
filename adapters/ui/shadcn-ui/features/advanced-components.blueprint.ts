@@ -48,7 +48,7 @@ export const advancedComponentsBlueprint: Blueprint = {
     // Install requested components
     {
       type: 'RUN_COMMAND',
-      command: 'npx shadcn@latest add {{#each module.features.advanced-components.parameters.components}}{{this}} {{/each}}'
+      command: 'npx shadcn@latest add {{#each module.features.advanced-components.parameters.components}}{{this}} {{/each}} --yes --overwrite --silent --src-dir --css-variables'
     }
   ]
 };
