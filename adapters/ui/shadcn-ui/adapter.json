@@ -8,7 +8,7 @@
   "provides": [
     {
       "name": "shadcn-ui",
-      "version": "2.6.4",
+      "version": "latest",
       "description": "Shadcn/ui component library"
     },
     {
