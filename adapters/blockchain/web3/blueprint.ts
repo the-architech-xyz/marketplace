@@ -1,8 +1,9 @@
 /**
- * Viem Blockchain Integration Blueprint
+ * Viem Blockchain Integration Blueprint - Minimal Base
  * 
  * Modern Web3 integration using viem for Ethereum blockchain interactions
- * Provides type-safe, performant blockchain utilities with proper error handling
+ * Provides core utilities, configuration, and type-safe foundation
+ * Advanced features are available through optional features
  */
 
 import { Blueprint } from '@thearchitech.xyz/types';
@@ -10,20 +11,21 @@ import { Blueprint } from '@thearchitech.xyz/types';
 export const web3Blueprint: Blueprint = {
   id: 'web3-base-setup',
   name: 'Viem Base Setup',
+  description: 'Core Web3 utilities and configuration using viem',
   actions: [
     {
       type: 'INSTALL_PACKAGES',
-      packages: ['viem', '@tanstack/react-query', 'zod']
+      packages: ['viem@^2.0.0', '@tanstack/react-query@^5.0.0', 'zod@^3.22.0']
     },
     {
       type: 'INSTALL_PACKAGES',
-      packages: ['@types/node'],
+      packages: ['@types/node@^20.0.0'],
       isDev: true
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/web3/config.ts',
-      content: `import { createPublicClient, createWalletClient, http, defineChain, type PublicClient, type WalletClient } from 'viem';
+      content: `import { defineChain, type Chain } from 'viem';
 import { z } from 'zod';
 
 // Network configuration schema for validation
@@ -97,39 +99,10 @@ export const NETWORKS = {
 export type SupportedChain = keyof typeof NETWORKS;
 
 // Get current network configuration
-export const getCurrentNetwork = (): typeof NETWORKS.mainnet => {
+export const getCurrentNetwork = (): Chain => {
   const chainId = parseInt(process.env.CHAIN_ID || '1');
   const network = Object.values(NETWORKS).find(network => network.id === chainId);
   return network || NETWORKS.mainnet;
-};
-
-// Create public client for read operations
-export const createPublicClient = (chainId?: number): PublicClient => {
-  const chain = chainId ? Object.values(NETWORKS).find(network => network.id === chainId) : getCurrentNetwork();
-  if (!chain) {
-    throw new Error(\`Unsupported chain ID: \${chainId}\`);
-  }
-  
-  return createPublicClient({
-    chain,
-    transport: http(chain.rpcUrls.default.http[0], {
-      retryCount: 3,
-      retryDelay: 1000,
-    }),
-  });
-};
-
-// Create wallet client for write operations
-export const createWalletClient = (chainId?: number): WalletClient => {
-  const chain = chainId ? Object.values(NETWORKS).find(network => network.id === chainId) : getCurrentNetwork();
-  if (!chain) {
-    throw new Error(\`Unsupported chain ID: \${chainId}\`);
-  }
-  
-  return createWalletClient({
-    chain,
-    transport: http(chain.rpcUrls.default.http[0]),
-  });
 };
 
 // Network validation utility
@@ -138,13 +111,18 @@ export const validateNetwork = (config: unknown): NetworkConfig => {
 };
 
 // Get supported networks
-export const getSupportedNetworks = () => {
+export const getSupportedNetworks = (): Chain[] => {
   return Object.values(NETWORKS);
 };
 
 // Check if chain is supported
 export const isChainSupported = (chainId: number): boolean => {
   return Object.values(NETWORKS).some(network => network.id === chainId);
+};
+
+// Get network by chain ID
+export const getNetworkByChainId = (chainId: number): Chain | undefined => {
+  return Object.values(NETWORKS).find(network => network.id === chainId);
 };`
     },
     {
@@ -152,17 +130,14 @@ export const isChainSupported = (chainId: number): boolean => {
       path: 'src/lib/web3/core.ts',
       content: `import { 
   createPublicClient, 
-  createWalletClient, 
   http, 
   type Address, 
   type Hash, 
-  type PublicClient, 
-  type WalletClient,
+  type PublicClient,
   formatEther,
   parseEther,
-  getContract,
-  type GetContractReturnType,
-  type Abi
+  isAddress,
+  isHex
 } from 'viem';
 import { z } from 'zod';
 import { NETWORKS, getCurrentNetwork, type SupportedChain } from './config';
@@ -180,13 +155,12 @@ export class Web3Error extends Error {
 }
 
 // Validation schemas
-const AddressSchema = z.string().regex(/^0x[a-fA-F0-9]{40}$/);
-const HashSchema = z.string().regex(/^0x[a-fA-F0-9]{64}$/);
+const AddressSchema = z.string().refine(isAddress, 'Invalid Ethereum address');
+const HashSchema = z.string().refine(isHex, 'Invalid hex string');
 
-// Core Web3 utilities class
+// Core Web3 utilities class - Minimal base implementation
 export class Web3Core {
   private publicClient: PublicClient;
-  private walletClient: WalletClient | null = null;
   private currentChain: SupportedChain;
 
   constructor(chainId?: number) {
@@ -203,36 +177,6 @@ export class Web3Core {
         retryDelay: 1000,
       }),
     });
-  }
-
-  // Initialize wallet client (requires browser environment)
-  async initializeWallet(): Promise<void> {
-    if (typeof window === 'undefined') {
-      throw new Web3Error('Wallet initialization requires browser environment', 'BROWSER_REQUIRED');
-    }
-
-    if (!window.ethereum) {
-      throw new Web3Error('No Ethereum provider found', 'NO_PROVIDER');
-    }
-
-    this.walletClient = createWalletClient({
-      chain: NETWORKS[this.currentChain],
-      transport: http(),
-    });
-  }
-
-  // Get account address
-  async getAccount(): Promise<Address | null> {
-    if (!this.walletClient) {
-      throw new Web3Error('Wallet not initialized', 'WALLET_NOT_INITIALIZED');
-    }
-
-    try {
-      const [account] = await this.walletClient.getAddresses();
-      return account || null;
-    } catch (error) {
-      throw new Web3Error('Failed to get account', 'ACCOUNT_ERROR', error as Error);
-    }
   }
 
   // Get balance
@@ -263,76 +207,22 @@ export class Web3Core {
     }
   }
 
-  // Estimate gas for transaction
-  async estimateGas(transaction: {
-    to: Address;
-    value?: bigint;
-    data?: \`0x\${string}\`;
-  }): Promise<bigint> {
+  // Get block by number
+  async getBlock(blockNumber: bigint) {
     try {
-      return await this.publicClient.estimateGas(transaction);
+      return await this.publicClient.getBlock({ blockNumber });
     } catch (error) {
-      throw new Web3Error('Failed to estimate gas', 'GAS_ESTIMATION_ERROR', error as Error);
+      throw new Web3Error('Failed to get block', 'BLOCK_ERROR', error as Error);
     }
   }
 
-  // Send transaction
-  async sendTransaction(transaction: {
-    to: Address;
-    value?: bigint;
-    data?: \`0x\${string}\`;
-    gas?: bigint;
-  }): Promise<Hash> {
-    if (!this.walletClient) {
-      throw new Web3Error('Wallet not initialized', 'WALLET_NOT_INITIALIZED');
-    }
-
+  // Get transaction by hash
+  async getTransaction(hash: Hash) {
     try {
-      const account = await this.getAccount();
-      if (!account) {
-        throw new Web3Error('No account connected', 'NO_ACCOUNT');
-      }
-
-      const hash = await this.walletClient.sendTransaction({
-        ...transaction,
-        account,
-      });
-
-      return hash;
+      return await this.publicClient.getTransaction({ hash });
     } catch (error) {
-      throw new Web3Error('Failed to send transaction', 'TRANSACTION_ERROR', error as Error);
+      throw new Web3Error('Failed to get transaction', 'TRANSACTION_ERROR', error as Error);
     }
-  }
-
-  // Wait for transaction receipt
-  async waitForTransactionReceipt(hash: Hash): Promise<any> {
-    try {
-      return await this.publicClient.waitForTransactionReceipt({ hash });
-    } catch (error) {
-      throw new Web3Error('Failed to wait for transaction receipt', 'RECEIPT_ERROR', error as Error);
-    }
-  }
-
-  // Get contract instance
-  getContract<TAbi extends Abi>(address: Address, abi: TAbi): GetContractReturnType<TAbi, PublicClient> {
-    return getContract({
-      address,
-      abi,
-      client: this.publicClient,
-    });
-  }
-
-  // Get wallet contract instance (for write operations)
-  getWalletContract<TAbi extends Abi>(address: Address, abi: TAbi): GetContractReturnType<TAbi, WalletClient> {
-    if (!this.walletClient) {
-      throw new Web3Error('Wallet not initialized', 'WALLET_NOT_INITIALIZED');
-    }
-
-    return getContract({
-      address,
-      abi,
-      client: this.walletClient,
-    });
   }
 
   // Utility functions
@@ -359,48 +249,9 @@ export class Web3Core {
     return NETWORKS[this.currentChain];
   }
 
-  // Switch chain
-  async switchChain(chainId: number): Promise<void> {
-    if (typeof window === 'undefined' || !window.ethereum) {
-      throw new Web3Error('Chain switching requires browser environment with provider', 'BROWSER_REQUIRED');
-    }
-
-    try {
-      await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: \`0x\${chainId.toString(16)}\` }],
-      });
-    } catch (error: any) {
-      // If the chain doesn't exist, try to add it
-      if (error.code === 4902) {
-        await this.addChain(chainId);
-      } else {
-        throw new Web3Error('Failed to switch chain', 'CHAIN_SWITCH_ERROR', error);
-      }
-    }
-  }
-
-  // Add new chain
-  private async addChain(chainId: number): Promise<void> {
-    const chain = Object.values(NETWORKS).find(network => network.id === chainId);
-    if (!chain) {
-      throw new Web3Error(\`Unsupported chain ID: \${chainId}\`, 'UNSUPPORTED_CHAIN');
-    }
-
-    try {
-      await window.ethereum.request({
-        method: 'wallet_addEthereumChain',
-        params: [{
-          chainId: \`0x\${chainId.toString(16)}\`,
-          chainName: chain.name,
-          rpcUrls: chain.rpcUrls.default.http,
-          blockExplorerUrls: [chain.blockExplorers.default.url],
-          nativeCurrency: chain.nativeCurrency,
-        }],
-      });
-    } catch (error) {
-      throw new Web3Error('Failed to add chain', 'CHAIN_ADD_ERROR', error as Error);
-    }
+  // Get public client for advanced operations
+  getPublicClient(): PublicClient {
+    return this.publicClient;
   }
 }
 
@@ -408,156 +259,15 @@ export class Web3Core {
 export const web3Core = new Web3Core();
 
 // Type exports
-export type { Address, Hash, PublicClient, WalletClient };
+export type { Address, Hash, PublicClient };
 export type { SupportedChain } from './config';`
     },
     {
       type: 'CREATE_FILE',
       path: 'src/hooks/useWeb3.ts',
-      content: `import { useState, useEffect, useCallback } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+      content: `import { useQuery } from '@tanstack/react-query';
 import { web3Core, Web3Error, type Address, type Hash } from '@/lib/web3/core';
 import { NETWORKS, type SupportedChain } from '@/lib/web3/config';
-
-// Web3 state interface
-export interface Web3State {
-  isConnected: boolean;
-  address: Address | null;
-  balance: string | null;
-  chainId: number | null;
-  isLoading: boolean;
-  error: string | null;
-}
-
-// Hook for Web3 state management
-export function useWeb3() {
-  const [state, setState] = useState<Web3State>({
-    isConnected: false,
-    address: null,
-    balance: null,
-    chainId: null,
-    isLoading: false,
-    error: null,
-  });
-
-  const queryClient = useQueryClient();
-
-  // Connect wallet
-  const connectWallet = useCallback(async () => {
-    setState(prev => ({ ...prev, isLoading: true, error: null }));
-    
-    try {
-      await web3Core.initializeWallet();
-      const address = await web3Core.getAccount();
-      
-      if (address) {
-        const balance = await web3Core.getBalance(address);
-        const chain = web3Core.getCurrentChain();
-        
-        setState(prev => ({
-          ...prev,
-          isConnected: true,
-          address,
-          balance,
-          chainId: chain.id,
-          isLoading: false,
-        }));
-      }
-    } catch (error) {
-      const errorMessage = error instanceof Web3Error ? error.message : 'Failed to connect wallet';
-      setState(prev => ({
-        ...prev,
-        error: errorMessage,
-        isLoading: false,
-      }));
-    }
-  }, []);
-
-  // Disconnect wallet
-  const disconnectWallet = useCallback(() => {
-    setState({
-      isConnected: false,
-      address: null,
-      balance: null,
-      chainId: null,
-      isLoading: false,
-      error: null,
-    });
-  }, []);
-
-  // Switch chain
-  const switchChain = useCallback(async (chainId: number) => {
-    setState(prev => ({ ...prev, isLoading: true, error: null }));
-    
-    try {
-      await web3Core.switchChain(chainId);
-      const chain = Object.values(NETWORKS).find(network => network.id === chainId);
-      
-      if (chain && state.address) {
-        const balance = await web3Core.getBalance(state.address);
-        setState(prev => ({
-          ...prev,
-          chainId,
-          balance,
-          isLoading: false,
-        }));
-      }
-    } catch (error) {
-      const errorMessage = error instanceof Web3Error ? error.message : 'Failed to switch chain';
-      setState(prev => ({
-        ...prev,
-        error: errorMessage,
-        isLoading: false,
-      }));
-    }
-  }, [state.address]);
-
-  // Refresh balance
-  const refreshBalance = useCallback(async () => {
-    if (!state.address) return;
-    
-    try {
-      const balance = await web3Core.getBalance(state.address);
-      setState(prev => ({ ...prev, balance }));
-    } catch (error) {
-      console.error('Failed to refresh balance:', error);
-    }
-  }, [state.address]);
-
-  // Listen for account changes
-  useEffect(() => {
-    if (typeof window === 'undefined' || !window.ethereum) return;
-
-    const handleAccountsChanged = (accounts: string[]) => {
-      if (accounts.length === 0) {
-        disconnectWallet();
-      } else {
-        connectWallet();
-      }
-    };
-
-    const handleChainChanged = (chainId: string) => {
-      const newChainId = parseInt(chainId, 16);
-      switchChain(newChainId);
-    };
-
-    window.ethereum.on('accountsChanged', handleAccountsChanged);
-    window.ethereum.on('chainChanged', handleChainChanged);
-
-    return () => {
-      window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
-      window.ethereum.removeListener('chainChanged', handleChainChanged);
-    };
-  }, [connectWallet, disconnectWallet, switchChain]);
-
-  return {
-    ...state,
-    connectWallet,
-    disconnectWallet,
-    switchChain,
-    refreshBalance,
-  };
-}
 
 // Hook for balance query
 export function useBalance(address: Address | null) {
@@ -569,6 +279,8 @@ export function useBalance(address: Address | null) {
     },
     enabled: !!address,
     refetchInterval: 30000, // Refetch every 30 seconds
+    retry: 3,
+    retryDelay: 1000,
   });
 }
 
@@ -580,6 +292,8 @@ export function useBlockNumber() {
       return await web3Core.getBlockNumber();
     },
     refetchInterval: 12000, // Refetch every 12 seconds
+    retry: 3,
+    retryDelay: 1000,
   });
 }
 
@@ -591,89 +305,63 @@ export function useGasPrice() {
       return await web3Core.getGasPrice();
     },
     refetchInterval: 60000, // Refetch every minute
+    retry: 3,
+    retryDelay: 1000,
   });
 }
 
-// Hook for sending transactions
-export function useSendTransaction() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async (transaction: {
-      to: Address;
-      value?: bigint;
-      data?: \`0x\${string}\`;
-      gas?: bigint;
-    }) => {
-      return await web3Core.sendTransaction(transaction);
-    },
-    onSuccess: (hash: Hash) => {
-      // Invalidate balance queries after successful transaction
-      queryClient.invalidateQueries({ queryKey: ['balance'] });
-      queryClient.invalidateQueries({ queryKey: ['blockNumber'] });
-    },
-  });
-}
-
-// Hook for waiting for transaction receipt
-export function useWaitForTransactionReceipt(hash: Hash | null) {
+// Hook for block query
+export function useBlock(blockNumber: bigint | null) {
   return useQuery({
-    queryKey: ['transactionReceipt', hash],
+    queryKey: ['block', blockNumber],
+    queryFn: async () => {
+      if (!blockNumber) return null;
+      return await web3Core.getBlock(blockNumber);
+    },
+    enabled: !!blockNumber,
+    retry: 3,
+    retryDelay: 1000,
+  });
+}
+
+// Hook for transaction query
+export function useTransaction(hash: Hash | null) {
+  return useQuery({
+    queryKey: ['transaction', hash],
     queryFn: async () => {
       if (!hash) return null;
-      return await web3Core.waitForTransactionReceipt(hash);
+      return await web3Core.getTransaction(hash);
     },
     enabled: !!hash,
-    refetchInterval: 2000, // Refetch every 2 seconds
+    retry: 3,
+    retryDelay: 1000,
   });
 }
 
-// Hook for contract interactions
-export function useContract(address: Address | null, abi: any) {
-  const [contract, setContract] = useState<any>(null);
-
-  useEffect(() => {
-    if (!address || !abi) {
-      setContract(null);
-      return;
-    }
-
-    try {
-      const contractInstance = web3Core.getContract(address, abi);
-      setContract(contractInstance);
-    } catch (error) {
-      console.error('Failed to create contract instance:', error);
-      setContract(null);
-    }
-  }, [address, abi]);
-
-  return contract;
+// Hook for current chain info
+export function useCurrentChain() {
+  return useQuery({
+    queryKey: ['currentChain'],
+    queryFn: async () => {
+      return web3Core.getCurrentChain();
+    },
+    staleTime: Infinity, // Chain info doesn't change during session
+  });
 }
 
-// Hook for wallet contract interactions (write operations)
-export function useWalletContract(address: Address | null, abi: any) {
-  const [contract, setContract] = useState<any>(null);
-
-  useEffect(() => {
-    if (!address || !abi) {
-      setContract(null);
-      return;
-    }
-
-    try {
-      const contractInstance = web3Core.getWalletContract(address, abi);
-      setContract(contractInstance);
-    } catch (error) {
-      console.error('Failed to create wallet contract instance:', error);
-      setContract(null);
-    }
-  }, [address, abi]);
-
-  return contract;
+// Hook for supported networks
+export function useSupportedNetworks() {
+  return useQuery({
+    queryKey: ['supportedNetworks'],
+    queryFn: async () => {
+      return NETWORKS;
+    },
+    staleTime: Infinity, // Networks don't change
+  });
 }
 
 // Type exports
-export type { Web3State, Address, Hash };
+export type { Address, Hash };
 export type { SupportedChain } from '@/lib/web3/config';`
     },
     {

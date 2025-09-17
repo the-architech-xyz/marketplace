@@ -1,190 +1,41 @@
 {
   "id": "shadcn-nextjs-integration",
   "name": "Shadcn Next.js Integration",
-  "description": "Complete Shadcn/ui integration for Next.js with modern components, optimizations, and Next.js-specific features",
+  "description": "Integrates Shadcn/ui with Next.js by configuring Tailwind and providing theme providers",
   "category": "integration",
-  "version": "3.0.0",
-  "tech_stack": {
-    "framework": "nextjs",
-    "adapters": ["shadcn-ui"]
-  },
-  "requirements": {
-    "modules": ["shadcn-ui", "nextjs"],
-    "dependencies": ["@radix-ui/react-*", "class-variance-authority", "clsx", "tailwind-merge", "lucide-react"]
-  },
-  "provides": {
-    "files": [
-      "src/lib/utils.ts",
-      "src/components/ui/button.tsx",
-      "src/components/ui/input.tsx",
-      "src/components/ui/card.tsx",
-      "src/components/ui/dialog.tsx",
-      "src/components/ui/form.tsx",
-      "src/components/ui/table.tsx",
-      "src/components/ui/badge.tsx",
-      "src/components/ui/avatar.tsx",
-      "src/components/ui/dropdown-menu.tsx",
-      "src/components/ui/toast.tsx",
-      "src/components/ui/sheet.tsx",
-      "src/components/ui/tabs.tsx",
-      "src/components/ui/accordion.tsx",
-      "src/components/ui/carousel.tsx",
-      "src/components/ui/calendar.tsx",
-      "src/components/ui/date-picker.tsx",
-      "src/components/layout/header.tsx",
-      "src/components/layout/footer.tsx",
-      "src/components/layout/sidebar.tsx",
-      "src/components/layout/navigation.tsx",
-      "src/components/theme/theme-provider.tsx",
-      "src/components/theme/theme-toggle.tsx",
-      "src/components/theme/theme-switcher.tsx",
-      "src/components/nextjs/next-image.tsx",
-      "src/components/nextjs/next-link.tsx",
-      "src/components/nextjs/forms.tsx",
-      "src/components/nextjs/pages.tsx",
-      "src/components/nextjs/seo.tsx",
-      "src/styles/globals.css",
-      "tailwind.config.js",
-      "components.json"
-    ],
-    "components": [
-      "Button",
-      "Input",
-      "Card",
-      "Dialog",
-      "Form",
-      "Table",
-      "Badge",
-      "Avatar",
-      "DropdownMenu",
-      "Toast",
-      "Sheet",
-      "Tabs",
-      "Accordion",
-      "Carousel",
-      "Calendar",
-      "DatePicker",
-      "Header",
-      "Footer",
-      "Sidebar",
-      "Navigation",
-      "ThemeProvider",
-      "ThemeToggle",
-      "ThemeSwitcher",
-      "NextImage",
-      "NextLink",
-      "FormInput",
-      "FormTextarea",
-      "FormSelect",
-      "FormSubmit",
-      "PageContainer",
-      "PageHeader",
-      "PageSection",
-      "SEO"
-    ],
-    "pages": [
-      "src/app/components/page.tsx",
-      "src/app/theme/page.tsx",
-      "src/app/layout.tsx"
+  "version": "1.0.0",
+  "prerequisites": {
+    "capabilities": [
+      {
+        "name": "nextjs",
+        "version": ">=15.0.0",
+        "description": "Next.js framework required"
+      },
+      {
+        "name": "tailwind",
+        "version": ">=3.0.0",
+        "description": "Tailwind CSS required"
+      },
+      {
+        "name": "shadcn-ui",
+        "version": ">=2.0.0",
+        "description": "Shadcn/ui components required"
+      }
     ]
   },
-  "sub_features": {
-    "coreComponents": {
-      "name": "Core Components",
-      "description": "Essential UI components (Button, Input, Card, etc.)",
-      "type": "boolean",
-      "default": true
-    },
-    "advancedComponents": {
-      "name": "Advanced Components",
-      "description": "Complex UI components (Table, Form, Dialog, etc.)",
-      "type": "boolean",
-      "default": true
-    },
-    "layoutComponents": {
-      "name": "Layout Components",
-      "description": "Layout and navigation components (Header, Footer, Sidebar)",
-      "type": "boolean",
-      "default": true
-    },
-    "themeSystem": {
-      "name": "Theme System",
-      "description": "Complete theming system with dark mode and custom themes",
-      "type": "boolean",
-      "default": true
-    },
-    "accessibility": {
-      "name": "Accessibility",
-      "description": "WCAG compliance and accessibility features",
-      "type": "boolean",
-      "default": true
-    },
-    "responsiveDesign": {
-      "name": "Responsive Design",
-      "description": "Mobile-first responsive design utilities",
-      "type": "boolean",
-      "default": true
-    },
-    "animations": {
-      "name": "Animations",
-      "description": "Smooth animations and transitions",
-      "type": "boolean",
-      "default": true
-    },
-    "icons": {
-      "name": "Icons",
-      "description": "Lucide React icons integration",
-      "type": "boolean",
-      "default": true
-    },
-    "forms": {
-      "name": "Forms",
-      "description": "Form components with validation",
-      "type": "boolean",
-      "default": true
-    },
-    "dataDisplay": {
-      "name": "Data Display",
-      "description": "Tables, lists, and data visualization components",
-      "type": "boolean",
-      "default": true
-    },
-    "nextjsOptimizations": {
-      "name": "Next.js Optimizations",
-      "description": "Next.js specific optimizations and components",
-      "type": "boolean",
-      "default": true
-    },
-    "seoComponents": {
-      "name": "SEO Components",
-      "description": "SEO and meta tag management components",
-      "type": "boolean",
-      "default": true
-    },
-    "formValidation": {
-      "name": "Form Validation",
-      "description": "Type-safe form validation with Zod and React Hook Form",
-      "type": "boolean",
-      "default": true
-    },
-    "imageOptimization": {
-      "name": "Image Optimization",
-      "description": "Next.js Image component optimizations",
-      "type": "boolean",
-      "default": true
-    },
-    "linkOptimization": {
-      "name": "Link Optimization",
-      "description": "Next.js Link component optimizations",
-      "type": "boolean",
-      "default": true
+  "provides": [
+    {
+      "name": "shadcn-nextjs-integration",
+      "version": "1.0.0",
+      "description": "Shadcn/ui integration for Next.js"
     }
-  },
-  "blueprint": {
-    "id": "shadcn-nextjs-integration",
-    "name": "Shadcn Next.js Integration",
-    "description": "Complete Shadcn/ui integration for Next.js applications",
-    "version": "1.0.0",
-    "actions": []
+  ],
+  "parameters": {
+    "theming": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable theming integration (requires next-themes)",
+      "required": false
+    }
   }
 }

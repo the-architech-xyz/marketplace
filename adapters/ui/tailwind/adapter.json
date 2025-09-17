@@ -5,8 +5,30 @@
   "category": "ui",
   "version": "1.0.0",
   "blueprint": "blueprint.ts",
-  "requirements": {
-    "capabilities": ["css", "postcss"]
+  "provides": [
+    {
+      "name": "tailwind",
+      "version": "3.4.0",
+      "description": "Tailwind CSS utility framework"
+    },
+    {
+      "name": "postcss",
+      "version": "8.4.0",
+      "description": "PostCSS CSS processor"
+    }
+  ],
+  "prerequisites": {
+    "capabilities": [
+      {
+        "name": "css",
+        "description": "CSS support required"
+      },
+      {
+        "name": "postcss",
+        "version": ">=8.0.0",
+        "description": "PostCSS processor required"
+      }
+    ]
   },
   "capabilities": [
     "utility-first",

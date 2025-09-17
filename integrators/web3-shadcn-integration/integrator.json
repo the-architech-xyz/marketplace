@@ -1,0 +1,77 @@
+{
+  "id": "web3-shadcn-integration",
+  "name": "Web3 Shadcn Integration",
+  "description": "Pre-built Shadcn UI components for Web3 functionality",
+  "version": "1.0.0",
+  "type": "integrator",
+  "category": "ui",
+  "tags": ["web3", "ui", "shadcn", "components"],
+  "author": "The Architech Team",
+  "license": "MIT",
+  "repository": "https://github.com/thearchitech/web3-shadcn-integration",
+  "homepage": "https://thearchitech.xyz",
+  "prerequisites": {
+    "capabilities": [
+      {
+        "name": "react",
+        "version": ">=18.0.0",
+        "description": "React library required"
+      },
+      {
+        "name": "shadcn-ui",
+        "version": ">=2.0.0",
+        "description": "Shadcn UI component library required"
+      },
+      {
+        "name": "web3-core",
+        "version": ">=2.0.0",
+        "description": "Web3 core functionality required"
+      }
+    ]
+  },
+  "capabilities": [
+    "web3-ui-components",
+    "wallet-connection-ui",
+    "transaction-ui",
+    "nft-gallery-ui",
+    "defi-dashboard-ui"
+  ],
+  "files": [
+    "src/components/web3/ui/",
+    "src/hooks/web3/ui/",
+    "src/lib/web3/ui/"
+  ],
+  "dependencies": [
+    "react",
+    "react-dom",
+    "@radix-ui/react-dialog",
+    "@radix-ui/react-dropdown-menu",
+    "@radix-ui/react-tabs",
+    "@radix-ui/react-tooltip",
+    "@radix-ui/react-progress",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge",
+    "lucide-react"
+  ],
+  "peerDependencies": [
+    "viem",
+    "@tanstack/react-query",
+    "zod"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src/",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "web3",
+    "ui",
+    "shadcn",
+    "components",
+    "react",
+    "typescript",
+    "tailwind"
+  ]
+}

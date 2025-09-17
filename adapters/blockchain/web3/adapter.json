@@ -3,8 +3,39 @@
   "name": "Viem Ethereum Integration",
   "description": "Modern, type-safe Web3 integration using viem for Ethereum blockchain interactions",
   "category": "blockchain",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "blueprint": "blueprint.ts",
+  "provides": [
+    {
+      "name": "viem",
+      "version": "2.0.0",
+      "description": "Modern, type-safe Ethereum library"
+    },
+    {
+      "name": "web3-core",
+      "version": "2.0.0",
+      "description": "Core Web3 utilities and configuration"
+    },
+    {
+      "name": "react-query",
+      "version": "5.0.0",
+      "description": "Data fetching and caching for Web3"
+    }
+  ],
+  "prerequisites": {
+    "capabilities": [
+      {
+        "name": "react",
+        "version": ">=18.0.0",
+        "description": "React library required for hooks"
+      },
+      {
+        "name": "typescript",
+        "version": ">=4.0.0",
+        "description": "TypeScript support required"
+      }
+    ]
+  },
   "dependencies": [],
   "capabilities": [
     "wallet-connection",
@@ -18,7 +49,9 @@
     "type-safety",
     "error-handling",
     "react-hooks",
-    "query-caching"
+    "query-caching",
+    "viem-integration",
+    "modern-architecture"
   ],
   "limitations": "Requires Web3 wallet and RPC endpoints. Browser environment required for wallet operations.",
   "parameters": {

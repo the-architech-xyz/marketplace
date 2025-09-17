@@ -5,8 +5,36 @@
   "category": "ui",
   "version": "1.0.0",
   "blueprint": "blueprint.ts",
-  "requirements": {
-    "capabilities": ["react-framework"]
+  "provides": [
+    {
+      "name": "shadcn-ui",
+      "version": "2.6.4",
+      "description": "Shadcn/ui component library"
+    },
+    {
+      "name": "radix-ui",
+      "version": "1.0.0",
+      "description": "Radix UI primitive components"
+    }
+  ],
+  "prerequisites": {
+    "capabilities": [
+      {
+        "name": "react",
+        "version": ">=18.0.0",
+        "description": "React library required"
+      },
+      {
+        "name": "tailwind",
+        "version": ">=3.0.0",
+        "description": "Tailwind CSS required"
+      },
+      {
+        "name": "typescript",
+        "version": ">=4.0.0",
+        "description": "TypeScript support required"
+      }
+    ]
   },
   "capabilities": [
     "components",
@@ -31,13 +59,6 @@
       "default": [
         "button",
         "input",
-        "card"
-      ],
-      "description": "Components to install",
-      "required": false,
-      "options": [
-        "button",
-        "input",
         "card",
         "dialog",
         "form",
@@ -45,128 +66,49 @@
         "badge",
         "avatar",
         "dropdown-menu",
-        "toast"
-      ]
-    },
-    "theme": {
-      "type": "string",
-      "default": "default",
-      "description": "Color theme to use",
-      "required": false,
-      "options": [
-        "default",
-        "dark",
-        "blue",
-        "green",
-        "purple"
-      ]
-    },
-    "darkMode": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable dark mode support",
-      "required": false
-    },
-    "tailwind": {
-      "type": "boolean",
-      "default": true,
-      "description": "Configure Tailwind CSS",
+        "toast",
+        "sheet",
+        "tabs",
+        "accordion",
+        "carousel",
+        "calendar",
+        "date-picker",
+        "alert-dialog",
+        "checkbox",
+        "collapsible",
+        "context-menu",
+        "hover-card",
+        "menubar",
+        "navigation-menu",
+        "popover",
+        "progress",
+        "radio-group",
+        "scroll-area",
+        "slider",
+        "toggle",
+        "toggle-group"
+      ],
+      "description": "Components to install (comprehensive set by default)",
       "required": false
     }
   },
   "features": {
-    "advanced-components": {
-      "id": "advanced-components",
-      "name": "Advanced Components",
-      "description": "Tables, Forms, Dialogs, Dropdowns and complex UI components",
-      "blueprint": "features/advanced-components.blueprint.ts",
-      "category": "core",
-      "parameters": {
-        "components": {
-          "type": "array",
-          "default": [
-            "table",
-            "form",
-            "dialog",
-            "dropdown-menu"
-          ],
-          "description": "Advanced components to install",
-          "required": false,
-          "options": [
-            "table",
-            "form",
-            "dialog",
-            "dropdown-menu",
-            "sheet",
-            "tabs",
-            "accordion",
-            "carousel",
-            "calendar",
-            "date-picker"
-          ]
-        }
-      }
-    },
     "theming": {
       "id": "theming",
-      "name": "Advanced Theming",
-      "description": "Custom themes, color schemes, and design system",
+      "name": "Theming Dependencies",
+      "description": "Install theming dependencies (next-themes)",
       "blueprint": "features/theming.blueprint.ts",
       "category": "premium",
-      "parameters": {
-        "themes": {
-          "type": "array",
-          "default": [
-            "default",
-            "dark"
-          ],
-          "description": "Themes to include",
-          "required": false,
-          "options": [
-            "default",
-            "dark",
-            "blue",
-            "green",
-            "purple",
-            "orange",
-            "red"
-          ]
-        },
-        "custom-colors": {
-          "type": "boolean",
-          "default": false,
-          "description": "Include custom color palette",
-          "required": false
-        }
-      }
+      "parameters": {}
     },
     "accessibility": {
       "id": "accessibility",
-      "name": "Accessibility Features",
-      "description": "WCAG compliance, screen reader support, and accessibility tools",
+      "name": "Accessibility Dependencies",
+      "description": "Install accessibility dependencies (eslint-plugin-jsx-a11y)",
       "blueprint": "features/accessibility.blueprint.ts",
       "category": "premium",
-      "parameters": {
-        "screen-reader": {
-          "type": "boolean",
-          "default": true,
-          "description": "Screen reader support",
-          "required": false
-        },
-        "keyboard-navigation": {
-          "type": "boolean",
-          "default": true,
-          "description": "Keyboard navigation support",
-          "required": false
-        },
-        "focus-management": {
-          "type": "boolean",
-          "default": true,
-          "description": "Focus management utilities",
-          "required": false
-        }
-      }
-    },
+      "parameters": {}
+    }
   },
   "constraints": {}
 }

@@ -103,7 +103,7 @@
     },
     {
       "id": "framework/nextjs",
-      "version": "14.0.0",
+      "version": "15.0.0",
       "path": "adapters/framework/nextjs/adapter.json",
       "engine": {
         "cliVersion": ">=1.0.0"
@@ -160,8 +160,41 @@
     },
     {
       "id": "ui/shadcn-ui",
-      "version": "latest",
+      "version": "1.0.0",
       "path": "adapters/ui/shadcn-ui/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "ui/forms",
+      "version": "1.0.0",
+      "path": "adapters/ui/forms/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "ui/tailwind",
+      "version": "1.0.0",
+      "path": "adapters/ui/tailwind/adapter.json",
+      "engine": {
+        "cliVersion": ">=1.0.0"
+      },
+      "category": "adapter",
+      "dependencies": [],
+      "tags": []
+    },
+    {
+      "id": "tooling/dev-tools",
+      "version": "1.0.0",
+      "path": "adapters/tooling/dev-tools/adapter.json",
       "engine": {
         "cliVersion": ">=1.0.0"
       },
@@ -396,6 +429,6 @@
       "tags": []
     }
   ],
-  "lastUpdated": "2025-09-13T12:37:34.478Z",
-  "totalModules": 35
+  "lastUpdated": "2025-09-16T18:00:00.000Z",
+  "totalModules": 38
 }

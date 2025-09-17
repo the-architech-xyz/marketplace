@@ -6,6 +6,33 @@
   "version": "15.0.0",
   "blueprint": "blueprint.ts",
   "dependencies": [],
+  "provides": [
+    {
+      "name": "react",
+      "version": "19.1.0",
+      "description": "React library for building user interfaces"
+    },
+    {
+      "name": "nextjs",
+      "version": "15.0.0",
+      "description": "Next.js React framework"
+    },
+    {
+      "name": "typescript",
+      "version": "5.0.0",
+      "description": "TypeScript language support"
+    },
+    {
+      "name": "tailwind",
+      "version": "3.4.0",
+      "description": "Tailwind CSS utility framework"
+    },
+    {
+      "name": "eslint",
+      "version": "8.0.0",
+      "description": "ESLint code linting"
+    }
+  ],
   "capabilities": [
     "ssr",
     "ssg",
@@ -84,7 +111,7 @@
     "api-routes": {
       "id": "api-routes",
       "name": "API Routes",
-      "description": "Next.js API routes with middleware and error handling",
+      "description": "Comprehensive API routes with middleware and error handling",
       "blueprint": "features/api-routes.blueprint.ts",
       "category": "core",
       "parameters": {
@@ -102,23 +129,83 @@
         }
       }
     },
-    "ssr-optimization": {
-      "id": "ssr-optimization",
-      "name": "SSR Optimization",
-      "description": "Server-side rendering optimization and caching",
-      "blueprint": "features/ssr-optimization.blueprint.ts",
-      "category": "core",
+    "performance": {
+      "id": "performance",
+      "name": "Performance Optimization",
+      "description": "Advanced performance optimization tools for Next.js 15+",
+      "blueprint": "features/performance.blueprint.ts",
+      "category": "premium",
       "parameters": {
-        "caching": {
+        "bundle-analysis": {
           "type": "boolean",
           "default": true,
-          "description": "Enable response caching",
+          "description": "Include bundle analysis tools",
           "required": false
         },
-        "streaming": {
+        "web-vitals": {
           "type": "boolean",
           "default": true,
-          "description": "Enable streaming SSR",
+          "description": "Enable Web Vitals monitoring",
+          "required": false
+        },
+        "lighthouse": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include Lighthouse performance testing",
+          "required": false
+        }
+      }
+    },
+    "security": {
+      "id": "security",
+      "name": "Security Headers",
+      "description": "Comprehensive security middleware and headers for Next.js 15+",
+      "blueprint": "features/security.blueprint.ts",
+      "category": "premium",
+      "parameters": {
+        "csp": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Content Security Policy",
+          "required": false
+        },
+        "rate-limiting": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable rate limiting",
+          "required": false
+        },
+        "bot-protection": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable bot detection and protection",
+          "required": false
+        }
+      }
+    },
+    "server-actions": {
+      "id": "server-actions",
+      "name": "Server Actions",
+      "description": "Modern Server Actions implementation for Next.js 15+",
+      "blueprint": "features/server-actions.blueprint.ts",
+      "category": "core",
+      "parameters": {
+        "examples": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include example server actions",
+          "required": false
+        },
+        "validation": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include form validation utilities",
+          "required": false
+        },
+        "rate-limiting": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable rate limiting for server actions",
           "required": false
         }
       }
@@ -144,27 +231,6 @@
         }
       }
     },
-    "performance": {
-      "id": "performance",
-      "name": "Performance Optimization",
-      "description": "Image optimization, bundle analysis, and performance monitoring",
-      "blueprint": "features/performance.blueprint.ts",
-      "category": "premium",
-      "parameters": {
-        "image-optimization": {
-          "type": "boolean",
-          "default": true,
-          "description": "Enable image optimization",
-          "required": false
-        },
-        "bundle-analysis": {
-          "type": "boolean",
-          "default": true,
-          "description": "Include bundle analysis tools",
-          "required": false
-        }
-      }
-    },
     "seo": {
       "id": "seo",
       "name": "SEO Optimization",
@@ -183,27 +249,6 @@
           "default": true,
           "description": "Enable automatic sitemap generation",
           "required": false
-        }
-      }
-    },
-    "deployment": {
-      "id": "deployment",
-      "name": "Deployment Configuration",
-      "description": "Vercel, Docker, and CI/CD deployment configs",
-      "blueprint": "features/deployment.blueprint.ts",
-      "category": "premium",
-      "parameters": {
-        "platform": {
-          "type": "string",
-          "default": "vercel",
-          "description": "Deployment platform",
-          "required": false,
-          "options": [
-            "vercel",
-            "docker",
-            "aws",
-            "netlify"
-          ]
         }
       }
     }

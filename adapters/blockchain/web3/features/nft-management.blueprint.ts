@@ -1,7 +1,7 @@
 /**
  * NFT Management Feature Blueprint
  * 
- * Mint, transfer, and manage NFTs (ERC721, ERC1155)
+ * Modern NFT management using viem with type-safe contract interactions
  */
 
 import { Blueprint } from '@thearchitech.xyz/types';
@@ -9,35 +9,103 @@ import { Blueprint } from '@thearchitech.xyz/types';
 const nftManagementBlueprint: Blueprint = {
   id: 'web3-nft-management',
   name: 'NFT Management',
+  description: 'Modern NFT management using viem with type-safe contract interactions',
   actions: [
+    {
+      type: 'INSTALL_PACKAGES',
+      packages: ['viem@^2.0.0', '@tanstack/react-query@^5.0.0']
+    },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/web3/nft.ts',
-      content: `import Web3 from 'web3';
-import { contractManager } from './contracts.js';
+      content: `import { 
+  type Address, 
+  type Hash, 
+  type PublicClient, 
+  type WalletClient,
+  type Abi,
+  type GetContractReturnType,
+  isAddress
+} from 'viem';
+import { contractManager, ERC721_ABI, ERC1155_ABI } from './contracts.js';
+import { Web3Error } from './core.js';
 
+// NFT Metadata interfaces
 export interface NFTMetadata {
   name: string;
   description: string;
   image: string;
+  external_url?: string;
+  background_color?: string;
   attributes?: Array<{
     trait_type: string;
     value: string | number;
+    display_type?: string;
+    max_value?: number;
   }>;
+  properties?: Record<string, any>;
 }
 
 export interface NFTToken {
-  tokenId: string;
-  owner: string;
+  tokenId: bigint;
+  owner: Address;
   metadata?: NFTMetadata;
-  contractAddress: string;
+  contractAddress: Address;
+  tokenURI?: string;
 }
 
-export class NFTManager {
-  private web3: Web3;
+export interface NFTCollection {
+  address: Address;
+  name: string;
+  symbol: string;
+  totalSupply?: bigint;
+  contractType: 'ERC721' | 'ERC1155';
+}
 
-  constructor(web3?: Web3) {
-    this.web3 = web3 || new Web3();
+// Mint function ABI for ERC721
+const MINT_ABI = [
+  {
+    "name": "mint",
+    "type": "function",
+    "stateMutability": "payable",
+    "inputs": [
+      { "name": "to", "type": "address" },
+      { "name": "tokenURI", "type": "string" }
+    ],
+    "outputs": [{ "name": "tokenId", "type": "uint256" }]
+  }
+] as const;
+
+// Mint function ABI for ERC1155
+const MINT_BATCH_ABI = [
+  {
+    "name": "mintBatch",
+    "type": "function",
+    "stateMutability": "payable",
+    "inputs": [
+      { "name": "to", "type": "address" },
+      { "name": "ids", "type": "uint256[]" },
+      { "name": "amounts", "type": "uint256[]" },
+      { "name": "data", "type": "bytes" }
+    ],
+    "outputs": []
+  }
+] as const;
+
+// Modern NFT manager using viem
+export class NFTManager {
+  private publicClient: PublicClient | null = null;
+  private walletClient: WalletClient | null = null;
+
+  constructor(options?: { publicClient?: PublicClient; walletClient?: WalletClient }) {
+    this.publicClient = options?.publicClient || null;
+    this.walletClient = options?.walletClient || null;
+  }
+
+  // Set clients
+  setClients(publicClient: PublicClient, walletClient?: WalletClient) {
+    this.publicClient = publicClient;
+    this.walletClient = walletClient || null;
   }
 
   /**
@@ -45,48 +113,133 @@ export class NFTManager {
    */
   async getNFTMetadata(tokenURI: string): Promise<NFTMetadata> {
     try {
-      const response = await fetch(tokenURI);
+      // Handle IPFS URLs
+      const url = tokenURI.startsWith('ipfs://') 
+        ? tokenURI.replace('ipfs://', 'https://ipfs.io/ipfs/')
+        : tokenURI;
+
+      const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Failed to fetch NFT metadata');
+        throw new Web3Error('Failed to fetch NFT metadata', 'METADATA_FETCH_ERROR');
       }
-      return await response.json();
+      
+      const metadata = await response.json();
+      
+      // Validate required fields
+      if (!metadata.name) {
+        throw new Web3Error('Invalid metadata: missing name field', 'INVALID_METADATA');
+      }
+      
+      return metadata as NFTMetadata;
     } catch (error) {
-      console.error('Error fetching NFT metadata:', error);
-      throw error;
+      if (error instanceof Web3Error) throw error;
+      throw new Web3Error('Error fetching NFT metadata', 'METADATA_FETCH_ERROR', error as Error);
     }
   }
 
   /**
-   * Get all NFTs owned by an address
+   * Get NFT collection information
    */
-  async getOwnedNFTs(contractAddress: string, ownerAddress: string): Promise<NFTToken[]> {
-    try {
-      const balance = await contractManager.getNFTBalance(contractAddress, ownerAddress);
-      const nfts: NFTToken[] = [];
+  async getCollectionInfo(contractAddress: Address): Promise<NFTCollection> {
+    if (!this.publicClient) {
+      throw new Web3Error('Public client not initialized', 'CLIENT_NOT_INITIALIZED');
+    }
 
-      // For ERC721, we need to iterate through token IDs
-      // This is a simplified version - in practice, you'd use events or indexing
-      for (let i = 0; i < Math.min(balance, 100); i++) {
-        try {
-          const tokenId = i.toString();
-          const owner = await contractManager.getNFTOwner(contractAddress, tokenId);
-          
-          if (owner.toLowerCase() === ownerAddress.toLowerCase()) {
-            const tokenURI = await contractManager.getNFTTokenURI(contractAddress, tokenId);
+    try {
+      const contract = contractManager.getContract(contractAddress, ERC721_ABI);
+      
+      const [name, symbol] = await Promise.all([
+        contract.read.name(),
+        contract.read.symbol()
+      ]);
+
+      // Try to get total supply (not all contracts have this)
+      let totalSupply: bigint | undefined;
+      try {
+        totalSupply = await contract.read.totalSupply();
+      } catch {
+        // Contract doesn't have totalSupply function
+        totalSupply = undefined;
+      }
+
+      return {
+        address: contractAddress,
+        name,
+        symbol,
+        totalSupply,
+        contractType: 'ERC721'
+      };
+    } catch (error) {
+      throw new Web3Error('Failed to get collection info', 'CONTRACT_ERROR', error as Error);
+    }
+  }
+
+  /**
+   * Get NFT token information
+   */
+  async getNFTToken(
+    contractAddress: Address, 
+    tokenId: bigint, 
+    ownerAddress?: Address
+  ): Promise<NFTToken> {
+    if (!this.publicClient) {
+      throw new Web3Error('Public client not initialized', 'CLIENT_NOT_INITIALIZED');
+    }
+
+    try {
+      const contract = contractManager.getContract(contractAddress, ERC721_ABI);
+      
+      const [owner, tokenURI] = await Promise.all([
+        contract.read.ownerOf([tokenId]),
+        contract.read.tokenURI([tokenId])
+      ]);
+
             let metadata: NFTMetadata | undefined;
-            
             try {
               metadata = await this.getNFTMetadata(tokenURI);
             } catch (error) {
-              console.warn('Failed to fetch metadata for token', tokenId);
+        console.warn('Failed to fetch metadata for token', tokenId.toString());
             }
 
-            nfts.push({
+      return {
               tokenId,
               owner,
               metadata,
-              contractAddress
-            });
+        contractAddress,
+        tokenURI
+      };
+    } catch (error) {
+      throw new Web3Error('Failed to get NFT token', 'CONTRACT_ERROR', error as Error);
+    }
+  }
+
+  /**
+   * Get all NFTs owned by an address (simplified version)
+   * Note: In production, you'd use an indexing service like The Graph
+   */
+  async getOwnedNFTs(
+    contractAddress: Address, 
+    ownerAddress: Address,
+    limit: number = 50
+  ): Promise<NFTToken[]> {
+    if (!this.publicClient) {
+      throw new Web3Error('Public client not initialized', 'CLIENT_NOT_INITIALIZED');
+    }
+
+    try {
+      const balance = await contractManager.getERC721Balance(contractAddress, ownerAddress);
+      const nfts: NFTToken[] = [];
+
+      // This is a simplified approach - in production, use events or indexing
+      const maxTokens = Math.min(Number(balance), limit);
+      
+      for (let i = 0; i < maxTokens; i++) {
+        try {
+          const tokenId = BigInt(i);
+          const nft = await this.getNFTToken(contractAddress, tokenId, ownerAddress);
+          
+          if (nft.owner.toLowerCase() === ownerAddress.toLowerCase()) {
+            nfts.push(nft);
           }
         } catch (error) {
           // Token might not exist, continue
@@ -96,128 +249,125 @@ export class NFTManager {
 
       return nfts;
     } catch (error) {
-      console.error('Error getting owned NFTs:', error);
-      throw error;
+      throw new Web3Error('Failed to get owned NFTs', 'CONTRACT_ERROR', error as Error);
     }
   }
 
   /**
-   * Transfer NFT to another address
+   * Transfer ERC721 NFT
    */
-  async transferNFT(
-    contractAddress: string,
-    fromAddress: string,
-    toAddress: string,
-    tokenId: string
-  ): Promise<string> {
-    try {
-      const contract = contractManager.createContract(contractAddress, [
-        {
-          "constant": false,
-          "inputs": [
-            {"name": "_to", "type": "address"},
-            {"name": "_tokenId", "type": "uint256"}
-          ],
-          "name": "transferFrom",
-          "outputs": [],
-          "type": "function"
-        }
-      ]);
+  async transferERC721(
+    contractAddress: Address,
+    from: Address,
+    to: Address,
+    tokenId: bigint
+  ): Promise<Hash> {
+    if (!this.walletClient) {
+      throw new Web3Error('Wallet client not initialized', 'WALLET_NOT_INITIALIZED');
+    }
 
-      return new Promise((resolve, reject) => {
-        contract.methods.transferFrom(fromAddress, toAddress, tokenId)
-          .send({ from: fromAddress })
-          .on('transactionHash', (hash: string) => resolve(hash))
-          .on('error', (error: any) => reject(error));
-      });
+    try {
+      return await contractManager.transferERC721(contractAddress, from, to, tokenId);
     } catch (error) {
-      console.error('Error transferring NFT:', error);
-      throw error;
+      throw new Web3Error('Failed to transfer ERC721 NFT', 'TRANSFER_ERROR', error as Error);
     }
   }
 
   /**
-   * Mint a new NFT (requires contract with mint function)
+   * Transfer ERC1155 NFT
    */
-  async mintNFT(
-    contractAddress: string,
-    toAddress: string,
-    tokenURI: string,
-    fromAddress: string
-  ): Promise<string> {
-    try {
-      const contract = contractManager.createContract(contractAddress, [
-        {
-          "constant": false,
-          "inputs": [
-            {"name": "_to", "type": "address"},
-            {"name": "_tokenURI", "type": "string"}
-          ],
-          "name": "mint",
-          "outputs": [{"name": "", "type": "uint256"}],
-          "type": "function"
-        }
-      ]);
+  async transferERC1155(
+    contractAddress: Address,
+    from: Address,
+    to: Address,
+    tokenId: bigint,
+    amount: bigint,
+    data: \`0x\${string}\` = '0x'
+  ): Promise<Hash> {
+    if (!this.walletClient) {
+      throw new Web3Error('Wallet client not initialized', 'WALLET_NOT_INITIALIZED');
+    }
 
-      return new Promise((resolve, reject) => {
-        contract.methods.mint(toAddress, tokenURI)
-          .send({ from: fromAddress })
-          .on('transactionHash', (hash: string) => resolve(hash))
-          .on('error', (error: any) => reject(error));
-      });
+    try {
+      return await contractManager.transferERC1155(contractAddress, from, to, tokenId, amount, data);
     } catch (error) {
-      console.error('Error minting NFT:', error);
-      throw error;
+      throw new Web3Error('Failed to transfer ERC1155 NFT', 'TRANSFER_ERROR', error as Error);
     }
   }
 
   /**
-   * Get NFT collection info
+   * Mint ERC721 NFT (requires contract with mint function)
    */
-  async getCollectionInfo(contractAddress: string): Promise<{
-    name: string;
-    symbol: string;
-    totalSupply: number;
-  }> {
+  async mintERC721(
+    contractAddress: Address,
+    to: Address,
+    tokenURI: string
+  ): Promise<Hash> {
+    if (!this.walletClient) {
+      throw new Web3Error('Wallet client not initialized', 'WALLET_NOT_INITIALIZED');
+    }
+
     try {
-      const contract = contractManager.createContract(contractAddress, [
-        {
-          "constant": true,
-          "inputs": [],
-          "name": "name",
-          "outputs": [{"name": "", "type": "string"}],
-          "type": "function"
-        },
-        {
-          "constant": true,
-          "inputs": [],
-          "name": "symbol",
-          "outputs": [{"name": "", "type": "string"}],
-          "type": "function"
-        },
-        {
-          "constant": true,
-          "inputs": [],
-          "name": "totalSupply",
-          "outputs": [{"name": "", "type": "uint256"}],
-          "type": "function"
-        }
-      ]);
-
-      const [name, symbol, totalSupply] = await Promise.all([
-        contract.methods.name().call(),
-        contract.methods.symbol().call(),
-        contract.methods.totalSupply().call()
-      ]);
-
-      return {
-        name,
-        symbol,
-        totalSupply: parseInt(totalSupply)
-      };
+      const contract = contractManager.getWalletContract(contractAddress, MINT_ABI);
+      const hash = await contract.write.mint([to, tokenURI]);
+      return hash;
     } catch (error) {
-      console.error('Error getting collection info:', error);
-      throw error;
+      throw new Web3Error('Failed to mint ERC721 NFT', 'MINT_ERROR', error as Error);
+    }
+  }
+
+  /**
+   * Mint ERC1155 NFT batch (requires contract with mintBatch function)
+   */
+  async mintERC1155Batch(
+    contractAddress: Address,
+    to: Address,
+    tokenIds: bigint[],
+    amounts: bigint[],
+    data: \`0x\${string}\` = '0x'
+  ): Promise<Hash> {
+    if (!this.walletClient) {
+      throw new Web3Error('Wallet client not initialized', 'WALLET_NOT_INITIALIZED');
+    }
+
+    try {
+      const contract = contractManager.getWalletContract(contractAddress, MINT_BATCH_ABI);
+      const hash = await contract.write.mintBatch([to, tokenIds, amounts, data]);
+      return hash;
+    } catch (error) {
+      throw new Web3Error('Failed to mint ERC1155 batch', 'MINT_ERROR', error as Error);
+    }
+  }
+
+  /**
+   * Check if address is valid
+   */
+  validateAddress(address: string): boolean {
+    return isAddress(address);
+  }
+
+  /**
+   * Get contract type (ERC721 or ERC1155)
+   */
+  async getContractType(contractAddress: Address): Promise<'ERC721' | 'ERC1155'> {
+    if (!this.publicClient) {
+      throw new Web3Error('Public client not initialized', 'CLIENT_NOT_INITIALIZED');
+    }
+
+    try {
+      // Try ERC721 first
+      const erc721Contract = contractManager.getContract(contractAddress, ERC721_ABI);
+      await erc721Contract.read.name();
+      return 'ERC721';
+    } catch {
+      try {
+        // Try ERC1155
+        const erc1155Contract = contractManager.getContract(contractAddress, ERC1155_ABI);
+        await erc1155Contract.read.uri([0n]);
+        return 'ERC1155';
+      } catch {
+        throw new Web3Error('Contract is not a recognized NFT standard', 'INVALID_CONTRACT');
+      }
     }
   }
 }
@@ -227,78 +377,256 @@ export const nftManager = new NFTManager();`
     },
     {
       type: 'CREATE_FILE',
+      path: 'src/hooks/web3/useNFT.ts',
+      content: `import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { nftManager } from '../../lib/web3/nft.js';
+import { useWallet } from './useWallet.js';
+import type { Address } from 'viem';
+
+// NFT Collection Hooks
+export function useNFTCollection(contractAddress: Address) {
+  return useQuery({
+    queryKey: ['nft-collection', contractAddress],
+    queryFn: async () => {
+      return await nftManager.getCollectionInfo(contractAddress);
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+}
+
+export function useNFTToken(contractAddress: Address, tokenId: bigint) {
+  return useQuery({
+    queryKey: ['nft-token', contractAddress, tokenId],
+    queryFn: async () => {
+      return await nftManager.getNFTToken(contractAddress, tokenId);
+    },
+    enabled: !!tokenId,
+    staleTime: 2 * 60 * 1000, // 2 minutes
+  });
+}
+
+export function useOwnedNFTs(contractAddress: Address, ownerAddress?: Address, limit: number = 50) {
+  const { account } = useWallet();
+  const address = ownerAddress || account;
+
+  return useQuery({
+    queryKey: ['owned-nfts', contractAddress, address, limit],
+    queryFn: async () => {
+      if (!address) throw new Error('Owner address required');
+      return await nftManager.getOwnedNFTs(contractAddress, address, limit);
+    },
+    enabled: !!address,
+    staleTime: 30 * 1000, // 30 seconds
+  });
+}
+
+// NFT Transfer Hooks
+export function useERC721Transfer() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ 
+      contractAddress, 
+      from, 
+      to, 
+      tokenId 
+    }: { 
+      contractAddress: Address; 
+      from: Address; 
+      to: Address; 
+      tokenId: bigint; 
+    }) => {
+      return await nftManager.transferERC721(contractAddress, from, to, tokenId);
+    },
+    onSuccess: (_, variables) => {
+      // Invalidate owned NFTs queries
+      queryClient.invalidateQueries({ 
+        queryKey: ['owned-nfts', variables.contractAddress] 
+      });
+      queryClient.invalidateQueries({ 
+        queryKey: ['nft-token', variables.contractAddress, variables.tokenId] 
+      });
+    },
+  });
+}
+
+export function useERC1155Transfer() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ 
+      contractAddress, 
+      from, 
+      to, 
+      tokenId, 
+      amount, 
+      data = '0x' 
+    }: { 
+      contractAddress: Address; 
+      from: Address; 
+      to: Address; 
+      tokenId: bigint; 
+      amount: bigint; 
+      data?: \`0x\${string}\`; 
+    }) => {
+      return await nftManager.transferERC1155(contractAddress, from, to, tokenId, amount, data);
+    },
+    onSuccess: (_, variables) => {
+      // Invalidate owned NFTs queries
+      queryClient.invalidateQueries({ 
+        queryKey: ['owned-nfts', variables.contractAddress] 
+      });
+    },
+  });
+}
+
+// NFT Minting Hooks
+export function useERC721Mint() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ 
+      contractAddress, 
+      to, 
+      tokenURI 
+    }: { 
+      contractAddress: Address; 
+      to: Address; 
+      tokenURI: string; 
+    }) => {
+      return await nftManager.mintERC721(contractAddress, to, tokenURI);
+    },
+    onSuccess: (_, variables) => {
+      // Invalidate owned NFTs queries
+      queryClient.invalidateQueries({ 
+        queryKey: ['owned-nfts', variables.contractAddress] 
+      });
+    },
+  });
+}
+
+export function useERC1155MintBatch() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ 
+      contractAddress, 
+      to, 
+      tokenIds, 
+      amounts, 
+      data = '0x' 
+    }: { 
+      contractAddress: Address; 
+      to: Address; 
+      tokenIds: bigint[]; 
+      amounts: bigint[]; 
+      data?: \`0x\${string}\`; 
+    }) => {
+      return await nftManager.mintERC1155Batch(contractAddress, to, tokenIds, amounts, data);
+    },
+    onSuccess: (_, variables) => {
+      // Invalidate owned NFTs queries
+      queryClient.invalidateQueries({ 
+        queryKey: ['owned-nfts', variables.contractAddress] 
+      });
+    },
+  });
+}
+
+// Utility Hooks
+export function useNFTManager() {
+  return nftManager;
+}
+
+export function useContractType(contractAddress: Address) {
+  return useQuery({
+    queryKey: ['contract-type', contractAddress],
+    queryFn: async () => {
+      return await nftManager.getContractType(contractAddress);
+    },
+    staleTime: 10 * 60 * 1000, // 10 minutes
+  });
+}`
+    },
+    {
+      type: 'CREATE_FILE',
       path: 'src/components/web3/NFTGallery.tsx',
-      content: `import React, { useState, useEffect } from 'react';
+      content: `import React, { useState } from 'react';
 import { useWallet } from '../../hooks/web3/useWallet.js';
-import { nftManager, NFTToken } from '../../lib/web3/nft.js';
+import { 
+  useNFTCollection, 
+  useOwnedNFTs, 
+  useERC721Transfer, 
+  useERC1155Transfer,
+  useContractType 
+} from '../../hooks/web3/useNFT.js';
 import { Button } from '../ui/button.js';
 import { Input } from '../ui/input.js';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card.js';
+import { Badge } from '../ui/badge.js';
+import { Alert, AlertDescription } from '../ui/alert.js';
+import type { Address } from 'viem';
 
 interface NFTGalleryProps {
-  contractAddress: string;
+  contractAddress: Address;
 }
 
 export const NFTGallery: React.FC<NFTGalleryProps> = ({ contractAddress }) => {
-  const { address, isConnected } = useWallet();
-  const [nfts, setNfts] = useState<NFTToken[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string>('');
-  const [collectionInfo, setCollectionInfo] = useState<{
-    name: string;
-    symbol: string;
-    totalSupply: number;
-  } | null>(null);
+  const { account, isConnected } = useWallet();
+  const [transferTo, setTransferTo] = useState('');
+  const [transferAmount, setTransferAmount] = useState('1');
+  const [selectedTokenId, setSelectedTokenId] = useState<string>('');
 
-  // Load collection info
-  useEffect(() => {
-    const loadCollectionInfo = async () => {
-      try {
-        const info = await nftManager.getCollectionInfo(contractAddress);
-        setCollectionInfo(info);
-      } catch (err) {
-        console.error('Failed to load collection info:', err);
+  // Hooks
+  const { 
+    data: collection, 
+    isLoading: collectionLoading, 
+    error: collectionError 
+  } = useNFTCollection(contractAddress);
+  
+  const { 
+    data: nfts, 
+    isLoading: nftsLoading, 
+    error: nftsError,
+    refetch: refetchNFTs
+  } = useOwnedNFTs(contractAddress, account);
+  
+  const { 
+    data: contractType, 
+    isLoading: contractTypeLoading 
+  } = useContractType(contractAddress);
+  
+  const erc721Transfer = useERC721Transfer();
+  const erc1155Transfer = useERC1155Transfer();
+
+  const handleTransfer = async (tokenId: bigint) => {
+    if (!account || !transferTo) return;
+
+    try {
+      if (contractType === 'ERC721') {
+        await erc721Transfer.mutateAsync({
+          contractAddress,
+          from: account,
+          to: transferTo as Address,
+          tokenId
+        });
+      } else if (contractType === 'ERC1155') {
+        await erc1155Transfer.mutateAsync({
+          contractAddress,
+          from: account,
+          to: transferTo as Address,
+          tokenId,
+          amount: BigInt(transferAmount)
+        });
       }
-    };
-
-    if (contractAddress) {
-      loadCollectionInfo();
-    }
-  }, [contractAddress]);
-
-  // Load owned NFTs
-  const loadOwnedNFTs = async () => {
-    if (!address || !isConnected) return;
-
-    setLoading(true);
-    setError('');
-
-    try {
-      const ownedNFTs = await nftManager.getOwnedNFTs(contractAddress, address);
-      setNfts(ownedNFTs);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load NFTs');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Transfer NFT
-  const transferNFT = async (tokenId: string, toAddress: string) => {
-    if (!address || !isConnected) return;
-
-    setLoading(true);
-    setError('');
-
-    try {
-      const txHash = await nftManager.transferNFT(contractAddress, address, toAddress, tokenId);
-      setError('');
-      // Reload NFTs after transfer
-      await loadOwnedNFTs();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to transfer NFT');
-    } finally {
-      setLoading(false);
+      
+      alert('Transfer successful!');
+      setTransferTo('');
+      setTransferAmount('1');
+      setSelectedTokenId('');
+    } catch (error) {
+      console.error('Transfer failed:', error);
+      alert('Transfer failed. Check console for details.');
     }
   };
 
@@ -320,30 +648,103 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ contractAddress }) => {
       <CardHeader>
         <CardTitle>NFT Gallery</CardTitle>
         <CardDescription>
-          {collectionInfo ? \`\${collectionInfo.name} (\${collectionInfo.symbol})\` : 'Loading collection info...'}
+          {collectionLoading ? (
+            'Loading collection info...'
+          ) : collectionError ? (
+            'Failed to load collection info'
+          ) : collection ? (
+            \`\${collection.name} (\${collection.symbol})\`
+          ) : (
+            'Unknown Collection'
+          )}
         </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <Button onClick={loadOwnedNFTs} disabled={loading} className="w-full">
-          {loading ? 'Loading...' : 'Load My NFTs'}
-        </Button>
-
-        {error && (
-          <div className="p-3 bg-red-100 border border-red-300 rounded-md">
-            <p className="text-red-700 text-sm">{error}</p>
+        {contractType && (
+          <div className="flex gap-2">
+            <Badge variant="outline">{contractType}</Badge>
+            {collection?.totalSupply && (
+              <Badge variant="secondary">
+                Total Supply: {collection.totalSupply.toString()}
+              </Badge>
+            )}
           </div>
         )}
+      </CardHeader>
+      <CardContent className="space-y-6">
+        {/* Transfer Controls */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold">Transfer NFT</h3>
+          <div className="grid grid-cols-1 gap-2">
+            <Input
+              placeholder="Recipient address"
+              value={transferTo}
+              onChange={(e) => setTransferTo(e.target.value)}
+            />
+            {contractType === 'ERC1155' && (
+              <Input
+                placeholder="Amount"
+                value={transferAmount}
+                onChange={(e) => setTransferAmount(e.target.value)}
+                type="number"
+                min="1"
+              />
+            )}
+            <Input
+              placeholder="Token ID"
+              value={selectedTokenId}
+              onChange={(e) => setSelectedTokenId(e.target.value)}
+              type="number"
+            />
+            <Button 
+              onClick={() => {
+                if (selectedTokenId) {
+                  handleTransfer(BigInt(selectedTokenId));
+                }
+              }}
+              disabled={
+                !transferTo || 
+                !selectedTokenId || 
+                erc721Transfer.isPending || 
+                erc1155Transfer.isPending
+              }
+              className="w-full"
+            >
+              {(erc721Transfer.isPending || erc1155Transfer.isPending) 
+                ? 'Transferring...' 
+                : 'Transfer NFT'
+              }
+            </Button>
+          </div>
+        </div>
 
-        {nfts.length > 0 && (
+        {/* Refresh Button */}
+        <Button onClick={() => refetchNFTs()} disabled={nftsLoading} className="w-full">
+          {nftsLoading ? 'Loading...' : 'Refresh NFTs'}
+        </Button>
+
+        {/* Error Display */}
+        {nftsError && (
+          <Alert>
+            <AlertDescription>
+              Error loading NFTs: {nftsError.message}
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {/* NFT Grid */}
+        {nfts && nfts.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {nfts.map((nft) => (
-              <Card key={nft.tokenId} className="overflow-hidden">
+              <Card key={nft.tokenId.toString()} className="overflow-hidden">
                 {nft.metadata?.image && (
                   <div className="aspect-square bg-gray-100">
                     <img
                       src={nft.metadata.image}
                       alt={nft.metadata.name || \`NFT #\${nft.tokenId}\`}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
                     />
                   </div>
                 )}
@@ -352,42 +753,47 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ contractAddress }) => {
                     {nft.metadata?.name || \`NFT #\${nft.tokenId}\`}
                   </h3>
                   {nft.metadata?.description && (
-                    <p className="text-sm text-gray-600 mt-1">
+                    <p className="text-sm text-gray-600 mt-1 line-clamp-2">
                       {nft.metadata.description}
                     </p>
                   )}
-                  <p className="text-xs text-gray-500 mt-2">
-                    Token ID: {nft.tokenId}
-                  </p>
-                  
-                  <div className="mt-3 space-y-2">
-                    <Input
-                      placeholder="Transfer to address"
-                      id={\`transfer-\${nft.tokenId}\`}
-                    />
-                    <Button
-                      size="sm"
-                      className="w-full"
-                      onClick={() => {
-                        const input = document.getElementById(\`transfer-\${nft.tokenId}\`) as HTMLInputElement;
-                        const toAddress = input?.value;
-                        if (toAddress) {
-                          transferNFT(nft.tokenId, toAddress);
-                        }
-                      }}
-                    >
-                      Transfer
-                    </Button>
+                  <div className="flex justify-between items-center mt-2">
+                    <p className="text-xs text-gray-500">
+                      Token ID: {nft.tokenId.toString()}
+                    </p>
+                    <Badge variant="outline" className="text-xs">
+                      {contractType}
+                    </Badge>
                   </div>
+                  
+                  {nft.metadata?.attributes && nft.metadata.attributes.length > 0 && (
+                    <div className="mt-3">
+                      <h4 className="text-sm font-medium mb-2">Attributes</h4>
+                      <div className="flex flex-wrap gap-1">
+                        {nft.metadata.attributes.slice(0, 3).map((attr, index) => (
+                          <Badge key={index} variant="secondary" className="text-xs">
+                            {attr.trait_type}: {attr.value}
+                          </Badge>
+                        ))}
+                        {nft.metadata.attributes.length > 3 && (
+                          <Badge variant="secondary" className="text-xs">
+                            +{nft.metadata.attributes.length - 3} more
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}
           </div>
         )}
 
-        {nfts.length === 0 && !loading && (
+        {/* Empty State */}
+        {nfts && nfts.length === 0 && !nftsLoading && (
           <div className="text-center py-8 text-gray-500">
-            No NFTs found. Click "Load My NFTs" to check your collection.
+            <p>No NFTs found in this collection.</p>
+            <p className="text-sm mt-1">Make sure you own NFTs from this contract.</p>
           </div>
         )}
       </CardContent>
@@ -398,3 +804,4 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ contractAddress }) => {
   ]
 };
 export default nftManagementBlueprint;
+
