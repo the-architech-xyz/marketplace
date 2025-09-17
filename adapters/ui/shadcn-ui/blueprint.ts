@@ -71,12 +71,17 @@ export const shadcnUiBlueprint: Blueprint = {
     // Initialize Shadcn/ui (non-interactive, Tailwind v4 compatible)
     {
       type: 'RUN_COMMAND',
-      command: 'npx shadcn@latest init --yes --defaults --force --silent --src-dir --css-variables'
+      command: 'npx shadcn@latest init --yes --defaults --force --silent --src-dir --css-variables --style new-york --base-color slate'
     },
     // Install comprehensive set of core components (20+ components)
     {
       type: 'RUN_COMMAND',
-      command: 'npx shadcn@latest add button input card dialog form table badge avatar dropdown-menu toast sheet tabs accordion carousel calendar date-picker alert-dialog checkbox collapsible context-menu hover-card menubar navigation-menu popover progress radio-group scroll-area slider toggle toggle-group --yes --overwrite --silent'
+      command: 'npx shadcn@latest add button input card dialog form table badge avatar dropdown-menu sheet tabs accordion carousel calendar date-picker alert-dialog checkbox collapsible context-menu hover-card menubar navigation-menu popover progress radio-group scroll-area slider toggle toggle-group --yes --overwrite --silent'
+    },
+    // Install sonner for toast notifications (replaces deprecated toast component)
+    {
+      type: 'RUN_COMMAND',
+      command: 'npx shadcn@latest add sonner --yes --overwrite --silent'
     },
   ]
 };
