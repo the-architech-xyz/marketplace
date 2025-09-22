@@ -7,7 +7,7 @@
 
 import { Blueprint } from '@thearchitech.xyz/types';
 
-export const shadcnUiBlueprint: Blueprint = {
+const shadcnUiBlueprint: Blueprint = {
   id: 'shadcn-ui-installer',
   name: 'Shadcn/ui Component Installer',
   description: 'Pure installer for Shadcn/ui components and dependencies',
@@ -65,23 +65,23 @@ export const shadcnUiBlueprint: Blueprint = {
         'react-hook-form@^7.48.2',
         '@hookform/resolvers@^3.3.2',
         'zod@^3.22.4',
-        'sonner@^1.2.4'
+        'sonner@^1.2.4',
+        'tailwindcss-animate@^1.0.7'
       ]
     },
     // Initialize Shadcn/ui (non-interactive, Tailwind v4 compatible)
     {
       type: 'RUN_COMMAND',
-      command: 'npx shadcn@latest init --yes --defaults --force --silent --src-dir --css-variables --style new-york --base-color slate'
+      command: 'npx shadcn@latest init --yes --defaults --force --silent --src-dir --css-variables --base-color slate'
     },
-    // Install comprehensive set of core components (20+ components)
+    // Install components from genome parameters using forEach pattern
+    // This will be dynamically expanded by the BlueprintExecutor
     {
       type: 'RUN_COMMAND',
-      command: 'npx shadcn@latest add button input card dialog form table badge avatar dropdown-menu sheet tabs accordion carousel calendar date-picker alert-dialog checkbox collapsible context-menu hover-card menubar navigation-menu popover progress radio-group scroll-area slider toggle toggle-group --yes --overwrite --silent'
-    },
-    // Install sonner for toast notifications (replaces deprecated toast component)
-    {
-      type: 'RUN_COMMAND',
-      command: 'npx shadcn@latest add sonner --yes --overwrite --silent'
-    },
+      command: 'npx shadcn@latest add {{item}} --yes --overwrite',
+      forEach: 'module.parameters.components'
+    }
   ]
 };
+
+export default shadcnUiBlueprint;
