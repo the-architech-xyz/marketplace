@@ -1,5 +1,5 @@
 {
-  "name": "@thearchitech/marketplace",
+  "name": "@thearchitech.xyz/marketplace",
   "version": "1.0.0",
   "description": "The Architech Marketplace - Adapters and Integrations",
   "type": "module",
@@ -14,7 +14,8 @@
     "adapters/",
     "integrations/",
     "manifest.json",
-    "index.js"
+    "index.js",
+    "types/"
   ],
   "keywords": [
     "architech",
@@ -36,7 +37,19 @@
   "engines": {
     "node": ">=16.0.0"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "types:generate": "tsx scripts/generate-types.ts",
+    "build": "npm run types:generate",
+    "prepublishOnly": "npm run build"
+  },
   "dependencies": {
     "@thearchitech.xyz/types": "^1.1.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.0.0",
+    "glob": "^10.0.0"
   }
 }

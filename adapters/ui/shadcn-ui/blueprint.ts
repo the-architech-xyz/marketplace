@@ -1,66 +1,17 @@
 /**
- * Shadcn/ui Adapter Blueprint - Schema-Driven Version
+ * Shadcn/ui Adapter Blueprint
  * 
- * Self-schematizing blueprint with type-safe parameter validation
- * This blueprint automatically validates component names and provides defaults
+ * Pure installer for Shadcn/ui components - only installs components and dependencies
+ * Configuration and integration is handled by integrators
  */
 
-import { defineBlueprint, type BlueprintSchema, type BlueprintAction } from '@thearchitech.xyz/types';
+import { Blueprint } from '@thearchitech.xyz/types';
 
-// Define valid Shadcn components with 'as const' for type inference
-const VALID_SHADCN_COMPONENTS = [
-  'button', 'input', 'card', 'dialog', 'form', 'table', 'badge', 'avatar', 
-  'dropdown-menu', 'sonner', 'sheet', 'tabs', 'accordion', 'carousel', 
-  'calendar', 'alert-dialog', 'checkbox', 'collapsible', 'context-menu', 
-  'hover-card', 'menubar', 'navigation-menu', 'popover', 'progress', 
-  'radio-group', 'scroll-area', 'slider', 'toggle', 'toggle-group'
-] as const;
-
-// Define the schema with type-safe validation
-const schema: BlueprintSchema = {
-  parameters: {
-    theme: {
-      type: 'string',
-      enum: ['default', 'dark', 'light'] as const,
-      default: 'default',
-      description: 'UI theme variant'
-    },
-    components: {
-      type: 'array',
-      items: {
-        type: 'string',
-        enum: VALID_SHADCN_COMPONENTS
-      },
-      default: ['button', 'card', 'input'],
-      description: 'Shadcn components to install'
-    },
-    darkMode: {
-      type: 'boolean',
-      default: true,
-      description: 'Enable dark mode support'
-    }
-  },
-  features: {
-    theming: {
-      type: 'boolean',
-      default: true,
-      description: 'Enable theming capabilities'
-    },
-    accessibility: {
-      type: 'boolean',
-      default: true,
-      description: 'Enable accessibility features'
-    }
-  }
-};
-
-// Create the schema-driven blueprint
-export const blueprint = defineBlueprint({
+const shadcnUiBlueprint: Blueprint = {
   id: 'shadcn-ui-installer',
   name: 'Shadcn/ui Component Installer',
   description: 'Pure installer for Shadcn/ui components and dependencies',
-  schema,
-  actions: (params) => [
+  actions: [
     // Install core Shadcn/ui dependencies
     {
       type: 'INSTALL_PACKAGES',
@@ -128,12 +79,15 @@ export const blueprint = defineBlueprint({
       type: 'RUN_COMMAND',
       command: 'npx shadcn@latest init --yes --defaults --force --silent --src-dir --css-variables --base-color slate'
     },
-    // Install components from validated parameters
-    // The params.components is now type-safe and validated
-    ...(Array.isArray(params.components) ? params.components.map(component => ({
-      type: 'RUN_COMMAND' as const,
-      command: `npx shadcn@latest add ${component} --yes --overwrite`,
+    // Install components from genome parameters using forEach pattern
+    // This will be dynamically expanded by the BlueprintExecutor
+    {
+      type: 'RUN_COMMAND',
+      command: 'npx shadcn@latest add {{item}} --yes --overwrite',
+      forEach: 'module.parameters.components',
       workingDir: '.'
-    })) : [])
+    }
   ]
-});
+};
+
+export default shadcnUiBlueprint;

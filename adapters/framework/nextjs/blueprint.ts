@@ -1,65 +1,21 @@
 /**
- * Next.js 15+ Base Blueprint - Schema-Driven Version
+ * Next.js 15+ Base Blueprint
  * 
  * Creates a modern Next.js 15+ project with React 19, App Router, TypeScript, and Tailwind CSS v4
  * This blueprint provides the core foundation - additional features are handled by optional features
  */
 
-import { defineBlueprint, type BlueprintSchema } from '@thearchitech.xyz/types';
+import { Blueprint } from '@thearchitech.xyz/types';
 
-// Define valid import alias options
-const IMPORT_ALIAS_OPTIONS = ['@/*', '~/*', '#/*'] as const;
-
-// Define schema for the NextJS blueprint
-const schema: BlueprintSchema = {
-  parameters: {
-    tailwind: {
-      type: 'boolean',
-      default: true,
-      description: 'Enable Tailwind CSS'
-    },
-    eslint: {
-      type: 'boolean',
-      default: true,
-      description: 'Enable ESLint'
-    },
-    importAlias: {
-      type: 'string',
-      enum: IMPORT_ALIAS_OPTIONS,
-      default: '@/*',
-      description: 'Import alias pattern for module imports'
-    }
-  },
-  features: {
-    appRouter: {
-      type: 'boolean',
-      default: true,
-      description: 'Use Next.js App Router (vs Pages Router)'
-    },
-    typescript: {
-      type: 'boolean',
-      default: true,
-      description: 'Use TypeScript'
-    },
-    srcDir: {
-      type: 'boolean',
-      default: true,
-      description: 'Use src directory structure'
-    }
-  }
-};
-
-// Create the schema-driven blueprint
-export const blueprint = defineBlueprint({
+export const nextjsBlueprint: Blueprint = {
   id: 'nextjs-base-setup',
   name: 'Next.js 15+ Base Setup',
   description: 'Modern Next.js 15+ foundation with React 19, App Router, TypeScript, and Tailwind CSS v4',
-  schema,
-  actions: (params) => [
-    // Create Next.js project with latest versions and validated parameters
+  actions: [
+    // Create Next.js project with latest versions and dynamic parameters
     {
       type: 'RUN_COMMAND',
-      command: `npx create-next-app@latest . --typescript${params.tailwind ? ' --tailwind' : ''}${params.eslint ? ' --eslint' : ''} --app --src-dir --import-alias "${params.importAlias}" --yes`
+      command: 'npx create-next-app@latest . --typescript{{#if module.parameters.tailwind}} --tailwind{{/if}}{{#if module.parameters.eslint}} --eslint{{/if}} --app --src-dir --import-alias "{{module.parameters.importAlias}}" --yes'
     },
     // Create Tailwind v4 configuration for shadcn/ui compatibility
     {
@@ -149,4 +105,4 @@ export const blueprint = defineBlueprint({
       }
     }
   ]
-});
+}

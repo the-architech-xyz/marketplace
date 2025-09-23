@@ -1,1 +1,117 @@
-import { Blueprint }
+import { Blueprint } from '@thearchitech.xyz/types';
+
+const web3ShadcnIntegrationBlueprint: Blueprint = {
+  id: 'web3-shadcn-integration',
+  name: 'Web3 Shadcn Integration',
+  description: 'Beautiful Web3 UI components using Shadcn/ui with modern viem integration for wallet management, transaction display, and blockchain interactions',
+  version: '2.0.0',
+  actions: [
+    // Create Web3 UI Components
+    {
+      type: 'CREATE_FILE',
+      path: 'src/components/web3/WalletCard.tsx',
+      template: 'WalletCard.tsx.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/components/web3/TransactionCard.tsx',
+      template: 'TransactionCard.tsx.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/components/web3/NetworkSwitcher.tsx',
+      template: 'NetworkSwitcher.tsx.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/components/web3/BalanceCard.tsx',
+      template: 'BalanceCard.tsx.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/components/web3/Web3Dashboard.tsx',
+      template: 'Web3Dashboard.tsx.tpl'
+    },
+    // Install Web3 Dependencies
+    {
+      type: 'INSTALL_PACKAGES',
+      packages: [
+        'viem',
+        '@tanstack/react-query',
+        'wagmi',
+        'lucide-react'
+      ],
+      isDev: false
+    },
+    // Add Web3 Hooks
+    {
+      type: 'ENHANCE_FILE',
+      path: 'src/hooks/useWeb3.ts',
+      modifier: 'ts-module-enhancer',
+      params: {
+        importsToAdd: [
+          { name: 'useAccount', from: 'wagmi', type: 'import' },
+          { name: 'useConnect', from: 'wagmi', type: 'import' },
+          { name: 'useDisconnect', from: 'wagmi', type: 'import' },
+          { name: 'useNetwork', from: 'wagmi', type: 'import' }
+        ],
+        statementsToAppend: [
+          {
+            type: 'raw',
+            content: `export const useWeb3 = () => {
+  const { address, isConnected } = useAccount();
+  const { connect, connectors } = useConnect();
+  const { disconnect } = useDisconnect();
+  const { chain } = useNetwork();
+
+  return {
+    address,
+    isConnected,
+    chainId: chain?.id,
+    connect,
+    disconnect,
+    connectors
+  };
+};
+
+export const useBlockNumber = () => {
+  const { data: blockNumber } = useBlockNumber();
+  return { data: blockNumber };
+};`
+          }
+        ]
+      }
+    },
+    // Add Web3 Provider Setup
+    {
+      type: 'ENHANCE_FILE',
+      path: 'src/providers/Web3Provider.tsx',
+      modifier: 'ts-module-enhancer',
+      params: {
+        importsToAdd: [
+          { name: 'WagmiConfig', from: 'wagmi', type: 'import' },
+          { name: 'QueryClient', from: '@tanstack/react-query', type: 'import' },
+          { name: 'QueryClientProvider', from: '@tanstack/react-query', type: 'import' }
+        ],
+        statementsToAppend: [
+          {
+            type: 'raw',
+            content: `const queryClient = new QueryClient();
+
+export function Web3Provider({ children }: { children: React.ReactNode }) {
+  return (
+    <WagmiConfig config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        {children}
+      </QueryClientProvider>
+    </WagmiConfig>
+  );
+}`
+          }
+        ]
+      }
+    }
+  ]
+};
+
+export default web3ShadcnIntegrationBlueprint;
