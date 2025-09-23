@@ -69,6 +69,11 @@ const shadcnUiBlueprint: Blueprint = {
         'tailwindcss-animate@^1.0.7'
       ]
     },
+    // Set npm to use legacy peer deps for React 19 compatibility
+    {
+      type: 'RUN_COMMAND',
+      command: 'npm config set legacy-peer-deps true'
+    },
     // Initialize Shadcn/ui (non-interactive, Tailwind v4 compatible)
     {
       type: 'RUN_COMMAND',
@@ -79,7 +84,8 @@ const shadcnUiBlueprint: Blueprint = {
     {
       type: 'RUN_COMMAND',
       command: 'npx shadcn@latest add {{item}} --yes --overwrite',
-      forEach: 'module.parameters.components'
+      forEach: 'module.parameters.components',
+      workingDir: '.'
     }
   ]
 };

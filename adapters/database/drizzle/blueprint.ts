@@ -23,70 +23,17 @@ export const drizzleBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/lib/db/index.ts',
-      content: `import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
-import * as schema from './schema';
-
-// Database connection
-const connectionString = process.env.DATABASE_URL!;
-const client = postgres(connectionString);
-export const db = drizzle(client, { schema });
-
-// Export schema for use in other files
-export * from './schema';`
+      template: 'adapters/database/drizzle/templates/db-index.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/db/schema.ts',
-      content: `import { pgTable, text, timestamp, uuid, boolean } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
-
-// Example user table
-export const users = pgTable('users', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  email: text('email').notNull().unique(),
-  name: text('name'),
-  emailVerified: boolean('email_verified').default(false),
-  createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow(),
-});
-
-// Example posts table
-export const posts = pgTable('posts', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  title: text('title').notNull(),
-  content: text('content'),
-  published: boolean('published').default(false),
-  authorId: uuid('author_id').references(() => users.id),
-  createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow(),
-});
-
-// Relations
-export const usersRelations = relations(users, ({ many }) => ({
-  posts: many(posts),
-}));
-
-export const postsRelations = relations(posts, ({ one }) => ({
-  author: one(users, {
-    fields: [posts.authorId],
-    references: [users.id],
-  }),
-}));`
+      template: 'adapters/database/drizzle/templates/schema.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'drizzle.config.ts',
-      content: `import type { Config } from 'drizzle-kit';
-
-export default {
-  schema: './src/lib/db/schema.ts',
-  out: './drizzle',
-  dialect: 'postgresql',
-  dbCredentials: {
-    url: process.env.DATABASE_URL!,
-  },
-} satisfies Config;`
+      template: 'adapters/database/drizzle/templates/drizzle.config.ts.tpl'
     },
     {
       type: 'ADD_ENV_VAR',

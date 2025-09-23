@@ -1,0 +1,39 @@
+node_modules
+dist
+build
+.next
+.nuxt
+.vuepress/dist
+.serverless
+.fusebox
+.dynamodb
+.tern-port
+coverage
+.nyc_output
+.cache
+.parcel-cache
+.next
+.nuxt
+.vuepress/dist
+.serverless
+.fusebox
+.dynamodb
+.tern-port
+coverage
+.nyc_output
+.cache
+.parcel-cache
+*.log
+*.tgz
+*.tar.gz
+.DS_Store
+.vscode
+.idea
+*.swp
+*.swo
+*~
+`,
+      condition: '{{#if module.parameters.prettier}}'
+    },
+    // Create Husky configuration
+    {

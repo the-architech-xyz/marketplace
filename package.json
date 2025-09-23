@@ -35,5 +35,8 @@
   "homepage": "https://the-architech.dev",
   "engines": {
     "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "@thearchitech.xyz/types": "^1.0.6"
   }
 }

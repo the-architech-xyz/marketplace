@@ -50,121 +50,73 @@ export const devToolsBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: '.prettierrc',
-      content: `{
-  "semi": true,
-  "trailingComma": "es5",
-  "singleQuote": true,
-  "printWidth": 80,
-  "tabWidth": 2,
-  "useTabs": false
-}`,
+      template: 'adapters/tooling/dev-tools/templates/.prettierrc.tpl',
       condition: '{{#if module.parameters.prettier}}'
     },
     // Create Prettier ignore file
     {
       type: 'CREATE_FILE',
       path: '.prettierignore',
-      content: `node_modules
-dist
-build
-.next
-.nuxt
-.vuepress/dist
-.serverless
-.fusebox
-.dynamodb
-.tern-port
-coverage
-.nyc_output
-.cache
-.parcel-cache
-.next
-.nuxt
-.vuepress/dist
-.serverless
-.fusebox
-.dynamodb
-.tern-port
-coverage
-.nyc_output
-.cache
-.parcel-cache
-*.log
-*.tgz
-*.tar.gz
-.DS_Store
-.vscode
-.idea
-*.swp
-*.swo
-*~
-`,
+      template: 'adapters/tooling/dev-tools/templates/.prettierignore.tpl',
       condition: '{{#if module.parameters.prettier}}'
     },
-    // Create Husky configuration
+    // Create Husky pre-commit hook
     {
       type: 'CREATE_FILE',
       path: '.husky/pre-commit',
-      content: `#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-npx lint-staged
-`,
+      template: 'adapters/tooling/dev-tools/templates/.husky/pre-commit.tpl',
       condition: '{{#if module.parameters.husky}}'
     },
     // Create lint-staged configuration
     {
       type: 'CREATE_FILE',
       path: '.lintstagedrc',
-      content: `{
-  "*.{js,jsx,ts,tsx}": [
-    "eslint --fix",
-    "prettier --write"
-  ],
-  "*.{json,md,yml,yaml}": [
-    "prettier --write"
-  ]
-}`,
+      template: 'adapters/tooling/dev-tools/templates/.lintstagedrc.tpl',
       condition: '{{#if module.parameters.lintStaged}}'
     },
     // Create commitlint configuration
     {
       type: 'CREATE_FILE',
-      path: '.commitlintrc.json',
-      content: `{
-  "extends": ["@commitlint/config-conventional"]
-}`,
+      path: 'commitlint.config.js',
+      template: 'adapters/tooling/dev-tools/templates/commitlint.config.js.tpl',
       condition: '{{#if module.parameters.commitlint}}'
     },
     // Create ESLint configuration
     {
       type: 'CREATE_FILE',
-      path: '.eslintrc.json',
-      content: `{
-  "extends": [
-    "eslint:recommended",
-    "@typescript-eslint/recommended"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "rules": {
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error",
-    "no-console": "warn",
-    "prefer-const": "error"
-  },
-  "env": {
-    "browser": true,
-    "node": true,
-    "es2021": true
-  }
-}`,
+      path: '.eslintrc.js',
+      template: 'adapters/tooling/dev-tools/templates/.eslintrc.js.tpl',
       condition: '{{#if module.parameters.eslint}}'
     },
-    // Initialize Husky
+    // Add scripts to package.json
     {
-      type: 'RUN_COMMAND',
-      command: 'npx husky install',
+      type: 'ADD_SCRIPT',
+      name: 'format',
+      command: 'prettier --write .',
+      condition: '{{#if module.parameters.prettier}}'
+    },
+    {
+      type: 'ADD_SCRIPT',
+      name: 'format:check',
+      command: 'prettier --check .',
+      condition: '{{#if module.parameters.prettier}}'
+    },
+    {
+      type: 'ADD_SCRIPT',
+      name: 'lint',
+      command: 'eslint . --ext .js,.jsx,.ts,.tsx',
+      condition: '{{#if module.parameters.eslint}}'
+    },
+    {
+      type: 'ADD_SCRIPT',
+      name: 'lint:fix',
+      command: 'eslint . --ext .js,.jsx,.ts,.tsx --fix',
+      condition: '{{#if module.parameters.eslint}}'
+    },
+    {
+      type: 'ADD_SCRIPT',
+      name: 'prepare',
+      command: 'husky install',
       condition: '{{#if module.parameters.husky}}'
     }
   ]
