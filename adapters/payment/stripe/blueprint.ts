@@ -1,80 +1,30 @@
 /**
- * Stripe Payment Processing Blueprint - Schema-Driven Version
+ * Stripe Payment Processing Blueprint
  * 
  * Sets up complete Stripe integration for payments and subscriptions
  * Creates payment components, API routes, and webhook handling
  */
 
-import { defineBlueprint, type BlueprintSchema } from '@thearchitech.xyz/types';
+import { Blueprint } from '@thearchitech.xyz/types';
 
-// Define schema for the Stripe blueprint
-const schema: BlueprintSchema = {
-  parameters: {
-    webhookEndpoint: {
-      type: 'string',
-      default: '/api/payment/webhook',
-      description: 'Endpoint path for Stripe webhooks'
-    },
-    environment: {
-      type: 'string',
-      enum: ['test', 'production'] as const,
-      default: 'test',
-      description: 'Stripe environment to use'
-    },
-    appUrl: {
-      type: 'string',
-      default: 'http://localhost:3000',
-      description: 'Application URL for Stripe redirects'
-    }
-  },
-  features: {
-    subscriptions: {
-      type: 'boolean',
-      default: true,
-      description: 'Enable subscription payment support'
-    },
-    oneTimePayments: {
-      type: 'boolean',
-      default: true,
-      description: 'Enable one-time payment support'
-    },
-    webhooks: {
-      type: 'boolean',
-      default: true,
-      description: 'Enable webhook handling'
-    },
-    customerPortal: {
-      type: 'boolean',
-      default: false,
-      description: 'Enable Stripe Customer Portal integration'
-    }
-  }
-};
-
-// Create the schema-driven blueprint
-export const blueprint = defineBlueprint({
+export const stripeBlueprint: Blueprint = {
   id: 'stripe-payment-setup',
   name: 'Stripe Payment Processing Setup',
-  description: 'Complete Stripe integration for payments and subscriptions with TypeScript support',
-  schema,
-  actions: (params) => [
-    // Install required packages
+  actions: [
     {
       type: 'INSTALL_PACKAGES',
       packages: ['stripe', '@stripe/stripe-js']
     },
-    // Add development scripts
     {
       type: 'ADD_SCRIPT',
       name: 'stripe:listen',
-      command: `stripe listen --forward-to ${params.appUrl}${params.webhookEndpoint}`
+      command: 'stripe listen --forward-to {{env.APP_URL}}/api/payment/webhook'
     },
     {
       type: 'ADD_SCRIPT',
       name: 'stripe:test',
       command: 'stripe trigger payment_intent.succeeded'
     },
-    // Create core Stripe files
     {
       type: 'CREATE_FILE',
       path: '{{paths.payment_config}}/stripe.ts',
@@ -85,17 +35,16 @@ export const blueprint = defineBlueprint({
       path: '{{paths.payment_config}}/client.ts',
       template: 'adapters/payment/stripe/templates/client.ts.tpl'
     },
-    // Add environment variables
     {
       type: 'ADD_ENV_VAR',
       key: 'STRIPE_SECRET_KEY',
-      value: params.environment === 'test' ? 'sk_test_...' : 'sk_live_...',
+      value: 'sk_test_...',
       description: 'Stripe secret key for server-side operations'
     },
     {
       type: 'ADD_ENV_VAR',
       key: 'STRIPE_PUBLISHABLE_KEY',
-      value: params.environment === 'test' ? 'pk_test_...' : 'pk_live_...',
+      value: 'pk_test_...',
       description: 'Stripe publishable key for client-side operations'
     },
     {
@@ -104,48 +53,40 @@ export const blueprint = defineBlueprint({
       value: 'whsec_...',
       description: 'Stripe webhook secret for webhook verification'
     },
-    // Add subscription-specific environment variables if enabled
-    ...(params.subscriptions ? [
-      {
-        type: 'ADD_ENV_VAR' as const,
-        key: 'STRIPE_BASIC_PRICE_ID',
-        value: 'price_...',
-        description: 'Stripe price ID for basic plan'
-      },
-      {
-        type: 'ADD_ENV_VAR' as const,
-        key: 'STRIPE_PRO_PRICE_ID',
-        value: 'price_...',
-        description: 'Stripe price ID for pro plan'
-      },
-      {
-        type: 'ADD_ENV_VAR' as const,
-        key: 'STRIPE_ENTERPRISE_PRICE_ID',
-        value: 'price_...',
-        description: 'Stripe price ID for enterprise plan'
-      }
-    ] : []),
-    // Add application URL for redirects
+    {
+      type: 'ADD_ENV_VAR',
+      key: 'STRIPE_BASIC_PRICE_ID',
+      value: 'price_...',
+      description: 'Stripe price ID for basic plan'
+    },
+    {
+      type: 'ADD_ENV_VAR',
+      key: 'STRIPE_PRO_PRICE_ID',
+      value: 'price_...',
+      description: 'Stripe price ID for pro plan'
+    },
+    {
+      type: 'ADD_ENV_VAR',
+      key: 'STRIPE_ENTERPRISE_PRICE_ID',
+      value: 'price_...',
+      description: 'Stripe price ID for enterprise plan'
+    },
     {
       type: 'ADD_ENV_VAR',
       key: 'APP_URL',
-      value: params.appUrl,
+      value: '{{env.APP_URL}}',
       description: 'Application URL for Stripe redirects'
     },
-    // Add customer portal configuration if enabled
-    ...(params.customerPortal ? [
-      {
-        type: 'ADD_ENV_VAR' as const,
-        key: 'STRIPE_CUSTOMER_PORTAL_URL',
-        value: 'https://billing.stripe.com/p/login/...',
-        description: 'Stripe Customer Portal URL'
-      }
-    ] : []),
-    // Add integration guide
+    {
+      type: 'ADD_ENV_VAR',
+      key: 'STRIPE_PUBLISHABLE_KEY',
+      value: 'pk_test_...',
+      description: 'Public Stripe publishable key for client-side'
+    },
     {
       type: 'CREATE_FILE',
       path: '{{paths.payment_config}}/INTEGRATION_GUIDE.md',
       template: 'adapters/payment/stripe/templates/INTEGRATION_GUIDE.md.tpl'
     }
   ]
-});
+};

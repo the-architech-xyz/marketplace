@@ -1,0 +1,46 @@
+{
+  "genomes": [
+    {
+      "id": "comprehensive-app",
+      "name": "Comprehensive App",
+      "description": "A comprehensive full-stack application showcasing all marketplace features",
+      "category": "full-stack",
+      "complexity": "advanced",
+      "tags": ["full-stack", "comprehensive", "all-features"],
+      "modules": 39,
+      "file": "comprehensive-app.genome.ts"
+    },
+    {
+      "id": "saas-app",
+      "name": "SaaS Application",
+      "description": "Complete SaaS application with authentication, payments, and dashboard",
+      "category": "saas",
+      "complexity": "intermediate",
+      "tags": ["saas", "authentication", "payments", "dashboard"],
+      "modules": 10,
+      "file": "saas-app.genome.ts"
+    },
+    {
+      "id": "ecommerce-app",
+      "name": "E-commerce Platform",
+      "description": "Complete e-commerce platform with products, cart, and payments",
+      "category": "ecommerce",
+      "complexity": "intermediate",
+      "tags": ["ecommerce", "products", "cart", "payments"],
+      "modules": 9,
+      "file": "ecommerce-app.genome.ts"
+    },
+    {
+      "id": "blog-app",
+      "name": "Blog Platform",
+      "description": "Modern blog platform with CMS and SEO optimization",
+      "category": "content",
+      "complexity": "beginner",
+      "tags": ["blog", "cms", "seo", "content"],
+      "modules": 8,
+      "file": "blog-app.genome.ts"
+    }
+  ],
+  "totalGenomes": 4,
+  "lastUpdated": "2024-09-23T21:30:00Z"
+}
