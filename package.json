@@ -6,12 +6,14 @@
   "main": "index.js",
   "exports": {
     ".": "./index.js",
+    "./types": "./types/index.d.ts",
     "./adapters/*": "./adapters/*/adapter.json",
     "./integrations/*": "./integrations/*/integration.json",
     "./genomes/*": "./genomes/*.genome.ts",
     "./genomes": "./genomes/manifest.json",
     "./manifest": "./manifest.json"
   },
+  "types": "./types/index.d.ts",
   "files": [
     "adapters/",
     "integrations/",
