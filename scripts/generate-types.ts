@@ -48,7 +48,9 @@ function jsonSchemaTypeToTypeScript(param: any): string {
         for (const [key, prop] of Object.entries(param.properties)) {
           const isRequired = param.required?.includes(key) ?? false;
           const optional = isRequired ? '' : '?';
-          result += `    ${key}${optional}: ${jsonSchemaTypeToTypeScript(prop)};\n`;
+          // Quote property names that contain hyphens or other special characters
+          const quotedKey = key.includes('-') || key.includes(' ') ? `'${key}'` : key;
+          result += `    ${quotedKey}${optional}: ${jsonSchemaTypeToTypeScript(prop)};\n`;
         }
         result += '  }';
         return result;
@@ -138,7 +140,9 @@ export interface ${typeName}Features {\n`;
     if (features && Object.keys(features).length > 0) {
       for (const [key, feature] of Object.entries(features)) {
         const description = feature.description ? `  /**\n   * ${feature.description}\n   */\n  ` : '  ';
-        typeContent += `${description}${key}?: boolean;\n`;
+        // Quote property names that contain hyphens or other special characters
+        const quotedKey = key.includes('-') || key.includes(' ') ? `'${key}'` : key;
+        typeContent += `${description}${quotedKey}?: boolean;\n`;
       }
     }
     

@@ -40,5 +40,5 @@ export interface ResendEmailFeatures {
   /**
    * Bulk email sending, list management, and campaign tools
    */
-  batch-sending?: boolean;
+  'batch-sending'?: boolean;
 }

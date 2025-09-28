@@ -49,10 +49,11 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@thearchitech.xyz/types": "^1.1.0"
+    "@thearchitech.xyz/types": "^1.1.0",
+    "@types/glob": "^9.0.0"
   },
   "devDependencies": {
-    "tsx": "^4.0.0",
-    "glob": "^10.0.0"
+    "glob": "^10.4.5",
+    "tsx": "^4.0.0"
   }
 }

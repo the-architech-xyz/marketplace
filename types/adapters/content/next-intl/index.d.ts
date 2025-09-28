@@ -36,9 +36,9 @@ export interface Next_intlContentFeatures {
   /**
    * Multilingual SEO with hreflang and metadata
    */
-  seo-optimization?: boolean;
+  'seo-optimization'?: boolean;
   /**
    * Lazy loading of translations and locale-specific content
    */
-  dynamic-imports?: boolean;
+  'dynamic-imports'?: boolean;
 }

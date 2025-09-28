@@ -32,25 +32,25 @@ export interface Better_authAuthFeatures {
   /**
    * Google, GitHub, Discord, Twitter authentication
    */
-  oauth-providers?: boolean;
+  'oauth-providers'?: boolean;
   /**
    * JWT, database sessions, session security
    */
-  session-management?: boolean;
+  'session-management'?: boolean;
   /**
    * Email verification system with templates
    */
-  email-verification?: boolean;
+  'email-verification'?: boolean;
   /**
    * Secure password reset flow
    */
-  password-reset?: boolean;
+  'password-reset'?: boolean;
   /**
    * 2FA/TOTP support
    */
-  multi-factor?: boolean;
+  'multi-factor'?: boolean;
   /**
    * User management admin interface
    */
-  admin-panel?: boolean;
+  'admin-panel'?: boolean;
 }

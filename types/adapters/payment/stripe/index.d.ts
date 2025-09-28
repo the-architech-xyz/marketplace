@@ -32,7 +32,7 @@ export interface StripePaymentFeatures {
   /**
    * Process single payments with Stripe Checkout and Payment Intents
    */
-  one-time-payments?: boolean;
+  'one-time-payments'?: boolean;
   /**
    * Handle recurring payments and subscription lifecycle
    */

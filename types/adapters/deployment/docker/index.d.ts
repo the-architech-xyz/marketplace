@@ -28,9 +28,9 @@ export interface DockerDeploymentFeatures {
   /**
    * Optimized multi-stage Docker builds for production
    */
-  multi-stage?: boolean;
+  'multi-stage'?: boolean;
   /**
    * Production-ready configuration with security and monitoring
    */
-  production-ready?: boolean;
+  'production-ready'?: boolean;
 }

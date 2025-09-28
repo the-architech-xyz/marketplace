@@ -28,17 +28,17 @@ export interface Web3BlockchainFeatures {
   /**
    * Deploy and interact with smart contracts
    */
-  smart-contracts?: boolean;
+  'smart-contracts'?: boolean;
   /**
    * MetaMask, WalletConnect and other wallet integrations
    */
-  wallet-integration?: boolean;
+  'wallet-integration'?: boolean;
   /**
    * Mint, transfer, and manage NFTs
    */
-  nft-management?: boolean;
+  'nft-management'?: boolean;
   /**
    * DEX, lending, staking and other DeFi protocols
    */
-  defi-integration?: boolean;
+  'defi-integration'?: boolean;
 }

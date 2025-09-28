@@ -56,5 +56,5 @@ export interface SequelizeDatabaseFeatures {
   /**
    * Advanced query building and optimization tools
    */
-  query-optimization?: boolean;
+  'query-optimization'?: boolean;
 }

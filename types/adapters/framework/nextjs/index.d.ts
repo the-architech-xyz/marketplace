@@ -40,7 +40,7 @@ export interface NextjsFrameworkFeatures {
   /**
    * Comprehensive API routes with middleware and error handling
    */
-  api-routes?: boolean;
+  'api-routes'?: boolean;
   /**
    * Advanced performance optimization tools for Next.js 15+
    */
@@ -52,7 +52,7 @@ export interface NextjsFrameworkFeatures {
   /**
    * Modern Server Actions implementation for Next.js 15+
    */
-  server-actions?: boolean;
+  'server-actions'?: boolean;
   /**
    * Next.js middleware for auth, redirects, and more
    */

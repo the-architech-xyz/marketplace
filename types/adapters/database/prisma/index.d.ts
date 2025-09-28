@@ -32,13 +32,13 @@ export interface PrismaDatabaseFeatures {
   /**
    * Advanced schema management with Prisma schema and migrations
    */
-  schema-management?: boolean;
+  'schema-management'?: boolean;
   /**
    * Advanced query building and optimization tools
    */
-  query-optimization?: boolean;
+  'query-optimization'?: boolean;
   /**
    * Database management interface and admin tools
    */
-  studio-integration?: boolean;
+  'studio-integration'?: boolean;
 }

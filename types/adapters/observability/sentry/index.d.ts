@@ -32,13 +32,13 @@ export interface SentryObservabilityFeatures {
   /**
    * Advanced performance tracking, web vitals, and transaction monitoring
    */
-  performance-monitoring?: boolean;
+  'performance-monitoring'?: boolean;
   /**
    * Enhanced error tracking with breadcrumbs, context, and user feedback
    */
-  error-tracking?: boolean;
+  'error-tracking'?: boolean;
   /**
    * Custom alerts, monitoring dashboard, and notification system
    */
-  alerts-dashboard?: boolean;
+  'alerts-dashboard'?: boolean;
 }

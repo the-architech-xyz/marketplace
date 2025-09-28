@@ -75,9 +75,10 @@ const genome: Genome = {
     {
       id: 'observability/sentry',
       parameters: {
-        errorTracking: true,
+        dsn: 'https://test-dsn@sentry.io/test-project',
+        environment: 'development',
         performance: true,
-        sessionReplay: false
+        release: '1.0.0'
       }
     }
   ]

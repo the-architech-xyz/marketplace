@@ -28,13 +28,13 @@ export interface TypeormDatabaseFeatures {
   /**
    * Advanced entity management with decorators and relationships
    */
-  entity-management?: boolean;
+  'entity-management'?: boolean;
   /**
    * Database migrations and schema versioning
    */
-  migration-system?: boolean;
+  'migration-system'?: boolean;
   /**
    * Advanced query building and optimization tools
    */
-  query-builder?: boolean;
+  'query-builder'?: boolean;
 }
