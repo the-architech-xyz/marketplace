@@ -4,7 +4,7 @@
  * A minimal but complete genome for testing parameter validation.
  */
 
-import { Genome } from '@thearchitech.xyz/marketplace';
+import { Genome } from '@thearchitech.xyz/marketplace/types';
 
 const genome: Genome = {
   version: '1.0.0',

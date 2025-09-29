@@ -10,7 +10,7 @@ export interface Shadcn_uiUiParams {
   /**
    * Components to install (comprehensive set by default)
    */
-  components?: Array<any>;
+  components?: Array<'button' | 'input' | 'card' | 'dialog' | 'form' | 'table' | 'badge' | 'avatar' | 'dropdown-menu' | 'toast' | 'sheet' | 'tabs' | 'accordion' | 'carousel' | 'calendar' | 'date-picker' | 'alert-dialog' | 'checkbox' | 'collapsible' | 'context-menu' | 'hover-card' | 'menubar' | 'navigation-menu' | 'popover' | 'progress' | 'radio-group' | 'scroll-area' | 'slider' | 'toggle' | 'toggle-group'>;
 }
 
 /**

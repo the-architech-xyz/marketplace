@@ -4,7 +4,7 @@
  * A genome with a type error to test validation.
  */
 
-import { Genome } from '@thearchitech.xyz/marketplace';
+import { Genome } from '@thearchitech.xyz/marketplace/types';
 
 const genome: Genome = {
   version: '1.0.0',

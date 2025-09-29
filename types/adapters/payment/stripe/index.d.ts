@@ -10,11 +10,11 @@ export interface StripePaymentParams {
   /**
    * Default currency for payments
    */
-  currency?: any;
+  currency?: 'usd' | 'eur' | 'gbp' | 'cad' | 'aud' | 'jpy';
   /**
    * Stripe mode (test or live)
    */
-  mode?: any;
+  mode?: 'test' | 'live';
   /**
    * Enable webhook handling
    */

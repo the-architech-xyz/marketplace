@@ -24,24 +24,56 @@ async function ensureDirectoryExists(dirPath: string) {
   }
 }
 
-// Convert JSON schema type to TypeScript type
-function jsonSchemaTypeToTypeScript(param: any): string {
+// High-fidelity JSON schema to TypeScript type converter
+function jsonSchemaTypeToTypeScript(param: any, indent: string = ''): string {
+  // Handle null/undefined
+  if (!param || typeof param !== 'object') {
+    return 'any';
+  }
+
+  // Handle direct enum values (not wrapped in type)
+  if (Array.isArray(param)) {
+    return param.map((v: any) => `'${v}'`).join(' | ');
+  }
+
+  // Handle default values that are arrays
+  if (param.default && Array.isArray(param.default)) {
+    return `Array<'${param.default.join("' | '")}'>`;
+  }
+
   switch (param.type) {
     case 'string':
       if (param.enum) {
         return param.enum.map((v: string) => `'${v}'`).join(' | ');
       }
       return 'string';
+    
     case 'boolean':
       return 'boolean';
+    
     case 'number':
     case 'integer':
       return 'number';
+    
     case 'array':
-      if (param.items?.type === 'string' && param.items?.enum) {
-        return `Array<${param.items.enum.map((v: string) => `'${v}'`).join(' | ')}>`;
+      if (param.items) {
+        if (param.items.enum) {
+          // Array of specific enum values
+          return `Array<${param.items.enum.map((v: string) => `'${v}'`).join(' | ')}>`;
+        } else if (param.items.type) {
+          // Array of specific type
+          return `Array<${jsonSchemaTypeToTypeScript(param.items, indent + '  ')}>`;
+        } else if (Array.isArray(param.items)) {
+          // Array with specific items
+          return `Array<${param.items.map((item: any) => jsonSchemaTypeToTypeScript(item, indent + '  ')).join(' | ')}>`;
+        }
       }
-      return `Array<${jsonSchemaTypeToTypeScript(param.items || { type: 'any' })}>`;
+      // Check if default is an array with specific values
+      if (param.default && Array.isArray(param.default)) {
+        return `Array<'${param.default.join("' | '")}'>`;
+      }
+      return `Array<${jsonSchemaTypeToTypeScript(param.items || { type: 'any' }, indent + '  ')}>`;
+    
     case 'object':
       if (param.properties) {
         let result = '{\n';
@@ -50,15 +82,47 @@ function jsonSchemaTypeToTypeScript(param: any): string {
           const optional = isRequired ? '' : '?';
           // Quote property names that contain hyphens or other special characters
           const quotedKey = key.includes('-') || key.includes(' ') ? `'${key}'` : key;
-          result += `    ${quotedKey}${optional}: ${jsonSchemaTypeToTypeScript(prop)};\n`;
+          result += `${indent}  ${quotedKey}${optional}: ${jsonSchemaTypeToTypeScript(prop, indent + '  ')};\n`;
         }
-        result += '  }';
+        result += `${indent}}`;
         return result;
       }
       return 'Record<string, any>';
+    
     default:
+      // Handle cases where type is not specified but we have other clues
+      if (param.enum) {
+        return param.enum.map((v: string) => `'${v}'`).join(' | ');
+      }
+      if (param.default !== undefined) {
+        if (typeof param.default === 'string') {
+          return `'${param.default}'`;
+        }
+        if (typeof param.default === 'boolean') {
+          return 'boolean';
+        }
+        if (typeof param.default === 'number') {
+          return 'number';
+        }
+        if (Array.isArray(param.default)) {
+          return `Array<'${param.default.join("' | '")}'>`;
+        }
+      }
       return 'any';
   }
+}
+
+// Generate JSDoc comment for a parameter
+function generateJSDoc(param: any, indent: string = ''): string {
+  if (!param.description) return '';
+  
+  const lines = param.description.split('\n');
+  let result = `${indent}/**\n`;
+  for (const line of lines) {
+    result += `${indent} * ${line.trim()}\n`;
+  }
+  result += `${indent} */\n`;
+  return result;
 }
 
 // Process an adapter.json file and generate types
@@ -121,8 +185,14 @@ export interface ${typeName}Params {\n`;
       for (const [key, param] of Object.entries(parameters)) {
         const paramType = jsonSchemaTypeToTypeScript(param);
         const required = param.required ? '' : '?';
-        const description = param.description ? `  /**\n   * ${param.description}\n   */\n  ` : '  ';
-        typeContent += `${description}${key}${required}: ${paramType};\n`;
+        
+        // Generate JSDoc comment
+        const jsdoc = generateJSDoc(param, '  ');
+        typeContent += jsdoc;
+        
+        // Quote property names that contain hyphens or other special characters
+        const quotedKey = key.includes('-') || key.includes(' ') ? `'${key}'` : key;
+        typeContent += `  ${quotedKey}${required}: ${paramType};\n`;
       }
     }
     
@@ -139,10 +209,13 @@ export interface ${typeName}Features {\n`;
     
     if (features && Object.keys(features).length > 0) {
       for (const [key, feature] of Object.entries(features)) {
-        const description = feature.description ? `  /**\n   * ${feature.description}\n   */\n  ` : '  ';
+        // Generate JSDoc comment
+        const jsdoc = generateJSDoc(feature, '  ');
+        typeContent += jsdoc;
+        
         // Quote property names that contain hyphens or other special characters
         const quotedKey = key.includes('-') || key.includes(' ') ? `'${key}'` : key;
-        typeContent += `${description}${quotedKey}?: boolean;\n`;
+        typeContent += `  ${quotedKey}?: boolean;\n`;
       }
     }
     
