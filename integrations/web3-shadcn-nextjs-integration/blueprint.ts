@@ -42,7 +42,6 @@ const web3ShadcnNextjsIntegrationBlueprint: Blueprint = {
         '@tanstack/react-query',
         'lucide-react'
       ],
-      dev: false
     }
   ]
 };

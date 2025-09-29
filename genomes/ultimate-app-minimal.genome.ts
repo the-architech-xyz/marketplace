@@ -4,7 +4,7 @@
  * This is a minimal version to test the genome structure and TypeScript types
  */
 
-import { Genome } from '@thearchitech.xyz/marketplace/types';
+import { Genome } from '@thearchitech.xyz/marketplace';
 
 const genome: Genome = {
   version: '1.0.0',
@@ -26,7 +26,7 @@ const genome: Genome = {
         appRouter: true,
         srcDir: true,
         importAlias: '@/*'
-      },
+    },
       features: {
         performance: true,
         security: true,
@@ -38,10 +38,8 @@ const genome: Genome = {
     {
       id: 'ui/shadcn-ui',
       parameters: {
-        components: ['button', 'card', 'input', 'form'],
-        theme: 'dark',
-        darkMode: true
-      },
+        components: ['button', 'card', 'input', 'form']
+    },
       features: {
         theming: true,
         accessibility: true
@@ -67,7 +65,7 @@ const genome: Genome = {
     {
       id: 'auth/better-auth',
       parameters: {
-        providers: ['github', 'email'],
+        providers: ['email'],
         session: 'jwt',
         csrf: true
       },

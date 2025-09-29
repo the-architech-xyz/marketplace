@@ -70,7 +70,6 @@ const shadcnZustandIntegrationBlueprint: Blueprint = {
         '@hookform/resolvers',
         'zod'
       ],
-      dev: false
     },
     // Add Store Hooks
     {

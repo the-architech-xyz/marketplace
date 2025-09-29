@@ -32,7 +32,7 @@ const genome: Genome = {
         appRouter: true,
         srcDir: true,
         importAlias: '@/*'
-      },
+    },
       features: {
         'api-routes': true,
         performance: true,
@@ -52,10 +52,8 @@ const genome: Genome = {
         components: [
           // Only basic components that are guaranteed to work
           'button', 'card', 'input'
-        ],
-        theme: 'dark',
-        darkMode: true
-      },
+        ]
+    },
       features: {
         theming: true,
         accessibility: true
@@ -65,29 +63,21 @@ const genome: Genome = {
     {
       id: 'ui/forms',
       parameters: {
-        validation: 'zod',
-        components: ['form', 'input', 'select', 'checkbox', 'radio-group', 'textarea'],
-        errorHandling: true
+        zod: true,
+        reactHookForm: true,
+        resolvers: true
       },
-      features: {
-        validation: true,
-        errorHandling: true,
-        accessibility: true
-      }
+      features: {}
     },
 
     {
       id: 'ui/tailwind',
       parameters: {
-        config: 'extended',
-        plugins: ['typography', 'forms', 'aspect-ratio'],
-        darkMode: 'class'
-      },
-      features: {
-        responsive: true,
-        darkMode: true,
-        animations: true
-      }
+        typography: true,
+        forms: true,
+        aspectRatio: true
+    },
+      features: {}
     },
 
     // =============================================================================
@@ -99,17 +89,12 @@ const genome: Genome = {
         provider: 'neon',
         migrations: true,
         studio: true,
-        databaseType: 'postgresql',
-        relations: true,
-        seeding: true
+        databaseType: 'postgresql'
       },
       features: {
         migrations: true,
-        studio: true,
-        relations: true,
-        seeding: true,
-        queryOptimization: true
-      }
+        studio: true
+    }
     },
 
     // =============================================================================
@@ -118,14 +103,11 @@ const genome: Genome = {
     {
       id: 'auth/better-auth',
       parameters: {
-        providers: ['github', 'google', 'discord', 'twitter', 'email'],
+        providers: ['email'],
         session: 'jwt',
         csrf: true,
-        rateLimit: true,
-        emailVerification: true,
-        passwordReset: true,
-        multiFactor: true
-      },
+        rateLimit: true
+    },
       features: {
         'oauth-providers': true,
         'session-management': true,
@@ -144,14 +126,12 @@ const genome: Genome = {
       parameters: {
         devtools: true,
         persistence: true,
-        middleware: ['immer', 'devtools', 'subscribeWithSelector']
+        middleware: ['persist']
       },
       features: {
         devtools: true,
-        persistence: true,
-        middleware: true,
-        subscriptions: true
-      }
+        persistence: true
+    }
     },
 
     // =============================================================================
@@ -161,19 +141,12 @@ const genome: Genome = {
       id: 'payment/stripe',
       parameters: {
         mode: 'test',
-        webhooks: true,
-        subscriptions: true,
-        oneTimePayments: true,
-        marketplace: true,
-        connect: true
-      },
+        webhooks: true
+    },
       features: {
-        webhooks: true,
+        'one-time-payments': true,
         subscriptions: true,
-        invoices: true,
-        marketplace: true,
-        connect: true,
-        taxCalculation: true
+        invoicing: true
       }
     },
 
@@ -184,19 +157,13 @@ const genome: Genome = {
       id: 'email/resend',
       parameters: {
         apiKey: 'your-resend-api-key',
-        templates: [
-          'welcome', 'password-reset', 'order-confirmation', 'invoice',
-          'newsletter', 'notification', 'verification', 'marketing'
-        ],
-        analytics: true,
-        batchSending: true
+        fromEmail: 'noreply@yourdomain.com',
+        analytics: true
       },
       features: {
         templates: true,
         analytics: true,
-        batchSending: true,
-        scheduling: true,
-        tracking: true
+        'batch-sending': true
       }
     },
 
@@ -206,17 +173,14 @@ const genome: Genome = {
     {
       id: 'content/next-intl',
       parameters: {
-        locales: ['en', 'es', 'fr', 'de', 'it', 'pt', 'ja', 'ko', 'zh'],
+        locales: ['en', 'fr'],
         defaultLocale: 'en',
-        routing: true,
-        timezone: true
+        routing: true
       },
       features: {
         routing: true,
-        seoOptimization: true,
-        dynamicImports: true,
-        timezone: true,
-        currency: true
+        'seo-optimization': true,
+        'dynamic-imports': true
       }
     },
 
@@ -228,17 +192,12 @@ const genome: Genome = {
       parameters: {
         coverage: true,
         ui: true,
-        e2e: true,
-        componentTesting: true,
-        mockServiceWorker: true
+        jsx: true,
+        environment: 'jsdom'
       },
       features: {
-        unitTesting: true,
-        integrationTesting: true,
-        e2eTesting: true,
         coverage: true,
-        mocking: true,
-        visualRegression: true
+        ui: true
       }
     },
 
@@ -248,19 +207,14 @@ const genome: Genome = {
     {
       id: 'observability/sentry',
       parameters: {
-        errorTracking: true,
-        performance: true,
-        sessionReplay: true,
-        alerts: true,
-        profiling: true
+        dsn: 'https://your-dsn@sentry.io/your-project',
+        environment: 'development',
+        performance: true
       },
       features: {
-        errorTracking: true,
-        performanceMonitoring: true,
-        alertsDashboard: true,
-        sessionReplay: true,
-        profiling: true,
-        releaseTracking: true
+        'error-tracking': true,
+        'performance-monitoring': true,
+        'alerts-dashboard': true
       }
     },
 
@@ -270,20 +224,15 @@ const genome: Genome = {
     {
       id: 'blockchain/web3',
       parameters: {
-        networks: ['ethereum', 'polygon', 'arbitrum', 'optimism', 'base'],
-        walletIntegration: true,
-        smartContracts: true,
-        nftSupport: true,
-        defiSupport: true
+        networks: ['mainnet', 'polygon', 'arbitrum'],
+        walletConnect: true
       },
       features: {
-        walletIntegration: true,
-        smartContracts: true,
-        nftManagement: true,
-        defiIntegration: true,
-        crossChain: true,
-        gasOptimization: true
-      }
+        'wallet-integration': true,
+        'smart-contracts': true,
+        'nft-management': true,
+        'defi-integration': true
+    }
     },
 
     // =============================================================================
@@ -292,19 +241,13 @@ const genome: Genome = {
     {
       id: 'deployment/docker',
       parameters: {
-        multiStage: true,
-        productionReady: true,
-        healthChecks: true,
-        securityScanning: true,
-        optimization: true
+        nodeVersion: '18',
+        optimization: true,
+        healthCheck: true
       },
       features: {
-        multiStage: true,
-        productionReady: true,
-        healthChecks: true,
-        securityScanning: true,
-        optimization: true,
-        monitoring: true
+        'multi-stage': true,
+        'production-ready': true
       }
     },
 
@@ -314,20 +257,13 @@ const genome: Genome = {
     {
       id: 'tooling/dev-tools',
       parameters: {
-        linting: true,
-        formatting: true,
-        gitHooks: true,
-        debugging: true,
-        profiling: true
+        prettier: true,
+        husky: true,
+        lintStaged: true,
+        commitlint: true,
+        eslint: true
       },
-      features: {
-        linting: true,
-        formatting: true,
-        gitHooks: true,
-        debugging: true,
-        profiling: true,
-        codeGeneration: true
-      }
+      features: {}
     },
 
     // =============================================================================
@@ -449,12 +385,12 @@ const genome: Genome = {
     {
       id: 'resend-nextjs-integration',
       parameters: {
-        apiRoutes: true,
+        'api-routes': true,
         templates: true,
         webhooks: true
       },
       features: {
-        apiRoutes: true,
+        'api-routes': true,
         templates: true,
         webhooks: true,
         analytics: true
@@ -636,13 +572,13 @@ const genome: Genome = {
       id: 'better-auth-nextjs-integration',
       parameters: {
         middleware: true,
-        apiRoutes: true,
-        sessionManagement: true
+        'api-routes': true,
+        'session-management': true
       },
       features: {
         middleware: true,
-        apiRoutes: true,
-        sessionManagement: true,
+        'api-routes': true,
+        'session-management': true,
         csrfProtection: true
       }
     }

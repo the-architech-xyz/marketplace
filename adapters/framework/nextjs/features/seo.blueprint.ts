@@ -136,14 +136,13 @@ Sitemap: https://{{project.domain}}/sitemap.xml
     },
     // Update package.json scripts
     {
-      type: 'MODIFY_FILE',
+      type: 'MERGE_JSON',
       path: 'package.json',
       content: `{
   "scripts": {
     "postbuild": "next-sitemap"
   }
 }`,
-      action: 'merge'
     }
   ]
 };

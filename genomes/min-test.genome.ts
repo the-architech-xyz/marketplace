@@ -4,7 +4,7 @@
  * A minimal but complete genome for testing parameter validation.
  */
 
-import { Genome } from '@thearchitech.xyz/marketplace/types';
+import { Genome } from '@thearchitech.xyz/marketplace';
 
 const genome: Genome = {
   version: '1.0.0',
@@ -26,17 +26,15 @@ const genome: Genome = {
         appRouter: true,
         srcDir: true,
         importAlias: '@/*'
-      }
+    }
     },
     
     // UI module
     {
       id: 'ui/shadcn-ui',
       parameters: {
-        components: ['button', 'card'],
-        theme: 'dark',
-        darkMode: true
-      }
+        components: ['button', 'card']
+    }
     }
   ]
 };

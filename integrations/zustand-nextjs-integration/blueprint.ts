@@ -41,7 +41,6 @@ const zustandNextjsIntegrationBlueprint: Blueprint = {
         'immer',
         'js-cookie'
       ],
-      dev: false
     }
   ]
 };

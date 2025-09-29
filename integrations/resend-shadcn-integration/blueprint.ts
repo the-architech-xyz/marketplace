@@ -43,7 +43,6 @@ const resendShadcnIntegrationBlueprint: Blueprint = {
         'monaco-editor',
         'html-to-text'
       ],
-      dev: false
     }
   ]
 };

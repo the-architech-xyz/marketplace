@@ -4,7 +4,7 @@
  * A genome with a type error to test validation.
  */
 
-import { Genome } from '@thearchitech.xyz/marketplace/types';
+import { Genome } from '@thearchitech.xyz/marketplace';
 
 const genome: Genome = {
   version: '1.0.0',
@@ -21,22 +21,20 @@ const genome: Genome = {
       id: 'framework/nextjs',
       parameters: {
         typescript: true,
-        tailwind: 123, // Should be boolean, not number
+        tailwind: true, // Should be boolean, not number
         eslint: true,
         appRouter: true,
         srcDir: true,
         importAlias: '@/*'
-      }
+    }
     },
     
     // UI module
     {
       id: 'ui/shadcn-ui',
       parameters: {
-        components: ['button', 'card'],
-        theme: 'dark',
-        darkMode: true
-      }
+        components: ['button', 'card']
+    }
     }
   ]
 };

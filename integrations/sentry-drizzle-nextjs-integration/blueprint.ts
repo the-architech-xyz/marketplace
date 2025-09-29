@@ -36,7 +36,6 @@ const sentryDrizzleNextjsIntegrationBlueprint: Blueprint = {
         '@sentry/profiling-node',
         'drizzle-orm'
       ],
-      dev: false
     },
     // Add Environment Variables
     {

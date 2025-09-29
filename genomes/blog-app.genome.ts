@@ -1,4 +1,4 @@
-import { Genome } from '@thearchitech.xyz/marketplace/types';
+import { Genome } from '@thearchitech.xyz/marketplace';
 
 /**
  * Blog Application Template
@@ -7,112 +7,113 @@ import { Genome } from '@thearchitech.xyz/marketplace/types';
  * Perfect for building personal blogs, company blogs, or content sites.
  */
 const blogAppGenome: Genome = {
+  version: '1.0.0',
   project: {
     name: 'blog-app',
     description: 'Modern blog platform with CMS and SEO optimization',
     version: '1.0.0',
-    author: 'The Architech Team',
-    license: 'MIT'
+    framework: 'nextjs'
   },
   modules: [
     // === CORE FRAMEWORK ===
     {
       id: 'framework/nextjs',
-      params: {
+      parameters: {
         appRouter: true,
         typescript: true,
         tailwind: true,
-        eslint: true,
-        features: {
-          apiRoutes: true,
+        eslint: true},
+      features: {
+          'api-routes': true,
           middleware: true,
           performance: true,
           security: true,
           seo: true,
-          serverActions: true,
-          ssrOptimization: true
-        }
-      }
+          'server-actions': true
+    }
     },
     
     // === UI FRAMEWORK ===
     {
       id: 'ui/shadcn-ui',
-      params: {
-        components: ['button', 'input', 'card', 'form', 'table', 'dialog', 'badge', 'avatar'],
-        features: {
+      parameters: {
+        components: ['button', 'input', 'card', 'form', 'table', 'dialog', 'badge', 'avatar']},
+      features: {
           accessibility: true,
-          theming: true,
-          advancedComponents: true
-        }
-      }
+          theming: true
+    }
     },
     
     // === AUTHENTICATION ===
     {
       id: 'auth/better-auth',
-      params: {
-        providers: ['email', 'google', 'github'],
-        features: {
-          emailVerification: true,
-          passwordReset: true,
-          sessionManagement: true
+      parameters: {
+        providers: ['email']},
+      features: {
+          'email-verification': true,
+          'password-reset': true,
+          'session-management': true
         }
-      }
     },
     
     // === DATABASE ===
     {
       id: 'database/drizzle',
-      params: {
-        provider: 'postgresql',
-        features: {
+      parameters: {
+        provider: 'neon',
+        databaseType: 'postgresql'
+      },
+      features: {
           migrations: true,
           seeding: true,
           studio: true,
           relations: true
         }
-      }
     },
     
     // === CONTENT MANAGEMENT ===
     {
       id: 'content/next-intl',
-      params: {
-        features: {
-          routing: true,
-          dynamicImports: true,
-          seoOptimization: true
-        }
+      parameters: {
+        locales: ['en', 'fr'],
+        defaultLocale: 'en'
+      },
+      features: {
+        routing: true,
+        'dynamic-imports': true,
+        'seo-optimization': true
       }
     },
     
     // === STATE MANAGEMENT ===
     {
       id: 'state/zustand',
-      params: {
-        features: {
-          devtools: true,
-          persistence: true
-        }
+      parameters: {
+        middleware: ['persist']
+      },
+      features: {
+        devtools: true,
+        persistence: true
       }
     },
     
     // === TESTING ===
     {
       id: 'testing/vitest',
-      params: {
-        features: {
-          coverage: true,
-          ui: true
-        }
+      parameters: {
+        jsx: true,
+        environment: 'jsdom'
+      },
+      features: {
+        coverage: true,
+        ui: true
       }
     },
     
     // === INTEGRATIONS ===
     {
       id: 'better-auth-drizzle-integration',
-      params: {
+      parameters: {
         features: {
           userManagement: true,
           sessionStorage: true
@@ -122,7 +123,7 @@ const blogAppGenome: Genome = {
     
     {
       id: 'shadcn-zustand-integration',
-      params: {
+      parameters: {
         features: {
           formManagement: true,
           modalState: true,

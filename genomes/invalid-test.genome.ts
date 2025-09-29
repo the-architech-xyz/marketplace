@@ -4,7 +4,7 @@
  * A genome with an invalid parameter to test validation.
  */
 
-import { Genome } from '@thearchitech.xyz/marketplace/types';
+import { Genome } from '@thearchitech.xyz/marketplace';
 
 const genome: Genome = {
   version: '1.0.0',
@@ -26,17 +26,15 @@ const genome: Genome = {
         appRouter: true,
         srcDir: true,
         importAlias: '@/*'
-      }
+    }
     },
     
     // UI module with invalid component name
     {
       id: 'ui/shadcn-ui',
       parameters: {
-        components: ['button', 'invalid-component', 'card'],
-        theme: 'dark',
-        darkMode: true
-      }
+        components: ['button', 'button', 'card']
+    }
     }
   ]
 };

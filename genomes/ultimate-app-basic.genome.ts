@@ -29,7 +29,7 @@ const genome: Genome = {
         appRouter: true,
         srcDir: true,
         importAlias: '@/*'
-      },
+    },
       features: {
         performance: true,
         security: true,
@@ -74,7 +74,7 @@ const genome: Genome = {
     {
       id: 'auth/better-auth',
       parameters: {
-        providers: ['github', 'email'],
+        providers: ['email'],
         session: 'jwt',
         csrf: true
       },
@@ -92,7 +92,7 @@ const genome: Genome = {
       parameters: {
         devtools: true,
         persistence: true,
-        middleware: ['immer', 'devtools']
+        middleware: ['persist']
       },
       features: {
         devtools: true,
@@ -139,7 +139,7 @@ const genome: Genome = {
     {
       id: 'content/next-intl',
       parameters: {
-        locales: ['en', 'es', 'fr'],
+        locales: ['en', 'fr'],
         defaultLocale: 'en',
         routing: true,
         seo: true
@@ -190,7 +190,7 @@ const genome: Genome = {
     {
       id: 'blockchain/web3',
       parameters: {
-        networks: ['ethereum', 'polygon'],
+        networks: ['mainnet', 'polygon', 'arbitrum'],
         walletConnect: true
       },
       features: {
@@ -266,9 +266,8 @@ const genome: Genome = {
     {
       id: 'shadcn-nextjs-integration',
       parameters: {
-        themeProvider: true,
-        darkMode: true
-      },
+        themeProvider: true
+    },
       features: {
         themeProvider: true,
         darkMode: true
@@ -292,11 +291,11 @@ const genome: Genome = {
     {
       id: 'resend-nextjs-integration',
       parameters: {
-        apiRoutes: true,
+        'api-routes': true,
         templates: true
       },
       features: {
-        apiRoutes: true,
+        'api-routes': true,
         templates: true
       }
     },
@@ -345,11 +344,11 @@ const genome: Genome = {
       id: 'better-auth-nextjs-integration',
       parameters: {
         middleware: true,
-        apiRoutes: true
+        'api-routes': true
       },
       features: {
         middleware: true,
-        apiRoutes: true
+        'api-routes': true
       }
     }
   ]

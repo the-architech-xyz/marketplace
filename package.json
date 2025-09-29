@@ -48,7 +48,9 @@
   "scripts": {
     "types:generate": "tsx scripts/generate-types.ts",
     "build": "npm run types:generate",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "prepare": "husky install",
+    "precommit": "npm run types:generate && git add types/ types/index.d.ts"
   },
   "dependencies": {
     "@thearchitech.xyz/types": "^1.1.0",
@@ -56,6 +58,14 @@
   },
   "devDependencies": {
     "glob": "^10.4.5",
-    "tsx": "^4.0.0"
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.9.2"
+  },
+  "lint-staged": {
+    "adapters/**/*.json": "npm run types:generate && git add types/ types/index.d.ts",
+    "integrations/**/*.json": "npm run types:generate && git add types/ types/index.d.ts",
+    "scripts/generate-types.ts": "npm run types:generate && git add types/ types/index.d.ts"
   }
 }

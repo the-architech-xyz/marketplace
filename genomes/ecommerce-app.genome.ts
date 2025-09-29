@@ -1,4 +1,4 @@
-import { Genome } from '@thearchitech.xyz/marketplace/types';
+import { Genome } from '@thearchitech.xyz/marketplace';
 
 /**
  * E-commerce Application Template
@@ -7,112 +7,116 @@ import { Genome } from '@thearchitech.xyz/marketplace/types';
  * Perfect for building online stores and marketplaces.
  */
 const ecommerceAppGenome: Genome = {
+  version: '1.0.0',
   project: {
     name: 'ecommerce-app',
     description: 'Complete e-commerce platform with products, cart, and payments',
     version: '1.0.0',
-    author: 'The Architech Team',
-    license: 'MIT'
+    framework: 'nextjs'
   },
   modules: [
     // === CORE FRAMEWORK ===
     {
       id: 'framework/nextjs',
-      params: {
+      parameters: {
         appRouter: true,
         typescript: true,
         tailwind: true,
-        eslint: true,
-        features: {
-          apiRoutes: true,
+        eslint: true},
+      features: {
+          'api-routes': true,
           middleware: true,
           performance: true,
           security: true,
           seo: true,
-          serverActions: true,
-          ssrOptimization: true
-        }
-      }
+          'server-actions': true
+    }
     },
     
     // === UI FRAMEWORK ===
     {
       id: 'ui/shadcn-ui',
-      params: {
-        components: ['button', 'input', 'card', 'form', 'table', 'dialog', 'dropdown-menu', 'badge', 'carousel'],
-        features: {
+      parameters: {
+        components: ['button', 'input', 'card', 'form', 'table', 'dialog', 'dropdown-menu', 'badge', 'carousel']},
+      features: {
           accessibility: true,
-          theming: true,
-          advancedComponents: true
-        }
-      }
+          theming: true
+    }
     },
     
     // === AUTHENTICATION ===
     {
       id: 'auth/better-auth',
-      params: {
-        providers: ['email', 'google', 'github'],
-        features: {
-          emailVerification: true,
-          passwordReset: true,
-          sessionManagement: true
+      parameters: {
+        providers: ['email']},
+      features: {
+          'email-verification': true,
+          'password-reset': true,
+          'session-management': true
         }
-      }
     },
     
     // === DATABASE ===
     {
       id: 'database/drizzle',
-      params: {
-        provider: 'postgresql',
-        features: {
+      parameters: {
+        provider: 'neon',
+        databaseType: 'postgresql'
+      },
+      features: {
           migrations: true,
           seeding: true,
           studio: true,
           relations: true
         }
-      }
     },
     
     // === PAYMENTS ===
     {
       id: 'payment/stripe',
-      params: {
-        features: {
-          oneTimePayments: true,
-          webhooks: true,
-          customerPortal: true
-        }
+      parameters: {
+        currency: 'usd',
+        mode: 'test',
+        webhooks: true,
+        dashboard: true
+      },
+      features: {
+        'one-time-payments': true,
+        subscriptions: true,
+        marketplace: true,
+        invoicing: true
       }
     },
     
     // === STATE MANAGEMENT ===
     {
       id: 'state/zustand',
-      params: {
-        features: {
-          devtools: true,
-          persistence: true
-        }
+      parameters: {
+        middleware: ['persist']
+      },
+      features: {
+        devtools: true,
+        persistence: true
       }
     },
     
     // === TESTING ===
     {
       id: 'testing/vitest',
-      params: {
-        features: {
-          coverage: true,
-          ui: true
-        }
+      parameters: {
+        jsx: true,
+        environment: 'jsdom'
+      },
+      features: {
+        coverage: true,
+        ui: true
       }
     },
     
     // === INTEGRATIONS ===
     {
       id: 'better-auth-drizzle-integration',
-      params: {
+      parameters: {
         features: {
           userManagement: true,
           sessionStorage: true
@@ -122,7 +126,7 @@ const ecommerceAppGenome: Genome = {
     
     {
       id: 'stripe-drizzle-integration',
-      params: {
+      parameters: {
         features: {
           paymentTracking: true,
           orderManagement: true,
@@ -133,7 +137,7 @@ const ecommerceAppGenome: Genome = {
     
     {
       id: 'shadcn-zustand-integration',
-      params: {
+      parameters: {
         features: {
           cartManagement: true,
           wishlistState: true,

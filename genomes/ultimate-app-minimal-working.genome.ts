@@ -29,7 +29,7 @@ const genome: Genome = {
         appRouter: true,
         srcDir: true,
         importAlias: '@/*'
-      },
+    },
       features: {
         performance: true,
         security: true,
@@ -43,9 +43,7 @@ const genome: Genome = {
     {
       id: 'ui/shadcn-ui',
       parameters: {
-        components: ['button', 'card', 'input', 'dialog', 'form'],
-        theme: 'dark',
-        darkMode: true
+        components: ['button', 'card', 'input', 'dialog', 'form']
       },
       features: {
         theming: true,
@@ -76,7 +74,7 @@ const genome: Genome = {
     {
       id: 'auth/better-auth',
       parameters: {
-        providers: ['github', 'email'],
+        providers: ['email'],
         session: 'jwt',
         csrf: true
       },
@@ -94,12 +92,11 @@ const genome: Genome = {
       parameters: {
         devtools: true,
         persistence: true,
-        middleware: ['immer', 'devtools']
+        middleware: ['persist']
       },
       features: {
         devtools: true,
-        persistence: true,
-        middleware: true
+        persistence: true
       }
     },
 
@@ -110,14 +107,12 @@ const genome: Genome = {
       id: 'payment/stripe',
       parameters: {
         mode: 'test',
-        webhooks: true,
-        subscriptions: true,
-        oneTimePayments: true
-      },
+        webhooks: true
+    },
       features: {
-        webhooks: true,
+        'one-time-payments': true,
         subscriptions: true,
-        invoices: true
+        invoicing: true
       }
     },
 
@@ -128,13 +123,13 @@ const genome: Genome = {
       id: 'email/resend',
       parameters: {
         apiKey: 'your-resend-api-key',
-        templates: ['welcome', 'password-reset', 'order-confirmation'],
+        fromEmail: 'noreply@yourdomain.com',
         analytics: true
       },
       features: {
         templates: true,
         analytics: true,
-        batchSending: true
+        'batch-sending': true
       }
     },
 
@@ -144,14 +139,14 @@ const genome: Genome = {
     {
       id: 'content/next-intl',
       parameters: {
-        locales: ['en', 'es', 'fr'],
+        locales: ['en', 'fr'],
         defaultLocale: 'en',
         routing: true
       },
       features: {
         routing: true,
-        seoOptimization: true,
-        dynamicImports: true
+        'seo-optimization': true,
+        'dynamic-imports': true
       }
     },
 
@@ -163,14 +158,12 @@ const genome: Genome = {
       parameters: {
         coverage: true,
         ui: true,
-        e2e: true,
-        componentTesting: true
+        jsx: true,
+        environment: 'jsdom'
       },
       features: {
-        unitTesting: true,
-        integrationTesting: true,
-        e2eTesting: true,
-        coverage: true
+        coverage: true,
+        ui: true
       }
     },
 
@@ -180,15 +173,14 @@ const genome: Genome = {
     {
       id: 'observability/sentry',
       parameters: {
-        errorTracking: true,
-        performance: true,
-        sessionReplay: true,
-        alerts: true
+        dsn: 'https://your-dsn@sentry.io/your-project',
+        environment: 'development',
+        performance: true
       },
       features: {
-        errorTracking: true,
-        performanceMonitoring: true,
-        alertsDashboard: true
+        'error-tracking': true,
+        'performance-monitoring': true,
+        'alerts-dashboard': true
       }
     },
 
@@ -198,14 +190,13 @@ const genome: Genome = {
     {
       id: 'blockchain/web3',
       parameters: {
-        networks: ['ethereum', 'polygon'],
-        walletIntegration: true,
-        smartContracts: true
+        networks: ['mainnet', 'polygon', 'arbitrum'],
+        walletConnect: true
       },
       features: {
-        walletIntegration: true,
-        smartContracts: true,
-        nftManagement: true
+        'wallet-integration': true,
+        'smart-contracts': true,
+        'nft-management': true
       }
     },
 
@@ -215,14 +206,13 @@ const genome: Genome = {
     {
       id: 'deployment/docker',
       parameters: {
-        multiStage: true,
-        productionReady: true,
-        healthChecks: true
+        nodeVersion: '18',
+        optimization: true,
+        healthCheck: true
       },
       features: {
-        multiStage: true,
-        productionReady: true,
-        healthChecks: true
+        'multi-stage': true,
+        'production-ready': true
       }
     },
 
@@ -232,16 +222,13 @@ const genome: Genome = {
     {
       id: 'tooling/dev-tools',
       parameters: {
-        linting: true,
-        formatting: true,
-        gitHooks: true,
-        debugging: true
+        prettier: true,
+        husky: true,
+        lintStaged: true,
+        commitlint: true,
+        eslint: true
       },
-      features: {
-        linting: true,
-        formatting: true,
-        gitHooks: true
-      }
+      features: {}
     },
 
     // =============================================================================
@@ -279,9 +266,8 @@ const genome: Genome = {
     {
       id: 'shadcn-nextjs-integration',
       parameters: {
-        themeProvider: true,
-        darkMode: true
-      },
+        themeProvider: true
+    },
       features: {
         themeProvider: true,
         darkMode: true
@@ -305,11 +291,11 @@ const genome: Genome = {
     {
       id: 'resend-nextjs-integration',
       parameters: {
-        apiRoutes: true,
+        'api-routes': true,
         templates: true
       },
       features: {
-        apiRoutes: true,
+        'api-routes': true,
         templates: true
       }
     },
@@ -358,11 +344,11 @@ const genome: Genome = {
       id: 'better-auth-nextjs-integration',
       parameters: {
         middleware: true,
-        apiRoutes: true
+        'api-routes': true
       },
       features: {
         middleware: true,
-        apiRoutes: true
+        'api-routes': true
       }
     }
   ]

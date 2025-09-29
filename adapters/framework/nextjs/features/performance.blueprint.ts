@@ -95,7 +95,6 @@ const nextConfig = {
 };
 
 module.exports = withBundleAnalyzer(nextConfig);`,
-      action: 'js-config-merger'
     },
     // Create performance utilities
     {
@@ -369,7 +368,7 @@ export const PerformanceMonitorComponent: React.FC = () => {
     },
     // Update package.json scripts
     {
-      type: 'MODIFY_FILE',
+      type: 'MERGE_JSON',
       path: 'package.json',
       content: `{
   "scripts": {
@@ -379,7 +378,6 @@ export const PerformanceMonitorComponent: React.FC = () => {
     "perf": "npm run build && npm run lighthouse"
   }
 }`,
-      action: 'merge'
     }
   ]
 };
