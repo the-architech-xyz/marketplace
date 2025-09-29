@@ -10,7 +10,7 @@ export interface Web3BlockchainParams {
   /**
    * Supported blockchain networks
    */
-  networks: Array<any>;
+  networks: Array<'mainnet' | 'polygon' | 'arbitrum'>;
   /**
    * Enable WalletConnect support
    */
@@ -18,7 +18,7 @@ export interface Web3BlockchainParams {
   /**
    * Smart contract addresses
    */
-  contracts?: Array<any>;
+  contracts?: Array<''>;
 }
 
 /**

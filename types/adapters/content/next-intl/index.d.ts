@@ -10,7 +10,7 @@ export interface Next_intlContentParams {
   /**
    * Supported locales
    */
-  locales: Array<any>;
+  locales: Array<'en' | 'fr'>;
   /**
    * Default locale
    */

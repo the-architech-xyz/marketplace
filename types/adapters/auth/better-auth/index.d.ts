@@ -10,11 +10,11 @@ export interface Better_authAuthParams {
   /**
    * Authentication providers to enable
    */
-  providers?: Array<any>;
+  providers?: Array<'email'>;
   /**
    * Session management strategy
    */
-  session?: any;
+  session?: 'jwt';
   /**
    * Enable CSRF protection
    */

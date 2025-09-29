@@ -18,7 +18,7 @@ export interface ZustandStateParams {
   /**
    * Middleware to use
    */
-  middleware?: Array<any>;
+  middleware?: Array<'persist'>;
 }
 
 /**
