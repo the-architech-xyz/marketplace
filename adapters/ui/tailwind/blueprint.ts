@@ -47,7 +47,7 @@ export const tailwindBlueprint: Blueprint = {
       },
       mergeInstructions: {
         modifier: 'js-config-merger',
-        strategy: 'merge',
+        strategy: 'deep-merge',
         params: {
           exportName: 'default',
           mergeStrategy: 'merge'
@@ -71,7 +71,7 @@ export const tailwindBlueprint: Blueprint = {
       },
       mergeInstructions: {
         modifier: 'css-enhancer',
-        strategy: 'merge'
+        strategy: 'deep-merge'
       }
     }
   ]

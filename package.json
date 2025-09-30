@@ -53,7 +53,7 @@
     "precommit": "npm run types:generate && git add types/ types/index.d.ts"
   },
   "dependencies": {
-    "@thearchitech.xyz/types": "^1.1.0",
+    "@thearchitech.xyz/types": "file:../types-package",
     "@types/glob": "^9.0.0"
   },
   "devDependencies": {
