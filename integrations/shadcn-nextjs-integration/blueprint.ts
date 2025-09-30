@@ -14,7 +14,7 @@ export const blueprint: Blueprint = {
       modifier: 'js-config-merger',
       params: {
         path: ['compilerOptions'],
-        propertiesToMerge: {
+        targetProperties: {
           baseUrl: '.',
           paths: {
             '@/*': ['./src/*']
@@ -110,7 +110,7 @@ export const blueprint: Blueprint = {
       modifier: 'js-config-merger',
       params: {
         path: [],
-        propertiesToMerge: {
+        targetProperties: {
           style: 'default',
           rsc: true,
           tsx: true,

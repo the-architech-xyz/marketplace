@@ -120,7 +120,7 @@ const drizzleAdapterConfig = drizzleAdapter(db, {
       modifier: 'js-config-merger',
       params: {
         exportName: 'auth',
-        propertiesToMerge: {
+        targetProperties: {
           database: 'drizzleAdapterConfig',
           emailAndPassword: {
             enabled: true,
