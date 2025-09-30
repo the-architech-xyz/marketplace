@@ -21,13 +21,13 @@ export const nextjsBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'tailwind.config.js',
-      template: 'adapters/framework/nextjs/templates/tailwind.config.js.tpl'
+      template: 'templates/tailwind.config.js.tpl'
     },
     // Create components.json for shadcn/ui
     {
       type: 'CREATE_FILE',
       path: 'components.json',
-      template: 'adapters/framework/nextjs/templates/components.json.tpl'
+      template: 'templates/components.json.tpl'
     },
     // Update globals.css for Tailwind v4 + shadcn/ui compatibility
     {

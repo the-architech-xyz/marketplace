@@ -10,13 +10,13 @@ export const blueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'Dockerfile',
-      template: 'integrations/docker-nextjs-integration/templates/Dockerfile.tpl'
+      template: 'templates/Dockerfile.tpl'
     },
     // Create .dockerignore
     {
       type: 'CREATE_FILE',
       path: '.dockerignore',
-      template: 'integrations/docker-nextjs-integration/templates/.dockerignore.tpl'
+      template: 'templates/.dockerignore.tpl'
     }
   ]
 };

@@ -18,42 +18,42 @@ export const resendBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/config.ts',
-      template: 'adapters/email/resend/templates/config.ts.tpl'
+      template: 'templates/config.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/sender.ts',
-      template: 'adapters/email/resend/templates/sender.ts.tpl'
+      template: 'templates/sender.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/templates/welcome-email.tsx',
-      template: 'adapters/email/resend/templates/templates/welcome-email.tsx.tpl'
+      template: 'templates/welcome-email.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/templates/password-reset-email.tsx',
-      template: 'adapters/email/resend/templates/templates/password-reset-email.tsx.tpl'
+      template: 'templates/password-reset-email.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/templates/email-verification-email.tsx',
-      template: 'adapters/email/resend/templates/templates/email-verification-email.tsx.tpl'
+      template: 'templates/email-verification-email.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/templates/payment-confirmation-email.tsx',
-      template: 'adapters/email/resend/templates/templates/payment-confirmation-email.tsx.tpl'
+      template: 'templates/payment-confirmation-email.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/templates/subscription-created-email.tsx',
-      template: 'adapters/email/resend/templates/templates/subscription-created-email.tsx.tpl'
+      template: 'templates/subscription-created-email.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/templates/subscription-cancelled-email.tsx',
-      template: 'adapters/email/resend/templates/templates/subscription-cancelled-email.tsx.tpl'
+      template: 'templates/subscription-cancelled-email.tsx.tpl'
     },
     {
       type: 'ADD_ENV_VAR',

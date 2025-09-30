@@ -25,17 +25,17 @@ export const web3Blueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/lib/web3/config.ts',
-      template: 'adapters/blockchain/web3/templates/config.ts.tpl'
+      template: 'templates/config.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/web3/core.ts',
-      template: 'adapters/blockchain/web3/templates/core.ts.tpl'
+      template: 'templates/core.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/hooks/useWeb3.ts',
-      template: 'adapters/blockchain/web3/templates/useWeb3.ts.tpl'
+      template: 'templates/useWeb3.ts.tpl'
     },
     {
       type: 'ADD_ENV_VAR',

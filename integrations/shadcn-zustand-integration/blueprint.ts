@@ -10,55 +10,55 @@ const shadcnZustandIntegrationBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/stores/form-store.ts',
-      template: 'form-store.ts.tpl'
+      template: 'templates/form-store.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/stores/modal-store.ts',
-      template: 'modal-store.ts.tpl'
+      template: 'templates/modal-store.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/stores/toast-store.ts',
-      template: 'toast-store.ts.tpl'
+      template: 'templates/toast-store.ts.tpl'
     },
     // Create Form Components
     {
       type: 'CREATE_FILE',
       path: 'src/components/forms/FormProvider.tsx',
-      template: 'FormProvider.tsx.tpl'
+      template: 'templates/FormProvider.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/forms/FormField.tsx',
-      template: 'FormField.tsx.tpl'
+      template: 'templates/FormField.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/forms/FormInput.tsx',
-      template: 'FormInput.tsx.tpl'
+      template: 'templates/FormInput.tsx.tpl'
     },
     // Create Modal Components
     {
       type: 'CREATE_FILE',
       path: 'src/components/modals/Modal.tsx',
-      template: 'Modal.tsx.tpl'
+      template: 'templates/Modal.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/modals/ModalProvider.tsx',
-      template: 'ModalProvider.tsx.tpl'
+      template: 'templates/ModalProvider.tsx.tpl'
     },
     // Create Toast Components
     {
       type: 'CREATE_FILE',
       path: 'src/components/toast/Toast.tsx',
-      template: 'Toast.tsx.tpl'
+      template: 'templates/Toast.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/toast/ToastProvider.tsx',
-      template: 'ToastProvider.tsx.tpl'
+      template: 'templates/ToastProvider.tsx.tpl'
     },
     // Install Dependencies
     {

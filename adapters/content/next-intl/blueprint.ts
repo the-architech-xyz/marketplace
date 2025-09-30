@@ -18,22 +18,22 @@ export const nextIntlBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/i18n/request.ts',
-      template: 'adapters/content/next-intl/templates/request.ts.tpl'
+      template: 'request.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/messages/en.json',
-      template: 'adapters/content/next-intl/templates/en.json.tpl'
+      template: 'templates/en.json.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/messages/es.json',
-      template: 'adapters/content/next-intl/templates/es.json.tpl'
+      template: 'templates/es.json.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/messages/fr.json',
-      template: 'adapters/content/next-intl/templates/fr.json.tpl'
+      template: 'templates/fr.json.tpl'
     }
   ]
 };

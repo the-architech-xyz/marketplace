@@ -10,28 +10,28 @@ const zustandNextjsIntegrationBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/stores/auth-store.ts',
-      template: 'auth-store.ts.tpl'
+      template: 'templates/auth-store.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/stores/ui-store.ts',
-      template: 'ui-store.ts.tpl'
+      template: 'templates/ui-store.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/stores/data-store.ts',
-      template: 'data-store.ts.tpl'
+      template: 'templates/data-store.ts.tpl'
     },
     // Create SSR Utilities
     {
       type: 'CREATE_FILE',
       path: 'src/lib/ssr-store.ts',
-      template: 'ssr-store.ts.tpl'
+      template: 'templates/ssr-store.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/hydration.ts',
-      template: 'hydration.ts.tpl'
+      template: 'templates/hydration.ts.tpl'
     },
     // Install Dependencies
     {

@@ -10,23 +10,23 @@ const sentryDrizzleNextjsIntegrationBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/lib/sentry.ts',
-      template: 'sentry.ts.tpl'
+      template: 'templates/sentry.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/sentry-drizzle.ts',
-      template: 'sentry-drizzle.ts.tpl'
+      template: 'templates/sentry-drizzle.ts.tpl'
     },
     // Create Error Monitoring Components
     {
       type: 'CREATE_FILE',
       path: 'src/components/errors/ErrorBoundary.tsx',
-      template: 'ErrorBoundary.tsx.tpl'
+      template: 'templates/ErrorBoundary.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/errors/ErrorFallback.tsx',
-      template: 'ErrorFallback.tsx.tpl'
+      template: 'templates/ErrorFallback.tsx.tpl'
     },
     // Install Dependencies
     {

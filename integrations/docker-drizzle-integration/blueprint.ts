@@ -10,138 +10,138 @@ const dockerDrizzleIntegrationBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'docker-compose.database.yml',
-      template: 'docker-compose.database.yml.tpl'
+      template: 'templates/docker-compose.database.yml.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'docker-compose.migration.yml',
-      template: 'docker-compose.migration.yml.tpl'
+      template: 'templates/docker-compose.migration.yml.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'docker-compose.backup.yml',
-      template: 'docker-compose.backup.yml.tpl'
+      template: 'templates/docker-compose.backup.yml.tpl'
     },
     // Create Database Dockerfiles
     {
       type: 'CREATE_FILE',
       path: 'database/Dockerfile.postgres',
-      template: 'Dockerfile.postgres.tpl'
+      template: 'templates/Dockerfile.postgres.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'database/Dockerfile.migration',
-      template: 'Dockerfile.migration.tpl'
+      template: 'templates/Dockerfile.migration.tpl'
     },
     // Create Database Scripts
     {
       type: 'CREATE_FILE',
       path: 'database/init.sql',
-      template: 'init.sql.tpl'
+      template: 'templates/init.sql.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'database/seed.sql',
-      template: 'seed.sql.tpl'
+      template: 'templates/seed.sql.tpl'
     },
     // Create Migration Files
     {
       type: 'CREATE_FILE',
       path: 'database/migrations/001_initial.sql',
-      template: '001_initial.sql.tpl'
+      template: 'templates/001_initial.sql.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'database/migrations/002_add_indexes.sql',
-      template: '002_add_indexes.sql.tpl'
+      template: 'templates/002_add_indexes.sql.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'database/migrations/003_add_constraints.sql',
-      template: '003_add_constraints.sql.tpl'
+      template: 'templates/003_add_constraints.sql.tpl'
     },
     // Create Database Management Scripts
     {
       type: 'CREATE_FILE',
       path: 'scripts/db-setup.sh',
-      template: 'db-setup.sh.tpl'
+      template: 'templates/db-setup.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'scripts/db-migrate.sh',
-      template: 'db-migrate.sh.tpl'
+      template: 'templates/db-migrate.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'scripts/db-seed.sh',
-      template: 'db-seed.sh.tpl'
+      path: 'scripts/db-seed.sh', 
+      template: 'templates/db-seed.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'scripts/db-backup.sh',
-      template: 'db-backup.sh.tpl'
+      template: 'templates/db-backup.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'scripts/db-restore.sh',
-      template: 'db-restore.sh.tpl'
+      template: 'templates/db-restore.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'scripts/db-reset.sh',
-      template: 'db-reset.sh.tpl'
+      template: 'templates/db-reset.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'scripts/db-health.sh',
-      template: 'db-health.sh.tpl'
+      template: 'templates/db-health.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'scripts/db-shell.sh',
-      template: 'db-shell.sh.tpl'
+      template: 'templates/db-shell.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'scripts/db-logs.sh',
-      template: 'db-logs.sh.tpl'
+      template: 'templates/db-logs.sh.tpl'
     },
     // Create Monitoring Configuration
     {
       type: 'CREATE_FILE',
       path: 'monitoring/database/prometheus.yml',
-      template: 'prometheus.yml.tpl'
+      template: 'templates/prometheus.yml.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'monitoring/database/grafana/dashboards/postgres.json',
-      template: 'postgres.json.tpl'
+      template: 'templates/postgres.json.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'monitoring/database/grafana/provisioning/dashboards/dashboard.yml',
-      template: 'dashboard.yml.tpl'
+      template: 'templates/dashboard.yml.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'monitoring/database/grafana/provisioning/datasources/postgres.yml',
-      template: 'postgres.yml.tpl'
+      template: 'templates/postgres.yml.tpl'
     },
     // Create Backup Scripts
     {
       type: 'CREATE_FILE',
       path: 'backup/backup.sh',
-      template: 'backup.sh.tpl'
+      template: 'templates/backup.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'backup/restore.sh',
-      template: 'restore.sh.tpl'
+      template: 'templates/restore.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'backup/cleanup.sh',
-      template: 'cleanup.sh.tpl'
+      template: 'templates/cleanup.sh.tpl'
     },
     // Add Database Scripts to package.json
     {

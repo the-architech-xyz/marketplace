@@ -10,23 +10,23 @@ const prismaNextjsIntegrationBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'prisma/schema.prisma',
-      template: 'schema.prisma.tpl'
+      template: 'templates/schema.prisma.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/prisma.ts',
-      template: 'prisma.ts.tpl'
+      template: 'templates/prisma.ts.tpl'
     },
     // Create API Routes
     {
       type: 'CREATE_FILE',
       path: 'src/app/api/users/route.ts',
-      template: 'users-route.ts.tpl'
+      template: 'templates/users-route.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/app/api/posts/route.ts',
-      template: 'posts-route.ts.tpl'
+      template: 'templates/posts-route.ts.tpl'
     },
     // Install Dependencies
     {

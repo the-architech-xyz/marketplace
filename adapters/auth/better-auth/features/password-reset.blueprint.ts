@@ -13,17 +13,17 @@ const passwordResetBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/lib/auth/password-reset.ts',
-      template: 'adapters/auth/better-auth/features/templates/password-reset.ts.tpl'
+      template: 'templates/password-reset.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/auth/PasswordResetForm.tsx',
-      template: 'adapters/auth/better-auth/features/templates/password-reset-form.tsx.tpl'
+      template: 'templates/password-reset-form.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/app/auth/reset-password/page.tsx',
-      template: 'adapters/auth/better-auth/features/templates/password-reset-page.tsx.tpl'
+      template: 'templates/password-reset-page.tsx.tpl'
     }
   ]
 };

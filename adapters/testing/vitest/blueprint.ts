@@ -18,22 +18,22 @@ export const vitestBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'vitest.config.ts',
-      template: 'adapters/testing/vitest/templates/vitest.config.ts.tpl'
+      template: 'templates/vitest.config.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/setup/setup.ts',
-      template: 'adapters/testing/vitest/templates/setup.ts.tpl'
+      template: 'templates/setup.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/setup/utils.tsx',
-      template: 'adapters/testing/vitest/templates/utils.tsx.tpl'
+      template: 'templates/utils.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/unit/example.test.tsx',
-      template: 'adapters/testing/vitest/templates/example.test.tsx.tpl'
+      template: 'templates/example.test.tsx.tpl'
     },
     {
       type: 'ADD_SCRIPT',

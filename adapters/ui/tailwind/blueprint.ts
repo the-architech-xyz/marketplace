@@ -40,7 +40,7 @@ export const tailwindBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'tailwind.config.js',
-      template: 'adapters/ui/tailwind/templates/tailwind.config.js.tpl',
+      template: 'templates/tailwind.config.js.tpl',
       conflictResolution: {
         strategy: 'merge',
         mergeStrategy: 'js'
@@ -58,13 +58,13 @@ export const tailwindBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'postcss.config.js',
-      template: 'adapters/ui/tailwind/templates/postcss.config.js.tpl'
+      template: 'templates/postcss.config.js.tpl'
     },
     // Create base CSS file
     {
       type: 'CREATE_FILE',
       path: 'src/app/globals.css',
-      template: 'adapters/ui/tailwind/templates/globals.css.tpl',
+      template: 'templates/globals.css.tpl',
       conflictResolution: {
         strategy: 'merge',
         mergeStrategy: 'css'

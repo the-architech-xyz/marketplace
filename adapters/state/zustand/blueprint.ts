@@ -18,12 +18,12 @@ export const zustandBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: '{{paths.state_config}}/use-app-store.ts',
-      template: 'adapters/state/zustand/templates/use-app-store.ts.tpl'
+      template: 'templates/use-app-store.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: 'CREATE_FILE',  
       path: '{{paths.state_config}}/index.ts',
-      template: 'adapters/state/zustand/templates/index.ts.tpl'
+      template: 'templates/index.ts.tpl'
     }
   ]
 };

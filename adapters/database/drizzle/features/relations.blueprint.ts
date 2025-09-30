@@ -13,17 +13,17 @@ const relationsBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/lib/db/relations.ts',
-      template: 'adapters/database/drizzle/features/templates/relations.ts.tpl'
+      template: 'templates/relations.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/db/query-helpers.ts',
-      template: 'adapters/database/drizzle/features/templates/query-helpers.ts.tpl'
+      template: 'templates/query-helpers.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/db/example-usage.ts',
-      template: 'adapters/database/drizzle/features/templates/example-usage.ts.tpl'
+      template: 'templates/example-usage.ts.tpl'
     }
   ]
 };

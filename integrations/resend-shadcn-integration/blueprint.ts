@@ -10,27 +10,27 @@ const resendShadcnIntegrationBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/components/email/EmailComposer.tsx',
-      template: 'EmailComposer.tsx.tpl'
+      template: 'templates/EmailComposer.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/email/EmailTemplateEditor.tsx',
-      template: 'EmailTemplateEditor.tsx.tpl'
+      template: 'templates/EmailTemplateEditor.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/email/EmailAnalytics.tsx',
-      template: 'EmailAnalytics.tsx.tpl'
+      template: 'templates/EmailAnalytics.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/email/EmailList.tsx',
-      template: 'EmailList.tsx.tpl'
+      template: 'templates/EmailList.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/email/EmailPreview.tsx',
-      template: 'EmailPreview.tsx.tpl'
+      template: 'templates/EmailPreview.tsx.tpl'
     },
     // Install Dependencies
     {

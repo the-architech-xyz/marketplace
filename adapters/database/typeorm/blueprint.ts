@@ -18,12 +18,12 @@ export const typeormBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: '{{paths.database_config}}/typeorm.ts',
-      template: 'adapters/database/typeorm/templates/typeorm.ts.tpl'
+      template: 'templates/typeorm.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.database_config}}/entities/User.ts',
-      template: 'adapters/database/typeorm/templates/User.ts.tpl'
+      template: 'templates/User.ts.tpl'
     }
   ]
 };

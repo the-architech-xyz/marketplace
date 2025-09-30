@@ -10,27 +10,27 @@ const web3ShadcnIntegrationBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/components/web3/WalletCard.tsx',
-      template: 'WalletCard.tsx.tpl'
+      template: 'templates/WalletCard.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/web3/TransactionCard.tsx',
-      template: 'TransactionCard.tsx.tpl'
+      template: 'templates/TransactionCard.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/web3/NetworkSwitcher.tsx',
-      template: 'NetworkSwitcher.tsx.tpl'
+      template: 'templates/NetworkSwitcher.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/web3/BalanceCard.tsx',
-      template: 'BalanceCard.tsx.tpl'
+      template: 'templates/BalanceCard.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/web3/Web3Dashboard.tsx',
-      template: 'Web3Dashboard.tsx.tpl'
+      template: 'templates/Web3Dashboard.tsx.tpl'
     },
     // Install Web3 Dependencies
     {

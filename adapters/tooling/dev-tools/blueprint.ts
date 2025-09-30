@@ -50,42 +50,42 @@ export const devToolsBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: '.prettierrc',
-      template: 'adapters/tooling/dev-tools/templates/.prettierrc.tpl',
+      template: 'templates/.prettierrc.tpl',
       condition: '{{#if module.parameters.prettier}}'
     },
     // Create Prettier ignore file
     {
       type: 'CREATE_FILE',
       path: '.prettierignore',
-      template: 'adapters/tooling/dev-tools/templates/.prettierignore.tpl',
+      template: 'templates/.prettierignore.tpl',
       condition: '{{#if module.parameters.prettier}}'
     },
     // Create Husky pre-commit hook
     {
       type: 'CREATE_FILE',
       path: '.husky/pre-commit',
-      template: 'adapters/tooling/dev-tools/templates/.husky/pre-commit.tpl',
+      template: 'templates/.husky/pre-commit.tpl',
       condition: '{{#if module.parameters.husky}}'
     },
     // Create lint-staged configuration
     {
       type: 'CREATE_FILE',
       path: '.lintstagedrc',
-      template: 'adapters/tooling/dev-tools/templates/.lintstagedrc.tpl',
+      template: 'templates/.lintstagedrc.tpl',
       condition: '{{#if module.parameters.lintStaged}}'
     },
     // Create commitlint configuration
     {
       type: 'CREATE_FILE',
       path: 'commitlint.config.js',
-      template: 'adapters/tooling/dev-tools/templates/commitlint.config.js.tpl',
+      template: 'templates/commitlint.config.js.tpl',
       condition: '{{#if module.parameters.commitlint}}'
     },
     // Create ESLint configuration
     {
       type: 'CREATE_FILE',
       path: '.eslintrc.js',
-      template: 'adapters/tooling/dev-tools/templates/.eslintrc.js.tpl',
+      template: 'templates/.eslintrc.js.tpl',
       condition: '{{#if module.parameters.eslint}}'
     },
     // Add scripts to package.json

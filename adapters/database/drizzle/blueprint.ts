@@ -23,17 +23,17 @@ export const drizzleBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/lib/db/index.ts',
-      template: 'adapters/database/drizzle/templates/db-index.ts.tpl'
+      template: 'templates/db-index.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/db/schema.ts',
-      template: 'adapters/database/drizzle/templates/schema.ts.tpl'
+      template: 'templates/schema.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'drizzle.config.ts',
-      template: 'adapters/database/drizzle/templates/drizzle.config.ts.tpl'
+      template: 'templates/drizzle.config.ts.tpl'
     },
     {
       type: 'ADD_ENV_VAR',

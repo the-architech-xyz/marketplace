@@ -22,17 +22,17 @@ export const sequelizeBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: '{{paths.database_config}}/sequelize.ts',
-      template: 'adapters/database/sequelize/templates/sequelize.ts.tpl'
+      template: 'templates/sequelize.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.database_config}}/index.ts',
-      template: 'adapters/database/sequelize/templates/index.ts.tpl'
+      template: 'templates/index.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '.sequelizerc',
-      template: 'adapters/database/sequelize/templates/.sequelizerc.tpl'
+      template: 'templates/.sequelizerc.tpl'
     },
     {
       type: 'ADD_ENV_VAR',

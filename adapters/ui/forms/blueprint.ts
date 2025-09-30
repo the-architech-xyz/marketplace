@@ -33,14 +33,14 @@ export const formsBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/lib/forms.ts',
-      template: 'adapters/ui/forms/templates/forms.ts.tpl',
+      template: 'templates/forms.ts.tpl',
       condition: '{{#if module.parameters.zod}}'
     },
     // Create example form components
     {
       type: 'CREATE_FILE',
       path: 'src/components/forms/ContactForm.tsx',
-      template: 'adapters/ui/forms/templates/ContactForm.tsx.tpl',
+      template: 'templates/ContactForm.tsx.tpl',
       condition: '{{#if module.parameters.reactHookForm}}'
     }
   ]

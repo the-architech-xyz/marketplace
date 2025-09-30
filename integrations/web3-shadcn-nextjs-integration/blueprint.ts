@@ -10,28 +10,28 @@ const web3ShadcnNextjsIntegrationBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/components/web3/WalletCard.tsx',
-      template: 'WalletCard.tsx.tpl'
+      template: 'templates/WalletCard.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/web3/TransactionCard.tsx',
-      template: 'TransactionCard.tsx.tpl'
+      template: 'templates/TransactionCard.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/web3/NetworkSwitcher.tsx',
-      template: 'NetworkSwitcher.tsx.tpl'
+      template: 'templates/NetworkSwitcher.tsx.tpl'
     },
     // Create Next.js API Routes
     {
       type: 'CREATE_FILE',
       path: 'src/app/api/web3/balance/route.ts',
-      template: 'balance-route.ts.tpl'
+      template: 'templates/balance-route.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/app/api/web3/transaction/route.ts',
-      template: 'transaction-route.ts.tpl'
+      template: 'templates/transaction-route.ts.tpl'
     },
     // Install Dependencies
     {

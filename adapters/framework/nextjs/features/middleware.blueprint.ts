@@ -13,28 +13,28 @@ const middlewareBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'middleware.ts',
-      template: 'adapters/framework/nextjs/features/templates/middleware.ts.tpl'
+      template: 'templates/middleware.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/middleware/auth.ts',
-      template: 'adapters/framework/nextjs/features/templates/auth-middleware.ts.tpl'
+      template: 'templates/auth-middleware.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/middleware/redirects.ts',
-      template: 'adapters/framework/nextjs/features/templates/redirect-middleware.ts.tpl'
+      template: 'templates/redirect-middleware.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/middleware/security.ts',
-      template: 'adapters/framework/nextjs/features/templates/security-middleware.ts.tpl'
+      template: 'templates/security-middleware.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'docs/middleware.md',
-      template: 'adapters/framework/nextjs/features/templates/README.md.tpl'
-    }
+      template: 'templates/README.md.tpl'
+    } 
   ]
 };
 

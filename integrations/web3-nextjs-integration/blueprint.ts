@@ -19,32 +19,32 @@ export const blueprint: Blueprint = {
     // Create modern Web3 configuration
     {
       type: 'CREATE_FILE',
-      path: 'src/lib/web3/config.ts',
-      template: 'integrations/web3-nextjs-integration/templates/config.ts.tpl'
+      path: 'src/lib/web3/config.ts', 
+      template: 'templates/config.ts.tpl'
     },
     // Create modern Web3 core utilities
     {
       type: 'CREATE_FILE',
       path: 'src/lib/web3/core.ts',
-      template: 'integrations/web3-nextjs-integration/templates/core.ts.tpl'
+      template: 'templates/core.ts.tpl'
     },
     // Create modern React hooks
     {
       type: 'CREATE_FILE',
       path: 'src/hooks/useWeb3.ts',
-      template: 'integrations/web3-nextjs-integration/templates/useWeb3.ts.tpl'
+      template: 'templates/useWeb3.ts.tpl'
     },
     // Create API route for balance
     {
       type: 'CREATE_FILE',
       path: 'src/app/api/web3/balance/route.ts',
-      template: 'integrations/web3-nextjs-integration/templates/route.ts.tpl'
+      template: 'templates/route.ts.tpl'
     },
     // Create middleware
     {
       type: 'CREATE_FILE',
       path: 'src/middleware.ts',
-      template: 'integrations/web3-nextjs-integration/templates/middleware.ts.tpl'
+      template: 'templates/middleware.ts.tpl'
     }
   ]
 };

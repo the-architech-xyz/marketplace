@@ -18,28 +18,28 @@ export const sentryBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/lib/sentry/client.ts',
-      template: 'adapters/observability/sentry/templates/client.ts.tpl'
+      template: 'templates/client.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/sentry/server.ts',
-      template: 'adapters/observability/sentry/templates/server.ts.tpl'
+      template: 'templates/server.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/sentry/config.ts',
-      template: 'adapters/observability/sentry/templates/config.ts.tpl'
+      template: 'templates/config.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/sentry/performance.ts',
-      template: 'adapters/observability/sentry/templates/performance.ts.tpl'
+      template: 'templates/performance.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/sentry/analytics.ts',
-      template: 'adapters/observability/sentry/templates/analytics.ts.tpl'
-    },
+      template: 'templates/analytics.ts.tpl'
+    },  
     {
       type: 'ADD_ENV_VAR',
       key: 'SENTRY_DSN',

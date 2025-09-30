@@ -184,7 +184,7 @@ export interface ${typeName}Params {\n`;
     if (parameters && Object.keys(parameters).length > 0) {
       for (const [key, param] of Object.entries(parameters)) {
         const paramType = jsonSchemaTypeToTypeScript(param);
-        const required = param.required ? '' : '?';
+        const required = (param as any).required ? '' : '?';
         
         // Generate JSDoc comment
         const jsdoc = generateJSDoc(param, '  ');
@@ -330,12 +330,12 @@ async function generateTypes(): Promise<void> {
   
   for (const adapterFile of adapterFiles) {
     const result = await processAdapterFile(adapterFile);
-    if (result) moduleResults.push(result);
+    if (result) moduleResults.push(result as never);
   }
   
   for (const integrationFile of integrationFiles) {
     const result = await processAdapterFile(integrationFile);
-    if (result) moduleResults.push(result);
+    if (result) moduleResults.push(result as never);
   }
   
   // Generate the main index file

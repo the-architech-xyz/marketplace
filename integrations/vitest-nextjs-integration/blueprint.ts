@@ -10,185 +10,185 @@ const vitestNextjsIntegrationBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'vitest.config.ts',
-      template: 'vitest.config.ts.tpl'
+      template: 'templates/vitest.config.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'vitest.config.unit.ts',
-      template: 'vitest.config.unit.ts.tpl'
+      template: 'templates/vitest.config.unit.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'vitest.config.integration.ts',
-      template: 'vitest.config.integration.ts.tpl'
+      template: 'templates/vitest.config.integration.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'vitest.config.e2e.ts',
-      template: 'vitest.config.e2e.ts.tpl'
+      template: 'templates/vitest.config.e2e.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'vitest.setup.ts',
-      template: 'vitest.setup.ts.tpl'
+      template: 'templates/vitest.setup.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'vitest.teardown.ts',
-      template: 'vitest.teardown.ts.tpl'
+      template: 'templates/vitest.teardown.ts.tpl'
     },
     // Create Test Utilities
     {
       type: 'CREATE_FILE',
       path: 'test-utils/test-utils.tsx',
-      template: 'test-utils.tsx.tpl'
+      template: 'templates/test-utils.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/mock-next-router.ts',
-      template: 'mock-next-router.ts.tpl'
+      template: 'templates/mock-next-router.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/mock-next-auth.ts',
-      template: 'mock-next-auth.ts.tpl'
+      template: 'templates/mock-next-auth.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/mock-fetch.ts',
-      template: 'mock-fetch.ts.tpl'
+      template: 'templates/mock-fetch.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/test-db.ts',
-      template: 'test-db.ts.tpl'
+      template: 'templates/test-db.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/test-server.ts',
-      template: 'test-server.ts.tpl'
+      template: 'templates/test-server.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/test-client.ts',
-      template: 'test-client.ts.tpl'
+      template: 'templates/test-client.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/test-helpers.ts',
-      template: 'test-helpers.ts.tpl'
+      template: 'templates/test-helpers.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/test-fixtures.ts',
-      template: 'test-fixtures.ts.tpl'
+      template: 'templates/test-fixtures.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/test-mocks.ts',
-      template: 'test-mocks.ts.tpl'
+      template: 'templates/test-mocks.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/test-setup.ts',
-      template: 'test-setup.ts.tpl'
+      template: 'templates/test-setup.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/test-teardown.ts',
-      template: 'test-teardown.ts.tpl'
+      template: 'templates/test-teardown.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/test-constants.ts',
-      template: 'test-constants.ts.tpl'
+      template: 'templates/test-constants.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/test-types.ts',
-      template: 'test-types.ts.tpl'
+      template: 'templates/test-types.ts.tpl'
     },
     // Create Sample Test Files
     {
       type: 'CREATE_FILE',
       path: 'tests/unit/components/Button.test.tsx',
-      template: 'Button.test.tsx.tpl'
+      template: 'templates/Button.test.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/unit/components/Input.test.tsx',
-      template: 'Input.test.tsx.tpl'
+      template: 'templates/Input.test.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/unit/hooks/useAuth.test.ts',
-      template: 'useAuth.test.ts.tpl'
+      template: 'templates/useAuth.test.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/unit/utils/formatDate.test.ts',
-      template: 'formatDate.test.ts.tpl'
+      template: 'templates/formatDate.test.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/unit/lib/api.test.ts',
-      template: 'api.test.ts.tpl'
+      template: 'templates/api.test.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/integration/pages/home.test.tsx',
-      template: 'home.test.tsx.tpl'
+      template: 'templates/home.test.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/integration/pages/about.test.tsx',
-      template: 'about.test.tsx.tpl'
+      template: 'templates/about.test.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/integration/api/auth.test.ts',
-      template: 'auth.test.ts.tpl'
+      template: 'templates/auth.test.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/integration/api/users.test.ts',
-      template: 'users.test.ts.tpl'
+      template: 'templates/users.test.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/e2e/auth.spec.ts',
-      template: 'auth.spec.ts.tpl'
+      template: 'templates/auth.spec.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/e2e/navigation.spec.ts',
-      template: 'navigation.spec.ts.tpl'
+      template: 'templates/navigation.spec.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/e2e/forms.spec.ts',
-      template: 'forms.spec.ts.tpl'
+      template: 'templates/forms.spec.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/e2e/api.spec.ts',
-      template: 'api.spec.ts.tpl'
+      template: 'templates/api.spec.ts.tpl'
     },
     // Create Test Fixtures
     {
       type: 'CREATE_FILE',
       path: 'tests/fixtures/users.json',
-      template: 'users.json.tpl'
+      template: 'templates/users.json.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/fixtures/posts.json',
-      template: 'posts.json.tpl'
+      template: 'templates/posts.json.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/fixtures/comments.json',
-      template: 'comments.json.tpl'
+      template: 'templates/comments.json.tpl'
     },
     // Install Testing Dependencies
     {

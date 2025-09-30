@@ -18,12 +18,12 @@ export const prismaBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: '{{paths.database_config}}/prisma.ts',
-      template: 'adapters/database/prisma/templates/prisma.ts.tpl'
+      template: 'templates/prisma.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'prisma/schema.prisma',
-      template: 'adapters/database/prisma/templates/schema.prisma.tpl'
+      template: 'templates/schema.prisma.tpl'
     }
   ]
 };

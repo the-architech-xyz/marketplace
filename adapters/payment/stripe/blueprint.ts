@@ -28,12 +28,12 @@ export const stripeBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: '{{paths.payment_config}}/stripe.ts',
-      template: 'adapters/payment/stripe/templates/stripe.ts.tpl'
+      template: 'templates/stripe.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.payment_config}}/client.ts',
-      template: 'adapters/payment/stripe/templates/client.ts.tpl'
+      template: 'templates/client.ts.tpl'
     },
     {
       type: 'ADD_ENV_VAR',
@@ -86,7 +86,7 @@ export const stripeBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: '{{paths.payment_config}}/INTEGRATION_GUIDE.md',
-      template: 'adapters/payment/stripe/templates/INTEGRATION_GUIDE.md.tpl'
+      template: 'templates/INTEGRATION_GUIDE.md.tpl'
     }
   ]
 };

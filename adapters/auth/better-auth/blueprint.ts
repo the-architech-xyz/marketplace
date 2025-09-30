@@ -18,17 +18,17 @@ export const betterAuthBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: '{{paths.auth_config}}/config.ts',
-      template: 'adapters/auth/better-auth/templates/config.ts.tpl'
+      template: 'templates/config.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.auth_config}}/api.ts',
-      template: 'adapters/auth/better-auth/templates/api.ts.tpl'
+      template: 'templates/api.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.auth_config}}/client.ts',
-      template: 'adapters/auth/better-auth/templates/client.ts.tpl'
+      template: 'templates/client.ts.tpl'
     },
     {
       type: 'ADD_ENV_VAR',
@@ -51,7 +51,7 @@ export const betterAuthBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: '{{paths.auth_config}}/INTEGRATION_GUIDE.md',
-      template: 'adapters/auth/better-auth/templates/INTEGRATION_GUIDE.md.tpl'
+      template: 'templates/INTEGRATION_GUIDE.md.tpl'
     }
   ]
 };

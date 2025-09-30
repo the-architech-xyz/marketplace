@@ -10,43 +10,43 @@ const vitestZustandIntegrationBlueprint: Blueprint = {
       type: 'CREATE_FILE',
       path: 'vitest.config.zustand.ts',
       condition: '{{#if integration.features.storeTesting}}',
-      template: 'integrations/vitest-zustand-integration/templates/vitest.config.zustand.ts.tpl'
+      template: 'templates/vitest.config.zustand.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'vitest.setup.zustand.ts',
       condition: '{{#if integration.features.storeTesting}}',
-      template: 'integrations/vitest-zustand-integration/templates/vitest.setup.zustand.ts.tpl'
+      template: 'templates/vitest.setup.zustand.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/store-test-utils.ts',
       condition: '{{#if integration.features.storeTesting}}',
-      template: 'integrations/vitest-zustand-integration/templates/store-test-utils.ts.tpl'
+      template: 'templates/store-test-utils.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'test-utils/store-mock-utils.ts',
       condition: '{{#if integration.features.storeTesting}}',
-      template: 'integrations/vitest-zustand-integration/templates/store-mock-utils.ts.tpl'
+      template: 'templates/store-mock-utils.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/stores/store.test.ts',
       condition: '{{#if integration.features.storeTesting}}',
-      template: 'integrations/vitest-zustand-integration/templates/store.test.ts.tpl'
+      template: 'templates/store.test.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/stores/store-actions.test.ts',
       condition: '{{#if integration.features.storeTesting}}',
-      template: 'integrations/vitest-zustand-integration/templates/store-actions.test.ts.tpl'
+      template: 'templates/store-actions.test.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'tests/stores/store-integration.test.ts',
       condition: '{{#if integration.features.storeTesting}}',
-      template: 'integrations/vitest-zustand-integration/templates/store-integration.test.ts.tpl'
+      template: 'templates/store-integration.test.ts.tpl'
     }
   ]
 };

@@ -13,12 +13,12 @@ const queryOptimizationBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/lib/db/query-optimizer.ts',
-      template: 'adapters/database/prisma/features/templates/query-optimizer.ts.tpl'
+      template: 'templates/query-optimizer.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/db/example-usage.ts',
-      template: 'adapters/database/prisma/features/templates/example-usage.ts.tpl'
+      template: 'templates/example-usage.ts.tpl'
     }
   ]
 };

@@ -10,65 +10,65 @@ const resendNextjsIntegrationBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/app/api/email/send/route.ts',
-      template: 'send-route.ts.tpl'
+      template: 'templates/send-route.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/app/api/email/templates/route.ts',
-      template: 'templates-route.ts.tpl'
+      template: 'templates/templates-route.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/app/api/email/analytics/route.ts',
-      template: 'analytics-route.ts.tpl'
+      template: 'templates/analytics-route.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/app/api/email/webhook/route.ts',
-      template: 'webhook-route.ts.tpl'
+      template: 'templates/webhook-route.ts.tpl'
     },
     // Create Email Utilities
     {
       type: 'CREATE_FILE',
       path: 'src/lib/email/resend.ts',
-      template: 'resend.ts.tpl'
+      template: 'templates/resend.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/email/templates.ts',
-      template: 'templates.ts.tpl'
+      template: 'templates/templates.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/email/analytics.ts',
-      template: 'analytics.ts.tpl'
+      template: 'templates/analytics.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/lib/email/validation.ts',
-      template: 'validation.ts.tpl'
+      template: 'templates/validation.ts.tpl'
     },
     // Create Email Components
     {
       type: 'CREATE_FILE',
       path: 'src/components/email/EmailForm.tsx',
-      template: 'EmailForm.tsx.tpl'
+      template: 'templates/EmailForm.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/email/EmailTemplate.tsx',
-      template: 'EmailTemplate.tsx.tpl'
+      template: 'templates/EmailTemplate.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/email/EmailAnalytics.tsx',
-      template: 'EmailAnalytics.tsx.tpl'
+      template: 'templates/EmailAnalytics.tsx.tpl'
     },
     // Create Middleware
     {
       type: 'CREATE_FILE',
       path: 'src/middleware.ts',
-      template: 'middleware.ts.tpl'
+      template: 'templates/middleware.ts.tpl'
     },
     // Install Dependencies
     {

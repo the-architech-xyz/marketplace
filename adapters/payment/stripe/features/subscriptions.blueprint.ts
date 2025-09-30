@@ -14,17 +14,17 @@ const subscriptionsFeatureBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'src/lib/stripe/subscriptions.ts',
-      template: 'adapters/payment/stripe/features/templates/subscriptions.ts.tpl'
+      template: 'templates/subscriptions.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'src/hooks/useSubscription.ts',
-      template: 'adapters/payment/stripe/features/templates/subscription-hooks.ts.tpl'
+      path: 'src/hooks/useSubscription.ts', 
+      template: 'templates/subscription-hooks.ts.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: 'src/components/subscription/SubscriptionManager.tsx',
-      template: 'adapters/payment/stripe/features/templates/subscription-components.tsx.tpl'
+      template: 'templates/subscription-components.tsx.tpl'
     }
   ]
 };
