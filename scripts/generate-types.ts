@@ -144,7 +144,7 @@ async function processAdapterFile(adapterPath: string): Promise<any> {
       moduleName = pathParts[1]; // e.g., 'web3-shadcn-integration'
       const pascalModuleName = capitalize(moduleName.replace(/-/g, '_'));
       typeName = `${pascalModuleName}Integration`;
-      moduleId = moduleName;
+      moduleId = `integrations/${moduleName}`; // Convention: integrations/{name}
     } else {
       // For adapters: adapters/ui/shadcn-ui/adapter.json
       moduleType = pathParts[1]; // e.g., 'ui', 'database'

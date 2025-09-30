@@ -65,27 +65,27 @@ export type ModuleConfig =
   | { id: 'content/next-intl'; parameters?: Next_intlContentParams; features?: Next_intlContentFeatures }
   | { id: 'blockchain/web3'; parameters?: Web3BlockchainParams; features?: Web3BlockchainFeatures }
   | { id: 'auth/better-auth'; parameters?: Better_authAuthParams; features?: Better_authAuthFeatures }
-  | { id: 'zustand-nextjs-integration'; parameters?: Zustand_nextjs_integrationIntegrationParams; features?: Zustand_nextjs_integrationIntegrationFeatures }
-  | { id: 'web3-shadcn-nextjs-integration'; parameters?: Web3_shadcn_nextjs_integrationIntegrationParams; features?: Web3_shadcn_nextjs_integrationIntegrationFeatures }
-  | { id: 'web3-shadcn-integration'; parameters?: Web3_shadcn_integrationIntegrationParams; features?: Web3_shadcn_integrationIntegrationFeatures }
-  | { id: 'web3-nextjs-integration'; parameters?: Web3_nextjs_integrationIntegrationParams; features?: Web3_nextjs_integrationIntegrationFeatures }
-  | { id: 'vitest-zustand-integration'; parameters?: Vitest_zustand_integrationIntegrationParams; features?: Vitest_zustand_integrationIntegrationFeatures }
-  | { id: 'vitest-nextjs-integration'; parameters?: Vitest_nextjs_integrationIntegrationParams; features?: Vitest_nextjs_integrationIntegrationFeatures }
-  | { id: 'stripe-shadcn-integration'; parameters?: Stripe_shadcn_integrationIntegrationParams; features?: Stripe_shadcn_integrationIntegrationFeatures }
-  | { id: 'stripe-nextjs-integration'; parameters?: Stripe_nextjs_integrationIntegrationParams; features?: Stripe_nextjs_integrationIntegrationFeatures }
-  | { id: 'stripe-drizzle-integration'; parameters?: Stripe_drizzle_integrationIntegrationParams; features?: Stripe_drizzle_integrationIntegrationFeatures }
-  | { id: 'shadcn-zustand-integration'; parameters?: Shadcn_zustand_integrationIntegrationParams; features?: Shadcn_zustand_integrationIntegrationFeatures }
-  | { id: 'shadcn-nextjs-integration'; parameters?: Shadcn_nextjs_integrationIntegrationParams; features?: Shadcn_nextjs_integrationIntegrationFeatures }
-  | { id: 'sentry-nextjs-integration'; parameters?: Sentry_nextjs_integrationIntegrationParams; features?: Sentry_nextjs_integrationIntegrationFeatures }
-  | { id: 'sentry-drizzle-nextjs-integration'; parameters?: Sentry_drizzle_nextjs_integrationIntegrationParams; features?: Sentry_drizzle_nextjs_integrationIntegrationFeatures }
-  | { id: 'resend-shadcn-integration'; parameters?: Resend_shadcn_integrationIntegrationParams; features?: Resend_shadcn_integrationIntegrationFeatures }
-  | { id: 'resend-nextjs-integration'; parameters?: Resend_nextjs_integrationIntegrationParams; features?: Resend_nextjs_integrationIntegrationFeatures }
-  | { id: 'prisma-nextjs-integration'; parameters?: Prisma_nextjs_integrationIntegrationParams; features?: Prisma_nextjs_integrationIntegrationFeatures }
-  | { id: 'drizzle-nextjs-integration'; parameters?: Drizzle_nextjs_integrationIntegrationParams; features?: Drizzle_nextjs_integrationIntegrationFeatures }
-  | { id: 'docker-nextjs-integration'; parameters?: Docker_nextjs_integrationIntegrationParams; features?: Docker_nextjs_integrationIntegrationFeatures }
-  | { id: 'docker-drizzle-integration'; parameters?: Docker_drizzle_integrationIntegrationParams; features?: Docker_drizzle_integrationIntegrationFeatures }
-  | { id: 'better-auth-nextjs-integration'; parameters?: Better_auth_nextjs_integrationIntegrationParams; features?: Better_auth_nextjs_integrationIntegrationFeatures }
-  | { id: 'better-auth-drizzle-integration'; parameters?: Better_auth_drizzle_integrationIntegrationParams; features?: Better_auth_drizzle_integrationIntegrationFeatures };
+  | { id: 'integrations/zustand-nextjs-integration'; parameters?: Zustand_nextjs_integrationIntegrationParams; features?: Zustand_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/web3-shadcn-nextjs-integration'; parameters?: Web3_shadcn_nextjs_integrationIntegrationParams; features?: Web3_shadcn_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/web3-shadcn-integration'; parameters?: Web3_shadcn_integrationIntegrationParams; features?: Web3_shadcn_integrationIntegrationFeatures }
+  | { id: 'integrations/web3-nextjs-integration'; parameters?: Web3_nextjs_integrationIntegrationParams; features?: Web3_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/vitest-zustand-integration'; parameters?: Vitest_zustand_integrationIntegrationParams; features?: Vitest_zustand_integrationIntegrationFeatures }
+  | { id: 'integrations/vitest-nextjs-integration'; parameters?: Vitest_nextjs_integrationIntegrationParams; features?: Vitest_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/stripe-shadcn-integration'; parameters?: Stripe_shadcn_integrationIntegrationParams; features?: Stripe_shadcn_integrationIntegrationFeatures }
+  | { id: 'integrations/stripe-nextjs-integration'; parameters?: Stripe_nextjs_integrationIntegrationParams; features?: Stripe_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/stripe-drizzle-integration'; parameters?: Stripe_drizzle_integrationIntegrationParams; features?: Stripe_drizzle_integrationIntegrationFeatures }
+  | { id: 'integrations/shadcn-zustand-integration'; parameters?: Shadcn_zustand_integrationIntegrationParams; features?: Shadcn_zustand_integrationIntegrationFeatures }
+  | { id: 'integrations/shadcn-nextjs-integration'; parameters?: Shadcn_nextjs_integrationIntegrationParams; features?: Shadcn_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/sentry-nextjs-integration'; parameters?: Sentry_nextjs_integrationIntegrationParams; features?: Sentry_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/sentry-drizzle-nextjs-integration'; parameters?: Sentry_drizzle_nextjs_integrationIntegrationParams; features?: Sentry_drizzle_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/resend-shadcn-integration'; parameters?: Resend_shadcn_integrationIntegrationParams; features?: Resend_shadcn_integrationIntegrationFeatures }
+  | { id: 'integrations/resend-nextjs-integration'; parameters?: Resend_nextjs_integrationIntegrationParams; features?: Resend_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/prisma-nextjs-integration'; parameters?: Prisma_nextjs_integrationIntegrationParams; features?: Prisma_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/drizzle-nextjs-integration'; parameters?: Drizzle_nextjs_integrationIntegrationParams; features?: Drizzle_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/docker-nextjs-integration'; parameters?: Docker_nextjs_integrationIntegrationParams; features?: Docker_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/docker-drizzle-integration'; parameters?: Docker_drizzle_integrationIntegrationParams; features?: Docker_drizzle_integrationIntegrationFeatures }
+  | { id: 'integrations/better-auth-nextjs-integration'; parameters?: Better_auth_nextjs_integrationIntegrationParams; features?: Better_auth_nextjs_integrationIntegrationFeatures }
+  | { id: 'integrations/better-auth-drizzle-integration'; parameters?: Better_auth_drizzle_integrationIntegrationParams; features?: Better_auth_drizzle_integrationIntegrationFeatures };
 
 /**
  * Genome type for The Architech

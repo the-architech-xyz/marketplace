@@ -272,7 +272,7 @@ const genome: Genome = {
     
     // Database integrations
     {
-      id: 'drizzle-nextjs-integration',
+      id: 'integrations/drizzle-nextjs-integration',
       parameters: {
         connectionPooling: true,
         queryOptimization: true,
@@ -287,7 +287,7 @@ const genome: Genome = {
     },
 
     {
-      id: 'better-auth-drizzle-integration',
+      id: 'integrations/better-auth-drizzle-integration',
       parameters: {
         userSchema: true,
         adapterLogic: true,
@@ -306,7 +306,7 @@ const genome: Genome = {
 
     // UI integrations
     {
-      id: 'shadcn-nextjs-integration',
+      id: 'integrations/shadcn-nextjs-integration',
       parameters: {
         themeProvider: true,
         darkMode: true,
@@ -321,7 +321,7 @@ const genome: Genome = {
     },
 
     {
-      id: 'shadcn-zustand-integration',
+      id: 'integrations/shadcn-zustand-integration',
       parameters: {
         stateManagement: true,
         persistence: true,
@@ -337,7 +337,7 @@ const genome: Genome = {
 
     // Payment integrations
     {
-      id: 'stripe-nextjs-integration',
+      id: 'integrations/stripe-nextjs-integration',
       parameters: {
         webhooks: true,
         subscriptions: true,
@@ -352,7 +352,7 @@ const genome: Genome = {
     },
 
     {
-      id: 'stripe-drizzle-integration',
+      id: 'integrations/stripe-drizzle-integration',
       parameters: {
         customerManagement: true,
         subscriptionTracking: true,
@@ -367,7 +367,7 @@ const genome: Genome = {
     },
 
     {
-      id: 'stripe-shadcn-integration',
+      id: 'integrations/stripe-shadcn-integration',
       parameters: {
         uiComponents: true,
         checkoutForm: true,
@@ -383,7 +383,7 @@ const genome: Genome = {
 
     // Email integrations
     {
-      id: 'resend-nextjs-integration',
+      id: 'integrations/resend-nextjs-integration',
       parameters: {
         'api-routes': true,
         templates: true,
@@ -398,7 +398,7 @@ const genome: Genome = {
     },
 
     {
-      id: 'resend-shadcn-integration',
+      id: 'integrations/resend-shadcn-integration',
       parameters: {
         emailForms: true,
         templates: true,
@@ -414,7 +414,7 @@ const genome: Genome = {
 
     // Observability integrations
     {
-      id: 'sentry-nextjs-integration',
+      id: 'integrations/sentry-nextjs-integration',
       parameters: {
         errorBoundary: true,
         performance: true,
@@ -429,7 +429,7 @@ const genome: Genome = {
     },
 
     {
-      id: 'sentry-drizzle-nextjs-integration',
+      id: 'integrations/sentry-drizzle-nextjs-integration',
       parameters: {
         databaseMonitoring: true,
         queryTracking: true,
@@ -445,7 +445,7 @@ const genome: Genome = {
 
     // Testing integrations
     {
-      id: 'vitest-nextjs-integration',
+      id: 'integrations/vitest-nextjs-integration',
       parameters: {
         componentTesting: true,
         apiTesting: true,
@@ -460,7 +460,7 @@ const genome: Genome = {
     },
 
     {
-      id: 'vitest-zustand-integration',
+      id: 'integrations/vitest-zustand-integration',
       parameters: {
         stateTesting: true,
         mockStores: true,
@@ -476,7 +476,7 @@ const genome: Genome = {
 
     // Blockchain integrations
     {
-      id: 'web3-nextjs-integration',
+      id: 'integrations/web3-nextjs-integration',
       parameters: {
         walletConnection: true,
         contractInteraction: true,
@@ -491,7 +491,7 @@ const genome: Genome = {
     },
 
     {
-      id: 'web3-shadcn-integration',
+      id: 'integrations/web3-shadcn-integration',
       parameters: {
         walletUI: true,
         transactionUI: true,
@@ -506,7 +506,7 @@ const genome: Genome = {
     },
 
     {
-      id: 'web3-shadcn-nextjs-integration',
+      id: 'integrations/web3-shadcn-nextjs-integration',
       parameters: {
         fullStackWeb3: true,
         walletManagement: true,
@@ -522,7 +522,7 @@ const genome: Genome = {
 
     // State management integrations
     {
-      id: 'zustand-nextjs-integration',
+      id: 'integrations/zustand-nextjs-integration',
       parameters: {
         ssrSupport: true,
         hydration: true,
@@ -538,7 +538,7 @@ const genome: Genome = {
 
     // Deployment integrations
     {
-      id: 'docker-nextjs-integration',
+      id: 'integrations/docker-nextjs-integration',
       parameters: {
         nextjsOptimization: true,
         staticGeneration: true,
@@ -553,7 +553,7 @@ const genome: Genome = {
     },
 
     {
-      id: 'docker-drizzle-integration',
+      id: 'integrations/docker-drizzle-integration',
       parameters: {
         databaseContainer: true,
         migrations: true,
@@ -569,7 +569,7 @@ const genome: Genome = {
 
     // Auth integrations
     {
-      id: 'better-auth-nextjs-integration',
+      id: 'integrations/better-auth-nextjs-integration',
       parameters: {
         middleware: true,
         'api-routes': true,
