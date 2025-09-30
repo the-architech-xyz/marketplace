@@ -1,6 +1,6 @@
 {
   "name": "@thearchitech.xyz/marketplace",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "The Architech Marketplace - Adapters and Integrations",
   "type": "module",
   "main": "index.js",
