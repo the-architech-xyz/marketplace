@@ -4,7 +4,7 @@ const sentryNextjsIntegrationBlueprint: Blueprint = {
   id: 'sentry-nextjs-integration',
   name: 'Sentry Next.js Integration',
   description: 'Complete error monitoring and performance tracking for Next.js',
-  version: '2.0.0',
+  version: '2.1.0',
   actions: [
     // Install Next.js specific Sentry package
     {
@@ -12,6 +12,7 @@ const sentryNextjsIntegrationBlueprint: Blueprint = {
       packages: ['@sentry/nextjs'],
       isDev: false
     },
+    
     // Add Next.js specific environment variables
     {
       type: 'ADD_ENV_VAR',
@@ -38,17 +39,18 @@ const sentryNextjsIntegrationBlueprint: Blueprint = {
       description: 'Sentry auth token for releases'
     },
     
-    // PURE MODIFIER: Enhance Next.js config with Sentry wrapper
+    // V1 MODIFIER: Wrap next.config.js with Sentry HOC
     {
       type: 'ENHANCE_FILE',
-      path: 'next.config.ts',
+      path: 'next.config.js',
       condition: '{{#if integration.features.errorTracking}}',
-      modifier: 'ts-module-enhancer',
+      modifier: 'js-export-wrapper',
       params: {
-        exportToWrap: 'default',
-        wrapperFunction: {
+        wrapperFunction: 'withSentryConfig',
+        wrapperImport: {
           name: 'withSentryConfig',
-          importFrom: '@sentry/nextjs'
+          from: '@sentry/nextjs',
+          isDefault: false
         },
         wrapperOptions: {
           org: 'process.env.SENTRY_ORG',
@@ -58,12 +60,12 @@ const sentryNextjsIntegrationBlueprint: Blueprint = {
           widenClientFileUpload: true,
           hideSourceMaps: true,
           disableLogger: true,
-          automaticVercelMonitors: true,
+          automaticVercelMonitors: true
         }
       }
     },
     
-    // PURE MODIFIER: Enhance the Sentry client config created by the adapter
+    // V1 MODIFIER: Add Sentry client configuration
     {
       type: 'ENHANCE_FILE',
       path: 'src/lib/sentry/client.ts',
@@ -71,13 +73,13 @@ const sentryNextjsIntegrationBlueprint: Blueprint = {
       modifier: 'ts-module-enhancer',
       params: {
         importsToAdd: [
-          { name: 'withSentryConfig', from: '@sentry/nextjs', type: 'import' }
+          { name: '* as Sentry', from: '@sentry/nextjs', type: 'import' }
         ],
         statementsToAppend: [
           {
             type: 'raw',
-            content: `// Next.js specific Sentry configuration
-export const sentryConfig = {
+            content: `// Next.js specific Sentry client configuration
+export const sentryClientConfig = {
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
   environment: process.env.NODE_ENV,
   tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
@@ -90,13 +92,18 @@ export const sentryConfig = {
       blockAllMedia: true,
     }),
   ],
-};`
+};
+
+// Initialize Sentry on the client side
+if (typeof window !== 'undefined') {
+  Sentry.init(sentryClientConfig);
+}`
           }
         ]
       }
     },
     
-    // PURE MODIFIER: Enhance the Sentry server config created by the adapter
+    // V1 MODIFIER: Add Sentry server configuration
     {
       type: 'ENHANCE_FILE',
       path: 'src/lib/sentry/server.ts',
@@ -104,7 +111,7 @@ export const sentryConfig = {
       modifier: 'ts-module-enhancer',
       params: {
         importsToAdd: [
-          { name: 'withSentryConfig', from: '@sentry/nextjs', type: 'import' }
+          { name: '* as Sentry', from: '@sentry/nextjs', type: 'import' }
         ],
         statementsToAppend: [
           {
@@ -115,13 +122,16 @@ export const sentryServerConfig = {
   environment: process.env.NODE_ENV,
   tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
   debug: process.env.NODE_ENV === 'development',
-};`
+};
+
+// Initialize Sentry on the server side
+Sentry.init(sentryServerConfig);`
           }
         ]
       }
     },
     
-    // PURE MODIFIER: Enhance the main Sentry config with Next.js specific features
+    // V1 MODIFIER: Add Sentry configuration utilities
     {
       type: 'ENHANCE_FILE',
       path: 'src/lib/sentry/config.ts',
@@ -129,7 +139,7 @@ export const sentryServerConfig = {
       modifier: 'ts-module-enhancer',
       params: {
         importsToAdd: [
-          { name: 'withSentryConfig', from: '@sentry/nextjs', type: 'import' }
+          { name: '* as Sentry', from: '@sentry/nextjs', type: 'import' }
         ],
         statementsToAppend: [
           {
@@ -147,40 +157,47 @@ export const nextjsSentryConfig = {
 
 // Next.js specific error reporting
 export const reportNextjsError = (error: Error, context?: Record<string, unknown>) => {
-  // This will be implemented by the Next.js specific integration
-  console.error('Next.js Error reported:', error, context);
+  Sentry.captureException(error, {
+    tags: { framework: 'nextjs' },
+    extra: context
+  });
 };
 
 // Next.js specific performance monitoring
 export const startNextjsSpan = (name: string, op: string) => {
-  // This will be implemented by the Next.js specific integration
-  return { name, op, framework: 'nextjs' };
+  return Sentry.startSpan({ name, op }, () => {
+    return { name, op, framework: 'nextjs' };
+  });
 };`
           }
         ]
       }
     },
     
-    // PURE MODIFIER: Enhance the root layout with Sentry provider
+    // V1 MODIFIER: Wrap layout children with Sentry provider
     {
       type: 'ENHANCE_FILE',
       path: 'src/app/layout.tsx',
       condition: '{{#if integration.features.errorTracking}}',
-      modifier: 'jsx-wrapper',
+      modifier: 'jsx-children-wrapper',
       params: {
-        targetComponent: 'body',
-        wrapperComponent: {
-          name: 'Sentry.Provider',
-          importFrom: '@sentry/nextjs',
-          props: {
-            dsn: 'process.env.NEXT_PUBLIC_SENTRY_DSN'
+        providers: [
+          {
+            component: 'SentryProvider',
+            import: {
+              name: 'SentryProvider',
+              from: '@sentry/nextjs'
+            },
+            props: {
+              dsn: 'process.env.NEXT_PUBLIC_SENTRY_DSN'
+            }
           }
-        },
-        wrapStrategy: 'provider'
+        ],
+        targetElement: 'body'
       }
     },
     
-    // PURE MODIFIER: Create Next.js middleware (only if it doesn't exist)
+    // V1 MODIFIER: Create Next.js middleware for Sentry
     {
       type: 'ENHANCE_FILE',
       path: 'src/middleware.ts',
@@ -194,7 +211,8 @@ export const startNextjsSpan = (name: string, op: string) => {
         statementsToAppend: [
           {
             type: 'raw',
-            content: `Sentry.init({
+            content: `// Initialize Sentry in middleware
+Sentry.init({
   dsn: process.env.SENTRY_DSN,
   environment: process.env.NODE_ENV,
   tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,

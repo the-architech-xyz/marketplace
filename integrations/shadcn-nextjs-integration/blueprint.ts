@@ -4,36 +4,34 @@ export const blueprint: Blueprint = {
   id: 'shadcn-nextjs-integration',
   name: 'Shadcn Next.js Integration',
   description: 'Configuration and integration glue for Shadcn/ui within Next.js projects (Tailwind v4 compatible)',
-  version: '1.0.0',
+  version: '1.1.0',
   actions: [
     
-    // Enhance TypeScript config with path mapping
+    // V1 MODIFIER: Enhance TypeScript config with path mapping using json-merger
     {
       type: 'ENHANCE_FILE',
       path: 'tsconfig.json',
-      modifier: 'js-config-merger',
+      modifier: 'json-merger',
       params: {
-        path: ['compilerOptions'],
-        targetProperties: {
-          baseUrl: '.',
-          paths: {
-            '@/*': ['./src/*']
+        merge: {
+          compilerOptions: {
+            baseUrl: '.',
+            paths: {
+              '@/*': ['./src/*']
+            }
           }
         },
-        mergeStrategy: 'deep'
+        strategy: 'deep'
       }
     },
     
-    // Enhance globals.css with Shadcn CSS variables
+    // V1 MODIFIER: Enhance globals.css with Shadcn CSS variables using css-enhancer
     {
       type: 'ENHANCE_FILE',
       path: 'src/app/globals.css',
-      modifier: 'ts-module-enhancer',
+      modifier: 'css-enhancer',
       params: {
-        statementsToAppend: [
-          {
-            type: 'raw',
-            content: `@layer base {
+        content: `@layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -98,19 +96,16 @@ export const blueprint: Blueprint = {
     @apply bg-background text-foreground;
   }
 }`
-          }
-        ]
       }
     },
     
-    // Enhance components.json with Next.js specific configuration (Tailwind v4 compatible)
+    // V1 MODIFIER: Enhance components.json with Next.js specific configuration using json-merger
     {
       type: 'ENHANCE_FILE',
       path: 'components.json',
-      modifier: 'js-config-merger',
+      modifier: 'json-merger',
       params: {
-        path: [],
-        targetProperties: {
+        merge: {
           style: 'default',
           rsc: true,
           tsx: true,
@@ -129,27 +124,32 @@ export const blueprint: Blueprint = {
             hooks: '@/hooks'
           }
         },
-        mergeStrategy: 'deep'
+        strategy: 'deep'
       }
     },
     
-    // Conditional: Provider injection for theming (only if theming feature is enabled)
+    // V1 MODIFIER: Add ThemeProvider to layout using jsx-children-wrapper
     {
       type: 'ENHANCE_FILE',
       path: 'src/app/layout.tsx',
-      modifier: 'jsx-wrapper',
+      modifier: 'jsx-children-wrapper',
       params: {
-        condition: '{{#if theming}}',
-        wrapper: {
-          import: "import { ThemeProvider } from 'next-themes'",
-          component: 'ThemeProvider',
-          props: {
-            attribute: 'class',
-            defaultTheme: 'system',
-            enableSystem: true,
-            disableTransitionOnChange: false
+        providers: [
+          {
+            component: 'ThemeProvider',
+            import: {
+              name: 'ThemeProvider',
+              from: 'next-themes'
+            },
+            props: {
+              attribute: 'class',
+              defaultTheme: 'system',
+              enableSystem: true,
+              disableTransitionOnChange: false
+            }
           }
-        }
+        ],
+        targetElement: 'body'
       }
     }
   ]
