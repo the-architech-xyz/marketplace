@@ -11,7 +11,7 @@ export const blueprint: Blueprint = {
     {
       type: 'ENHANCE_FILE',
       path: 'tsconfig.json',
-      modifier: 'json-object-merger',
+      modifier: 'js-config-merger',
       params: {
         path: ['compilerOptions'],
         propertiesToMerge: {
@@ -107,7 +107,7 @@ export const blueprint: Blueprint = {
     {
       type: 'ENHANCE_FILE',
       path: 'components.json',
-      modifier: 'json-object-merger',
+      modifier: 'js-config-merger',
       params: {
         path: [],
         propertiesToMerge: {

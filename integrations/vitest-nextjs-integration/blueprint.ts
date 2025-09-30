@@ -209,7 +209,7 @@ const vitestNextjsIntegrationBlueprint: Blueprint = {
     {
       type: 'ENHANCE_FILE',
       path: 'package.json',
-      modifier: 'json-enhancer',
+      modifier: 'package-json-merger',
       params: {
         scriptsToAdd: {
           'test': 'vitest',

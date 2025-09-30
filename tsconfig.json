@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "allowJs": true,
     "checkJs": false,
-    "strict": true,
-    "noEmit": true,
+    "strict": false,
+    "noEmit": false,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
@@ -24,9 +24,8 @@
     }
   },
   "include": [
-    "genomes/**/*.ts",
-    "types/**/*.ts",
-    "index.js"
+    "adapters/**/blueprint.ts",
+    "integrations/**/blueprint.ts"
   ],
   "exclude": [
     "node_modules",

@@ -15,8 +15,16 @@
   },
   "types": "./types/index.d.ts",
   "files": [
-    "adapters/",
-    "integrations/",
+    "adapters/**/*.json",
+    "adapters/**/templates/",
+    "adapters/**/features/",
+    "integrations/**/*.json",
+    "integrations/**/templates/",
+    "integrations/**/features/",
+    "dist/adapters/**/*.js",
+    "dist/adapters/**/*.d.ts",
+    "dist/integrations/**/*.js",
+    "dist/integrations/**/*.d.ts",
     "genomes/",
     "manifest.json",
     "index.js",
@@ -47,13 +55,15 @@
   },
   "scripts": {
     "types:generate": "tsx scripts/generate-types.ts",
-    "build": "npm run types:generate",
-    "prepublishOnly": "npm run build",
+    "compile": "tsc",
+    "build": "npm run types:generate && npm run compile",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build",
     "prepare": "husky install",
     "precommit": "npm run types:generate && git add types/ types/index.d.ts"
   },
   "dependencies": {
-    "@thearchitech.xyz/types": "^1.2.0",
+    "@thearchitech.xyz/types": "^1.2.3",
     "@types/glob": "^9.0.0"
   },
   "devDependencies": {
