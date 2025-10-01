@@ -1,19 +1,22 @@
 /**
-     * Generated TypeScript definitions for Stripe Drizzle Integration
-     * Generated from: integrations/stripe-drizzle-integration/integration.json
-     */
+ * Stripe Drizzle Integration
+ * 
+ * Integrates Stripe with Drizzle ORM for database operations
+ */
 
-/**
-     * Parameters for the Stripe Drizzle Integration integration
-     */
-export interface Stripe_drizzle_integrationIntegrationParams {
-}
+export interface StripeDrizzleIntegrationParams {}
 
-/**
-     * Features for the Stripe Drizzle Integration integration
-     */
-export interface Stripe_drizzle_integrationIntegrationFeatures {
-  0?: boolean;
-  1?: boolean;
-  2?: boolean;
-}
+// 🚀 Auto-discovered artifacts with ownership info
+export declare const StripeDrizzleIntegrationArtifacts: {
+  creates: [],
+  enhances: [
+    { path: 'src/lib/db/schema.ts' },
+    { path: 'src/lib/payment/stripe.ts' }
+  ],
+  installs: [],
+  envVars: []
+};
+
+// Type-safe artifact access
+export type StripeDrizzleIntegrationCreates = typeof StripeDrizzleIntegrationArtifacts.creates[number];
+export type StripeDrizzleIntegrationEnhances = typeof StripeDrizzleIntegrationArtifacts.enhances[number];

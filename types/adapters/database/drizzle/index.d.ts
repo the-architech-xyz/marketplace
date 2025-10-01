@@ -1,48 +1,43 @@
 /**
-     * Generated TypeScript definitions for Drizzle ORM
-     * Generated from: adapters/database/drizzle/adapter.json
-     */
+ * Drizzle ORM
+ * 
+ * TypeScript ORM with excellent developer experience
+ */
 
-/**
-     * Parameters for the Drizzle ORM adapter
-     */
-export interface DrizzleDatabaseParams {
-  /**
-   * Database provider
-   */
+export interface DatabaseDrizzleParams {
+
+  /** Database provider */
   provider?: string;
-  /**
-   * Enable database migrations
-   */
+
+  /** Enable database migrations */
   migrations?: boolean;
-  /**
-   * Enable Drizzle Studio
-   */
+
+  /** Enable Drizzle Studio */
   studio?: boolean;
-  /**
-   * Database type to use
-   */
+
+  /** Database type to use */
   databaseType: string;
 }
 
-/**
-     * Features for the Drizzle ORM adapter
-     */
-export interface DrizzleDatabaseFeatures {
-  /**
-   * Automated database schema migrations and versioning
-   */
-  migrations?: boolean;
-  /**
-   * Visual database browser and query interface
-   */
-  studio?: boolean;
-  /**
-   * Advanced relationship management and queries
-   */
-  relations?: boolean;
-  /**
-   * Data seeding and fixtures management
-   */
-  seeding?: boolean;
-}
+export interface DatabaseDrizzleFeatures {}
+
+// 🚀 Auto-discovered artifacts
+export declare const DatabaseDrizzleArtifacts: {
+  creates: [
+    'src/lib/db/index.ts',
+    'src/lib/db/schema.ts',
+    'drizzle.config.ts'
+  ],
+  enhances: [],
+  installs: [
+    { packages: ['drizzle-orm', 'pg'], isDev: false },
+    { packages: ['drizzle-kit', '@types/pg'], isDev: true }
+  ],
+  envVars: [
+    { key: 'DATABASE_URL', value: 'postgresql://username:password@localhost:5432/{{project.name}}', description: 'Database connection string' }
+  ]
+};
+
+// Type-safe artifact access
+export type DatabaseDrizzleCreates = typeof DatabaseDrizzleArtifacts.creates[number];
+export type DatabaseDrizzleEnhances = typeof DatabaseDrizzleArtifacts.enhances[number];

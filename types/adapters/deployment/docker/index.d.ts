@@ -1,36 +1,34 @@
 /**
-     * Generated TypeScript definitions for Docker Deployment
-     * Generated from: adapters/deployment/docker/adapter.json
-     */
+ * Docker Deployment
+ * 
+ * Containerization and deployment setup with Docker
+ */
 
-/**
-     * Parameters for the Docker Deployment adapter
-     */
-export interface DockerDeploymentParams {
-  /**
-   * Node.js version for Docker image
-   */
+export interface DeploymentDockerParams {
+
+  /** Node.js version for Docker image */
   nodeVersion?: string;
-  /**
-   * Enable production optimizations
-   */
+
+  /** Enable production optimizations */
   optimization?: boolean;
-  /**
-   * Enable health check endpoint
-   */
+
+  /** Enable health check endpoint */
   healthCheck?: boolean;
 }
 
-/**
-     * Features for the Docker Deployment adapter
-     */
-export interface DockerDeploymentFeatures {
-  /**
-   * Optimized multi-stage Docker builds for production
-   */
-  'multi-stage'?: boolean;
-  /**
-   * Production-ready configuration with security and monitoring
-   */
-  'production-ready'?: boolean;
-}
+export interface DeploymentDockerFeatures {}
+
+// 🚀 Auto-discovered artifacts
+export declare const DeploymentDockerArtifacts: {
+  creates: [
+    'Dockerfile',
+    '.dockerignore'
+  ],
+  enhances: [],
+  installs: [],
+  envVars: []
+};
+
+// Type-safe artifact access
+export type DeploymentDockerCreates = typeof DeploymentDockerArtifacts.creates[number];
+export type DeploymentDockerEnhances = typeof DeploymentDockerArtifacts.enhances[number];

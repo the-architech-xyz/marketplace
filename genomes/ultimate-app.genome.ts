@@ -8,9 +8,9 @@
  * - TypeScript type safety for configuration validation
  */
 
-import { Genome } from '@thearchitech.xyz/marketplace';
+import { Recipe } from '@thearchitech.xyz/types';
 
-const genome: Genome = {
+const genome: Recipe = {
   version: '1.0.0',
   project: {
     name: 'ultimate-app',

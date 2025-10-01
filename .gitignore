@@ -93,3 +93,4 @@ test-*.js
 test-*.ts
 debug-*.js
 debug-*.ts
+genomes/test/

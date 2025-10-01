@@ -1,36 +1,50 @@
 /**
-     * Generated TypeScript definitions for Development Tools
-     * Generated from: adapters/tooling/dev-tools/adapter.json
-     */
+ * Development Tools
+ * 
+ * Essential development tools for code quality, formatting, and git hooks
+ */
 
-/**
-     * Parameters for the Development Tools adapter
-     */
-export interface Dev_toolsToolingParams {
-  /**
-   * Enable Prettier for code formatting
-   */
+export interface ToolingDevToolsParams {
+
+  /** Enable Prettier for code formatting */
   prettier?: boolean;
-  /**
-   * Enable Husky for git hooks
-   */
+
+  /** Enable Husky for git hooks */
   husky?: boolean;
-  /**
-   * Enable lint-staged for pre-commit hooks
-   */
+
+  /** Enable lint-staged for pre-commit hooks */
   lintStaged?: boolean;
-  /**
-   * Enable commitlint for commit message validation
-   */
+
+  /** Enable commitlint for commit message validation */
   commitlint?: boolean;
-  /**
-   * Enable ESLint configuration
-   */
+
+  /** Enable ESLint configuration */
   eslint?: boolean;
 }
 
-/**
-     * Features for the Development Tools adapter
-     */
-export interface Dev_toolsToolingFeatures {
-}
+export interface ToolingDevToolsFeatures {}
+
+// 🚀 Auto-discovered artifacts
+export declare const ToolingDevToolsArtifacts: {
+  creates: [
+    '.prettierrc',
+    '.prettierignore',
+    '.husky/pre-commit',
+    '.lintstagedrc',
+    'commitlint.config.js',
+    '.eslintrc.js'
+  ],
+  enhances: [],
+  installs: [
+    { packages: ['prettier'], isDev: true },
+    { packages: ['husky'], isDev: true },
+    { packages: ['lint-staged'], isDev: true },
+    { packages: ['@commitlint/cli', '@commitlint/config-conventional'], isDev: true },
+    { packages: ['eslint'], isDev: true }
+  ],
+  envVars: []
+};
+
+// Type-safe artifact access
+export type ToolingDevToolsCreates = typeof ToolingDevToolsArtifacts.creates[number];
+export type ToolingDevToolsEnhances = typeof ToolingDevToolsArtifacts.enhances[number];

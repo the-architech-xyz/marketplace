@@ -1,6 +1,6 @@
 {
   "name": "@thearchitech.xyz/marketplace",
-  "version": "1.7.2",
+  "version": "1.9.0",
   "description": "The Architech Marketplace - Adapters and Integrations",
   "type": "module",
   "main": "index.js",
@@ -25,7 +25,8 @@
     "dist/adapters/**/*.d.ts",
     "dist/integrations/**/*.js",
     "dist/integrations/**/*.d.ts",
-    "genomes/",
+    "genomes/*.genome.ts",
+    "genomes/manifest.json",
     "manifest.json",
     "index.js",
     "types/"
@@ -54,28 +55,29 @@
     "access": "public"
   },
   "scripts": {
-    "types:generate": "tsx scripts/generate-types.ts",
+    "types:generate": "tsx scripts/generate-types-cli.ts",
     "compile": "tsc",
     "build": "npm run types:generate && npm run compile",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "prepare": "husky install",
-    "precommit": "npm run types:generate && git add types/ types/index.d.ts"
+    "precommit": "npm run types:generate"
   },
   "dependencies": {
-    "@thearchitech.xyz/types": "^1.4.0",
+    "@thearchitech.xyz/types": "^1.9.0",
     "@types/glob": "^9.0.0"
   },
   "devDependencies": {
+    "@types/node": "^24.6.1",
     "glob": "^10.4.5",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
-    "tsx": "^4.0.0",
-    "typescript": "^5.9.2"
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
   },
   "lint-staged": {
-    "adapters/**/*.json": "npm run types:generate && git add types/ types/index.d.ts",
-    "integrations/**/*.json": "npm run types:generate && git add types/ types/index.d.ts",
-    "scripts/generate-types.ts": "npm run types:generate && git add types/ types/index.d.ts"
+    "adapters/**/*.json": "node scripts/lint-staged-types.js",
+    "integrations/**/*.json": "node scripts/lint-staged-types.js",
+    "scripts/generate-types.ts": "node scripts/lint-staged-types.js"
   }
 }

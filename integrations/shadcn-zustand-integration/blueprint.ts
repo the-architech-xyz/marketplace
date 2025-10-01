@@ -73,51 +73,15 @@ const shadcnZustandIntegrationBlueprint: Blueprint = {
     },
     // Add Store Hooks
     {
-      type: 'ENHANCE_FILE',
+      type: 'CREATE_FILE',
       path: 'src/hooks/useFormStore.ts',
-      modifier: 'ts-module-enhancer',
-      params: {
-        importsToAdd: [
-          { name: 'useFormStore', from: '@/stores/form-store', type: 'import' }
-        ],
-        statementsToAppend: [
-          {
-            type: 'raw',
-            content: `export { useFormStore } from '@/stores/form-store';
-export { useModalStore } from '@/stores/modal-store';
-export { useToastStore } from '@/stores/toast-store';`
-          }
-        ]
-      }
+      template: 'templates/useFormStore.ts.tpl'
     },
     // Add Provider Setup
     {
-      type: 'ENHANCE_FILE',
+      type: 'CREATE_FILE',
       path: 'src/providers/StoreProvider.tsx',
-      modifier: 'ts-module-enhancer',
-      params: {
-        importsToAdd: [
-          { name: 'FormProvider', from: '@/components/forms/FormProvider', type: 'import' },
-          { name: 'ModalProvider', from: '@/components/modals/ModalProvider', type: 'import' },
-          { name: 'ToastProvider', from: '@/components/toast/ToastProvider', type: 'import' }
-        ],
-        statementsToAppend: [
-          {
-            type: 'raw',
-            content: `export function StoreProvider({ children }: { children: React.ReactNode }) {
-  return (
-    <FormProvider>
-      <ModalProvider>
-        <ToastProvider>
-          {children}
-        </ToastProvider>
-      </ModalProvider>
-    </FormProvider>
-  );
-}`
-          }
-        ]
-      }
+      template: 'templates/StoreProvider.tsx.tpl'
     }
   ]
 };

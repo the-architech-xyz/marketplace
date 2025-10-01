@@ -84,32 +84,9 @@ export const useBlockNumber = () => {
     },
     // Add Web3 Provider Setup
     {
-      type: 'ENHANCE_FILE',
+      type: 'CREATE_FILE',
       path: 'src/providers/Web3Provider.tsx',
-      modifier: 'ts-module-enhancer',
-      params: {
-        importsToAdd: [
-          { name: 'WagmiConfig', from: 'wagmi', type: 'import' },
-          { name: 'QueryClient', from: '@tanstack/react-query', type: 'import' },
-          { name: 'QueryClientProvider', from: '@tanstack/react-query', type: 'import' }
-        ],
-        statementsToAppend: [
-          {
-            type: 'raw',
-            content: `const queryClient = new QueryClient();
-
-export function Web3Provider({ children }: { children: React.ReactNode }) {
-  return (
-    <WagmiConfig config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
-    </WagmiConfig>
-  );
-}`
-          }
-        ]
-      }
+      template: 'templates/Web3Provider.tsx.tpl'
     }
   ]
 };

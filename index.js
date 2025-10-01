@@ -9,8 +9,8 @@ import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-// Re-export types for convenience
-export * from './types/index.js';
+// Types are available in the .d.ts files
+// Runtime code doesn't need to import TypeScript types
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

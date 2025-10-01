@@ -1,36 +1,36 @@
 /**
-     * Generated TypeScript definitions for Zustand State Management
-     * Generated from: adapters/state/zustand/adapter.json
-     */
+ * Zustand State Management
+ * 
+ * Simple, modern state management with Zustand
+ */
 
-/**
-     * Parameters for the Zustand State Management adapter
-     */
-export interface ZustandStateParams {
-  /**
-   * Enable state persistence
-   */
+export interface StateZustandParams {
+
+  /** Enable state persistence */
   persistence?: boolean;
-  /**
-   * Enable Redux DevTools
-   */
+
+  /** Enable Redux DevTools */
   devtools?: boolean;
-  /**
-   * Middleware to use
-   */
-  middleware?: Array<'persist'>;
+
+  /** Middleware to use */
+  middleware?: string[];
 }
 
-/**
-     * Features for the Zustand State Management adapter
-     */
-export interface ZustandStateFeatures {
-  /**
-   * Persist state to localStorage, sessionStorage, or custom storage
-   */
-  persistence?: boolean;
-  /**
-   * Integration with Redux DevTools for debugging
-   */
-  devtools?: boolean;
-}
+export interface StateZustandFeatures {}
+
+// 🚀 Auto-discovered artifacts
+export declare const StateZustandArtifacts: {
+  creates: [
+    '{{paths.state_config}}/use-app-store.ts',
+    '{{paths.state_config}}/index.ts'
+  ],
+  enhances: [],
+  installs: [
+    { packages: ['zustand'], isDev: false }
+  ],
+  envVars: []
+};
+
+// Type-safe artifact access
+export type StateZustandCreates = typeof StateZustandArtifacts.creates[number];
+export type StateZustandEnhances = typeof StateZustandArtifacts.enhances[number];

@@ -1,20 +1,24 @@
 /**
-     * Generated TypeScript definitions for Shadcn Next.js Integration
-     * Generated from: integrations/shadcn-nextjs-integration/integration.json
-     */
+ * Shadcn Next.js Integration
+ * 
+ * Integrates Shadcn/ui with Next.js by configuring Tailwind and providing theme providers
+ */
 
-/**
-     * Parameters for the Shadcn Next.js Integration integration
-     */
-export interface Shadcn_nextjs_integrationIntegrationParams {
-  /**
-   * Enable theming integration (requires next-themes)
-   */
-  theming?: boolean;
-}
+export interface ShadcnNextjsIntegrationParams {}
 
-/**
-     * Features for the Shadcn Next.js Integration integration
-     */
-export interface Shadcn_nextjs_integrationIntegrationFeatures {
-}
+// 🚀 Auto-discovered artifacts with ownership info
+export declare const ShadcnNextjsIntegrationArtifacts: {
+  creates: [],
+  enhances: [
+    { path: 'tsconfig.json' },
+    { path: 'src/app/globals.css' },
+    { path: 'components.json' },
+    { path: 'src/app/layout.tsx' }
+  ],
+  installs: [],
+  envVars: []
+};
+
+// Type-safe artifact access
+export type ShadcnNextjsIntegrationCreates = typeof ShadcnNextjsIntegrationArtifacts.creates[number];
+export type ShadcnNextjsIntegrationEnhances = typeof ShadcnNextjsIntegrationArtifacts.enhances[number];

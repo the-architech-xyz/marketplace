@@ -1,44 +1,44 @@
 /**
-     * Generated TypeScript definitions for Vitest
-     * Generated from: adapters/testing/vitest/adapter.json
-     */
+ * Vitest
+ * 
+ * Fast unit test framework powered by Vite
+ */
 
-/**
-     * Parameters for the Vitest adapter
-     */
-export interface VitestTestingParams {
-  /**
-   * Enable code coverage reporting
-   */
+export interface TestingVitestParams {
+
+  /** Enable code coverage reporting */
   coverage?: boolean;
-  /**
-   * Enable watch mode for development
-   */
+
+  /** Enable watch mode for development */
   watch?: boolean;
-  /**
-   * Enable Vitest UI
-   */
+
+  /** Enable Vitest UI */
   ui?: boolean;
-  /**
-   * Enable JSX support for React testing
-   */
+
+  /** Enable JSX support for React testing */
   jsx?: boolean;
-  /**
-   * Test environment
-   */
+
+  /** Test environment */
   environment?: string;
 }
 
-/**
-     * Features for the Vitest adapter
-     */
-export interface VitestTestingFeatures {
-  /**
-   * Comprehensive code coverage reporting with HTML and LCOV reports
-   */
-  coverage?: boolean;
-  /**
-   * Interactive web-based test runner interface
-   */
-  ui?: boolean;
-}
+export interface TestingVitestFeatures {}
+
+// 🚀 Auto-discovered artifacts
+export declare const TestingVitestArtifacts: {
+  creates: [
+    'vitest.config.ts',
+    'tests/setup/setup.ts',
+    'tests/setup/utils.tsx',
+    'tests/unit/example.test.tsx'
+  ],
+  enhances: [],
+  installs: [
+    { packages: ['vitest', '@vitejs/plugin-react', 'jsdom', '@testing-library/react', '@testing-library/jest-dom', '@testing-library/user-event', '@types/react', '@types/react-dom'], isDev: true }
+  ],
+  envVars: []
+};
+
+// Type-safe artifact access
+export type TestingVitestCreates = typeof TestingVitestArtifacts.creates[number];
+export type TestingVitestEnhances = typeof TestingVitestArtifacts.enhances[number];

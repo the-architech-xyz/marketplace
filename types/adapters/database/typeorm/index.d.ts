@@ -1,40 +1,36 @@
 /**
-     * Generated TypeScript definitions for TypeORM
-     * Generated from: adapters/database/typeorm/adapter.json
-     */
+ * TypeORM
+ * 
+ * TypeScript ORM for Node.js with decorators and migrations
+ */
 
-/**
-     * Parameters for the TypeORM adapter
-     */
-export interface TypeormDatabaseParams {
-  /**
-   * Enable schema synchronization
-   */
+export interface DatabaseTypeormParams {
+
+  /** Enable schema synchronization */
   synchronize?: boolean;
-  /**
-   * Enable query logging
-   */
+
+  /** Enable query logging */
   logging?: boolean;
-  /**
-   * Database type
-   */
+
+  /** Database type */
   databaseType: string;
 }
 
-/**
-     * Features for the TypeORM adapter
-     */
-export interface TypeormDatabaseFeatures {
-  /**
-   * Advanced entity management with decorators and relationships
-   */
-  'entity-management'?: boolean;
-  /**
-   * Database migrations and schema versioning
-   */
-  'migration-system'?: boolean;
-  /**
-   * Advanced query building and optimization tools
-   */
-  'query-builder'?: boolean;
-}
+export interface DatabaseTypeormFeatures {}
+
+// 🚀 Auto-discovered artifacts
+export declare const DatabaseTypeormArtifacts: {
+  creates: [
+    '{{paths.database_config}}/typeorm.ts',
+    '{{paths.database_config}}/entities/User.ts'
+  ],
+  enhances: [],
+  installs: [
+    { packages: ['typeorm', 'reflect-metadata', '{{module.parameters.databaseType}}'], isDev: false }
+  ],
+  envVars: []
+};
+
+// Type-safe artifact access
+export type DatabaseTypeormCreates = typeof DatabaseTypeormArtifacts.creates[number];
+export type DatabaseTypeormEnhances = typeof DatabaseTypeormArtifacts.enhances[number];

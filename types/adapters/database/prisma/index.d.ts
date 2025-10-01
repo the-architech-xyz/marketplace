@@ -1,44 +1,39 @@
 /**
-     * Generated TypeScript definitions for Prisma ORM
-     * Generated from: adapters/database/prisma/adapter.json
-     */
+ * Prisma ORM
+ * 
+ * Next-generation ORM for Node.js and TypeScript
+ */
 
-/**
-     * Parameters for the Prisma ORM adapter
-     */
-export interface PrismaDatabaseParams {
-  /**
-   * Database provider
-   */
+export interface DatabasePrismaParams {
+
+  /** Database provider */
   provider: string;
-  /**
-   * Enable Prisma Studio
-   */
+
+  /** Enable Prisma Studio */
   studio?: boolean;
-  /**
-   * Enable database migrations
-   */
+
+  /** Enable database migrations */
   migrations?: boolean;
-  /**
-   * Database type
-   */
+
+  /** Database type */
   databaseType: string;
 }
 
-/**
-     * Features for the Prisma ORM adapter
-     */
-export interface PrismaDatabaseFeatures {
-  /**
-   * Advanced schema management with Prisma schema and migrations
-   */
-  'schema-management'?: boolean;
-  /**
-   * Advanced query building and optimization tools
-   */
-  'query-optimization'?: boolean;
-  /**
-   * Database management interface and admin tools
-   */
-  'studio-integration'?: boolean;
-}
+export interface DatabasePrismaFeatures {}
+
+// 🚀 Auto-discovered artifacts
+export declare const DatabasePrismaArtifacts: {
+  creates: [
+    '{{paths.database_config}}/prisma.ts',
+    'prisma/schema.prisma'
+  ],
+  enhances: [],
+  installs: [
+    { packages: ['prisma', '@prisma/client'], isDev: false }
+  ],
+  envVars: []
+};
+
+// Type-safe artifact access
+export type DatabasePrismaCreates = typeof DatabasePrismaArtifacts.creates[number];
+export type DatabasePrismaEnhances = typeof DatabasePrismaArtifacts.enhances[number];

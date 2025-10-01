@@ -102,64 +102,20 @@ export const validateRecord = async (record: any) => {
       condition: '{{#if integration.features.apiRoutes}}'
     },
 
-    // PURE MODIFIER: Create Next.js API route for migrations
+    // Create Next.js API route for migrations
     {
-      type: 'ENHANCE_FILE',
+      type: 'CREATE_FILE',
       path: 'src/app/api/db/migrate/route.ts',
-      modifier: 'ts-module-enhancer',
-      fallback: 'create',
-      params: {
-        importsToAdd: [
-          { name: 'NextRequest', from: 'next/server', type: 'import' },
-          { name: 'NextResponse', from: 'next/server', type: 'import' },
-          { name: 'runMigrations', from: '@/lib/db', type: 'import' }
-        ],
-        statementsToAppend: [
-          {
-            type: 'raw',
-            content: `export async function POST(request: NextRequest) {
-  try {
-    await runMigrations();
-    return NextResponse.json({ success: true, message: 'Migrations completed' });
-  } catch (error) {
-    console.error('Migration error:', error);
-    return NextResponse.json({ error: 'Migration failed' }, { status: 500 });
-  }
-}`
-          }
-        ]
-      },
-      condition: '{{#if integration.features.apiRoutes}}'
+      condition: '{{#if integration.features.apiRoutes}}',
+      template: 'templates/migrate-route.ts.tpl'
     },
 
-    // PURE MODIFIER: Create Next.js API route for seeding
+    // Create Next.js API route for seeding
     {
-      type: 'ENHANCE_FILE',
+      type: 'CREATE_FILE',
       path: 'src/app/api/db/seed/route.ts',
-      modifier: 'ts-module-enhancer',
-      fallback: 'create',
-      params: {
-        importsToAdd: [
-          { name: 'NextRequest', from: 'next/server', type: 'import' },
-          { name: 'NextResponse', from: 'next/server', type: 'import' },
-          { name: 'seedDatabase', from: '@/lib/db', type: 'import' }
-        ],
-        statementsToAppend: [
-          {
-            type: 'raw',
-            content: `export async function POST(request: NextRequest) {
-  try {
-    await seedDatabase();
-    return NextResponse.json({ success: true, message: 'Database seeded' });
-  } catch (error) {
-    console.error('Seeding error:', error);
-    return NextResponse.json({ error: 'Seeding failed' }, { status: 500 });
-  }
-}`
-          }
-        ]
-      },
-      condition: '{{#if integration.features.apiRoutes}}'
+      condition: '{{#if integration.features.apiRoutes}}',
+      template: 'templates/seed-route.ts.tpl'
     }
   ]
 };
