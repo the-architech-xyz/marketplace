@@ -14,12 +14,12 @@ export const dockerBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: 'Dockerfile',
-      template: 'adapters/deployment/docker/templates/Dockerfile.tpl'
+      template: 'templates/Dockerfile.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '.dockerignore',
-      template: 'adapters/deployment/docker/templates/.dockerignore.tpl'
+      template: 'templates/.dockerignore.tpl'
     },
     {
       type: 'ADD_SCRIPT',

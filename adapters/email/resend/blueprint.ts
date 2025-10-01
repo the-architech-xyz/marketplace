@@ -28,32 +28,32 @@ export const resendBlueprint: Blueprint = {
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/templates/welcome-email.tsx',
-      template: 'templates/welcome-email.tsx.tpl'
+      template: 'templates/templates/welcome-email.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/templates/password-reset-email.tsx',
-      template: 'templates/password-reset-email.tsx.tpl'
+      template: 'templates/templates/password-reset-email.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/templates/email-verification-email.tsx',
-      template: 'templates/email-verification-email.tsx.tpl'
+      template: 'templates/templates/email-verification-email.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/templates/payment-confirmation-email.tsx',
-      template: 'templates/payment-confirmation-email.tsx.tpl'
+      template: 'templates/templates/payment-confirmation-email.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/templates/subscription-created-email.tsx',
-      template: 'templates/subscription-created-email.tsx.tpl'
+      template: 'templates/templates/subscription-created-email.tsx.tpl'
     },
     {
       type: 'CREATE_FILE',
       path: '{{paths.email_config}}/templates/subscription-cancelled-email.tsx',
-      template: 'templates/subscription-cancelled-email.tsx.tpl'
+      template: 'templates/templates/subscription-cancelled-email.tsx.tpl'
     },
     {
       type: 'ADD_ENV_VAR',
