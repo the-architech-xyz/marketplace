@@ -56,6 +56,75 @@ export class SmartTypeGenerator {
   }
 
   /**
+   * Generate types for specific changed files (incremental)
+   */
+  async generateTypesForFiles(changedFiles: string[]): Promise<void> {
+    console.log('🔍 Analyzing changed files...');
+    
+    const modulesToRegenerate = new Set<string>();
+    
+    // Analyze each changed file to determine which modules need regeneration
+    for (const filePath of changedFiles) {
+      const relativePath = path.relative(this.marketplacePath, filePath);
+      
+      // Check if it's an adapter file
+      const adapterMatch = relativePath.match(/^adapters\/([^\/]+)\/([^\/]+)\/.*\.json$/);
+      if (adapterMatch) {
+        const [, category, adapterId] = adapterMatch;
+        modulesToRegenerate.add(`adapter:${category}/${adapterId}`);
+        console.log(`📝 Will regenerate adapter: ${category}/${adapterId}`);
+        continue;
+      }
+      
+      // Check if it's an integration file
+      const integrationMatch = relativePath.match(/^integrations\/([^\/]+)\/.*\.json$/);
+      if (integrationMatch) {
+        const [, integrationId] = integrationMatch;
+        modulesToRegenerate.add(`integration:${integrationId}`);
+        console.log(`📝 Will regenerate integration: ${integrationId}`);
+        continue;
+      }
+      
+      // Check if it's the type generation script itself
+      if (relativePath.includes('scripts/generate-types.ts')) {
+        console.log('📝 Type generation script changed, regenerating all types...');
+        return this.generateAllTypes();
+      }
+    }
+    
+    if (modulesToRegenerate.size === 0) {
+      console.log('ℹ️ No modules need type regeneration');
+      return;
+    }
+    
+    console.log(`📊 Found ${modulesToRegenerate.size} modules to regenerate`);
+    
+    // Parse all blueprints to get the data we need
+    const analysisResults = this.parser.parseAllBlueprints(this.marketplacePath);
+    
+    // Generate types only for changed modules
+    for (const moduleKey of modulesToRegenerate) {
+      const [moduleType, moduleId] = moduleKey.split(':');
+      const moduleResult = analysisResults.find(r => 
+        r.moduleType === moduleType && r.moduleId === moduleId
+      );
+      
+      if (moduleResult) {
+        if (moduleType === 'adapter') {
+          await this.generateAdapterTypes(moduleResult);
+        } else if (moduleType === 'integration') {
+          await this.generateIntegrationTypes(moduleResult);
+        }
+      }
+    }
+    
+    // Always regenerate master index when any module changes
+    await TypeGeneratorHelpers.generateMasterIndex(analysisResults, this.outputPath);
+    
+    console.log('✅ Incremental type generation completed successfully!');
+  }
+
+  /**
    * Generate types for a single adapter
    */
   private async generateAdapterTypes(analysis: BlueprintAnalysisResult): Promise<void> {
