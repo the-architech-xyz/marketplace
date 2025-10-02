@@ -1,94 +1,36 @@
 {
   "id": "web3-shadcn-integration",
   "name": "Web3 Shadcn Integration",
-  "description": "Beautiful Web3 UI components using Shadcn/ui with modern viem integration for wallet management, transaction display, and blockchain interactions",
-  "category": "integration",
-  "version": "2.0.0",
-  "tech_stack": {
-    "framework": "agnostic",
-    "adapters": ["web3", "shadcn-ui"]
-  },
+  "description": "Web3 UI components with Shadcn/ui for modern blockchain applications",
+  "version": "1.0.0",
+  "category": "ui",
   "requirements": {
-    "modules": ["web3", "shadcn-ui"],
-    "dependencies": []
+    "capabilities": ["shadcn-ui", "web3-nextjs-integration"]
   },
-  "provides": {
-    "files": [
-      "src/components/web3/WalletCard.tsx",
-      "src/components/web3/TransactionCard.tsx",
-      "src/components/web3/NetworkSwitcher.tsx",
-      "src/components/web3/BalanceCard.tsx",
-      "src/components/web3/Web3Dashboard.tsx"
-    ],
-    "components": [
-      "WalletCard",
-      "TransactionCard",
-      "NetworkSwitcher",
-      "BalanceCard",
-      "Web3Dashboard"
-    ],
-    "pages": []
-  },
-  "sub_features": {
-    "viemIntegration": {
-      "name": "Viem Integration",
-      "description": "Modern Web3 library with type safety and performance",
-      "type": "boolean",
-      "default": true
-    },
-    "walletComponents": {
-      "name": "Wallet Components",
-      "description": "Beautiful wallet management UI components with Shadcn/ui",
-      "type": "boolean",
-      "default": true
-    },
-    "transactionComponents": {
-      "name": "Transaction Components",
-      "description": "Transaction display and management components",
-      "type": "boolean",
-      "default": true
-    },
-    "networkComponents": {
-      "name": "Network Components",
-      "description": "Network switching and display components",
-      "type": "boolean",
-      "default": true
-    },
-    "balanceComponents": {
-      "name": "Balance Components",
-      "description": "Balance display and management components",
-      "type": "boolean",
-      "default": true
-    },
-    "dashboardComponents": {
-      "name": "Dashboard Components",
-      "description": "Complete Web3 dashboard with all components",
-      "type": "boolean",
-      "default": true
-    },
-    "reactQuery": {
-      "name": "React Query",
-      "description": "Data fetching, caching, and synchronization for Web3 data",
-      "type": "boolean",
-      "default": true
-    },
-    "typeScript": {
-      "name": "TypeScript Support",
-      "description": "Full TypeScript support with strict type checking",
-      "type": "boolean",
-      "default": true
-    },
-    "accessibility": {
-      "name": "Accessibility",
-      "description": "WCAG AA compliant components with proper ARIA labels",
-      "type": "boolean",
-      "default": true
-    },
-    "theming": {
-      "name": "Theming",
-      "description": "Dark mode and custom theme support",
-      "type": "boolean",
-      "default": true
+  "capabilities": [
+    "web3-ui",
+    "wallet-connection",
+    "transaction-ui",
+    "balance-display",
+    "network-switching",
+    "shadcn-components"
+  ],
+  "limitations": "Requires web3-nextjs-integration for functionality",
+  "parameters": {
+    "components": {
+      "type": "array",
+      "default": [
+        "WalletCard",
+        "TransactionCard", 
+        "NetworkSwitcher",
+        "ConnectButton",
+        "DisconnectButton",
+        "BalanceDisplay",
+        "TransactionForm"
+      ],
+      "description": "Web3 UI components to install",
+      "required": false
     }
-  }
+  },
+  "constraints": {}
 }

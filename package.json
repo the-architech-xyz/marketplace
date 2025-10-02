@@ -55,16 +55,17 @@
     "access": "public"
   },
   "scripts": {
+    "validate": "tsx scripts/validate-blueprints.ts",
     "types:generate": "tsx scripts/generate-types-cli.ts",
     "compile": "tsc",
-    "build": "npm run types:generate && npm run compile",
+    "build": "npm run validate && npm run types:generate && npm run compile",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "prepare": "husky install",
-    "precommit": "npm run types:generate"
+    "precommit": "npm run validate && npm run types:generate"
   },
   "dependencies": {
-    "@thearchitech.xyz/types": "^1.9.0",
+    "@thearchitech.xyz/types": "^1.10.0",
     "@types/glob": "^9.0.0"
   },
   "devDependencies": {

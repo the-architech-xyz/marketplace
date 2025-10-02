@@ -144,6 +144,28 @@ const ecommerceAppGenome: Genome = {
           toastNotifications: true
         }
       }
+    },
+
+    // =============================================================================
+    // FEATURE MODULES - E-commerce specific features
+    // =============================================================================
+    {
+      id: 'features/payment-management/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
+    },
+    {
+      id: 'features/email-management/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
+    },
+    {
+      id: 'features/user-profile/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
     }
   ]
 };

@@ -69,7 +69,14 @@ export interface SentryNextjsIntegrationParams {
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const SentryNextjsIntegrationArtifacts: {
-  creates: [],
+  creates: [
+    'src/hooks/use-error-tracking.ts',
+    'src/hooks/use-performance-monitoring.ts',
+    'src/hooks/use-user-feedback.ts',
+    'src/hooks/use-sentry.ts',
+    'src/lib/sentry/api.ts',
+    'src/lib/sentry/types.ts'
+  ],
   enhances: [
     { path: 'next.config.js' },
     { path: 'src/lib/sentry/client.ts' },

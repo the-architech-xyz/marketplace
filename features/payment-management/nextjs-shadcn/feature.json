@@ -1,0 +1,49 @@
+{
+  "id": "payment-management-nextjs-shadcn",
+  "name": "Payment Management (Next.js + Shadcn)",
+  "description": "Complete payment management system with Next.js and Shadcn/ui",
+  "version": "1.0.0",
+  "category": "feature",
+  "blueprint": "blueprint.ts",
+  "prerequisites": {
+    "adapters": [
+      "nextjs",
+      "shadcn-ui",
+      "stripe"
+    ],
+    "integrators": [
+      "stripe-nextjs"
+    ]
+  },
+  "capabilities": [
+    "payment-forms",
+    "subscription-management",
+    "invoice-management",
+    "pricing-display",
+    "billing-management"
+  ],
+  "parameters": {
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false,
+      "options": ["default", "dark", "light"]
+    },
+    "features": {
+      "type": "object",
+      "default": {
+        "paymentForms": true,
+        "subscriptionCards": true,
+        "invoiceTables": true,
+        "pricingCards": true
+      },
+      "description": "Payment management features to enable",
+      "required": false
+    }
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

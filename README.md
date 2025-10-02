@@ -1,8 +1,25 @@
 # The Architech Marketplace
 
-> **Type-Safe Adapter and Integration Marketplace for The Architech CLI**
+> **Revolutionary 3-Tier Architecture for Modern Web Development**
 
-The Architech Marketplace is a comprehensive collection of adapters and integrations that provide type-safe, automated project generation capabilities. This package serves as the foundation for The Architech CLI's powerful code generation system.
+The Architech Marketplace is a comprehensive ecosystem of Adapters, Integrators, and Features that provides type-safe, automated project generation capabilities. Built on our revolutionary 3-tier architecture, it enables developers to build modern web applications with unprecedented speed and consistency.
+
+## 🏗️ The 3-Tier Architecture
+
+### Tier 1: Adapters (The Raw Materials)
+**Role**: Install ONE pure, self-contained technology
+**Philosophy**: Foundational pillars that know nothing about each other
+**Examples**: `nextjs`, `drizzle`, `shadcn-ui`, `better-auth`
+
+### Tier 2: Integrators (The Technical Bridges)
+**Role**: Connect exactly two Adapters to ensure technical compatibility
+**Philosophy**: Low-level technical circuits that make things work together
+**Examples**: `drizzle-nextjs-integration`, `better-auth-nextjs-integration`
+
+### Tier 3: Features (The Business Capabilities)
+**Role**: Provide high-level, end-user business capabilities
+**Philosophy**: Functional appliances that consume Adapter and Integrator capabilities
+**Examples**: `teams-dashboard`, `user-profile`, `payment-management`
 
 ## 🚀 Quick Start
 
@@ -654,6 +671,15 @@ const adapter = loadAdapter('ui', 'shadcn-ui');
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
+## 📚 Documentation
+
+- [Getting Started](./docs/GETTING_STARTED.md) - Quick start guide
+- [Architecture](./docs/ARCHITECTURE.md) - 3-tier architecture overview
+- [Adapter Guide](./docs/ADAPTER_GUIDE.md) - Creating adapters
+- [Integrator Guide](./docs/INTEGRATOR_GUIDE.md) - Creating integrators
+- [Feature Guide](./docs/FEATURE_GUIDE.md) - Creating features
+- [Contributing](./docs/CONTRIBUTING.md) - How to contribute
+
 ## 🆘 Support
 
 - **Documentation**: [docs.thearchitech.dev](https://docs.thearchitech.dev)
@@ -663,4 +689,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-**Built with ❤️ by The Architech Team**# Test
+**Built with ❤️ by The Architech Team**

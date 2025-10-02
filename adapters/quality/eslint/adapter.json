@@ -1,0 +1,81 @@
+{
+  "id": "eslint",
+  "name": "ESLint",
+  "description": "Golden Core code linting with ESLint for JavaScript and TypeScript",
+  "category": "quality",
+  "version": "8.0.0",
+  "blueprint": "blueprint.ts",
+  "requirements": {
+    "capabilities": ["javascript", "typescript"]
+  },
+  "capabilities": [
+    "code-linting",
+    "javascript",
+    "typescript",
+    "react",
+    "nextjs",
+    "nodejs",
+    "accessibility",
+    "imports",
+    "typescript-eslint",
+    "golden-core",
+    "code-quality",
+    "best-practices",
+    "error-detection"
+  ],
+  "limitations": "Requires Node.js and JavaScript/TypeScript project",
+  "parameters": {
+    "typescript": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable TypeScript support",
+      "required": false
+    },
+    "react": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable React support",
+      "required": false
+    },
+    "nextjs": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable Next.js specific rules",
+      "required": false
+    },
+    "nodejs": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable Node.js specific rules",
+      "required": false
+    },
+    "accessibility": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable accessibility rules",
+      "required": false
+    },
+    "imports": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable import/export rules",
+      "required": false
+    },
+    "strict": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable strict mode rules",
+      "required": false
+    },
+    "format": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable formatting rules",
+      "required": false
+    }
+  },
+  "constraints": {
+    "nodeVersion": ">=16.0.0",
+    "eslintVersion": ">=8.0.0"
+  }
+}

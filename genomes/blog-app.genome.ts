@@ -130,6 +130,22 @@ const blogAppGenome: Genome = {
           toastNotifications: true
         }
       }
+    },
+
+    // =============================================================================
+    // FEATURE MODULES - Blog-specific features
+    // =============================================================================
+    {
+      id: 'features/user-profile/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
+    },
+    {
+      id: 'features/email-management/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
     }
   ]
 };

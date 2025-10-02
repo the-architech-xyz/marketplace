@@ -31,6 +31,12 @@ export interface ResendNextjsIntegrationParams {
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const ResendNextjsIntegrationArtifacts: {
   creates: [
+    'src/hooks/use-send-email.ts',
+    'src/hooks/use-email-templates.ts',
+    'src/hooks/use-email-analytics.ts',
+    'src/hooks/use-email-webhooks.ts',
+    'src/lib/email/api.ts',
+    'src/lib/email/types.ts',
     'src/app/api/email/send/route.ts',
     'src/app/api/email/templates/route.ts',
     'src/app/api/email/analytics/route.ts',
@@ -39,9 +45,6 @@ export declare const ResendNextjsIntegrationArtifacts: {
     'src/lib/email/templates.ts',
     'src/lib/email/analytics.ts',
     'src/lib/email/validation.ts',
-    'src/components/email/EmailForm.tsx',
-    'src/components/email/EmailTemplate.tsx',
-    'src/components/email/EmailAnalytics.tsx',
     'src/middleware.ts'
   ],
   enhances: [],

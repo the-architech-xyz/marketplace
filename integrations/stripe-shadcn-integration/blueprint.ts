@@ -3,39 +3,50 @@ import { Blueprint } from '@thearchitech.xyz/types';
 const stripeShadcnIntegrationBlueprint: Blueprint = {
   id: 'stripe-shadcn-integration',
   name: 'Stripe Shadcn Integration',
-  description: 'Complete Stripe integration with Shadcn/ui components for payments, subscriptions, and billing management',
+  description: 'Technical bridge connecting Stripe and Shadcn/ui - configures payment utilities and styling',
   version: '2.0.0',
   actions: [
-    // Create Stripe payment form component
+    // Configure Tailwind for payment components
     {
-      type: 'CREATE_FILE',
-      path: 'src/components/payment/stripe-payment-form.tsx',
-      condition: '{{#if integration.features.paymentForms}}',
-      template: 'templates/stripe-payment-form.tsx.tpl'
+      type: 'ENHANCE_FILE',
+      path: 'tailwind.config.js',
+      modifier: 'js-export-wrapper',
+      params: {
+        wrapperFunction: 'withPaymentConfig',
+        wrapperImport: {
+          name: 'withPaymentConfig',
+          from: './lib/payment/tailwind-config',
+          isDefault: false
+        },
+        wrapperOptions: {
+          paymentStyles: true,
+          paymentUtilities: true
+        }
+      }
     },
-
-    // Create subscription card component
+    // Create payment-specific Tailwind configuration
     {
       type: 'CREATE_FILE',
-      path: 'src/components/payment/subscription-card.tsx',
-      condition: '{{#if integration.features.subscriptionCards}}',
-      template: 'templates/subscription-card.tsx.tpl'
+      path: 'src/lib/payment/tailwind-config.ts',
+      template: 'templates/tailwind-config.ts.tpl'
     },
-
-    // Create invoice table component
+    // Create payment utility functions
     {
       type: 'CREATE_FILE',
-      path: 'src/components/payment/invoice-table.tsx',
-      condition: '{{#if integration.features.invoiceTables}}',
-      template: 'templates/invoice-table.tsx.tpl'
+      path: 'src/lib/payment/utils.ts',
+      template: 'templates/payment-utils.ts.tpl'
     },
-
-    // Create pricing card component
+    // Create payment component utilities
     {
       type: 'CREATE_FILE',
-      path: 'src/components/payment/pricing-card.tsx',
-      condition: '{{#if integration.features.pricingCards}}',
-      template: 'templates/pricing-card.tsx.tpl'
+      path: 'src/lib/payment/component-utils.ts',
+      template: 'templates/component-utils.ts.tpl'
+    },
+    // Create payment styling constants
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/payment/styles.ts',
+      template: 'templates/payment-styles.ts.tpl'
     }
   ]
 };

@@ -3,9 +3,51 @@ import { Blueprint } from '@thearchitech.xyz/types';
 export const blueprint: Blueprint = {
   id: 'stripe-nextjs-integration',
   name: 'Stripe Next.js Integration',
-  description: 'Complete Next.js integration for Stripe',
-  version: '2.0.0',
+  description: 'Complete Next.js integration for Stripe with standardized TanStack Query hooks',
+  version: '3.0.0',
   actions: [
+    // Create standardized Stripe hooks (REVOLUTIONARY!)
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-stripe.ts',
+      template: 'templates/use-stripe.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-create-payment.ts',
+      template: 'templates/use-create-payment.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-payment-methods.ts',
+      template: 'templates/use-payment-methods.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-subscriptions.ts',
+      template: 'templates/use-subscriptions.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-invoices.ts',
+      template: 'templates/use-invoices.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-customers.ts',
+      template: 'templates/use-customers.ts.tpl'
+    },
+    // Create Stripe API service layer
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/stripe/api.ts',
+      template: 'templates/stripe-api.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/stripe/types.ts',
+      template: 'templates/stripe-types.ts.tpl'
+    },
     // PURE MODIFIER: Enhance the Stripe config with Next.js specific features
     {
       type: 'ENHANCE_FILE',

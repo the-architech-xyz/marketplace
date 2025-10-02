@@ -1,0 +1,85 @@
+{
+  "id": "tanstack-query",
+  "name": "TanStack Query",
+  "description": "Powerful data synchronization for React applications with caching, background updates, and optimistic updates",
+  "category": "data-fetching",
+  "version": "5.0.0",
+  "blueprint": "blueprint.ts",
+  "requirements": {
+    "capabilities": ["react-framework", "typescript"]
+  },
+  "capabilities": [
+    "data-fetching",
+    "caching",
+    "background-updates",
+    "optimistic-updates",
+    "infinite-queries",
+    "mutations",
+    "query-invalidation",
+    "offline-support",
+    "devtools",
+    "typescript",
+    "react-hooks",
+    "suspense",
+    "error-handling",
+    "retry-logic",
+    "stale-while-revalidate"
+  ],
+  "limitations": "Requires React 18+ and TypeScript for optimal experience",
+  "parameters": {
+    "devtools": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable TanStack Query DevTools",
+      "required": false
+    },
+    "defaultOptions": {
+      "type": "object",
+      "default": {
+        "queries": {
+          "staleTime": 5 * 60 * 1000,
+          "gcTime": 10 * 60 * 1000,
+          "retry": 3,
+          "refetchOnWindowFocus": false
+        },
+        "mutations": {
+          "retry": 1
+        }
+      },
+      "description": "Default query and mutation options",
+      "required": false
+    },
+    "suspense": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable Suspense mode for queries",
+      "required": false
+    }
+  },
+  "features": {
+    "core": {
+      "id": "core",
+      "name": "Core Query Features",
+      "description": "Basic query and mutation functionality"
+    },
+    "infinite": {
+      "id": "infinite",
+      "name": "Infinite Queries",
+      "description": "Infinite scrolling and pagination support"
+    },
+    "optimistic": {
+      "id": "optimistic",
+      "name": "Optimistic Updates",
+      "description": "Optimistic UI updates for better UX"
+    },
+    "offline": {
+      "id": "offline",
+      "name": "Offline Support",
+      "description": "Offline-first data synchronization"
+    }
+  },
+  "constraints": {
+    "reactVersion": ">=18.0.0",
+    "typescriptVersion": ">=4.5.0"
+  }
+}

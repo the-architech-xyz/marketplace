@@ -1,0 +1,49 @@
+{
+  "id": "email-management-nextjs-shadcn",
+  "name": "Email Management (Next.js + Shadcn)",
+  "description": "Complete email management system with Next.js and Shadcn/ui",
+  "version": "1.0.0",
+  "category": "feature",
+  "blueprint": "blueprint.ts",
+  "prerequisites": {
+    "adapters": [
+      "nextjs",
+      "shadcn-ui",
+      "resend"
+    ],
+    "integrators": [
+      "resend-nextjs"
+    ]
+  },
+  "capabilities": [
+    "email-composition",
+    "email-templates",
+    "email-analytics",
+    "email-management",
+    "email-preview"
+  ],
+  "parameters": {
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false,
+      "options": ["default", "dark", "light"]
+    },
+    "features": {
+      "type": "object",
+      "default": {
+        "templates": true,
+        "analytics": true,
+        "preview": true,
+        "composer": true
+      },
+      "description": "Email management features to enable",
+      "required": false
+    }
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

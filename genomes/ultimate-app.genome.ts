@@ -8,9 +8,9 @@
  * - TypeScript type safety for configuration validation
  */
 
-import { Recipe } from '@thearchitech.xyz/types';
+import { Genome } from '@thearchitech.xyz/marketplace';
 
-const genome: Recipe = {
+const genome: Genome = {
   version: '1.0.0',
   project: {
     name: 'ultimate-app',
@@ -580,6 +580,46 @@ const genome: Recipe = {
         'api-routes': true,
         'session-management': true,
         csrfProtection: true
+      }
+    },
+
+    // =============================================================================
+    // FEATURE MODULES - Complete business capabilities
+    // =============================================================================
+    {
+      id: 'features/teams-dashboard/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
+    },
+    {
+      id: 'features/user-profile/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
+    },
+    {
+      id: 'features/project-kanban/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
+    },
+    {
+      id: 'features/email-management/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
+    },
+    {
+      id: 'features/payment-management/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
+    },
+    {
+      id: 'features/web3-dashboard/nextjs-shadcn',
+      parameters: {
+        enabled: true
       }
     }
   ]

@@ -28,6 +28,14 @@ export interface StripeNextjsIntegrationParams {
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const StripeNextjsIntegrationArtifacts: {
   creates: [
+    'src/hooks/use-stripe.ts',
+    'src/hooks/use-create-payment.ts',
+    'src/hooks/use-payment-methods.ts',
+    'src/hooks/use-subscriptions.ts',
+    'src/hooks/use-invoices.ts',
+    'src/hooks/use-customers.ts',
+    'src/lib/stripe/api.ts',
+    'src/lib/stripe/types.ts',
     'src/app/api/stripe/webhooks/route.ts',
     'src/app/api/stripe/create-payment-intent/route.ts',
     'src/app/api/stripe/create-subscription/route.ts',

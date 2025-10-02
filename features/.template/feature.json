@@ -1,0 +1,43 @@
+{
+  "id": "{feature-name}-{stack}",
+  "name": "{Feature Name} ({Stack})",
+  "description": "{Feature description} with {stack} implementation",
+  "version": "1.0.0",
+  "category": "feature",
+  "blueprint": "blueprint.ts",
+  "prerequisites": {
+    "adapters": [
+      "nextjs",
+      "shadcn-ui",
+      "drizzle",
+      "better-auth"
+    ],
+    "integrators": [
+      "drizzle-nextjs",
+      "better-auth-nextjs"
+    ]
+  },
+  "capabilities": [
+    "feature-specific-capability-1",
+    "feature-specific-capability-2"
+  ],
+  "parameters": {
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false,
+      "options": ["default", "dark", "light"]
+    },
+    "features": {
+      "type": "object",
+      "default": {},
+      "description": "Feature-specific configuration",
+      "required": false
+    }
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

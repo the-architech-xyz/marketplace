@@ -40,48 +40,33 @@ export interface VitestNextjsIntegrationParams {
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const VitestNextjsIntegrationArtifacts: {
   creates: [
-    'vitest.config.ts',
+    'src/hooks/use-test.ts',
+    'src/hooks/use-test-suite.ts',
+    'src/hooks/use-test-runner.ts',
+    'src/hooks/use-test-coverage.ts',
+    'src/hooks/use-test-mocks.ts',
+    'src/lib/testing/api.ts',
+    'src/lib/testing/types.ts',
+    'vitest.nextjs.config.ts',
     'vitest.config.unit.ts',
     'vitest.config.integration.ts',
     'vitest.config.e2e.ts',
-    'vitest.setup.ts',
-    'vitest.teardown.ts',
-    'test-utils/test-utils.tsx',
+    'test-utils/nextjs-test-utils.ts',
     'test-utils/mock-next-router.ts',
     'test-utils/mock-next-auth.ts',
-    'test-utils/mock-fetch.ts',
-    'test-utils/test-db.ts',
-    'test-utils/test-server.ts',
-    'test-utils/test-client.ts',
-    'test-utils/test-helpers.ts',
-    'test-utils/test-fixtures.ts',
-    'test-utils/test-mocks.ts',
-    'test-utils/test-setup.ts',
-    'test-utils/test-teardown.ts',
-    'test-utils/test-constants.ts',
-    'test-utils/test-types.ts',
-    'tests/unit/components/Button.test.tsx',
-    'tests/unit/components/Input.test.tsx',
-    'tests/unit/hooks/useAuth.test.ts',
-    'tests/unit/utils/formatDate.test.ts',
-    'tests/unit/lib/api.test.ts',
-    'tests/integration/pages/home.test.tsx',
-    'tests/integration/pages/about.test.tsx',
-    'tests/integration/api/auth.test.ts',
-    'tests/integration/api/users.test.ts',
-    'tests/e2e/auth.spec.ts',
-    'tests/e2e/navigation.spec.ts',
-    'tests/e2e/forms.spec.ts',
-    'tests/e2e/api.spec.ts',
-    'tests/fixtures/users.json',
-    'tests/fixtures/posts.json',
-    'tests/fixtures/comments.json'
+    'test-utils/mock-next-fetch.ts',
+    'test-utils/nextjs-test-server.ts',
+    'test-utils/nextjs-test-client.ts',
+    'test-utils/nextjs-test-helpers.ts',
+    'test-utils/nextjs-test-setup.ts',
+    'test-utils/nextjs-test-teardown.ts'
   ],
   enhances: [
+    { path: 'vitest.config.ts' },
     { path: 'package.json' }
   ],
   installs: [
-    { packages: ['vitest', '@testing-library/react', '@testing-library/jest-dom', '@testing-library/user-event', 'jsdom', '@vitejs/plugin-react', 'happy-dom', 'msw'], isDev: true }
+    { packages: ['@testing-library/next', 'next-test-utils', 'msw', 'happy-dom'], isDev: true }
   ],
   envVars: []
 };

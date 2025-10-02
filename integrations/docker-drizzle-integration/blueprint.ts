@@ -6,23 +6,21 @@ const dockerDrizzleIntegrationBlueprint: Blueprint = {
   description: 'Complete Docker containerization for Drizzle ORM with database services, migrations, and production-ready configuration',
   version: '1.0.0',
   actions: [
-    // Create Docker Compose Files
+    // Create Drizzle-specific Docker Compose Files (enhance existing docker-compose.yml)
     {
-      type: 'CREATE_FILE',
-      path: 'docker-compose.database.yml',
-      template: 'templates/docker-compose.database.yml.tpl'
+      type: 'ENHANCE_FILE',
+      path: 'docker-compose.yml',
+      modifier: 'yaml-merger',
+      params: {
+        mergePath: 'templates/docker-compose.drizzle.yml.tpl'
+      }
     },
     {
       type: 'CREATE_FILE',
-      path: 'docker-compose.migration.yml',
-      template: 'templates/docker-compose.migration.yml.tpl'
+      path: 'docker-compose.drizzle.yml',
+      template: 'templates/docker-compose.drizzle.yml.tpl'
     },
-    {
-      type: 'CREATE_FILE',
-      path: 'docker-compose.backup.yml',
-      template: 'templates/docker-compose.backup.yml.tpl'
-    },
-    // Create Database Dockerfiles
+    // Create Database-specific Dockerfiles
     {
       type: 'CREATE_FILE',
       path: 'database/Dockerfile.postgres',
@@ -33,115 +31,115 @@ const dockerDrizzleIntegrationBlueprint: Blueprint = {
       path: 'database/Dockerfile.migration',
       template: 'templates/Dockerfile.migration.tpl'
     },
-    // Create Database Scripts
+    // Create Drizzle-specific Database Scripts
     {
       type: 'CREATE_FILE',
-      path: 'database/init.sql',
-      template: 'templates/init.sql.tpl'
+      path: 'database/drizzle-init.sql',
+      template: 'templates/drizzle-init.sql.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'database/seed.sql',
-      template: 'templates/seed.sql.tpl'
+      path: 'database/drizzle-seed.sql',
+      template: 'templates/drizzle-seed.sql.tpl'
     },
-    // Create Migration Files
+    // Create Drizzle Migration Files
     {
       type: 'CREATE_FILE',
-      path: 'database/migrations/001_initial.sql',
+      path: 'database/drizzle-migrations/001_initial.sql',
       template: 'templates/001_initial.sql.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'database/migrations/002_add_indexes.sql',
+      path: 'database/drizzle-migrations/002_add_indexes.sql',
       template: 'templates/002_add_indexes.sql.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'database/migrations/003_add_constraints.sql',
+      path: 'database/drizzle-migrations/003_add_constraints.sql',
       template: 'templates/003_add_constraints.sql.tpl'
     },
-    // Create Database Management Scripts
+    // Create Drizzle-specific Database Management Scripts
     {
       type: 'CREATE_FILE',
-      path: 'scripts/db-setup.sh',
-      template: 'templates/db-setup.sh.tpl'
+      path: 'scripts/drizzle-setup.sh',
+      template: 'templates/drizzle-setup.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'scripts/db-migrate.sh',
-      template: 'templates/db-migrate.sh.tpl'
+      path: 'scripts/drizzle-migrate.sh',
+      template: 'templates/drizzle-migrate.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'scripts/db-seed.sh', 
-      template: 'templates/db-seed.sh.tpl'
+      path: 'scripts/drizzle-seed.sh', 
+      template: 'templates/drizzle-seed.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'scripts/db-backup.sh',
-      template: 'templates/db-backup.sh.tpl'
+      path: 'scripts/drizzle-backup.sh',
+      template: 'templates/drizzle-backup.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'scripts/db-restore.sh',
-      template: 'templates/db-restore.sh.tpl'
+      path: 'scripts/drizzle-restore.sh',
+      template: 'templates/drizzle-restore.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'scripts/db-reset.sh',
-      template: 'templates/db-reset.sh.tpl'
+      path: 'scripts/drizzle-reset.sh',
+      template: 'templates/drizzle-reset.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'scripts/db-health.sh',
-      template: 'templates/db-health.sh.tpl'
+      path: 'scripts/drizzle-health.sh',
+      template: 'templates/drizzle-health.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'scripts/db-shell.sh',
-      template: 'templates/db-shell.sh.tpl'
+      path: 'scripts/drizzle-shell.sh',
+      template: 'templates/drizzle-shell.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'scripts/db-logs.sh',
-      template: 'templates/db-logs.sh.tpl'
+      path: 'scripts/drizzle-logs.sh',
+      template: 'templates/drizzle-logs.sh.tpl'
     },
-    // Create Monitoring Configuration
+    // Create Drizzle-specific Monitoring Configuration
     {
       type: 'CREATE_FILE',
-      path: 'monitoring/database/prometheus.yml',
-      template: 'templates/prometheus.yml.tpl'
-    },
-    {
-      type: 'CREATE_FILE',
-      path: 'monitoring/database/grafana/dashboards/postgres.json',
-      template: 'templates/postgres.json.tpl'
+      path: 'monitoring/drizzle/prometheus.yml',
+      template: 'templates/drizzle-prometheus.yml.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'monitoring/database/grafana/provisioning/dashboards/dashboard.yml',
-      template: 'templates/dashboard.yml.tpl'
+      path: 'monitoring/drizzle/grafana/dashboards/drizzle.json',
+      template: 'templates/drizzle-dashboard.json.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'monitoring/database/grafana/provisioning/datasources/postgres.yml',
-      template: 'templates/postgres.yml.tpl'
-    },
-    // Create Backup Scripts
-    {
-      type: 'CREATE_FILE',
-      path: 'backup/backup.sh',
-      template: 'templates/backup.sh.tpl'
+      path: 'monitoring/drizzle/grafana/provisioning/dashboards/dashboard.yml',
+      template: 'templates/drizzle-dashboard.yml.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'backup/restore.sh',
-      template: 'templates/restore.sh.tpl'
+      path: 'monitoring/drizzle/grafana/provisioning/datasources/drizzle.yml',
+      template: 'templates/drizzle-datasource.yml.tpl'
+    },
+    // Create Drizzle-specific Backup Scripts
+    {
+      type: 'CREATE_FILE',
+      path: 'backup/drizzle-backup.sh',
+      template: 'templates/drizzle-backup.sh.tpl'
     },
     {
       type: 'CREATE_FILE',
-      path: 'backup/cleanup.sh',
-      template: 'templates/cleanup.sh.tpl'
+      path: 'backup/drizzle-restore.sh',
+      template: 'templates/drizzle-restore.sh.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'backup/drizzle-cleanup.sh',
+      template: 'templates/drizzle-cleanup.sh.tpl'
     },
     // Add Database Scripts to package.json
     {
@@ -150,20 +148,20 @@ const dockerDrizzleIntegrationBlueprint: Blueprint = {
       modifier: 'package-json-merger',
       params: {
         scriptsToAdd: {
-          'db:setup': 'bash scripts/db-setup.sh',
-          'db:migrate': 'bash scripts/db-migrate.sh',
-          'db:seed': 'bash scripts/db-seed.sh',
-          'db:backup': 'bash scripts/db-backup.sh',
-          'db:restore': 'bash scripts/db-restore.sh',
-          'db:reset': 'bash scripts/db-reset.sh',
-          'db:health': 'bash scripts/db-health.sh',
-          'db:shell': 'bash scripts/db-shell.sh',
-          'db:logs': 'bash scripts/db-logs.sh',
-          'docker:db:up': 'docker-compose -f docker-compose.database.yml up -d',
-          'docker:db:down': 'docker-compose -f docker-compose.database.yml down',
-          'docker:db:logs': 'docker-compose -f docker-compose.database.yml logs -f',
-          'docker:migrate:up': 'docker-compose -f docker-compose.migration.yml up',
-          'docker:backup:up': 'docker-compose -f docker-compose.backup.yml up'
+          'drizzle:setup': 'bash scripts/drizzle-setup.sh',
+          'drizzle:migrate': 'bash scripts/drizzle-migrate.sh',
+          'drizzle:seed': 'bash scripts/drizzle-seed.sh',
+          'drizzle:backup': 'bash scripts/drizzle-backup.sh',
+          'drizzle:restore': 'bash scripts/drizzle-restore.sh',
+          'drizzle:reset': 'bash scripts/drizzle-reset.sh',
+          'drizzle:health': 'bash scripts/drizzle-health.sh',
+          'drizzle:shell': 'bash scripts/drizzle-shell.sh',
+          'drizzle:logs': 'bash scripts/drizzle-logs.sh',
+          'docker:drizzle:up': 'docker-compose -f docker-compose.drizzle.yml up -d',
+          'docker:drizzle:down': 'docker-compose -f docker-compose.drizzle.yml down',
+          'docker:drizzle:logs': 'docker-compose -f docker-compose.drizzle.yml logs -f',
+          'docker:drizzle:migrate': 'docker-compose -f docker-compose.drizzle.yml run drizzle-migrate',
+          'docker:drizzle:backup': 'docker-compose -f docker-compose.drizzle.yml run drizzle-backup'
         }
       }
     },

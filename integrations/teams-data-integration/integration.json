@@ -1,0 +1,34 @@
+{
+  "id": "teams-data-integration",
+  "name": "Teams Data Integration",
+  "description": "Technical bridge connecting auth and database for teams data - provides headless teams hooks",
+  "version": "1.0.0",
+  "category": "integrator",
+  "requirements": {
+    "adapters": ["drizzle", "better-auth"]
+  },
+  "capabilities": [
+    "teams-data-hooks",
+    "teams-api-routes",
+    "teams-database-schema",
+    "teams-auth-integration"
+  ],
+  "limitations": "Provides only data layer - requires Feature for UI",
+  "parameters": {
+    "features": {
+      "type": "array",
+      "default": [
+        "teams",
+        "members",
+        "permissions",
+        "invitations"
+      ],
+      "description": "Teams data features to enable",
+      "required": false
+    }
+  },
+  "constraints": {
+    "requiresAuth": true,
+    "requiresDatabase": true
+  }
+}

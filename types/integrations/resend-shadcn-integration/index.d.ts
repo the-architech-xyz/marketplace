@@ -67,16 +67,15 @@ export interface ResendShadcnIntegrationParams {
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const ResendShadcnIntegrationArtifacts: {
   creates: [
-    'src/components/email/EmailComposer.tsx',
-    'src/components/email/EmailTemplateEditor.tsx',
-    'src/components/email/EmailAnalytics.tsx',
-    'src/components/email/EmailList.tsx',
-    'src/components/email/EmailPreview.tsx'
+    'src/lib/email/tailwind-config.ts',
+    'src/lib/email/utils.ts',
+    'src/lib/email/component-utils.ts',
+    'src/lib/email/styles.ts'
   ],
-  enhances: [],
-  installs: [
-    { packages: ['resend', 'react-hook-form', '@hookform/resolvers', 'zod', 'monaco-editor', 'html-to-text'], isDev: false }
+  enhances: [
+    { path: 'tailwind.config.js' }
   ],
+  installs: [],
   envVars: []
 };
 

@@ -3,119 +3,111 @@ import { Blueprint } from '@thearchitech.xyz/types';
 const drizzleNextjsIntegrationBlueprint: Blueprint = {
   id: 'drizzle-nextjs-integration',
   name: 'Drizzle Next.js Integration',
-  description: 'Complete Drizzle ORM integration for Next.js applications',
-  version: '2.0.0',
+  description: 'Complete Drizzle ORM integration for Next.js with standardized TanStack Query hooks',
+  version: '3.0.0',
   actions: [
-    // PURE MODIFIER: Enhance the database index with Next.js specific utilities
+    // Create standardized data fetching hooks
     {
-      type: 'ENHANCE_FILE',
-      path: 'src/lib/db/index.ts',
-      modifier: 'ts-module-enhancer',
-      params: {
-        importsToAdd: [
-          { name: 'NextRequest', from: 'next/server', type: 'import' },
-          { name: 'NextResponse', from: 'next/server', type: 'import' }
-        ],
-        statementsToAppend: [
-          {
-            type: 'raw',
-            content: `// Next.js specific database utilities
-export const runMigrations = async () => {
-  try {
-    // Next.js migration logic
-    console.log('Running database migrations...');
-    // Add your migration logic here
-    return { success: true, message: 'Migrations completed' };
-  } catch (error) {
-    console.error('Migration error:', error);
-    throw error;
-  }
-};
-
-export const seedDatabase = async () => {
-  try {
-    // Next.js seeding logic
-    console.log('Seeding database...');
-    // Add your seeding logic here
-    return { success: true, message: 'Database seeded' };
-  } catch (error) {
-    console.error('Seeding error:', error);
-    throw error;
-  }
-};
-
-// Next.js specific query utilities
-export const createQuery = async (query: string) => {
-  // Next.js query logic
-  return { query, result: 'Query executed' };
-};
-
-export const findById = async (id: string) => {
-  // Next.js find logic
-  return { id, found: true };
-};
-
-export const findAll = async () => {
-  // Next.js find all logic
-  return { records: [], count: 0 };
-};
-
-export const createRecord = async (data: any) => {
-  // Next.js create logic
-  return { id: 'new-id', ...data };
-};
-
-export const updateRecord = async (id: string, data: any) => {
-  // Next.js update logic
-  return { id, ...data, updated: true };
-};
-
-export const deleteRecord = async (id: string) => {
-  // Next.js delete logic
-  return { id, deleted: true };
-};
-
-// Next.js specific transaction utilities
-export const withTransaction = async (callback: Function) => {
-  // Next.js transaction logic
-  return callback();
-};
-
-export const runInTransaction = async (callback: Function) => {
-  // Next.js transaction logic
-  return callback();
-};
-
-// Next.js specific validation utilities
-export const validateSchema = async (schema: any, data: any) => {
-  // Next.js validation logic
-  return { valid: true, errors: [] };
-};
-
-export const validateRecord = async (record: any) => {
-  // Next.js validation logic
-  return { valid: true, errors: [] };
-};`
-          }
-        ]
-      },
-      condition: '{{#if integration.features.apiRoutes}}'
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-products.ts',
+      template: 'templates/use-products.ts.tpl'
     },
-
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-users.ts',
+      template: 'templates/use-users.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-posts.ts',
+      template: 'templates/use-posts.ts.tpl'
+    },
+    // Create generic data fetching hooks
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-query.ts',
+      template: 'templates/use-query.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-mutation.ts',
+      template: 'templates/use-mutation.ts.tpl'
+    },
+    // Create API service layer
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/api/products.ts',
+      template: 'templates/api-products.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/api/users.ts',
+      template: 'templates/api-users.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/api/posts.ts',
+      template: 'templates/api-posts.ts.tpl'
+    },
+    // Create Next.js API routes
+    {
+      type: 'CREATE_FILE',
+      path: 'src/app/api/products/route.ts',
+      template: 'templates/api-products-route.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/app/api/products/[id]/route.ts',
+      template: 'templates/api-product-route.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/app/api/users/route.ts',
+      template: 'templates/api-users-route.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/app/api/users/[id]/route.ts',
+      template: 'templates/api-user-route.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/app/api/posts/route.ts',
+      template: 'templates/api-posts-route.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/app/api/posts/[id]/route.ts',
+      template: 'templates/api-post-route.ts.tpl'
+    },
+    // Create database utilities
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/db/queries.ts',
+      template: 'templates/db-queries.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/db/mutations.ts',
+      template: 'templates/db-mutations.ts.tpl'
+    },
     // Create Next.js API route for migrations
     {
       type: 'CREATE_FILE',
       path: 'src/app/api/db/migrate/route.ts',
-      condition: '{{#if integration.features.apiRoutes}}',
       template: 'templates/migrate-route.ts.tpl'
     },
-
     // Create Next.js API route for seeding
     {
       type: 'CREATE_FILE',
       path: 'src/app/api/db/seed/route.ts',
-      condition: '{{#if integration.features.apiRoutes}}',
       template: 'templates/seed-route.ts.tpl'
+    },
+    // Create types
+    {
+      type: 'CREATE_FILE',
+      path: 'src/types/api.ts',
+      template: 'templates/api-types.ts.tpl'
     }
   ]
 };

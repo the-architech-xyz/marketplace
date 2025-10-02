@@ -6,17 +6,29 @@ export const blueprint: Blueprint = {
   description: 'Complete Next.js integration for Docker',
   version: '1.0.0',
   actions: [
-    // Create Dockerfile - only if it doesn't exist
+    // Enhance existing Dockerfile for Next.js
     {
-      type: 'CREATE_FILE',
+      type: 'ENHANCE_FILE',
       path: 'Dockerfile',
-      template: 'templates/Dockerfile.tpl'
+      modifier: 'dockerfile-merger',
+      params: {
+        mergePath: 'templates/nextjs-dockerfile.tpl'
+      }
     },
-    // Create .dockerignore
+    // Enhance existing .dockerignore for Next.js
+    {
+      type: 'ENHANCE_FILE',
+      path: '.dockerignore',
+      modifier: 'dockerignore-merger',
+      params: {
+        mergePath: 'templates/nextjs-dockerignore.tpl'
+      }
+    },
+    // Create Next.js-specific Docker Compose
     {
       type: 'CREATE_FILE',
-      path: '.dockerignore',
-      template: 'templates/.dockerignore.tpl'
+      path: 'docker-compose.nextjs.yml',
+      template: 'templates/docker-compose.nextjs.yml.tpl'
     }
   ]
 };

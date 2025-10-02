@@ -1,83 +1,125 @@
-import { create } from 'zustand';
+/**
+ * App Store
+ * 
+ * Main application store with global state management
+ */
 
+import { createStore } from '@/lib/stores/create-store';
+import type { StoreConfig } from '@/lib/stores/store-types';
+
+// App store state interface
 export interface AppState {
-  // User state
-  user: {
-    id: string | null;
-    name: string | null;
-    email: string | null;
-    isAuthenticated: boolean;
-  };
+  // App metadata
+  version: string;
+  environment: 'development' | 'production' | 'test';
   
-  // UI state
-  ui: {
-    theme: 'light' | 'dark';
-    sidebarOpen: boolean;
-    loading: boolean;
-  };
+  // App status
+  isInitialized: boolean;
+  isLoading: boolean;
+  error: string | null;
   
-  // Actions
-  setUser: (user: Partial<AppState['user']>) => void;
-  setTheme: (theme: 'light' | 'dark') => void;
-  setSidebarOpen: (open: boolean) => void;
+  // App settings
+  theme: 'light' | 'dark' | 'system';
+  language: string;
+  timezone: string;
+  
+  // App actions
+  initialize: () => void;
   setLoading: (loading: boolean) => void;
+  setError: (error: string | null) => void;
+  setTheme: (theme: 'light' | 'dark' | 'system') => void;
+  setLanguage: (language: string) => void;
+  setTimezone: (timezone: string) => void;
   reset: () => void;
 }
 
-const initialState = {
-  user: {
-    id: null,
-    name: null,
-    email: null,
-    isAuthenticated: false,
+// App store creator
+const createAppStore = (): AppState => ({
+  // Initial state
+  version: '1.0.0',
+  environment: process.env.NODE_ENV as 'development' | 'production' | 'test',
+  isInitialized: false,
+  isLoading: false,
+  error: null,
+  theme: 'system',
+  language: 'en',
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  
+  // Actions
+  initialize: () => {
+    // Implementation will be added by Zustand
   },
-  ui: {
-    theme: 'light' as const,
-    sidebarOpen: false,
-    loading: false,
+  
+  setLoading: (loading: boolean) => {
+    // Implementation will be added by Zustand
+  },
+  
+  setError: (error: string | null) => {
+    // Implementation will be added by Zustand
+  },
+  
+  setTheme: (theme: 'light' | 'dark' | 'system') => {
+    // Implementation will be added by Zustand
+  },
+  
+  setLanguage: (language: string) => {
+    // Implementation will be added by Zustand
+  },
+  
+  setTimezone: (timezone: string) => {
+    // Implementation will be added by Zustand
+  },
+  
+  reset: () => {
+    // Implementation will be added by Zustand
+  },
+});
+
+// Store configuration
+const storeConfig: StoreConfig = {
+  name: 'app-store',
+  middleware: {
+    persist: {
+      name: 'app-store',
+      partialize: (state) => ({
+        theme: state.theme,
+        language: state.language,
+        timezone: state.timezone,
+      }),
+    },
+    devtools: {
+      name: 'App Store',
+      enabled: process.env.NODE_ENV === 'development',
+    },
+    immer: {{#if module.parameters.immer}}true{{else}}false{{/if}},
+    subscribeWithSelector: true,
   },
 };
 
-export const useAppStore = create<AppState>((set) => ({
-        ...initialState,
-        
-        setUser: (user) =>
-    set((state) => ({
-              user: { ...state.user, ...user },
-    })),
-        
-        setTheme: (theme) =>
-    set((state) => ({
-              ui: { ...state.ui, theme },
-    })),
-        
-        setSidebarOpen: (sidebarOpen) =>
-    set((state) => ({
-              ui: { ...state.ui, sidebarOpen },
-    })),
-        
-        setLoading: (loading) =>
-    set((state) => ({
-              ui: { ...state.ui, loading },
-    })),
-  
-  reset: () => set(initialState),
-}));
+// Create and export the store
+export const useAppStore = createStore(createAppStore, storeConfig);
 
 // Selectors for better performance
-export const useUser = () => useAppStore((state) => state.user);
-export const useUI = () => useAppStore((state) => state.ui);
-export const useTheme = () => useAppStore((state) => state.ui.theme);
-export const useSidebar = () => useAppStore((state) => state.ui.sidebarOpen);
-export const useLoading = () => useAppStore((state) => state.ui.loading);
+export const appSelectors = {
+  version: (state: AppState) => state.version,
+  environment: (state: AppState) => state.environment,
+  isInitialized: (state: AppState) => state.isInitialized,
+  isLoading: (state: AppState) => state.isLoading,
+  error: (state: AppState) => state.error,
+  theme: (state: AppState) => state.theme,
+  language: (state: AppState) => state.language,
+  timezone: (state: AppState) => state.timezone,
+};
 
-// Actions
-export const useAppActions = () => useAppStore((state) => ({
-  setUser: state.setUser,
-  setTheme: state.setTheme,
-  setSidebarOpen: state.setSidebarOpen,
-  setLoading: state.setLoading,
-  reset: state.reset,
-}));
+// Actions for better organization
+export const appActions = {
+  initialize: () => useAppStore.getState().initialize(),
+  setLoading: (loading: boolean) => useAppStore.getState().setLoading(loading),
+  setError: (error: string | null) => useAppStore.getState().setError(error),
+  setTheme: (theme: 'light' | 'dark' | 'system') => useAppStore.getState().setTheme(theme),
+  setLanguage: (language: string) => useAppStore.getState().setLanguage(language),
+  setTimezone: (timezone: string) => useAppStore.getState().setTimezone(timezone),
+  reset: () => useAppStore.getState().reset(),
+};
 
-
+export default useAppStore;

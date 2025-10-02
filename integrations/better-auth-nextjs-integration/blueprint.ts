@@ -3,8 +3,8 @@ import { Blueprint } from '@thearchitech.xyz/types';
 export const blueprint: Blueprint = {
   id: 'better-auth-nextjs-integration',
   name: 'Better Auth Next.js Integration',
-  description: 'Complete Next.js integration for Better Auth',
-  version: '2.0.0',
+  description: 'Complete Next.js integration for Better Auth with standardized auth hooks',
+  version: '3.0.0',
   actions: [
     // Add Next.js specific environment variables
     {
@@ -18,6 +18,57 @@ export const blueprint: Blueprint = {
       key: 'BETTER_AUTH_URL',
       value: 'http://localhost:3000',
       description: 'Better Auth base URL'
+    },
+    
+    // Create standardized auth hooks (REVOLUTIONARY!)
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-auth.ts',
+      template: 'templates/use-auth.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-sign-in.ts',
+      template: 'templates/use-sign-in.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-sign-out.ts',
+      template: 'templates/use-sign-out.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-sign-up.ts',
+      template: 'templates/use-sign-up.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-user.ts',
+      template: 'templates/use-user.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-session.ts',
+      template: 'templates/use-session.ts.tpl'
+    },
+    
+    // Create auth API service layer
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/auth/api.ts',
+      template: 'templates/auth-api.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/auth/types.ts',
+      template: 'templates/auth-types.ts.tpl'
+    },
+    
+    // Create auth context and provider
+    {
+      type: 'CREATE_FILE',
+      path: 'src/providers/AuthProvider.tsx',
+      template: 'templates/AuthProvider.tsx.tpl'
     },
     
     // PURE MODIFIER: Enhance the auth config with Next.js specific features

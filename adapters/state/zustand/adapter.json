@@ -1,12 +1,12 @@
 {
   "id": "zustand",
   "name": "Zustand State Management",
-  "description": "Simple, modern state management with Zustand",
+  "description": "Golden Core state management with Zustand - powerful, performant, and minimal boilerplate",
   "category": "state",
-  "version": "1.0.0",
+  "version": "4.4.0",
   "blueprint": "blueprint.ts",
   "requirements": {
-    "capabilities": ["react-framework"]
+    "capabilities": ["react-framework", "typescript"]
   },
   "capabilities": [
     "state-management",
@@ -15,9 +15,13 @@
     "middleware",
     "subscriptions",
     "typescript",
-    "lightweight"
+    "lightweight",
+    "immer-integration",
+    "type-safety",
+    "performance",
+    "golden-core"
   ],
-  "limitations": "Requires React framework for state management",
+  "limitations": "Requires React 18+ and TypeScript for optimal experience",
   "parameters": {
     "persistence": {
       "type": "boolean",
@@ -31,17 +35,25 @@
       "description": "Enable Redux DevTools",
       "required": false
     },
+    "immer": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Immer for immutable updates",
+      "required": false
+    },
     "middleware": {
       "type": "array",
       "default": [
-        "persist"
+        "persist",
+        "devtools"
       ],
       "description": "Middleware to use",
       "required": false,
       "options": [
         "persist",
         "devtools",
-        "subscribeWithSelector"
+        "subscribeWithSelector",
+        "immer"
       ]
     }
   },

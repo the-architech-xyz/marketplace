@@ -147,6 +147,34 @@ const saasAppGenome: Genome = {
           toastNotifications: true
         }
       }
+    },
+
+    // =============================================================================
+    // FEATURE MODULES - SaaS specific features
+    // =============================================================================
+    {
+      id: 'features/teams-dashboard/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
+    },
+    {
+      id: 'features/user-profile/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
+    },
+    {
+      id: 'features/payment-management/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
+    },
+    {
+      id: 'features/email-management/nextjs-shadcn',
+      parameters: {
+        enabled: true
+      }
     }
   ]
 };

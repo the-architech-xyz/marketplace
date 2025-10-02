@@ -3,46 +3,50 @@ import { Blueprint } from '@thearchitech.xyz/types';
 const resendShadcnIntegrationBlueprint: Blueprint = {
   id: 'resend-shadcn-integration',
   name: 'Resend Shadcn Integration',
-  description: 'Beautiful email UI components using Shadcn/ui with Resend for email management, templates, and analytics',
-  version: '1.0.0',
+  description: 'Technical bridge connecting Resend and Shadcn/ui - configures Tailwind and provides email utilities',
+  version: '2.0.0',
   actions: [
-    // Create Email UI Components
+    // Configure Tailwind for email components
+    {
+      type: 'ENHANCE_FILE',
+      path: 'tailwind.config.js',
+      modifier: 'js-export-wrapper',
+      params: {
+        wrapperFunction: 'withEmailConfig',
+        wrapperImport: {
+          name: 'withEmailConfig',
+          from: './lib/email/tailwind-config',
+          isDefault: false
+        },
+        wrapperOptions: {
+          emailStyles: true,
+          emailUtilities: true
+        }
+      }
+    },
+    // Create email-specific Tailwind configuration
     {
       type: 'CREATE_FILE',
-      path: 'src/components/email/EmailComposer.tsx',
-      template: 'templates/EmailComposer.tsx.tpl'
+      path: 'src/lib/email/tailwind-config.ts',
+      template: 'templates/tailwind-config.ts.tpl'
     },
+    // Create email utility functions
     {
       type: 'CREATE_FILE',
-      path: 'src/components/email/EmailTemplateEditor.tsx',
-      template: 'templates/EmailTemplateEditor.tsx.tpl'
+      path: 'src/lib/email/utils.ts',
+      template: 'templates/email-utils.ts.tpl'
     },
+    // Create email component utilities
     {
       type: 'CREATE_FILE',
-      path: 'src/components/email/EmailAnalytics.tsx',
-      template: 'templates/EmailAnalytics.tsx.tpl'
+      path: 'src/lib/email/component-utils.ts',
+      template: 'templates/component-utils.ts.tpl'
     },
+    // Create email styling constants
     {
       type: 'CREATE_FILE',
-      path: 'src/components/email/EmailList.tsx',
-      template: 'templates/EmailList.tsx.tpl'
-    },
-    {
-      type: 'CREATE_FILE',
-      path: 'src/components/email/EmailPreview.tsx',
-      template: 'templates/EmailPreview.tsx.tpl'
-    },
-    // Install Dependencies
-    {
-      type: 'INSTALL_PACKAGES',
-      packages: [
-        'resend',
-        'react-hook-form',
-        '@hookform/resolvers',
-        'zod',
-        'monaco-editor',
-        'html-to-text'
-      ],
+      path: 'src/lib/email/styles.ts',
+      template: 'templates/email-styles.ts.tpl'
     }
   ]
 };

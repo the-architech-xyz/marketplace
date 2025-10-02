@@ -1,0 +1,64 @@
+/**
+ * Prettier
+ * 
+ * Golden Core code formatting with Prettier for consistent code style
+ */
+
+export interface QualityPrettierParams {
+
+  /** Add semicolons at the end of statements */
+  semi?: boolean;
+
+  /** Use single quotes instead of double quotes */
+  singleQuote?: boolean;
+
+  /** Number of spaces per indentation level */
+  tabWidth?: number;
+
+  /** Use tabs instead of spaces for indentation */
+  useTabs?: boolean;
+
+  /** Print trailing commas where valid in ES5 */
+  trailingComma?: string;
+
+  /** Wrap lines that exceed this length */
+  printWidth?: number;
+
+  /** Print spaces between brackets in object literals */
+  bracketSpacing?: boolean;
+
+  /** Include parentheses around a sole arrow function parameter */
+  arrowParens?: string;
+
+  /** Line ending style */
+  endOfLine?: string;
+
+  /** Prettier plugins to use */
+  plugins?: string[];
+}
+
+export interface QualityPrettierFeatures {}
+
+// 🚀 Auto-discovered artifacts
+export declare const QualityPrettierArtifacts: {
+  creates: [
+    '.prettierrc',
+    '.prettierrc.js',
+    '.prettierignore',
+    'scripts/format-all.js',
+    'scripts/format-staged.js',
+    'prettier.config.js'
+  ],
+  enhances: [],
+  installs: [
+    { packages: ['prettier'], isDev: true },
+    { packages: ['prettier-plugin-tailwindcss'], isDev: true },
+    { packages: ['prettier-plugin-sort-imports'], isDev: true },
+    { packages: ['prettier-plugin-organize-imports'], isDev: true }
+  ],
+  envVars: []
+};
+
+// Type-safe artifact access
+export type QualityPrettierCreates = typeof QualityPrettierArtifacts.creates[number];
+export type QualityPrettierEnhances = typeof QualityPrettierArtifacts.enhances[number];

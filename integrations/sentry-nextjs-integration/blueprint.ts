@@ -3,14 +3,47 @@ import { Blueprint } from '@thearchitech.xyz/types';
 const sentryNextjsIntegrationBlueprint: Blueprint = {
   id: 'sentry-nextjs-integration',
   name: 'Sentry Next.js Integration',
-  description: 'Complete error monitoring and performance tracking for Next.js',
-  version: '2.1.0',
+  description: 'Complete error monitoring and performance tracking for Next.js with standardized TanStack Query hooks',
+  version: '3.0.0',
   actions: [
     // Install Next.js specific Sentry package
     {
       type: 'INSTALL_PACKAGES',
       packages: ['@sentry/nextjs'],
       isDev: false
+    },
+    
+    // Create standardized monitoring hooks (REVOLUTIONARY!)
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-error-tracking.ts',
+      template: 'templates/use-error-tracking.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-performance-monitoring.ts',
+      template: 'templates/use-performance-monitoring.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-user-feedback.ts',
+      template: 'templates/use-user-feedback.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-sentry.ts',
+      template: 'templates/use-sentry.ts.tpl'
+    },
+    // Create Sentry API service layer
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/sentry/api.ts',
+      template: 'templates/sentry-api.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/sentry/types.ts',
+      template: 'templates/sentry-types.ts.tpl'
     },
     
     // Add Next.js specific environment variables

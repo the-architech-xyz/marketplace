@@ -61,12 +61,14 @@ export interface StripeShadcnIntegrationParams {
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const StripeShadcnIntegrationArtifacts: {
   creates: [
-    'src/components/payment/stripe-payment-form.tsx',
-    'src/components/payment/subscription-card.tsx',
-    'src/components/payment/invoice-table.tsx',
-    'src/components/payment/pricing-card.tsx'
+    'src/lib/payment/tailwind-config.ts',
+    'src/lib/payment/utils.ts',
+    'src/lib/payment/component-utils.ts',
+    'src/lib/payment/styles.ts'
   ],
-  enhances: [],
+  enhances: [
+    { path: 'tailwind.config.js' }
+  ],
   installs: [],
   envVars: []
 };
