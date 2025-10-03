@@ -1,0 +1,88 @@
+{
+  "id": "features/auth-ui/shadcn",
+  "name": "Authentication UI",
+  "description": "Complete authentication UI components using Shadcn UI and Better Auth",
+  "version": "1.0.0",
+  "category": "feature",
+  "tags": ["auth", "ui", "shadcn", "better-auth", "login", "register", "profile"],
+  "compatibility": {
+    "frameworks": ["nextjs"],
+    "adapters": ["ui/shadcn-ui", "auth/better-auth"],
+    "integrations": ["better-auth-nextjs-integration"]
+  },
+  "dependencies": {
+    "adapters": ["ui/shadcn-ui", "auth/better-auth"],
+    "integrations": ["better-auth-nextjs-integration"]
+  },
+  "features": {
+    "loginForm": true,
+    "registerForm": true,
+    "profileButton": true,
+    "profilePage": true,
+    "settingsPage": true,
+    "emailVerification": true,
+    "passwordReset": true,
+    "twoFactor": true,
+    "oauthProviders": true,
+    "sessionManagement": true
+  },
+  "parameters": {
+    "components": {
+      "type": "array",
+      "description": "Auth components to include",
+      "default": ["login", "register", "profile", "settings"],
+      "enum": ["login", "register", "profile", "settings", "email-verification", "password-reset", "two-factor", "oauth"]
+    },
+    "providers": {
+      "type": "array",
+      "description": "OAuth providers to include",
+      "default": ["google", "github"],
+      "enum": ["google", "github", "discord", "twitter", "facebook", "apple"]
+    },
+    "features": {
+      "type": "object",
+      "description": "Feature flags",
+      "properties": {
+        "emailVerification": {
+          "type": "boolean",
+          "default": true
+        },
+        "passwordReset": {
+          "type": "boolean",
+          "default": true
+        },
+        "twoFactor": {
+          "type": "boolean",
+          "default": false
+        },
+        "oauth": {
+          "type": "boolean",
+          "default": true
+        },
+        "profileManagement": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "styling": {
+      "type": "object",
+      "description": "Styling options",
+      "properties": {
+        "theme": {
+          "type": "string",
+          "default": "default",
+          "enum": ["default", "minimal", "modern", "classic"]
+        },
+        "layout": {
+          "type": "string",
+          "default": "centered",
+          "enum": ["centered", "sidebar", "full-width"]
+        }
+      }
+    }
+  },
+  "blueprint": {
+    "file": "blueprint.ts"
+  }
+}

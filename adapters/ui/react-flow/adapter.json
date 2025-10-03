@@ -1,0 +1,99 @@
+{
+  "id": "ui/react-flow",
+  "name": "React Flow",
+  "description": "Pure React Flow library for building interactive node-based editors and diagrams",
+  "version": "1.0.0",
+  "category": "ui",
+  "tags": ["react-flow", "diagrams", "nodes", "edges", "visualization", "graph"],
+  "compatibility": {
+    "frameworks": ["react", "nextjs", "vite", "remix"],
+    "runtimes": ["browser"]
+  },
+  "dependencies": {
+    "runtime": [
+      "reactflow",
+      "react",
+      "react-dom"
+    ],
+    "dev": [
+      "@types/react",
+      "@types/react-dom"
+    ]
+  },
+  "features": {
+    "nodes": true,
+    "edges": true,
+    "panning": true,
+    "zooming": true,
+    "selection": true,
+    "dragging": true,
+    "customNodes": true,
+    "customEdges": true,
+    "minimap": true,
+    "controls": true,
+    "background": true,
+    "keyboard": true,
+    "touch": true
+  },
+  "parameters": {
+    "components": {
+      "type": "array",
+      "description": "React Flow components to include",
+      "default": ["basic", "minimap", "controls", "background"],
+      "enum": ["basic", "minimap", "controls", "background", "keyboard", "touch"]
+    },
+    "themes": {
+      "type": "array",
+      "description": "Available themes",
+      "default": ["default", "dark"],
+      "enum": ["default", "dark", "light", "custom"]
+    },
+    "features": {
+      "type": "object",
+      "description": "Feature flags",
+      "properties": {
+        "panOnDrag": {
+          "type": "boolean",
+          "default": true
+        },
+        "zoomOnScroll": {
+          "type": "boolean", 
+          "default": true
+        },
+        "selectOnClick": {
+          "type": "boolean",
+          "default": true
+        },
+        "multiSelection": {
+          "type": "boolean",
+          "default": true
+        },
+        "deleteOnBackspace": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "defaultViewport": {
+      "type": "object",
+      "description": "Default viewport settings",
+      "properties": {
+        "x": {
+          "type": "number",
+          "default": 0
+        },
+        "y": {
+          "type": "number", 
+          "default": 0
+        },
+        "zoom": {
+          "type": "number",
+          "default": 1
+        }
+      }
+    }
+  },
+  "blueprint": {
+    "file": "blueprint.ts"
+  }
+}

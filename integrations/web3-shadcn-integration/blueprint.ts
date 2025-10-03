@@ -10,7 +10,7 @@ const web3ShadcnIntegrationBlueprint: Blueprint = {
     {
       type: 'ENHANCE_FILE',
       path: 'tailwind.config.js',
-      modifier: 'js-export-wrapper',
+      modifier: 'ts-module-enhancer',
       params: {
         wrapperFunction: 'withWeb3Config',
         wrapperImport: {

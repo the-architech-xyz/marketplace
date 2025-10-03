@@ -121,20 +121,17 @@ const prismaNextjsIntegrationBlueprint: Blueprint = {
     {
       type: 'ADD_SCRIPT',
       name: 'db:generate',
-      command: 'prisma generate',
-      description: 'Generate Prisma client'
+      command: 'prisma generate'
     },
     {
       type: 'ADD_SCRIPT',
       name: 'db:push',
-      command: 'prisma db push',
-      description: 'Push schema to database'
+      command: 'prisma db push'
     },
     {
       type: 'ADD_SCRIPT',
       name: 'db:migrate',
-      command: 'prisma migrate dev',
-      description: 'Run database migrations'
+      command: 'prisma migrate dev'
     }
   ]
 };

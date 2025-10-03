@@ -93,6 +93,12 @@ export const tanstackQueryBlueprint: Blueprint = {
       type: 'CREATE_FILE',
       path: 'src/types/query.ts',
       template: 'templates/query-types.ts.tpl'
+    },
+    // Create Query Invalidation Utilities
+    {
+      type: 'CREATE_FILE',
+      path: 'src/hooks/use-query-invalidation.ts',
+      template: 'templates/query-invalidation.ts.tpl'
     }
   ]
 };

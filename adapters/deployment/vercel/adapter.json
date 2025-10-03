@@ -1,0 +1,75 @@
+{
+  "id": "deployment/vercel",
+  "name": "Vercel Deployment",
+  "description": "Pure Vercel deployment configuration for any framework",
+  "version": "1.0.0",
+  "category": "deployment",
+  "tags": ["vercel", "deployment", "hosting", "serverless"],
+  "compatibility": {
+    "frameworks": ["nextjs", "react", "vue", "svelte", "angular"],
+    "runtimes": ["nodejs", "edge"]
+  },
+  "dependencies": {
+    "runtime": [],
+    "dev": ["@vercel/cli"]
+  },
+  "features": {
+    "serverless": true,
+    "edgeFunctions": true,
+    "staticGeneration": true,
+    "apiRoutes": true,
+    "middleware": true,
+    "analytics": true,
+    "monitoring": true
+  },
+  "parameters": {
+    "framework": {
+      "type": "string",
+      "description": "Target framework",
+      "default": "nextjs",
+      "enum": ["nextjs", "react", "vue", "svelte", "angular"]
+    },
+    "buildCommand": {
+      "type": "string", 
+      "description": "Build command to run",
+      "default": "npm run build"
+    },
+    "outputDirectory": {
+      "type": "string",
+      "description": "Output directory for build",
+      "default": ".next"
+    },
+    "installCommand": {
+      "type": "string",
+      "description": "Install command",
+      "default": "npm install"
+    },
+    "devCommand": {
+      "type": "string",
+      "description": "Development command",
+      "default": "npm run dev"
+    },
+    "envVars": {
+      "type": "array",
+      "description": "Environment variables to configure",
+      "default": []
+    },
+    "functions": {
+      "type": "object",
+      "description": "Serverless function configuration",
+      "properties": {
+        "regions": {
+          "type": "array",
+          "default": ["iad1"]
+        },
+        "maxDuration": {
+          "type": "number",
+          "default": 10
+        }
+      }
+    }
+  },
+  "blueprint": {
+    "file": "blueprint.ts"
+  }
+}

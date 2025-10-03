@@ -127,6 +127,12 @@ export const formsBlueprint: Blueprint = {
       template: 'templates/LoginForm.tsx.tpl',
       condition: '{{#if module.parameters.reactHookForm}}'
     },
+    // Create validation examples
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/forms/validation-examples.ts',
+      template: 'templates/validation-examples.ts.tpl'
+    },
     // Create form index
     {
       type: 'CREATE_FILE',

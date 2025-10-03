@@ -1,0 +1,94 @@
+{
+  "id": "ai/vercel-ai-sdk",
+  "name": "Vercel AI SDK",
+  "description": "Pure Vercel AI SDK for building AI-powered applications with streaming, chat, and text generation",
+  "version": "1.0.0",
+  "category": "ai",
+  "tags": ["ai", "vercel", "openai", "streaming", "chat", "llm", "generation"],
+  "compatibility": {
+    "frameworks": ["nextjs", "react", "svelte", "vue"],
+    "runtimes": ["nodejs", "edge", "browser"]
+  },
+  "dependencies": {
+    "runtime": [
+      "ai",
+      "@ai-sdk/react",
+      "@ai-sdk/openai",
+      "@ai-sdk/anthropic"
+    ],
+    "dev": [
+      "@types/node"
+    ]
+  },
+  "features": {
+    "streaming": true,
+    "chat": true,
+    "textGeneration": true,
+    "imageGeneration": true,
+    "embeddings": true,
+    "functionCalling": true,
+    "toolUse": true,
+    "reactHooks": true,
+    "edgeRuntime": true,
+    "caching": true
+  },
+  "parameters": {
+    "providers": {
+      "type": "array",
+      "description": "AI providers to include",
+      "default": ["openai", "anthropic"],
+      "enum": ["openai", "anthropic", "google", "cohere", "huggingface"]
+    },
+    "features": {
+      "type": "object",
+      "description": "Feature flags",
+      "properties": {
+        "streaming": {
+          "type": "boolean",
+          "default": true
+        },
+        "chat": {
+          "type": "boolean",
+          "default": true
+        },
+        "textGeneration": {
+          "type": "boolean",
+          "default": true
+        },
+        "imageGeneration": {
+          "type": "boolean",
+          "default": false
+        },
+        "embeddings": {
+          "type": "boolean",
+          "default": false
+        },
+        "functionCalling": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "defaultModel": {
+      "type": "string",
+      "description": "Default AI model",
+      "default": "gpt-3.5-turbo",
+      "enum": ["gpt-3.5-turbo", "gpt-4", "gpt-4-turbo", "claude-3-sonnet", "claude-3-opus"]
+    },
+    "maxTokens": {
+      "type": "number",
+      "description": "Maximum tokens for generation",
+      "default": 1000
+    },
+    "temperature": {
+      "type": "number",
+      "description": "Temperature for generation",
+      "default": 0.7,
+      "minimum": 0,
+      "maximum": 2
+    }
+  },
+  "blueprint": {
+    "file": "blueprint.ts"
+  }
+}

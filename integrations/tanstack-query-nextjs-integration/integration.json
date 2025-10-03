@@ -1,0 +1,76 @@
+{
+  "id": "integrations/tanstack-query-nextjs-integration",
+  "name": "TanStack Query Next.js Integration",
+  "description": "Golden Core integrator that configures TanStack Query for Next.js applications",
+  "version": "1.0.0",
+  "category": "integration",
+  "tags": ["tanstack-query", "nextjs", "data-fetching", "caching", "golden-core"],
+  "compatibility": {
+    "frameworks": ["nextjs"],
+    "adapters": ["data-fetching/tanstack-query", "framework/nextjs"]
+  },
+  "dependencies": {
+    "adapters": ["data-fetching/tanstack-query", "framework/nextjs"]
+  },
+  "features": {
+    "queryClientProvider": true,
+    "devtools": true,
+    "hydration": true,
+    "ssr": true,
+    "prefetching": true,
+    "backgroundRefetch": true,
+    "errorBoundary": true
+  },
+  "parameters": {
+    "devtools": {
+      "type": "boolean",
+      "description": "Enable React Query DevTools",
+      "default": true
+    },
+    "ssr": {
+      "type": "boolean",
+      "description": "Enable SSR support",
+      "default": true
+    },
+    "hydration": {
+      "type": "boolean",
+      "description": "Enable hydration support",
+      "default": true
+    },
+    "prefetching": {
+      "type": "boolean",
+      "description": "Enable automatic prefetching",
+      "default": true
+    },
+    "errorBoundary": {
+      "type": "boolean",
+      "description": "Include error boundary",
+      "default": true
+    },
+    "defaultOptions": {
+      "type": "object",
+      "description": "Default query options",
+      "properties": {
+        "staleTime": {
+          "type": "number",
+          "default": 300000
+        },
+        "cacheTime": {
+          "type": "number",
+          "default": 600000
+        },
+        "retry": {
+          "type": "number",
+          "default": 3
+        },
+        "refetchOnWindowFocus": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  },
+  "blueprint": {
+    "file": "blueprint.ts"
+  }
+}

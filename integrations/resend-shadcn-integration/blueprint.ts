@@ -10,7 +10,7 @@ const resendShadcnIntegrationBlueprint: Blueprint = {
     {
       type: 'ENHANCE_FILE',
       path: 'tailwind.config.js',
-      modifier: 'js-export-wrapper',
+      modifier: 'ts-module-enhancer',
       params: {
         wrapperFunction: 'withEmailConfig',
         wrapperImport: {

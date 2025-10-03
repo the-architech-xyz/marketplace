@@ -1,0 +1,90 @@
+{
+  "id": "features/graph-visualizer/react-flow",
+  "name": "Graph Visualizer",
+  "description": "Interactive graph visualizer for displaying project architecture and dependencies",
+  "version": "1.0.0",
+  "category": "feature",
+  "tags": ["graph", "visualization", "react-flow", "architecture", "dependencies"],
+  "compatibility": {
+    "frameworks": ["nextjs"],
+    "adapters": ["ui/react-flow", "ui/shadcn-ui"],
+    "integrations": ["zustand-nextjs-integration"]
+  },
+  "dependencies": {
+    "adapters": ["ui/react-flow", "ui/shadcn-ui"],
+    "integrations": ["zustand-nextjs-integration"]
+  },
+  "features": {
+    "interactiveGraph": true,
+    "nodeTypes": true,
+    "edgeTypes": true,
+    "minimap": true,
+    "controls": true,
+    "background": true,
+    "selection": true,
+    "dragging": true,
+    "zooming": true,
+    "panning": true,
+    "export": true,
+    "import": true
+  },
+  "parameters": {
+    "nodeTypes": {
+      "type": "array",
+      "description": "Available node types",
+      "default": ["module", "component", "api", "database"],
+      "enum": ["module", "component", "api", "database", "service", "page", "hook", "utility"]
+    },
+    "edgeTypes": {
+      "type": "array",
+      "description": "Available edge types",
+      "default": ["dependency", "import", "export"],
+      "enum": ["dependency", "import", "export", "inheritance", "composition", "association"]
+    },
+    "features": {
+      "type": "object",
+      "description": "Feature flags",
+      "properties": {
+        "minimap": {
+          "type": "boolean",
+          "default": true
+        },
+        "controls": {
+          "type": "boolean",
+          "default": true
+        },
+        "background": {
+          "type": "boolean",
+          "default": true
+        },
+        "export": {
+          "type": "boolean",
+          "default": true
+        },
+        "import": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "description": "Layout configuration",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "default": "hierarchical",
+          "enum": ["hierarchical", "force", "circular", "grid"]
+        },
+        "direction": {
+          "type": "string",
+          "default": "TB",
+          "enum": ["TB", "BT", "LR", "RL"]
+        }
+      }
+    }
+  },
+  "blueprint": {
+    "file": "blueprint.ts"
+  }
+}

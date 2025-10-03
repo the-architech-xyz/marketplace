@@ -1,0 +1,54 @@
+{
+  "id": "integrations/zustand-nextjs-integration",
+  "name": "Zustand Next.js Integration",
+  "description": "Golden Core integrator that configures Zustand for Next.js applications with SSR support",
+  "version": "1.0.0",
+  "category": "integration",
+  "tags": ["zustand", "nextjs", "state-management", "ssr", "golden-core"],
+  "compatibility": {
+    "frameworks": ["nextjs"],
+    "adapters": ["state/zustand", "framework/nextjs"]
+  },
+  "dependencies": {
+    "adapters": ["state/zustand", "framework/nextjs"]
+  },
+  "features": {
+    "ssr": true,
+    "hydration": true,
+    "persistence": true,
+    "devtools": true,
+    "middleware": true,
+    "subscriptions": true
+  },
+  "parameters": {
+    "ssr": {
+      "type": "boolean",
+      "description": "Enable SSR support",
+      "default": true
+    },
+    "hydration": {
+      "type": "boolean",
+      "description": "Enable hydration support",
+      "default": true
+    },
+    "persistence": {
+      "type": "boolean",
+      "description": "Enable persistence",
+      "default": true
+    },
+    "devtools": {
+      "type": "boolean",
+      "description": "Enable Redux DevTools",
+      "default": true
+    },
+    "middleware": {
+      "type": "array",
+      "description": "Middleware to include",
+      "default": ["persist", "devtools"],
+      "enum": ["persist", "devtools", "subscribeWithSelector", "immer"]
+    }
+  },
+  "blueprint": {
+    "file": "blueprint.ts"
+  }
+}

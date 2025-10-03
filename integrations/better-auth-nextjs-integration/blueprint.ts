@@ -140,6 +140,13 @@ export function authMiddleware(request: NextRequest) {
       template: 'templates/middleware.ts.tpl'
     },
 
+    // Create session management utilities
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/auth/session-management.ts',
+      template: 'templates/session-management.ts.tpl'
+    },
+    
     // Create Next.js auth components
     {
       type: 'CREATE_FILE',

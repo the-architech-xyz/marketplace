@@ -85,6 +85,16 @@ export const stripeBlueprint: Blueprint = {
     },
     {
       type: 'CREATE_FILE',
+      path: '{{paths.payment_config}}/webhook-verification.ts',
+      template: 'templates/webhook-verification.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
+      path: '{{paths.api_routes}}/payment/webhook/route.ts',
+      template: 'templates/webhook-route.ts.tpl'
+    },
+    {
+      type: 'CREATE_FILE',
       path: '{{paths.payment_config}}/INTEGRATION_GUIDE.md',
       template: 'templates/INTEGRATION_GUIDE.md.tpl'
     }

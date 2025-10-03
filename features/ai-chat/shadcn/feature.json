@@ -1,0 +1,86 @@
+{
+  "id": "features/ai-chat/shadcn",
+  "name": "AI Chat Interface",
+  "description": "Complete AI chat interface using Vercel AI SDK and Shadcn UI",
+  "version": "1.0.0",
+  "category": "feature",
+  "tags": ["ai", "chat", "shadcn", "vercel-ai-sdk", "conversation"],
+  "compatibility": {
+    "frameworks": ["nextjs"],
+    "adapters": ["ai/vercel-ai-sdk", "ui/shadcn-ui"],
+    "integrations": ["tanstack-query-nextjs-integration"]
+  },
+  "dependencies": {
+    "adapters": ["ai/vercel-ai-sdk", "ui/shadcn-ui"],
+    "integrations": ["tanstack-query-nextjs-integration"]
+  },
+  "features": {
+    "chatInterface": true,
+    "messageHistory": true,
+    "streaming": true,
+    "fileUpload": true,
+    "codeHighlighting": true,
+    "markdownSupport": true,
+    "conversationExport": true,
+    "conversationImport": true,
+    "voiceInput": true,
+    "voiceOutput": true
+  },
+  "parameters": {
+    "components": {
+      "type": "array",
+      "description": "Chat components to include",
+      "default": ["chat-interface", "message-list", "input", "toolbar"],
+      "enum": ["chat-interface", "message-list", "input", "toolbar", "file-upload", "voice-input", "voice-output"]
+    },
+    "features": {
+      "type": "object",
+      "description": "Feature flags",
+      "properties": {
+        "streaming": {
+          "type": "boolean",
+          "default": true
+        },
+        "fileUpload": {
+          "type": "boolean",
+          "default": true
+        },
+        "voiceInput": {
+          "type": "boolean",
+          "default": false
+        },
+        "voiceOutput": {
+          "type": "boolean",
+          "default": false
+        },
+        "codeHighlighting": {
+          "type": "boolean",
+          "default": true
+        },
+        "markdownSupport": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "description": "UI configuration",
+      "properties": {
+        "theme": {
+          "type": "string",
+          "default": "default",
+          "enum": ["default", "minimal", "modern", "classic"]
+        },
+        "layout": {
+          "type": "string",
+          "default": "sidebar",
+          "enum": ["sidebar", "full-width", "modal", "drawer"]
+        }
+      }
+    }
+  },
+  "blueprint": {
+    "file": "blueprint.ts"
+  }
+}

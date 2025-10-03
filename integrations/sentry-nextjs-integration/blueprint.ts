@@ -77,7 +77,7 @@ const sentryNextjsIntegrationBlueprint: Blueprint = {
       type: 'ENHANCE_FILE',
       path: 'next.config.js',
       condition: '{{#if integration.features.errorTracking}}',
-      modifier: 'js-export-wrapper',
+      modifier: 'ts-module-enhancer',
       params: {
         wrapperFunction: 'withSentryConfig',
         wrapperImport: {
