@@ -4,7 +4,7 @@
  * Golden Core code linting with ESLint for JavaScript and TypeScript
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const eslintBlueprint: Blueprint = {
   id: 'eslint-golden-core-setup',
@@ -14,121 +14,127 @@ export const eslintBlueprint: Blueprint = {
   actions: [
     // Install ESLint and core packages
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['eslint'],
       isDev: true
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@typescript-eslint/parser', '@typescript-eslint/eslint-plugin'],
       isDev: true,
       condition: '{{#if module.parameters.typescript}}'
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['eslint-plugin-react', 'eslint-plugin-react-hooks'],
       isDev: true,
       condition: '{{#if module.parameters.react}}'
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['eslint-config-next'],
       isDev: true,
       condition: '{{#if module.parameters.nextjs}}'
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['eslint-plugin-node'],
       isDev: true,
       condition: '{{#if module.parameters.nodejs}}'
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['eslint-plugin-jsx-a11y'],
       isDev: true,
       condition: '{{#if module.parameters.accessibility}}'
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['eslint-plugin-import', 'eslint-plugin-import-resolver-typescript'],
       isDev: true,
       condition: '{{#if module.parameters.imports}}'
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['eslint-plugin-prettier', 'eslint-config-prettier'],
       isDev: true,
       condition: '{{#if module.parameters.format}}'
     },
     // Create ESLint configuration
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: '.eslintrc.js',
       template: 'templates/.eslintrc.js.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: '.eslintignore',
       template: 'templates/.eslintignore.tpl'
     },
     // Create TypeScript ESLint configuration
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'eslint.config.ts',
       template: 'templates/eslint.config.ts.tpl',
       condition: '{{#if module.parameters.typescript}}'
     },
     // Create ESLint scripts
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'lint',
       command: 'eslint . --ext .js,.jsx,.ts,.tsx',
       condition: '{{#if module.parameters.typescript}}'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'lint',
       command: 'eslint . --ext .js,.jsx',
       condition: '{{#if not module.parameters.typescript}}'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'lint:fix',
       command: 'eslint . --ext .js,.jsx,.ts,.tsx --fix',
       condition: '{{#if module.parameters.typescript}}'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'lint:fix',
       command: 'eslint . --ext .js,.jsx --fix',
       condition: '{{#if not module.parameters.typescript}}'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'lint:check',
       command: 'eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0',
       condition: '{{#if module.parameters.typescript}}'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'lint:check',
       command: 'eslint . --ext .js,.jsx --max-warnings 0',
       condition: '{{#if not module.parameters.typescript}}'
     },
     // Create ESLint rules configuration
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'eslint-rules.js',
       template: 'templates/eslint-rules.js.tpl'
     },
     // Create ESLint utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/lint-staged.js',
       template: 'templates/lint-staged.js.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/eslint-fix.js',
       template: 'templates/eslint-fix.js.tpl'
     }

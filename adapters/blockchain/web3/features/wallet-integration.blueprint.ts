@@ -4,7 +4,7 @@
  * Modern wallet integration using viem with MetaMask, WalletConnect, and other wallets
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const walletIntegrationBlueprint: Blueprint = {
   id: 'web3-wallet-integration',
@@ -12,11 +12,11 @@ const walletIntegrationBlueprint: Blueprint = {
   description: 'Modern wallet integration using viem with comprehensive wallet support',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@walletconnect/modal@^2.0.0', '@walletconnect/ethereum-provider@^2.0.0', 'wagmi@^2.0.0', 'viem@^2.0.0']
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/web3/wallet.ts',
       content: `import { 
   createWalletClient, 
@@ -331,7 +331,7 @@ export class WalletManager {
 export const walletManager = new WalletManager();`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/web3/useWallet.ts',
       content: `import { useState, useEffect, useCallback } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -509,7 +509,7 @@ export const useWalletTransaction = () => {
 };`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/web3/WalletConnect.tsx',
       content: `import React from 'react';
 import { useWallet } from '../../hooks/web3/useWallet.js';

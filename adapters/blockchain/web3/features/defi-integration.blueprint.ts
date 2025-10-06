@@ -4,7 +4,7 @@
  * Modern DeFi integration using viem with type-safe contract interactions
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const defiIntegrationBlueprint: Blueprint = {
   id: 'web3-defi-integration',
@@ -12,11 +12,11 @@ const defiIntegrationBlueprint: Blueprint = {
   description: 'Modern DeFi integration using viem with type-safe contract interactions',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['viem@^2.0.0', '@tanstack/react-query@^5.0.0', 'zod@^3.22.0']
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/web3/defi.ts',
       content: `import { 
   type Address, 
@@ -496,7 +496,7 @@ export class DeFiManager {
 export const defiManager = new DeFiManager();`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/web3/useDeFi.ts',
       content: `import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { defiManager } from '../../lib/web3/defi.js';
@@ -624,7 +624,7 @@ export function useAddressValidation() {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/web3/DeFiDashboard.tsx',
       content: `import React, { useState } from 'react';
 import { useWallet } from '../../hooks/web3/useWallet.js';

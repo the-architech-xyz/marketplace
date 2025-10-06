@@ -4,28 +4,28 @@
  * Adds advanced email template system with React components
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const templatesBlueprint: Blueprint = {
   id: 'resend-templates',
   name: 'Resend Templates',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['react-email']
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['handlebars'],
       condition: '{{#if (eq module.parameters.template-engine "handlebars")}}'
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['mjml'],
       condition: '{{#if (eq module.parameters.template-engine "mjml")}}'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/templates/template-manager.ts',
       content: `import { Resend } from 'resend';
 import { render } from 'react-email';
@@ -239,7 +239,7 @@ export class TemplateUtils {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/templates/base-template.ts',
       content: `// Base template configuration
 export interface BaseTemplateConfig {
@@ -304,7 +304,7 @@ export interface TemplateMetadata {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'docs/integrations/resend-templates.md',
       content: `# Resend Templates Integration Guide
 

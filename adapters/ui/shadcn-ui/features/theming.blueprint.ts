@@ -5,7 +5,7 @@
  * Configuration and integration is handled by integrators
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const themingBlueprint: Blueprint = {
   id: 'shadcn-ui-theming-installer',
@@ -14,7 +14,7 @@ export const themingBlueprint: Blueprint = {
   actions: [
     // Install theming dependencies only
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         'next-themes@^0.2.1'
       ]

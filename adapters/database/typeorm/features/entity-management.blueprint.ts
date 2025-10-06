@@ -4,14 +4,14 @@
  * Adds advanced entity management with decorators and relationships
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const entityManagementBlueprint: Blueprint = {
   id: 'typeorm-entity-management',
   name: 'TypeORM Entity Management',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/entities/BaseEntity.ts',
       content: `import { PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column } from 'typeorm';
 
@@ -30,7 +30,7 @@ export abstract class BaseEntity {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/entities/Product.ts',
       content: `{{#if module.parameters.relationships}}
 import { Entity, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
@@ -95,7 +95,7 @@ export class Product extends BaseEntity {
 {{/if}}`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/repositories/BaseRepository.ts',
       content: `import { Repository, FindOptionsWhere, FindManyOptions } from 'typeorm';
 import { BaseEntity } from '../entities/BaseEntity';

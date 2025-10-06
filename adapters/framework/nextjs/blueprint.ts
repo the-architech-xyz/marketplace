@@ -5,7 +5,7 @@
  * This blueprint provides the core foundation - UI and styling are handled by other modules
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const nextjsBlueprint: Blueprint = {
   id: 'nextjs-base-setup',
@@ -14,7 +14,7 @@ export const nextjsBlueprint: Blueprint = {
   actions: [
     // Create Next.js project with latest versions and dynamic parameters
     {
-      type: 'RUN_COMMAND',
+      type: BlueprintActionType.RUN_COMMAND,
       command: 'npx create-next-app@latest . --typescript{{#if module.parameters.eslint}} --eslint{{/if}} --app --src-dir --import-alias "{{module.parameters.importAlias}}" --yes'
     }
   ]

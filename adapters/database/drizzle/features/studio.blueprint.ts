@@ -4,19 +4,19 @@
  * Adds visual database browser and query interface to Drizzle
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const studioBlueprint: Blueprint = {
   id: 'drizzle-studio',
   name: 'Drizzle Studio',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['drizzle-kit'],
       isDev: true
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/studio/studio-config.ts',
       content: `// Drizzle Studio Configuration
 export const studioConfig = {
@@ -74,7 +74,7 @@ export class StudioManager {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/studio.js',
       content: `#!/usr/bin/env node
 

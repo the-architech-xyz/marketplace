@@ -52,13 +52,13 @@ mkdir -p integrations/adapter1-adapter2-integration/templates
 
 ### 3. Create blueprint.ts
 ```typescript
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const blueprint: Blueprint = {
   version: '1.0.0',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/useAdapter1Adapter2.ts',
       template: 'use-integration.ts.tpl',
       context: {
@@ -67,7 +67,8 @@ const blueprint: Blueprint = {
       }
     },
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/lib/adapter1.ts',
       action: 'addIntegration',
       template: 'adapter1-integration.ts.tpl'
@@ -118,7 +119,7 @@ const blueprint: Blueprint = {
   version: '1.0.0',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/useQuery.ts',
       template: 'use-query.ts.tpl',
       context: {
@@ -126,7 +127,7 @@ const blueprint: Blueprint = {
       }
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db.ts',
       template: 'db-client.ts.tpl',
       context: {
@@ -241,10 +242,10 @@ describe('Database Integration', () => {
 ### ❌ Don't Create UI Components
 ```typescript
 // ❌ Wrong - UI in integrator
-{ type: 'CREATE_FILE', path: 'components/UserList.tsx' }
+{ type: BlueprintActionType.CREATE_FILE, path: 'components/UserList.tsx' }
 
 // ✅ Correct - Headless logic only
-{ type: 'CREATE_FILE', path: 'hooks/useUsers.ts' }
+{ type: BlueprintActionType.CREATE_FILE, path: 'hooks/useUsers.ts' }
 ```
 
 ### ❌ Don't Connect Multiple Adapters

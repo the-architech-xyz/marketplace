@@ -57,13 +57,13 @@ mkdir -p adapters/category/technology/templates
 
 ### 3. Create blueprint.ts
 ```typescript
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const blueprint: Blueprint = {
   version: '1.0.0',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'package.json',
       template: 'package.json.tpl',
       context: {
@@ -72,7 +72,7 @@ const blueprint: Blueprint = {
       }
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/config/technology.ts',
       template: 'config.ts.tpl',
       context: {
@@ -130,7 +130,7 @@ const blueprint: Blueprint = {
   version: '1.0.0',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'drizzle.config.ts',
       template: 'drizzle.config.ts.tpl',
       context: {
@@ -138,7 +138,7 @@ const blueprint: Blueprint = {
       }
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/db/schema.ts',
       template: 'schema.ts.tpl'
     }
@@ -189,19 +189,20 @@ describe('Database Adapter Integration', () => {
 ### Configuration Files
 ```typescript
 // Always create config files in standard locations
-{ type: 'CREATE_FILE', path: 'config/technology.ts' }
+{ type: BlueprintActionType.CREATE_FILE, path: 'config/technology.ts' }
 ```
 
 ### Package Dependencies
 ```typescript
 // Add dependencies to package.json
-{ type: 'ENHANCE_FILE', path: 'package.json', action: 'addDependency' }
+{ type: BlueprintActionType.ENHANCE_FILE,
+ path: 'package.json', action: 'addDependency' }
 ```
 
 ### Environment Variables
 ```typescript
 // Add environment variables
-{ type: 'CREATE_FILE', path: '.env.example', template: 'env.example.tpl' }
+{ type: BlueprintActionType.CREATE_FILE, path: '.env.example', template: 'env.example.tpl' }
 ```
 
 ## Troubleshooting

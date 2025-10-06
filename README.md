@@ -401,7 +401,7 @@ EOF
 
 # Create blueprint.ts
 cat > adapters/category/adapter-name/blueprint.ts << EOF
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const blueprint: Blueprint = {
   id: 'adapter-name-blueprint',
@@ -409,7 +409,7 @@ const blueprint: Blueprint = {
   description: 'Blueprint for my adapter',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['my-package@^1.0.0']
     }
   ]

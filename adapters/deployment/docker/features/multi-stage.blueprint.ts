@@ -4,14 +4,14 @@
  * Optimized multi-stage Docker builds for production
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const multiStageBlueprint: Blueprint = {
   id: 'docker-multi-stage',
   name: 'Multi-Stage Builds',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'Dockerfile.optimized',
       content: `# Multi-stage Dockerfile for {{project.name}}
 # Optimized for production with multiple build stages
@@ -124,7 +124,7 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \\
 CMD ["node", "server.js"]`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'docker-compose.optimized.yml',
       content: `version: '3.8'
 
@@ -194,7 +194,7 @@ volumes:
   redis_data:`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/docker-optimized.sh',
       content: `#!/bin/bash
 
@@ -233,22 +233,26 @@ echo "To run the container: docker run -p 3000:3000 --env-file .env.local {{proj
 echo "To run with compose: docker-compose -f docker-compose.optimized.yml up --build"`
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'docker:build:optimized',
       command: 'docker build -f Dockerfile.optimized -t {{project.name}}:optimized .'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'docker:run:optimized',
       command: 'docker run -p 3000:3000 --env-file .env.local {{project.name}}:optimized'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'docker:compose:optimized',
       command: 'docker-compose -f docker-compose.optimized.yml up --build'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'docker:stop:optimized',
       command: 'docker-compose -f docker-compose.optimized.yml down'
     }

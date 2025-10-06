@@ -4,14 +4,14 @@
  * Lazy loading of translations and locale-specific content
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const dynamicImportsBlueprint: Blueprint = {
   id: 'next-intl-dynamic-imports',
   name: 'Dynamic Imports',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/dynamic-translations.ts',
       content: `import { routing } from '../i18n/routing';
 
@@ -134,7 +134,7 @@ class DynamicTranslationManager {
 export const dynamicTranslationManager = new DynamicTranslationManager();`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/useDynamicTranslations.ts',
       content: `import { useState, useEffect, useCallback } from 'react';
 import { useLocale } from 'next-intl';
@@ -219,7 +219,7 @@ export function usePreloadTranslations() {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/i18n/DynamicTranslationProvider.tsx',
       content: `import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useLocale } from 'next-intl';
@@ -338,7 +338,7 @@ export const useDynamicT = (namespace: string) => {
 };`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/translations/[locale]/[namespace]/route.ts',
       content: `import { NextRequest, NextResponse } from 'next/server';
 import { routing } from '../../../../i18n/routing';

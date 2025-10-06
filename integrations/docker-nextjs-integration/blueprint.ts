@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const blueprint: Blueprint = {
   id: 'docker-nextjs-integration',
@@ -8,7 +8,8 @@ export const blueprint: Blueprint = {
   actions: [
     // Enhance existing Dockerfile for Next.js
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'Dockerfile',
       modifier: 'dockerfile-merger',
       params: {
@@ -17,7 +18,8 @@ export const blueprint: Blueprint = {
     },
     // Enhance existing .dockerignore for Next.js
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: '.dockerignore',
       modifier: 'dockerignore-merger',
       params: {
@@ -26,7 +28,7 @@ export const blueprint: Blueprint = {
     },
     // Create Next.js-specific Docker Compose
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'docker-compose.nextjs.yml',
       template: 'templates/docker-compose.nextjs.yml.tpl'
     }

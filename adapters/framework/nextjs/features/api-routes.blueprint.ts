@@ -4,7 +4,7 @@
  * Comprehensive API routes with middleware, error handling, and utilities
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const nextjsApiRoutesBlueprint: Blueprint = {
   id: 'nextjs-api-routes',
@@ -13,7 +13,7 @@ export const nextjsApiRoutesBlueprint: Blueprint = {
   actions: [
     // Create API utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/api/utils.ts',
       content: `/**
  * API utilities for Next.js 15+
@@ -208,7 +208,7 @@ export const apiRateLimit = {
     },
     // Create API middleware
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/api/middleware.ts',
       content: `/**
  * API middleware for Next.js 15+
@@ -344,7 +344,7 @@ export function withApiHandler<T = any>(
     },
     // Create example API routes
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/health/route.ts',
       content: `/**
  * Health check API route
@@ -366,7 +366,7 @@ export const GET = withApiHandler(async (request: NextRequest) => {
 });`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/echo/route.ts',
       content: `/**
  * Echo API route - returns the request data
@@ -394,7 +394,7 @@ export const POST = withApiHandler(async (request: NextRequest) => {
 });`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/calculate/route.ts',
       content: `/**
  * Calculator API route

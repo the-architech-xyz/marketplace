@@ -5,7 +5,7 @@
  * Configuration and integration is handled by integrators
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const accessibilityBlueprint: Blueprint = {
   id: 'shadcn-ui-accessibility-installer',
@@ -14,7 +14,7 @@ export const accessibilityBlueprint: Blueprint = {
   actions: [
     // Install accessibility dependencies only
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         'eslint-plugin-jsx-a11y@^6.8.0',
         '@types/eslint-plugin-jsx-a11y@^6.0.0'

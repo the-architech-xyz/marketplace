@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const web3ShadcnIntegrationBlueprint: Blueprint = {
   id: 'web3-shadcn-integration',
@@ -8,9 +8,10 @@ const web3ShadcnIntegrationBlueprint: Blueprint = {
   actions: [
     // Configure Tailwind for Web3 components
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'tailwind.config.js',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         wrapperFunction: 'withWeb3Config',
         wrapperImport: {
@@ -26,25 +27,25 @@ const web3ShadcnIntegrationBlueprint: Blueprint = {
     },
     // Create Web3-specific Tailwind configuration
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/web3/tailwind-config.ts',
       template: 'templates/tailwind-config.ts.tpl'
     },
     // Create Web3 utility functions
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/web3/utils.ts',
       template: 'templates/web3-utils.ts.tpl'
     },
     // Create Web3 component utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/web3/component-utils.ts',
       template: 'templates/component-utils.ts.tpl'
     },
     // Create Web3 styling constants
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/web3/styles.ts',
       template: 'templates/web3-styles.ts.tpl'
     }

@@ -5,7 +5,7 @@
  * Includes bundle analysis, image optimization, and performance monitoring
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const nextjsPerformanceBlueprint: Blueprint = {
   id: 'nextjs-performance-setup',
@@ -14,7 +14,7 @@ export const nextjsPerformanceBlueprint: Blueprint = {
   actions: [
     // Install performance packages
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         'sharp@^0.33.0',
         '@next/bundle-analyzer@^15.0.0',
@@ -24,7 +24,8 @@ export const nextjsPerformanceBlueprint: Blueprint = {
     },
     // Enhance next.config.js with performance optimizations
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'next.config.js',
       content: `const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -98,7 +99,7 @@ module.exports = withBundleAnalyzer(nextConfig);`,
     },
     // Create performance utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/performance.ts',
       content: `/**
  * Performance utilities for Next.js 15+
@@ -299,7 +300,7 @@ export const bundleUtils = {
     },
     // Create performance monitoring component
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/performance/PerformanceMonitor.tsx',
       content: `'use client';
 

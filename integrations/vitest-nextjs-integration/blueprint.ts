@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
 
 const vitestNextjsIntegrationBlueprint: Blueprint = {
   id: 'vitest-nextjs-integration',
@@ -8,46 +8,47 @@ const vitestNextjsIntegrationBlueprint: Blueprint = {
   actions: [
     // Create standardized testing hooks (REVOLUTIONARY!)
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-test.ts',
       template: 'templates/use-test.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-test-suite.ts',
       template: 'templates/use-test-suite.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-test-runner.ts',
       template: 'templates/use-test-runner.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-test-coverage.ts',
       template: 'templates/use-test-coverage.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-test-mocks.ts',
       template: 'templates/use-test-mocks.ts.tpl'
     },
     // Create testing API service layer
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/testing/api.ts',
       template: 'templates/testing-api.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/testing/types.ts',
       template: 'templates/testing-types.ts.tpl'
     },
     // Enhance existing Vitest configuration for Next.js
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'vitest.config.ts',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         enhancements: [
           {
@@ -64,74 +65,74 @@ const vitestNextjsIntegrationBlueprint: Blueprint = {
       }
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'vitest.nextjs.config.ts',
       template: 'templates/vitest.nextjs.config.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'vitest.config.unit.ts',
       template: 'templates/vitest.config.unit.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'vitest.config.integration.ts',
       template: 'templates/vitest.config.integration.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'vitest.config.e2e.ts',
       template: 'templates/vitest.config.e2e.ts.tpl'
     },
     // Create Next.js-specific Test Utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'test-utils/nextjs-test-utils.ts',
       template: 'templates/nextjs-test-utils.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'test-utils/mock-next-router.ts',
       template: 'templates/mock-next-router.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'test-utils/mock-next-auth.ts',
       template: 'templates/mock-next-auth.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'test-utils/mock-next-fetch.ts',
       template: 'templates/mock-next-fetch.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'test-utils/nextjs-test-server.ts',
       template: 'templates/nextjs-test-server.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'test-utils/nextjs-test-client.ts',
       template: 'templates/nextjs-test-client.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'test-utils/nextjs-test-helpers.ts',
       template: 'templates/nextjs-test-helpers.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'test-utils/nextjs-test-setup.ts',
       template: 'templates/nextjs-test-setup.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'test-utils/nextjs-test-teardown.ts',
       template: 'templates/nextjs-test-teardown.ts.tpl'
     },
     // Install Next.js-specific Testing Dependencies
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         '@testing-library/next',
         'next-test-utils',
@@ -142,9 +143,10 @@ const vitestNextjsIntegrationBlueprint: Blueprint = {
     },
     // Add Test Scripts to package.json
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'package.json',
-      modifier: 'package-json-merger',
+      modifier: ModifierType.PACKAGE_JSON_MERGER,
       params: {
         scriptsToAdd: {
           'test:nextjs': 'vitest --config vitest.nextjs.config.ts',

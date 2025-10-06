@@ -24,7 +24,7 @@ Creates new files with content.
 
 ```typescript
 {
-  type: 'CREATE_FILE',
+  type: BlueprintActionType.CREATE_FILE,
   path: 'src/components/Button.tsx',
   content: 'export const Button = () => { return <button>Click me</button>; };'
 }
@@ -35,7 +35,7 @@ Adds dependencies to package.json.
 
 ```typescript
 {
-  type: 'INSTALL_PACKAGES',
+  type: BlueprintActionType.INSTALL_PACKAGES,
   packages: ['react', 'react-dom', '@types/react'],
   isDev: false  // optional, defaults to false
 }
@@ -46,7 +46,8 @@ Adds npm scripts to package.json.
 
 ```typescript
 {
-  type: 'ADD_SCRIPT',
+  type: BlueprintActionType.ADD_SCRIPT,
+
   name: 'build',
   command: 'tsc && next build'
 }
@@ -57,7 +58,8 @@ Adds environment variables to .env files.
 
 ```typescript
 {
-  type: 'ADD_ENV_VAR',
+  type: BlueprintActionType.ADD_ENV_VAR,
+
   key: 'DATABASE_URL',
   value: 'postgresql://localhost:5432/mydb',
   description: 'Database connection string'
@@ -123,9 +125,10 @@ Performs complex file modifications using registered modifiers with smart fallba
 
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   path: 'src/app/api/auth/[...all]/route.ts',
-  modifier: 'ts-module-enhancer',
+  modifier: ModifierType.TS_MODULE_ENHANCER,
   fallback: 'create',  // Smart fallback strategy
   params: {
     importsToAdd: [
@@ -155,16 +158,18 @@ The `fallback` property controls what happens when the target file doesn't exist
 ```typescript
 // API Route Creation - Auto-create missing files
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   path: 'src/app/api/stripe/webhooks/route.ts',
-  modifier: 'ts-module-enhancer',
+  modifier: ModifierType.TS_MODULE_ENHANCER,
   fallback: 'create',  // Will create the file if it doesn't exist
   params: { /* ... */ }
 }
 
 // Configuration Enhancement - Skip if file doesn't exist
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   path: 'next.config.js',
   modifier: 'nextjs-config-wrapper',
   fallback: 'skip',  // Will skip if next.config.js doesn't exist
@@ -173,9 +178,10 @@ The `fallback` property controls what happens when the target file doesn't exist
 
 // Critical Enhancement - Fail if file doesn't exist
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   path: 'src/lib/auth/config.ts',
-  modifier: 'ts-module-enhancer',
+  modifier: ModifierType.TS_MODULE_ENHANCER,
   fallback: 'error',  // Will throw error if file doesn't exist
   params: { /* ... */ }
 }
@@ -194,7 +200,7 @@ Executes CLI commands.
 
 ```typescript
 {
-  type: 'RUN_COMMAND',
+  type: BlueprintActionType.RUN_COMMAND,
   command: 'npx shadcn-ui@latest init',
   workingDir: './src'  // optional
 }
@@ -206,7 +212,7 @@ All actions support template variables using `{{variable}}` syntax:
 
 ```typescript
 {
-  type: 'CREATE_FILE',
+  type: BlueprintActionType.CREATE_FILE,
   path: 'src/components/{{componentName}}.tsx',
   content: 'export const {{componentName}} = () => { ... };'
 }
@@ -224,7 +230,7 @@ Actions can be conditionally executed:
 
 ```typescript
 {
-  type: 'INSTALL_PACKAGES',
+  type: BlueprintActionType.INSTALL_PACKAGES,
   packages: ['@types/node'],
   condition: '{{module.parameters.typescript}}'
 }
@@ -245,7 +251,7 @@ Actions can be conditionally executed:
 ### After (Semantic)
 ```typescript
 {
-  type: 'INSTALL_PACKAGES',
+  type: BlueprintActionType.INSTALL_PACKAGES,
   packages: ['react@^18.0.0']
 }
 ```

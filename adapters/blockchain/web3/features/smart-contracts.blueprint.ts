@@ -4,7 +4,7 @@
  * Modern smart contract integration using viem with type-safe contract interactions
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const smartContractsBlueprint: Blueprint = {
   id: 'web3-smart-contracts',
@@ -12,11 +12,11 @@ const smartContractsBlueprint: Blueprint = {
   description: 'Modern smart contract integration using viem with type-safe contract interactions',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['viem@^2.0.0', '@tanstack/react-query@^5.0.0']
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/web3/contracts.ts',
       content: `import { 
   getContract, 
@@ -396,7 +396,7 @@ export class ContractManager {
 export const contractManager = new ContractManager();`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/web3/useContracts.ts',
       content: `import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { contractManager } from '../../lib/web3/contracts.js';
@@ -602,7 +602,7 @@ export function useAddressValidation() {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/web3/ContractInteraction.tsx',
       content: `import React, { useState } from 'react';
 import { useWallet } from '../../hooks/web3/useWallet.js';

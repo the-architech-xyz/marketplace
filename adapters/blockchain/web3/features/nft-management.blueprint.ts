@@ -4,7 +4,7 @@
  * Modern NFT management using viem with type-safe contract interactions
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const nftManagementBlueprint: Blueprint = {
   id: 'web3-nft-management',
@@ -12,11 +12,11 @@ const nftManagementBlueprint: Blueprint = {
   description: 'Modern NFT management using viem with type-safe contract interactions',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['viem@^2.0.0', '@tanstack/react-query@^5.0.0']
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/web3/nft.ts',
       content: `import { 
   type Address, 
@@ -376,7 +376,7 @@ export class NFTManager {
 export const nftManager = new NFTManager();`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/web3/useNFT.ts',
       content: `import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { nftManager } from '../../lib/web3/nft.js';
@@ -549,7 +549,7 @@ export function useContractType(contractAddress: Address) {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/web3/NFTGallery.tsx',
       content: `import React, { useState } from 'react';
 import { useWallet } from '../../hooks/web3/useWallet.js';

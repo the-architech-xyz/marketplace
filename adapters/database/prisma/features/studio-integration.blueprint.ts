@@ -4,14 +4,14 @@
  * Adds database management interface and admin tools
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const studioIntegrationBlueprint: Blueprint = {
   id: 'prisma-studio-integration',
   name: 'Prisma Studio Integration',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/studio-manager.ts',
       content: `import { execSync } from 'child_process';
 import { spawn } from 'child_process';
@@ -159,7 +159,7 @@ export class StudioManager {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/database/studio-widget.tsx',
       content: `'use client';
 
@@ -403,7 +403,7 @@ export function StudioWidget() {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/admin/database/page.tsx',
       content: `import { StudioWidget } from '@/components/database/studio-widget';
 

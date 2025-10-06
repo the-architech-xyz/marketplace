@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const blueprint: Blueprint = {
   id: 'better-auth-nextjs-integration',
@@ -8,13 +8,15 @@ export const blueprint: Blueprint = {
   actions: [
     // Add Next.js specific environment variables
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'BETTER_AUTH_SECRET',
       value: 'your-secret-key',
       description: 'Better Auth secret key for JWT signing'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'BETTER_AUTH_URL',
       value: 'http://localhost:3000',
       description: 'Better Auth base URL'
@@ -22,60 +24,61 @@ export const blueprint: Blueprint = {
     
     // Create standardized auth hooks (REVOLUTIONARY!)
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-auth.ts',
       template: 'templates/use-auth.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-sign-in.ts',
       template: 'templates/use-sign-in.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-sign-out.ts',
       template: 'templates/use-sign-out.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-sign-up.ts',
       template: 'templates/use-sign-up.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-user.ts',
       template: 'templates/use-user.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-session.ts',
       template: 'templates/use-session.ts.tpl'
     },
     
     // Create auth API service layer
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/api.ts',
       template: 'templates/auth-api.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/types.ts',
       template: 'templates/auth-types.ts.tpl'
     },
     
     // Create auth context and provider
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/providers/AuthProvider.tsx',
       template: 'templates/AuthProvider.tsx.tpl'
     },
     
     // PURE MODIFIER: Enhance the auth config with Next.js specific features
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/lib/auth/config.ts',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         importsToAdd: [
           { name: 'NextRequest', from: 'next/server', type: 'import' },
@@ -126,7 +129,7 @@ export function authMiddleware(request: NextRequest) {
     
     // Create Next.js API route for auth
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/auth/[...all]/route.ts',
       condition: '{{#if integration.features.apiRoutes}}',
       template: 'templates/auth-route.ts.tpl'
@@ -134,7 +137,7 @@ export function authMiddleware(request: NextRequest) {
     
     // Create Next.js middleware
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/middleware.ts',
       condition: '{{#if integration.features.middleware}}',
       template: 'templates/middleware.ts.tpl'
@@ -142,7 +145,7 @@ export function authMiddleware(request: NextRequest) {
 
     // Create session management utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/session-management.ts',
       template: 'templates/session-management.ts.tpl'
     },

@@ -4,25 +4,25 @@
  * Adds data seeding and fixtures management to Drizzle
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const seedingBlueprint: Blueprint = {
   id: 'drizzle-seeding',
   name: 'Drizzle Seeding',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['drizzle-kit'],
       isDev: true
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@faker-js/faker'],
       isDev: true,
       condition: '{{#if module.parameters.faker}}'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/seeds/seed-manager.ts',
       content: `import { db } from '../index';
 import { users, posts, comments, categories, postCategories } from '../schema';
@@ -246,7 +246,7 @@ export class SeedManager {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/seed.js',
       content: `#!/usr/bin/env node
 

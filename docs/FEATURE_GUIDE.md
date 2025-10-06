@@ -55,13 +55,13 @@ mkdir -p features/feature-name/framework-ui/templates
 
 ### 3. Create blueprint.ts
 ```typescript
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const blueprint: Blueprint = {
   version: '1.0.0',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/FeatureName.tsx',
       template: 'FeatureName.tsx.tpl',
       context: {
@@ -70,7 +70,7 @@ const blueprint: Blueprint = {
       }
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/pages/feature-name.tsx',
       template: 'page.tsx.tpl'
     }
@@ -124,17 +124,17 @@ const blueprint: Blueprint = {
   version: '1.0.0',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/TeamsDashboard.tsx',
       template: 'TeamsDashboard.tsx.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/TeamCard.tsx',
       template: 'TeamCard.tsx.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/CreateTeamForm.tsx',
       template: 'CreateTeamForm.tsx.tpl'
     }

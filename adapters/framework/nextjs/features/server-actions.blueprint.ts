@@ -5,7 +5,7 @@
  * Provides self-contained examples without external dependencies
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const nextjsServerActionsBlueprint: Blueprint = {
   id: 'nextjs-server-actions-setup',
@@ -14,31 +14,31 @@ export const nextjsServerActionsBlueprint: Blueprint = {
   actions: [
     // Create server actions utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/server-actions.ts',
       template: 'templates/server-actions.ts.tpl'
     },
     // Create example server actions
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/example-actions.ts',
       template: 'templates/example-actions.ts.tpl'
     },
     // Create example form component
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/ExampleForm.tsx',
       template: 'templates/example-form.tsx.tpl'
     },
     // Create example page
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/server-actions-example/page.tsx',
       template: 'templates/example-page.tsx.tpl'
     },
     // Create documentation
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'docs/server-actions.md',   
       template: 'templates/README.md.tpl'
     }

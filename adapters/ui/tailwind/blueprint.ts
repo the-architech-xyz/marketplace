@@ -5,7 +5,7 @@
  * Framework-agnostic CSS utilities that work with any project
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const tailwindBlueprint: Blueprint = {
   id: 'tailwind-setup',
@@ -13,44 +13,44 @@ export const tailwindBlueprint: Blueprint = {
   actions: [
     // Install Tailwind CSS
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['tailwindcss', 'postcss', 'autoprefixer'],
       isDev: true
     },
     // Install Tailwind plugins
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@tailwindcss/typography'],
       isDev: true,
       condition: '{{#if module.parameters.typography}}'
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@tailwindcss/forms'],
       isDev: true,
       condition: '{{#if module.parameters.forms}}'
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@tailwindcss/aspect-ratio'],
       isDev: true,
       condition: '{{#if module.parameters.aspectRatio}}'
     },
     // Create Tailwind config
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'tailwind.config.js',
       template: 'templates/tailwind.config.js.tpl',
     },
     // Create PostCSS config
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'postcss.config.js',
       template: 'templates/postcss.config.js.tpl'
     },
     // Create base CSS file
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/globals.css',
       template: 'templates/globals.css.tpl',
     }

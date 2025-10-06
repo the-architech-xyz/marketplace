@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const stripeShadcnIntegrationBlueprint: Blueprint = {
   id: 'stripe-shadcn-integration',
@@ -8,9 +8,10 @@ const stripeShadcnIntegrationBlueprint: Blueprint = {
   actions: [
     // Configure Tailwind for payment components
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'tailwind.config.js',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         wrapperFunction: 'withPaymentConfig',
         wrapperImport: {
@@ -26,25 +27,25 @@ const stripeShadcnIntegrationBlueprint: Blueprint = {
     },
     // Create payment-specific Tailwind configuration
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/payment/tailwind-config.ts',
       template: 'templates/tailwind-config.ts.tpl'
     },
     // Create payment utility functions
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/payment/utils.ts',
       template: 'templates/payment-utils.ts.tpl'
     },
     // Create payment component utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/payment/component-utils.ts',
       template: 'templates/component-utils.ts.tpl'
     },
     // Create payment styling constants
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/payment/styles.ts',
       template: 'templates/payment-styles.ts.tpl'
     }

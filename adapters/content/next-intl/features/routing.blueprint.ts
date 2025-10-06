@@ -4,14 +4,14 @@
  * Locale-based routing with pathname translations
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const routingBlueprint: Blueprint = {
   id: 'next-intl-routing',
   name: 'Internationalized Routing',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/i18n/routing.ts',
       content: `import {defineRouting} from 'next-intl/routing';
 import {createNavigation} from 'next-intl/navigation';
@@ -72,7 +72,7 @@ export const {Link, redirect, usePathname, useRouter} =
   createNavigation(routing);`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'middleware.ts',
       content: `import createMiddleware from 'next-intl/middleware';
 import {routing} from './src/i18n/routing';
@@ -84,7 +84,7 @@ export const config = {
 };`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/i18n/language-switcher.tsx',
       content: `'use client';
 

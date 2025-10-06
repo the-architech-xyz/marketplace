@@ -4,14 +4,14 @@
  * Adds advanced session management capabilities to Better Auth
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const sessionManagementBlueprint: Blueprint = {
   id: 'better-auth-session-management',
   name: 'Better Auth Session Management',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/session-config.ts',
       content: `// Advanced Session Management Configuration
 export const sessionConfig = {
@@ -54,7 +54,7 @@ export const sessionConfig = {
 };`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/session-utils.ts',
       content: `import { auth } from './config';
 import { sessionConfig } from './session-config';
@@ -134,7 +134,7 @@ export function withSession(handler: any) {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/session-middleware.ts',
       content: `import { SessionManager } from './session-utils';
 

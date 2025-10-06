@@ -4,14 +4,14 @@
  * Advanced query building and optimization tools
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const queryOptimizationBlueprint: Blueprint = {
   id: 'sequelize-query-optimization',
   name: 'Query Optimization',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/database/query-optimizer.ts',
       content: `import { Sequelize, QueryTypes, Transaction } from 'sequelize';
 import sequelize from '../config.js';
@@ -365,7 +365,7 @@ export class QueryOptimizer {
 export const queryOptimizer = new QueryOptimizer();`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/database/cache.ts',
       content: `import { Model, ModelCtor } from 'sequelize';
 

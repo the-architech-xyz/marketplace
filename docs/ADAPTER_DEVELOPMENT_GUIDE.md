@@ -211,7 +211,7 @@ export const winstonBlueprint: Blueprint = {
   name: 'Winston Logging Setup',
   actions: [
     {
-      type: 'RUN_COMMAND',
+      type: BlueprintActionType.RUN_COMMAND,
       command: 'npm install winston'
     },
     {
@@ -305,9 +305,10 @@ export const stripeNextjsBlueprint: Blueprint = {
   ],
   actions: [
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/app/api/stripe/webhooks/route.ts',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       fallback: 'create',  // Auto-create if missing
       params: { /* ... */ }
     }
@@ -334,7 +335,7 @@ Blueprints use **high-level semantic actions** that express intent rather than i
 
 ```typescript
 {
-  type: 'INSTALL_PACKAGES',
+  type: BlueprintActionType.INSTALL_PACKAGES,
   packages: ['stripe', '@stripe/stripe-js'],
   isDev: false  // optional, defaults to false
 }
@@ -346,7 +347,8 @@ Blueprints use **high-level semantic actions** that express intent rather than i
 
 ```typescript
 {
-  type: 'ADD_SCRIPT',
+  type: BlueprintActionType.ADD_SCRIPT,
+
   name: 'stripe:listen',
   command: 'stripe listen --forward-to localhost:3000/api/stripe/webhook'
 }
@@ -358,7 +360,8 @@ Blueprints use **high-level semantic actions** that express intent rather than i
 
 ```typescript
 {
-  type: 'ADD_ENV_VAR',
+  type: BlueprintActionType.ADD_ENV_VAR,
+
   key: 'STRIPE_SECRET_KEY',
   value: 'sk_test_...',
   description: 'Stripe secret key for payments'  // optional
@@ -371,7 +374,7 @@ Blueprints use **high-level semantic actions** that express intent rather than i
 
 ```typescript
 {
-  type: 'CREATE_FILE',
+  type: BlueprintActionType.CREATE_FILE,
   path: 'src/lib/stripe.ts',
   content: `import Stripe from 'stripe';
 
@@ -420,7 +423,7 @@ stripe.log
 
 ```typescript
 {
-  type: 'RUN_COMMAND',
+  type: BlueprintActionType.RUN_COMMAND,
   command: 'npm run build',
   workingDir: '.'  // optional
 }
@@ -432,9 +435,10 @@ stripe.log
 
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   path: 'src/app/api/auth/[...all]/route.ts',
-  modifier: 'ts-module-enhancer',
+  modifier: ModifierType.TS_MODULE_ENHANCER,
   fallback: 'create',  // Smart fallback strategy
   params: {
     importsToAdd: [
@@ -503,11 +507,12 @@ stripe.log
 ```typescript
 [
   {
-    type: 'INSTALL_PACKAGES',
+    type: BlueprintActionType.INSTALL_PACKAGES,
     packages: ['stripe', '@stripe/stripe-js']
   },
   {
-    type: 'ADD_SCRIPT',
+    type: BlueprintActionType.ADD_SCRIPT,
+
     name: 'stripe:listen',
     command: 'stripe listen --forward-to localhost:3000/api/stripe/webhook'
   }
@@ -606,7 +611,7 @@ Always use existing CLI tools when possible:
 ```typescript
 // ✅ Good - Use existing CLI
 {
-  type: 'RUN_COMMAND',
+  type: BlueprintActionType.RUN_COMMAND,
   command: 'npx create-next-app@latest . --typescript --tailwind'
 }
 
@@ -816,7 +821,7 @@ export const complexBlueprint: Blueprint = {
   actions: [
     // Install dependencies
     {
-      type: 'RUN_COMMAND',
+      type: BlueprintActionType.RUN_COMMAND,
       command: 'npm install express cors helmet'
     },
     // Create main server file

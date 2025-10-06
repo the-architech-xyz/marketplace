@@ -4,14 +4,14 @@
  * Adds OAuth providers (Google, GitHub, Discord, Twitter) to Better Auth
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const oauthProvidersBlueprint: Blueprint = {
   id: 'better-auth-oauth-providers',
   name: 'Better Auth OAuth Providers',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/oauth-config.ts',
       content: `// OAuth Providers Configuration
 export const oauthProviders = {
@@ -24,7 +24,7 @@ export const oauthProviders = {
 };`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/oauth-setup.ts',
       content: `import { oauthProviders } from './oauth-config';
 
@@ -40,7 +40,7 @@ export const oauthSetupInstructions = {
 };`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/auth/OAuthButtons.tsx',
       content: `import { authClient } from '@/lib/auth/client';
 
@@ -85,19 +85,22 @@ export function OAuthButtons({ mode }: OAuthButtonsProps) {
 }`
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'OAUTH_PROVIDERS',
       value: '{{#each module.parameters.providers}}{{toUpperCase this}},{{/each}}',
       description: 'Comma-separated list of OAuth providers'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'OAUTH_CLIENT_IDS',
       value: '{{#each module.parameters.providers}}{{toUpperCase this}}_CLIENT_ID="your-{{this}}-client-id",{{/each}}',
       description: 'OAuth client IDs for each provider'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'OAUTH_CLIENT_SECRETS',
       value: '{{#each module.parameters.providers}}{{toUpperCase this}}_CLIENT_SECRET="your-{{this}}-client-secret",{{/each}}',
       description: 'OAuth client secrets for each provider'

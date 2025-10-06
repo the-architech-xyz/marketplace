@@ -100,25 +100,29 @@ const button = {
 export default SubscriptionCancelledEmail;`,
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'RESEND_API_KEY',
       value: 're_...',
       description: 'Resend API key for sending emails'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'EMAIL_FROM',
       value: '{{module.parameters.fromEmail}}',
       description: 'Default sender email address'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'EMAIL_REPLY_TO',
       value: 'support@{{project.name}}.com',
       description: 'Reply-to email address'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'APP_URL',
       value: '{{env.APP_URL}}',
       description: 'Public app URL for email links'

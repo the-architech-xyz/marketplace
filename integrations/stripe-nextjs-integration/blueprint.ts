@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
 
 export const blueprint: Blueprint = {
   id: 'stripe-nextjs-integration',
@@ -8,51 +8,52 @@ export const blueprint: Blueprint = {
   actions: [
     // Create standardized Stripe hooks (REVOLUTIONARY!)
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-stripe.ts',
       template: 'templates/use-stripe.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-create-payment.ts',
       template: 'templates/use-create-payment.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-payment-methods.ts',
       template: 'templates/use-payment-methods.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-subscriptions.ts',
       template: 'templates/use-subscriptions.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-invoices.ts',
       template: 'templates/use-invoices.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-customers.ts',
       template: 'templates/use-customers.ts.tpl'
     },
     // Create Stripe API service layer
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/stripe/api.ts',
       template: 'templates/stripe-api.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/stripe/types.ts',
       template: 'templates/stripe-types.ts.tpl'
     },
     // PURE MODIFIER: Enhance the Stripe config with Next.js specific features
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/lib/payment/stripe.ts',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         importsToAdd: [
           { name: 'NextRequest', from: 'next/server', type: 'import' },
@@ -113,9 +114,10 @@ export const handleStripeWebhook = async (request: NextRequest) => {
     
     // PURE MODIFIER: Enhance the Stripe client with Next.js specific features
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/lib/payment/client.ts',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         importsToAdd: [
           { name: 'loadStripe', from: '@stripe/stripe-js', type: 'import' },
@@ -166,28 +168,28 @@ export const createPortalSession = async (customerId: string) => {
     
     // Create Next.js API route for webhooks
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/stripe/webhooks/route.ts',
       template: 'templates/webhooks-route.ts.tpl'
     },
     
     // Create Next.js API route for payment intents
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/stripe/create-payment-intent/route.ts',
       template: 'templates/create-payment-intent-route.ts.tpl'
     },
     
     // Create Next.js API route for subscriptions
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/stripe/create-subscription/route.ts',
       template: 'templates/create-subscription-route.ts.tpl'
     },
     
     // Create Next.js API route for customer portal
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/stripe/create-portal-session/route.ts',
       template: 'templates/create-portal-session-route.ts.tpl'
     }

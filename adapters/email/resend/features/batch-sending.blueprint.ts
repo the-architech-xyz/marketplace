@@ -4,14 +4,14 @@
  * Adds bulk email sending, list management, and campaign tools
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const batchSendingBlueprint: Blueprint = {
   id: 'resend-batch-sending',
   name: 'Resend Batch Sending',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/batch/batch-manager.ts',
       content: `import { Resend } from 'resend';
 
@@ -345,7 +345,7 @@ export class BatchManager {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/email/campaign-manager.tsx',
       content: `{{#if module.parameters.campaigns}}
 'use client';
@@ -635,7 +635,7 @@ export function CampaignManager({ batchManager }: CampaignManagerProps) {
 {{/if}}`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/email/list-manager.tsx',
       content: `{{#if module.parameters.list-management}}
 'use client';

@@ -4,19 +4,19 @@
  * Adds automated database schema migrations and versioning to Drizzle
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const migrationsBlueprint: Blueprint = {
   id: 'drizzle-migrations',
   name: 'Drizzle Migrations',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['drizzle-kit'],
       isDev: true
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'drizzle.config.ts',
       content: `import { defineConfig } from 'drizzle-kit';
 
@@ -38,7 +38,7 @@ export default defineConfig({
 });`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/migrations/migration-manager.ts',
       content: `import { migrate } from 'drizzle-orm/{{module.parameters.database}}-migrator';
 import { db } from '../index';
@@ -132,7 +132,7 @@ export class MigrationManager {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/migrate.js',
       content: `#!/usr/bin/env node
 

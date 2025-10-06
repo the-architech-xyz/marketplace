@@ -5,7 +5,7 @@
  * Includes next-seo and next-sitemap for better search engine visibility
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const nextjsSeoBlueprint: Blueprint = {
   id: 'nextjs-seo-setup',
@@ -13,12 +13,12 @@ export const nextjsSeoBlueprint: Blueprint = {
   actions: [
     // Install SEO packages
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['next-seo', 'next-sitemap']
     },
     // Create SEO configuration
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/seo.ts',
       content: `import { NextSeoProps } from 'next-seo';
 
@@ -93,7 +93,7 @@ export function createSeoProps(config: Partial<SeoConfig> = {}): NextSeoProps {
     },
     // Create sitemap configuration
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'next-sitemap.config.js',
       content: `/** @type {import('next-sitemap').IConfig} */
 module.exports = {
@@ -126,7 +126,7 @@ module.exports = {
     },
     // Create robots.txt
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'public/robots.txt',
       content: `User-agent: *
 Allow: /

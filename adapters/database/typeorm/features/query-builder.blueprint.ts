@@ -4,14 +4,14 @@
  * Adds advanced query building and optimization tools
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const queryBuilderBlueprint: Blueprint = {
   id: 'typeorm-query-builder',
   name: 'TypeORM Query Builder',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/query-builder.ts',
       content: `import { DataSource, SelectQueryBuilder, QueryRunner } from 'typeorm';
 

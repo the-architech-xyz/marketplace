@@ -5,7 +5,7 @@
  * Includes CSP, HSTS, and other security best practices
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const nextjsSecurityBlueprint: Blueprint = {
   id: 'nextjs-security-setup',
@@ -14,7 +14,7 @@ export const nextjsSecurityBlueprint: Blueprint = {
   actions: [
     // Install security packages
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         'helmet@^7.1.0',
         '@types/helmet@^4.0.0'
@@ -22,7 +22,7 @@ export const nextjsSecurityBlueprint: Blueprint = {
     },
     // Create comprehensive security middleware
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/middleware.ts',
       content: `import { NextRequest, NextResponse } from 'next/server';
 
@@ -237,7 +237,7 @@ export const config = {
     },
     // Create security utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/security.ts',
       content: `/**
  * Security utilities for Next.js 15+
@@ -465,7 +465,7 @@ export const securityMiddleware = {
     },
     // Create security monitoring component
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/security/SecurityMonitor.tsx',
       content: `'use client';
 

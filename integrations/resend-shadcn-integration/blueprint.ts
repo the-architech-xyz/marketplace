@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
 
 const resendShadcnIntegrationBlueprint: Blueprint = {
   id: 'resend-shadcn-integration',
@@ -8,9 +8,10 @@ const resendShadcnIntegrationBlueprint: Blueprint = {
   actions: [
     // Configure Tailwind for email components
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'tailwind.config.js',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         wrapperFunction: 'withEmailConfig',
         wrapperImport: {
@@ -26,25 +27,25 @@ const resendShadcnIntegrationBlueprint: Blueprint = {
     },
     // Create email-specific Tailwind configuration
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/tailwind-config.ts',
       template: 'templates/tailwind-config.ts.tpl'
     },
     // Create email utility functions
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/utils.ts',
       template: 'templates/email-utils.ts.tpl'
     },
     // Create email component utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/component-utils.ts',
       template: 'templates/component-utils.ts.tpl'
     },
     // Create email styling constants
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/styles.ts',
       template: 'templates/email-styles.ts.tpl'
     }

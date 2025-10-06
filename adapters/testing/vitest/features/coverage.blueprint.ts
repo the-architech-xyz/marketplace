@@ -4,19 +4,19 @@
  * Adds comprehensive code coverage reporting
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const coverageBlueprint: Blueprint = {
   id: 'vitest-coverage',
   name: 'Vitest Code Coverage',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@vitest/coverage-v8', '@vitest/coverage-c8'],
       isDev: true
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'vitest.config.ts',
       content: `/// <reference types="vitest" />
 import { defineConfig } from 'vite'
@@ -63,7 +63,7 @@ export default defineConfig({
 })`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: '.gitignore',
       content: `# Coverage reports
 coverage/
@@ -71,7 +71,7 @@ coverage/
 .nyc_output/`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'tests/unit/coverage.test.ts',
       content: `import { describe, it, expect } from 'vitest'
 

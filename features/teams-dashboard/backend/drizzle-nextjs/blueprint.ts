@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const teamsDashboardBackendBlueprint: Blueprint = {
   id: 'teams-dashboard-backend-drizzle-nextjs',
@@ -8,9 +8,10 @@ const teamsDashboardBackendBlueprint: Blueprint = {
   actions: [
     // Create database schema for teams
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/lib/db/schema.ts',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         importsToAdd: [
           { name: 'pgTable', from: 'drizzle-orm/pg-core', type: 'import' },
@@ -90,68 +91,68 @@ export interface TeamFilters {
 
     // Create API routes for teams
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/teams/route.ts',
       template: 'templates/api-teams-route.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/teams/[id]/route.ts',
       template: 'templates/api-team-route.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/teams/[id]/members/route.ts',
       template: 'templates/api-team-members-route.ts.tpl'
     },
 
     // Create headless hooks that implement the master schema contract
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/teams/use-teams.ts',
       template: 'templates/use-teams.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/teams/use-create-team.ts',
       template: 'templates/use-create-team.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/teams/use-update-team.ts',
       template: 'templates/use-update-team.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/teams/use-delete-team.ts',
       template: 'templates/use-delete-team.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/teams/use-team-members.ts',
       template: 'templates/use-team-members.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/teams/use-add-team-member.ts',
       template: 'templates/use-add-team-member.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/teams/use-remove-team-member.ts',
       template: 'templates/use-remove-team-member.ts.tpl'
     },
 
     // Create API service layer
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/api/teams.ts',
       template: 'templates/teams-api.ts.tpl'
     },
 
     // Create types file that exports the master schema types
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/types/teams.ts',
       template: 'templates/teams-types.ts.tpl'
     }

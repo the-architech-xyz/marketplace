@@ -5,7 +5,7 @@
  * Only installed when explicitly requested in genome.yaml
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const advancedComponentsBlueprint: Blueprint = {
   id: 'shadcn-ui-advanced-components',
@@ -13,7 +13,7 @@ export const advancedComponentsBlueprint: Blueprint = {
   actions: [
     // Install additional Radix UI dependencies for advanced components
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         '@radix-ui/react-dialog',
         '@radix-ui/react-dropdown-menu',
@@ -47,7 +47,7 @@ export const advancedComponentsBlueprint: Blueprint = {
     },
      // Install requested components
      {
-       type: 'RUN_COMMAND',
+       type: BlueprintActionType.RUN_COMMAND,
        command: 'npx shadcn@latest add {{#each module.features.advanced-components.parameters.components}}{{this}} {{/each}} --yes --overwrite --silent'
      }
   ]

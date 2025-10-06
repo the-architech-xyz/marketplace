@@ -4,19 +4,19 @@
  * Adds interactive web-based test runner interface
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const uiBlueprint: Blueprint = {
   id: 'vitest-ui',
   name: 'Vitest UI',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@vitest/ui'],
       isDev: true
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'vitest.config.ts',
       content: `/// <reference types="vitest" />
 import { defineConfig } from 'vite'
@@ -59,28 +59,32 @@ export default defineConfig({
 })`
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'test',
       command: 'vitest'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'test:run',
       command: 'vitest run'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'test:ui',
       command: 'vitest --ui --port {{module.parameters.port}}'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'test:coverage',
       command: 'vitest run --coverage',
       condition: '{{#if module.parameters.coverage}}'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/__tests__/ui-demo.test.tsx',
       content: `import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '../test/utils'

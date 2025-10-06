@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
 
 const vercelAiSdkBlueprint: Blueprint = {
   id: 'vercel-ai-sdk',
@@ -8,7 +8,7 @@ const vercelAiSdkBlueprint: Blueprint = {
   actions: [
     // Install AI SDK packages
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         'ai',
         '@ai-sdk/react',
@@ -17,7 +17,7 @@ const vercelAiSdkBlueprint: Blueprint = {
       ]
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         '@types/node'
       ],
@@ -25,68 +25,69 @@ const vercelAiSdkBlueprint: Blueprint = {
     },
     // Create AI configuration
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/ai/config.ts',
       template: 'templates/ai-config.ts.tpl'
     },
     // Create AI providers
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/ai/providers.ts',
       template: 'templates/ai-providers.ts.tpl'
     },
     // Create chat hooks
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-chat.ts',
       template: 'templates/use-chat.ts.tpl'
     },
     // Create text generation hooks
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-completion.ts',
       template: 'templates/use-completion.ts.tpl'
     },
     // Create streaming hooks
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-streaming.ts',
       template: 'templates/use-streaming.ts.tpl'
     },
     // Create AI utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/ai/utils.ts',
       template: 'templates/ai-utils.ts.tpl'
     },
     // Create AI types
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/types/ai.ts',
       template: 'templates/ai-types.ts.tpl'
     },
     // Create API routes for AI
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/chat/route.ts',
       template: 'templates/chat-route.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/completion/route.ts',
       template: 'templates/completion-route.ts.tpl'
     },
     // Create AI context provider
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/contexts/AIProvider.tsx',
       template: 'templates/AIProvider.tsx.tpl'
     },
     // Add environment variables
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: '.env.example',
-      modifier: 'env-merger',
+      modifier: ModifierType.ENV_MERGER,
       params: {
         variables: [
           {

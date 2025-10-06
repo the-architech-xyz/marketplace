@@ -110,7 +110,7 @@ EOF
 
 # Create blueprint.ts
 cat > adapters/utilities/date-utils/blueprint.ts << 'EOF'
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const blueprint: Blueprint = {
   id: 'date-utils-blueprint',
@@ -118,11 +118,11 @@ const blueprint: Blueprint = {
   description: 'Blueprint for date utility functions',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['date-fns@^2.30.0']
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/utils/date.ts',
       content: `import { format, parseISO } from 'date-fns';
 

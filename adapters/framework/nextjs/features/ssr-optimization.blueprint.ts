@@ -4,14 +4,14 @@
  * Adds server-side rendering optimization and caching to Next.js
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const ssrOptimizationBlueprint: Blueprint = {
   id: 'nextjs-ssr-optimization',
   name: 'Next.js SSR Optimization',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/ssr/cache.ts',
       content: `import { unstable_cache } from 'next/cache';
 
@@ -99,7 +99,7 @@ export async function revalidatePath(path: string) {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/ssr/streaming.ts',
       content: `import { Suspense } from 'react';
 
@@ -165,7 +165,7 @@ export function ProgressiveLoader({
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/ssr/performance.ts',
       content: `// Performance monitoring utilities
 export class PerformanceMonitor {
@@ -268,7 +268,7 @@ export function getMemoryUsage() {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/ssr/CachedData.tsx',
       content: `import { Suspense } from 'react';
 import { fetchWithCache } from '@/lib/ssr/cache';
@@ -315,7 +315,7 @@ export function CachedDataWrapper({
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/ssr/StreamingList.tsx',
       content: `import { Suspense } from 'react';
 import { StreamingWrapper, StreamingFallback } from '@/lib/ssr/streaming';
@@ -398,7 +398,7 @@ export function ProgressiveList<T>({
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/performance/page.tsx',
       content: `import { PerformanceMonitor, getMemoryUsage } from '@/lib/ssr/performance';
 import { revalidateCache, revalidatePath } from '@/lib/ssr/cache';

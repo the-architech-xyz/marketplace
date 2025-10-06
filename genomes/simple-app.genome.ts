@@ -1,5 +1,4 @@
-import { Genome } from '@thearchitech.xyz/marketplace';
-
+import { Genome } from '@thearchitech.xyz/types';
 /**
  * Simple App Genome
  * 

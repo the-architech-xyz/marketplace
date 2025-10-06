@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
 
 const zustandNextjsIntegrationBlueprint: Blueprint = {
   id: 'zustand-nextjs-integration',
@@ -8,51 +8,52 @@ const zustandNextjsIntegrationBlueprint: Blueprint = {
   actions: [
     // Create Zustand store configuration
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/store-config.ts',
       template: 'templates/store-config.ts.tpl'
     },
     // Create SSR utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/store-ssr.ts',
       template: 'templates/store-ssr.ts.tpl'
     },
     // Create hydration utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/store-hydration.ts',
       template: 'templates/store-hydration.ts.tpl'
     },
     // Create store provider
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/providers/StoreProvider.tsx',
       template: 'templates/StoreProvider.tsx.tpl'
     },
     // Create store hooks
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/useStore.ts',
       template: 'templates/useStore.ts.tpl'
     },
     // Create store utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/store-utils.ts',
       template: 'templates/store-utils.ts.tpl'
     },
     // Create example store
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/stores/example-store.ts',
       template: 'templates/example-store.ts.tpl'
     },
     // Update root layout with StoreProvider
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/app/layout.tsx',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         importsToAdd: [
           { name: 'StoreProvider', from: '@/components/providers/StoreProvider', type: 'import' }

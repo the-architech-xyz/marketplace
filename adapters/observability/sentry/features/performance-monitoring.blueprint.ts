@@ -5,18 +5,18 @@
  * Framework-agnostic implementation
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const performanceMonitoringBlueprint: Blueprint = {
   id: 'sentry-performance-monitoring',
   name: 'Sentry Performance Monitoring',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@sentry/browser', '@sentry/node']
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/monitoring/performance-tracker.ts',
       content: `// Performance monitoring utilities - framework agnostic
 export class PerformanceTracker {
@@ -72,7 +72,7 @@ export class PerformanceTracker {
 `
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/monitoring/web-vitals.ts',
       content: `// Web Vitals monitoring - framework agnostic
 export class WebVitalsTracker {

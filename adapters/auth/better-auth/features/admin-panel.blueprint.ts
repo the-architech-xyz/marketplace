@@ -4,14 +4,14 @@
  * Adds admin utilities and management functions for Better Auth
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const adminPanelBlueprint: Blueprint = {
   id: 'better-auth-admin-panel',
   name: 'Better Auth Admin Panel',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/admin.ts',
       content: `import { auth } from './config';
 
@@ -247,7 +247,7 @@ export class AuditLogger {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'docs/integrations/better-auth-admin-panel.md',
       content: `# Better Auth Admin Panel Integration Guide
 

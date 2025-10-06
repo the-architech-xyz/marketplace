@@ -4,14 +4,14 @@
  * Persist state to localStorage, sessionStorage, or custom storage
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const persistenceBlueprint: Blueprint = {
   id: 'zustand-persistence',
   name: 'State Persistence',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/stores/use-app-store.ts',
       content: `import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -114,7 +114,7 @@ export const useAppActions = () => useAppStore((state) => ({
 }));`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/storage/custom-storage.ts',
       content: `import { StateStorage } from 'zustand/middleware';
 
@@ -286,7 +286,7 @@ export function createStorage(type: string, options?: any): StateStorage {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/stores/use-persisted-store.ts',
       content: `import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -375,7 +375,7 @@ export const useOfflineStore = createPersistedStore(
 );`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-persistence.ts',
       content: `import { useEffect, useState } from 'react';
 import { useAppStore } from '../stores/use-app-store.js';

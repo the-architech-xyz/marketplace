@@ -4,14 +4,14 @@
  * Integration with Redux DevTools for debugging
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const devtoolsBlueprint: Blueprint = {
   id: 'zustand-devtools',
   name: 'Redux DevTools',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/stores/use-app-store.ts',
       content: `import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
@@ -126,7 +126,7 @@ export const useAppActions = () => useAppStore((state) => ({
 }));`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/devtools/devtools-utils.ts',
       content: `import { StateCreator } from 'zustand';
 
@@ -327,7 +327,7 @@ export function createPerformanceMonitor(storeName: string) {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/devtools/DevToolsPanel.tsx',
       content: `'use client';
 
@@ -528,7 +528,7 @@ export const DevToolsPanel: React.FC<DevToolsPanelProps> = ({ isOpen, onClose })
 };`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/useDevTools.ts',
       content: `import { useState, useEffect } from 'react';
 import { useAppStore } from '../lib/stores/use-app-store.js';

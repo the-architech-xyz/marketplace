@@ -1,121 +1,134 @@
-import { Genome } from '@thearchitech.xyz/marketplace';
-
+import { Genome } from "@thearchitech.xyz/types";
 /**
  * E-commerce Application Template
- * 
+ *
  * A complete e-commerce platform with product management, shopping cart, payments, and order tracking.
  * Perfect for building online stores and marketplaces.
  */
 const ecommerceAppGenome: Genome = {
-  version: '1.0.0',
+  version: "1.0.0",
   project: {
-    name: 'ecommerce-app',
-    description: 'Complete e-commerce platform with products, cart, and payments',
-    version: '1.0.0',
-    framework: 'nextjs'
+    name: "ecommerce-app",
+    description:
+      "Complete e-commerce platform with products, cart, and payments",
+    version: "1.0.0",
+    framework: "nextjs",
   },
   modules: [
     // === CORE FRAMEWORK ===
     {
-      id: 'framework/nextjs',
+      id: "framework/nextjs",
       parameters: {
         appRouter: true,
         typescript: true,
         tailwind: true,
-        eslint: true},
+        eslint: true,
+      },
       features: {
-          'api-routes': true,
-          middleware: true,
-          performance: true,
-          security: true,
-          seo: true,
-          'server-actions': true
-    }
+        "api-routes": true,
+        middleware: true,
+        performance: true,
+        security: true,
+        seo: true,
+        "server-actions": true,
+      },
     },
-    
+
     // === UI FRAMEWORK ===
     {
-      id: 'ui/shadcn-ui',
+      id: "ui/shadcn-ui",
       parameters: {
-        components: ['button', 'input', 'card', 'form', 'table', 'dialog', 'dropdown-menu', 'badge', 'carousel']},
+        components: [
+          "button",
+          "input",
+          "card",
+          "form",
+          "table",
+          "dialog",
+          "dropdown-menu",
+          "badge",
+          "carousel",
+        ],
+      },
       features: {
-          accessibility: true,
-          theming: true
-    }
+        accessibility: true,
+        theming: true,
+      },
     },
-    
+
     // === AUTHENTICATION ===
     {
-      id: 'auth/better-auth',
+      id: "auth/better-auth",
       parameters: {
-        providers: ['email']},
+        providers: ["email"],
+      },
       features: {
-          'email-verification': true,
-          'password-reset': true,
-          'session-management': true
-        }
+        "email-verification": true,
+        "password-reset": true,
+        "session-management": true,
+      },
     },
-    
+
     // === DATABASE ===
     {
-      id: 'database/drizzle',
+      id: "database/drizzle",
       parameters: {
-        provider: 'neon',
-        databaseType: 'postgresql'
+        provider: "neon",
+        databaseType: "postgresql",
       },
       features: {
-          migrations: true,
-          seeding: true,
-          studio: true,
-          relations: true
-        }
+        migrations: true,
+        seeding: true,
+        studio: true,
+        relations: true,
+      },
     },
-    
+
     // === PAYMENTS ===
     {
-      id: 'payment/stripe',
+      id: "payment/stripe",
       parameters: {
-        currency: 'usd',
-        mode: 'test',
+        currency: "usd",
+        mode: "test",
         webhooks: true,
-        dashboard: true
+        dashboard: true,
       },
       features: {
-        'one-time-payments': true,
+        "one-time-payments": true,
         subscriptions: true,
         marketplace: true,
-        invoicing: true
-      }
+        invoicing: true,
+      },
     },
-    
+
     // === STATE MANAGEMENT ===
     {
-      id: 'state/zustand',
+      id: "state/zustand",
       parameters: {
-        middleware: ['persist']
+        middleware: ["persist"],
       },
       features: {
         devtools: true,
-        persistence: true
-      }
+        persistence: true,
+      },
     },
-    
+
     // === TESTING ===
     {
-      id: 'testing/vitest',
+      id: "testing/vitest",
       parameters: {
         jsx: true,
-        environment: 'jsdom'
+        environment: "jsdom",
       },
       features: {
         coverage: true,
-        ui: true
-      }
+        ui: true,
+      },
     },
-    
+
     // === GOLDEN CORE ADAPTERS ===
     {
-      id: 'data-fetching/tanstack-query',
+      id: "data-fetching/tanstack-query",
       parameters: {
         devtools: true,
         suspense: false,
@@ -124,32 +137,32 @@ const ecommerceAppGenome: Genome = {
             staleTime: 5 * 60 * 1000,
             gcTime: 10 * 60 * 1000,
             retry: 3,
-            refetchOnWindowFocus: false
-          }
-        }
+            refetchOnWindowFocus: false,
+          },
+        },
       },
       features: {
         core: true,
         infinite: true,
         optimistic: true,
-        offline: true
-      }
+        offline: true,
+      },
     },
-    
+
     {
-      id: 'core/forms',
+      id: "core/forms",
       parameters: {
         zod: true,
         reactHookForm: true,
         resolvers: true,
         accessibility: true,
-        devtools: true
-      }
+        devtools: true,
+      },
     },
-    
+
     // === INTEGRATIONS ===
     {
-      id: 'integrations/drizzle-nextjs-integration',
+      id: "integrations/drizzle-nextjs-integration",
       parameters: {
         apiRoutes: true,
         middleware: true,
@@ -160,112 +173,112 @@ const ecommerceAppGenome: Genome = {
         validators: true,
         adminPanel: false,
         healthChecks: true,
-        connectionPooling: true
-      }
+        connectionPooling: true,
+      },
     },
-    
+
     {
-      id: 'integrations/better-auth-nextjs-integration',
+      id: "integrations/better-auth-nextjs-integration",
       parameters: {
         apiRoutes: true,
         middleware: true,
-        uiComponents: 'shadcn',
+        uiComponents: "shadcn",
         adminPanel: false,
         emailVerification: true,
         mfa: false,
-        passwordReset: true
-      }
+        passwordReset: true,
+      },
     },
-    
+
     {
-      id: 'integrations/stripe-nextjs-integration',
+      id: "integrations/stripe-nextjs-integration",
       parameters: {
         webhooks: true,
         apiRoutes: true,
-        customerManagement: true
-      }
+        customerManagement: true,
+      },
     },
-    
+
     {
-      id: 'integrations/stripe-shadcn-integration',
+      id: "integrations/stripe-shadcn-integration",
       parameters: {
         paymentForms: true,
         subscriptionCards: false,
         invoiceTables: true,
-        pricingCards: true
-      }
+        pricingCards: true,
+      },
     },
-    
+
     {
-      id: 'integrations/tanstack-query-nextjs-integration',
+      id: "integrations/tanstack-query-nextjs-integration",
       parameters: {
         devtools: true,
         ssr: true,
         hydration: true,
         prefetching: true,
-        errorBoundary: true
-      }
+        errorBoundary: true,
+      },
     },
-    
+
     {
-      id: 'integrations/zustand-nextjs-integration',
+      id: "integrations/zustand-nextjs-integration",
       parameters: {
         persistence: true,
         devtools: true,
-        ssr: true
-      }
+        ssr: true,
+      },
     },
-    
+
     {
-      id: 'integrations/rhf-zod-shadcn-integration',
+      id: "integrations/rhf-zod-shadcn-integration",
       parameters: {
         formComponents: true,
         validation: true,
-        accessibility: true
-      }
+        accessibility: true,
+      },
     },
 
     // =============================================================================
     // FEATURE MODULES - E-commerce specific features
     // =============================================================================
     {
-      id: 'features/payment-management/nextjs-shadcn',
+      id: "features/payment-management/nextjs-shadcn",
       parameters: {
-        theme: 'default',
+        theme: "default",
         features: {
           paymentForms: true,
           subscriptionCards: false,
           invoiceTables: true,
-          pricingCards: true
-        }
-      }
+          pricingCards: true,
+        },
+      },
     },
     {
-      id: 'features/email-management/nextjs-shadcn',
+      id: "features/email-management/nextjs-shadcn",
       parameters: {
-        theme: 'default',
+        theme: "default",
         features: {
           composer: true,
           templates: true,
           analytics: true,
-          settings: true
-        }
-      }
+          settings: true,
+        },
+      },
     },
     {
-      id: 'features/user-profile/nextjs-shadcn',
+      id: "features/user-profile/nextjs-shadcn",
       parameters: {
-        theme: 'default',
+        theme: "default",
         features: {
           avatarUpload: true,
           preferences: true,
           security: true,
           notifications: true,
-          exportData: false
-        }
-      }
-    }
-  ]
+          exportData: false,
+        },
+      },
+    },
+  ],
 };
 
 export default ecommerceAppGenome;

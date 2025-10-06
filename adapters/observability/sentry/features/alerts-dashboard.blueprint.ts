@@ -5,14 +5,14 @@
  * Framework-agnostic implementation
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const alertsDashboardBlueprint: Blueprint = {
   id: 'sentry-alerts-dashboard',
   name: 'Sentry Alerts Dashboard',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/alerts/alert-manager.ts',
       content: `// Alert management utilities - framework agnostic
 export class AlertManager {
@@ -49,7 +49,7 @@ export class AlertManager {
 `
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/alerts/notification-channels.ts',
       content: `// Notification channels - framework agnostic
 export class NotificationChannels {

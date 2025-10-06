@@ -65,7 +65,7 @@
     "precommit": "npm run validate && npm run types:generate"
   },
   "dependencies": {
-    "@thearchitech.xyz/types": "^1.10.0",
+    "@thearchitech.xyz/types": "^1.11.12",
     "@types/glob": "^9.0.0"
   },
   "devDependencies": {

@@ -4,18 +4,18 @@
  * Adds 2FA/TOTP support to Better Auth
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const multiFactorBlueprint: Blueprint = {
   id: 'better-auth-multi-factor',
   name: 'Better Auth Multi-Factor Authentication',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['speakeasy', 'qrcode']
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/mfa.ts',
       content: `import speakeasy from 'speakeasy';
 import QRCode from 'qrcode';
@@ -179,7 +179,7 @@ declare global {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/auth/mfa/setup/route.ts',
       content: `import { NextRequest, NextResponse } from 'next/server';
 import { MFAManager } from '@/lib/auth/mfa';
@@ -210,7 +210,7 @@ export const POST = withSession(async (req: any, res: any) => {
 });`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/auth/mfa/enable/route.ts',
       content: `import { NextRequest, NextResponse } from 'next/server';
 import { MFAManager } from '@/lib/auth/mfa';
@@ -247,7 +247,7 @@ export const POST = withSession(async (req: any, res: any) => {
 });`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/auth/mfa/disable/route.ts',
       content: `import { NextRequest, NextResponse } from 'next/server';
 import { MFAManager } from '@/lib/auth/mfa';
@@ -275,7 +275,7 @@ export const POST = withSession(async (req: any, res: any) => {
 });`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/auth/mfa/verify/route.ts',
       content: `import { NextRequest, NextResponse } from 'next/server';
 import { MFAManager } from '@/lib/auth/mfa';
@@ -301,7 +301,7 @@ export async function POST(req: NextRequest) {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/auth/MFASetup.tsx',
       content: `'use client';
 
@@ -490,7 +490,7 @@ export function MFASetup({ onComplete, onCancel }: MFASetupProps) {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/auth/MFAVerification.tsx',
       content: `'use client';
 

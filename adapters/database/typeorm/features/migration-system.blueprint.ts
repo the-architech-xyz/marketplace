@@ -4,19 +4,19 @@
  * Adds database migrations and schema versioning
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const migrationSystemBlueprint: Blueprint = {
   id: 'typeorm-migration-system',
   name: 'TypeORM Migration System',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['typeorm'],
       isDev: true
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/migration-manager.ts',
       content: `import { DataSource } from 'typeorm';
 import { execSync } from 'child_process';

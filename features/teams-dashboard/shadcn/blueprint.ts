@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const teamsDashboardShadcnBlueprint: Blueprint = {
   id: 'teams-dashboard-shadcn',
@@ -8,7 +8,8 @@ const teamsDashboardShadcnBlueprint: Blueprint = {
   actions: [
     // Configure Tailwind for teams components
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'tailwind.config.js',
       modifier: 'js-export-wrapper',
       params: {
@@ -26,25 +27,25 @@ const teamsDashboardShadcnBlueprint: Blueprint = {
     },
     // Create teams-specific Tailwind configuration
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/teams/tailwind-config.ts',
       template: 'templates/tailwind-config.ts.tpl'
     },
     // Create teams utility functions
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/teams/utils.ts',
       template: 'templates/teams-utils.ts.tpl'
     },
     // Create teams component utilities
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/teams/component-utils.ts',
       template: 'templates/component-utils.ts.tpl'
     },
     // Create teams styling constants
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/teams/styles.ts',
       template: 'templates/teams-styles.ts.tpl'
     }

@@ -235,37 +235,43 @@ export function requireSubscription(user: User) {
 
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'STRIPE_SECRET_KEY',
       value: 'sk_test_...',
       description: 'Stripe secret key for subscriptions'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'STRIPE_PUBLISHABLE_KEY',
       value: 'pk_test_...',
       description: 'Stripe publishable key for client-side'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'STRIPE_WEBHOOK_SECRET',
       value: 'whsec_...',
       description: 'Stripe webhook secret for verification'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'STRIPE_BASIC_PLAN_PRICE_ID',
       value: 'price_...',
       description: 'Stripe price ID for basic plan (create in Stripe Dashboard)'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'STRIPE_PRO_PLAN_PRICE_ID',
       value: 'price_...',
       description: 'Stripe price ID for pro plan (create in Stripe Dashboard)'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'STRIPE_ENTERPRISE_PLAN_PRICE_ID',
       value: 'price_...',
       description: 'Stripe price ID for enterprise plan (create in Stripe Dashboard)'

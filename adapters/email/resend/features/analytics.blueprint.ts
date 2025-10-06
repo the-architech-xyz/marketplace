@@ -4,14 +4,14 @@
  * Adds detailed email tracking, open rates, and click analytics
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const analyticsBlueprint: Blueprint = {
   id: 'resend-analytics',
   name: 'Resend Analytics',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/analytics/analytics-manager.ts',
       content: `import { Resend } from 'resend';
 
@@ -228,7 +228,7 @@ export class AnalyticsManager {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/email/analytics-dashboard.tsx',
       content: `{{#if module.parameters.dashboard}}
 'use client';

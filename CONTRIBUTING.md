@@ -106,7 +106,7 @@ mkdir -p adapters/category/adapter-name
 ### 3. Create `blueprint.ts`
 
 ```typescript
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const blueprint: Blueprint = {
   id: 'adapter-name-blueprint',
@@ -114,11 +114,11 @@ const blueprint: Blueprint = {
   description: 'Blueprint for my adapter',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['my-package@^1.0.0']
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.src}}/lib/my-adapter.ts',
       content: '// My adapter implementation'
     }
@@ -170,7 +170,7 @@ mkdir -p integrations/integration-name
 ### 3. Create `blueprint.ts`
 
 ```typescript
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const blueprint: Blueprint = {
   id: 'integration-name-blueprint',
@@ -178,7 +178,7 @@ const blueprint: Blueprint = {
   description: 'Blueprint for my integration',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.src}}/lib/integrations/my-integration.ts',
       content: '// Integration implementation'
     }

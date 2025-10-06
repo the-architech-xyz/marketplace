@@ -351,7 +351,7 @@ Integration blueprints use the same actions as regular adapters, with special fo
 
 ```typescript
 {
-  type: 'RUN_COMMAND',
+  type: BlueprintActionType.RUN_COMMAND,
   command: 'npm install @stripe/stripe-js'
 }
 ```
@@ -374,9 +374,10 @@ Integration blueprints often need to create API routes and modify existing files
 
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   path: 'src/app/api/stripe/webhooks/route.ts',
-  modifier: 'ts-module-enhancer',
+  modifier: ModifierType.TS_MODULE_ENHANCER,
   fallback: 'create',  // Auto-create missing API routes
   params: {
     importsToAdd: [
@@ -399,7 +400,8 @@ Integration blueprints often need to create API routes and modify existing files
 
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   path: 'next.config.js',
   modifier: 'nextjs-config-wrapper',
   fallback: 'skip',  // Skip if config doesn't exist
@@ -414,9 +416,10 @@ Integration blueprints often need to create API routes and modify existing files
 
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   path: 'src/lib/payment/stripe.ts',
-  modifier: 'ts-module-enhancer',
+  modifier: ModifierType.TS_MODULE_ENHANCER,
   fallback: 'error',  // Fail if file doesn't exist
   params: {
     importsToAdd: [

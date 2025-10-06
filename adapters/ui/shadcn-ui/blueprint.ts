@@ -5,7 +5,7 @@
  * Handles all UI and styling configuration
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy } from '@thearchitech.xyz/types';
 
 const shadcnUiBlueprint: Blueprint = {
   id: 'shadcn-ui-installer',
@@ -14,7 +14,7 @@ const shadcnUiBlueprint: Blueprint = {
   actions: [
     // Install Tailwind CSS v4 and PostCSS plugin
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         'tailwindcss@next',
         '@tailwindcss/postcss@next'
@@ -22,7 +22,7 @@ const shadcnUiBlueprint: Blueprint = {
     },   
     // Create PostCSS configuration for Tailwind CSS v4
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'postcss.config.mjs',
       content: `const config = {
   plugins: ["@tailwindcss/postcss"],
@@ -32,12 +32,12 @@ export default config;`
     },
     // Create Tailwind CSS v4 globals.css
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/globals.css',
-      modifier: 'css-enhancer',
-      fallback: 'create',
-      params: {
-        content: `@import "tailwindcss";
+        content: `
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
 
 @layer base {
   :root {
@@ -103,11 +103,10 @@ export default config;`
     @apply border-border;
   }
 }`
-      }
     },
     // Install core Shadcn/ui dependencies
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         '@radix-ui/react-slot@^1.0.2',
         'class-variance-authority@^0.7.0',
@@ -118,7 +117,7 @@ export default config;`
     },
     // Install core Radix UI primitives
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         '@radix-ui/react-dialog@^1.0.5',
         '@radix-ui/react-dropdown-menu@^2.0.6',
@@ -148,7 +147,7 @@ export default config;`
     },
     // Install additional utilities
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         'cmdk@^0.2.0',
         'date-fns@^2.30.0',
@@ -161,19 +160,19 @@ export default config;`
     },
     // Set npm to use legacy peer deps for React 19 compatibility
     {
-      type: 'RUN_COMMAND',
+      type: BlueprintActionType.RUN_COMMAND,
       command: 'npm config set legacy-peer-deps true'
     },
 
     // Initialize Shadcn/ui (non-interactive, Tailwind v4 compatible)
     {
-      type: 'RUN_COMMAND',
+      type: BlueprintActionType.RUN_COMMAND,
       command: 'npx shadcn@latest init --yes --defaults --force --silent --src-dir --css-variables --base-color slate'
     },
     // Install components from genome parameters using forEach pattern
     // This will be dynamically expanded by the BlueprintExecutor
     {
-      type: 'RUN_COMMAND',
+      type: BlueprintActionType.RUN_COMMAND,
       command: 'npx shadcn@latest add {{item}} --yes --overwrite',
       forEach: 'module.parameters.components',
       workingDir: '.'

@@ -4,14 +4,14 @@
  * Advanced model relationships and associations
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const associationsBlueprint: Blueprint = {
   id: 'sequelize-associations',
   name: 'Model Associations',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/database/associations.ts',
       content: `import { Model, DataTypes, Association } from 'sequelize';
 import sequelize from '../config.js';
@@ -462,7 +462,7 @@ export const models = {
 export default models;`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/database/query-helpers.ts',
       content: `import { Op, WhereOptions, Order } from 'sequelize';
 import { User, Post, Comment, Profile, Tag } from './associations.js';

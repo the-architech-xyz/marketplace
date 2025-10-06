@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const teamsDataIntegrationBlueprint: Blueprint = {
   id: 'teams-data-integration',
@@ -8,9 +8,10 @@ const teamsDataIntegrationBlueprint: Blueprint = {
   actions: [
     // Create database schema for teams
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/lib/db/schema.ts',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         statementsToAppend: [
           {
@@ -51,53 +52,53 @@ export const teamInvitations = pgTable('team_invitations', {
     
     // Create teams API service layer
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/api/teams.ts',
       template: 'templates/teams-api.ts.tpl'
     },
     
     // Create teams data hooks
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-teams.ts',
       template: 'templates/use-teams.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-team-members.ts',
       template: 'templates/use-team-members.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-team-invitations.ts',
       template: 'templates/use-team-invitations.ts.tpl'
     },
     
     // Create API routes
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/teams/route.ts',
       template: 'templates/teams-route.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/teams/[id]/route.ts',
       template: 'templates/team-route.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/teams/[id]/members/route.ts',
       template: 'templates/team-members-route.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/teams/[id]/invitations/route.ts',
       template: 'templates/team-invitations-route.ts.tpl'
     },
     
     // Create types
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/types/teams.ts',
       template: 'templates/teams-types.ts.tpl'
     }

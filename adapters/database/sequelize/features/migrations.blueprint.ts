@@ -4,14 +4,14 @@
  * Automated database schema migrations and versioning
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const migrationsBlueprint: Blueprint = {
   id: 'sequelize-migrations',
   name: 'Database Migrations',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/database/migrations.ts',
       content: `import { Sequelize } from 'sequelize';
 import { execSync } from 'child_process';
@@ -203,7 +203,7 @@ export class MigrationManager {
 export const migrationManager = new MigrationManager();`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/scripts/migrate.ts',
       content: `#!/usr/bin/env node
 
@@ -279,37 +279,44 @@ async function main() {
 main();`
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'migrate:generate',
       command: 'tsx src/scripts/migrate.ts generate'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'migrate:up',
       command: 'tsx src/scripts/migrate.ts up'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'migrate:down',
       command: 'tsx src/scripts/migrate.ts down'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'migrate:down:all',
       command: 'tsx src/scripts/migrate.ts down:all'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'migrate:status',
       command: 'tsx src/scripts/migrate.ts status'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'migrate:backup',
       command: 'tsx src/scripts/migrate.ts backup'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'migrate:restore',
       command: 'tsx src/scripts/migrate.ts restore'
     }

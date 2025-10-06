@@ -114,7 +114,7 @@ The `adapter.json` file defines your adapter's metadata, parameters, and capabil
 The blueprint defines what your adapter does when executed. It's a series of **Semantic Actions**.
 
 ```typescript
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const loggerBlueprint: Blueprint = {
   id: 'logger-setup',
@@ -123,32 +123,33 @@ export const loggerBlueprint: Blueprint = {
   actions: [
     // 1. Install packages
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['winston', 'winston-daily-rotate-file']
     },
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@types/winston'],
       isDev: true
     },
     
     // 2. Create configuration file
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}/logger.ts',
       template: 'templates/logger.ts.tpl'
     },
     
     // 3. Create index file
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}/index.ts',
       template: 'templates/index.ts.tpl'
     },
     
     // 4. Add environment variables
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'LOG_LEVEL',
       value: '{{module.parameters.level}}',
       description: 'Default log level'
@@ -156,7 +157,8 @@ export const loggerBlueprint: Blueprint = {
     
     // 5. Add npm script
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'logs:view',
       command: 'tail -f logs/app.log'
     }
@@ -279,7 +281,8 @@ For more sophisticated adapters, you can use **modifiers** to enhance existing f
 
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   file: 'package.json',
   modifier: 'json-merger',
   params: {
@@ -297,9 +300,10 @@ For more sophisticated adapters, you can use **modifiers** to enhance existing f
 
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   file: 'src/app/layout.tsx',
-  modifier: 'ts-module-enhancer',
+  modifier: ModifierType.TS_MODULE_ENHANCER,
   params: {
     importsToAdd: [
       { name: 'logger', from: '@/lib/logger' }

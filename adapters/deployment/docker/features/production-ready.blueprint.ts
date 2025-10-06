@@ -4,14 +4,14 @@
  * Production-ready configuration with security and monitoring
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const productionReadyBlueprint: Blueprint = {
   id: 'docker-production-ready',
   name: 'Production Ready',
   actions: [
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'Dockerfile.production',
       content: `# Production-ready Dockerfile for {{project.name}}
 # Optimized for security, performance, and monitoring
@@ -65,7 +65,7 @@ ENV HOSTNAME "0.0.0.0"
 CMD ["server.js"]`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'docker-compose.production.yml',
       content: `version: '3.8'
 
@@ -204,7 +204,7 @@ volumes:
   {{/if}}`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'nginx.conf',
       content: `events {
     worker_connections 1024;
@@ -284,7 +284,7 @@ http {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'prometheus.yml',
       content: `global:
   scrape_interval: 15s
@@ -321,7 +321,7 @@ scrape_configs:
     scrape_interval: 10s`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/deploy-production.sh',
       content: `#!/bin/bash
 
@@ -373,27 +373,32 @@ echo "📈 Grafana: http://localhost:3001 (admin/\$GRAFANA_PASSWORD)"
 echo "🔍 Prometheus: http://localhost:9090"`
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'docker:build:production',
       command: 'docker build -f Dockerfile.production -t {{project.name}}:production .'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'docker:deploy:production',
       command: 'bash scripts/deploy-production.sh'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'docker:compose:production',
       command: 'docker-compose -f docker-compose.production.yml up -d'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'docker:stop:production',
       command: 'docker-compose -f docker-compose.production.yml down'
     },
     {
-      type: 'ADD_SCRIPT',
+      type: BlueprintActionType.ADD_SCRIPT,
+
       name: 'docker:logs:production',
       command: 'docker-compose -f docker-compose.production.yml logs -f'
     }

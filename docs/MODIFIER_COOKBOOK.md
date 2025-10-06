@@ -22,7 +22,8 @@ The Architech's **Pure Modifiers** are sophisticated tools that perform precise,
 
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   file: 'path/to/config.js',
   modifier: 'js-config-merger',
   params: {
@@ -55,7 +56,8 @@ module.exports = {
 **Blueprint Action:**
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   file: 'tailwind.config.js',
   modifier: 'js-config-merger',
   params: {
@@ -113,9 +115,10 @@ module.exports = {
 
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   file: 'path/to/file.ts',
-  modifier: 'ts-module-enhancer',
+  modifier: ModifierType.TS_MODULE_ENHANCER,
   params: {
     importsToAdd?: Array<{
       name: string,                     // Import name
@@ -145,9 +148,10 @@ export function getUser() {
 **Blueprint Action:**
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   file: 'src/lib/auth.ts',
-  modifier: 'ts-module-enhancer',
+  modifier: ModifierType.TS_MODULE_ENHANCER,
   params: {
     importsToAdd: [
       { name: 'jwt', from: 'jsonwebtoken' },
@@ -209,7 +213,8 @@ export function verifyToken(token: string): User | null {
 
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   file: 'path/to/file.json',
   modifier: 'json-merger',
   params: {
@@ -241,7 +246,8 @@ export function verifyToken(token: string): User | null {
 **Blueprint Action:**
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   file: 'package.json',
   modifier: 'json-merger',
   params: {
@@ -301,7 +307,8 @@ export function verifyToken(token: string): User | null {
 
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   file: 'path/to/layout.tsx',
   modifier: 'jsx-children-wrapper',
   params: {
@@ -341,7 +348,8 @@ export default function RootLayout({
 **Blueprint Action:**
 ```typescript
 {
-  type: 'ENHANCE_FILE',
+  type: BlueprintActionType.ENHANCE_FILE,
+
   file: 'src/app/layout.tsx',
   modifier: 'jsx-children-wrapper',
   params: {

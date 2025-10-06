@@ -1,4 +1,4 @@
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const sentryNextjsIntegrationBlueprint: Blueprint = {
   id: 'sentry-nextjs-integration',
@@ -8,65 +8,69 @@ const sentryNextjsIntegrationBlueprint: Blueprint = {
   actions: [
     // Install Next.js specific Sentry package
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@sentry/nextjs'],
       isDev: false
     },
     
     // Create standardized monitoring hooks (REVOLUTIONARY!)
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-error-tracking.ts',
       template: 'templates/use-error-tracking.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-performance-monitoring.ts',
       template: 'templates/use-performance-monitoring.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-user-feedback.ts',
       template: 'templates/use-user-feedback.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-sentry.ts',
       template: 'templates/use-sentry.ts.tpl'
     },
     // Create Sentry API service layer
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/sentry/api.ts',
       template: 'templates/sentry-api.ts.tpl'
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/sentry/types.ts',
       template: 'templates/sentry-types.ts.tpl'
     },
     
     // Add Next.js specific environment variables
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'NEXT_PUBLIC_SENTRY_DSN',
       value: 'https://...@sentry.io/...',
       description: 'Sentry DSN for client-side error tracking'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'SENTRY_ORG',
       value: 'your-org',
       description: 'Sentry organization slug'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'SENTRY_PROJECT',
       value: 'your-project',
       description: 'Sentry project name'
     },
     {
-      type: 'ADD_ENV_VAR',
+      type: BlueprintActionType.ADD_ENV_VAR,
+
       key: 'SENTRY_AUTH_TOKEN',
       value: 'sntrys_...',
       description: 'Sentry auth token for releases'
@@ -74,10 +78,11 @@ const sentryNextjsIntegrationBlueprint: Blueprint = {
     
     // V1 MODIFIER: Wrap next.config.js with Sentry HOC
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'next.config.js',
       condition: '{{#if integration.features.errorTracking}}',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         wrapperFunction: 'withSentryConfig',
         wrapperImport: {
@@ -100,10 +105,11 @@ const sentryNextjsIntegrationBlueprint: Blueprint = {
     
     // V1 MODIFIER: Add Sentry client configuration
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/lib/sentry/client.ts',
       condition: '{{#if integration.features.errorTracking}}',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         importsToAdd: [
           { name: '* as Sentry', from: '@sentry/nextjs', type: 'import' }
@@ -138,10 +144,11 @@ if (typeof window !== 'undefined') {
     
     // V1 MODIFIER: Add Sentry server configuration
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/lib/sentry/server.ts',
       condition: '{{#if integration.features.errorTracking}}',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         importsToAdd: [
           { name: '* as Sentry', from: '@sentry/nextjs', type: 'import' }
@@ -166,10 +173,11 @@ Sentry.init(sentryServerConfig);`
     
     // V1 MODIFIER: Add Sentry configuration utilities
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/lib/sentry/config.ts',
       condition: '{{#if integration.features.errorTracking}}',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         importsToAdd: [
           { name: '* as Sentry', from: '@sentry/nextjs', type: 'import' }
@@ -209,7 +217,8 @@ export const startNextjsSpan = (name: string, op: string) => {
     
     // V1 MODIFIER: Wrap layout children with Sentry provider
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/app/layout.tsx',
       condition: '{{#if integration.features.errorTracking}}',
       modifier: 'jsx-children-wrapper',
@@ -232,10 +241,11 @@ export const startNextjsSpan = (name: string, op: string) => {
     
     // V1 MODIFIER: Create Next.js middleware for Sentry
     {
-      type: 'ENHANCE_FILE',
+      type: BlueprintActionType.ENHANCE_FILE,
+
       path: 'src/middleware.ts',
       condition: '{{#if integration.features.middleware}}',
-      modifier: 'ts-module-enhancer',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
       params: {
         importsToAdd: [
           { name: '* as Sentry', from: '@sentry/nextjs', type: 'import' },

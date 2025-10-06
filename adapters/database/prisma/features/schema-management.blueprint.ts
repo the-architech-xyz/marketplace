@@ -4,19 +4,19 @@
  * Adds advanced schema management with Prisma schema and migrations
  */
 
-import { Blueprint } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const schemaManagementBlueprint: Blueprint = {
   id: 'prisma-schema-management',
   name: 'Prisma Schema Management',
   actions: [
     {
-      type: 'INSTALL_PACKAGES',
+      type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['prisma'],
       isDev: true
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/schema-manager.ts',
       content: `import { execSync } from 'child_process';
 import * as fs from 'fs';
@@ -205,7 +205,7 @@ export class SchemaManager {
 }`
     },
     {
-      type: 'CREATE_FILE',
+      type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/database/schema-manager.tsx',
       content: `'use client';
 
