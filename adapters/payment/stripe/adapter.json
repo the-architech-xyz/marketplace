@@ -6,18 +6,23 @@
   "version": "1.0.0",
   "blueprint": "blueprint.ts",
   "dependencies": [],
-  "capabilities": [
-    "one-time-payments",
-    "subscriptions",
-    "webhooks",
-    "customer-management",
-    "invoice-generation",
-    "refunds",
-    "multi-currency",
-    "tax-calculation",
-    "fraud-protection",
-    "mobile-payments"
-  ],
+  "capabilities": {
+    "payment-processing": {
+      "version": "1.0.0",
+      "description": "Complete payment processing with Stripe",
+      "provides": ["one-time-payments", "subscriptions", "webhooks", "customer-management", "invoice-generation", "refunds", "multi-currency", "tax-calculation", "fraud-protection", "mobile-payments"]
+    },
+    "subscription-management": {
+      "version": "1.0.0",
+      "description": "Recurring payment and subscription lifecycle management",
+      "provides": ["subscriptions", "billing-portal", "proration", "plan-changes"]
+    },
+    "webhook-handling": {
+      "version": "1.0.0",
+      "description": "Stripe webhook processing and event handling",
+      "provides": ["webhooks", "event-processing", "signature-verification"]
+    }
+  },
   "limitations": "Requires Stripe account and API keys",
   "parameters": {
     "currency": {

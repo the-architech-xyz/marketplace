@@ -13,7 +13,7 @@ export interface AiVercelAiSdkParams {
   features: Record<string, any>;
 
   /** Default AI model */
-  defaultModel: string;
+  defaultModel: 'gpt-3.5-turbo' | 'gpt-4' | 'gpt-4-turbo' | 'claude-3-sonnet' | 'claude-3-opus';
 
   /** Maximum tokens for generation */
   maxTokens: number;

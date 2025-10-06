@@ -8,9 +8,16 @@
     "framework": "nextjs",
     "adapters": ["drizzle"]
   },
-  "requirements": {
+  "prerequisites": {
     "modules": ["drizzle", "nextjs"],
-    "dependencies": ["drizzle-orm", "postgres", "react", "react-dom"]
+    "capabilities": ["database-orm", "api-routes"]
+  },
+  "capabilities": {
+    "database-nextjs-integration": {
+      "version": "1.0.0",
+      "description": "Complete Drizzle ORM integration for Next.js",
+      "provides": ["database-api-routes", "database-middleware", "database-queries", "database-transactions", "teams-data-hooks"]
+    }
   },
   "provides": {
     "files": [
@@ -25,11 +32,7 @@
       "src/lib/db/validators.ts",
       "src/lib/db/middleware.ts"
     ],
-    "components": [
-      "DatabaseProvider",
-      "QueryProvider",
-      "DatabaseDebugger"
-    ],
+    "components": [],
     "pages": [
       "src/app/api/db/health/route.ts",
       "src/app/api/db/migrate/route.ts",

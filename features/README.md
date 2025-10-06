@@ -38,10 +38,13 @@ Features can depend on:
   "description": "Complete teams management dashboard with Next.js and Shadcn/ui",
   "version": "1.0.0",
   "prerequisites": {
-    "adapters": ["nextjs", "shadcn-ui", "drizzle", "better-auth"],
-    "integrators": ["drizzle-nextjs", "better-auth-nextjs"]
+    "capabilities": ["teams-data-hooks", "shadcn-ui", "user-authentication"],
+    "adapters": ["nextjs"],
+    "integrators": ["drizzle-nextjs-integration"]
   },
-  "capabilities": ["teams-management", "user-dashboard", "team-collaboration"]
+  "provides": {
+    "capabilities": ["teams-management", "user-dashboard", "team-collaboration", "team-settings", "team-members", "team-invitations"]
+  }
 }
 ```
 

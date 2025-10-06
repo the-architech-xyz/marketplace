@@ -314,9 +314,16 @@ export function useStripe() {
     "framework": "string",           // Framework (agnostic, nextjs, etc.)
     "adapters": ["string"]           // Required adapters
   },
-  "requirements": {                  // Requirements
+  "prerequisites": {                 // Prerequisites
     "modules": ["string"],           // Required modules
-    "dependencies": ["string"]       // Additional dependencies
+    "capabilities": ["string"]       // Required capabilities
+  },
+  "capabilities": {                  // What this integration provides
+    "integration-name": {
+      "version": "string",           // Capability version
+      "description": "string",       // Capability description
+      "provides": ["string"]         // Specific functionalities provided
+    }
   },
   "provides": {                      // What this integration provides
     "files": ["string"],             // Files generated

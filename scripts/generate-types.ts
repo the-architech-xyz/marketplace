@@ -9,11 +9,13 @@ import * as path from 'path';
 import { BlueprintParser } from './blueprint-parser.js';
 import { TemplatePathResolver } from './template-path-resolver.js';
 import { TypeGeneratorHelpers } from './generate-types-helpers.js';
+import { CapabilityTypeGenerator } from './generate-capability-types.js';
 import { BlueprintAnalysisResult, ModuleArtifacts } from '@thearchitech.xyz/types';
 
 export class SmartTypeGenerator {
   private parser: BlueprintParser;
   private pathResolver: TemplatePathResolver;
+  private capabilityGenerator: CapabilityTypeGenerator;
   private marketplacePath: string;
   private outputPath: string;
 
@@ -22,6 +24,7 @@ export class SmartTypeGenerator {
     this.outputPath = outputPath;
     this.parser = new BlueprintParser(marketplacePath);
     this.pathResolver = new TemplatePathResolver();
+    this.capabilityGenerator = new CapabilityTypeGenerator();
   }
 
   /**
@@ -48,6 +51,11 @@ export class SmartTypeGenerator {
     for (const integration of integrations) {
       await this.generateIntegrationTypes(integration);
     }
+    
+    // Generate capability types
+    console.log('🎯 Generating capability types...');
+    const capabilityOutputPath = path.join(this.outputPath, 'capabilities.ts');
+    await this.capabilityGenerator.generateCapabilityTypes(this.marketplacePath, capabilityOutputPath);
     
     // Generate master index
     await TypeGeneratorHelpers.generateMasterIndex(analysisResults, this.outputPath);

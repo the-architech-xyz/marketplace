@@ -4,7 +4,7 @@
   "description": "Web3 UI components with Shadcn/ui for modern blockchain applications",
   "version": "1.0.0",
   "category": "ui",
-  "requirements": {
+  "prerequisites": {
     "capabilities": ["shadcn-ui", "web3-nextjs-integration"]
   },
   "capabilities": [
@@ -16,21 +16,6 @@
     "shadcn-components"
   ],
   "limitations": "Requires web3-nextjs-integration for functionality",
-  "parameters": {
-    "components": {
-      "type": "array",
-      "default": [
-        "WalletCard",
-        "TransactionCard", 
-        "NetworkSwitcher",
-        "ConnectButton",
-        "DisconnectButton",
-        "BalanceDisplay",
-        "TransactionForm"
-      ],
-      "description": "Web3 UI components to install",
-      "required": false
-    }
-  },
+  "parameters": {},
   "constraints": {}
 }

@@ -46,6 +46,7 @@ export declare const DrizzleNextjsIntegrationArtifacts: {
     'src/lib/db/mutations.ts',
     'src/app/api/db/migrate/route.ts',
     'src/app/api/db/seed/route.ts',
+    'src/lib/db/transactions.ts',
     'src/types/api.ts'
   ],
   enhances: [],

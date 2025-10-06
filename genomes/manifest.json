@@ -39,8 +39,58 @@
       "tags": ["blog", "cms", "seo", "content"],
       "modules": 8,
       "file": "blog-app.genome.ts"
+    },
+    {
+      "id": "saas-starter",
+      "name": "SaaS Starter",
+      "description": "The perfect, production-ready foundation for your next subscription-based application",
+      "category": "saas",
+      "complexity": "intermediate",
+      "tags": ["saas", "subscription", "payments", "teams", "authentication"],
+      "modules": 25,
+      "file": "saas-starter.genome.ts"
+    },
+    {
+      "id": "ai-powered-blog",
+      "name": "AI-Powered Blog",
+      "description": "A modern content platform with AI-powered features and seamless content management",
+      "category": "content",
+      "complexity": "intermediate",
+      "tags": ["ai", "blog", "content", "chat", "i18n"],
+      "modules": 20,
+      "file": "ai-powered-blog.genome.ts"
+    },
+    {
+      "id": "ecommerce-mvp",
+      "name": "E-commerce MVP",
+      "description": "A complete e-commerce solution with payments, inventory management, and modern UI",
+      "category": "ecommerce",
+      "complexity": "intermediate",
+      "tags": ["ecommerce", "payments", "inventory", "orders", "products"],
+      "modules": 22,
+      "file": "ecommerce-mvp.genome.ts"
+    },
+    {
+      "id": "web3-dashboard",
+      "name": "Web3 Dashboard",
+      "description": "A comprehensive Web3 application with wallet integration, DeFi features, and blockchain data visualization",
+      "category": "web3",
+      "complexity": "advanced",
+      "tags": ["web3", "blockchain", "defi", "nft", "wallet"],
+      "modules": 18,
+      "file": "web3-dashboard.genome.ts"
+    },
+    {
+      "id": "simple-app",
+      "name": "Simple App",
+      "description": "A minimal, production-ready application with essential features",
+      "category": "starter",
+      "complexity": "beginner",
+      "tags": ["minimal", "starter", "essential", "testing"],
+      "modules": 12,
+      "file": "simple-app.genome.ts"
     }
   ],
-  "totalGenomes": 4,
-  "lastUpdated": "2024-09-23T21:30:00Z"
+  "totalGenomes": 9,
+  "lastUpdated": "2024-12-19T10:00:00Z"
 }

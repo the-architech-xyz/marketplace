@@ -110,25 +110,96 @@ const blogAppGenome: Genome = {
       }
     },
     
-    // === INTEGRATIONS ===
+    // === GOLDEN CORE ADAPTERS ===
     {
-      id: 'better-auth-drizzle-integration',
+      id: 'data-fetching/tanstack-query',
       parameters: {
-        features: {
-          userManagement: true,
-          sessionStorage: true
+        devtools: true,
+        suspense: false,
+        defaultOptions: {
+          queries: {
+            staleTime: 5 * 60 * 1000,
+            gcTime: 10 * 60 * 1000,
+            retry: 3,
+            refetchOnWindowFocus: false
+          }
         }
+      },
+      features: {
+        core: true,
+        infinite: true,
+        optimistic: true,
+        offline: true
       }
     },
     
     {
-      id: 'shadcn-zustand-integration',
+      id: 'core/forms',
       parameters: {
-        features: {
-          formManagement: true,
-          modalState: true,
-          toastNotifications: true
-        }
+        zod: true,
+        reactHookForm: true,
+        resolvers: true,
+        accessibility: true,
+        devtools: true
+      }
+    },
+    
+    // === INTEGRATIONS ===
+    {
+      id: 'integrations/drizzle-nextjs-integration',
+      parameters: {
+        apiRoutes: true,
+        middleware: true,
+        queries: true,
+        transactions: true,
+        migrations: true,
+        seeding: false,
+        validators: true,
+        adminPanel: false,
+        healthChecks: true,
+        connectionPooling: true
+      }
+    },
+    
+    {
+      id: 'integrations/better-auth-nextjs-integration',
+      parameters: {
+        apiRoutes: true,
+        middleware: true,
+        uiComponents: 'shadcn',
+        adminPanel: false,
+        emailVerification: true,
+        mfa: false,
+        passwordReset: true
+      }
+    },
+    
+    {
+      id: 'integrations/tanstack-query-nextjs-integration',
+      parameters: {
+        devtools: true,
+        ssr: true,
+        hydration: true,
+        prefetching: true,
+        errorBoundary: true
+      }
+    },
+    
+    {
+      id: 'integrations/zustand-nextjs-integration',
+      parameters: {
+        persistence: true,
+        devtools: true,
+        ssr: true
+      }
+    },
+    
+    {
+      id: 'integrations/rhf-zod-shadcn-integration',
+      parameters: {
+        formComponents: true,
+        validation: true,
+        accessibility: true
       }
     },
 
@@ -138,13 +209,26 @@ const blogAppGenome: Genome = {
     {
       id: 'features/user-profile/nextjs-shadcn',
       parameters: {
-        enabled: true
+        theme: 'default',
+        features: {
+          avatarUpload: true,
+          preferences: true,
+          security: true,
+          notifications: true,
+          exportData: false
+        }
       }
     },
     {
       id: 'features/email-management/nextjs-shadcn',
       parameters: {
-        enabled: true
+        theme: 'default',
+        features: {
+          composer: true,
+          templates: true,
+          analytics: true,
+          settings: true
+        }
       }
     }
   ]

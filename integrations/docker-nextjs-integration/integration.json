@@ -8,9 +8,9 @@
     "framework": "nextjs",
     "adapters": ["docker"]
   },
-  "requirements": {
+  "prerequisites": {
     "modules": ["docker", "nextjs"],
-    "dependencies": ["docker", "next", "react", "react-dom"]
+    "capabilities": ["containerization", "react-framework"]
   },
   "provides": {
     "files": [

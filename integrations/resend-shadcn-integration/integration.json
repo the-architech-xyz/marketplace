@@ -8,27 +8,14 @@
     "framework": "agnostic",
     "adapters": ["resend", "shadcn-ui"]
   },
-  "requirements": {
+  "prerequisites": {
     "modules": ["resend", "shadcn-ui"],
-    "dependencies": ["resend", "react", "react-dom", "@radix-ui/react-*", "class-variance-authority", "clsx", "tailwind-merge"]
+    "capabilities": ["email-service", "ui-components"]
   },
   "provides": {
     "files": [
-      "src/components/email/EmailForm.tsx",
-      "src/components/email/EmailTemplates.tsx",
-      "src/components/email/EmailCampaigns.tsx",
-      "src/components/email/EmailList.tsx",
-      "src/components/email/EmailComposer.tsx",
-      "src/components/email/EmailSettings.tsx"
     ],
-    "components": [
-      "src/components/email/EmailForm.tsx",
-      "src/components/email/EmailTemplates.tsx",
-      "src/components/email/EmailCampaigns.tsx",
-      "src/components/email/EmailList.tsx",
-      "src/components/email/EmailComposer.tsx",
-      "src/components/email/EmailSettings.tsx"
-    ],
+    "components": [],
     "pages": []
   },
   "sub_features": {

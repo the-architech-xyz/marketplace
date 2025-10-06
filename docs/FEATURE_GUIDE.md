@@ -20,8 +20,12 @@ marketplace/features/
 
 ### 1. Create Directory Structure
 ```bash
-mkdir -p marketplace/features/feature-name/framework-ui
-mkdir -p marketplace/features/feature-name/framework-ui/templates
+# Navigate to marketplace directory
+cd marketplace
+
+# Create feature directory
+mkdir -p features/feature-name/framework-ui
+mkdir -p features/feature-name/framework-ui/templates
 ```
 
 ### 2. Create feature.json

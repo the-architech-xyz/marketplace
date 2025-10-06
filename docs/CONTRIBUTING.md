@@ -8,32 +8,36 @@ Thank you for your interest in contributing to The Architech! This guide will he
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/thearchitech.xyz/architech.git
-cd architech
+git clone https://github.com/the-architech/cli.git
+cd cli
 ```
 
 ### 2. Install Dependencies
 ```bash
-# Install root dependencies
+# Install CLI dependencies
 npm install
 
 # Install marketplace dependencies
 cd marketplace
 npm install
 
-# Install CLI dependencies
-cd ../Architech
+# Install types package dependencies
+cd ../types-package
 npm install
 ```
 
 ### 3. Build the Project
 ```bash
-# Build marketplace
-cd marketplace
+# Build types package first
+cd types-package
 npm run build
 
 # Build CLI
 cd ../Architech
+npm run build
+
+# Build marketplace
+cd ../marketplace
 npm run build
 ```
 
@@ -89,8 +93,11 @@ git checkout -b feature/your-feature-name
 # Run tests
 npm test
 
-# Test generation
-architech new test-app --verbose
+# Test generation with dry run
+node dist/index.js new /path/to/marketplace/genomes/simple-app.genome.ts --dry-run
+
+# Test actual generation
+node dist/index.js new /path/to/marketplace/genomes/simple-app.genome.ts
 ```
 
 ### 4. Submit a Pull Request
@@ -145,29 +152,45 @@ architech new test-app --verbose
 
 ### Unit Tests
 ```typescript
-import { validateAdapter } from '@thearchitech.xyz/validator';
+import { Genome } from '@thearchitech.xyz/marketplace';
 
-describe('Adapter Validation', () => {
-  it('should validate configuration', () => {
-    const config = { /* test config */ };
-    expect(validateAdapter('adapter/id', config)).toBe(true);
+describe('Genome Validation', () => {
+  it('should validate genome configuration', () => {
+    const genome: Genome = {
+      version: '1.0.0',
+      project: {
+        name: 'test-app',
+        framework: 'nextjs'
+      },
+      modules: [
+        {
+          id: 'framework/nextjs',
+          parameters: {
+            typescript: true,
+            tailwind: true
+          }
+        }
+      ]
+    };
+    
+    expect(genome.modules).toHaveLength(1);
+    expect(genome.project.framework).toBe('nextjs');
   });
 });
 ```
 
 ### Integration Tests
-```typescript
-import { generateProject } from '@thearchitech.xyz/cli';
+```bash
+# Test genome with dry run
+node dist/index.js new test-genome.genome.ts --dry-run
 
-describe('Project Generation', () => {
-  it('should generate project successfully', async () => {
-    const result = await generateProject({
-      modules: [{ id: 'adapter/id' }]
-    });
-    
-    expect(result.success).toBe(true);
-  });
-});
+# Test actual generation
+node dist/index.js new test-genome.genome.ts
+
+# Verify generated project
+cd test-app
+npm install
+npm run build
 ```
 
 ## Pull Request Process

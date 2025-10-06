@@ -19,8 +19,12 @@ marketplace/integrations/
 
 ### 1. Create Directory Structure
 ```bash
-mkdir -p marketplace/integrations/adapter1-adapter2-integration
-mkdir -p marketplace/integrations/adapter1-adapter2-integration/templates
+# Navigate to marketplace directory
+cd marketplace
+
+# Create integrator directory
+mkdir -p integrations/adapter1-adapter2-integration
+mkdir -p integrations/adapter1-adapter2-integration/templates
 ```
 
 ### 2. Create integration.json

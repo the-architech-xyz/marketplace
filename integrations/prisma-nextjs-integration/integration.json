@@ -8,9 +8,9 @@
     "framework": "nextjs",
     "adapters": ["prisma"]
   },
-  "requirements": {
+  "prerequisites": {
     "modules": ["prisma", "nextjs"],
-    "dependencies": ["@prisma/client", "prisma", "react", "react-dom"]
+    "capabilities": ["database-orm", "api-routes"]
   },
   "provides": {
     "files": [
@@ -25,11 +25,7 @@
       "src/lib/db/validators.ts",
       "src/lib/db/middleware.ts"
     ],
-    "components": [
-      "DatabaseProvider",
-      "QueryProvider",
-      "DatabaseDebugger"
-    ],
+    "components": [],
     "pages": [
       "src/app/api/db/health/route.ts",
       "src/app/api/db/migrate/route.ts",

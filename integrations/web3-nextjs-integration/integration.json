@@ -8,9 +8,9 @@
     "framework": "nextjs",
     "adapters": ["web3"]
   },
-  "requirements": {
+  "prerequisites": {
     "modules": ["web3", "nextjs"],
-    "dependencies": []
+    "capabilities": ["wallet-connection", "react-framework"]
   },
   "provides": {
     "files": [

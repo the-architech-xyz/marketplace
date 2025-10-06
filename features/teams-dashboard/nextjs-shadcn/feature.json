@@ -6,26 +6,20 @@
   "category": "feature",
   "blueprint": "blueprint.ts",
   "prerequisites": {
-    "adapters": [
-      "nextjs",
-      "shadcn-ui",
-      "drizzle",
-      "better-auth"
-    ],
-    "integrators": [
-      "drizzle-nextjs",
-      "better-auth-nextjs",
-      "teams-data-integration"
+    "capabilities": ["teams-data-hooks", "shadcn-ui", "user-authentication"],
+    "adapters": ["nextjs"],
+    "integrators": ["drizzle-nextjs-integration"]
+  },
+  "provides": {
+    "capabilities": [
+      "teams-management",
+      "user-dashboard",
+      "team-collaboration",
+      "team-settings",
+      "team-members",
+      "team-invitations"
     ]
   },
-  "capabilities": [
-    "teams-management",
-    "user-dashboard",
-    "team-collaboration",
-    "team-settings",
-    "team-members",
-    "team-invitations"
-  ],
   "parameters": {
     "theme": {
       "type": "string",

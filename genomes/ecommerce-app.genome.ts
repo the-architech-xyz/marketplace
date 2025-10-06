@@ -113,36 +113,115 @@ const ecommerceAppGenome: Genome = {
       }
     },
     
+    // === GOLDEN CORE ADAPTERS ===
+    {
+      id: 'data-fetching/tanstack-query',
+      parameters: {
+        devtools: true,
+        suspense: false,
+        defaultOptions: {
+          queries: {
+            staleTime: 5 * 60 * 1000,
+            gcTime: 10 * 60 * 1000,
+            retry: 3,
+            refetchOnWindowFocus: false
+          }
+        }
+      },
+      features: {
+        core: true,
+        infinite: true,
+        optimistic: true,
+        offline: true
+      }
+    },
+    
+    {
+      id: 'core/forms',
+      parameters: {
+        zod: true,
+        reactHookForm: true,
+        resolvers: true,
+        accessibility: true,
+        devtools: true
+      }
+    },
+    
     // === INTEGRATIONS ===
     {
-      id: 'better-auth-drizzle-integration',
+      id: 'integrations/drizzle-nextjs-integration',
       parameters: {
-        features: {
-          userManagement: true,
-          sessionStorage: true
-        }
+        apiRoutes: true,
+        middleware: true,
+        queries: true,
+        transactions: true,
+        migrations: true,
+        seeding: false,
+        validators: true,
+        adminPanel: false,
+        healthChecks: true,
+        connectionPooling: true
       }
     },
     
     {
-      id: 'stripe-drizzle-integration',
+      id: 'integrations/better-auth-nextjs-integration',
       parameters: {
-        features: {
-          paymentTracking: true,
-          orderManagement: true,
-          customerManagement: true
-        }
+        apiRoutes: true,
+        middleware: true,
+        uiComponents: 'shadcn',
+        adminPanel: false,
+        emailVerification: true,
+        mfa: false,
+        passwordReset: true
       }
     },
     
     {
-      id: 'shadcn-zustand-integration',
+      id: 'integrations/stripe-nextjs-integration',
       parameters: {
-        features: {
-          cartManagement: true,
-          wishlistState: true,
-          toastNotifications: true
-        }
+        webhooks: true,
+        apiRoutes: true,
+        customerManagement: true
+      }
+    },
+    
+    {
+      id: 'integrations/stripe-shadcn-integration',
+      parameters: {
+        paymentForms: true,
+        subscriptionCards: false,
+        invoiceTables: true,
+        pricingCards: true
+      }
+    },
+    
+    {
+      id: 'integrations/tanstack-query-nextjs-integration',
+      parameters: {
+        devtools: true,
+        ssr: true,
+        hydration: true,
+        prefetching: true,
+        errorBoundary: true
+      }
+    },
+    
+    {
+      id: 'integrations/zustand-nextjs-integration',
+      parameters: {
+        persistence: true,
+        devtools: true,
+        ssr: true
+      }
+    },
+    
+    {
+      id: 'integrations/rhf-zod-shadcn-integration',
+      parameters: {
+        formComponents: true,
+        validation: true,
+        accessibility: true
       }
     },
 
@@ -152,19 +231,38 @@ const ecommerceAppGenome: Genome = {
     {
       id: 'features/payment-management/nextjs-shadcn',
       parameters: {
-        enabled: true
+        theme: 'default',
+        features: {
+          paymentForms: true,
+          subscriptionCards: false,
+          invoiceTables: true,
+          pricingCards: true
+        }
       }
     },
     {
       id: 'features/email-management/nextjs-shadcn',
       parameters: {
-        enabled: true
+        theme: 'default',
+        features: {
+          composer: true,
+          templates: true,
+          analytics: true,
+          settings: true
+        }
       }
     },
     {
       id: 'features/user-profile/nextjs-shadcn',
       parameters: {
-        enabled: true
+        theme: 'default',
+        features: {
+          avatarUpload: true,
+          preferences: true,
+          security: true,
+          notifications: true,
+          exportData: false
+        }
       }
     }
   ]

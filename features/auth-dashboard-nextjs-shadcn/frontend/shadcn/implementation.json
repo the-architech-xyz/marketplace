@@ -1,0 +1,40 @@
+{
+  "id": "auth-dashboard-frontend-shadcn",
+  "name": "Auth Dashboard Frontend (Shadcn)",
+  "description": "Frontend implementation of auth-dashboard using Shadcn/ui components",
+  "version": "1.0.0",
+  "type": "frontend-implementation",
+  "implements": "auth-dashboard",
+  "tech_stack": {
+    "ui": "shadcn",
+    "framework": "nextjs"
+  },
+  "prerequisites": {
+    "modules": ["shadcn-ui", "nextjs"],
+    "capabilities": ["ui-components", "form-validation", "auth-hooks"]
+  },
+  "provides": {
+    "capabilities": [
+      "auth-ui-components",
+      "auth-forms",
+      "auth-pages"
+    ],
+    "components": [
+      "LoginForm",
+      "RegisterForm",
+      "UserMenu",
+      "UserAvatar",
+      "UserProfile",
+      "AdminPanel",
+      "UserList",
+      "UserCard"
+    ],
+    "pages": [
+      "/auth/login",
+      "/auth/register",
+      "/auth/profile",
+      "/admin/users"
+    ]
+  },
+  "blueprint": "blueprint.json"
+}

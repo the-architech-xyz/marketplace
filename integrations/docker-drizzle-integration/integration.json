@@ -8,9 +8,9 @@
     "framework": "agnostic",
     "adapters": ["docker", "drizzle"]
   },
-  "requirements": {
+  "prerequisites": {
     "modules": ["docker", "drizzle"],
-    "dependencies": ["docker", "drizzle-orm", "postgres"]
+    "capabilities": ["containerization", "database-orm"]
   },
   "provides": {
     "files": [

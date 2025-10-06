@@ -36,22 +36,28 @@
       }
     ]
   },
-  "capabilities": [
-    "components",
-    "tailwind",
-    "radix-ui",
-    "accessibility",
-    "dark-mode",
-    "theming",
-    "responsive",
-    "typescript",
-    "form-validation",
-    "animations",
-    "icons",
-    "theme-switching",
-    "comprehensive-utils",
-    "production-ready"
-  ],
+  "capabilities": {
+    "ui-components": {
+      "version": "1.0.0",
+      "description": "Beautifully designed React components",
+      "provides": ["components", "radix-ui", "accessibility", "responsive", "typescript", "production-ready"]
+    },
+    "styling-system": {
+      "version": "1.0.0",
+      "description": "Complete styling and theming system",
+      "provides": ["tailwind", "dark-mode", "theming", "theme-switching", "animations", "icons"]
+    },
+    "form-integration": {
+      "version": "1.0.0",
+      "description": "Form components and validation integration",
+      "provides": ["form-validation", "form-components", "input-components"]
+    },
+    "utilities": {
+      "version": "1.0.0",
+      "description": "Comprehensive utility functions and helpers",
+      "provides": ["comprehensive-utils", "class-utilities", "style-utilities"]
+    }
+  },
   "limitations": "Requires React framework and Tailwind CSS",
   "parameters": {
     "components": {
@@ -66,7 +72,7 @@
         "badge",
         "avatar",
         "dropdown-menu",
-        "toast",
+        "sonner",
         "sheet",
         "tabs",
         "accordion",
@@ -89,7 +95,42 @@
         "toggle-group"
       ],
       "description": "Components to install (comprehensive set by default)",
-      "required": false
+      "required": false,
+      "items": {
+        "type": "string",
+        "enum": [
+          "button",
+          "input",
+          "card",
+          "dialog",
+          "form",
+          "table",
+          "badge",
+          "avatar",
+          "dropdown-menu",
+          "sonner",
+          "sheet",
+          "tabs",
+          "accordion",
+          "carousel",
+          "calendar",
+          "date-picker",
+          "alert-dialog",
+          "checkbox",
+          "collapsible",
+          "context-menu",
+          "hover-card",
+          "menubar",
+          "navigation-menu",
+          "popover",
+          "progress",
+          "radio-group",
+          "scroll-area",
+          "slider",
+          "toggle",
+          "toggle-group"
+        ]
+      }
     }
   },
   "features": {

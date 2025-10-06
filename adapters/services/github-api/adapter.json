@@ -1,0 +1,157 @@
+{
+  "id": "github-api",
+  "name": "GitHub API",
+  "description": "GitHub API client for repository management and operations",
+  "category": "services",
+  "version": "1.0.0",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "capabilities": {
+    "repository-management": {
+      "version": "1.0.0",
+      "description": "Complete GitHub repository management",
+      "provides": ["repository-management", "file-operations", "branch-management", "commit-operations"]
+    },
+    "collaboration": {
+      "version": "1.0.0",
+      "description": "Pull requests and collaboration features",
+      "provides": ["pull-requests", "issue-management", "collaborator-management"]
+    },
+    "automation": {
+      "version": "1.0.0",
+      "description": "GitHub Actions and automation",
+      "provides": ["workflow-management", "secrets-management", "webhooks"]
+    }
+  },
+  "limitations": "Requires GitHub Personal Access Token or OAuth access token",
+  "parameters": {
+    "token": {
+      "type": "string",
+      "description": "GitHub Personal Access Token or OAuth access token",
+      "required": true
+    },
+    "baseUrl": {
+      "type": "string",
+      "default": "https://api.github.com",
+      "description": "GitHub API base URL (for GitHub Enterprise)",
+      "required": false
+    },
+    "userAgent": {
+      "type": "string",
+      "default": "the-architech-cli",
+      "description": "User agent string for API requests",
+      "required": false
+    }
+  },
+  "features": {
+    "repository-operations": {
+      "id": "repository-operations",
+      "name": "Repository Operations",
+      "description": "Create, read, update, and delete repositories",
+      "blueprint": "features/repository-operations.blueprint.ts",
+      "category": "core",
+      "parameters": {
+        "createRepos": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable repository creation",
+          "required": false
+        },
+        "deleteRepos": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable repository deletion",
+          "required": false
+        }
+      }
+    },
+    "file-operations": {
+      "id": "file-operations",
+      "name": "File Operations",
+      "description": "Read, create, update, and delete files in repositories",
+      "blueprint": "features/file-operations.blueprint.ts",
+      "category": "core",
+      "parameters": {
+        "readFiles": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable file reading",
+          "required": false
+        },
+        "writeFiles": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable file writing",
+          "required": false
+        }
+      }
+    },
+    "pull-requests": {
+      "id": "pull-requests",
+      "name": "Pull Request Management",
+      "description": "Create, manage, and merge pull requests",
+      "blueprint": "features/pull-requests.blueprint.ts",
+      "category": "core",
+      "parameters": {
+        "createPRs": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable pull request creation",
+          "required": false
+        },
+        "mergePRs": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable pull request merging",
+          "required": false
+        }
+      }
+    },
+    "secrets-management": {
+      "id": "secrets-management",
+      "name": "Secrets Management",
+      "description": "Manage repository and organization secrets",
+      "blueprint": "features/secrets-management.blueprint.ts",
+      "category": "premium",
+      "parameters": {
+        "repoSecrets": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable repository secrets management",
+          "required": false
+        },
+        "orgSecrets": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable organization secrets management",
+          "required": false
+        }
+      }
+    },
+    "workflow-management": {
+      "id": "workflow-management",
+      "name": "Workflow Management",
+      "description": "Create and manage GitHub Actions workflows",
+      "blueprint": "features/workflow-management.blueprint.ts",
+      "category": "premium",
+      "parameters": {
+        "createWorkflows": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable workflow creation",
+          "required": false
+        },
+        "manageWorkflows": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable workflow management",
+          "required": false
+        }
+      }
+    }
+  },
+  "constraints": {
+    "rateLimits": "GitHub API has rate limits (5000 requests/hour for authenticated users)",
+    "tokenPermissions": "Token must have appropriate scopes for desired operations"
+  }
+}

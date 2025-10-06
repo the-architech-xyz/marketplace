@@ -1,0 +1,49 @@
+{
+  "id": "stripe-payments-backend-nextjs",
+  "name": "Stripe Payments Backend (Next.js)",
+  "description": "Backend implementation of stripe-payments using Next.js API routes and Stripe",
+  "version": "1.0.0",
+  "type": "backend-implementation",
+  "implements": "stripe-payments",
+  "tech_stack": {
+    "framework": "nextjs"
+  },
+  "prerequisites": {
+    "modules": ["stripe-nextjs-integration"],
+    "capabilities": ["payment-service", "api-routes"]
+  },
+  "provides": {
+    "capabilities": [
+      "payment-hooks",
+      "payment-api-routes",
+      "payment-types"
+    ],
+    "hooks": [
+      "useStripe",
+      "useCreatePayment",
+      "usePaymentMethods",
+      "useSubscriptions",
+      "useCreateSubscription",
+      "useInvoices",
+      "useCustomers"
+    ],
+    "types": [
+      "StripeConfig",
+      "PaymentIntent",
+      "PaymentMethod",
+      "Subscription",
+      "Invoice",
+      "Customer",
+      "CreatePaymentData",
+      "CreateSubscriptionData"
+    ],
+    "api": [
+      "/api/stripe/payment-intents",
+      "/api/stripe/payment-methods",
+      "/api/stripe/subscriptions",
+      "/api/stripe/invoices",
+      "/api/stripe/customers"
+    ]
+  },
+  "blueprint": "blueprint.json"
+}

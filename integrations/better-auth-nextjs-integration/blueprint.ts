@@ -148,12 +148,6 @@ export function authMiddleware(request: NextRequest) {
     },
     
     // Create Next.js auth components
-    {
-      type: 'CREATE_FILE',
-      path: 'src/components/auth/auth-provider.tsx',
-      condition: '{{#if integration.features.uiComponents}}',
-      template: 'templates/auth-provider.tsx.tpl'
-    },
 
   ]
 };

@@ -8,9 +8,9 @@
     "framework": "nextjs",
     "adapters": ["vitest"]
   },
-  "requirements": {
+  "prerequisites": {
     "modules": ["vitest", "nextjs"],
-    "dependencies": ["vitest", "@testing-library/react", "@testing-library/jest-dom", "jsdom"]
+    "capabilities": ["testing-framework", "react-framework"]
   },
   "provides": {
     "files": [

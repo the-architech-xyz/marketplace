@@ -6,18 +6,23 @@
   "version": "0.29.0",
   "blueprint": "blueprint.ts",
   "dependencies": [],
-  "capabilities": [
-    "sql",
-    "postgresql",
-    "mysql",
-    "sqlite",
-    "serverless",
-    "migrations",
-    "schema-validation",
-    "type-safety",
-    "query-builder",
-    "relations"
-  ],
+  "capabilities": {
+    "database-orm": {
+      "version": "1.0.0",
+      "description": "Type-safe SQL ORM with excellent TypeScript support",
+      "provides": ["sql", "postgresql", "mysql", "sqlite", "serverless", "migrations", "schema-validation", "type-safety", "query-builder", "relations"]
+    },
+    "database-migrations": {
+      "version": "1.0.0",
+      "description": "Database schema migration management",
+      "provides": ["migrations", "schema-validation", "rollback"]
+    },
+    "database-relations": {
+      "version": "1.0.0",
+      "description": "Advanced relationship management and queries",
+      "provides": ["relations", "joins", "foreign-keys"]
+    }
+  },
   "limitations": "Requires a supported database (PostgreSQL, MySQL, SQLite)",
   "parameters": {
     "provider": {

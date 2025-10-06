@@ -1,0 +1,83 @@
+{
+  "id": "teams-dashboard",
+  "name": "Teams Dashboard",
+  "description": "Provides a complete dashboard for team management with decoupled backend and frontend implementations",
+  "version": "1.0.0",
+  "category": "feature",
+  "provides": {
+    "hooks": {
+      "useTeams": "() => UseQueryResult<Team[]>",
+      "useCreateTeam": "() => UseMutationResult<Team, Error, { name: string }>",
+      "useUpdateTeam": "() => UseMutationResult<Team, Error, { id: string; data: Partial<Team> }>",
+      "useDeleteTeam": "() => UseMutationResult<void, Error, { id: string }>",
+      "useTeamMembers": "(teamId: string) => UseQueryResult<TeamMember[]>",
+      "useAddTeamMember": "() => UseMutationResult<TeamMember, Error, { teamId: string; userId: string; role: string }>",
+      "useRemoveTeamMember": "() => UseMutationResult<void, Error, { teamId: string; userId: string }>"
+    },
+    "types": [
+      "Team",
+      "TeamMember", 
+      "TeamRole",
+      "CreateTeamData",
+      "UpdateTeamData",
+      "TeamFilters"
+    ],
+    "api": [
+      "/api/teams",
+      "/api/teams/[id]",
+      "/api/teams/[id]/members"
+    ]
+  },
+  "sub_features": {
+    "invitations": {
+      "name": "Team Invitations",
+      "description": "Enables user invitation system with email notifications",
+      "provides": {
+        "hooks": {
+          "useInviteUser": "() => UseMutationResult<Invitation, Error, { teamId: string; email: string; role: string }>",
+          "useInvitations": "(teamId: string) => UseQueryResult<Invitation[]>",
+          "useAcceptInvitation": "() => UseMutationResult<void, Error, { token: string }>"
+        },
+        "types": ["Invitation", "InvitationStatus"],
+        "api": ["/api/teams/[id]/invitations", "/api/invitations/[token]"]
+      }
+    },
+    "billing": {
+      "name": "Team Billing",
+      "description": "Enables team-based billing and subscription management",
+      "provides": {
+        "hooks": {
+          "useTeamBilling": "(teamId: string) => UseQueryResult<BillingInfo>",
+          "useUpdateBilling": "() => UseMutationResult<BillingInfo, Error, { teamId: string; plan: string }>",
+          "useBillingHistory": "(teamId: string) => UseQueryResult<BillingRecord[]>"
+        },
+        "types": ["BillingInfo", "BillingRecord", "BillingPlan"],
+        "api": ["/api/teams/[id]/billing", "/api/teams/[id]/billing/history"]
+      }
+    },
+    "analytics": {
+      "name": "Team Analytics",
+      "description": "Provides team usage and performance analytics",
+      "provides": {
+        "hooks": {
+          "useTeamAnalytics": "(teamId: string) => UseQueryResult<TeamAnalytics>",
+          "useTeamActivity": "(teamId: string) => UseQueryResult<ActivityLog[]>"
+        },
+        "types": ["TeamAnalytics", "ActivityLog", "AnalyticsPeriod"],
+        "api": ["/api/teams/[id]/analytics", "/api/teams/[id]/activity"]
+      }
+    }
+  },
+  "requirements": {
+    "backend": {
+      "database": ["drizzle", "prisma"],
+      "framework": ["nextjs"],
+      "capabilities": ["api-routes", "database-orm"]
+    },
+    "frontend": {
+      "ui": ["shadcn", "mui", "chakra"],
+      "framework": ["nextjs"],
+      "capabilities": ["ui-components", "form-validation"]
+    }
+  }
+}

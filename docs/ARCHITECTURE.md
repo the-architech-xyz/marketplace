@@ -37,6 +37,33 @@ The Architech follows a revolutionary 3-tier architecture that separates concern
 - **Auth**: Better Auth, Auth0, Clerk
 - **Deployment**: Vercel, Netlify, Docker
 
+## Capability System
+
+The Architech uses a sophisticated capability-based dependency resolution system:
+
+### Capability Structure
+```json
+{
+  "capabilities": {
+    "capability-name": {
+      "version": "1.0.0",
+      "description": "What this capability provides",
+      "provides": ["specific-functionality-1", "specific-functionality-2"]
+    }
+  }
+}
+```
+
+### Prerequisites Structure
+```json
+{
+  "prerequisites": {
+    "modules": ["required-module-1", "required-module-2"],
+    "capabilities": ["required-capability-1", "required-capability-2"]
+  }
+}
+```
+
 ## Module Classification
 
 ```typescript

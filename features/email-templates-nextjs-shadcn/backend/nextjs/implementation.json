@@ -1,0 +1,51 @@
+{
+  "id": "email-templates-backend-nextjs",
+  "name": "Email Templates Backend (Next.js)",
+  "description": "Backend implementation of email-templates using Next.js API routes and Resend",
+  "version": "1.0.0",
+  "type": "backend-implementation",
+  "implements": "email-templates",
+  "tech_stack": {
+    "framework": "nextjs"
+  },
+  "prerequisites": {
+    "modules": ["resend-nextjs-integration"],
+    "capabilities": ["email-service", "api-routes"]
+  },
+  "provides": {
+    "capabilities": [
+      "email-hooks",
+      "email-api-routes",
+      "email-types"
+    ],
+    "hooks": [
+      "useEmailTemplates",
+      "useCreateEmailTemplate",
+      "useUpdateEmailTemplate",
+      "useDeleteEmailTemplate",
+      "useEmailCampaigns",
+      "useCreateEmailCampaign",
+      "useSendEmail",
+      "useEmailAnalytics"
+    ],
+    "types": [
+      "EmailTemplate",
+      "EmailCampaign",
+      "EmailResult",
+      "EmailAnalytics",
+      "CreateEmailTemplateData",
+      "UpdateEmailTemplateData",
+      "CreateEmailCampaignData",
+      "SendEmailData"
+    ],
+    "api": [
+      "/api/email/templates",
+      "/api/email/templates/[id]",
+      "/api/email/campaigns",
+      "/api/email/campaigns/[id]",
+      "/api/email/send",
+      "/api/email/analytics"
+    ]
+  },
+  "blueprint": "blueprint.json"
+}

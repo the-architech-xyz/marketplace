@@ -116,12 +116,22 @@ The `adapter.json` file defines the adapter's metadata and capabilities:
     "conflicts": []
   },
   "capabilities": {
-    "database": {
-      "orm": true,
-      "migrations": true,
-      "studio": true,
-      "relations": true
+    "database-orm": {
+      "version": "1.0.0",
+      "description": "Type-safe SQL ORM with excellent TypeScript support",
+      "provides": ["sql", "postgresql", "mysql", "sqlite", "serverless", "migrations", "schema-validation", "type-safety", "query-builder", "relations"]
     },
+    "database-migrations": {
+      "version": "1.0.0",
+      "description": "Database schema migration management",
+      "provides": ["migrations", "schema-validation", "rollback"]
+    },
+    "database-relations": {
+      "version": "1.0.0",
+      "description": "Advanced relationship management and queries",
+      "provides": ["relations", "joins", "foreign-keys"]
+    }
+  },
     "integrations": {
       "auth": "User schema generation",
       "framework": "Next.js API routes"
@@ -176,9 +186,9 @@ cd src/adapters/logging/winston
   "blueprint": "blueprint.ts",
   "capabilities": {
     "logging": {
-      "transports": ["console", "file", "database"],
-      "formats": ["json", "simple", "colorize"],
-      "levels": ["error", "warn", "info", "debug"]
+      "version": "1.0.0",
+      "description": "Multi-transport async logging library",
+      "provides": ["console-logging", "file-logging", "database-logging", "json-format", "simple-format", "colorize-format", "error-level", "warn-level", "info-level", "debug-level"]
     }
   },
   "environment": {

@@ -26,6 +26,8 @@ export declare const PaymentStripeArtifacts: {
   creates: [
     '{{paths.payment_config}}/stripe.ts',
     '{{paths.payment_config}}/client.ts',
+    '{{paths.payment_config}}/webhook-verification.ts',
+    '{{paths.api_routes}}/payment/webhook/route.ts',
     '{{paths.payment_config}}/INTEGRATION_GUIDE.md'
   ],
   enhances: [],

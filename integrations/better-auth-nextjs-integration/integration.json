@@ -7,27 +7,25 @@
     "framework": "nextjs",
     "adapters": ["better-auth"]
   },
-  "requirements": {
+  "prerequisites": {
     "modules": ["better-auth", "nextjs"],
-    "dependencies": []
+    "capabilities": ["user-authentication", "api-routes"]
+  },
+  "capabilities": {
+    "auth-nextjs-integration": {
+      "version": "1.0.0",
+      "description": "Complete Next.js integration for Better Auth",
+      "provides": ["auth-api-routes", "auth-middleware", "session-management"]
+    }
   },
   "provides": {
     "files": [
       "src/app/api/auth/[...all]/route.ts",
       "src/middleware.ts",
       "src/lib/auth/nextjs-handler.ts",
-      "src/lib/auth/middleware.ts",
-      "src/components/auth/auth-provider.tsx",
-      "src/components/auth/login-form.tsx",
-      "src/components/auth/register-form.tsx",
-      "src/components/auth/user-menu.tsx"
+      "src/lib/auth/middleware.ts"
     ],
-    "components": [
-      "auth-provider",
-      "login-form", 
-      "register-form",
-      "user-menu"
-    ],
+    "components": [],
     "pages": []
   },
   "sub_features": {
@@ -42,13 +40,6 @@
       "description": "Next.js middleware for authentication and route protection",
       "type": "boolean",
       "default": true
-    },
-    "uiComponents": {
-      "name": "UI Components",
-      "description": "React components for authentication UI",
-      "type": "string",
-      "default": "shadcn",
-      "options": ["shadcn", "chakra", "mui", "none"]
     },
     "adminPanel": {
       "name": "Admin Panel",

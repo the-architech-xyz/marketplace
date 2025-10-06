@@ -21,7 +21,8 @@ export declare const DataFetchingTanstackQueryArtifacts: {
     'src/lib/query-keys.ts',
     'src/components/QueryErrorBoundary.tsx',
     'src/components/QueryLoading.tsx',
-    'src/types/query.ts'
+    'src/types/query.ts',
+    'src/hooks/use-query-invalidation.ts'
   ],
   enhances: [],
   installs: [

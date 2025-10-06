@@ -6,18 +6,23 @@
   "version": "0.18.0",
   "blueprint": "blueprint.ts",
   "dependencies": [],
-  "capabilities": [
-    "email-password",
-    "oauth",
-    "social-login",
-    "session-management",
-    "jwt",
-    "csrf-protection",
-    "rate-limiting",
-    "multi-factor",
-    "password-reset",
-    "email-verification"
-  ],
+  "capabilities": {
+    "user-authentication": {
+      "version": "1.0.0",
+      "description": "Complete user authentication system",
+      "provides": ["email-password", "oauth", "social-login", "session-management", "jwt", "csrf-protection", "rate-limiting", "multi-factor", "password-reset", "email-verification"]
+    },
+    "session-management": {
+      "version": "1.0.0",
+      "description": "Advanced session management and security",
+      "provides": ["jwt", "database-sessions", "csrf-protection", "rate-limiting"]
+    },
+    "oauth-providers": {
+      "version": "1.0.0",
+      "description": "OAuth and social login providers",
+      "provides": ["google-oauth", "github-oauth", "discord-oauth", "twitter-oauth"]
+    }
+  },
   "limitations": "Requires a database adapter (Drizzle recommended)",
   "parameters": {
     "providers": {

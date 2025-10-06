@@ -8,9 +8,9 @@
     "framework": "nextjs",
     "adapters": ["resend"]
   },
-  "requirements": {
+  "prerequisites": {
     "modules": ["resend", "nextjs"],
-    "dependencies": ["resend", "next", "react", "react-dom"]
+    "capabilities": ["email-service", "api-routes"]
   },
   "provides": {
     "files": [
@@ -23,11 +23,7 @@
       "src/lib/email/webhooks.ts",
       "src/middleware.ts"
     ],
-    "components": [
-      "src/components/email/EmailPreview.tsx",
-      "src/components/email/EmailForm.tsx",
-      "src/components/email/EmailAnalytics.tsx"
-    ],
+    "components": [],
     "pages": [
       "src/app/admin/emails/page.tsx",
       "src/app/admin/emails/templates/page.tsx",

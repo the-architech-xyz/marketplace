@@ -1,0 +1,44 @@
+{
+  "id": "auth-dashboard-backend-nextjs",
+  "name": "Auth Dashboard Backend (Next.js)",
+  "description": "Backend implementation of auth-dashboard using Next.js API routes and Better Auth",
+  "version": "1.0.0",
+  "type": "backend-implementation",
+  "implements": "auth-dashboard",
+  "tech_stack": {
+    "framework": "nextjs"
+  },
+  "prerequisites": {
+    "modules": ["better-auth-nextjs-integration"],
+    "capabilities": ["auth-api-routes", "auth-middleware", "session-management"]
+  },
+  "provides": {
+    "capabilities": [
+      "auth-hooks",
+      "auth-api-routes",
+      "auth-types"
+    ],
+    "hooks": [
+      "useAuth",
+      "useSignIn",
+      "useSignUp", 
+      "useSignOut",
+      "useUser",
+      "useSession"
+    ],
+    "types": [
+      "AuthUser",
+      "Session",
+      "SignInData",
+      "SignUpData",
+      "AuthError"
+    ],
+    "api": [
+      "/api/auth/signin",
+      "/api/auth/signup",
+      "/api/auth/signout",
+      "/api/auth/session"
+    ]
+  },
+  "blueprint": "blueprint.json"
+}

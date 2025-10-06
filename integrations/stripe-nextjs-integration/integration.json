@@ -7,9 +7,9 @@
     "framework": "nextjs",
     "adapters": ["stripe"]
   },
-  "requirements": {
+  "prerequisites": {
     "modules": ["stripe", "nextjs"],
-    "dependencies": []
+    "capabilities": ["payment-processing", "api-routes"]
   },
   "provides": {
     "files": [

@@ -7,7 +7,7 @@
 export interface UiShadcnUiParams {
 
   /** Components to install (comprehensive set by default) */
-  components?: string[];
+  components?: Array<'button' | 'input' | 'card' | 'dialog' | 'form' | 'table' | 'badge' | 'avatar' | 'dropdown-menu' | 'sonner' | 'sheet' | 'tabs' | 'accordion' | 'carousel' | 'calendar' | 'date-picker' | 'alert-dialog' | 'checkbox' | 'collapsible' | 'context-menu' | 'hover-card' | 'menubar' | 'navigation-menu' | 'popover' | 'progress' | 'radio-group' | 'scroll-area' | 'slider' | 'toggle' | 'toggle-group'>;
 }
 
 export interface UiShadcnUiFeatures {}

@@ -1,0 +1,45 @@
+{
+  "id": "email-templates-frontend-shadcn",
+  "name": "Email Templates Frontend (Shadcn)",
+  "description": "Frontend implementation of email-templates using Shadcn/ui components",
+  "version": "1.0.0",
+  "type": "frontend-implementation",
+  "implements": "email-templates",
+  "tech_stack": {
+    "ui": "shadcn",
+    "framework": "nextjs"
+  },
+  "prerequisites": {
+    "modules": ["shadcn-ui", "nextjs"],
+    "capabilities": ["ui-components", "form-validation", "email-hooks"]
+  },
+  "provides": {
+    "capabilities": [
+      "email-ui-components",
+      "email-forms",
+      "email-pages"
+    ],
+    "components": [
+      "EmailComposer",
+      "EmailPreview",
+      "TemplateSelector",
+      "EmailTemplates",
+      "TemplateEditor",
+      "TemplatePreview",
+      "EmailCampaigns",
+      "CampaignBuilder",
+      "CampaignAnalytics",
+      "EmailAnalytics",
+      "EmailStats",
+      "EmailReports"
+    ],
+    "pages": [
+      "/email/templates",
+      "/email/templates/[id]",
+      "/email/campaigns",
+      "/email/campaigns/[id]",
+      "/email/analytics"
+    ]
+  },
+  "blueprint": "blueprint.json"
+}

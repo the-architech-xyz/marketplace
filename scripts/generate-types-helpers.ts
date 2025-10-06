@@ -261,12 +261,21 @@ export type ${moduleName}Enhances = typeof ${artifactsConst}.enhances[number];
   private static getTypeScriptType(param: any): string {
     switch (param.type) {
       case 'string':
+        // Check if it has enum values
+        if (param.enum && Array.isArray(param.enum)) {
+          return param.enum.map((v: any) => `'${v}'`).join(' | ');
+        }
         return 'string';
       case 'number':
         return 'number';
       case 'boolean':
         return 'boolean';
       case 'array':
+        // Check if it has items with enum values
+        if (param.items && param.items.enum && Array.isArray(param.items.enum)) {
+          const unionType = param.items.enum.map((v: any) => `'${v}'`).join(' | ');
+          return `Array<${unionType}>`;
+        }
         return 'string[]';
       case 'object':
         return 'Record<string, any>';

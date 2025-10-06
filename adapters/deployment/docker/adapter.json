@@ -6,14 +6,18 @@
   "version": "1.0.0",
   "blueprint": "blueprint.ts",
   "dependencies": [],
-  "capabilities": [
-    "containerization",
-    "multi-stage-builds",
-    "optimization",
-    "production-ready",
-    "health-checks",
-    "environment-config"
-  ],
+  "capabilities": {
+    "containerization": {
+      "version": "1.0.0",
+      "description": "Docker containerization and deployment",
+      "provides": ["containerization", "multi-stage-builds", "optimization", "production-ready"]
+    },
+    "monitoring": {
+      "version": "1.0.0",
+      "description": "Health checks and monitoring",
+      "provides": ["health-checks", "environment-config", "logging"]
+    }
+  },
   "limitations": "Requires Docker to be installed",
   "parameters": {
     "nodeVersion": {

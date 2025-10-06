@@ -12,9 +12,6 @@ export interface BetterAuthNextjsIntegrationParams {
   /** Next.js middleware for authentication and route protection */
   middleware: boolean;
 
-  /** React components for authentication UI */
-  uiComponents: string;
-
   /** Admin API routes for user management */
   adminPanel: boolean;
 
@@ -42,7 +39,7 @@ export declare const BetterAuthNextjsIntegrationArtifacts: {
     'src/providers/AuthProvider.tsx',
     'src/app/api/auth/[...all]/route.ts',
     'src/middleware.ts',
-    'src/components/auth/auth-provider.tsx'
+    'src/lib/auth/session-management.ts'
   ],
   enhances: [
     { path: 'src/lib/auth/config.ts' }

@@ -1,0 +1,82 @@
+{
+  "id": "email-templates",
+  "name": "Email Templates & Campaigns",
+  "description": "Complete email management system with templates, campaigns, analytics, and composition tools",
+  "version": "1.0.0",
+  "category": "feature",
+  "provides": {
+    "hooks": {
+      "useEmailTemplates": "() => UseQueryResult<EmailTemplate[]>",
+      "useCreateEmailTemplate": "() => UseMutationResult<EmailTemplate, Error, CreateEmailTemplateData>",
+      "useUpdateEmailTemplate": "() => UseMutationResult<EmailTemplate, Error, UpdateEmailTemplateData>",
+      "useDeleteEmailTemplate": "() => UseMutationResult<void, Error, { id: string }>",
+      "useEmailCampaigns": "() => UseQueryResult<EmailCampaign[]>",
+      "useCreateEmailCampaign": "() => UseMutationResult<EmailCampaign, Error, CreateEmailCampaignData>",
+      "useSendEmail": "() => UseMutationResult<EmailResult, Error, SendEmailData>",
+      "useEmailAnalytics": "() => UseQueryResult<EmailAnalytics>"
+    },
+    "types": [
+      "EmailTemplate",
+      "EmailCampaign", 
+      "EmailResult",
+      "EmailAnalytics",
+      "CreateEmailTemplateData",
+      "UpdateEmailTemplateData",
+      "CreateEmailCampaignData",
+      "SendEmailData"
+    ],
+    "api": [
+      "/api/email/templates",
+      "/api/email/templates/[id]",
+      "/api/email/campaigns",
+      "/api/email/campaigns/[id]",
+      "/api/email/send",
+      "/api/email/analytics"
+    ]
+  },
+  "sub_features": {
+    "email-composer": {
+      "name": "Email Composer",
+      "description": "Rich text email composition with template support",
+      "provides": {
+        "components": ["EmailComposer", "EmailPreview", "TemplateSelector"],
+        "hooks": ["useEmailComposer"]
+      }
+    },
+    "email-templates": {
+      "name": "Email Templates",
+      "description": "Template management and customization",
+      "provides": {
+        "components": ["EmailTemplates", "TemplateEditor", "TemplatePreview"],
+        "hooks": ["useEmailTemplates", "useTemplateEditor"]
+      }
+    },
+    "email-campaigns": {
+      "name": "Email Campaigns",
+      "description": "Campaign creation and management",
+      "provides": {
+        "components": ["EmailCampaigns", "CampaignBuilder", "CampaignAnalytics"],
+        "hooks": ["useEmailCampaigns", "useCampaignBuilder"]
+      }
+    },
+    "email-analytics": {
+      "name": "Email Analytics",
+      "description": "Email performance tracking and reporting",
+      "provides": {
+        "components": ["EmailAnalytics", "EmailStats", "EmailReports"],
+        "hooks": ["useEmailAnalytics", "useEmailStats"]
+      }
+    }
+  },
+  "requirements": {
+    "backend": {
+      "framework": ["nextjs"],
+      "capabilities": ["email-service", "api-routes"]
+    },
+    "frontend": {
+      "ui": ["shadcn"],
+      "framework": ["nextjs"],
+      "capabilities": ["ui-components", "form-validation", "email-hooks"]
+    }
+  }
+}

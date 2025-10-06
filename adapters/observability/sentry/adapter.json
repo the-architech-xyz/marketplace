@@ -6,15 +6,28 @@
   "version": "1.0.0",
   "blueprint": "blueprint.ts",
   "dependencies": [],
-  "capabilities": [
-    "error-monitoring",
-    "performance-tracking",
-    "release-tracking",
-    "user-feedback",
-    "breadcrumbs",
-    "source-maps",
-    "alerts"
-  ],
+  "capabilities": {
+    "error-monitoring": {
+      "version": "1.0.0",
+      "description": "Comprehensive error tracking and monitoring",
+      "provides": ["error-monitoring", "breadcrumbs", "user-feedback", "crash-reporting", "error-grouping"]
+    },
+    "performance-tracking": {
+      "version": "1.0.0",
+      "description": "Advanced performance monitoring and web vitals",
+      "provides": ["performance-tracking", "web-vitals", "transactions", "profiling"]
+    },
+    "release-tracking": {
+      "version": "1.0.0",
+      "description": "Release and deployment monitoring",
+      "provides": ["release-tracking", "deployment-monitoring", "source-maps"]
+    },
+    "alerting": {
+      "version": "1.0.0",
+      "description": "Custom alerts and notification system",
+      "provides": ["alerts", "notifications", "dashboard", "custom-metrics"]
+    }
+  },
   "limitations": "Requires Sentry DSN",
   "parameters": {
     "dsn": {

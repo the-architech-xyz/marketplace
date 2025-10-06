@@ -1,0 +1,47 @@
+{
+  "id": "teams-dashboard-backend-drizzle-nextjs",
+  "name": "Teams Dashboard Backend (Drizzle + Next.js)",
+  "description": "Backend implementation of teams-dashboard using Drizzle ORM and Next.js API routes",
+  "version": "1.0.0",
+  "type": "backend-implementation",
+  "implements": "teams-dashboard",
+  "tech_stack": {
+    "database": "drizzle-nextjs",
+    "framework": "nextjs"
+  },
+  "prerequisites": {
+    "modules": ["drizzle", "nextjs"],
+    "capabilities": ["database-orm", "api-routes"]
+  },
+  "provides": {
+    "capabilities": [
+      "teams-data-hooks",
+      "teams-api-routes",
+      "teams-database-schema",
+      "teams-types"
+    ],
+    "hooks": [
+      "useTeams",
+      "useCreateTeam", 
+      "useUpdateTeam",
+      "useDeleteTeam",
+      "useTeamMembers",
+      "useAddTeamMember",
+      "useRemoveTeamMember"
+    ],
+    "types": [
+      "Team",
+      "TeamMember",
+      "TeamRole", 
+      "CreateTeamData",
+      "UpdateTeamData",
+      "TeamFilters"
+    ],
+    "api": [
+      "/api/teams",
+      "/api/teams/[id]",
+      "/api/teams/[id]/members"
+    ]
+  },
+  "blueprint": "blueprint.json"
+}

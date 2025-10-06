@@ -20,8 +20,12 @@ marketplace/adapters/
 
 ### 1. Create Directory Structure
 ```bash
-mkdir -p marketplace/adapters/category/technology
-mkdir -p marketplace/adapters/category/technology/templates
+# Navigate to marketplace directory
+cd marketplace
+
+# Create adapter directory
+mkdir -p adapters/category/technology
+mkdir -p adapters/category/technology/templates
 ```
 
 ### 2. Create adapter.json

@@ -26,7 +26,14 @@ The Architech Marketplace is a comprehensive ecosystem of Adapters, Integrators,
 ### Installation
 
 ```bash
-npm install @thearchitech.xyz/marketplace
+# Clone and build from source
+git clone https://github.com/the-architech/cli.git
+cd cli
+npm install
+npm run build
+
+# Test the CLI
+node dist/index.js --version
 ```
 
 ### Basic Usage
@@ -69,6 +76,25 @@ const genome: Genome = {
 };
 
 export default genome;
+```
+
+### Generate Your Project
+
+```bash
+# Test with dry run first
+node dist/index.js new my-app.genome.ts --dry-run
+
+# Create the project
+node dist/index.js new my-app.genome.ts
+
+# Navigate to project
+cd my-app
+
+# Install dependencies
+npm install
+
+# Start development
+npm run dev
 ```
 
 ## 🏗️ Architecture Overview
@@ -673,12 +699,13 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 📚 Documentation
 
+- [Contributor Quick Start](./docs/CONTRIBUTOR_QUICK_START.md) - **Start here for contributing**
 - [Getting Started](./docs/GETTING_STARTED.md) - Quick start guide
 - [Architecture](./docs/ARCHITECTURE.md) - 3-tier architecture overview
 - [Adapter Guide](./docs/ADAPTER_GUIDE.md) - Creating adapters
 - [Integrator Guide](./docs/INTEGRATOR_GUIDE.md) - Creating integrators
 - [Feature Guide](./docs/FEATURE_GUIDE.md) - Creating features
-- [Contributing](./docs/CONTRIBUTING.md) - How to contribute
+- [Contributing](./docs/CONTRIBUTING.md) - Complete contribution guide
 
 ## 🆘 Support
 

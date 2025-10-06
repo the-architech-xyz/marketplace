@@ -1,0 +1,115 @@
+{
+  "id": "git",
+  "name": "Git Version Control",
+  "description": "Local git repository management and operations",
+  "category": "core",
+  "version": "1.0.0",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "capabilities": {
+    "repository-management": {
+      "version": "1.0.0",
+      "description": "Complete git repository management",
+      "provides": ["repository-initialization", "file-staging", "status-checking", "log-viewing"]
+    },
+    "version-control": {
+      "version": "1.0.0",
+      "description": "Version control operations",
+      "provides": ["commit-management", "branch-management", "remote-management", "tag-management"]
+    }
+  },
+  "limitations": "Requires git to be installed on the system",
+  "parameters": {
+    "userName": {
+      "type": "string",
+      "description": "Git user name for commits",
+      "required": false
+    },
+    "userEmail": {
+      "type": "string", 
+      "description": "Git user email for commits",
+      "required": false
+    },
+    "defaultBranch": {
+      "type": "string",
+      "default": "main",
+      "description": "Default branch name for new repositories",
+      "required": false
+    },
+    "autoInit": {
+      "type": "boolean",
+      "default": true,
+      "description": "Automatically initialize git repository after project creation",
+      "required": false
+    }
+  },
+  "features": {
+    "basic-operations": {
+      "id": "basic-operations",
+      "name": "Basic Git Operations",
+      "description": "Initialize, add, commit, and status operations",
+      "blueprint": "features/basic-operations.blueprint.ts",
+      "category": "core",
+      "parameters": {
+        "enableStatus": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable git status checking",
+          "required": false
+        },
+        "enableLog": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable git log viewing",
+          "required": false
+        }
+      }
+    },
+    "branch-management": {
+      "id": "branch-management",
+      "name": "Branch Management",
+      "description": "Create, switch, and manage branches",
+      "blueprint": "features/branch-management.blueprint.ts",
+      "category": "core",
+      "parameters": {
+        "enableBranchCreation": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable branch creation",
+          "required": false
+        },
+        "enableBranchSwitching": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable branch switching",
+          "required": false
+        }
+      }
+    },
+    "remote-management": {
+      "id": "remote-management",
+      "name": "Remote Management",
+      "description": "Add, remove, and manage remote repositories",
+      "blueprint": "features/remote-management.blueprint.ts",
+      "category": "core",
+      "parameters": {
+        "enableRemoteAdd": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable remote addition",
+          "required": false
+        },
+        "enableRemoteRemove": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable remote removal",
+          "required": false
+        }
+      }
+    }
+  },
+  "constraints": {
+    "gitRequired": "Git must be installed and available in PATH",
+    "writePermissions": "Requires write permissions to project directory"
+  }
+}

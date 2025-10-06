@@ -1,0 +1,75 @@
+{
+  "id": "auth-dashboard",
+  "name": "Authentication Dashboard",
+  "description": "Complete authentication UI with login, registration, user management, and admin features",
+  "version": "1.0.0",
+  "category": "feature",
+  "provides": {
+    "hooks": {
+      "useAuth": "() => UseQueryResult<AuthUser>",
+      "useSignIn": "() => UseMutationResult<AuthUser, Error, { email: string; password: string }>",
+      "useSignUp": "() => UseMutationResult<AuthUser, Error, { email: string; password: string; name: string }>",
+      "useSignOut": "() => UseMutationResult<void, Error, void>",
+      "useUser": "() => UseQueryResult<AuthUser>",
+      "useSession": "() => UseQueryResult<Session>"
+    },
+    "types": [
+      "AuthUser",
+      "Session",
+      "SignInData",
+      "SignUpData",
+      "AuthError"
+    ],
+    "api": [
+      "/api/auth/signin",
+      "/api/auth/signup",
+      "/api/auth/signout",
+      "/api/auth/session"
+    ]
+  },
+  "sub_features": {
+    "login-form": {
+      "name": "Login Form",
+      "description": "User login form with email/password validation",
+      "provides": {
+        "components": ["LoginForm", "LoginButton"],
+        "hooks": ["useLoginForm"]
+      }
+    },
+    "register-form": {
+      "name": "Registration Form", 
+      "description": "User registration form with validation",
+      "provides": {
+        "components": ["RegisterForm", "RegisterButton"],
+        "hooks": ["useRegisterForm"]
+      }
+    },
+    "user-menu": {
+      "name": "User Menu",
+      "description": "User dropdown menu with profile and settings",
+      "provides": {
+        "components": ["UserMenu", "UserAvatar", "UserProfile"],
+        "hooks": ["useUserMenu"]
+      }
+    },
+    "admin-panel": {
+      "name": "Admin Panel",
+      "description": "Admin interface for user management",
+      "provides": {
+        "components": ["AdminPanel", "UserList", "UserCard"],
+        "hooks": ["useAdminPanel", "useUserList"]
+      }
+    }
+  },
+  "requirements": {
+    "backend": {
+      "framework": ["nextjs"],
+      "capabilities": ["auth-api-routes", "auth-middleware", "session-management"]
+    },
+    "frontend": {
+      "ui": ["shadcn"],
+      "framework": ["nextjs"],
+      "capabilities": ["ui-components", "form-validation"]
+    }
+  }
+}

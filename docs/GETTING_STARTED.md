@@ -4,16 +4,24 @@
 
 ### 1. Install The Architech CLI
 ```bash
-npm install -g @thearchitech.xyz/cli
+# Clone and build from source
+git clone https://github.com/the-architech/cli.git
+cd cli
+npm install
+npm run build
 ```
 
 ### 2. Create Your First Project
 ```bash
-architech new my-app
+# Use a pre-built genome
+node dist/index.js new /path/to/marketplace/genomes/simple-app.genome.ts
+
+# Or create your own genome
+node dist/index.js new my-custom.genome.ts
 ```
 
 ### 3. Choose Your Stack
-The CLI will guide you through selecting:
+Create a TypeScript genome file that defines:
 - Framework (Next.js, Remix, etc.)
 - UI Library (Shadcn/UI, MUI, etc.)
 - Database (Drizzle, Prisma, etc.)
@@ -21,8 +29,8 @@ The CLI will guide you through selecting:
 
 ### 4. Add Features
 ```bash
-architech add feature teams-dashboard
-architech add feature user-profile
+# Features are included in genomes
+# Edit your genome.ts file to add more modules
 ```
 
 ## Understanding Genomes

@@ -42,6 +42,7 @@ export declare const CoreFormsArtifacts: {
     'src/types/forms.ts',
     'src/examples/ContactForm.tsx',
     'src/examples/LoginForm.tsx',
+    'src/lib/forms/validation-examples.ts',
     'src/lib/forms/index.ts'
   ],
   enhances: [],

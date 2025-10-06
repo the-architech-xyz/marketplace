@@ -14,16 +14,6 @@
   },
   "provides": {
     "files": [
-      "src/components/payment/PaymentForm.tsx",
-      "src/components/payment/SubscriptionCard.tsx",
-      "src/components/payment/InvoiceTable.tsx",
-      "src/components/payment/PricingCard.tsx",
-      "src/components/payment/CheckoutButton.tsx",
-      "src/components/payment/PaymentMethodSelector.tsx",
-      "src/components/payment/BillingHistory.tsx",
-      "src/components/payment/SubscriptionManager.tsx",
-      "src/components/payment/InvoiceViewer.tsx",
-      "src/components/payment/PaymentStatus.tsx",
       "src/lib/stripe/config.ts",
       "src/lib/stripe/webhooks.ts",
       "src/lib/stripe/subscriptions.ts",
@@ -32,18 +22,7 @@
       "src/hooks/useSubscription.ts",
       "src/hooks/usePaymentMethods.ts"
     ],
-    "components": [
-      "PaymentForm",
-      "SubscriptionCard",
-      "InvoiceTable",
-      "PricingCard",
-      "CheckoutButton",
-      "PaymentMethodSelector",
-      "BillingHistory",
-      "SubscriptionManager",
-      "InvoiceViewer",
-      "PaymentStatus"
-    ],
+    "components": [],
     "pages": []
   },
   "sub_features": {

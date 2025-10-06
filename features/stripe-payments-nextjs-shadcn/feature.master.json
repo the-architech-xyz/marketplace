@@ -1,0 +1,80 @@
+{
+  "id": "stripe-payments",
+  "name": "Stripe Payments & Billing",
+  "description": "Complete payment processing system with subscriptions, billing, and payment management",
+  "version": "1.0.0",
+  "category": "feature",
+  "provides": {
+    "hooks": {
+      "useStripe": "() => UseQueryResult<StripeConfig>",
+      "useCreatePayment": "() => UseMutationResult<PaymentIntent, Error, CreatePaymentData>",
+      "usePaymentMethods": "() => UseQueryResult<PaymentMethod[]>",
+      "useSubscriptions": "() => UseQueryResult<Subscription[]>",
+      "useCreateSubscription": "() => UseMutationResult<Subscription, Error, CreateSubscriptionData>",
+      "useInvoices": "() => UseQueryResult<Invoice[]>",
+      "useCustomers": "() => UseQueryResult<Customer[]>"
+    },
+    "types": [
+      "StripeConfig",
+      "PaymentIntent",
+      "PaymentMethod",
+      "Subscription",
+      "Invoice",
+      "Customer",
+      "CreatePaymentData",
+      "CreateSubscriptionData"
+    ],
+    "api": [
+      "/api/stripe/payment-intents",
+      "/api/stripe/payment-methods",
+      "/api/stripe/subscriptions",
+      "/api/stripe/invoices",
+      "/api/stripe/customers"
+    ]
+  },
+  "sub_features": {
+    "payment-forms": {
+      "name": "Payment Forms",
+      "description": "Secure payment forms with validation",
+      "provides": {
+        "components": ["PaymentForm", "CheckoutButton", "PaymentMethodSelector"],
+        "hooks": ["usePaymentForm"]
+      }
+    },
+    "subscription-management": {
+      "name": "Subscription Management",
+      "description": "Subscription creation and management",
+      "provides": {
+        "components": ["SubscriptionCard", "SubscriptionManager", "PricingCard"],
+        "hooks": ["useSubscriptionManager"]
+      }
+    },
+    "billing-dashboard": {
+      "name": "Billing Dashboard",
+      "description": "Billing history and invoice management",
+      "provides": {
+        "components": ["BillingHistory", "InvoiceTable", "InvoiceViewer"],
+        "hooks": ["useBillingHistory"]
+      }
+    },
+    "payment-analytics": {
+      "name": "Payment Analytics",
+      "description": "Payment performance and revenue tracking",
+      "provides": {
+        "components": ["PaymentAnalytics", "RevenueChart", "PaymentStats"],
+        "hooks": ["usePaymentAnalytics"]
+      }
+    }
+  },
+  "requirements": {
+    "backend": {
+      "framework": ["nextjs"],
+      "capabilities": ["payment-service", "api-routes"]
+    },
+    "frontend": {
+      "ui": ["shadcn"],
+      "framework": ["nextjs"],
+      "capabilities": ["ui-components", "form-validation", "payment-hooks"]
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "teams-dashboard-frontend-shadcn",
+  "name": "Teams Dashboard Frontend (Shadcn)",
+  "description": "Frontend implementation of teams-dashboard using Shadcn/ui components",
+  "version": "1.0.0",
+  "type": "frontend-implementation",
+  "implements": "teams-dashboard",
+  "tech_stack": {
+    "ui": "shadcn",
+    "framework": "nextjs"
+  },
+  "prerequisites": {
+    "modules": ["shadcn-ui", "nextjs"],
+    "capabilities": ["ui-components", "form-validation", "teams-data-hooks"]
+  },
+  "provides": {
+    "capabilities": [
+      "teams-ui-components",
+      "teams-pages",
+      "teams-forms"
+    ],
+    "components": [
+      "TeamsList",
+      "TeamCard",
+      "CreateTeamDialog",
+      "EditTeamDialog",
+      "TeamMembersList",
+      "AddMemberDialog",
+      "TeamSettings"
+    ],
+    "pages": [
+      "/teams",
+      "/teams/[id]",
+      "/teams/[id]/settings"
+    ]
+  },
+  "blueprint": "blueprint.json"
+}

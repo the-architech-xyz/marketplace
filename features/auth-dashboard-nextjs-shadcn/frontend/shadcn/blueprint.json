@@ -1,0 +1,68 @@
+{
+  "id": "auth-dashboard-frontend-shadcn",
+  "name": "Auth Dashboard Frontend (Shadcn)",
+  "description": "Frontend implementation of auth-dashboard using Shadcn/ui components",
+  "version": "1.0.0",
+  "actions": [
+    {
+      "type": "CREATE_FILE",
+      "path": "src/app/auth/login/page.tsx",
+      "template": "templates/login-page.tsx.tpl"
+    },
+    {
+      "type": "CREATE_FILE",
+      "path": "src/app/auth/register/page.tsx",
+      "template": "templates/register-page.tsx.tpl"
+    },
+    {
+      "type": "CREATE_FILE",
+      "path": "src/app/auth/profile/page.tsx",
+      "template": "templates/profile-page.tsx.tpl"
+    },
+    {
+      "type": "CREATE_FILE",
+      "path": "src/app/admin/users/page.tsx",
+      "template": "templates/admin-users-page.tsx.tpl"
+    },
+    {
+      "type": "CREATE_FILE",
+      "path": "src/components/auth/LoginForm.tsx",
+      "template": "templates/LoginForm.tsx.tpl"
+    },
+    {
+      "type": "CREATE_FILE",
+      "path": "src/components/auth/RegisterForm.tsx",
+      "template": "templates/RegisterForm.tsx.tpl"
+    },
+    {
+      "type": "CREATE_FILE",
+      "path": "src/components/auth/UserMenu.tsx",
+      "template": "templates/UserMenu.tsx.tpl"
+    },
+    {
+      "type": "CREATE_FILE",
+      "path": "src/components/auth/UserAvatar.tsx",
+      "template": "templates/UserAvatar.tsx.tpl"
+    },
+    {
+      "type": "CREATE_FILE",
+      "path": "src/components/auth/UserProfile.tsx",
+      "template": "templates/UserProfile.tsx.tpl"
+    },
+    {
+      "type": "CREATE_FILE",
+      "path": "src/components/auth/AdminPanel.tsx",
+      "template": "templates/AdminPanel.tsx.tpl"
+    },
+    {
+      "type": "CREATE_FILE",
+      "path": "src/components/auth/UserList.tsx",
+      "template": "templates/UserList.tsx.tpl"
+    },
+    {
+      "type": "CREATE_FILE",
+      "path": "src/components/auth/UserCard.tsx",
+      "template": "templates/UserCard.tsx.tpl"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "id": "better-auth-github-connector-integration",
+  "name": "Better Auth + GitHub Connector Integration",
+  "description": "OAuth integration between Better Auth and GitHub for Application Authorization",
+  "version": "1.0.0",
+  "category": "integration",
+  "adapters": ["better-auth", "github-api"],
+  "dependencies": [
+    { "id": "better-auth", "version": "^1.0.0" },
+    { "id": "github-api", "version": "^1.0.0" }
+  ],
+  "capabilities": [
+    "oauth-flow",
+    "token-management",
+    "user-repositories",
+    "permission-scoping",
+    "token-refresh",
+    "secure-storage"
+  ],
+  "parameters": {
+    "clientId": {
+      "type": "string",
+      "description": "GitHub OAuth App Client ID",
+      "required": true
+    },
+    "clientSecret": {
+      "type": "string",
+      "description": "GitHub OAuth App Client Secret",
+      "required": true
+    },
+    "redirectUri": {
+      "type": "string",
+      "description": "OAuth redirect URI",
+      "required": true
+    },
+    "scopes": {
+      "type": "array",
+      "default": ["repo", "workflow", "admin:org", "user:email"],
+      "description": "GitHub OAuth scopes",
+      "required": false
+    },
+    "encryptionKey": {
+      "type": "string",
+      "description": "Encryption key for storing tokens securely",
+      "required": true
+    }
+  },
+  "features": {
+    "oauth-flow": {
+      "id": "oauth-flow",
+      "name": "OAuth Flow",
+      "description": "Complete OAuth 2.0 flow for GitHub authorization",
+      "blueprint": "features/oauth-flow.blueprint.ts",
+      "category": "core",
+      "parameters": {
+        "enableRefresh": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable token refresh functionality",
+          "required": false
+        },
+        "enableRevoke": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable token revocation",
+          "required": false
+        }
+      }
+    },
+    "token-management": {
+      "id": "token-management",
+      "name": "Token Management",
+      "description": "Secure storage and management of OAuth tokens",
+      "blueprint": "features/token-management.blueprint.ts",
+      "category": "core",
+      "parameters": {
+        "encryptionEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable token encryption",
+          "required": false
+        },
+        "tokenExpiry": {
+          "type": "number",
+          "default": 3600,
+          "description": "Token expiry time in seconds",
+          "required": false
+        }
+      }
+    },
+    "repository-access": {
+      "id": "repository-access",
+      "name": "Repository Access",
+      "description": "Access user repositories with proper permissions",
+      "blueprint": "features/repository-access.blueprint.ts",
+      "category": "core",
+      "parameters": {
+        "enablePublicRepos": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable access to public repositories",
+          "required": false
+        },
+        "enablePrivateRepos": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable access to private repositories",
+          "required": false
+        }
+      }
+    }
+  },
+  "constraints": {
+    "betterAuthRequired": "Better Auth must be configured and running",
+    "databaseRequired": "Database required for token storage",
+    "httpsRequired": "HTTPS required for OAuth in production"
+  }
+}

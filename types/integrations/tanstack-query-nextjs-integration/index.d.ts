@@ -16,7 +16,8 @@ export declare const TanstackQueryNextjsIntegrationArtifacts: {
     'src/components/QueryErrorBoundary.tsx',
     'src/lib/query-keys.ts',
     'src/lib/query-prefetch.ts',
-    'src/components/devtools/ReactQueryDevtools.tsx'
+    'src/components/devtools/ReactQueryDevtools.tsx',
+    'src/lib/query-prefetching.ts'
   ],
   enhances: [
     { path: 'src/app/layout.tsx' }

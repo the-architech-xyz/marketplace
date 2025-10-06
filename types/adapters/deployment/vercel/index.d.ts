@@ -7,7 +7,7 @@
 export interface DeploymentVercelParams {
 
   /** Target framework */
-  framework: string;
+  framework: 'nextjs' | 'react' | 'vue' | 'svelte' | 'angular';
 
   /** Build command to run */
   buildCommand: string;

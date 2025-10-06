@@ -1,0 +1,109 @@
+{
+  "id": "repo-analyzer-nextjs-shadcn",
+  "name": "Repository Analyzer",
+  "description": "Analyze existing GitHub repositories and detect their architecture",
+  "version": "1.0.0",
+  "category": "feature",
+  "prerequisites": {
+    "adapters": ["github-api", "better-auth"],
+    "integrators": ["better-auth-github-connector-integration"]
+  },
+  "capabilities": [
+    "repository-analysis",
+    "genome-detection",
+    "architecture-visualization",
+    "adapter-suggestions",
+    "confidence-scoring",
+    "export-genome"
+  ],
+  "parameters": {
+    "enableVisualization": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable visual architecture diagram",
+      "required": false
+    },
+    "enableExport": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable genome export functionality",
+      "required": false
+    },
+    "confidenceThreshold": {
+      "type": "number",
+      "default": 70,
+      "description": "Minimum confidence threshold for suggestions",
+      "required": false
+    }
+  },
+  "features": {
+    "analysis-dashboard": {
+      "id": "analysis-dashboard",
+      "name": "Analysis Dashboard",
+      "description": "Main dashboard for repository analysis",
+      "blueprint": "features/analysis-dashboard.blueprint.ts",
+      "category": "core",
+      "parameters": {
+        "showConfidence": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show confidence scores",
+          "required": false
+        },
+        "showWarnings": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show analysis warnings",
+          "required": false
+        }
+      }
+    },
+    "architecture-visualizer": {
+      "id": "architecture-visualizer",
+      "name": "Architecture Visualizer",
+      "description": "Visual representation of detected architecture",
+      "blueprint": "features/architecture-visualizer.blueprint.ts",
+      "category": "premium",
+      "parameters": {
+        "interactive": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable interactive diagram",
+          "required": false
+        },
+        "exportFormats": {
+          "type": "array",
+          "default": ["png", "svg", "pdf"],
+          "description": "Available export formats",
+          "required": false
+        }
+      }
+    },
+    "genome-exporter": {
+      "id": "genome-exporter",
+      "name": "Genome Exporter",
+      "description": "Export detected architecture as TypeScript genome",
+      "blueprint": "features/genome-exporter.blueprint.ts",
+      "category": "core",
+      "parameters": {
+        "includeComments": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include analysis comments in genome",
+          "required": false
+        },
+        "includeMetadata": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include analysis metadata",
+          "required": false
+        }
+      }
+    }
+  },
+  "constraints": {
+    "githubAccess": "Requires GitHub repository access",
+    "analysisTime": "Analysis time depends on repository size",
+    "confidence": "Analysis confidence may vary based on project complexity"
+  }
+}
