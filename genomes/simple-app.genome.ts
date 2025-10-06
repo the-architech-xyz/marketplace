@@ -51,7 +51,7 @@ const simpleAppGenome: Genome = {
       parameters: {
         components: [
           'button', 'input', 'card', 'form', 'table', 'dialog', 'badge', 'avatar',
-          'toast', 'sheet', 'tabs', 'accordion', 'alert-dialog', 'checkbox',
+          'sonner', 'sheet', 'tabs', 'accordion', 'alert-dialog', 'checkbox',
           'collapsible', 'context-menu', 'hover-card', 'menubar', 'navigation-menu',
           'popover', 'progress', 'radio-group', 'scroll-area', 'slider', 'toggle'
         ]
