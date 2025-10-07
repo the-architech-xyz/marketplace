@@ -20,10 +20,7 @@ export interface DeploymentDockerFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const DeploymentDockerArtifacts: {
-  creates: [
-    'Dockerfile',
-    '.dockerignore'
-  ],
+  creates: [],
   enhances: [],
   installs: [],
   envVars: []

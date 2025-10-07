@@ -10,13 +10,21 @@ const tanstackQueryNextjsIntegrationBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/query-client.ts',
-      template: 'templates/query-client.ts.tpl'
+      template: 'templates/query-client.ts.tpl',
+      conflictResolution: {
+        strategy: 'replace',
+        priority: 1
+      }
     },
     // Create QueryClientProvider component
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/providers/QueryProvider.tsx',
-      template: 'templates/QueryProvider.tsx.tpl'
+      template: 'templates/QueryProvider.tsx.tpl',
+      conflictResolution: {
+        strategy: 'replace',
+        priority: 1
+      }
     },
     // Create SSR utilities
     {
@@ -34,13 +42,21 @@ const tanstackQueryNextjsIntegrationBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/QueryErrorBoundary.tsx',
-      template: 'templates/QueryErrorBoundary.tsx.tpl'
+      template: 'templates/QueryErrorBoundary.tsx.tpl',
+      conflictResolution: {
+        strategy: 'replace',
+        priority: 1
+      }
     },
     // Create query keys utilities
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/query-keys.ts',
-      template: 'templates/query-keys.ts.tpl'
+      template: 'templates/query-keys.ts.tpl',
+      conflictResolution: {
+        strategy: 'replace',
+        priority: 1
+      }
     },
     // Create prefetching utilities
     {

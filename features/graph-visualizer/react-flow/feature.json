@@ -1,90 +1,108 @@
 {
-  "id": "features/graph-visualizer/react-flow",
-  "name": "Graph Visualizer",
+  "id": "graph-visualizer",
+  "name": "Graph Visualizer Capability",
   "description": "Interactive graph visualizer for displaying project architecture and dependencies",
   "version": "1.0.0",
   "category": "feature",
-  "tags": ["graph", "visualization", "react-flow", "architecture", "dependencies"],
-  "compatibility": {
-    "frameworks": ["nextjs"],
-    "adapters": ["ui/react-flow", "ui/shadcn-ui"],
-    "integrations": ["zustand-nextjs-integration"]
+  "contract": {
+    "hooks": {
+      "useGraphData": "UseQueryResult<GraphData, Error>",
+      "useNodes": "UseQueryResult<Node[], Error>",
+      "useEdges": "UseQueryResult<Edge[], Error>",
+      "useLayout": "UseQueryResult<LayoutConfig, Error>",
+      "useNodeTypes": "UseQueryResult<NodeType[], Error>",
+      "useEdgeTypes": "UseQueryResult<EdgeType[], Error>",
+      "useGraphHistory": "UseQueryResult<GraphSnapshot[], Error>",
+      "useExportGraph": "UseMutationResult<ExportResult, Error, ExportOptions>",
+      "useImportGraph": "UseMutationResult<GraphData, Error, ImportData>",
+      "useSaveGraph": "UseMutationResult<{ success: boolean; graphId: string }, Error, SaveGraphData>",
+      "useLoadGraph": "UseMutationResult<GraphData, Error, LoadGraphData>",
+      "useUpdateLayout": "UseMutationResult<LayoutConfig, Error, LayoutConfig>",
+      "useAddNode": "UseMutationResult<Node, Error, AddNodeData>",
+      "useUpdateNode": "UseMutationResult<Node, Error, UpdateNodeData>",
+      "useDeleteNode": "UseMutationResult<{ success: boolean }, Error, string>",
+      "useAddEdge": "UseMutationResult<Edge, Error, AddEdgeData>",
+      "useUpdateEdge": "UseMutationResult<Edge, Error, UpdateEdgeData>",
+      "useDeleteEdge": "UseMutationResult<{ success: boolean }, Error, string>"
+    },
+    "api": {
+      "endpoints": ["/api/graph/data", "/api/graph/nodes", "/api/graph/edges", "/api/graph/layout", "/api/graph/export", "/api/graph/import", "/api/graph/save", "/api/graph/load"],
+      "methods": ["POST", "GET", "PATCH", "DELETE"]
+    },
+    "types": ["GraphData", "Node", "Edge", "LayoutConfig", "NodeType", "EdgeType", "GraphSnapshot", "ExportResult", "ExportOptions", "ImportData", "SaveGraphData", "LoadGraphData", "AddNodeData", "UpdateNodeData", "AddEdgeData", "UpdateEdgeData"]
   },
-  "dependencies": {
-    "adapters": ["ui/react-flow", "ui/shadcn-ui"],
-    "integrations": ["zustand-nextjs-integration"]
+  "prerequisites": {
+    "adapters": [
+      "react-flow",
+      "shadcn-ui"
+    ],
+    "integrators": [
+      "zustand-nextjs-integration"
+    ],
+    "capabilities": [
+      "graph-visualization",
+      "state-management"
+    ]
   },
-  "features": {
-    "interactiveGraph": true,
-    "nodeTypes": true,
-    "edgeTypes": true,
-    "minimap": true,
-    "controls": true,
-    "background": true,
-    "selection": true,
-    "dragging": true,
-    "zooming": true,
-    "panning": true,
-    "export": true,
-    "import": true
+  "provides": {
+    "capabilities": [
+      "interactive-graphs",
+      "node-management",
+      "edge-management",
+      "layout-algorithms",
+      "graph-export-import",
+      "graph-persistence"
+    ]
   },
   "parameters": {
-    "nodeTypes": {
-      "type": "array",
-      "description": "Available node types",
-      "default": ["module", "component", "api", "database"],
-      "enum": ["module", "component", "api", "database", "service", "page", "hook", "utility"]
+    "backend": {
+      "type": "select",
+      "default": "nextjs",
+      "description": "Backend implementation for graph data management",
+      "required": true,
+      "options": ["nextjs", "express", "fastify"]
     },
-    "edgeTypes": {
-      "type": "array",
-      "description": "Available edge types",
-      "default": ["dependency", "import", "export"],
-      "enum": ["dependency", "import", "export", "inheritance", "composition", "association"]
+    "frontend": {
+      "type": "select",
+      "default": "react-flow",
+      "description": "Frontend implementation for graph visualization",
+      "required": true,
+      "options": ["react-flow", "vis-network", "d3"]
     },
     "features": {
       "type": "object",
-      "description": "Feature flags",
-      "properties": {
-        "minimap": {
-          "type": "boolean",
-          "default": true
-        },
-        "controls": {
-          "type": "boolean",
-          "default": true
-        },
-        "background": {
-          "type": "boolean",
-          "default": true
-        },
-        "export": {
-          "type": "boolean",
-          "default": true
-        },
-        "import": {
-          "type": "boolean",
-          "default": true
-        }
-      }
-    },
-    "layout": {
-      "type": "object",
-      "description": "Layout configuration",
-      "properties": {
-        "algorithm": {
-          "type": "string",
-          "default": "hierarchical",
-          "enum": ["hierarchical", "force", "circular", "grid"]
-        },
-        "direction": {
-          "type": "string",
-          "default": "TB",
-          "enum": ["TB", "BT", "LR", "RL"]
-        }
-      }
+      "default": {
+        "interactiveGraph": true,
+        "nodeTypes": true,
+        "edgeTypes": true,
+        "minimap": true,
+        "controls": true,
+        "background": true,
+        "selection": true,
+        "dragging": true,
+        "zooming": true,
+        "panning": true,
+        "export": true,
+        "import": true
+      },
+      "description": "Graph visualizer features to enable",
+      "required": false
     }
   },
-  "blueprint": {
-    "file": "blueprint.ts"
+  "implementations": {
+    "backend": [
+      "nextjs",
+      "express",
+      "fastify"
+    ],
+    "frontend": [
+      "react-flow",
+      "vis-network",
+      "d3"
+    ]
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
   }
 }

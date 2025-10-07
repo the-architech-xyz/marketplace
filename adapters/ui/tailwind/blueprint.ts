@@ -5,7 +5,7 @@
  * Framework-agnostic CSS utilities that work with any project
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const tailwindBlueprint: Blueprint = {
   id: 'tailwind-setup',
@@ -53,6 +53,7 @@ export const tailwindBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/globals.css',
       template: 'templates/globals.css.tpl',
+      conflictResolution: { strategy: ConflictResolutionStrategy.REPLACE },
     }
   ]
 };

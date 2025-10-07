@@ -19,43 +19,51 @@ export type DatabaseOrm = 'database-orm';
 export type ReactFramework = 'react-framework';
 export type DatabaseNextjsIntegration = 'database-nextjs-integration';
 export type EmailService = 'email-service';
-export type UiComponents = 'ui-components';
 export type SentryNextjsIntegration = 'sentry-nextjs-integration';
 export type ErrorMonitoring = 'error-monitoring';
 export type PerformanceTracking = 'performance-tracking';
 export type PaymentProcessing = 'payment-processing';
 export type TestingFramework = 'testing-framework';
 export type WalletConnection = 'wallet-connection';
-export type ShadcnUi = 'shadcn-ui';
-export type Web3NextjsIntegration = 'web3-nextjs-integration';
+export type WelcomePage = 'welcome-page';
+export type ProjectAnalyzer = 'project-analyzer';
+export type DataPersistence = 'data-persistence';
+export type FileStorage = 'file-storage';
+export type DatabaseOperations = 'database-operations';
+export type UiComponents = 'ui-components';
+export type BlockchainInteraction = 'blockchain-interaction';
 
 // Capability union type
-export type Capability = '0' | '1' | '2' | '3' | '4' | '5' | 'auth-nextjs-integration' | 'user-authentication' | 'api-routes' | 'containerization' | 'database-orm' | 'react-framework' | 'database-nextjs-integration' | 'email-service' | 'ui-components' | 'sentry-nextjs-integration' | 'error-monitoring' | 'performance-tracking' | 'payment-processing' | 'testing-framework' | 'wallet-connection' | 'shadcn-ui' | 'web3-nextjs-integration';
+export type Capability = '0' | '1' | '2' | '3' | '4' | '5' | 'auth-nextjs-integration' | 'user-authentication' | 'api-routes' | 'containerization' | 'database-orm' | 'react-framework' | 'database-nextjs-integration' | 'email-service' | 'sentry-nextjs-integration' | 'error-monitoring' | 'performance-tracking' | 'payment-processing' | 'testing-framework' | 'wallet-connection' | 'welcome-page' | 'project-analyzer' | 'data-persistence' | 'file-storage' | 'database-operations' | 'ui-components' | 'blockchain-interaction';
 
 // Module capability mappings
 export interface ModuleCapabilities {
-  '0': ['integrations/better-auth-github-connector-integration', 'integrations/web3-shadcn-integration'];
-  '1': ['integrations/better-auth-github-connector-integration', 'integrations/web3-shadcn-integration'];
-  '2': ['integrations/better-auth-github-connector-integration', 'integrations/web3-shadcn-integration'];
-  '3': ['integrations/better-auth-github-connector-integration', 'integrations/web3-shadcn-integration'];
-  '4': ['integrations/better-auth-github-connector-integration', 'integrations/web3-shadcn-integration'];
-  '5': ['integrations/better-auth-github-connector-integration', 'integrations/web3-shadcn-integration'];
+  '0': ['integrations/better-auth-github-connector-integration'];
+  '1': ['integrations/better-auth-github-connector-integration'];
+  '2': ['integrations/better-auth-github-connector-integration'];
+  '3': ['integrations/better-auth-github-connector-integration'];
+  '4': ['integrations/better-auth-github-connector-integration'];
+  '5': ['integrations/better-auth-github-connector-integration'];
   'auth-nextjs-integration': ['integrations/better-auth-nextjs-integration'];
   'database-nextjs-integration': ['integrations/drizzle-nextjs-integration'];
   'sentry-nextjs-integration': ['integrations/sentry-nextjs-integration'];
+  'welcome-page': ['features/architech-welcome'];
+  'project-analyzer': ['features/architech-welcome'];
 }
 
 // Capability provider mappings
 export interface CapabilityProviders {
-  '0': ['integrations/better-auth-github-connector-integration', 'integrations/web3-shadcn-integration'];
-  '1': ['integrations/better-auth-github-connector-integration', 'integrations/web3-shadcn-integration'];
-  '2': ['integrations/better-auth-github-connector-integration', 'integrations/web3-shadcn-integration'];
-  '3': ['integrations/better-auth-github-connector-integration', 'integrations/web3-shadcn-integration'];
-  '4': ['integrations/better-auth-github-connector-integration', 'integrations/web3-shadcn-integration'];
-  '5': ['integrations/better-auth-github-connector-integration', 'integrations/web3-shadcn-integration'];
+  '0': ['integrations/better-auth-github-connector-integration'];
+  '1': ['integrations/better-auth-github-connector-integration'];
+  '2': ['integrations/better-auth-github-connector-integration'];
+  '3': ['integrations/better-auth-github-connector-integration'];
+  '4': ['integrations/better-auth-github-connector-integration'];
+  '5': ['integrations/better-auth-github-connector-integration'];
   'auth-nextjs-integration': ['integrations/better-auth-nextjs-integration'];
   'database-nextjs-integration': ['integrations/drizzle-nextjs-integration'];
   'sentry-nextjs-integration': ['integrations/sentry-nextjs-integration'];
+  'welcome-page': ['features/architech-welcome'];
+  'project-analyzer': ['features/architech-welcome'];
 }
 
 // Capability registry (for runtime use)
@@ -95,15 +103,6 @@ export const CAPABILITY_REGISTRY: Record<string, {
           "provides": [],
           "requires": []
         }
-      },
-      {
-        "moduleId": "integrations/web3-shadcn-integration",
-        "capabilityVersion": "1.0.0",
-        "confidence": 95,
-        "metadata": {
-          "provides": [],
-          "requires": []
-        }
       }
     ],
     "consumers": [],
@@ -113,15 +112,6 @@ export const CAPABILITY_REGISTRY: Record<string, {
     "providers": [
       {
         "moduleId": "integrations/better-auth-github-connector-integration",
-        "capabilityVersion": "1.0.0",
-        "confidence": 95,
-        "metadata": {
-          "provides": [],
-          "requires": []
-        }
-      },
-      {
-        "moduleId": "integrations/web3-shadcn-integration",
         "capabilityVersion": "1.0.0",
         "confidence": 95,
         "metadata": {
@@ -143,15 +133,6 @@ export const CAPABILITY_REGISTRY: Record<string, {
           "provides": [],
           "requires": []
         }
-      },
-      {
-        "moduleId": "integrations/web3-shadcn-integration",
-        "capabilityVersion": "1.0.0",
-        "confidence": 95,
-        "metadata": {
-          "provides": [],
-          "requires": []
-        }
       }
     ],
     "consumers": [],
@@ -161,15 +142,6 @@ export const CAPABILITY_REGISTRY: Record<string, {
     "providers": [
       {
         "moduleId": "integrations/better-auth-github-connector-integration",
-        "capabilityVersion": "1.0.0",
-        "confidence": 95,
-        "metadata": {
-          "provides": [],
-          "requires": []
-        }
-      },
-      {
-        "moduleId": "integrations/web3-shadcn-integration",
         "capabilityVersion": "1.0.0",
         "confidence": 95,
         "metadata": {
@@ -191,15 +163,6 @@ export const CAPABILITY_REGISTRY: Record<string, {
           "provides": [],
           "requires": []
         }
-      },
-      {
-        "moduleId": "integrations/web3-shadcn-integration",
-        "capabilityVersion": "1.0.0",
-        "confidence": 95,
-        "metadata": {
-          "provides": [],
-          "requires": []
-        }
       }
     ],
     "consumers": [],
@@ -209,15 +172,6 @@ export const CAPABILITY_REGISTRY: Record<string, {
     "providers": [
       {
         "moduleId": "integrations/better-auth-github-connector-integration",
-        "capabilityVersion": "1.0.0",
-        "confidence": 95,
-        "metadata": {
-          "provides": [],
-          "requires": []
-        }
-      },
-      {
-        "moduleId": "integrations/web3-shadcn-integration",
         "capabilityVersion": "1.0.0",
         "confidence": 95,
         "metadata": {
@@ -257,6 +211,22 @@ export const CAPABILITY_REGISTRY: Record<string, {
         "requiredVersion": "1.0.0",
         "metadata": {
           "description": "Required by integrations/better-auth-nextjs-integration",
+          "context": "prerequisite"
+        }
+      },
+      {
+        "moduleId": "features/auth",
+        "requiredVersion": "1.0.0",
+        "metadata": {
+          "description": "Required by features/auth",
+          "context": "prerequisite"
+        }
+      },
+      {
+        "moduleId": "features/teams-management",
+        "requiredVersion": "1.0.0",
+        "metadata": {
+          "description": "Required by features/teams-management",
           "context": "prerequisite"
         }
       }
@@ -433,24 +403,10 @@ export const CAPABILITY_REGISTRY: Record<string, {
         }
       },
       {
-        "moduleId": "integrations/resend-shadcn-integration",
+        "moduleId": "features/emailing",
         "requiredVersion": "1.0.0",
         "metadata": {
-          "description": "Required by integrations/resend-shadcn-integration",
-          "context": "prerequisite"
-        }
-      }
-    ],
-    "conflicts": []
-  },
-  "ui-components": {
-    "providers": [],
-    "consumers": [
-      {
-        "moduleId": "integrations/resend-shadcn-integration",
-        "requiredVersion": "1.0.0",
-        "metadata": {
-          "description": "Required by integrations/resend-shadcn-integration",
+          "description": "Required by features/emailing",
           "context": "prerequisite"
         }
       }
@@ -488,6 +444,14 @@ export const CAPABILITY_REGISTRY: Record<string, {
           "description": "Required by integrations/sentry-nextjs-integration",
           "context": "prerequisite"
         }
+      },
+      {
+        "moduleId": "features/monitoring",
+        "requiredVersion": "1.0.0",
+        "metadata": {
+          "description": "Required by features/monitoring",
+          "context": "prerequisite"
+        }
       }
     ],
     "conflicts": []
@@ -502,6 +466,14 @@ export const CAPABILITY_REGISTRY: Record<string, {
           "description": "Required by integrations/sentry-nextjs-integration",
           "context": "prerequisite"
         }
+      },
+      {
+        "moduleId": "features/monitoring",
+        "requiredVersion": "1.0.0",
+        "metadata": {
+          "description": "Required by features/monitoring",
+          "context": "prerequisite"
+        }
       }
     ],
     "conflicts": []
@@ -514,6 +486,14 @@ export const CAPABILITY_REGISTRY: Record<string, {
         "requiredVersion": "1.0.0",
         "metadata": {
           "description": "Required by integrations/stripe-nextjs-integration",
+          "context": "prerequisite"
+        }
+      },
+      {
+        "moduleId": "features/payments",
+        "requiredVersion": "1.0.0",
+        "metadata": {
+          "description": "Required by features/payments",
           "context": "prerequisite"
         }
       }
@@ -548,28 +528,128 @@ export const CAPABILITY_REGISTRY: Record<string, {
     ],
     "conflicts": []
   },
-  "shadcn-ui": {
+  "welcome-page": {
+    "providers": [
+      {
+        "moduleId": "features/architech-welcome",
+        "capabilityVersion": "1.0.0",
+        "confidence": 95,
+        "metadata": {
+          "description": "Interactive welcome page with project showcase",
+          "provides": [
+            "welcome-page",
+            "tech-stack-visualizer",
+            "component-showcase",
+            "project-structure",
+            "quick-start-guide"
+          ],
+          "requires": []
+        }
+      }
+    ],
+    "consumers": [],
+    "conflicts": []
+  },
+  "project-analyzer": {
+    "providers": [
+      {
+        "moduleId": "features/architech-welcome",
+        "capabilityVersion": "1.0.0",
+        "confidence": 95,
+        "metadata": {
+          "description": "Analyzes generated project to extract technology stack and features",
+          "provides": [
+            "project-analysis",
+            "module-detection",
+            "capability-mapping"
+          ],
+          "requires": []
+        }
+      }
+    ],
+    "consumers": [],
+    "conflicts": []
+  },
+  "data-persistence": {
     "providers": [],
     "consumers": [
       {
-        "moduleId": "integrations/web3-shadcn-integration",
+        "moduleId": "features/ecommerce",
         "requiredVersion": "1.0.0",
         "metadata": {
-          "description": "Required by integrations/web3-shadcn-integration",
+          "description": "Required by features/ecommerce",
           "context": "prerequisite"
         }
       }
     ],
     "conflicts": []
   },
-  "web3-nextjs-integration": {
+  "file-storage": {
     "providers": [],
     "consumers": [
       {
-        "moduleId": "integrations/web3-shadcn-integration",
+        "moduleId": "features/ecommerce",
         "requiredVersion": "1.0.0",
         "metadata": {
-          "description": "Required by integrations/web3-shadcn-integration",
+          "description": "Required by features/ecommerce",
+          "context": "prerequisite"
+        }
+      }
+    ],
+    "conflicts": []
+  },
+  "database-operations": {
+    "providers": [],
+    "consumers": [
+      {
+        "moduleId": "features/project-management",
+        "requiredVersion": "1.0.0",
+        "metadata": {
+          "description": "Required by features/project-management",
+          "context": "prerequisite"
+        }
+      },
+      {
+        "moduleId": "features/teams-management",
+        "requiredVersion": "1.0.0",
+        "metadata": {
+          "description": "Required by features/teams-management",
+          "context": "prerequisite"
+        }
+      }
+    ],
+    "conflicts": []
+  },
+  "ui-components": {
+    "providers": [],
+    "consumers": [
+      {
+        "moduleId": "features/project-management",
+        "requiredVersion": "1.0.0",
+        "metadata": {
+          "description": "Required by features/project-management",
+          "context": "prerequisite"
+        }
+      },
+      {
+        "moduleId": "features/teams-management",
+        "requiredVersion": "1.0.0",
+        "metadata": {
+          "description": "Required by features/teams-management",
+          "context": "prerequisite"
+        }
+      }
+    ],
+    "conflicts": []
+  },
+  "blockchain-interaction": {
+    "providers": [],
+    "consumers": [
+      {
+        "moduleId": "features/web3",
+        "requiredVersion": "1.0.0",
+        "metadata": {
+          "description": "Required by features/web3",
           "context": "prerequisite"
         }
       }

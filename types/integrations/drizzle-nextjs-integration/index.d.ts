@@ -39,16 +39,7 @@ export interface DrizzleNextjsIntegrationParams {
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const DrizzleNextjsIntegrationArtifacts: {
-  creates: [
-    'src/hooks/use-query.ts',
-    'src/hooks/use-mutation.ts',
-    'src/lib/db/queries.ts',
-    'src/lib/db/mutations.ts',
-    'src/app/api/db/migrate/route.ts',
-    'src/app/api/db/seed/route.ts',
-    'src/lib/db/transactions.ts',
-    'src/types/api.ts'
-  ],
+  creates: [],
   enhances: [],
   installs: [],
   envVars: []

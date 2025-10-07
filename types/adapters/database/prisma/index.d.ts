@@ -23,14 +23,9 @@ export interface DatabasePrismaFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const DatabasePrismaArtifacts: {
-  creates: [
-    '{{paths.database_config}}/prisma.ts',
-    'prisma/schema.prisma'
-  ],
+  creates: [],
   enhances: [],
-  installs: [
-    { packages: ['prisma', '@prisma/client'], isDev: false }
-  ],
+  installs: [],
   envVars: []
 };
 

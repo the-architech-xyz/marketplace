@@ -8,20 +8,8 @@ export interface TanstackQueryNextjsIntegrationParams {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const TanstackQueryNextjsIntegrationArtifacts: {
-  creates: [
-    'src/lib/query-client.ts',
-    'src/components/providers/QueryProvider.tsx',
-    'src/lib/query-ssr.ts',
-    'src/lib/query-hydration.ts',
-    'src/components/QueryErrorBoundary.tsx',
-    'src/lib/query-keys.ts',
-    'src/lib/query-prefetch.ts',
-    'src/components/devtools/ReactQueryDevtools.tsx',
-    'src/lib/query-prefetching.ts'
-  ],
-  enhances: [
-    { path: 'src/app/layout.tsx' }
-  ],
+  creates: [],
+  enhances: [],
   installs: [],
   envVars: []
 };

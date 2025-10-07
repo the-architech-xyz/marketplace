@@ -20,25 +20,10 @@ export interface ServicesGithubApiFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const ServicesGithubApiArtifacts: {
-  creates: [
-    '{{paths.shared_library}}/github/config.ts',
-    '{{paths.shared_library}}/github/client.ts',
-    '{{paths.shared_library}}/github/repository.ts',
-    '{{paths.shared_library}}/github/files.ts',
-    '{{paths.shared_library}}/github/pull-requests.ts',
-    '{{paths.shared_library}}/github/secrets.ts',
-    '{{paths.shared_library}}/github/workflows.ts',
-    '{{paths.shared_library}}/github/types.ts',
-    '{{paths.shared_library}}/github/index.ts'
-  ],
+  creates: [],
   enhances: [],
-  installs: [
-    { packages: ['@octokit/rest', '@octokit/auth-app', '@octokit/plugin-retry'], isDev: false }
-  ],
-  envVars: [
-    { key: 'GITHUB_TOKEN', value: '{{module.parameters.token}}', description: 'GitHub Personal Access Token or OAuth access token' },
-    { key: 'GITHUB_API_URL', value: '{{module.parameters.baseUrl}}', description: 'GitHub API base URL' }
-  ]
+  installs: [],
+  envVars: []
 };
 
 // Type-safe artifact access

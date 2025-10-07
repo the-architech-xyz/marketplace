@@ -23,16 +23,9 @@ export interface ContentNextIntlFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const ContentNextIntlArtifacts: {
-  creates: [
-    'src/i18n/request.ts',
-    'src/messages/en.json',
-    'src/messages/es.json',
-    'src/messages/fr.json'
-  ],
+  creates: [],
   enhances: [],
-  installs: [
-    { packages: ['next-intl'], isDev: false }
-  ],
+  installs: [],
   envVars: []
 };
 

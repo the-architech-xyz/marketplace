@@ -1,0 +1,90 @@
+{
+  "id": "emailing",
+  "name": "Emailing Capability",
+  "description": "Complete emailing capability with sending, templates, lists, subscribers, and analytics",
+  "version": "1.0.0",
+  "category": "feature",
+  "contract": {
+    "hooks": {
+      "useSendEmail": "UseMutationResult<{ success: boolean; messageId?: string }, Error, { to: string | string[]; subject: string; body: string; from?: string; html?: string; text?: string }>",
+      "useCreateTemplate": "UseMutationResult<{ success: boolean; templateId: string }, Error, { name: string; subject: string; html: string; text?: string }>",
+      "useUpdateTemplate": "UseMutationResult<{ success: boolean }, Error, { templateId: string; name?: string; subject?: string; html?: string; text?: string }>",
+      "useDeleteTemplate": "UseMutationResult<{ success: boolean }, Error, { templateId: string }>",
+      "useSubscribe": "UseMutationResult<{ success: boolean }, Error, { email: string; listId?: string }>",
+      "useUnsubscribe": "UseMutationResult<{ success: boolean }, Error, { email: string; listId?: string }>",
+      "useTemplates": "UseQueryResult<Array<{ id: string; name: string; subject: string; createdAt: string }>, Error>",
+      "useTemplate": "UseQueryResult<{ id: string; name: string; subject: string; html: string; text?: string; createdAt: string }, Error>",
+      "useEmails": "UseQueryResult<Array<{ id: string; recipient: string; subject: string; status: 'sent' | 'failed'; sentAt: string }>, Error>",
+      "useEmailAnalytics": "UseQueryResult<{ sent: number; delivered: number; opened: number; clicked: number; failed: number }, Error>"
+    },
+    "api": {
+      "endpoints": ["/api/email/send", "/api/email/templates", "/api/email/history", "/api/email/subscribers"],
+      "methods": ["POST", "GET", "PATCH", "DELETE"]
+    },
+    "types": ["EmailResult", "SendEmailData", "EmailTemplate", "CreateTemplateData", "EmailAnalytics"]
+  },
+  "prerequisites": {
+    "adapters": [
+      "resend"
+    ],
+    "integrators": [
+      "resend-nextjs-integration"
+    ],
+    "capabilities": [
+      "email-service"
+    ]
+  },
+  "provides": {
+    "capabilities": [
+      "email-sending",
+      "email-templates",
+      "email-lists",
+      "subscriber-management",
+      "email-analytics"
+    ]
+  },
+  "parameters": {
+    "backend": {
+      "type": "select",
+      "default": "resend-nextjs",
+      "description": "Backend implementation for emailing",
+      "required": true,
+      "options": ["resend-nextjs", "sendgrid-nextjs", "mailgun-nextjs"]
+    },
+    "frontend": {
+      "type": "select", 
+      "default": "shadcn",
+      "description": "Frontend implementation for emailing UI",
+      "required": true,
+      "options": ["shadcn", "mui", "chakra"]
+    },
+    "features": {
+      "type": "object",
+      "default": {
+        "emailSending": true,
+        "templates": true,
+        "lists": true,
+        "subscribers": true,
+        "analytics": true
+      },
+      "description": "Emailing features to enable",
+      "required": false
+    }
+  },
+  "implementations": {
+    "backend": [
+      "resend-nextjs",
+      "sendgrid-nextjs",
+      "mailgun-nextjs"
+    ],
+    "frontend": [
+      "shadcn",
+      "mui", 
+      "chakra"
+    ]
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

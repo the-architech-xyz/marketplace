@@ -239,6 +239,43 @@ const simpleAppGenome: Genome = {
         coverage: true,
         mocking: true
       }
+    },
+    
+    // === COHESIVE BUSINESS MODULES ===
+    {
+      id: 'features/auth-ui',
+      parameters: {
+        theme: 'default',
+        features: {
+          loginForm: true,
+          signupForm: true,
+          passwordReset: true,
+          profileManagement: true,
+          userSettings: true,
+          sessionManagement: true
+        }
+      },
+      features: {
+        'oauth-google': false,
+        'oauth-github': false,
+        'mfa': false,
+        'social-login': false
+      }
+    },
+    
+    // === WELCOME FEATURE ===
+    {
+      id: 'features/architech-welcome',
+      parameters: {
+        showTechStack: true,
+        showComponents: true,
+        showProjectStructure: true,
+        showQuickStart: true,
+        customTitle: 'Welcome to {{project.name}}',
+        customDescription: 'Your {{project.name}} application is ready! Explore the features and technologies that power your project.',
+        primaryColor: 'blue',
+        showArchitechBranding: true
+      }
     }
   ]
 };

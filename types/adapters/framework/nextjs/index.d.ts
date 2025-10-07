@@ -29,13 +29,8 @@ export interface FrameworkNextjsFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const FrameworkNextjsArtifacts: {
-  creates: [
-    'tailwind.config.js',
-    'components.json'
-  ],
-  enhances: [
-    'src/app/globals.css'
-  ],
+  creates: [],
+  enhances: [],
   installs: [],
   envVars: []
 };

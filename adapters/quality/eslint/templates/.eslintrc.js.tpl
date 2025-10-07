@@ -1,118 +1,144 @@
 module.exports = {
-  root: true,
   env: {
     browser: true,
-    es2021: true,
+    es2022: true,
     node: true,
   },
   extends: [
     'eslint:recommended',
-    {{#if module.parameters.typescript}}
-    '@typescript-eslint/recommended',
-    {{/if}}
-    {{#if module.parameters.react}}
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    {{/if}}
-    {{#if module.parameters.nextjs}}
-    'next/core-web-vitals',
-    {{/if}}
-    {{#if module.parameters.nodejs}}
-    'plugin:node/recommended',
-    {{/if}}
-    {{#if module.parameters.accessibility}}
-    'plugin:jsx-a11y/recommended',
-    {{/if}}
-    {{#if module.parameters.imports}}
-    'plugin:import/recommended',
-    'plugin:import/typescript',
-    {{/if}}
-    {{#if module.parameters.format}}
-    'plugin:prettier/recommended',
-    {{/if}}
+    {{#if module.parameters.typescript}}'@typescript-eslint/recommended',{{/if}}
+    {{#if module.parameters.react}}'plugin:react/recommended',
+    'plugin:react-hooks/recommended',{{/if}}
+    {{#if module.parameters.nextjs}}'next/core-web-vitals',{{/if}}
+    {{#if module.parameters.accessibility}}'plugin:jsx-a11y/recommended',{{/if}}
+    {{#if module.parameters.imports}}'plugin:import/recommended',
+    'plugin:import/typescript',{{/if}}
+    {{#if module.parameters.format}}'plugin:prettier/recommended',{{/if}}
   ],
   parser: {{#if module.parameters.typescript}}'@typescript-eslint/parser'{{else}}'@babel/eslint-parser'{{/if}},
   parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    {{#if module.parameters.typescript}}
-    project: './tsconfig.json',
-    {{/if}}
+    {{#if module.parameters.typescript}}project: './tsconfig.json',{{/if}}
   },
   plugins: [
-    {{#if module.parameters.typescript}}
-    '@typescript-eslint',
-    {{/if}}
-    {{#if module.parameters.react}}
-    'react',
-    'react-hooks',
-    {{/if}}
-    {{#if module.parameters.nodejs}}
-    'node',
-    {{/if}}
-    {{#if module.parameters.accessibility}}
-    'jsx-a11y',
-    {{/if}}
-    {{#if module.parameters.imports}}
-    'import',
-    {{/if}}
-    {{#if module.parameters.format}}
-    'prettier',
-    {{/if}}
+    {{#if module.parameters.typescript}}'@typescript-eslint',{{/if}}
+    {{#if module.parameters.react}}'react',
+    'react-hooks',{{/if}}
+    {{#if module.parameters.accessibility}}'jsx-a11y',{{/if}}
+    {{#if module.parameters.imports}}'import',{{/if}}
+    {{#if module.parameters.format}}'prettier',{{/if}}
   ],
-  settings: {
-    {{#if module.parameters.react}}
-    react: {
-      version: 'detect',
-    },
-    {{/if}}
-    {{#if module.parameters.imports}}
-    'import/resolver': {
-      {{#if module.parameters.typescript}}
-      typescript: {
-        alwaysTryTypes: true,
-        project: './tsconfig.json',
-      },
-      {{else}}
-      node: {
-        extensions: ['.js', '.jsx'],
-      },
-      {{/if}}
-    },
-    {{/if}}
-  },
   rules: {
-    // Base rules
+    // Basic rules
     'no-console': 'warn',
     'no-debugger': 'error',
-    'no-unused-vars': 'off',
+    'no-unused-vars': 'error',
+    'no-undef': 'error',
     'prefer-const': 'error',
     'no-var': 'error',
-    
+    'eqeqeq': ['error', 'always'],
+    'curly': ['error', 'all'],
+    'brace-style': ['error', '1tbs'],
+    'comma-dangle': ['error', 'always-multiline'],
+    'semi': ['error', 'always'],
+    'quotes': ['error', 'single', { avoidEscape: true }],
+    'indent': ['error', 2, { SwitchCase: 1 }],
+    'max-len': ['warn', { code: 100, ignoreUrls: true }],
+    'object-curly-spacing': ['error', 'always'],
+    'array-bracket-spacing': ['error', 'never'],
+    'computed-property-spacing': ['error', 'never'],
+    'space-before-blocks': 'error',
+    'keyword-spacing': 'error',
+    'space-infix-ops': 'error',
+    'eol-last': 'error',
+    'no-trailing-spaces': 'error',
+    'no-multiple-empty-lines': ['error', { max: 1 }],
+    'no-mixed-spaces-and-tabs': 'error',
+
     {{#if module.parameters.typescript}}
-    // TypeScript rules
+    // TypeScript-specific rules
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/prefer-const': 'error',
+    '@typescript-eslint/no-var-requires': 'error',
+    '@typescript-eslint/ban-ts-comment': 'warn',
     '@typescript-eslint/no-non-null-assertion': 'warn',
-    '@typescript-eslint/prefer-optional-chain': 'error',
     '@typescript-eslint/prefer-nullish-coalescing': 'error',
+    '@typescript-eslint/prefer-optional-chain': 'error',
+    '@typescript-eslint/no-unnecessary-condition': 'warn',
+    '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
+    '@typescript-eslint/prefer-string-starts-ends-with': 'error',
+    '@typescript-eslint/prefer-includes': 'error',
     {{/if}}
-    
+
     {{#if module.parameters.react}}
-    // React rules
-    'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off',
+    // React-specific rules
+    'react/react-in-jsx-scope': 'off', // Not needed in React 17+
+    'react/prop-types': 'off', // Using TypeScript for prop validation
     'react/jsx-uses-react': 'off',
     'react/jsx-uses-vars': 'error',
+    'react/jsx-key': 'error',
+    'react/jsx-no-duplicate-props': 'error',
+    'react/jsx-no-undef': 'error',
+    'react/jsx-pascal-case': 'error',
+    'react/jsx-sort-props': 'off',
+    'react/jsx-wrap-multilines': 'error',
+    'react/no-array-index-key': 'warn',
+    'react/no-danger': 'warn',
+    'react/no-deprecated': 'error',
+    'react/no-direct-mutation-state': 'error',
+    'react/no-find-dom-node': 'error',
+    'react/no-is-mounted': 'error',
+    'react/no-render-return-value': 'error',
+    'react/no-string-refs': 'error',
+    'react/no-unescaped-entities': 'error',
+    'react/no-unknown-property': 'error',
+    'react/no-unsafe': 'warn',
+    'react/require-render-return': 'error',
+    'react/self-closing-comp': 'error',
+    'react/sort-comp': 'off',
+    'react/sort-prop-types': 'off',
+    // React Hooks rules
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     {{/if}}
-    
+
+    {{#if module.parameters.accessibility}}
+    // Accessibility rules
+    'jsx-a11y/alt-text': 'error',
+    'jsx-a11y/anchor-has-content': 'error',
+    'jsx-a11y/anchor-is-valid': 'error',
+    'jsx-a11y/aria-props': 'error',
+    'jsx-a11y/aria-proptypes': 'error',
+    'jsx-a11y/aria-role': 'error',
+    'jsx-a11y/aria-unsupported-elements': 'error',
+    'jsx-a11y/click-events-have-key-events': 'warn',
+    'jsx-a11y/heading-has-content': 'error',
+    'jsx-a11y/html-has-lang': 'error',
+    'jsx-a11y/iframe-has-title': 'error',
+    'jsx-a11y/img-redundant-alt': 'error',
+    'jsx-a11y/no-access-key': 'error',
+    'jsx-a11y/no-autofocus': 'warn',
+    'jsx-a11y/no-distracting-elements': 'error',
+    'jsx-a11y/no-interactive-element-to-noninteractive-role': 'error',
+    'jsx-a11y/no-noninteractive-element-interactions': 'warn',
+    'jsx-a11y/no-noninteractive-element-to-interactive-role': 'error',
+    'jsx-a11y/no-noninteractive-tabindex': 'warn',
+    'jsx-a11y/no-redundant-roles': 'error',
+    'jsx-a11y/no-static-element-interactions': 'warn',
+    'jsx-a11y/role-has-required-aria-props': 'error',
+    'jsx-a11y/role-supports-aria-props': 'error',
+    'jsx-a11y/scope': 'error',
+    'jsx-a11y/tabindex-no-positive': 'error',
+    {{/if}}
+
     {{#if module.parameters.imports}}
     // Import rules
     'import/order': [
@@ -134,48 +160,57 @@ module.exports = {
       },
     ],
     'import/no-unresolved': 'error',
-    'import/no-cycle': 'error',
+    'import/named': 'error',
+    'import/default': 'error',
+    'import/namespace': 'error',
+    'import/no-absolute-path': 'error',
+    'import/no-dynamic-require': 'warn',
+    'import/no-internal-modules': 'off',
+    'import/no-relative-packages': 'warn',
     'import/no-self-import': 'error',
+    'import/no-cycle': 'warn',
+    'import/no-unused-modules': 'warn',
+    'import/no-deprecated': 'warn',
+    'import/no-extraneous-dependencies': 'error',
+    'import/no-mutable-exports': 'error',
+    'import/no-named-as-default': 'warn',
+    'import/no-named-as-default-member': 'warn',
+    'import/no-named-export': 'off',
+    'import/no-namespace': 'off',
+    'import/no-nodejs-modules': 'off',
+    'import/no-relative-parent-imports': 'off',
+    'import/no-restricted-paths': 'off',
+    'import/no-unassigned-import': 'off',
     'import/no-useless-path-segments': 'error',
+    'import/prefer-default-export': 'off',
     {{/if}}
-    
-    {{#if module.parameters.strict}}
-    // Strict rules
-    'no-implicit-coercion': 'error',
-    'no-implicit-globals': 'error',
-    'no-new-wrappers': 'error',
-    'no-throw-literal': 'error',
-    'no-unmodified-loop-condition': 'error',
-    'no-unused-expressions': 'error',
-    'no-useless-call': 'error',
-    'no-useless-concat': 'error',
-    'no-useless-return': 'error',
-    'prefer-arrow-callback': 'error',
-    'prefer-template': 'error',
-    {{/if}}
-    
+
     {{#if module.parameters.format}}
     // Prettier rules
     'prettier/prettier': 'error',
     {{/if}}
   },
-  overrides: [
-    {
-      files: ['*.js', '*.jsx'],
-      rules: {
-        {{#if module.parameters.typescript}}
-        '@typescript-eslint/no-var-requires': 'off',
-        {{/if}}
+  settings: {
+    {{#if module.parameters.react}}
+    react: {
+      version: 'detect',
+    },
+    {{/if}}
+    {{#if module.parameters.imports}}
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+        project: './tsconfig.json',
       },
     },
-    {
-      files: ['*.test.js', '*.test.jsx', '*.test.ts', '*.test.tsx'],
-      env: {
-        jest: true,
-      },
-      rules: {
-        'no-console': 'off',
-      },
-    },
+    {{/if}}
+  },
+  ignorePatterns: [
+    'node_modules/',
+    'dist/',
+    'build/',
+    '.next/',
+    'coverage/',
+    '*.min.js',
   ],
 };

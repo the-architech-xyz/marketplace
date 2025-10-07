@@ -56,13 +56,15 @@
   },
   "scripts": {
     "validate": "tsx scripts/validate-blueprints.ts",
+    "validate:templates": "tsx scripts/validate-templates.ts",
+    "validate:all": "npm run validate && npm run validate:templates",
     "types:generate": "tsx scripts/generate-types-cli.ts",
     "compile": "tsc",
-    "build": "npm run validate && npm run types:generate && npm run compile",
+    "build": "npm run validate:all && npm run types:generate && npm run compile",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "prepare": "husky install",
-    "precommit": "npm run validate && npm run types:generate"
+    "precommit": "npm run validate:all && npm run types:generate"
   },
   "dependencies": {
     "@thearchitech.xyz/types": "^1.11.12",

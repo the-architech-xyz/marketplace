@@ -1,0 +1,33 @@
+{
+  "id": "team-analytics",
+  "name": "Team Analytics",
+  "description": "Team performance and usage analytics dashboard",
+  "version": "1.0.0",
+  "category": "sub-feature",
+  "parent_feature": "teams-management",
+  "prerequisites": {
+    "capabilities": ["data-analytics", "reporting"]
+  },
+  "provides": {
+    "capabilities": [
+      "team-performance-metrics",
+      "usage-analytics",
+      "member-activity-tracking",
+      "team-reports"
+    ]
+  },
+  "parameters": {
+    "retentionPeriod": {
+      "type": "number",
+      "default": 90,
+      "description": "Data retention period in days",
+      "required": false
+    },
+    "realTimeUpdates": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable real-time analytics updates",
+      "required": false
+    }
+  }
+}

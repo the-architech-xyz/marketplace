@@ -20,14 +20,9 @@ export interface DatabaseTypeormFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const DatabaseTypeormArtifacts: {
-  creates: [
-    '{{paths.database_config}}/typeorm.ts',
-    '{{paths.database_config}}/entities/User.ts'
-  ],
+  creates: [],
   enhances: [],
-  installs: [
-    { packages: ['typeorm', 'reflect-metadata', '{{module.parameters.databaseType}}'], isDev: false }
-  ],
+  installs: [],
   envVars: []
 };
 

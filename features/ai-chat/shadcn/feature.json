@@ -1,86 +1,104 @@
 {
-  "id": "features/ai-chat/shadcn",
-  "name": "AI Chat Interface",
+  "id": "ai-chat",
+  "name": "AI Chat Capability",
   "description": "Complete AI chat interface using Vercel AI SDK and Shadcn UI",
   "version": "1.0.0",
   "category": "feature",
-  "tags": ["ai", "chat", "shadcn", "vercel-ai-sdk", "conversation"],
-  "compatibility": {
-    "frameworks": ["nextjs"],
-    "adapters": ["ai/vercel-ai-sdk", "ui/shadcn-ui"],
-    "integrations": ["tanstack-query-nextjs-integration"]
+  "contract": {
+    "hooks": {
+      "useChat": "UseQueryResult<ChatSession, Error>",
+      "useMessages": "UseQueryResult<Message[], Error>",
+      "useSendMessage": "UseMutationResult<Message, Error, SendMessageData>",
+      "useStreamMessage": "UseMutationResult<StreamResult, Error, StreamMessageData>",
+      "useCreateChat": "UseMutationResult<ChatSession, Error, CreateChatData>",
+      "useUpdateChat": "UseMutationResult<ChatSession, Error, UpdateChatData>",
+      "useDeleteChat": "UseMutationResult<{ success: boolean }, Error, string>",
+      "useChatHistory": "UseQueryResult<ChatSession[], Error>",
+      "useExportChat": "UseMutationResult<ExportResult, Error, ExportChatData>",
+      "useImportChat": "UseMutationResult<ChatSession, Error, ImportChatData>",
+      "useUploadFile": "UseMutationResult<FileUploadResult, Error, FileUploadData>",
+      "useVoiceInput": "UseMutationResult<VoiceResult, Error, VoiceInputData>",
+      "useVoiceOutput": "UseMutationResult<VoiceResult, Error, VoiceOutputData>",
+      "useCodeHighlighting": "UseQueryResult<CodeHighlightingConfig, Error>",
+      "useMarkdownSupport": "UseQueryResult<MarkdownConfig, Error>"
+    },
+    "api": {
+      "endpoints": ["/api/chat", "/api/chat/messages", "/api/chat/stream", "/api/chat/export", "/api/chat/import", "/api/chat/upload", "/api/chat/voice"],
+      "methods": ["POST", "GET", "PATCH", "DELETE"]
+    },
+    "types": ["ChatSession", "Message", "SendMessageData", "StreamResult", "StreamMessageData", "CreateChatData", "UpdateChatData", "ExportResult", "ExportChatData", "ImportChatData", "FileUploadResult", "FileUploadData", "VoiceResult", "VoiceInputData", "VoiceOutputData", "CodeHighlightingConfig", "MarkdownConfig"]
   },
-  "dependencies": {
-    "adapters": ["ai/vercel-ai-sdk", "ui/shadcn-ui"],
-    "integrations": ["tanstack-query-nextjs-integration"]
+  "prerequisites": {
+    "adapters": [
+      "vercel-ai-sdk",
+      "shadcn-ui"
+    ],
+    "integrators": [
+      "tanstack-query-nextjs-integration"
+    ],
+    "capabilities": [
+      "ai-chat",
+      "streaming",
+      "file-upload"
+    ]
   },
-  "features": {
-    "chatInterface": true,
-    "messageHistory": true,
-    "streaming": true,
-    "fileUpload": true,
-    "codeHighlighting": true,
-    "markdownSupport": true,
-    "conversationExport": true,
-    "conversationImport": true,
-    "voiceInput": true,
-    "voiceOutput": true
+  "provides": {
+    "capabilities": [
+      "ai-conversation",
+      "message-streaming",
+      "file-upload",
+      "voice-input-output",
+      "code-highlighting",
+      "markdown-support",
+      "chat-export-import"
+    ]
   },
   "parameters": {
-    "components": {
-      "type": "array",
-      "description": "Chat components to include",
-      "default": ["chat-interface", "message-list", "input", "toolbar"],
-      "enum": ["chat-interface", "message-list", "input", "toolbar", "file-upload", "voice-input", "voice-output"]
+    "backend": {
+      "type": "select",
+      "default": "vercel-ai-sdk",
+      "description": "Backend implementation for AI chat",
+      "required": true,
+      "options": ["vercel-ai-sdk", "openai", "anthropic", "cohere"]
+    },
+    "frontend": {
+      "type": "select",
+      "default": "shadcn",
+      "description": "Frontend implementation for AI chat UI",
+      "required": true,
+      "options": ["shadcn", "mui", "chakra"]
     },
     "features": {
       "type": "object",
-      "description": "Feature flags",
-      "properties": {
-        "streaming": {
-          "type": "boolean",
-          "default": true
-        },
-        "fileUpload": {
-          "type": "boolean",
-          "default": true
-        },
-        "voiceInput": {
-          "type": "boolean",
-          "default": false
-        },
-        "voiceOutput": {
-          "type": "boolean",
-          "default": false
-        },
-        "codeHighlighting": {
-          "type": "boolean",
-          "default": true
-        },
-        "markdownSupport": {
-          "type": "boolean",
-          "default": true
-        }
-      }
-    },
-    "ui": {
-      "type": "object",
-      "description": "UI configuration",
-      "properties": {
-        "theme": {
-          "type": "string",
-          "default": "default",
-          "enum": ["default", "minimal", "modern", "classic"]
-        },
-        "layout": {
-          "type": "string",
-          "default": "sidebar",
-          "enum": ["sidebar", "full-width", "modal", "drawer"]
-        }
-      }
+      "default": {
+        "chatInterface": true,
+        "messageHistory": true,
+        "streaming": true,
+        "fileUpload": true,
+        "voiceInput": false,
+        "voiceOutput": false,
+        "codeHighlighting": true,
+        "markdownSupport": true
+      },
+      "description": "AI chat features to enable",
+      "required": false
     }
   },
-  "blueprint": {
-    "file": "blueprint.ts"
+  "implementations": {
+    "backend": [
+      "vercel-ai-sdk",
+      "openai",
+      "anthropic",
+      "cohere"
+    ],
+    "frontend": [
+      "shadcn",
+      "mui",
+      "chakra"
+    ]
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
   }
 }

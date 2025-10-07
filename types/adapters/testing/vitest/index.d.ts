@@ -26,16 +26,9 @@ export interface TestingVitestFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const TestingVitestArtifacts: {
-  creates: [
-    'vitest.config.ts',
-    'tests/setup/setup.ts',
-    'tests/setup/utils.tsx',
-    'tests/unit/example.test.tsx'
-  ],
+  creates: [],
   enhances: [],
-  installs: [
-    { packages: ['vitest', '@vitejs/plugin-react', 'jsdom', '@testing-library/react', '@testing-library/jest-dom', '@testing-library/user-event', '@types/react', '@types/react-dom'], isDev: true }
-  ],
+  installs: [],
   envVars: []
 };
 

@@ -42,26 +42,9 @@ export interface Web3NextjsIntegrationParams {
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const Web3NextjsIntegrationArtifacts: {
-  creates: [
-    'src/hooks/use-web3.ts',
-    'src/hooks/use-connect.ts',
-    'src/hooks/use-disconnect.ts',
-    'src/hooks/use-balance.ts',
-    'src/hooks/use-transaction.ts',
-    'src/hooks/use-network.ts',
-    'src/lib/web3/api.ts',
-    'src/lib/web3/types.ts',
-    'src/lib/web3/config.ts',
-    'src/lib/web3/core.ts',
-    'src/hooks/useWeb3.ts',
-    'src/app/api/web3/balance/route.ts',
-    'src/middleware.ts'
-  ],
+  creates: [],
   enhances: [],
-  installs: [
-    { packages: ['viem', '@tanstack/react-query', 'zod', '@tanstack/react-query-devtools'], isDev: false },
-    { packages: ['@types/node'], isDev: true }
-  ],
+  installs: [],
   envVars: []
 };
 

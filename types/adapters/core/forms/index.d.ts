@@ -26,32 +26,9 @@ export interface CoreFormsFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const CoreFormsArtifacts: {
-  creates: [
-    'src/lib/forms/core.ts',
-    'src/lib/forms/validation.ts',
-    'src/lib/forms/hooks.ts',
-    'src/lib/forms/accessibility.ts',
-    'src/components/forms/FormProvider.tsx',
-    'src/components/forms/FormField.tsx',
-    'src/components/forms/FormInput.tsx',
-    'src/components/forms/FormTextarea.tsx',
-    'src/components/forms/FormSelect.tsx',
-    'src/components/forms/FormCheckbox.tsx',
-    'src/components/forms/FormRadio.tsx',
-    'src/components/forms/FormError.tsx',
-    'src/types/forms.ts',
-    'src/examples/ContactForm.tsx',
-    'src/examples/LoginForm.tsx',
-    'src/lib/forms/validation-examples.ts',
-    'src/lib/forms/index.ts'
-  ],
+  creates: [],
   enhances: [],
-  installs: [
-    { packages: ['zod'], isDev: false },
-    { packages: ['react-hook-form'], isDev: false },
-    { packages: ['@hookform/resolvers'], isDev: false },
-    { packages: ['@hookform/devtools'], isDev: true }
-  ],
+  installs: [],
   envVars: []
 };
 

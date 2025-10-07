@@ -269,56 +269,6 @@ const saasStarterGenome: Genome = {
     },
 
     {
-      id: "integrations/better-auth-nextjs-integration",
-      parameters: {
-        apiRoutes: true,
-        middleware: true,
-        uiComponents: "shadcn",
-        adminPanel: true,
-        emailVerification: true,
-        mfa: true,
-        passwordReset: true,
-      },
-    },
-
-    {
-      id: "integrations/stripe-nextjs-integration",
-      parameters: {
-        webhooks: true,
-        apiRoutes: true,
-        customerManagement: true,
-      },
-    },
-
-    {
-      id: "integrations/stripe-shadcn-integration",
-      parameters: {
-        paymentForms: true,
-        subscriptionCards: true,
-        invoiceTables: true,
-        pricingCards: true,
-      },
-    },
-
-    {
-      id: "integrations/resend-nextjs-integration",
-      parameters: {
-        apiRoutes: true,
-        templates: true,
-        analytics: true,
-      },
-    },
-
-    {
-      id: "integrations/resend-shadcn-integration",
-      parameters: {
-        composer: true,
-        templates: true,
-        analytics: true,
-      },
-    },
-
-    {
       id: "integrations/tanstack-query-nextjs-integration",
       parameters: {
         devtools: true,
@@ -348,15 +298,6 @@ const saasStarterGenome: Genome = {
     },
 
     {
-      id: "integrations/sentry-nextjs-integration",
-      parameters: {
-        errorTracking: true,
-        performance: true,
-        releases: true,
-      },
-    },
-
-    {
       id: "integrations/vitest-nextjs-integration",
       parameters: {
         testing: true,
@@ -365,84 +306,187 @@ const saasStarterGenome: Genome = {
       },
     },
 
-    // === FEATURES ===
+    // === TWO-HEADED FEATURES ===
     {
-      id: "features/auth-ui/shadcn",
+      id: "features/auth",
       parameters: {
-        theme: "default",
+        backend: "better-auth-nextjs",
+        frontend: "shadcn",
         features: {
           loginForm: true,
-          registerForm: true,
-          userMenu: true,
-          authProvider: true,
-        },
-      },
+          signupForm: true,
+          passwordReset: true,
+          profileManagement: true,
+          emailVerification: true,
+          twoFactorAuth: false,
+          oauthProviders: ["google", "github"]
+        }
+      }
     },
 
     {
-      id: "features/teams-dashboard/nextjs-shadcn",
+      id: "features/payments",
       parameters: {
-        theme: "default",
-        features: {
-          analytics: true,
-          goals: true,
-          permissions: true,
-          invitations: true,
-        },
-      },
-    },
-
-    {
-      id: "features/teams-data/drizzle",
-      parameters: {
-        database: "postgresql",
-        features: {
-          teams: true,
-          members: true,
-          invitations: true,
-          permissions: true,
-        },
-      },
-    },
-
-    {
-      id: "features/user-profile/nextjs-shadcn",
-      parameters: {
-        theme: "default",
-        features: {
-          avatarUpload: true,
-          preferences: true,
-          security: true,
-          notifications: true,
-          exportData: true,
-        },
-      },
-    },
-
-    {
-      id: "features/payment-management/nextjs-shadcn",
-      parameters: {
-        theme: "default",
+        backend: "stripe-nextjs",
+        frontend: "shadcn",
         features: {
           paymentForms: true,
-          subscriptionCards: true,
-          invoiceTables: true,
-          pricingCards: true,
-        },
-      },
+          subscriptionManager: true,
+          customerManager: true,
+          planManager: true,
+          invoiceViewer: true,
+          analyticsDashboard: true
+        }
+      }
     },
 
     {
-      id: "features/email-management/nextjs-shadcn",
+      id: "features/emailing",
+      parameters: {
+        backend: "resend-nextjs",
+        frontend: "shadcn",
+        features: {
+          sendEmailForm: true,
+          templateEditor: true,
+          emailList: true,
+          analyticsDashboard: true,
+          subscriberForms: true
+        }
+      }
+    },
+
+    {
+      id: "features/monitoring",
+      parameters: {
+        backend: "sentry-nextjs",
+        frontend: "shadcn",
+        features: {
+          errorTracking: true,
+          performanceMonitoring: true,
+          userFeedback: true,
+          monitoringAnalytics: true
+        }
+      }
+    },
+
+    // === COHESIVE BUSINESS MODULES ===
+    {
+      id: "features/teams-management",
       parameters: {
         theme: "default",
         features: {
-          composer: true,
-          templates: true,
-          analytics: true,
-          settings: true,
-        },
-      },
+          teamCreation: true,
+          memberManagement: true,
+          invitationSystem: true,
+          roleManagement: true,
+          teamSettings: true,
+          analytics: true
+        }
+      }
+    },
+
+    {
+      id: "features/project-management",
+      parameters: {
+        theme: "default",
+        features: {
+          projectCreation: true,
+          taskManagement: true,
+          kanbanBoard: true,
+          teamCollaboration: true,
+          progressTracking: true,
+          reporting: true
+        }
+      }
+    },
+
+    {
+      id: "features/social-profile",
+      parameters: {
+        backend: "nextjs",
+        frontend: "shadcn",
+        features: {
+          profileManagement: true,
+          socialConnections: true,
+          activityFeeds: true,
+          notifications: true,
+          privacyControls: true,
+          socialSettings: true,
+          avatarUpload: true,
+          blocking: true,
+          reporting: true
+        }
+      }
+    },
+
+    {
+      id: "features/ecommerce",
+      parameters: {
+        backend: "database-nextjs",
+        frontend: "shadcn",
+        features: {
+          productManagement: true,
+          shoppingCart: true,
+          orderManagement: true,
+          inventoryTracking: true,
+          reviews: true,
+          search: true,
+          categories: true
+        }
+      }
+    },
+
+    {
+      id: "features/graph-visualizer",
+      parameters: {
+        backend: "nextjs",
+        frontend: "react-flow",
+        features: {
+          interactiveGraph: true,
+          nodeTypes: true,
+          edgeTypes: true,
+          minimap: true,
+          controls: true,
+          background: true,
+          selection: true,
+          dragging: true,
+          zooming: true,
+          panning: true,
+          export: true,
+          import: true
+        }
+      }
+    },
+
+    {
+      id: "features/ai-chat",
+      parameters: {
+        backend: "vercel-ai-sdk",
+        frontend: "shadcn",
+        features: {
+          chatInterface: true,
+          messageHistory: true,
+          streaming: true,
+          fileUpload: true,
+          voiceInput: false,
+          voiceOutput: false,
+          codeHighlighting: true,
+          markdownSupport: true
+        }
+      }
+    },
+
+    {
+      id: "features/architech-welcome",
+      parameters: {
+        theme: "default",
+        features: {
+          welcomePage: true,
+          documentationLinks: true,
+          capabilitiesShowcase: true,
+          quickStart: true
+        }
+      }
     },
   ],
 };

@@ -1,0 +1,104 @@
+{
+  "id": "social-profile",
+  "name": "Social Profile Capability",
+  "description": "Complete social profile management system with social features, connections, and activity feeds",
+  "version": "1.0.0",
+  "category": "feature",
+  "contract": {
+    "hooks": {
+      "useProfile": "UseQueryResult<Profile, Error>",
+      "useUpdateProfile": "UseMutationResult<Profile, Error, UpdateProfileData>",
+      "useUploadAvatar": "UseMutationResult<AvatarResult, Error, AvatarUploadData>",
+      "useConnections": "UseQueryResult<Connection[], Error>",
+      "useAddConnection": "UseMutationResult<Connection, Error, AddConnectionData>",
+      "useRemoveConnection": "UseMutationResult<{ success: boolean }, Error, string>",
+      "useActivityFeed": "UseQueryResult<Activity[], Error>",
+      "useAddActivity": "UseMutationResult<Activity, Error, AddActivityData>",
+      "useSocialSettings": "UseQueryResult<SocialSettings, Error>",
+      "useUpdateSocialSettings": "UseMutationResult<SocialSettings, Error, UpdateSocialSettingsData>",
+      "useNotifications": "UseQueryResult<Notification[], Error>",
+      "useMarkNotificationRead": "UseMutationResult<Notification, Error, string>",
+      "usePrivacySettings": "UseQueryResult<PrivacySettings, Error>",
+      "useUpdatePrivacySettings": "UseMutationResult<PrivacySettings, Error, UpdatePrivacySettingsData>",
+      "useBlockUser": "UseMutationResult<{ success: boolean }, Error, string>",
+      "useUnblockUser": "UseMutationResult<{ success: boolean }, Error, string>",
+      "useReportUser": "UseMutationResult<{ success: boolean }, Error, ReportUserData>"
+    },
+    "api": {
+      "endpoints": ["/api/profile", "/api/profile/avatar", "/api/connections", "/api/activity", "/api/notifications", "/api/privacy", "/api/social-settings"],
+      "methods": ["POST", "GET", "PATCH", "DELETE"]
+    },
+    "types": ["Profile", "UpdateProfileData", "AvatarResult", "AvatarUploadData", "Connection", "AddConnectionData", "Activity", "AddActivityData", "SocialSettings", "UpdateSocialSettingsData", "Notification", "PrivacySettings", "UpdatePrivacySettingsData", "ReportUserData"]
+  },
+  "prerequisites": {
+    "adapters": [
+      "shadcn-ui",
+      "storage"
+    ],
+    "integrators": [
+      "storage-nextjs-integration"
+    ],
+    "capabilities": [
+      "file-storage",
+      "social-networking"
+    ]
+  },
+  "provides": {
+    "capabilities": [
+      "profile-management",
+      "social-connections",
+      "activity-feeds",
+      "notifications",
+      "privacy-controls",
+      "social-settings"
+    ]
+  },
+  "parameters": {
+    "backend": {
+      "type": "select",
+      "default": "nextjs",
+      "description": "Backend implementation for social profile",
+      "required": true,
+      "options": ["nextjs", "express", "fastify"]
+    },
+    "frontend": {
+      "type": "select",
+      "default": "shadcn",
+      "description": "Frontend implementation for social profile UI",
+      "required": true,
+      "options": ["shadcn", "mui", "chakra"]
+    },
+    "features": {
+      "type": "object",
+      "default": {
+        "profileManagement": true,
+        "socialConnections": true,
+        "activityFeeds": true,
+        "notifications": true,
+        "privacyControls": true,
+        "socialSettings": true,
+        "avatarUpload": true,
+        "blocking": true,
+        "reporting": true
+      },
+      "description": "Social profile features to enable",
+      "required": false
+    }
+  },
+  "implementations": {
+    "backend": [
+      "nextjs",
+      "express",
+      "fastify"
+    ],
+    "frontend": [
+      "shadcn",
+      "mui",
+      "chakra"
+    ]
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

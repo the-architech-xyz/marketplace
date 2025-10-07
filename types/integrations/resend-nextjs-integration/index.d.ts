@@ -30,32 +30,10 @@ export interface ResendNextjsIntegrationParams {
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const ResendNextjsIntegrationArtifacts: {
-  creates: [
-    'src/hooks/use-send-email.ts',
-    'src/hooks/use-email-templates.ts',
-    'src/hooks/use-email-analytics.ts',
-    'src/hooks/use-email-webhooks.ts',
-    'src/lib/email/api.ts',
-    'src/lib/email/types.ts',
-    'src/app/api/email/send/route.ts',
-    'src/app/api/email/templates/route.ts',
-    'src/app/api/email/analytics/route.ts',
-    'src/app/api/email/webhook/route.ts',
-    'src/lib/email/resend.ts',
-    'src/lib/email/templates.ts',
-    'src/lib/email/analytics.ts',
-    'src/lib/email/validation.ts',
-    'src/middleware.ts'
-  ],
+  creates: [],
   enhances: [],
-  installs: [
-    { packages: ['resend', 'react-hook-form', '@hookform/resolvers', 'zod', 'nodemailer', 'handlebars'], isDev: false }
-  ],
-  envVars: [
-    { key: 'RESEND_API_KEY', value: '', description: 'Resend API key for email service' },
-    { key: 'RESEND_FROM_EMAIL', value: 'noreply@yourdomain.com', description: 'Default from email address' },
-    { key: 'RESEND_WEBHOOK_SECRET', value: '', description: 'Webhook secret for Resend events' }
-  ]
+  installs: [],
+  envVars: []
 };
 
 // Type-safe artifact access

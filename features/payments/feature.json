@@ -1,0 +1,100 @@
+{
+  "id": "payments",
+  "name": "Payments Capability",
+  "description": "Complete payments capability with Stripe integration, subscriptions, invoices, and analytics",
+  "version": "1.0.0",
+  "category": "feature",
+  "contract": {
+    "hooks": {
+      "useCreatePaymentIntent": "UseMutationResult<{ clientSecret: string }, Error, { amount: number; currency: string; customerId?: string; metadata?: Record<string, unknown> }>",
+      "useCreateCheckoutSession": "UseMutationResult<{ sessionId: string; url: string }, Error, { lineItems: Array<{ price: string; quantity: number }>; mode: 'payment' | 'subscription'; successUrl: string; cancelUrl: string; customerId?: string }>",
+      "useCreateCustomer": "UseMutationResult<{ customerId: string }, Error, { email: string; name?: string; address?: { line1: string; city: string; state: string; postal_code: string; country: string } }>",
+      "useUpdateCustomer": "UseMutationResult<{ success: boolean }, Error, { customerId: string; email?: string; name?: string; address?: { line1: string; city: string; state: string; postal_code: string; country: string } }>",
+      "useCreateSubscription": "UseMutationResult<{ subscriptionId: string }, Error, { customerId: string; priceId: string; paymentMethodId?: string }>",
+      "useCancelSubscription": "UseMutationResult<{ success: boolean }, Error, { subscriptionId: string }>",
+      "useUpdateSubscription": "UseMutationResult<{ success: boolean }, Error, { subscriptionId: string; priceId?: string; cancelAtPeriodEnd?: boolean }>",
+      "useCreatePlan": "UseMutationResult<{ planId: string }, Error, { name: string; amount: number; currency: string; interval: 'day' | 'week' | 'month' | 'year' }>",
+      "useUpdatePlan": "UseMutationResult<{ success: boolean }, Error, { planId: string; name?: string; amount?: number; currency?: string; interval?: 'day' | 'week' | 'month' | 'year' }>",
+      "useCustomers": "UseQueryResult<Array<{ id: string; email: string; name?: string; createdAt: string }>, Error>",
+      "useCustomer": "UseQueryResult<{ id: string; email: string; name?: string; address?: { line1: string; city: string; state: string; postal_code: string; country: string }; createdAt: string }, Error>",
+      "useSubscriptions": "UseQueryResult<Array<{ id: string; customerId: string; planId: string; status: string; currentPeriodEnd: string }>, Error>",
+      "usePlans": "UseQueryResult<Array<{ id: string; name: string; amount: number; currency: string; interval: string; createdAt: string }>, Error>",
+      "useInvoices": "UseQueryResult<Array<{ id: string; customerId: string; amountDue: number; status: string; dueDate: string; invoicePdf: string }>, Error>",
+      "usePaymentMethods": "UseQueryResult<Array<{ id: string; type: string; last4: string; brand: string; expMonth: number; expYear: number }>, Error>",
+      "useAnalytics": "UseQueryResult<{ totalRevenue: number; newSubscriptions: number; churnRate: number; MRR: number }, Error>",
+      "useCustomerAnalytics": "UseQueryResult<{ totalSpent: number; subscriptions: number; lastPayment: string }, Error>",
+      "useSubscriptionAnalytics": "UseQueryResult<{ revenue: number; statusHistory: Array<{ status: string; timestamp: string }> }, Error>"
+    },
+    "api": {
+      "endpoints": ["/api/payments/intent", "/api/payments/checkout", "/api/payments/customers", "/api/payments/subscriptions", "/api/payments/plans", "/api/payments/invoices", "/api/payments/methods"],
+      "methods": ["POST", "GET", "PATCH", "DELETE"]
+    },
+    "types": ["PaymentIntent", "CheckoutSession", "Customer", "Subscription", "Plan", "Invoice", "PaymentMethod", "PaymentAnalytics"]
+  },
+  "prerequisites": {
+    "adapters": [
+      "stripe"
+    ],
+    "integrators": [
+      "stripe-nextjs-integration"
+    ],
+    "capabilities": [
+      "payment-processing"
+    ]
+  },
+  "provides": {
+    "capabilities": [
+      "payment-processing",
+      "subscription-management",
+      "invoice-management",
+      "customer-management",
+      "payment-method-management",
+      "payment-analytics"
+    ]
+  },
+  "parameters": {
+    "backend": {
+      "type": "select",
+      "default": "stripe-nextjs",
+      "description": "Backend implementation for payments",
+      "required": true,
+      "options": ["stripe-nextjs", "paypal-nextjs", "square-nextjs"]
+    },
+    "frontend": {
+      "type": "select", 
+      "default": "shadcn",
+      "description": "Frontend implementation for payments UI",
+      "required": true,
+      "options": ["shadcn", "mui", "chakra"]
+    },
+    "features": {
+      "type": "object",
+      "default": {
+        "payments": true,
+        "subscriptions": true,
+        "invoices": true,
+        "customers": true,
+        "paymentMethods": true,
+        "analytics": true
+      },
+      "description": "Payment features to enable",
+      "required": false
+    }
+  },
+  "implementations": {
+    "backend": [
+      "stripe-nextjs",
+      "paypal-nextjs",
+      "square-nextjs"
+    ],
+    "frontend": [
+      "shadcn",
+      "mui", 
+      "chakra"
+    ]
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

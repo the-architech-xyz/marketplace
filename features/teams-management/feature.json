@@ -1,0 +1,81 @@
+{
+  "id": "teams-management",
+  "name": "Teams Management System",
+  "description": "Complete team management system with creation, member management, settings, and dashboard",
+  "version": "1.0.0",
+  "category": "feature",
+  "blueprint": "blueprint.ts",
+  "prerequisites": {
+    "adapters": [
+      "nextjs",
+      "shadcn-ui", 
+      "drizzle",
+      "better-auth"
+    ],
+    "integrators": [
+      "drizzle-nextjs-integration",
+      "better-auth-nextjs-integration"
+    ],
+    "capabilities": [
+      "user-authentication",
+      "database-operations",
+      "ui-components"
+    ]
+  },
+  "provides": {
+    "capabilities": [
+      "team-creation",
+      "member-management",
+      "team-settings", 
+      "team-dashboard",
+      "team-invitations",
+      "team-collaboration"
+    ]
+  },
+  "parameters": {
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false,
+      "options": ["default", "dark", "light"]
+    },
+    "features": {
+      "type": "object",
+      "default": {
+        "teamCreation": true,
+        "memberManagement": true,
+        "teamSettings": true,
+        "teamDashboard": true,
+        "teamInvitations": true
+      },
+      "description": "Core team management features to enable",
+      "required": false
+    }
+  },
+  "sub_features": {
+    "team-billing": {
+      "name": "Team Billing",
+      "description": "Billing and subscription management for teams",
+      "optional": true,
+      "prerequisites": {
+        "adapters": ["stripe"],
+        "integrators": ["stripe-nextjs-integration"]
+      }
+    },
+    "advanced-permissions": {
+      "name": "Advanced Permissions",
+      "description": "Role-based access control and advanced permissions",
+      "optional": true
+    },
+    "team-analytics": {
+      "name": "Team Analytics", 
+      "description": "Team performance and usage analytics dashboard",
+      "optional": true
+    }
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "advanced-permissions",
+  "name": "Advanced Permissions",
+  "description": "Role-based access control and advanced permissions for teams",
+  "version": "1.0.0",
+  "category": "sub-feature",
+  "parent_feature": "teams-management",
+  "prerequisites": {
+    "capabilities": ["user-authentication", "database-operations"]
+  },
+  "provides": {
+    "capabilities": [
+      "role-based-access-control",
+      "permission-management",
+      "team-hierarchy",
+      "access-audit"
+    ]
+  },
+  "parameters": {
+    "customRoles": {
+      "type": "boolean",
+      "default": true,
+      "description": "Allow custom role creation",
+      "required": false
+    },
+    "permissionInheritance": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable permission inheritance from parent teams",
+      "required": false
+    }
+  }
+}

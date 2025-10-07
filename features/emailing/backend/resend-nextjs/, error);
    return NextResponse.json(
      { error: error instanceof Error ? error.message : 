@@ -1,0 +1,6 @@
+# , error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error - Generated template
+# Module: emailing/backend
+
+# Add content here

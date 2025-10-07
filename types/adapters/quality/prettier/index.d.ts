@@ -41,21 +41,9 @@ export interface QualityPrettierFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const QualityPrettierArtifacts: {
-  creates: [
-    '.prettierrc',
-    '.prettierrc.js',
-    '.prettierignore',
-    'scripts/format-all.js',
-    'scripts/format-staged.js',
-    'prettier.config.js'
-  ],
+  creates: [],
   enhances: [],
-  installs: [
-    { packages: ['prettier'], isDev: true },
-    { packages: ['prettier-plugin-tailwindcss'], isDev: true },
-    { packages: ['prettier-plugin-sort-imports'], isDev: true },
-    { packages: ['prettier-plugin-organize-imports'], isDev: true }
-  ],
+  installs: [],
   envVars: []
 };
 

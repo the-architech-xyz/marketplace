@@ -27,28 +27,10 @@ export interface BetterAuthNextjsIntegrationParams {
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const BetterAuthNextjsIntegrationArtifacts: {
-  creates: [
-    'src/hooks/use-auth.ts',
-    'src/hooks/use-sign-in.ts',
-    'src/hooks/use-sign-out.ts',
-    'src/hooks/use-sign-up.ts',
-    'src/hooks/use-user.ts',
-    'src/hooks/use-session.ts',
-    'src/lib/auth/api.ts',
-    'src/lib/auth/types.ts',
-    'src/providers/AuthProvider.tsx',
-    'src/app/api/auth/[...all]/route.ts',
-    'src/middleware.ts',
-    'src/lib/auth/session-management.ts'
-  ],
-  enhances: [
-    { path: 'src/lib/auth/config.ts' }
-  ],
+  creates: [],
+  enhances: [],
   installs: [],
-  envVars: [
-    { key: 'BETTER_AUTH_SECRET', value: 'your-secret-key', description: 'Better Auth secret key for JWT signing' },
-    { key: 'BETTER_AUTH_URL', value: 'http://localhost:3000', description: 'Better Auth base URL' }
-  ]
+  envVars: []
 };
 
 // Type-safe artifact access

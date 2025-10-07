@@ -37,8 +37,8 @@
       "type": "object",
       "default": {
         "queries": {
-          "staleTime": 5 * 60 * 1000,
-          "gcTime": 10 * 60 * 1000,
+          "staleTime": 300000,
+          "gcTime": 600000,
           "retry": 3,
           "refetchOnWindowFocus": false
         },

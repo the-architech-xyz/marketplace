@@ -69,31 +69,10 @@ export interface SentryNextjsIntegrationParams {
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const SentryNextjsIntegrationArtifacts: {
-  creates: [
-    'src/hooks/use-error-tracking.ts',
-    'src/hooks/use-performance-monitoring.ts',
-    'src/hooks/use-user-feedback.ts',
-    'src/hooks/use-sentry.ts',
-    'src/lib/sentry/api.ts',
-    'src/lib/sentry/types.ts'
-  ],
-  enhances: [
-    { path: 'next.config.js' },
-    { path: 'src/lib/sentry/client.ts' },
-    { path: 'src/lib/sentry/server.ts' },
-    { path: 'src/lib/sentry/config.ts' },
-    { path: 'src/app/layout.tsx' },
-    { path: 'src/middleware.ts' }
-  ],
-  installs: [
-    { packages: ['@sentry/nextjs'], isDev: false }
-  ],
-  envVars: [
-    { key: 'NEXT_PUBLIC_SENTRY_DSN', value: 'https://...@sentry.io/...', description: 'Sentry DSN for client-side error tracking' },
-    { key: 'SENTRY_ORG', value: 'your-org', description: 'Sentry organization slug' },
-    { key: 'SENTRY_PROJECT', value: 'your-project', description: 'Sentry project name' },
-    { key: 'SENTRY_AUTH_TOKEN', value: 'sntrys_...', description: 'Sentry auth token for releases' }
-  ]
+  creates: [],
+  enhances: [],
+  installs: [],
+  envVars: []
 };
 
 // Type-safe artifact access

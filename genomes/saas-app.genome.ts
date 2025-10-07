@@ -161,32 +161,120 @@ const saasAppGenome: Genome = {
     },
 
     // =============================================================================
-    // FEATURE MODULES - SaaS specific features
+    // COHESIVE BUSINESS MODULES - Complete SaaS functionality
     // =============================================================================
     {
-      id: "features/teams-dashboard/nextjs-shadcn",
+      id: "features/auth-ui",
       parameters: {
-        enabled: true,
+        theme: "default",
+        features: {
+          loginForm: true,
+          signupForm: true,
+          passwordReset: true,
+          profileManagement: true,
+          userSettings: true,
+          sessionManagement: true
+        }
       },
+      features: {
+        'oauth-google': true,
+        'oauth-github': true,
+        'mfa': true,
+        'social-login': false
+      }
     },
+    
     {
-      id: "features/user-profile/nextjs-shadcn",
+      id: "features/teams-management",
       parameters: {
-        enabled: true,
+        theme: "default",
+        features: {
+          teamCreation: true,
+          memberManagement: true,
+          teamSettings: true,
+          teamDashboard: true,
+          teamInvitations: true
+        }
       },
+      features: {
+        'team-billing': true,
+        'advanced-permissions': true,
+        'team-analytics': true
+      }
     },
+    
     {
-      id: "features/payment-management/nextjs-shadcn",
+      id: "features/billing-system",
       parameters: {
-        enabled: true,
+        theme: "default",
+        features: {
+          paymentForms: true,
+          subscriptionManagement: true,
+          invoiceDisplay: true,
+          billingHistory: true,
+          paymentMethods: true,
+          basicAnalytics: true
+        }
       },
+      features: {
+        'advanced-billing': true,
+        'tax-management': true,
+        'refund-management': true
+      }
     },
+    
     {
-      id: "features/email-management/nextjs-shadcn",
+      id: "features/email-system",
       parameters: {
-        enabled: true,
+        theme: "default",
+        features: {
+          emailComposition: true,
+          emailTemplates: true,
+          emailSending: true,
+          emailList: true,
+          basicAnalytics: true
+        }
       },
+      features: {
+        'advanced-analytics': true,
+        'email-campaigns': true,
+        'email-automation': true
+      }
     },
+    
+    {
+      id: "features/project-management",
+      parameters: {
+        theme: "default",
+        features: {
+          kanbanBoard: true,
+          taskCreation: true,
+          taskManagement: true,
+          projectOrganization: true,
+          teamCollaboration: true,
+          basicAnalytics: true
+        }
+      },
+      features: {
+        'time-tracking': true,
+        'gantt-view': true,
+        'project-reporting': true
+      }
+    },
+    
+    {
+      id: "features/architech-welcome",
+      parameters: {
+        showTechStack: true,
+        showComponents: true,
+        showProjectStructure: true,
+        showQuickStart: true,
+        customTitle: "Welcome to {{project.name}}",
+        customDescription: "Your complete SaaS application is ready! Explore all the features and start building your business.",
+        primaryColor: "blue",
+        showArchitechBranding: true
+      }
+    }
   ],
 };
 

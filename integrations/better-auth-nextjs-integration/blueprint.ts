@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
 
 export const blueprint: Blueprint = {
   id: 'better-auth-nextjs-integration',

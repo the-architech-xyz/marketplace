@@ -1,0 +1,110 @@
+{
+  "id": "auth",
+  "name": "Authentication Capability",
+  "description": "Complete authentication capability with user management, sessions, OAuth, and security features",
+  "version": "1.0.0",
+  "category": "feature",
+  "contract": {
+    "hooks": {
+      "useUser": "UseQueryResult<{ id: string; email: string; name?: string; emailVerified?: boolean; twoFactorEnabled?: boolean; createdAt: string }, Error>",
+      "useSession": "UseQueryResult<{ userId: string; expires: string; issuedAt: string }, Error>",
+      "useAuthState": "UseQueryResult<'authenticated' | 'unauthenticated' | 'loading', Error>",
+      "useAccounts": "UseQueryResult<Array<{ id: string; provider: string; providerAccountId: string; createdAt: string }>, Error>",
+      "useSignIn": "UseMutationResult<{ success: boolean; userId?: string }, Error, { email: string; password: string }>",
+      "useSignUp": "UseMutationResult<{ success: boolean; userId?: string }, Error, { email: string; password: string; name?: string }>",
+      "useSignOut": "UseMutationResult<{ success: boolean }, Error, void>",
+      "useResetPassword": "UseMutationResult<{ success: boolean }, Error, { email: string }>",
+      "useUpdatePassword": "UseMutationResult<{ success: boolean }, Error, { oldPassword?: string; newPassword: string; resetToken?: string }>",
+      "useUpdateProfile": "UseMutationResult<{ success: boolean }, Error, { name?: string; email?: string }>",
+      "useVerifyEmail": "UseMutationResult<{ success: boolean }, Error, { token: string }>",
+      "useResendVerification": "UseMutationResult<{ success: boolean }, Error, { email: string }>",
+      "useEnableTwoFactor": "UseMutationResult<{ success: boolean; qrCodeUrl?: string; secret?: string }, Error, void>",
+      "useVerifyTwoFactor": "UseMutationResult<{ success: boolean }, Error, { token: string }>",
+      "useDisableTwoFactor": "UseMutationResult<{ success: boolean }, Error, { token: string }>",
+      "useOAuthSignIn": "UseMutationResult<{ url: string }, Error, { provider: 'google' | 'github' | 'facebook' | 'twitter' }>",
+      "useOAuthCallback": "UseMutationResult<{ success: boolean; userId?: string }, Error, { provider: 'google' | 'github' | 'facebook' | 'twitter'; code: string }>",
+      "useDeleteAccount": "UseMutationResult<{ success: boolean }, Error, { password?: string }>",
+      "useExportData": "UseMutationResult<{ success: boolean; downloadUrl?: string }, Error, void>"
+    },
+    "api": {
+      "endpoints": ["/api/auth/signin", "/api/auth/signup", "/api/auth/signout", "/api/auth/me", "/api/auth/reset-password", "/api/auth/update-password", "/api/auth/verify-email", "/api/auth/2fa", "/api/auth/oauth", "/api/auth/delete-account", "/api/auth/export-data"],
+      "methods": ["POST", "GET", "PATCH", "DELETE"]
+    },
+    "types": ["User", "Session", "AuthState", "Account", "SignInData", "SignUpData", "ResetPasswordData", "UpdatePasswordData", "UpdateProfileData", "TwoFactorData", "OAuthData"]
+  },
+  "prerequisites": {
+    "adapters": [
+      "better-auth"
+    ],
+    "integrators": [
+      "better-auth-nextjs-integration"
+    ],
+    "capabilities": [
+      "user-authentication"
+    ]
+  },
+  "provides": {
+    "capabilities": [
+      "user-authentication",
+      "session-management",
+      "email-verification",
+      "password-reset",
+      "two-factor-authentication",
+      "oauth-providers",
+      "user-profile-management"
+    ]
+  },
+  "parameters": {
+    "backend": {
+      "type": "select",
+      "default": "better-auth-nextjs",
+      "description": "Backend implementation for authentication",
+      "required": true,
+      "options": ["better-auth-nextjs", "next-auth-nextjs", "clerk-nextjs"]
+    },
+    "frontend": {
+      "type": "select", 
+      "default": "shadcn",
+      "description": "Frontend implementation for authentication UI",
+      "required": true,
+      "options": ["shadcn", "mui", "chakra"]
+    },
+    "features": {
+      "type": "object",
+      "default": {
+        "emailAuth": true,
+        "oauthProviders": true,
+        "emailVerification": true,
+        "passwordReset": true,
+        "twoFactorAuth": false,
+        "profileManagement": true,
+        "sessionManagement": true
+      },
+      "description": "Authentication features to enable",
+      "required": false
+    },
+    "oauthProviders": {
+      "type": "array",
+      "default": ["google", "github"],
+      "description": "OAuth providers to enable",
+      "required": false,
+      "options": ["google", "github", "discord", "twitter", "linkedin"]
+    }
+  },
+  "implementations": {
+    "backend": [
+      "better-auth-nextjs",
+      "next-auth-nextjs",
+      "clerk-nextjs"
+    ],
+    "frontend": [
+      "shadcn",
+      "mui", 
+      "chakra"
+    ]
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

@@ -35,25 +35,10 @@ export interface DatabaseSequelizeFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const DatabaseSequelizeArtifacts: {
-  creates: [
-    '{{paths.database_config}}/sequelize.ts',
-    '{{paths.database_config}}/index.ts',
-    '.sequelizerc'
-  ],
+  creates: [],
   enhances: [],
-  installs: [
-    { packages: ['sequelize', '{{module.parameters.databaseType}}'], isDev: false },
-    { packages: ['sequelize-cli', '@types/sequelize'], isDev: true }
-  ],
-  envVars: [
-    { key: 'DB_HOST', value: '{{module.parameters.host}}', description: 'Database host' },
-    { key: 'DB_PORT', value: '{{module.parameters.port}}', description: 'Database port' },
-    { key: 'DB_USERNAME', value: '{{module.parameters.username}}', description: 'Database username' },
-    { key: 'DB_PASSWORD', value: '{{module.parameters.password}}', description: 'Database password' },
-    { key: 'DB_NAME', value: '{{module.parameters.databaseName}}', description: 'Database name' },
-    { key: 'DB_LOGGING', value: '{{module.parameters.logging}}', description: 'Sequelize logging' },
-    { key: 'DB_POOL', value: '{{module.parameters.pool}}', description: 'Sequelize connection pool' }
-  ]
+  installs: [],
+  envVars: []
 };
 
 // Type-safe artifact access

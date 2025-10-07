@@ -32,15 +32,8 @@ export interface DeploymentVercelFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const DeploymentVercelArtifacts: {
-  creates: [
-    'vercel.json',
-    '.vercelignore',
-    '.env.example',
-    'scripts/deploy.sh'
-  ],
-  enhances: [
-    'package.json'
-  ],
+  creates: [],
+  enhances: [],
   installs: [],
   envVars: []
 };

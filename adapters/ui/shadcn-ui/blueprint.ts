@@ -5,7 +5,7 @@
  * Handles all UI and styling configuration
  */
 
-import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 const shadcnUiBlueprint: Blueprint = {
   id: 'shadcn-ui-installer',
@@ -24,6 +24,7 @@ const shadcnUiBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'postcss.config.mjs',
+      conflictResolution: { strategy: ConflictResolutionStrategy.REPLACE },
       content: `const config = {
   plugins: ["@tailwindcss/postcss"],
 };
@@ -34,6 +35,7 @@ export default config;`
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/globals.css',
+      conflictResolution: { strategy: ConflictResolutionStrategy.REPLACE },
         content: `
 @import "tailwindcss";
 

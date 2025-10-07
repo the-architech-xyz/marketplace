@@ -23,21 +23,9 @@ export interface UiReactFlowFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const UiReactFlowArtifacts: {
-  creates: [
-    'src/components/ReactFlow/FlowCanvas.tsx',
-    'src/components/ReactFlow/nodes/CustomNode.tsx',
-    'src/components/ReactFlow/edges/CustomEdge.tsx',
-    'src/hooks/useReactFlow.ts',
-    'src/contexts/ReactFlowContext.tsx',
-    'src/types/reactflow.ts',
-    'src/utils/reactflow.ts',
-    'src/styles/reactflow.css'
-  ],
+  creates: [],
   enhances: [],
-  installs: [
-    { packages: ['reactflow', 'react', 'react-dom'], isDev: false },
-    { packages: ['@types/react', '@types/react-dom'], isDev: true }
-  ],
+  installs: [],
   envVars: []
 };
 

@@ -45,43 +45,10 @@ export interface DockerDrizzleIntegrationParams {
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const DockerDrizzleIntegrationArtifacts: {
-  creates: [
-    'docker-compose.drizzle.yml',
-    'database/Dockerfile.postgres',
-    'database/Dockerfile.migration',
-    'database/drizzle-init.sql',
-    'database/drizzle-seed.sql',
-    'database/drizzle-migrations/001_initial.sql',
-    'database/drizzle-migrations/002_add_indexes.sql',
-    'database/drizzle-migrations/003_add_constraints.sql',
-    'scripts/drizzle-setup.sh',
-    'scripts/drizzle-migrate.sh',
-    'scripts/drizzle-seed.sh',
-    'scripts/drizzle-backup.sh',
-    'scripts/drizzle-restore.sh',
-    'scripts/drizzle-reset.sh',
-    'scripts/drizzle-health.sh',
-    'scripts/drizzle-shell.sh',
-    'scripts/drizzle-logs.sh',
-    'monitoring/drizzle/prometheus.yml',
-    'monitoring/drizzle/grafana/dashboards/drizzle.json',
-    'monitoring/drizzle/grafana/provisioning/dashboards/dashboard.yml',
-    'monitoring/drizzle/grafana/provisioning/datasources/drizzle.yml',
-    'backup/drizzle-backup.sh',
-    'backup/drizzle-restore.sh',
-    'backup/drizzle-cleanup.sh'
-  ],
-  enhances: [
-    { path: 'docker-compose.yml' },
-    { path: 'package.json' }
-  ],
+  creates: [],
+  enhances: [],
   installs: [],
-  envVars: [
-    { key: 'POSTGRES_DB', value: 'myapp', description: 'PostgreSQL database name' },
-    { key: 'POSTGRES_USER', value: 'postgres', description: 'PostgreSQL username' },
-    { key: 'POSTGRES_PASSWORD', value: 'postgres', description: 'PostgreSQL password' },
-    { key: 'DATABASE_URL', value: 'postgresql://postgres:postgres@localhost:5432/myapp', description: 'Database connection URL' }
-  ]
+  envVars: []
 };
 
 // Type-safe artifact access

@@ -1,0 +1,81 @@
+{
+  "id": "architech-welcome",
+  "name": "Architech Welcome",
+  "description": "Beautiful welcome page showcasing the generated project's capabilities and technology stack",
+  "version": "1.0.0",
+  "category": "core",
+  "tags": ["welcome", "showcase", "documentation", "ui"],
+  "compatibility": {
+    "frameworks": ["nextjs"],
+    "uiLibraries": ["shadcn-ui", "tailwind"],
+    "minCliVersion": "1.0.0"
+  },
+  "dependencies": {
+    "required": ["framework/nextjs", "ui/shadcn-ui"],
+    "optional": ["ui/tailwind"]
+  },
+  "parameters": {
+    "showTechStack": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show technology stack visualization"
+    },
+    "showComponents": {
+      "type": "boolean", 
+      "default": true,
+      "description": "Show interactive component library showcase"
+    },
+    "showProjectStructure": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show project structure and architecture"
+    },
+    "showQuickStart": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show quick start guide"
+    },
+    "customTitle": {
+      "type": "string",
+      "default": "Welcome to {{project.name}}",
+      "description": "Custom welcome page title"
+    },
+    "customDescription": {
+      "type": "string",
+      "default": "Your {{project.name}} application is ready! Explore the features and technologies that power your project.",
+      "description": "Custom welcome page description"
+    },
+    "primaryColor": {
+      "type": "string",
+      "default": "blue",
+      "choices": ["blue", "green", "purple", "red", "orange", "pink"],
+      "description": "Primary color theme for the welcome page"
+    },
+    "showArchitechBranding": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show Architech branding and links"
+    }
+  },
+  "capabilities": {
+    "welcome-page": {
+      "version": "1.0.0",
+      "description": "Interactive welcome page with project showcase",
+      "provides": ["welcome-page", "tech-stack-visualizer", "component-showcase", "project-structure", "quick-start-guide"]
+    },
+    "project-analyzer": {
+      "version": "1.0.0", 
+      "description": "Analyzes generated project to extract technology stack and features",
+      "provides": ["project-analysis", "module-detection", "capability-mapping"]
+    }
+  },
+  "blueprint": "blueprint.ts",
+  "templates": [
+    "welcome-page.tsx.tpl",
+    "tech-stack-card.tsx.tpl", 
+    "component-showcase.tsx.tpl",
+    "project-structure.tsx.tpl",
+    "quick-start-guide.tsx.tpl",
+    "welcome-layout.tsx.tpl"
+  ]
+}

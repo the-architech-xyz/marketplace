@@ -23,18 +23,9 @@ export interface UiTailwindFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const UiTailwindArtifacts: {
-  creates: [
-    'tailwind.config.js',
-    'postcss.config.js',
-    'src/app/globals.css'
-  ],
+  creates: [],
   enhances: [],
-  installs: [
-    { packages: ['tailwindcss', 'postcss', 'autoprefixer'], isDev: true },
-    { packages: ['@tailwindcss/typography'], isDev: true },
-    { packages: ['@tailwindcss/forms'], isDev: true },
-    { packages: ['@tailwindcss/aspect-ratio'], isDev: true }
-  ],
+  installs: [],
   envVars: []
 };
 

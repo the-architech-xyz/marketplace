@@ -45,13 +45,8 @@ export interface DockerNextjsIntegrationParams {
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const DockerNextjsIntegrationArtifacts: {
-  creates: [
-    'docker-compose.nextjs.yml'
-  ],
-  enhances: [
-    { path: 'Dockerfile' },
-    { path: '.dockerignore' }
-  ],
+  creates: [],
+  enhances: [],
   installs: [],
   envVars: []
 };

@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
 
 const sentryNextjsIntegrationBlueprint: Blueprint = {
   id: 'sentry-nextjs-integration',

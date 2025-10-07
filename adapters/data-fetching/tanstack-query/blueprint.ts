@@ -29,13 +29,21 @@ export const tanstackQueryBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/providers/QueryProvider.tsx',
-      template: 'templates/QueryProvider.tsx.tpl'
+      template: 'templates/QueryProvider.tsx.tpl',
+      conflictResolution: {
+        strategy: 'skip',
+        priority: 0
+      }
     },
     // Create Query Client Configuration
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/query-client.ts',
-      template: 'templates/query-client.ts.tpl'
+      template: 'templates/query-client.ts.tpl',
+      conflictResolution: {
+        strategy: 'skip',
+        priority: 0
+      }
     },
     // Create Standard Query Hooks
     {
@@ -74,13 +82,21 @@ export const tanstackQueryBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/query-keys.ts',
-      template: 'templates/query-keys.ts.tpl'
+      template: 'templates/query-keys.ts.tpl',
+      conflictResolution: {
+        strategy: 'skip',
+        priority: 0
+      }
     },
     // Create Error Boundary for Queries
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/QueryErrorBoundary.tsx',
-      template: 'templates/QueryErrorBoundary.tsx.tpl'
+      template: 'templates/QueryErrorBoundary.tsx.tpl',
+      conflictResolution: {
+        strategy: 'skip',
+        priority: 0
+      }
     },
     // Create Loading States
     {

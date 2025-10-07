@@ -242,41 +242,67 @@ const ecommerceAppGenome: Genome = {
     // FEATURE MODULES - E-commerce specific features
     // =============================================================================
     {
-      id: "features/payment-management/nextjs-shadcn",
+      id: "features/payments",
       parameters: {
-        theme: "default",
+        backend: "stripe-nextjs",
+        frontend: "shadcn",
         features: {
           paymentForms: true,
-          subscriptionCards: false,
-          invoiceTables: true,
-          pricingCards: true,
-        },
-      },
+          subscriptionManager: true,
+          customerManager: true,
+          planManager: true,
+          invoiceViewer: true,
+          analyticsDashboard: true
+        }
+      }
     },
     {
-      id: "features/email-management/nextjs-shadcn",
+      id: "features/emailing",
       parameters: {
-        theme: "default",
+        backend: "resend-nextjs",
+        frontend: "shadcn",
         features: {
-          composer: true,
-          templates: true,
-          analytics: true,
-          settings: true,
-        },
-      },
+          sendEmailForm: true,
+          templateEditor: true,
+          emailList: true,
+          analyticsDashboard: true,
+          subscriberForms: true
+        }
+      }
     },
     {
-      id: "features/user-profile/nextjs-shadcn",
+      id: "features/social-profile",
       parameters: {
-        theme: "default",
+        backend: "nextjs",
+        frontend: "shadcn",
         features: {
-          avatarUpload: true,
-          preferences: true,
-          security: true,
+          profileManagement: true,
+          socialConnections: true,
+          activityFeeds: true,
           notifications: true,
-          exportData: false,
-        },
-      },
+          privacyControls: true,
+          socialSettings: true,
+          avatarUpload: true,
+          blocking: true,
+          reporting: true
+        }
+      }
+    },
+    {
+      id: "features/ecommerce",
+      parameters: {
+        backend: "database-nextjs",
+        frontend: "shadcn",
+        features: {
+          productManagement: true,
+          shoppingCart: true,
+          orderManagement: true,
+          inventoryTracking: true,
+          reviews: true,
+          search: true,
+          categories: true
+        }
+      }
     },
   ],
 };
