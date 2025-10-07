@@ -30,17 +30,17 @@ export const authShadcnBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/auth/LoginForm.tsx',
-      content: `'use client';
-
-import { useState ,
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2
-      }} from 'react';
+      },
+      content: `'use client';
+
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useSignIn, useOAuthSignIn } from '@/lib/auth/hooks';
+import { useSignIn, useOAuthSignIn } from '@/lib/hooks/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -246,17 +246,17 @@ export function LoginForm() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/auth/SignupForm.tsx',
-      content: `'use client';
-
-import { useState ,
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2
-      }} from 'react';
+      },
+      content: `'use client';
+
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useSignUp, useOAuthSignIn } from '@/lib/auth/hooks';
+import { useSignUp, useOAuthSignIn } from '@/lib/hooks/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -525,17 +525,17 @@ export function SignupForm() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/auth/ProfileManager.tsx',
-      content: `'use client';
-
-import { useState ,
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2
-      }} from 'react';
+      },
+      content: `'use client';
+
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useUser, useUpdateProfile, useSignOut, useAccounts, useUnlinkAccount } from '@/lib/auth/hooks';
+import { useUser, useSignOut } from '@/lib/hooks/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -836,11 +836,11 @@ export function ProfileManager() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/auth/login/page.tsx',
-      content: `import { LoginForm ,
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2
-      }} from '@/components/auth/LoginForm';
+      },
+      content: `import { LoginForm } from '@/components/auth/LoginForm';
 
 export default function LoginPage() {
   return (
@@ -854,11 +854,11 @@ export default function LoginPage() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/auth/signup/page.tsx',
-      content: `import { SignupForm ,
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2
-      }} from '@/components/auth/SignupForm';
+      },
+      content: `import { SignupForm } from '@/components/auth/SignupForm';
 
 export default function SignupPage() {
   return (
@@ -872,11 +872,11 @@ export default function SignupPage() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/auth/profile/page.tsx',
-      content: `import { ProfileManager ,
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2
-      }} from '@/components/auth/ProfileManager';
+      },
+      content: `import { ProfileManager } from '@/components/auth/ProfileManager';
 
 export default function ProfilePage() {
   return (

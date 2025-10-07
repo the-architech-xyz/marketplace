@@ -27,8 +27,8 @@
   "include": [
     "adapters/**/blueprint.ts",
     "integrations/**/blueprint.ts",
-    "scripts/**/*.ts",
-    "genomes/**/*.ts"
+    "features/**/blueprint.ts",
+    "genomes/simple-app.genome.ts"
   ],
   "exclude": [
     "node_modules",

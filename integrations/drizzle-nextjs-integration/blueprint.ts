@@ -12,21 +12,21 @@ const drizzleNextjsIntegrationBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-query.ts',
-      template: 'templates/use-query.ts.tpl'
-    ,
+      template: 'templates/use-query.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-mutation.ts',
-      template: 'templates/use-mutation.ts.tpl'
-    ,
+      template: 'templates/use-mutation.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
-      }},
+      }
+    },
     // Note: Domain-specific API services (products, users, posts) 
     // have been moved to features/ecommerce-core
     // Note: Domain-specific API routes (products, users, posts) 
@@ -35,21 +35,21 @@ const drizzleNextjsIntegrationBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/queries.ts',
-      template: 'templates/db-queries.ts.tpl'
-    ,
+      template: 'templates/db-queries.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/mutations.ts',
-      template: 'templates/db-mutations.ts.tpl'
-    ,
+      template: 'templates/db-mutations.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
-      }},
+      }
+    },
     // Create Next.js API route for migrations
     {
       type: BlueprintActionType.CREATE_FILE,

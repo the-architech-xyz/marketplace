@@ -40,78 +40,52 @@ export const prettierBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '.prettierrc',
-      template: 'templates/.prettierrc.tpl'
-    ,
+      template: 'templates/.prettierrc.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '.prettierrc.js',
-      template: 'templates/.prettierrc.js.tpl'
-    ,
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '.prettierignore',
-      template: 'templates/.prettierignore.tpl'
-    ,
+      template: 'templates/.prettierignore.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
-    // Create Prettier scripts
-    {
-      type: BlueprintActionType.ADD_SCRIPT,
-
-      name: 'format',
-      command: 'prettier --write .'
+      }
     },
-    {
-      type: BlueprintActionType.ADD_SCRIPT,
-
-      name: 'format:check',
-      command: 'prettier --check .'
-    },
-    {
-      type: BlueprintActionType.ADD_SCRIPT,
-
-      name: 'format:staged',
-      command: 'prettier --write --list-different'
-    },
+    // Prettier scripts are handled by core-scripts adapter
+    // Only add Prettier-specific scripts that aren't covered by core
     // Create Prettier utilities
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/format-all.js',
-      template: 'templates/format-all.js.tpl'
-    ,
+      template: 'templates/format-all.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/format-staged.js',
-      template: 'templates/format-staged.js.tpl'
-    ,
+      template: 'templates/format-staged.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
+      }
+    },
     // Create Prettier configuration for specific file types
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'prettier.config.js',
-      template: 'templates/prettier.config.js.tpl'
-    ,
+      template: 'templates/prettier.config.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }}
+      }
+    }
   ]
 };
 

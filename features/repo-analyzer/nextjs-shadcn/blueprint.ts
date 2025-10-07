@@ -4,7 +4,7 @@
  * Provides UI components and functionality for analyzing existing repositories
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const repoAnalyzerBlueprint: Blueprint = {
   id: 'repo-analyzer-setup',
@@ -96,11 +96,10 @@ export const repoAnalyzerBlueprint: Blueprint = {
     
     // Add navigation
     {
-      type: BlueprintActionType.ENHANCE_FILE,
-
-      path: '{{paths.components}}/navigation/nav.tsx',
-      action: 'addAnalysisLink',
-      template: 'templates/nav-analysis-link.tsx.tpl'
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.components}}/navigation/nav-analysis-link.tsx',
+      template: 'templates/nav-analysis-link.tsx.tpl',
+      conflictResolution: { strategy: ConflictResolutionStrategy.SKIP }
     }
   ]
 };

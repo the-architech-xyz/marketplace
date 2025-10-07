@@ -1,81 +1,42 @@
 {
   "id": "teams-management",
-  "name": "Teams Management System",
-  "description": "Complete team management system with creation, member management, settings, and dashboard",
+  "name": "Complete Teams Management System",
+  "description": "Complete team management with creation, members, settings, and dashboard",
   "version": "1.0.0",
   "category": "feature",
-  "blueprint": "blueprint.ts",
-  "prerequisites": {
-    "adapters": [
-      "nextjs",
-      "shadcn-ui", 
-      "drizzle",
-      "better-auth"
-    ],
-    "integrators": [
-      "drizzle-nextjs-integration",
-      "better-auth-nextjs-integration"
-    ],
-    "capabilities": [
-      "user-authentication",
-      "database-operations",
-      "ui-components"
-    ]
-  },
-  "provides": {
-    "capabilities": [
-      "team-creation",
-      "member-management",
-      "team-settings", 
-      "team-dashboard",
-      "team-invitations",
-      "team-collaboration"
-    ]
-  },
-  "parameters": {
-    "theme": {
-      "type": "string",
-      "default": "default",
-      "description": "UI theme variant",
-      "required": false,
-      "options": ["default", "dark", "light"]
-    },
-    "features": {
-      "type": "object",
-      "default": {
-        "teamCreation": true,
-        "memberManagement": true,
-        "teamSettings": true,
-        "teamDashboard": true,
-        "teamInvitations": true
-      },
-      "description": "Core team management features to enable",
-      "required": false
-    }
-  },
+  "core_capabilities": [
+    "Team Creation",
+    "Member Management",
+    "Team Dashboard",
+    "Basic Team Settings"
+  ],
   "sub_features": {
-    "team-billing": {
-      "name": "Team Billing",
-      "description": "Billing and subscription management for teams",
-      "optional": true,
-      "prerequisites": {
-        "adapters": ["stripe"],
-        "integrators": ["stripe-nextjs-integration"]
-      }
+    "advanced-analytics": {
+      "description": "Advanced team analytics and performance metrics",
+      "default": false,
+      "dependencies": ["core_capabilities"]
+    },
+    "team-templates": {
+      "description": "Pre-built team templates for different organization types",
+      "default": false,
+      "dependencies": ["core_capabilities"]
     },
     "advanced-permissions": {
-      "name": "Advanced Permissions",
-      "description": "Role-based access control and advanced permissions",
-      "optional": true
+      "description": "Granular role-based permissions and access control",
+      "default": false,
+      "dependencies": ["core_capabilities"]
     },
-    "team-analytics": {
-      "name": "Team Analytics", 
-      "description": "Team performance and usage analytics dashboard",
-      "optional": true
+    "team-integrations": {
+      "description": "Integrations with external tools (Slack, Discord, etc.)",
+      "default": false,
+      "dependencies": ["core_capabilities"]
     }
   },
-  "constraints": {
-    "minReactVersion": ">=18.0.0",
-    "minNextjsVersion": ">=13.0.0"
+  "prerequisites": {
+    "adapters": ["ui/shadcn-ui", "auth/better-auth"],
+    "integrations": ["better-auth-nextjs-integration"]
+  },
+  "provides": {
+    "capabilities": ["team-management", "member-management", "team-dashboard"]
   }
 }

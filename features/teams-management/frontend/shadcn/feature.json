@@ -1,0 +1,39 @@
+{
+  "id": "teams-management-frontend-shadcn",
+  "name": "Teams Management Frontend (Shadcn/ui)",
+  "description": "Complete team management UI with creation, member management, settings, and dashboard",
+  "version": "1.0.0",
+  "category": "feature",
+  "core_capabilities": [
+    "Team List View",
+    "Team Creation",
+    "Member Management",
+    "Team Settings",
+    "Team Dashboard"
+  ],
+  "sub_features": {
+    "advanced-permissions": {
+      "description": "UI for granular role-based permissions and access control",
+      "default": false,
+      "dependencies": ["core_capabilities"]
+    },
+    "team-analytics": {
+      "description": "Team performance and activity analytics dashboard",
+      "default": false,
+      "dependencies": ["core_capabilities"]
+    },
+    "team-billing": {
+      "description": "Team subscription and billing management UI",
+      "default": false,
+      "dependencies": ["core_capabilities"]
+    }
+  },
+  "prerequisites": {
+    "adapters": ["ui/shadcn-ui"],
+    "integrations": ["better-auth-nextjs-integration"],
+    "features": ["teams-management/backend/better-auth-nextjs"]
+  },
+  "provides": {
+    "capabilities": ["team-ui", "member-management-ui", "team-dashboard-ui"]
+  }
+}

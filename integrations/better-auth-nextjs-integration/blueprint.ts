@@ -9,105 +9,58 @@ export const blueprint: Blueprint = {
     // Add Next.js specific environment variables
     {
       type: BlueprintActionType.ADD_ENV_VAR,
-
       key: 'BETTER_AUTH_SECRET',
       value: 'your-secret-key',
       description: 'Better Auth secret key for JWT signing'
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
-
       key: 'BETTER_AUTH_URL',
       value: 'http://localhost:3000',
       description: 'Better Auth base URL'
     },
     
-    // Create standardized auth hooks (REVOLUTIONARY!)
+    // Create streamlined auth hooks (SIMPLE & GRANULAR!)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-auth.ts',
-      template: 'templates/use-auth.ts.tpl'
-    ,
+      path: 'src/lib/hooks/auth.ts',
+      template: 'templates/auth-hooks.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE, 
         priority: 1
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-sign-in.ts',
-      template: 'templates/use-sign-in.ts.tpl'
-    ,
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-sign-out.ts',
-      template: 'templates/use-sign-out.ts.tpl'
-    ,
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-sign-up.ts',
-      template: 'templates/use-sign-up.ts.tpl'
-    ,
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-user.ts',
-      template: 'templates/use-user.ts.tpl'
-    ,
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-session.ts',
-      template: 'templates/use-session.ts.tpl'
-    ,
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+      }
+    },
     
     // Create auth API service layer
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/api.ts',
-      template: 'templates/auth-api.ts.tpl'
-    ,
+      template: 'templates/auth-api.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/types.ts',
-      template: 'templates/auth-types.ts.tpl'
-    ,
+      template: 'templates/auth-types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
-      }},
+      }
+    },
     
     // Create auth context and provider
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/providers/AuthProvider.tsx',
-      template: 'templates/AuthProvider.tsx.tpl'
-    ,
+      template: 'templates/AuthProvider.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
-      }},
+      }
+    },
     
     // PURE MODIFIER: Enhance the auth config with Next.js specific features
     {
@@ -191,12 +144,12 @@ export function authMiddleware(request: NextRequest) {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/session-management.ts',
-      template: 'templates/session-management.ts.tpl'
-    ,
+      template: 'templates/session-management.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
-      }},
+      }
+    },
     
     // Create Next.js auth components
 

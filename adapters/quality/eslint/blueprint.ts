@@ -89,49 +89,8 @@ export const eslintBlueprint: Blueprint = {
         strategy: ConflictResolutionStrategy.MERGE,
         priority: 0
       }},
-    // Create ESLint scripts
-    {
-      type: BlueprintActionType.ADD_SCRIPT,
-
-      name: 'lint',
-      command: 'eslint . --ext .js,.jsx,.ts,.tsx',
-      condition: '{{#if module.parameters.typescript}}'
-    },
-    {
-      type: BlueprintActionType.ADD_SCRIPT,
-
-      name: 'lint',
-      command: 'eslint . --ext .js,.jsx',
-      condition: '{{#if not module.parameters.typescript}}'
-    },
-    {
-      type: BlueprintActionType.ADD_SCRIPT,
-
-      name: 'lint:fix',
-      command: 'eslint . --ext .js,.jsx,.ts,.tsx --fix',
-      condition: '{{#if module.parameters.typescript}}'
-    },
-    {
-      type: BlueprintActionType.ADD_SCRIPT,
-
-      name: 'lint:fix',
-      command: 'eslint . --ext .js,.jsx --fix',
-      condition: '{{#if not module.parameters.typescript}}'
-    },
-    {
-      type: BlueprintActionType.ADD_SCRIPT,
-
-      name: 'lint:check',
-      command: 'eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0',
-      condition: '{{#if module.parameters.typescript}}'
-    },
-    {
-      type: BlueprintActionType.ADD_SCRIPT,
-
-      name: 'lint:check',
-      command: 'eslint . --ext .js,.jsx --max-warnings 0',
-      condition: '{{#if not module.parameters.typescript}}'
-    },
+    // ESLint scripts are handled by core-scripts adapter
+    // Only add ESLint-specific scripts that aren't covered by core
     // Create ESLint rules configuration
     {
       type: BlueprintActionType.CREATE_FILE,

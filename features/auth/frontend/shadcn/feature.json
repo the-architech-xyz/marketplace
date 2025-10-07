@@ -1,0 +1,67 @@
+{
+  "id": "auth/frontend/shadcn",
+  "name": "Authentication Frontend (Shadcn)",
+  "description": "Authentication UI components using Shadcn/UI",
+  "version": "1.0.0",
+  "category": "feature",
+  "contract": {
+    "hooks": {
+      "useAuthForm": "UseFormReturn<AuthFormData, any, AuthFormData>",
+      "useLoginForm": "UseFormReturn<LoginFormData, any, LoginFormData>",
+      "useSignupForm": "UseFormReturn<SignupFormData, any, SignupFormData>",
+      "usePasswordResetForm": "UseFormReturn<PasswordResetFormData, any, PasswordResetFormData>"
+    },
+    "components": {
+      "AuthForm": "React.ComponentType<AuthFormProps>",
+      "LoginForm": "React.ComponentType<LoginFormProps>",
+      "SignupForm": "React.ComponentType<SignupFormProps>",
+      "PasswordResetForm": "React.ComponentType<PasswordResetFormProps>",
+      "UserProfile": "React.ComponentType<UserProfileProps>",
+      "UserSettings": "React.ComponentType<UserSettingsProps>"
+    },
+    "types": ["AuthFormData", "LoginFormData", "SignupFormData", "PasswordResetFormData", "UserProfileData"]
+  },
+  "prerequisites": {
+    "adapters": [
+      "better-auth",
+      "shadcn-ui"
+    ],
+    "integrators": [
+      "better-auth-nextjs-integration",
+      "rhf-zod-shadcn-integration"
+    ]
+  },
+  "provides": {
+    "capabilities": [
+      "auth-ui-components",
+      "form-validation",
+      "responsive-design"
+    ]
+  },
+  "parameters": {
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false,
+      "options": ["default", "dark", "light"]
+    },
+    "features": {
+      "type": "object",
+      "default": {
+        "loginForm": true,
+        "signupForm": true,
+        "passwordReset": true,
+        "profileManagement": true,
+        "userSettings": true,
+        "sessionManagement": true
+      },
+      "description": "UI features to enable",
+      "required": false
+    }
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

@@ -23,11 +23,11 @@ export const prismaBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'prisma/schema.prisma',
-      template: 'templates/schema.prisma.tpl'
-    ,
+      template: 'templates/schema.prisma.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }}
+      }
+    }
   ]
 };

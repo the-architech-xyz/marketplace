@@ -243,7 +243,7 @@ const simpleAppGenome: Genome = {
     
     // === COHESIVE BUSINESS MODULES ===
     {
-      id: 'features/auth-ui',
+      id: 'features/auth/frontend/shadcn',
       parameters: {
         theme: 'default',
         features: {

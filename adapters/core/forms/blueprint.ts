@@ -39,12 +39,12 @@ export const formsBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/forms/core.ts',
-      template: 'templates/core.ts.tpl'
-    ,
+      template: 'templates/core.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/forms/validation.ts',
@@ -53,7 +53,8 @@ export const formsBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/forms/hooks.ts',
@@ -62,7 +63,8 @@ export const formsBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/forms/accessibility.ts',
@@ -82,7 +84,8 @@ export const formsBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/forms/FormField.tsx',
@@ -91,7 +94,8 @@ export const formsBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }}, 
+      }
+    }, 
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/forms/FormInput.tsx',
@@ -101,13 +105,13 @@ export const formsBlueprint: Blueprint = {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
       }
-      },
-    { 
+    },
+    {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/forms/FormTextarea.tsx',
       template: 'templates/FormTextarea.tsx.tpl',
       condition: '{{#if module.parameters.reactHookForm}}',
-      conflictResolution: { 
+      conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
       }
@@ -116,11 +120,12 @@ export const formsBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/forms/FormSelect.tsx',
       template: 'templates/FormSelect.tsx.tpl',
-      condition: '{{#if module.parameters.reactHookForm}}',  
+      condition: '{{#if module.parameters.reactHookForm}}',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/forms/FormCheckbox.tsx',
@@ -129,7 +134,8 @@ export const formsBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/forms/FormRadio.tsx',
@@ -138,7 +144,8 @@ export const formsBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/forms/FormError.tsx',
@@ -147,27 +154,29 @@ export const formsBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
+      }
+    },
     // Create form types
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/types/forms.ts',
-      template: 'templates/types.ts.tpl'
-    ,
+      template: 'templates/types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
+      }
+    },
     // Create example forms
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/examples/ContactForm.tsx',
-      template: 'templates/ContactForm.tsx.tpl',  
+      template: 'templates/ContactForm.tsx.tpl',
       condition: '{{#if module.parameters.reactHookForm}}',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/examples/LoginForm.tsx',
@@ -176,26 +185,38 @@ export const formsBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
+      }
+    },
+    // Create configurable validation schemas
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: 'src/lib/forms/validation-schemas.ts',
+      template: 'templates/validation-schemas.ts.tpl',
+      condition: '{{#if module.parameters.zod}}',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
     // Create validation examples
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/forms/validation-examples.ts',
-      template: 'templates/validation-examples.ts.tpl'
-    ,
+      template: 'templates/validation-examples.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
+      }
+    },
     // Create form index
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/forms/index.ts',
-      template: 'templates/index.ts.tpl'
-    ,
+      template: 'templates/index.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }}
+      }
+    }
   ]
 };

@@ -1,0 +1,42 @@
+{
+  "id": "emailing-frontend-shadcn",
+  "name": "Complete Email System (Shadcn/ui)",
+  "description": "Complete email management system with composition, templates, and analytics",
+  "version": "1.0.0",
+  "category": "feature",
+  "core_capabilities": [
+    "Email Composition",
+    "Sent Email List", 
+    "Email Templates",
+    "Basic Email Management"
+  ],
+  "sub_features": {
+    "analytics-dashboard": {
+      "description": "Advanced analytics dashboard for email engagement metrics",
+      "default": false,
+      "dependencies": ["core_capabilities"]
+    },
+    "campaign-manager": {
+      "description": "Bulk email campaigns and user list management",
+      "default": false,
+      "dependencies": ["core_capabilities"]
+    },
+    "email-scheduling": {
+      "description": "Schedule emails to be sent at specific times",
+      "default": false,
+      "dependencies": ["core_capabilities"]
+    },
+    "advanced-templates": {
+      "description": "Rich template editor with drag-and-drop functionality",
+      "default": false,
+      "dependencies": ["core_capabilities"]
+    }
+  },
+  "prerequisites": {
+    "adapters": ["ui/shadcn-ui", "email/resend"],
+    "integrations": ["resend-nextjs-integration"]
+  },
+  "provides": {
+    "capabilities": ["email-management", "email-composition", "email-templates"]
+  }
+}

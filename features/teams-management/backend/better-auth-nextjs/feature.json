@@ -1,0 +1,37 @@
+{
+  "id": "teams-management-backend-better-auth",
+  "name": "Teams Management Backend (Better Auth)",
+  "description": "Backend functionality for team management with Better Auth integration",
+  "version": "1.0.0",
+  "category": "feature",
+  "core_capabilities": [
+    "Team CRUD Operations",
+    "Member Management",
+    "Team Settings",
+    "Permission Management"
+  ],
+  "sub_features": {
+    "advanced-permissions": {
+      "description": "Granular role-based permissions and access control",
+      "default": false,
+      "dependencies": ["core_capabilities"]
+    },
+    "team-analytics": {
+      "description": "Team performance and activity analytics",
+      "default": false,
+      "dependencies": ["core_capabilities"]
+    },
+    "team-billing": {
+      "description": "Team subscription and billing management",
+      "default": false,
+      "dependencies": ["core_capabilities"]
+    }
+  },
+  "prerequisites": {
+    "adapters": ["auth/better-auth"],
+    "integrations": ["better-auth-nextjs-integration"]
+  },
+  "provides": {
+    "capabilities": ["team-management", "member-management", "team-settings"]
+  }
+}

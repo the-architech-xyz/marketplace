@@ -117,35 +117,26 @@ export default config;`
         'lucide-react@^0.294.0'
       ]
     },
-    // Install core Radix UI primitives
+    // Install core Radix UI primitives (DYNAMIC - only what's needed!)
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
-        '@radix-ui/react-dialog@^1.0.5',
-        '@radix-ui/react-dropdown-menu@^2.0.6',
-        '@radix-ui/react-label@^2.0.2',
-        '@radix-ui/react-select@^2.0.0',
-        '@radix-ui/react-separator@^1.0.3',
-        '@radix-ui/react-switch@^1.0.3',
-        '@radix-ui/react-tabs@^1.0.4',
-        '@radix-ui/react-tooltip@^1.0.7',
-        '@radix-ui/react-accordion@^1.1.2',
-        '@radix-ui/react-alert-dialog@^1.0.5',
-        '@radix-ui/react-avatar@^1.0.4',
-        '@radix-ui/react-checkbox@^1.0.4',
-        '@radix-ui/react-collapsible@^1.0.3',
-        '@radix-ui/react-context-menu@^2.1.5',
-        '@radix-ui/react-hover-card@^1.0.7',
-        '@radix-ui/react-menubar@^1.0.4',
-        '@radix-ui/react-navigation-menu@^1.1.4',
-        '@radix-ui/react-popover@^1.0.7',
-        '@radix-ui/react-progress@^1.0.3',
-        '@radix-ui/react-radio-group@^1.1.3',
-        '@radix-ui/react-scroll-area@^1.0.5',
-        '@radix-ui/react-slider@^1.1.2',
-        '@radix-ui/react-toggle@^1.0.3',
-        '@radix-ui/react-toggle-group@^1.0.4'
+        '@radix-ui/react-slot@^1.0.2'
       ]
+    },
+    // Install Radix components dynamically based on selected shadcn components
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: 'scripts/install-radix-deps.js',
+      template: 'templates/install-radix-deps.js.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }
+    },
+    {
+      type: BlueprintActionType.RUN_COMMAND,
+      command: 'node scripts/install-radix-deps.js'
     },
     // Install additional utilities
     {

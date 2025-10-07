@@ -50,45 +50,45 @@ export const architechWelcomeBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/welcome/tech-stack-card.tsx',
-      template: 'templates/tech-stack-card.tsx.tpl'
-    ,
+      template: 'templates/tech-stack-card.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2
-      }},
+      }
+    },
 
     // Create component showcase
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/welcome/component-showcase.tsx',
-      template: 'templates/component-showcase.tsx.tpl'
-    ,
+      template: 'templates/component-showcase.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2
-      }},
+      }
+    },
 
     // Create project structure viewer
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/welcome/project-structure.tsx',
-      template: 'templates/project-structure.tsx.tpl'
-    ,
+      template: 'templates/project-structure.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2
-      }},
+      }
+    },
 
     // Create quick start guide
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/welcome/quick-start-guide.tsx',
-      template: 'templates/quick-start-guide.tsx.tpl'
-    ,
+      template: 'templates/quick-start-guide.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE, 
         priority: 2
-      }},
+      }
+    },
 
     // Create project analyzer utility
     {
@@ -348,74 +348,11 @@ export class ProjectAnalyzer {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'README.md',
-      content: `# {{project.name,
+      template: 'templates/README.md.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2
-      }}}
-
-{{project.description}}
-
-## 🚀 Quick Start
-
-\`\`\`bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Open http://localhost:3000
-\`\`\`
-
-## 🛠️ Technology Stack
-
-This project was generated with The Architech and includes:
-
-{{#each modules}}
-- **{{name}}**: {{description}}
-{{/each}}
-
-## 📁 Project Structure
-
-\`\`\`
-src/
-├── app/                 # Next.js App Router pages
-├── components/          # React components
-│   ├── ui/             # Shadcn/UI components
-│   └── welcome/        # Welcome page components
-├── lib/                # Utility functions
-└── styles/             # Additional styles
-\`\`\`
-
-## 🎨 Features
-
-- ⚡ **Next.js 15+** with App Router
-- 🎨 **Tailwind CSS** for styling
-- 🧩 **Shadcn/UI** components
-- 🔐 **Authentication** ready
-- 🗄️ **Database** integration
-- 📱 **Responsive** design
-- 🚀 **Production** ready
-
-## 📚 Learn More
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS](https://tailwindcss.com/docs)
-- [Shadcn/UI](https://ui.shadcn.com)
-- [The Architech](https://architech.xyz)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (\`git checkout -b feature/amazing-feature\`)
-3. Commit your changes (\`git commit -m 'Add some amazing feature'\`)
-4. Push to the branch (\`git push origin feature/amazing-feature\`)
-5. Open a Pull Request
-
----
-
-Generated with ❤️ by [The Architech](https://architech.xyz)`
+      }
     }
   ]
 };

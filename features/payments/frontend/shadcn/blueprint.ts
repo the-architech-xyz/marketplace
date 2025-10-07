@@ -34,11 +34,7 @@ export const paymentsShadcnBlueprint: Blueprint = {
       path: 'src/components/payments/PaymentForm.tsx',
       content: `'use client';
 
-import { useState ,
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }} from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -205,11 +201,7 @@ export function PaymentForm() {
       path: 'src/components/payments/SubscriptionManager.tsx',
       content: `'use client';
 
-import { useState ,
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }} from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -471,11 +463,7 @@ export function SubscriptionManager() {
       path: 'src/components/payments/CustomerManager.tsx',
       content: `'use client';
 
-import { useState ,
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }} from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -787,11 +775,7 @@ export function CustomerManager() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/payments/page.tsx',
-      content: `import { PaymentForm ,
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }} from '@/components/payments/PaymentForm';
+      content: `import { PaymentForm } from '@/components/payments/PaymentForm';
 import { SubscriptionManager } from '@/components/payments/SubscriptionManager';
 import { CustomerManager } from '@/components/payments/CustomerManager';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
