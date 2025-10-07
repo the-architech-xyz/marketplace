@@ -34,7 +34,11 @@ export const web3ShadcnBlueprint: Blueprint = {
       path: 'src/components/web3/WalletConnection.tsx',
       content: `'use client';
 
-import { useState } from 'react';
+import { useState ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'react';
 import { useWallet, useConnectWallet, useDisconnectWallet, useBalance } from '@/lib/web3/hooks';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -229,7 +233,11 @@ export function WalletConnection() {
       path: 'src/components/web3/TransactionForm.tsx',
       content: `'use client';
 
-import { useState } from 'react';
+import { useState ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -387,7 +395,11 @@ export function TransactionForm() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/web3/page.tsx',
-      content: `import { WalletConnection } from '@/components/web3/WalletConnection';
+      content: `import { WalletConnection ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/components/web3/WalletConnection';
 import { TransactionForm } from '@/components/web3/TransactionForm';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 

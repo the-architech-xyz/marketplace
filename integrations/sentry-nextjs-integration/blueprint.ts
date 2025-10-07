@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 const sentryNextjsIntegrationBlueprint: Blueprint = {
   id: 'sentry-nextjs-integration',
@@ -18,33 +18,57 @@ const sentryNextjsIntegrationBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-error-tracking.ts',
       template: 'templates/use-error-tracking.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-performance-monitoring.ts',
       template: 'templates/use-performance-monitoring.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-user-feedback.ts',
       template: 'templates/use-user-feedback.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-sentry.ts',
       template: 'templates/use-sentry.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create Sentry API service layer
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/sentry/api.ts',
       template: 'templates/sentry-api.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/sentry/types.ts',
       template: 'templates/sentry-types.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     
     // Add Next.js specific environment variables
     {
@@ -221,7 +245,7 @@ export const startNextjsSpan = (name: string, op: string) => {
 
       path: 'src/app/layout.tsx',
       condition: '{{#if integration.features.errorTracking}}',
-      modifier: 'jsx-children-wrapper',
+      modifier: ModifierType.JSX_CHILDREN_WRAPPER,
       params: {
         providers: [
           {

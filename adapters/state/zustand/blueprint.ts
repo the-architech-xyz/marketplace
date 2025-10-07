@@ -5,7 +5,7 @@
  * Provides powerful, performant, and minimal boilerplate state management
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const zustandBlueprint: Blueprint = {
   id: 'zustand-golden-core-setup',
@@ -33,60 +33,100 @@ export const zustandBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/stores/create-store.ts',
       template: 'templates/create-store.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/stores/store-types.ts',
       template: 'templates/store-types.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }},
     // Create app store
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/stores/use-app-store.ts',
       template: 'templates/use-app-store.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     // Create feature stores
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/stores/use-ui-store.ts',
       template: 'templates/use-ui-store.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/stores/use-auth-store.ts',
       template: 'templates/use-auth-store.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     // Create persistence utilities
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/stores/persistence.ts',
       template: 'templates/persistence.ts.tpl',
-      condition: '{{#if module.parameters.persistence}}'
-    },
+      condition: '{{#if module.parameters.persistence}}',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }},
+
     // Create middleware utilities
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/stores/middleware.ts',
       template: 'templates/middleware.ts.tpl',
-      condition: '{{#if module.parameters.middleware}}'
-    },
+      condition: '{{#if module.parameters.middleware}}',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }},
+
     // Create store hooks
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-store.ts',
       template: 'templates/use-store.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }},
     // Create store provider
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/providers/StoreProvider.tsx',
       template: 'templates/StoreProvider.tsx.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     // Create store index
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/stores/index.ts',
       template: 'templates/index.ts.tpl'
-    }
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }}
   ]
 };

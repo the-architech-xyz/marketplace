@@ -32,7 +32,11 @@ export const emailingShadcnBlueprint: Blueprint = {
       path: 'src/components/emailing/EmailComposer.tsx',
       content: `'use client';
 
-import { useState } from 'react';
+import { useState ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -221,7 +225,11 @@ export function EmailComposer() {
       path: 'src/components/emailing/EmailList.tsx',
       content: `'use client';
 
-import { useEmails } from '@/lib/emailing/hooks';
+import { useEmails ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/lib/emailing/hooks';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -353,7 +361,11 @@ export function EmailList() {
       path: 'src/components/emailing/TemplateManager.tsx',
       content: `'use client';
 
-import { useState } from 'react';
+import { useState ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -608,7 +620,11 @@ export function TemplateManager() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/emailing/page.tsx',
-      content: `import { EmailComposer } from '@/components/emailing/EmailComposer';
+      content: `import { EmailComposer ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/components/emailing/EmailComposer';
 import { EmailList } from '@/components/emailing/EmailList';
 import { TemplateManager } from '@/components/emailing/TemplateManager';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';

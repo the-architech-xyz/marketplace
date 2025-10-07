@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const blueprint: Blueprint = {
   id: 'stripe-nextjs-integration',
@@ -11,43 +11,75 @@ export const blueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-stripe.ts',
       template: 'templates/use-stripe.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-create-payment.ts',
       template: 'templates/use-create-payment.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-payment-methods.ts',
       template: 'templates/use-payment-methods.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-subscriptions.ts',
       template: 'templates/use-subscriptions.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-invoices.ts',
       template: 'templates/use-invoices.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-customers.ts',
       template: 'templates/use-customers.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create Stripe API service layer
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/stripe/api.ts',
       template: 'templates/stripe-api.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/stripe/types.ts',
       template: 'templates/stripe-types.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,   
+        priority: 1
+      }},
     // PURE MODIFIER: Enhance the Stripe config with Next.js specific features
     {
       type: BlueprintActionType.ENHANCE_FILE,
@@ -171,27 +203,43 @@ export const createPortalSession = async (customerId: string) => {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/stripe/webhooks/route.ts',
       template: 'templates/webhooks-route.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     
     // Create Next.js API route for payment intents
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/stripe/create-payment-intent/route.ts',
       template: 'templates/create-payment-intent-route.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     
     // Create Next.js API route for subscriptions
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/stripe/create-subscription/route.ts',
       template: 'templates/create-subscription-route.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     
     // Create Next.js API route for customer portal
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/stripe/create-portal-session/route.ts',
       template: 'templates/create-portal-session-route.ts.tpl'
-    }
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }}
   ]
 };

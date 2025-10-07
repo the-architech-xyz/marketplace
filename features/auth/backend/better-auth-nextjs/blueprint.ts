@@ -34,7 +34,11 @@ export const authBetterAuthNextjsBlueprint: Blueprint = {
  * using Better Auth. It implements all the operations defined in the contract.
  */
 
-import { betterAuth } from 'better-auth';
+import { betterAuth ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'better-auth';
 import { 
   User, 
   Session, 
@@ -505,7 +509,11 @@ export const authService = new AuthService();`
  * This route handles all authentication operations using Better Auth
  */
 
-import { auth } from '@/lib/auth/service';
+import { auth ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/lib/auth/service';
 import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -524,7 +532,11 @@ export async function POST(request: NextRequest) {
  * Sign In API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { authService } from '@/lib/auth/service';
 import { SignInCredentials } from '@/lib/auth/contract';
 
@@ -551,7 +563,11 @@ export async function POST(request: NextRequest) {
  * Sign Up API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { authService } from '@/lib/auth/service';
 import { SignUpCredentials } from '@/lib/auth/contract';
 
@@ -578,7 +594,11 @@ export async function POST(request: NextRequest) {
  * Sign Out API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { authService } from '@/lib/auth/service';
 
 export async function POST(request: NextRequest) {
@@ -607,7 +627,11 @@ export async function POST(request: NextRequest) {
  * defined in the parent feature's contract.ts.
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@tanstack/react-query';
 import { 
   User, 
   Session, 

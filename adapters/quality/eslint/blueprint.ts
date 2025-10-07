@@ -4,7 +4,7 @@
  * Golden Core code linting with ESLint for JavaScript and TypeScript
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const eslintBlueprint: Blueprint = {
   id: 'eslint-golden-core-setup',
@@ -65,19 +65,30 @@ export const eslintBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: '.eslintrc.js',
       template: 'templates/.eslintrc.js.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '.eslintignore',
       template: 'templates/.eslintignore.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     // Create TypeScript ESLint configuration
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'eslint.config.ts',
       template: 'templates/eslint.config.ts.tpl',
-      condition: '{{#if module.parameters.typescript}}'
-    },
+      condition: '{{#if module.parameters.typescript}}',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.MERGE,
+        priority: 0
+      }},
     // Create ESLint scripts
     {
       type: BlueprintActionType.ADD_SCRIPT,
@@ -126,18 +137,30 @@ export const eslintBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'eslint-rules.js',
       template: 'templates/eslint-rules.js.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     // Create ESLint utilities
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/lint-staged.js',
       template: 'templates/lint-staged.js.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/eslint-fix.js',
       template: 'templates/eslint-fix.js.tpl'
-    }
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }}
   ]
 };
 

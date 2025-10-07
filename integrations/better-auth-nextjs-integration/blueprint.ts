@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const blueprint: Blueprint = {
   id: 'better-auth-nextjs-integration',
@@ -27,51 +27,87 @@ export const blueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-auth.ts',
       template: 'templates/use-auth.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE, 
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-sign-in.ts',
       template: 'templates/use-sign-in.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-sign-out.ts',
       template: 'templates/use-sign-out.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-sign-up.ts',
       template: 'templates/use-sign-up.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-user.ts',
       template: 'templates/use-user.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-session.ts',
       template: 'templates/use-session.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     
     // Create auth API service layer
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/api.ts',
       template: 'templates/auth-api.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/types.ts',
       template: 'templates/auth-types.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     
     // Create auth context and provider
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/providers/AuthProvider.tsx',
       template: 'templates/AuthProvider.tsx.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     
     // PURE MODIFIER: Enhance the auth config with Next.js specific features
     {
@@ -132,6 +168,10 @@ export function authMiddleware(request: NextRequest) {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/auth/[...all]/route.ts',
       condition: '{{#if integration.features.apiRoutes}}',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      },
       template: 'templates/auth-route.ts.tpl'
     },
     
@@ -140,6 +180,10 @@ export function authMiddleware(request: NextRequest) {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/middleware.ts',
       condition: '{{#if integration.features.middleware}}',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      },
       template: 'templates/middleware.ts.tpl'
     },
 
@@ -148,7 +192,11 @@ export function authMiddleware(request: NextRequest) {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/auth/session-management.ts',
       template: 'templates/session-management.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     
     // Create Next.js auth components
 

@@ -57,7 +57,9 @@
   "scripts": {
     "validate": "tsx scripts/validate-blueprints.ts",
     "validate:templates": "tsx scripts/validate-templates.ts",
-    "validate:all": "npm run validate && npm run validate:templates",
+    "validate:conflicts": "tsx scripts/validate-conflict-resolution.ts",
+    "validate:all": "npm run validate && npm run validate:templates && npm run validate:conflicts",
+    "fix:conflicts": "tsx scripts/fix-conflict-resolution.ts",
     "types:generate": "tsx scripts/generate-types-cli.ts",
     "compile": "tsc",
     "build": "npm run validate:all && npm run types:generate && npm run compile",

@@ -32,7 +32,11 @@ export const authShadcnBlueprint: Blueprint = {
       path: 'src/components/auth/LoginForm.tsx',
       content: `'use client';
 
-import { useState } from 'react';
+import { useState ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -244,7 +248,11 @@ export function LoginForm() {
       path: 'src/components/auth/SignupForm.tsx',
       content: `'use client';
 
-import { useState } from 'react';
+import { useState ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -519,7 +527,11 @@ export function SignupForm() {
       path: 'src/components/auth/ProfileManager.tsx',
       content: `'use client';
 
-import { useState } from 'react';
+import { useState ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -824,7 +836,11 @@ export function ProfileManager() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/auth/login/page.tsx',
-      content: `import { LoginForm } from '@/components/auth/LoginForm';
+      content: `import { LoginForm ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/components/auth/LoginForm';
 
 export default function LoginPage() {
   return (
@@ -838,7 +854,11 @@ export default function LoginPage() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/auth/signup/page.tsx',
-      content: `import { SignupForm } from '@/components/auth/SignupForm';
+      content: `import { SignupForm ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/components/auth/SignupForm';
 
 export default function SignupPage() {
   return (
@@ -852,7 +872,11 @@ export default function SignupPage() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/auth/profile/page.tsx',
-      content: `import { ProfileManager } from '@/components/auth/ProfileManager';
+      content: `import { ProfileManager ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/components/auth/ProfileManager';
 
 export default function ProfilePage() {
   return (

@@ -4,7 +4,7 @@
  * Sets up Vitest testing framework with coverage
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const vitestBlueprint: Blueprint = {
   id: 'vitest-base-setup',
@@ -19,22 +19,38 @@ export const vitestBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'vitest.config.ts',
       template: 'templates/vitest.config.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'tests/setup/setup.ts',
       template: 'templates/setup.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'tests/setup/utils.tsx',
       template: 'templates/utils.tsx.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'tests/unit/example.test.tsx',
       template: 'templates/example.test.tsx.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.ADD_SCRIPT,
 

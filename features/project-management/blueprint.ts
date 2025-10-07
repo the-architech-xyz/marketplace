@@ -46,7 +46,11 @@ export interface Project {
   ownerId: string;
   teamId?: string;
   settings: ProjectSettings;
-}
+,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }}
 
 export interface ProjectSettings {
   allowGuestAccess: boolean;
@@ -173,7 +177,11 @@ export interface UpdateTaskData {
  * Project Management Hooks
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@tanstack/react-query';
 import { useAuth } from '@/lib/auth/use-auth';
 
 // Project queries
@@ -383,7 +391,11 @@ export function useDeleteTask() {
       path: 'src/components/projects/KanbanBoard.tsx',
       content: `'use client';
 
-import { useState } from 'react';
+import { useState ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'react';
 import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useProjectTasks } from '@/lib/projects/hooks';
@@ -509,7 +521,11 @@ export function KanbanBoard({ projectId }: KanbanBoardProps) {
       path: 'src/components/projects/TaskCard.tsx',
       content: `'use client';
 
-import { useSortable } from '@dnd-kit/sortable';
+import { useSortable ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -625,7 +641,11 @@ export function TaskCard({ task }: TaskCardProps) {
       content: `'use client';
 
 import React from 'react';
-import { DndContext, DragEndEvent, DragOverEvent, DragStartEvent, DragOverlay } from '@dnd-kit/core';
+import { DndContext, DragEndEvent, DragOverEvent, DragStartEvent, DragOverlay ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -869,7 +889,11 @@ export function KanbanBoard({
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/projects/page.tsx',
-      content: `import { ProjectsList } from '@/components/projects/ProjectsList';
+      content: `import { ProjectsList ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/components/projects/ProjectsList';
 
 export default function ProjectsPage() {
   return (
@@ -884,7 +908,11 @@ export default function ProjectsPage() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/projects/[id]/kanban/page.tsx',
-      content: `import { KanbanBoard } from '@/components/projects/KanbanBoard';
+      content: `import { KanbanBoard ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/components/projects/KanbanBoard';
 
 interface ProjectKanbanPageProps {
   params: {

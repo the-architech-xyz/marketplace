@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 const tanstackQueryNextjsIntegrationBlueprint: Blueprint = {
   id: 'tanstack-query-nextjs-integration',
@@ -12,7 +12,7 @@ const tanstackQueryNextjsIntegrationBlueprint: Blueprint = {
       path: 'src/lib/query-client.ts',
       template: 'templates/query-client.ts.tpl',
       conflictResolution: {
-        strategy: 'replace',
+        strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
     },
@@ -22,7 +22,7 @@ const tanstackQueryNextjsIntegrationBlueprint: Blueprint = {
       path: 'src/components/providers/QueryProvider.tsx',
       template: 'templates/QueryProvider.tsx.tpl',
       conflictResolution: {
-        strategy: 'replace',
+        strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
     },
@@ -31,20 +31,28 @@ const tanstackQueryNextjsIntegrationBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/query-ssr.ts',
       template: 'templates/query-ssr.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create hydration utilities
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/query-hydration.ts',
       template: 'templates/query-hydration.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create error boundary
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/QueryErrorBoundary.tsx',
       template: 'templates/QueryErrorBoundary.tsx.tpl',
       conflictResolution: {
-        strategy: 'replace',
+        strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
     },
@@ -54,7 +62,7 @@ const tanstackQueryNextjsIntegrationBlueprint: Blueprint = {
       path: 'src/lib/query-keys.ts',
       template: 'templates/query-keys.ts.tpl',
       conflictResolution: {
-        strategy: 'replace',
+        strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
     },
@@ -63,7 +71,11 @@ const tanstackQueryNextjsIntegrationBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/query-prefetch.ts',
       template: 'templates/query-prefetch.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Update root layout with QueryProvider
     {
       type: BlueprintActionType.ENHANCE_FILE,
@@ -102,13 +114,21 @@ export default function RootLayout({
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/devtools/ReactQueryDevtools.tsx',
       template: 'templates/ReactQueryDevtools.tsx.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create query prefetching utilities
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/query-prefetching.ts',
       template: 'templates/query-prefetching.ts.tpl'
-    }
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }}
   ]
 };
 

@@ -24,6 +24,7 @@ interface ValidationError {
   actionType: string;
   error: string;
   details: string;
+  suggestion?: string;
 }
 
 interface ValidationResult {
@@ -42,6 +43,10 @@ interface ParsedAction {
   template?: string;
   modifier?: string;
   path?: string;
+  conflictResolution?: {
+    strategy: string;
+    priority?: number;
+  };
 }
 
 interface ParsedBlueprint {
@@ -203,6 +208,19 @@ class BlueprintValidator {
         action.path = pathMatch[1];
       }
       
+      // Extract conflict resolution
+      const conflictMatch = actionString.match(/conflictResolution:\s*\{[\s\S]*?\}/);
+      if (conflictMatch) {
+        const conflictString = conflictMatch[0];
+        const strategyMatch = conflictString.match(/strategy:\s*ConflictResolutionStrategy\.(\w+)/);
+        const priorityMatch = conflictString.match(/priority:\s*(\d+)/);
+        
+        action.conflictResolution = {
+          strategy: strategyMatch?.[1] || 'unknown',
+          priority: priorityMatch ? parseInt(priorityMatch[1]) : undefined
+        };
+      }
+      
       actions.push(action);
     }
     
@@ -232,10 +250,103 @@ class BlueprintValidator {
       this.validateTemplateExistence(blueprintPath, blueprintId, action, actionIndex);
     }
     
+    // Validate CREATE_FILE actions for conflict resolution
+    if (action.type === 'CREATE_FILE') {
+      this.validateConflictResolution(blueprintPath, blueprintId, action, actionIndex);
+    }
+    
     // Validate ENHANCE_FILE actions with modifiers
     if (action.type === 'ENHANCE_FILE' && action.modifier) {
       this.validateModifierExistence(blueprintPath, blueprintId, action, actionIndex);
     }
+  }
+
+  /**
+   * Validate conflict resolution for CREATE_FILE actions
+   */
+  private validateConflictResolution(
+    blueprintPath: string,
+    blueprintId: string,
+    action: ParsedAction,
+    actionIndex: number
+  ): void {
+    // Skip if no path (invalid action)
+    if (!action.path) {
+      return;
+    }
+    
+    // Check if conflict resolution is missing
+    if (!action.conflictResolution) {
+      const suggestion = this.getSuggestedConflictResolution(blueprintPath, action.path, actionIndex);
+      
+      this.addError(
+        blueprintPath,
+        blueprintId,
+        actionIndex,
+        action.type,
+        'Missing conflict resolution strategy',
+        `CREATE_FILE action for '${action.path}' is missing conflictResolution property`,
+        suggestion
+      );
+    }
+  }
+
+  /**
+   * Determine the appropriate conflict resolution strategy based on module type and file path
+   */
+  private getSuggestedConflictResolution(
+    blueprintPath: string, 
+    filePath: string, 
+    actionIndex: number
+  ): string {
+    const isAdapter = blueprintPath.includes('/adapters/');
+    const isIntegration = blueprintPath.includes('/integrations/');
+    const isFeature = blueprintPath.includes('/features/');
+    
+    // Component files that should be replaceable by integrations
+    const componentFiles = [
+      'src/components/',
+      'src/lib/',
+      'src/hooks/',
+      'src/utils/',
+      'src/types/'
+    ];
+    
+    // Configuration files that should be merged or replaced
+    const configFiles = [
+      'package.json',
+      'tsconfig.json',
+      'next.config.',
+      'tailwind.config.',
+      'eslint.config.',
+      'drizzle.config.',
+      '.env'
+    ];
+    
+    const isComponentFile = componentFiles.some(pattern => filePath.includes(pattern));
+    const isConfigFile = configFiles.some(pattern => filePath.includes(pattern));
+    
+    if (isAdapter) {
+      if (isComponentFile) {
+        return 'SKIP (let integrations override)';
+      } else if (isConfigFile) {
+        return 'MERGE (combine configurations)';
+      } else {
+        return 'REPLACE (adapter provides base implementation)';
+      }
+    } else if (isIntegration) {
+      if (isComponentFile) {
+        return 'REPLACE (integration provides framework-specific version)';
+      } else if (isConfigFile) {
+        return 'MERGE (combine with existing configuration)';
+      } else {
+        return 'REPLACE (integration provides optimized version)';
+      }
+    } else if (isFeature) {
+      return 'REPLACE (feature provides complete implementation)';
+    }
+    
+    return 'REPLACE (default strategy)';
   }
 
   /**
@@ -299,7 +410,8 @@ class BlueprintValidator {
     actionIndex: number,
     actionType: string,
     error: string,
-    details: string
+    details: string,
+    suggestion?: string
   ): void {
     this.errors.push({
       blueprintPath,
@@ -307,7 +419,8 @@ class BlueprintValidator {
       actionIndex,
       actionType,
       error,
-      details
+      details,
+      suggestion
     });
   }
 
@@ -455,6 +568,9 @@ class BlueprintValidator {
           console.log(`  ❌ Action ${error.actionIndex} (${error.actionType}): ${error.error}`);
           if (error.details) {
             console.log(`     Details: ${error.details}`);
+          }
+          if (error.suggestion) {
+            console.log(`     💡 Suggestion: ${error.suggestion}`);
           }
         });
       }

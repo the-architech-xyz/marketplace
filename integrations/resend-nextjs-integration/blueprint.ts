@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 const resendNextjsIntegrationBlueprint: Blueprint = {
   id: 'resend-nextjs-integration',
@@ -11,81 +11,141 @@ const resendNextjsIntegrationBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-send-email.ts',
       template: 'templates/use-send-email.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-email-templates.ts',
       template: 'templates/use-email-templates.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-email-analytics.ts',
       template: 'templates/use-email-analytics.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-email-webhooks.ts',
       template: 'templates/use-email-webhooks.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create Email API service layer
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/api.ts',
       template: 'templates/email-api.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/types.ts',
       template: 'templates/email-types.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create Email API Routes
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/email/send/route.ts',
       template: 'templates/send-route.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/email/templates/route.ts',
       template: 'templates/templates-route.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/email/analytics/route.ts',
       template: 'templates/analytics-route.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/api/email/webhook/route.ts',
       template: 'templates/webhook-route.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create Email Utilities
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/resend.ts',
       template: 'templates/resend.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/templates.ts',
       template: 'templates/templates.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/analytics.ts',
       template: 'templates/analytics.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/email/validation.ts',
       template: 'templates/validation.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create Middleware
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/middleware.ts',
       template: 'templates/middleware.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Install Dependencies
     {
       type: BlueprintActionType.INSTALL_PACKAGES,

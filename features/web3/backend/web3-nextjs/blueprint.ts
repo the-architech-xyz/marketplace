@@ -36,7 +36,11 @@ export const web3NextjsBlueprint: Blueprint = {
  * using Web3 libraries. It implements all the operations defined in the contract.
  */
 
-import { Web3 } from 'web3';
+import { Web3 ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'web3';
 import { ethers } from 'ethers';
 import { 
   WalletConnection, 
@@ -314,7 +318,11 @@ export const web3Service = new Web3Service();`
  * Web3 Connect API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { web3Service } from '@/lib/web3/service';
 import { ConnectWalletData } from '@/lib/web3/contract';
 
@@ -341,7 +349,11 @@ export async function POST(request: NextRequest) {
  * Web3 Balance API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { web3Service } from '@/lib/web3/service';
 
 export async function GET(request: NextRequest) {
@@ -378,7 +390,11 @@ export async function GET(request: NextRequest) {
  * defined in the parent feature's contract.ts.
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@tanstack/react-query';
 import { 
   WalletConnection, 
   WalletBalance, 

@@ -33,7 +33,11 @@ export const emailingResendNextjsBlueprint: Blueprint = {
  * using Resend. It implements all the operations defined in the contract.
  */
 
-import { Resend } from 'resend';
+import { Resend ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'resend';
 import { Email, EmailTemplate, EmailList, EmailSubscriber, EmailAnalytics, SendEmailData, CreateTemplateData, UpdateTemplateData, CreateListData, UpdateListData, SubscribeData } from '../contract';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -244,7 +248,11 @@ export const emailingService = new EmailingService();`
  * Send Email API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { emailingService } from '@/lib/emailing/service';
 import { SendEmailData } from '@/lib/emailing/contract';
 
@@ -271,7 +279,11 @@ export async function POST(request: NextRequest) {
  * Emails API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { emailingService } from '@/lib/emailing/service';
 
 export async function GET(request: NextRequest) {
@@ -301,7 +313,11 @@ export async function GET(request: NextRequest) {
  * Templates API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { emailingService } from '@/lib/emailing/service';
 import { CreateTemplateData } from '@/lib/emailing/contract';
 
@@ -349,7 +365,11 @@ export async function POST(request: NextRequest) {
  * defined in the parent feature's contract.ts.
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@tanstack/react-query';
 import { 
   Email, 
   EmailTemplate, 

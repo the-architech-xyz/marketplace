@@ -4,7 +4,7 @@
  * Golden Core code formatting with Prettier for consistent code style
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const prettierBlueprint: Blueprint = {
   id: 'prettier-golden-core-setup',
@@ -41,17 +41,29 @@ export const prettierBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: '.prettierrc',
       template: 'templates/.prettierrc.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '.prettierrc.js',
       template: 'templates/.prettierrc.js.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '.prettierignore',
       template: 'templates/.prettierignore.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     // Create Prettier scripts
     {
       type: BlueprintActionType.ADD_SCRIPT,
@@ -76,18 +88,30 @@ export const prettierBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/format-all.js',
       template: 'templates/format-all.js.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'scripts/format-staged.js',
       template: 'templates/format-staged.js.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     // Create Prettier configuration for specific file types
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'prettier.config.js',
       template: 'templates/prettier.config.js.tpl'
-    }
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }}
   ]
 };
 

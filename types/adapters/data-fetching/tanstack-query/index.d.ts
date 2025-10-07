@@ -1,10 +1,20 @@
 /**
- * data-fetching/tanstack-query
+ * TanStack Query
  * 
- * Auto-generated adapter types
+ * Powerful data synchronization for React applications with caching, background updates, and optimistic updates
  */
 
-export interface DataFetchingTanstackQueryParams {}
+export interface DataFetchingTanstackQueryParams {
+
+  /** Enable TanStack Query DevTools */
+  devtools?: boolean;
+
+  /** Default query and mutation options */
+  defaultOptions?: Record<string, any>;
+
+  /** Enable Suspense mode for queries */
+  suspense?: boolean;
+}
 
 export interface DataFetchingTanstackQueryFeatures {}
 

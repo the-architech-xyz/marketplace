@@ -5,7 +5,7 @@
  * capabilities, technology stack, and provides quick start guidance.
  */
 
-import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const architechWelcomeBlueprint: Blueprint = {
   id: 'architech-welcome-setup',
@@ -29,42 +29,66 @@ export const architechWelcomeBlueprint: Blueprint = {
       path: 'src/app/page.tsx',
       template: 'templates/welcome-page.tsx.tpl',
       overwrite: true
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }},
 
     // Create welcome page layout
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/welcome/welcome-layout.tsx',
       template: 'templates/welcome-layout.tsx.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }},
 
     // Create technology stack visualizer
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/welcome/tech-stack-card.tsx',
       template: 'templates/tech-stack-card.tsx.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }},
 
     // Create component showcase
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/welcome/component-showcase.tsx',
       template: 'templates/component-showcase.tsx.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }},
 
     // Create project structure viewer
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/welcome/project-structure.tsx',
       template: 'templates/project-structure.tsx.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }},
 
     // Create quick start guide
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/welcome/quick-start-guide.tsx',
       template: 'templates/quick-start-guide.tsx.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE, 
+        priority: 2
+      }},
 
     // Create project analyzer utility
     {
@@ -84,7 +108,11 @@ export interface ProjectCapability {
   version?: string;
   icon?: string;
   color?: string;
-}
+,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }}
 
 export interface ProjectStructure {
   name: string;
@@ -246,7 +274,11 @@ export class ProjectAnalyzer {
 
 .welcome-gradient {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
+,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }}
 
 .tech-card {
   transition: all 0.3s ease;
@@ -316,7 +348,11 @@ export class ProjectAnalyzer {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'README.md',
-      content: `# {{project.name}}
+      content: `# {{project.name,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }}}
 
 {{project.description}}
 

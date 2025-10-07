@@ -42,7 +42,11 @@ export interface Team {
   updatedAt: Date;
   ownerId: string;
   settings: TeamSettings;
-}
+,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }}
 
 export interface TeamMember {
   id: string;
@@ -114,7 +118,11 @@ export interface TeamStats {
  * Teams Management Hooks
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@tanstack/react-query';
 import { useAuth } from '@/lib/auth/use-auth';
 
 // Team queries
@@ -250,7 +258,11 @@ export function useRemoveMember() {
  * Teams API Routes
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth/config';
 
@@ -307,7 +319,11 @@ export async function POST(request: NextRequest) {
       path: 'src/components/teams/TeamsList.tsx',
       content: `'use client';
 
-import { useTeams } from '@/lib/teams/hooks';
+import { useTeams ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/lib/teams/hooks';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -380,7 +396,11 @@ export function TeamsList() {
       path: 'src/components/teams/CreateTeamForm.tsx',
       content: `'use client';
 
-import { useState } from 'react';
+import { useState ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -528,7 +548,11 @@ export function CreateTeamForm() {
       content: `'use client';
 
 import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -725,7 +749,11 @@ export function TeamsDashboard({ userId, onTeamSelect }: TeamsDashboardProps) {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/teams/page.tsx',
-      content: `import { TeamsDashboard } from '@/components/teams/TeamsDashboard';
+      content: `import { TeamsDashboard ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/components/teams/TeamsDashboard';
 import { useAuth } from '@/lib/auth/hooks';
 
 export default function TeamsPage() {
@@ -743,7 +771,11 @@ export default function TeamsPage() {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/app/teams/new/page.tsx',
-      content: `import { CreateTeamForm } from '@/components/teams/CreateTeamForm';
+      content: `import { CreateTeamForm ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@/components/teams/CreateTeamForm';
 
 export default function CreateTeamPage() {
   return (

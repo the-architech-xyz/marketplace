@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 const zustandNextjsIntegrationBlueprint: Blueprint = {
   id: 'zustand-nextjs-integration',
@@ -11,43 +11,71 @@ const zustandNextjsIntegrationBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/store-config.ts',
       template: 'templates/store-config.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create SSR utilities
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/store-ssr.ts',
       template: 'templates/store-ssr.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create hydration utilities
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/store-hydration.ts',
       template: 'templates/store-hydration.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create store provider
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/providers/StoreProvider.tsx',
       template: 'templates/StoreProvider.tsx.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create store hooks
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/useStore.ts',
       template: 'templates/useStore.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create store utilities
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/store-utils.ts',
       template: 'templates/store-utils.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Create example store
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/stores/example-store.ts',
       template: 'templates/example-store.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }},
     // Update root layout with StoreProvider
     {
       type: BlueprintActionType.ENHANCE_FILE,

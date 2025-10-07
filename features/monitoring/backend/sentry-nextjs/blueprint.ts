@@ -45,7 +45,11 @@ Sentry.init({
     new Sentry.Replay({
       maskAllText: false,
       blockAllMedia: false,
-    }),
+    
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }}),
   ],
 });`
     },
@@ -63,7 +67,11 @@ Sentry.init({
   dsn: process.env.SENTRY_DSN,
   environment: process.env.NODE_ENV,
   tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
-});`
+
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }});`
     },
 
     {
@@ -79,7 +87,11 @@ Sentry.init({
   dsn: process.env.SENTRY_DSN,
   environment: process.env.NODE_ENV,
   tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
-});`
+
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }});`
     },
 
     // Create monitoring service
@@ -104,7 +116,11 @@ import {
   UserFeedbackData,
   ErrorFilter,
   PerformanceFilter
-} from '../contract';
+,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '../contract';
 
 export class MonitoringService {
   private sentry: typeof Sentry;
@@ -380,7 +396,11 @@ export const monitoringService = new MonitoringService();`
  * Monitoring Errors API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { monitoringService } from '@/lib/monitoring/service';
 import { ErrorFilter } from '@/lib/monitoring/contract';
 
@@ -415,7 +435,11 @@ export async function GET(request: NextRequest) {
  * Monitoring Performance API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { monitoringService } from '@/lib/monitoring/service';
 import { PerformanceFilter } from '@/lib/monitoring/contract';
 
@@ -453,7 +477,11 @@ export async function GET(request: NextRequest) {
  * defined in the parent feature's contract.ts.
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@tanstack/react-query';
 import { 
   ErrorData, 
   PerformanceMetrics, 

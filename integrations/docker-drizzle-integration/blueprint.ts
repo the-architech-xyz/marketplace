@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
 
 const dockerDrizzleIntegrationBlueprint: Blueprint = {
   id: 'docker-drizzle-integration',
@@ -11,7 +11,7 @@ const dockerDrizzleIntegrationBlueprint: Blueprint = {
       type: BlueprintActionType.ENHANCE_FILE,
 
       path: 'docker-compose.yml',
-      modifier: 'yaml-merger',
+      modifier: ModifierType.YAML_MERGER,
       params: {
         mergePath: 'templates/docker-compose.drizzle.yml.tpl'
       }
@@ -147,7 +147,7 @@ const dockerDrizzleIntegrationBlueprint: Blueprint = {
       type: BlueprintActionType.ENHANCE_FILE,
 
       path: 'package.json',
-      modifier: 'package-json-merger',
+      modifier: ModifierType.PACKAGE_JSON_MERGER,
       params: {
         scriptsToAdd: {
           'drizzle:setup': 'bash scripts/drizzle-setup.sh',

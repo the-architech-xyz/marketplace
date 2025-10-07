@@ -53,7 +53,11 @@ import {
   UpdateSubscriptionData,
   CreatePlanData,
   UpdatePlanData
-} from '../contract';
+,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '../contract';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2023-10-16',
@@ -653,7 +657,11 @@ export const paymentsService = new PaymentsService();`
  * Payment Intents API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { paymentsService } from '@/lib/payments/service';
 import { CreatePaymentIntentData } from '@/lib/payments/contract';
 
@@ -680,7 +688,11 @@ export async function POST(request: NextRequest) {
  * Checkout Sessions API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { paymentsService } from '@/lib/payments/service';
 import { CreateCheckoutSessionData } from '@/lib/payments/contract';
 
@@ -707,7 +719,11 @@ export async function POST(request: NextRequest) {
  * Customers API Route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from 'next/server';
 import { paymentsService } from '@/lib/payments/service';
 import { CreateCustomerData } from '@/lib/payments/contract';
 
@@ -756,7 +772,11 @@ export async function POST(request: NextRequest) {
  * defined in the parent feature's contract.ts.
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }} from '@tanstack/react-query';
 import { 
   Payment, 
   PaymentMethod, 

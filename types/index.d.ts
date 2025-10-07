@@ -5,7 +5,7 @@
  */
 
 // Import base types from the types package
-import { Module, ProjectConfig, ModuleArtifacts as ModuleArtifactsType } from '@thearchitech.xyz/types';
+import { Recipe, Module, ProjectConfig, ModuleArtifacts as ModuleArtifactsType } from '@thearchitech.xyz/types';
 
 export * from './adapters/ai/vercel-ai-sdk';
 export * from './adapters/auth/better-auth';
@@ -71,6 +71,15 @@ export declare const ModuleArtifacts: {
 
 export type ModuleId = keyof typeof ModuleArtifacts;
 
+// 🧬 Genome Type - Extended Recipe with marketplace-specific features
+export interface Genome extends Recipe {
+  version: string;
+  project: ProjectConfig & {
+    framework: string;
+    path?: string;
+  };
+  modules: Module[];
+}
 
 // Re-export base types for convenience
-export { Genome, Module, ProjectConfig } from '@thearchitech.xyz/types';
+export { Recipe, Module, ProjectConfig } from '@thearchitech.xyz/types';

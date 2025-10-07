@@ -5,7 +5,7 @@
  * Includes pluralization, rich text, dynamic imports, and more
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const nextIntlBlueprint: Blueprint = {
   id: 'next-intl-base-setup',
@@ -19,21 +19,37 @@ export const nextIntlBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/i18n/request.ts',
       template: 'request.ts.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/messages/en.json',
       template: 'templates/en.json.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/messages/es.json',
       template: 'templates/es.json.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/messages/fr.json',
       template: 'templates/fr.json.tpl'
-    }
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }}
   ]
 };

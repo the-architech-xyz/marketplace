@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy, ModifierType } from '@thearchitech.xyz/types';
 
 export const blueprint: Blueprint = {
   id: 'docker-nextjs-integration',
@@ -11,7 +11,7 @@ export const blueprint: Blueprint = {
       type: BlueprintActionType.ENHANCE_FILE,
 
       path: 'Dockerfile',
-      modifier: 'dockerfile-merger',
+      modifier: ModifierType.DOCKERFILE_MERGER,
       params: {
         mergePath: 'templates/nextjs-dockerfile.tpl'
       }
@@ -21,7 +21,7 @@ export const blueprint: Blueprint = {
       type: BlueprintActionType.ENHANCE_FILE,
 
       path: '.dockerignore',
-      modifier: 'dockerignore-merger',
+      modifier: ModifierType.DOCKERIGNORE_MERGER,
       params: {
         mergePath: 'templates/nextjs-dockerignore.tpl'
       }
@@ -31,6 +31,10 @@ export const blueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'docker-compose.nextjs.yml',
       template: 'templates/docker-compose.nextjs.yml.tpl'
-    }
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }}
   ]
 };

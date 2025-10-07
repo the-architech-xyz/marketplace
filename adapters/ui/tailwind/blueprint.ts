@@ -41,13 +41,21 @@ export const tailwindBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'tailwind.config.js',
       template: 'templates/tailwind.config.js.tpl',
-    },
+    
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.MERGE,
+        priority: 0
+      }},
     // Create PostCSS config
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'postcss.config.js',
       template: 'templates/postcss.config.js.tpl'
-    },
+    ,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }},
     // Create base CSS file
     {
       type: BlueprintActionType.CREATE_FILE,

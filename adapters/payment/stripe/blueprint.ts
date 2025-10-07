@@ -51,7 +51,6 @@ export const stripeBlueprint: Blueprint = {
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
-
       key: 'STRIPE_WEBHOOK_SECRET',
       value: 'whsec_...',
       description: 'Stripe webhook secret for webhook verification'
