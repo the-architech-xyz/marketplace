@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const errorTrackingBlueprint: Blueprint = {
   id: "sentry-error-tracking",

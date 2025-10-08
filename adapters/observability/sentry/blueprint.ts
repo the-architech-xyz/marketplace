@@ -5,7 +5,7 @@
  * Creates Sentry configuration, error boundaries, and monitoring utilities that work with any framework
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const sentryBlueprint: Blueprint = {
   id: 'sentry-observability-setup',
@@ -17,45 +17,40 @@ export const sentryBlueprint: Blueprint = {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/sentry/client.ts',
-      template: 'templates/client.ts.tpl'
-    ,
+      path: '{{paths.shared_library}}sentry/client.ts',
+      template: 'templates/client.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
       }},
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/sentry/server.ts',
-      template: 'templates/server.ts.tpl'
-    ,
+      path: '{{paths.shared_library}}sentry/server.ts',
+      template: 'templates/server.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
       }},
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/sentry/config.ts',
-      template: 'templates/config.ts.tpl'
-    ,
+      path: '{{paths.shared_library}}sentry/config.ts',
+      template: 'templates/config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
       }},
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/sentry/performance.ts',
-      template: 'templates/performance.ts.tpl'
-    ,
+      path: '{{paths.shared_library}}sentry/performance.ts',
+      template: 'templates/performance.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
       }},
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/sentry/analytics.ts',
-      template: 'templates/analytics.ts.tpl'
-    ,
+      path: '{{paths.shared_library}}sentry/analytics.ts',
+      template: 'templates/analytics.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0

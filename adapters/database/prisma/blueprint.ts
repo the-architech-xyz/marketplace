@@ -5,7 +5,7 @@
  * Advanced features are available as separate features
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const prismaBlueprint: Blueprint = {
   id: 'prisma-base-setup',
@@ -18,7 +18,7 @@ export const prismaBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.database_config}}/prisma.ts',
-      template: 'templates/prisma.ts.tpl'
+      template: 'templates/prisma.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,

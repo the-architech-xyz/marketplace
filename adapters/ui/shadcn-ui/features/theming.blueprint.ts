@@ -5,7 +5,7 @@
  * Configuration and integration is handled by integrators
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 export const themingBlueprint: Blueprint = {
   id: 'shadcn-ui-theming-installer',

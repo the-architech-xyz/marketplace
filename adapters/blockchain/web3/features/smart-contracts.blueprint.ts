@@ -4,7 +4,7 @@
  * Modern smart contract integration using viem with type-safe contract interactions
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const smartContractsBlueprint: Blueprint = {
   id: 'web3-smart-contracts',
@@ -30,7 +30,7 @@ const smartContractsBlueprint: Blueprint = {
   formatUnits,
   isAddress
 } from 'viem';
-import { Web3Error } from './core.js';
+import { Web3Error } from './core';
 
 // Type-safe contract ABIs
 export const ERC20_ABI = [
@@ -399,8 +399,8 @@ export const contractManager = new ContractManager();`
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/web3/useContracts.ts',
       content: `import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { contractManager } from '../../lib/web3/contracts.js';
-import { useWallet } from './useWallet.js';
+import.*';
+import { useWallet } from './useWallet';
 import type { Address } from 'viem';
 
 // ERC20 Hooks
@@ -605,7 +605,7 @@ export function useAddressValidation() {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/web3/ContractInteraction.tsx',
       content: `import React, { useState } from 'react';
-import { useWallet } from '../../hooks/web3/useWallet.js';
+import.*';
 import { 
   useERC20Balance, 
   useERC20Info, 
@@ -618,11 +618,11 @@ import {
   useERC1155Transfer,
   useAddressValidation
 } from '../../hooks/web3/useContracts.js';
-import { Button } from '../ui/button.js';
-import { Input } from '../ui/input.js';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card.js';
-import { Badge } from '../ui/badge.js';
-import { Alert, AlertDescription } from '../ui/alert.js';
+import.*';
+import.*';
+import.*';
+import.*';
+import.*';
 import type { Address } from 'viem';
 
 interface ContractInteractionProps {

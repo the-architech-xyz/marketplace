@@ -5,7 +5,7 @@
  * Advanced features are available as separate features
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 export const typeormBlueprint: Blueprint = {
   id: 'typeorm-base-setup',
@@ -18,12 +18,12 @@ export const typeormBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.database_config}}/typeorm.ts',
-      template: 'templates/typeorm.ts.tpl'
+      template: 'templates/typeorm.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.database_config}}/entities/User.ts',
-      template: 'templates/User.ts.tpl'
+      template: 'templates/User.ts.tpl',
     }
   ]
 };

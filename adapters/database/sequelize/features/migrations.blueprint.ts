@@ -4,7 +4,7 @@
  * Automated database schema migrations and versioning
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const migrationsBlueprint: Blueprint = {
   id: 'sequelize-migrations',
@@ -17,7 +17,7 @@ const migrationsBlueprint: Blueprint = {
 import { execSync } from 'child_process';
 import { promises as fs } from 'fs';
 import path from 'path';
-import sequelize from '../config.js';
+import.*';
 
 export class MigrationManager {
   private sequelize: Sequelize;
@@ -207,7 +207,7 @@ export const migrationManager = new MigrationManager();`
       path: 'src/scripts/migrate.ts',
       content: `#!/usr/bin/env node
 
-import { migrationManager } from '../lib/database/migrations.js';
+import.*';
 
 async function main() {
   const command = process.argv[2];

@@ -1,4 +1,4 @@
-import { Genome } from "@thearchitech.xyz/types";
+import { Genome } from "@thearchitech.xyz/marketplace/types";
 /**
  * SaaS Application Template
  *
@@ -163,8 +163,25 @@ const saasAppGenome: Genome = {
     // =============================================================================
     // COHESIVE BUSINESS MODULES - Complete SaaS functionality
     // =============================================================================
+    
+    // === AUTHENTICATION BACKEND ===
     {
-      id: "features/auth-ui",
+      id: "features/auth/backend/better-auth-nextjs",
+      parameters: {
+        providers: ["email", "google", "github"],
+        features: {
+          "email-verification": true,
+          "password-reset": true,
+          "multi-factor": true,
+          "session-management": true,
+          "admin-panel": true
+        }
+      }
+    },
+    
+    // === AUTHENTICATION FRONTEND ===
+    {
+      id: "features/auth/frontend/shadcn",
       parameters: {
         theme: "default",
         features: {
@@ -175,19 +192,13 @@ const saasAppGenome: Genome = {
           userSettings: true,
           sessionManagement: true
         }
-      },
-      features: {
-        'oauth-google': true,
-        'oauth-github': true,
-        'mfa': true,
-        'social-login': false
       }
     },
     
+    // === TEAMS MANAGEMENT BACKEND ===
     {
-      id: "features/teams-management",
+      id: "features/teams-management/backend/better-auth-nextjs",
       parameters: {
-        theme: "default",
         features: {
           teamCreation: true,
           memberManagement: true,
@@ -195,16 +206,41 @@ const saasAppGenome: Genome = {
           teamDashboard: true,
           teamInvitations: true
         }
-      },
-      features: {
-        'team-billing': true,
-        'advanced-permissions': true,
-        'team-analytics': true
       }
     },
     
+    // === TEAMS MANAGEMENT FRONTEND ===
     {
-      id: "features/billing-system",
+      id: "features/teams-management/frontend/shadcn",
+      parameters: {
+        theme: "default",
+        features: {
+          'team-billing': true,
+          'advanced-permissions': true,
+          'team-analytics': true
+        }
+      }
+    },
+    
+    // === PAYMENTS BACKEND ===
+    {
+      id: "features/payments/backend/stripe-nextjs",
+      parameters: {
+        currency: "usd",
+        mode: "test",
+        webhooks: true,
+        features: {
+          subscriptions: true,
+          "one-time-payments": true,
+          marketplace: true,
+          invoicing: true
+        }
+      }
+    },
+    
+    // === PAYMENTS FRONTEND ===
+    {
+      id: "features/payments/frontend/shadcn",
       parameters: {
         theme: "default",
         features: {
@@ -215,18 +251,13 @@ const saasAppGenome: Genome = {
           paymentMethods: true,
           basicAnalytics: true
         }
-      },
-      features: {
-        'advanced-billing': true,
-        'tax-management': true,
-        'refund-management': true
       }
     },
     
+    // === EMAILING BACKEND ===
     {
-      id: "features/email-system",
+      id: "features/emailing/backend/resend-nextjs",
       parameters: {
-        theme: "default",
         features: {
           emailComposition: true,
           emailTemplates: true,
@@ -234,16 +265,24 @@ const saasAppGenome: Genome = {
           emailList: true,
           basicAnalytics: true
         }
-      },
-      features: {
-        'advanced-analytics': true,
-        'email-campaigns': true,
-        'email-automation': true
+      }
+    },
+    
+    // === EMAILING FRONTEND ===
+    {
+      id: "features/emailing/frontend/shadcn",
+      parameters: {
+        theme: "default",
+        features: {
+          'advanced-analytics': true,
+          'email-campaigns': true,
+          'email-automation': true
+        }
       }
     },
     
     {
-      id: "features/project-management",
+      id: "features/project-management/shadcn",
       parameters: {
         theme: "default",
         features: {
@@ -254,16 +293,11 @@ const saasAppGenome: Genome = {
           teamCollaboration: true,
           basicAnalytics: true
         }
-      },
-      features: {
-        'time-tracking': true,
-        'gantt-view': true,
-        'project-reporting': true
       }
     },
     
     {
-      id: "features/architech-welcome",
+      id: "features/architech-welcome/shadcn",
       parameters: {
         showTechStack: true,
         showComponents: true,

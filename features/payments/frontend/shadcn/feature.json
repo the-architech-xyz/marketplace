@@ -1,0 +1,40 @@
+{
+  "id": "payments/frontend/shadcn",
+  "name": "Payments Frontend (Shadcn)",
+  "description": "Payment processing UI using Shadcn components",
+  "type": "feature",
+  "version": "1.0.0",
+  "prerequisites": {
+    "adapters": ["ui/shadcn-ui"],
+    "backend": ["payments/backend/stripe-nextjs"]
+  },
+  "provides": ["payments-ui"],
+  "parameters": {
+    "features": {
+      "type": "object",
+      "default": {
+        "paymentForm": true,
+        "checkout": true,
+        "subscriptions": true,
+        "invoices": true,
+        "transactions": true,
+        "analytics": true,
+        "refunds": false,
+        "paymentMethods": true
+      },
+      "description": "Payment UI features to enable",
+      "required": false
+    },
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false,
+      "options": ["default", "dark", "light", "minimal"]
+    }
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

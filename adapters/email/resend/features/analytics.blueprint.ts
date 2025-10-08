@@ -4,7 +4,7 @@
  * Adds detailed email tracking, open rates, and click analytics
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const analyticsBlueprint: Blueprint = {
   id: 'resend-analytics',

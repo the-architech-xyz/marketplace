@@ -4,7 +4,7 @@
  * CLI script for generating types with artifact discovery
  */
 
-import { SmartTypeGenerator } from './generate-types.js';
+import { SmartTypeGenerator } from './generate-types';
 import * as path from 'path';
 import * as process from 'process';
 

@@ -4,7 +4,7 @@
  * Golden Core code linting with ESLint for JavaScript and TypeScript
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const eslintBlueprint: Blueprint = {
   id: 'eslint-golden-core-setup',
@@ -64,8 +64,7 @@ export const eslintBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '.eslintrc.js',
-      template: 'templates/.eslintrc.js.tpl'
-    ,
+      template: 'templates/.eslintrc.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -73,8 +72,7 @@ export const eslintBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '.eslintignore',
-      template: 'templates/.eslintignore.tpl'
-    ,
+      template: 'templates/.eslintignore.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -95,8 +93,7 @@ export const eslintBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'eslint-rules.js',
-      template: 'templates/eslint-rules.js.tpl'
-    ,
+      template: 'templates/eslint-rules.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -104,18 +101,16 @@ export const eslintBlueprint: Blueprint = {
     // Create ESLint utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'scripts/lint-staged.js',
-      template: 'templates/lint-staged.js.tpl'
-    ,
+      path: '{{paths.scripts}}lint-staged.js',
+      template: 'templates/lint-staged.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
       }},
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'scripts/eslint-fix.js',
-      template: 'templates/eslint-fix.js.tpl'
-    ,
+      path: '{{paths.scripts}}eslint-fix.js',
+      template: 'templates/eslint-fix.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0

@@ -5,7 +5,7 @@
  * Includes bundle analysis, image optimization, and performance monitoring
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 export const nextjsPerformanceBlueprint: Blueprint = {
   id: 'nextjs-performance-setup',
@@ -305,7 +305,7 @@ export const bundleUtils = {
       content: `'use client';
 
 import React, { useEffect, useState } from 'react';
-import { PerformanceMonitor, initWebVitals } from '../../lib/performance.js';
+import.*';
 
 interface PerformanceMetrics {
   [key: string]: number;

@@ -5,7 +5,7 @@
  * Framework-agnostic CSS utilities that work with any project
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const tailwindBlueprint: Blueprint = {
   id: 'tailwind-setup',
@@ -50,8 +50,8 @@ export const tailwindBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'postcss.config.js',
-      template: 'templates/postcss.config.js.tpl'
-    ,
+      template: 'templates/postcss.config.js.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -59,7 +59,7 @@ export const tailwindBlueprint: Blueprint = {
     // Create base CSS file
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/app/globals.css',
+      path: '{{paths.app_root}}globals.css',
       template: 'templates/globals.css.tpl',
       conflictResolution: { strategy: ConflictResolutionStrategy.REPLACE },
     }

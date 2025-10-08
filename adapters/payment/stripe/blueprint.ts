@@ -5,7 +5,7 @@
  * Creates payment components, API routes, and webhook handling
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 export const stripeBlueprint: Blueprint = {
   id: 'stripe-payment-setup',
@@ -29,12 +29,12 @@ export const stripeBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.payment_config}}/stripe.ts',
-      template: 'templates/stripe.ts.tpl'
+      template: 'templates/stripe.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.payment_config}}/client.ts',
-      template: 'templates/client.ts.tpl'
+      template: 'templates/client.ts.tpl',
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
@@ -93,17 +93,17 @@ export const stripeBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.payment_config}}/webhook-verification.ts',
-      template: 'templates/webhook-verification.ts.tpl'
+      template: 'templates/webhook-verification.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.api_routes}}/payment/webhook/route.ts',
-      template: 'templates/webhook-route.ts.tpl'
+      template: 'templates/webhook-route.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.payment_config}}/INTEGRATION_GUIDE.md',
-      template: 'templates/INTEGRATION_GUIDE.md.tpl'
+      template: 'templates/INTEGRATION_GUIDE.md.tpl',
     }
   ]
 };

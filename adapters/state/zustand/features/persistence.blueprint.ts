@@ -4,7 +4,7 @@
  * Persist state to localStorage, sessionStorage, or custom storage
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const persistenceBlueprint: Blueprint = {
   id: 'zustand-persistence',
@@ -290,7 +290,7 @@ export function createStorage(type: string, options?: any): StateStorage {
       path: 'src/lib/stores/use-persisted-store.ts',
       content: `import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { createStorage } from '../storage/custom-storage.js';
+import.*';
 
 interface PersistedState {
   data: any;
@@ -378,7 +378,7 @@ export const useOfflineStore = createPersistedStore(
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/use-persistence.ts',
       content: `import { useEffect, useState } from 'react';
-import { useAppStore } from '../stores/use-app-store.js';
+import.*';
 
 export function usePersistence() {
   const [isHydrated, setIsHydrated] = useState(false);

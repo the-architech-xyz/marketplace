@@ -4,7 +4,7 @@
  * Modern DeFi integration using viem with type-safe contract interactions
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const defiIntegrationBlueprint: Blueprint = {
   id: 'web3-defi-integration',
@@ -30,8 +30,8 @@ const defiIntegrationBlueprint: Blueprint = {
   isAddress,
   getContract
 } from 'viem';
-import { contractManager, ERC20_ABI } from './contracts.js';
-import { Web3Error } from './core.js';
+import { contractManager, ERC20_ABI } from './contracts';
+import { Web3Error } from './core';
 import { z } from 'zod';
 
 // DeFi Token interfaces
@@ -499,8 +499,8 @@ export const defiManager = new DeFiManager();`
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/web3/useDeFi.ts',
       content: `import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { defiManager } from '../../lib/web3/defi.js';
-import { useWallet } from './useWallet.js';
+import.*';
+import { useWallet } from './useWallet';
 import type { Address } from 'viem';
 
 // Token Hooks
@@ -627,7 +627,7 @@ export function useAddressValidation() {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/web3/DeFiDashboard.tsx',
       content: `import React, { useState } from 'react';
-import { useWallet } from '../../hooks/web3/useWallet.js';
+import.*';
 import { 
   useTokenInfo, 
   useTokenBalance, 
@@ -638,11 +638,11 @@ import {
   useWETHAddress,
   useAddressValidation
 } from '../../hooks/web3/useDeFi.js';
-import { Button } from '../ui/button.js';
-import { Input } from '../ui/input.js';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card.js';
-import { Badge } from '../ui/badge.js';
-import { Alert, AlertDescription } from '../ui/alert.js';
+import.*';
+import.*';
+import.*';
+import.*';
+import.*';
 import type { Address } from 'viem';
 
 // Common token addresses (Ethereum mainnet)

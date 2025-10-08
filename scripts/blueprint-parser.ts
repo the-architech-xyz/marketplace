@@ -8,7 +8,7 @@
 import * as ts from 'typescript';
 import * as path from 'path';
 import * as fs from 'fs';
-import { FileArtifact, PackageArtifact, EnvVarArtifact, ModuleArtifacts, BlueprintAnalysisResult } from '@thearchitech.xyz/types';
+import { FileArtifact, PackageArtifact, EnvVarArtifact, ModuleArtifacts, BlueprintAnalysisResult } from '@thearchitech.xyz/marketplace/types';
 
 export class BlueprintParser {
   private program: ts.Program;
@@ -35,7 +35,7 @@ export class BlueprintParser {
   /**
    * Parse a single blueprint file and extract artifacts
    */
-  parseBlueprint(blueprintPath: string, moduleId: string, moduleType: 'adapter' | 'integration'): BlueprintAnalysisResult {
+  parseBlueprint(blueprintPath: string, moduleId: string, moduleType: 'adapter' | 'integration' | 'connector' | 'feature'): BlueprintAnalysisResult {
     try {
       const sourceFile = this.program.getSourceFile(blueprintPath);
       if (!sourceFile) {
@@ -441,9 +441,17 @@ export class BlueprintParser {
   /**
    * Determine module type from file path
    */
-  private determineModuleType(blueprintPath: string, marketplacePath: string): 'adapter' | 'integration' {
+  private determineModuleType(blueprintPath: string, marketplacePath: string): 'adapter' | 'integration' | 'connector' | 'feature' {
     const relativePath = path.relative(marketplacePath, blueprintPath);
-    const isAdapter = relativePath.startsWith('adapters/') || relativePath.includes('/adapters/');
-    return isAdapter ? 'adapter' : 'integration';
+    
+    if (relativePath.startsWith('adapters/') || relativePath.includes('/adapters/')) {
+      return 'adapter';
+    } else if (relativePath.startsWith('connectors/') || relativePath.includes('/connectors/')) {
+      return 'connector';
+    } else if (relativePath.startsWith('features/') || relativePath.includes('/features/')) {
+      return 'feature';
+    } else {
+      return 'integration'; // Legacy integrations
+    }
   }
 }

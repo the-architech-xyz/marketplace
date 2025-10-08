@@ -4,7 +4,7 @@
  * Golden Core code formatting with Prettier for consistent code style
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const prettierBlueprint: Blueprint = {
   id: 'prettier-golden-core-setup',
@@ -60,7 +60,7 @@ export const prettierBlueprint: Blueprint = {
     // Create Prettier utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'scripts/format-all.js',
+      path: '{{paths.scripts}}format-all.js',
       template: 'templates/format-all.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -69,7 +69,7 @@ export const prettierBlueprint: Blueprint = {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'scripts/format-staged.js',
+      path: '{{paths.scripts}}format-staged.js',
       template: 'templates/format-staged.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

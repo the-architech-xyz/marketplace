@@ -5,7 +5,7 @@
  * This feature can be added to projects that already have Stripe configured
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const subscriptionsFeatureBlueprint: Blueprint = {
   id: 'stripe-subscriptions-feature',

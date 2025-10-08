@@ -1,42 +1,39 @@
 {
-  "id": "emailing-frontend-shadcn",
-  "name": "Complete Email System (Shadcn/ui)",
-  "description": "Complete email management system with composition, templates, and analytics",
+  "id": "feature:emailing/shadcn",
+  "name": "Emailing Feature (Shadcn)",
+  "description": "Complete email management UI using Shadcn components",
+  "type": "feature",
   "version": "1.0.0",
-  "category": "feature",
-  "core_capabilities": [
-    "Email Composition",
-    "Sent Email List", 
-    "Email Templates",
-    "Basic Email Management"
-  ],
-  "sub_features": {
-    "analytics-dashboard": {
-      "description": "Advanced analytics dashboard for email engagement metrics",
-      "default": false,
-      "dependencies": ["core_capabilities"]
+  "prerequisites": {
+    "capabilities": ["emailing-backend-resend-nextjs"],
+    "adapters": ["ui/shadcn-ui"]
+  },
+  "provides": ["emailing-ui"],
+  "parameters": {
+    "features": {
+      "type": "object",
+      "default": {
+        "emailComposer": true,
+        "emailList": true,
+        "templates": true,
+        "analytics": false,
+        "campaigns": false,
+        "scheduling": false,
+        "advancedTemplates": false
+      },
+      "description": "Emailing UI features to enable",
+      "required": false
     },
-    "campaign-manager": {
-      "description": "Bulk email campaigns and user list management",
-      "default": false,
-      "dependencies": ["core_capabilities"]
-    },
-    "email-scheduling": {
-      "description": "Schedule emails to be sent at specific times",
-      "default": false,
-      "dependencies": ["core_capabilities"]
-    },
-    "advanced-templates": {
-      "description": "Rich template editor with drag-and-drop functionality",
-      "default": false,
-      "dependencies": ["core_capabilities"]
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false,
+      "options": ["default", "dark", "light", "minimal"]
     }
   },
-  "prerequisites": {
-    "adapters": ["ui/shadcn-ui", "email/resend"],
-    "integrations": ["resend-nextjs-integration"]
-  },
-  "provides": {
-    "capabilities": ["email-management", "email-composition", "email-templates"]
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
   }
 }

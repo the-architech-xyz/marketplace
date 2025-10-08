@@ -4,7 +4,7 @@
  * Provides local git repository management functionality
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 export const gitBlueprint: Blueprint = {
   id: 'git-setup',
@@ -20,56 +20,56 @@ export const gitBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}/git/config.ts',
-      template: 'templates/git-config.ts.tpl'
+      template: 'templates/git-config.ts.tpl',
     },
     
     // Create main Git client
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}/git/client.ts',
-      template: 'templates/git-client.ts.tpl'
+      template: 'templates/git-client.ts.tpl',
     },
     
     // Create repository operations
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}/git/repository.ts',
-      template: 'templates/git-repository.ts.tpl'
+      template: 'templates/git-repository.ts.tpl',
     },
     
     // Create commit operations
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}/git/commits.ts',
-      template: 'templates/git-commits.ts.tpl'
+      template: 'templates/git-commits.ts.tpl',
     },
     
     // Create branch operations
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}/git/branches.ts',
-      template: 'templates/git-branches.ts.tpl'
+      template: 'templates/git-branches.ts.tpl',
     },
     
     // Create remote operations
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}/git/remotes.ts',
-      template: 'templates/git-remotes.ts.tpl'
+      template: 'templates/git-remotes.ts.tpl',
     },
     
     // Create types
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}/git/types.ts',
-      template: 'templates/git-types.ts.tpl'
+      template: 'templates/git-types.ts.tpl',
     },
     
     // Create main index file
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}/git/index.ts',
-      template: 'templates/git-index.ts.tpl'
+      template: 'templates/git-index.ts.tpl',
     },
     
     // Add environment variables

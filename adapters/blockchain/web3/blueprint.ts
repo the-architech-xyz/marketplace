@@ -6,7 +6,7 @@
  * Advanced features are available through optional features
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const web3Blueprint: Blueprint = {
   id: 'web3-base-setup',
@@ -24,27 +24,26 @@ export const web3Blueprint: Blueprint = {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/web3/config.ts',
-      template: 'templates/config.ts.tpl'
-    ,
+      path: '{{paths.shared_library}}web3/config.ts',
+      template: 'templates/config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
       }},
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/web3/core.ts',
-      template: 'templates/core.ts.tpl'
-    ,
+      path: '{{paths.shared_library}}web3/core.ts',
+      template: 'templates/core.ts.tpl',
+      
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
       }},
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/useWeb3.ts',
-      template: 'templates/useWeb3.ts.tpl'
-    ,
+      path: '{{paths.hooks}}useWeb3.ts',
+      template: 'templates/useWeb3.ts.tpl',
+
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0

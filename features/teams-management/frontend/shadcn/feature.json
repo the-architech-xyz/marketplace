@@ -1,39 +1,40 @@
 {
-  "id": "teams-management-frontend-shadcn",
-  "name": "Teams Management Frontend (Shadcn/ui)",
-  "description": "Complete team management UI with creation, member management, settings, and dashboard",
+  "id": "feature:teams-management/shadcn",
+  "name": "Teams Management Feature (Shadcn)",
+  "description": "Complete team management UI using Shadcn components",
+  "type": "feature",
   "version": "1.0.0",
-  "category": "feature",
-  "core_capabilities": [
-    "Team List View",
-    "Team Creation",
-    "Member Management",
-    "Team Settings",
-    "Team Dashboard"
-  ],
-  "sub_features": {
-    "advanced-permissions": {
-      "description": "UI for granular role-based permissions and access control",
-      "default": false,
-      "dependencies": ["core_capabilities"]
+  "prerequisites": {
+    "capabilities": ["teams-management-backend-better-auth-nextjs"],
+    "adapters": ["ui/shadcn-ui"]
+  },
+  "provides": ["teams-ui"],
+  "parameters": {
+    "features": {
+      "type": "object",
+      "default": {
+        "teamList": true,
+        "teamCreation": true,
+        "memberManagement": true,
+        "teamSettings": true,
+        "teamDashboard": true,
+        "advancedPermissions": false,
+        "teamAnalytics": false,
+        "teamBilling": false
+      },
+      "description": "Teams management UI features to enable",
+      "required": false
     },
-    "team-analytics": {
-      "description": "Team performance and activity analytics dashboard",
-      "default": false,
-      "dependencies": ["core_capabilities"]
-    },
-    "team-billing": {
-      "description": "Team subscription and billing management UI",
-      "default": false,
-      "dependencies": ["core_capabilities"]
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false,
+      "options": ["default", "dark", "light", "minimal"]
     }
   },
-  "prerequisites": {
-    "adapters": ["ui/shadcn-ui"],
-    "integrations": ["better-auth-nextjs-integration"],
-    "features": ["teams-management/backend/better-auth-nextjs"]
-  },
-  "provides": {
-    "capabilities": ["team-ui", "member-management-ui", "team-dashboard-ui"]
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
   }
 }

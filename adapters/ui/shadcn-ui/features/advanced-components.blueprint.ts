@@ -5,7 +5,7 @@
  * Only installed when explicitly requested in genome.yaml
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 export const advancedComponentsBlueprint: Blueprint = {
   id: 'shadcn-ui-advanced-components',

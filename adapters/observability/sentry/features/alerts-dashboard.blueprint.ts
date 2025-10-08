@@ -5,7 +5,7 @@
  * Framework-agnostic implementation
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const alertsDashboardBlueprint: Blueprint = {
   id: 'sentry-alerts-dashboard',

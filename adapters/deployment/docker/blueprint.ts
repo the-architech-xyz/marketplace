@@ -5,7 +5,7 @@
  * Creates Dockerfile, docker-compose.yml, and deployment configuration
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const dockerBlueprint: Blueprint = {
   id: 'docker-base-setup',
@@ -14,8 +14,8 @@ export const dockerBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'Dockerfile',
-      template: 'templates/Dockerfile.tpl'
-    ,
+      template: 'templates/Dockerfile.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -23,8 +23,8 @@ export const dockerBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '.dockerignore',
-      template: 'templates/.dockerignore.tpl'
-    ,
+      template: 'templates/.dockerignore.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0

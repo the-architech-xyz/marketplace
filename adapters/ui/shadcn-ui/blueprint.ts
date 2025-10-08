@@ -5,7 +5,7 @@
  * Handles all UI and styling configuration
  */
 
-import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 const shadcnUiBlueprint: Blueprint = {
   id: 'shadcn-ui-installer',
@@ -34,7 +34,7 @@ export default config;`
     // Create Tailwind CSS v4 globals.css
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/app/globals.css',
+      path: '{{paths.app_root}}globals.css',
       conflictResolution: { strategy: ConflictResolutionStrategy.REPLACE },
         content: `
 @import "tailwindcss";
@@ -107,6 +107,7 @@ export default config;`
 }`
     },
     // Install core Shadcn/ui dependencies
+    // Note: Shadcn will automatically install Radix UI dependencies for each component
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
@@ -116,27 +117,6 @@ export default config;`
         'tailwind-merge@^2.0.0',
         'lucide-react@^0.294.0'
       ]
-    },
-    // Install core Radix UI primitives (DYNAMIC - only what's needed!)
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: [
-        '@radix-ui/react-slot@^1.0.2'
-      ]
-    },
-    // Install Radix components dynamically based on selected shadcn components
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'scripts/install-radix-deps.js',
-      template: 'templates/install-radix-deps.js.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 0
-      }
-    },
-    {
-      type: BlueprintActionType.RUN_COMMAND,
-      command: 'node scripts/install-radix-deps.js'
     },
     // Install additional utilities
     {
@@ -162,8 +142,8 @@ export default config;`
       type: BlueprintActionType.RUN_COMMAND,
       command: 'npx shadcn@latest init --yes --defaults --force --silent --src-dir --css-variables --base-color slate'
     },
-    // Install components from genome parameters using forEach pattern
-    // This will be dynamically expanded by the BlueprintExecutor
+    // Install components from genome parameters
+    // Shadcn will automatically install the required Radix UI dependencies for each component
     {
       type: BlueprintActionType.RUN_COMMAND,
       command: 'npx shadcn@latest add {{item}} --yes --overwrite',

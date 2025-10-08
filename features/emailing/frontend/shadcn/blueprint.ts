@@ -5,7 +5,7 @@
  * Uses template-based component generation for maintainability
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const emailingShadcnBlueprint: Blueprint = {
   id: 'emailing-frontend-shadcn',
@@ -24,7 +24,7 @@ export const emailingShadcnBlueprint: Blueprint = {
     // Create emailing hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/emailing/hooks.ts',
+      path: '{{paths.shared_library}}emailing/hooks.ts',
       template: 'templates/hooks.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -35,7 +35,7 @@ export const emailingShadcnBlueprint: Blueprint = {
     // Create emailing types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/emailing/types.ts',
+      path: '{{paths.shared_library}}emailing/types.ts',
       template: 'templates/types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -46,7 +46,7 @@ export const emailingShadcnBlueprint: Blueprint = {
     // Create email composer component (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/emailing/EmailComposer.tsx',
+      path: '{{paths.components}}emailing/EmailComposer.tsx',
       template: 'templates/EmailComposer.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -57,7 +57,7 @@ export const emailingShadcnBlueprint: Blueprint = {
     // Create email list component (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/emailing/EmailList.tsx',
+      path: '{{paths.components}}emailing/EmailList.tsx',
       template: 'templates/EmailList.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -68,7 +68,7 @@ export const emailingShadcnBlueprint: Blueprint = {
     // Create template manager component (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/emailing/TemplateManager.tsx',
+      path: '{{paths.components}}emailing/TemplateManager.tsx',
       template: 'templates/TemplateManager.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -79,7 +79,7 @@ export const emailingShadcnBlueprint: Blueprint = {
     // Create emailing dashboard page (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/app/emailing/page.tsx',
+      path: '{{paths.app_root}}emailing/page.tsx',
       template: 'templates/emailing-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

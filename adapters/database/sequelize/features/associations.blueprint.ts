@@ -4,7 +4,7 @@
  * Advanced model relationships and associations
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const associationsBlueprint: Blueprint = {
   id: 'sequelize-associations',
@@ -14,7 +14,7 @@ const associationsBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/database/associations.ts',
       content: `import { Model, DataTypes, Association } from 'sequelize';
-import sequelize from '../config.js';
+import.*';
 
 // Base Model class with common functionality
 export class BaseModel extends Model {
@@ -465,7 +465,7 @@ export default models;`
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/database/query-helpers.ts',
       content: `import { Op, WhereOptions, Order } from 'sequelize';
-import { User, Post, Comment, Profile, Tag } from './associations.js';
+import { User, Post, Comment, Profile, Tag } from './associations';
 
 export interface PaginationOptions {
   page?: number;

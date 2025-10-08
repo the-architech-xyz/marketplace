@@ -4,7 +4,7 @@
  * Adds server-side rendering optimization and caching to Next.js
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const ssrOptimizationBlueprint: Blueprint = {
   id: 'nextjs-ssr-optimization',

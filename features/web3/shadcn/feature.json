@@ -1,0 +1,36 @@
+{
+  "id": "feature:web3/shadcn",
+  "name": "Web3 Feature (Shadcn)",
+  "description": "Complete Web3 wallet connection and blockchain interaction UI using Shadcn components",
+  "type": "feature",
+  "version": "1.0.0",
+  "prerequisites": {
+    "capabilities": ["web3"],
+    "adapters": ["ui/shadcn-ui"]
+  },
+  "provides": ["web3-ui"],
+  "parameters": {
+    "features": {
+      "type": "object",
+      "default": {
+        "walletConnection": true,
+        "transactionHistory": true,
+        "nftGallery": false,
+        "defiIntegration": false,
+        "stakingInterface": false
+      },
+      "description": "Web3 UI features to enable",
+      "required": false
+    },
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false
+    }
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

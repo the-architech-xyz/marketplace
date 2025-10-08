@@ -4,7 +4,7 @@
  * Lazy loading of translations and locale-specific content
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const dynamicImportsBlueprint: Blueprint = {
   id: 'next-intl-dynamic-imports',
@@ -138,7 +138,7 @@ export const dynamicTranslationManager = new DynamicTranslationManager();`
       path: 'src/hooks/useDynamicTranslations.ts',
       content: `import { useState, useEffect, useCallback } from 'react';
 import { useLocale } from 'next-intl';
-import { dynamicTranslationManager } from '../lib/dynamic-translations.js';
+import.*';
 
 export function useDynamicTranslations(namespace: string = 'common') {
   const locale = useLocale();
@@ -223,7 +223,7 @@ export function usePreloadTranslations() {
       path: 'src/components/i18n/DynamicTranslationProvider.tsx',
       content: `import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useLocale } from 'next-intl';
-import { dynamicTranslationManager } from '../../lib/dynamic-translations.js';
+import.*';
 
 interface DynamicTranslationContextType {
   translations: { [namespace: string]: any };

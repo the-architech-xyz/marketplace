@@ -5,7 +5,7 @@
  * Uses template-based component generation for maintainability
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const teamsManagementFrontendBlueprint: Blueprint = {
   id: 'teams-management-frontend-shadcn',
@@ -24,7 +24,7 @@ export const teamsManagementFrontendBlueprint: Blueprint = {
     // Create team management types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/teams/types.ts',
+      path: '{{paths.shared_library}}teams/types.ts',
       template: 'templates/types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -35,7 +35,7 @@ export const teamsManagementFrontendBlueprint: Blueprint = {
     // Create team management hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/teams/hooks.ts',
+      path: '{{paths.shared_library}}teams/hooks.ts',
       template: 'templates/hooks.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -46,7 +46,7 @@ export const teamsManagementFrontendBlueprint: Blueprint = {
     // Create teams list component (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/teams/TeamsList.tsx',
+      path: '{{paths.components}}teams/TeamsList.tsx',
       template: 'templates/TeamsList.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -57,7 +57,7 @@ export const teamsManagementFrontendBlueprint: Blueprint = {
     // Create team creation form (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/teams/CreateTeamForm.tsx',
+      path: '{{paths.components}}teams/CreateTeamForm.tsx',
       template: 'templates/CreateTeamForm.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -68,7 +68,7 @@ export const teamsManagementFrontendBlueprint: Blueprint = {
     // Create team settings component (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/teams/TeamSettings.tsx',
+      path: '{{paths.components}}teams/TeamSettings.tsx',
       template: 'templates/TeamSettings.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -79,7 +79,7 @@ export const teamsManagementFrontendBlueprint: Blueprint = {
     // Create member management component (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/teams/MemberManagement.tsx',
+      path: '{{paths.components}}teams/MemberManagement.tsx',
       template: 'templates/MemberManagement.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -90,7 +90,7 @@ export const teamsManagementFrontendBlueprint: Blueprint = {
     // Create teams dashboard (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/teams/TeamsDashboard.tsx',
+      path: '{{paths.components}}teams/TeamsDashboard.tsx',
       template: 'templates/TeamsDashboard.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -101,7 +101,7 @@ export const teamsManagementFrontendBlueprint: Blueprint = {
     // Create teams management page (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/app/teams/page.tsx',
+      path: '{{paths.app_root}}teams/page.tsx',
       template: 'templates/teams-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

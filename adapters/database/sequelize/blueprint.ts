@@ -4,7 +4,7 @@
  * Sets up Sequelize ORM with basic configuration
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const sequelizeBlueprint: Blueprint = {
   id: 'sequelize-base-setup',
@@ -22,18 +22,18 @@ export const sequelizeBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.database_config}}/sequelize.ts',
-      template: 'templates/sequelize.ts.tpl'
+      template: 'templates/sequelize.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.database_config}}/index.ts',
-      template: 'templates/index.ts.tpl'
+      template: 'templates/index.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '.sequelizerc',
-      template: 'templates/.sequelizerc.tpl'
-    ,
+      template: 'templates/.sequelizerc.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0

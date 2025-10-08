@@ -4,7 +4,7 @@
  * Comprehensive API routes with middleware, error handling, and utilities
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 export const nextjsApiRoutesBlueprint: Blueprint = {
   id: 'nextjs-api-routes',
@@ -215,7 +215,7 @@ export const apiRateLimit = {
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { ApiUtils, ApiError, apiRateLimit } from './utils.js';
+import { ApiUtils, ApiError, apiRateLimit } from './utils';
 
 /**
  * API middleware configuration
@@ -351,7 +351,7 @@ export function withApiHandler<T = any>(
  */
 
 import { NextRequest } from 'next/server';
-import { ApiUtils, withApiHandler } from '../../../lib/api/middleware.js';
+import.*';
 
 export const GET = withApiHandler(async (request: NextRequest) => {
   return ApiUtils.success({
@@ -373,7 +373,7 @@ export const GET = withApiHandler(async (request: NextRequest) => {
  */
 
 import { NextRequest } from 'next/server';
-import { ApiUtils, withApiHandler } from '../../../lib/api/middleware.js';
+import.*';
 
 export const POST = withApiHandler(async (request: NextRequest) => {
   const body = await ApiUtils.getBody(request);
@@ -401,7 +401,7 @@ export const POST = withApiHandler(async (request: NextRequest) => {
  */
 
 import { NextRequest } from 'next/server';
-import { ApiUtils, withApiHandler, ApiError } from '../../../lib/api/middleware.js';
+import.*';
 
 export const POST = withApiHandler(async (request: NextRequest) => {
   const body = await ApiUtils.getBody<{ operation: string; a: number; b: number }>(request);

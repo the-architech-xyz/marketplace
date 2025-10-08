@@ -5,7 +5,7 @@
  * Advanced features are available as separate features
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 export const betterAuthBlueprint: Blueprint = {
   id: 'better-auth-base-setup',
@@ -18,17 +18,17 @@ export const betterAuthBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.auth_config}}/config.ts',
-      template: 'templates/config.ts.tpl'
+      template: 'templates/config.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.auth_config}}/api.ts',
-      template: 'templates/api.ts.tpl'
+      template: 'templates/api.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.auth_config}}/client.ts',
-      template: 'templates/client.ts.tpl'
+      template: 'templates/client.ts.tpl',
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
@@ -54,7 +54,7 @@ export const betterAuthBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.auth_config}}/INTEGRATION_GUIDE.md',
-      template: 'templates/INTEGRATION_GUIDE.md.tpl'
+      template: 'templates/INTEGRATION_GUIDE.md.tpl',
     }
   ]
 };

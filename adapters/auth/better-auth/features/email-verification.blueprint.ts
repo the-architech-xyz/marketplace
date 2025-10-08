@@ -4,7 +4,7 @@
  * Adds email verification system with templates to Better Auth
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const emailVerificationBlueprint: Blueprint = {
   id: 'better-auth-email-verification',

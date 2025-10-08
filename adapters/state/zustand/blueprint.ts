@@ -5,7 +5,7 @@
  * Provides powerful, performant, and minimal boilerplate state management
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const zustandBlueprint: Blueprint = {
   id: 'zustand-golden-core-setup',
@@ -31,18 +31,16 @@ export const zustandBlueprint: Blueprint = {
     // Create core store utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/stores/create-store.ts',
-      template: 'templates/create-store.ts.tpl'
-    ,
+      path: '{{paths.shared_library}}stores/create-store.ts',
+      template: 'templates/create-store.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
       }},
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/stores/store-types.ts',
-      template: 'templates/store-types.ts.tpl'
-    ,
+      path: '{{paths.shared_library}}stores/store-types.ts',
+      template: 'templates/store-types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -50,9 +48,8 @@ export const zustandBlueprint: Blueprint = {
     // Create app store
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/stores/use-app-store.ts',
-      template: 'templates/use-app-store.ts.tpl'
-    ,
+      path: '{{paths.stores}}use-app-store.ts',
+      template: 'templates/use-app-store.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -60,18 +57,16 @@ export const zustandBlueprint: Blueprint = {
     // Create feature stores
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/stores/use-ui-store.ts',
-      template: 'templates/use-ui-store.ts.tpl'
-    ,
+      path: '{{paths.stores}}use-ui-store.ts',
+      template: 'templates/use-ui-store.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
       }},
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/stores/use-auth-store.ts',
-      template: 'templates/use-auth-store.ts.tpl'
-    ,
+      path: '{{paths.stores}}use-auth-store.ts',
+      template: 'templates/use-auth-store.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -79,7 +74,7 @@ export const zustandBlueprint: Blueprint = {
     // Create persistence utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/stores/persistence.ts',
+      path: '{{paths.shared_library}}stores/persistence.ts',
       template: 'templates/persistence.ts.tpl',
       condition: '{{#if module.parameters.persistence}}',
       conflictResolution: {
@@ -90,7 +85,7 @@ export const zustandBlueprint: Blueprint = {
     // Create middleware utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/stores/middleware.ts',
+      path: '{{paths.shared_library}}stores/middleware.ts',
       template: 'templates/middleware.ts.tpl',
       condition: '{{#if module.parameters.middleware}}',
       conflictResolution: {
@@ -101,9 +96,8 @@ export const zustandBlueprint: Blueprint = {
     // Create store hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-store.ts',
-      template: 'templates/use-store.ts.tpl'
-    ,
+      path: '{{paths.hooks}}use-store.ts',
+      template: 'templates/use-store.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -112,8 +106,7 @@ export const zustandBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/providers/StoreProvider.tsx',
-      template: 'templates/StoreProvider.tsx.tpl'
-    ,
+      template: 'templates/StoreProvider.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -121,9 +114,8 @@ export const zustandBlueprint: Blueprint = {
     // Create store index
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/stores/index.ts',
-      template: 'templates/index.ts.tpl'
-    ,
+      path: '{{paths.stores}}index.ts',
+      template: 'templates/index.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0

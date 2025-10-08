@@ -5,7 +5,7 @@
  * Advanced features are available as separate features
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const drizzleBlueprint: Blueprint = {
   id: 'drizzle-base-setup',
@@ -22,7 +22,7 @@ export const drizzleBlueprint: Blueprint = {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/db/index.ts',
+      path: '{{paths.shared_library}}db/index.ts',
       template: 'templates/db-index.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -31,7 +31,7 @@ export const drizzleBlueprint: Blueprint = {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/db/schema.ts',
+      path: '{{paths.shared_library}}db/schema.ts',
       template: 'templates/schema.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,

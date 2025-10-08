@@ -4,13 +4,14 @@
  * Auto-generated TypeScript definitions with artifact discovery
  */
 
-// Import base types from the types package
-import { Recipe, Module, ProjectConfig, ModuleArtifacts as ModuleArtifactsType } from '@thearchitech.xyz/types';
+// Export base types
+export * from './base';
 
 export * from './adapters/ai/vercel-ai-sdk';
 export * from './adapters/auth/better-auth';
 export * from './adapters/blockchain/web3';
 export * from './adapters/content/next-intl';
+export * from './adapters/core/dependencies';
 export * from './adapters/core/forms';
 export * from './adapters/core/git';
 export * from './adapters/data-fetching/tanstack-query';
@@ -32,37 +33,38 @@ export * from './adapters/testing/vitest';
 export * from './adapters/ui/react-flow';
 export * from './adapters/ui/shadcn-ui';
 export * from './adapters/ui/tailwind';
-export * from './integrations/features/ai-chat/shadcn';
-export * from './integrations/features/architech-welcome';
-export * from './integrations/features/auth/backend/better-auth-nextjs';
-export * from './integrations/features/auth/frontend/shadcn';
-export * from './integrations/features/ecommerce';
-export * from './integrations/features/emailing/backend/resend-nextjs';
-export * from './integrations/features/emailing/frontend/shadcn';
-export * from './integrations/features/graph-visualizer/react-flow';
-export * from './integrations/features/monitoring/backend/sentry-nextjs';
-export * from './integrations/features/payments/backend/stripe-nextjs';
-export * from './integrations/features/payments/frontend/shadcn';
-export * from './integrations/features/project-management';
-export * from './integrations/features/repo-analyzer/nextjs-shadcn';
-export * from './integrations/features/social-profile/nextjs-shadcn';
-export * from './integrations/features/teams-management';
-export * from './integrations/features/web3/backend/web3-nextjs';
-export * from './integrations/features/web3/frontend/shadcn';
-export * from './integrations/better-auth-github-connector-integration';
-export * from './integrations/better-auth-nextjs-integration';
-export * from './integrations/docker-drizzle-integration';
-export * from './integrations/docker-nextjs-integration';
-export * from './integrations/drizzle-nextjs-integration';
-export * from './integrations/prisma-nextjs-integration';
-export * from './integrations/resend-nextjs-integration';
-export * from './integrations/rhf-zod-shadcn-integration';
-export * from './integrations/sentry-nextjs-integration';
-export * from './integrations/stripe-nextjs-integration';
-export * from './integrations/tanstack-query-nextjs-integration';
-export * from './integrations/vitest-nextjs-integration';
-export * from './integrations/web3-nextjs-integration';
-export * from './integrations/zustand-nextjs-integration';
+export * from './connectors/connectors/better-auth-github';
+export * from './connectors/connectors/docker-drizzle';
+export * from './connectors/connectors/docker-nextjs';
+export * from './connectors/connectors/rhf-zod-shadcn';
+export * from './connectors/connectors/sentry-nextjs';
+export * from './connectors/connectors/tanstack-query-nextjs';
+export * from './connectors/connectors/vitest-nextjs';
+export * from './connectors/connectors/zustand-nextjs';
+export * from './features/features/ai-chat/backend/vercel-ai-nextjs';
+export * from './features/features/ai-chat/frontend/shadcn';
+export * from './features/features/architech-welcome/shadcn';
+export * from './features/features/auth/backend/better-auth-nextjs';
+export * from './features/features/auth/frontend/shadcn';
+export * from './features/features/emailing/backend/resend-nextjs';
+export * from './features/features/emailing/frontend/shadcn';
+export * from './features/features/graph-visualizer/shadcn';
+export * from './features/features/monitoring/shadcn';
+export * from './features/features/payments/backend/stripe-nextjs';
+export * from './features/features/payments/frontend/shadcn';
+export * from './features/features/project-management/shadcn';
+export * from './features/features/repo-analyzer/shadcn';
+export * from './features/features/social-profile/shadcn';
+export * from './features/features/teams-management/backend/better-auth-nextjs';
+export * from './features/features/teams-management/frontend/shadcn';
+export * from './features/features/web3/shadcn';
+
+// 🎯 Cohesive Contract Exports
+export * from './contracts/ai-chat';
+export * from './contracts/auth';
+export * from './contracts/emailing';
+export * from './contracts/payments';
+export * from './contracts/teams-management';
 
 // 🚀 Auto-discovered module artifacts
 export declare const ModuleArtifacts: {
@@ -71,15 +73,8 @@ export declare const ModuleArtifacts: {
 
 export type ModuleId = keyof typeof ModuleArtifacts;
 
-// 🧬 Genome Type - Extended Recipe with marketplace-specific features
-export interface Genome extends Recipe {
-  version: string;
-  project: ProjectConfig & {
-    framework: string;
-    path?: string;
-  };
-  modules: Module[];
-}
-
 // Re-export base types for convenience
-export { Recipe, Module, ProjectConfig } from '@thearchitech.xyz/types';
+export { Module, ProjectConfig } from '@thearchitech.xyz/marketplace/types';
+
+// Re-export Genome type from shared types package
+export { Genome } from '@thearchitech.xyz/marketplace/types';

@@ -1,25 +1,66 @@
 # The Architech Marketplace
 
-> **Revolutionary 3-Tier Architecture for Modern Web Development**
+> **Revolutionary Cohesive Contract Architecture for Modern Web Development**
 
-The Architech Marketplace is a comprehensive ecosystem of Adapters, Integrators, and Features that provides type-safe, automated project generation capabilities. Built on our revolutionary 3-tier architecture, it enables developers to build modern web applications with unprecedented speed and consistency.
+The Architech Marketplace is a comprehensive ecosystem of Adapters, Connectors, and Features that provides type-safe, automated project generation capabilities. Built on our revolutionary cohesive contract architecture, it enables developers to build modern web applications with unprecedented speed, consistency, and maintainability.
 
-## 🏗️ The 3-Tier Architecture
+## 🏗️ The Cohesive Contract Architecture
 
 ### Tier 1: Adapters (The Raw Materials)
 **Role**: Install ONE pure, self-contained technology
 **Philosophy**: Foundational pillars that know nothing about each other
 **Examples**: `nextjs`, `drizzle`, `shadcn-ui`, `better-auth`
 
-### Tier 2: Integrators (The Technical Bridges)
+### Tier 2: Connectors (The Technical Bridges)
 **Role**: Connect exactly two Adapters to ensure technical compatibility
 **Philosophy**: Low-level technical circuits that make things work together
-**Examples**: `drizzle-nextjs-integration`, `better-auth-nextjs-integration`
+**Examples**: `drizzle-nextjs-connector`, `better-auth-nextjs-connector`
 
 ### Tier 3: Features (The Business Capabilities)
-**Role**: Provide high-level, end-user business capabilities
-**Philosophy**: Functional appliances that consume Adapter and Integrator capabilities
-**Examples**: `teams-dashboard`, `user-profile`, `payment-management`
+**Role**: Provide complete business capabilities with both backend and frontend implementations
+**Philosophy**: Cohesive business features that include everything needed for a complete user journey
+**Examples**: `payments/backend/stripe-nextjs` + `payments/frontend/shadcn`, `auth/backend/better-auth-nextjs` + `auth/frontend/shadcn`
+
+## 🎯 Cohesive Contract System
+
+### The Power of Cohesive Business Services
+
+Instead of scattered individual hooks, our features provide **cohesive business services** that group related functionality:
+
+```typescript
+// ❌ Old Granular Approach (85+ individual hooks)
+usePayments, usePayment, useCreatePayment, useUpdatePayment, useDeletePayment,
+useRefundPayment, usePaymentMethods, useCreatePaymentMethod, useUpdatePaymentMethod,
+useDeletePaymentMethod, useSubscriptions, useSubscription, useCreateSubscription...
+
+// ✅ New Cohesive Approach (26 cohesive services)
+const { create, list, get, update, delete, refund } = paymentService.usePayments();
+const { create, list, get, update, cancel } = paymentService.useSubscriptions();
+const { create, list, get, update } = paymentService.useInvoices();
+```
+
+### Contract-Driven Development
+
+Every feature defines a **contract** (`contract.ts`) that serves as the single source of truth:
+
+```typescript
+// features/payments/contract.ts
+export interface IPaymentService {
+  usePayments: () => {
+    list: any; // UseQueryResult<Payment[], Error>
+    get: (id: string) => any; // UseQueryResult<Payment, Error>
+    create: any; // UseMutationResult<Payment, Error, CreatePaymentData>
+    update: any; // UseMutationResult<Payment, Error, { id: string; data: UpdatePaymentData }>
+    delete: any; // UseMutationResult<void, Error, string>
+    refund: any; // UseMutationResult<Refund, Error, { paymentId: string; amount?: number }>
+  };
+  useSubscriptions: () => { /* ... */ };
+  useInvoices: () => { /* ... */ };
+  // ... other cohesive services
+}
+```
+
+**Backend implementations** provide the service, **Frontend implementations** consume it.
 
 ## 🚀 Quick Start
 

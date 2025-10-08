@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 const reactFlowBlueprint: Blueprint = {
   id: 'react-flow',
@@ -26,9 +26,8 @@ const reactFlowBlueprint: Blueprint = {
     // Create basic React Flow component
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/ReactFlow/FlowCanvas.tsx',
-      template: 'templates/FlowCanvas.tsx.tpl'
-    ,
+      path: '{{paths.components}}ReactFlow/FlowCanvas.tsx',
+      template: 'templates/FlowCanvas.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,  
         priority: 0
@@ -36,9 +35,8 @@ const reactFlowBlueprint: Blueprint = {
     // Create custom node components
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/ReactFlow/nodes/CustomNode.tsx',
-      template: 'templates/CustomNode.tsx.tpl'
-    ,
+      path: '{{paths.components}}ReactFlow/nodes/CustomNode.tsx',
+      template: 'templates/CustomNode.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -46,9 +44,8 @@ const reactFlowBlueprint: Blueprint = {
     // Create custom edge components
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/ReactFlow/edges/CustomEdge.tsx',
-      template: 'templates/CustomEdge.tsx.tpl'
-    ,
+      path: '{{paths.components}}ReactFlow/edges/CustomEdge.tsx',
+      template: 'templates/CustomEdge.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -56,9 +53,9 @@ const reactFlowBlueprint: Blueprint = {
     // Create React Flow hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/useReactFlow.ts',
-      template: 'templates/useReactFlow.ts.tpl'
-    ,
+      path: '{{paths.hooks}}useReactFlow.ts',
+      template: 'templates/useReactFlow.ts.tpl',
+      
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -67,8 +64,8 @@ const reactFlowBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/contexts/ReactFlowContext.tsx',
-      template: 'templates/ReactFlowContext.tsx.tpl'
-    ,
+      template: 'templates/ReactFlowContext.tsx.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -76,9 +73,9 @@ const reactFlowBlueprint: Blueprint = {
     // Create React Flow types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/types/reactflow.ts',
-      template: 'templates/reactflow-types.ts.tpl'
-    ,
+      path: '{{paths.types}}reactflow.ts',
+      template: 'templates/reactflow-types.ts.tpl',
+      
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -87,8 +84,8 @@ const reactFlowBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/utils/reactflow.ts',
-      template: 'templates/reactflow-utils.ts.tpl'
-    ,
+      template: 'templates/reactflow-utils.ts.tpl',
+      
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -96,9 +93,9 @@ const reactFlowBlueprint: Blueprint = {
     // Create React Flow styles
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/styles/reactflow.css',
-      template: 'templates/reactflow.css.tpl'
-    ,
+      path: '{{paths.styles}}reactflow.css',
+      template: 'templates/reactflow.css.tpl',
+      
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0

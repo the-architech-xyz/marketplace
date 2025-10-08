@@ -4,7 +4,7 @@
  * Optimized multi-stage Docker builds for production
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const multiStageBlueprint: Blueprint = {
   id: 'docker-multi-stage',

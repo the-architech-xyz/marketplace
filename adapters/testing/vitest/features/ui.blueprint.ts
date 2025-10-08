@@ -4,7 +4,7 @@
  * Adds interactive web-based test runner interface
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const uiBlueprint: Blueprint = {
   id: 'vitest-ui',

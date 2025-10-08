@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 const vercelAiSdkBlueprint: Blueprint = {
   id: 'vercel-ai-sdk',
@@ -26,9 +26,9 @@ const vercelAiSdkBlueprint: Blueprint = {
     // Create AI configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/ai/config.ts',
-      template: 'templates/ai-config.ts.tpl'
-    ,
+      path: '{{paths.shared_library}}ai/config.ts',
+      template: 'templates/ai-config.ts.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -36,9 +36,9 @@ const vercelAiSdkBlueprint: Blueprint = {
     // Create AI providers
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/ai/providers.ts',
-      template: 'templates/ai-providers.ts.tpl'
-    ,
+      path: '{{paths.shared_library}}ai/providers.ts',
+      template: 'templates/ai-providers.ts.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -46,9 +46,9 @@ const vercelAiSdkBlueprint: Blueprint = {
     // Create chat hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-chat.ts',
-      template: 'templates/use-chat.ts.tpl'
-    ,
+      path: '{{paths.hooks}}use-chat.ts',
+      template: 'templates/use-chat.ts.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -56,9 +56,9 @@ const vercelAiSdkBlueprint: Blueprint = {
     // Create text generation hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-completion.ts',
-      template: 'templates/use-completion.ts.tpl'
-    ,
+      path: '{{paths.hooks}}use-completion.ts',
+      template: 'templates/use-completion.ts.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -66,9 +66,9 @@ const vercelAiSdkBlueprint: Blueprint = {
     // Create streaming hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-streaming.ts',
-      template: 'templates/use-streaming.ts.tpl'
-    ,
+      path: '{{paths.hooks}}use-streaming.ts',
+      template: 'templates/use-streaming.ts.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -76,9 +76,9 @@ const vercelAiSdkBlueprint: Blueprint = {
     // Create AI utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/ai/utils.ts',
-      template: 'templates/ai-utils.ts.tpl'
-    ,
+      path: '{{paths.shared_library}}ai/utils.ts',
+      template: 'templates/ai-utils.ts.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -86,9 +86,9 @@ const vercelAiSdkBlueprint: Blueprint = {
     // Create AI types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/types/ai.ts',
-      template: 'templates/ai-types.ts.tpl'
-    ,
+      path: '{{paths.types}}ai.ts',
+      template: 'templates/ai-types.ts.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -96,18 +96,18 @@ const vercelAiSdkBlueprint: Blueprint = {
     // Create API routes for AI
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/app/api/chat/route.ts',
-      template: 'templates/chat-route.ts.tpl'
-    ,
+      path: '{{paths.app_root}}api/chat/route.ts',
+      template: 'templates/chat-route.ts.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
       }},
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/app/api/completion/route.ts',
-      template: 'templates/completion-route.ts.tpl'
-    ,
+      path: '{{paths.app_root}}api/completion/route.ts',
+      template: 'templates/completion-route.ts.tpl',
+        
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -116,8 +116,8 @@ const vercelAiSdkBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/contexts/AIProvider.tsx',
-      template: 'templates/AIProvider.tsx.tpl'
-    ,
+      template: 'templates/AIProvider.tsx.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -126,7 +126,7 @@ const vercelAiSdkBlueprint: Blueprint = {
     {
       type: BlueprintActionType.ENHANCE_FILE,
 
-      path: '.env.example',
+      path: '{{paths.env}}.example',
       modifier: ModifierType.ENV_MERGER,
       params: {
         variables: [

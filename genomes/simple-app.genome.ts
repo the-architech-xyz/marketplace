@@ -1,4 +1,4 @@
-import { Genome } from '@thearchitech.xyz/types';
+import { Genome } from '@thearchitech.xyz/marketplace/types';
 /**
  * Simple App Genome
  * 
@@ -78,9 +78,40 @@ const simpleAppGenome: Genome = {
       }
     },
     
+    // === DATABASE ===
+    {
+      id: 'database/drizzle',
+      parameters: {
+        orm: 'drizzle',
+        database: 'postgresql',
+        migrations: true,
+        seeding: true
+      }
+    },
+    
+    // === TESTING ===
+    {
+      id: 'testing/vitest',
+      parameters: {
+        framework: 'vitest',
+        coverage: true,
+        ui: true,
+        typescript: true
+      }
+    },
+    
+    // === DEPLOYMENT ===
+    {
+      id: 'deployment/docker',
+      parameters: {
+        multiStage: true,
+        productionReady: true
+      }
+    },
+    
     // === AUTHENTICATION ===
     {
-      id: 'auth/better-auth',
+      id: 'features/auth',
       parameters: {
         providers: ['email'],
         session: 'jwt',
@@ -173,38 +204,34 @@ const simpleAppGenome: Genome = {
       }
     },
     
-    // === INTEGRATIONS ===
+    // === CONNECTORS ===
     {
-      id: 'integrations/drizzle-nextjs-integration',
+      id: 'connector:docker-drizzle',
       parameters: {
-        apiRoutes: true,
-        middleware: true,
-        queries: true,
-        transactions: true,
-        migrations: true,
-        seeding: false,
-        validators: true,
-        adminPanel: false,
-        healthChecks: true,
-        connectionPooling: true
+        postgresService: true,
+        migrationService: true,
+        backupService: false,
+        monitoringService: false,
+        seedData: false,
+        sslSupport: false,
+        replication: false,
+        clustering: false,
+        performanceTuning: true,
+        securityHardening: true,
+        volumeManagement: true,
+        networking: true
       }
     },
     
     {
-      id: 'integrations/better-auth-nextjs-integration',
+      id: 'connector:better-auth-github',
       parameters: {
-        apiRoutes: true,
-        middleware: true,
-        uiComponents: 'shadcn',
-        adminPanel: false,
-        emailVerification: true,
-        mfa: false,
-        passwordReset: true
+        enabled: true
       }
     },
     
     {
-      id: 'integrations/tanstack-query-nextjs-integration',
+      id: 'connector:tanstack-query-nextjs',
       parameters: {
         devtools: true,
         ssr: true,
@@ -215,7 +242,7 @@ const simpleAppGenome: Genome = {
     },
     
     {
-      id: 'integrations/zustand-nextjs-integration',
+      id: 'connector:zustand-nextjs',
       parameters: {
         persistence: true,
         devtools: true,
@@ -224,7 +251,7 @@ const simpleAppGenome: Genome = {
     },
     
     {
-      id: 'integrations/rhf-zod-shadcn-integration',
+      id: 'connector:rhf-zod-shadcn',
       parameters: {
         formComponents: true,
         validation: true,
@@ -233,7 +260,7 @@ const simpleAppGenome: Genome = {
     },
     
     {
-      id: 'integrations/vitest-nextjs-integration',
+      id: 'connector:vitest-nextjs',
       parameters: {
         testing: true,
         coverage: true,
@@ -241,25 +268,24 @@ const simpleAppGenome: Genome = {
       }
     },
     
-    // === COHESIVE BUSINESS MODULES ===
+    // === FEATURES ===
     {
-      id: 'features/auth/frontend/shadcn',
+      id: 'features/auth',
       parameters: {
-        theme: 'default',
+        backend: 'better-auth-nextjs',
+        frontend: 'shadcn',
         features: {
           loginForm: true,
           signupForm: true,
           passwordReset: true,
           profileManagement: true,
           userSettings: true,
-          sessionManagement: true
+          sessionManagement: true,
+          oauthGoogle: false,
+          oauthGithub: false,
+          mfa: false,
+          socialLogin: false
         }
-      },
-      features: {
-        'oauth-google': false,
-        'oauth-github': false,
-        'mfa': false,
-        'social-login': false
       }
     },
     
@@ -267,14 +293,13 @@ const simpleAppGenome: Genome = {
     {
       id: 'features/architech-welcome',
       parameters: {
-        showTechStack: true,
-        showComponents: true,
-        showProjectStructure: true,
-        showQuickStart: true,
-        customTitle: 'Welcome to {{project.name}}',
-        customDescription: 'Your {{project.name}} application is ready! Explore the features and technologies that power your project.',
-        primaryColor: 'blue',
-        showArchitechBranding: true
+        theme: 'default',
+        features: {
+          welcomePage: true,
+          documentationLinks: true,
+          capabilitiesShowcase: true,
+          quickStart: true
+        }
       }
     }
   ]

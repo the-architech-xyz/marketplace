@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 const vercelDeploymentBlueprint: Blueprint = {
   id: 'vercel-deployment',
@@ -10,8 +10,8 @@ const vercelDeploymentBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'vercel.json',
-      template: 'templates/vercel.json.tpl'
-    ,
+      template: 'templates/vercel.json.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -20,8 +20,8 @@ const vercelDeploymentBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '.vercelignore',
-      template: 'templates/vercelignore.tpl'
-    ,
+      template: 'templates/vercelignore.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
@@ -29,9 +29,9 @@ const vercelDeploymentBlueprint: Blueprint = {
     // Create environment variables template
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '.env.example',
-      template: 'templates/env.example.tpl'
-    ,
+      path: '{{paths.env}}.example',
+      template: 'templates/env.example.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.MERGE,
         priority: 0
@@ -39,9 +39,9 @@ const vercelDeploymentBlueprint: Blueprint = {
     // Create Vercel deployment scripts
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'scripts/deploy.sh',
-      template: 'templates/deploy.sh.tpl'
-    ,
+      path: '{{paths.scripts}}deploy.sh',
+      template: 'templates/deploy.sh.tpl',
+    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE, 
         priority: 0

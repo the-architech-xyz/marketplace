@@ -4,7 +4,7 @@
  * Modern NFT management using viem with type-safe contract interactions
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const nftManagementBlueprint: Blueprint = {
   id: 'web3-nft-management',
@@ -27,8 +27,8 @@ const nftManagementBlueprint: Blueprint = {
   type GetContractReturnType,
   isAddress
 } from 'viem';
-import { contractManager, ERC721_ABI, ERC1155_ABI } from './contracts.js';
-import { Web3Error } from './core.js';
+import { contractManager, ERC721_ABI, ERC1155_ABI } from './contracts';
+import { Web3Error } from './core';
 
 // NFT Metadata interfaces
 export interface NFTMetadata {
@@ -379,8 +379,8 @@ export const nftManager = new NFTManager();`
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/web3/useNFT.ts',
       content: `import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { nftManager } from '../../lib/web3/nft.js';
-import { useWallet } from './useWallet.js';
+import.*';
+import { useWallet } from './useWallet';
 import type { Address } from 'viem';
 
 // NFT Collection Hooks
@@ -552,7 +552,7 @@ export function useContractType(contractAddress: Address) {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/web3/NFTGallery.tsx',
       content: `import React, { useState } from 'react';
-import { useWallet } from '../../hooks/web3/useWallet.js';
+import.*';
 import { 
   useNFTCollection, 
   useOwnedNFTs, 
@@ -560,11 +560,11 @@ import {
   useERC1155Transfer,
   useContractType 
 } from '../../hooks/web3/useNFT.js';
-import { Button } from '../ui/button.js';
-import { Input } from '../ui/input.js';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card.js';
-import { Badge } from '../ui/badge.js';
-import { Alert, AlertDescription } from '../ui/alert.js';
+import.*';
+import.*';
+import.*';
+import.*';
+import.*';
 import type { Address } from 'viem';
 
 interface NFTGalleryProps {

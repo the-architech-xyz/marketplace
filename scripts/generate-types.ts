@@ -6,11 +6,16 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { BlueprintParser } from './blueprint-parser.js';
-import { TemplatePathResolver } from './template-path-resolver.js';
-import { TypeGeneratorHelpers } from './generate-types-helpers.js';
-import { CapabilityTypeGenerator } from './generate-capability-types.js';
-import { BlueprintAnalysisResult, ModuleArtifacts } from '@thearchitech.xyz/types';
+import { BlueprintParser } from './blueprint-parser';
+import { TemplatePathResolver } from './template-path-resolver';
+import { TypeGeneratorHelpers } from './generate-types-helpers';
+import { CapabilityTypeGenerator } from './generate-capability-types';
+import { BlueprintAnalysisResult, ModuleArtifacts } from '@thearchitech.xyz/marketplace/types';
+
+// Extend the imported type to support new module types
+type ExtendedBlueprintAnalysisResult = Omit<BlueprintAnalysisResult, 'moduleType'> & {
+  moduleType: 'adapter' | 'integration' | 'connector' | 'feature';
+};
 
 export class SmartTypeGenerator {
   private parser: BlueprintParser;
@@ -32,15 +37,17 @@ export class SmartTypeGenerator {
    */
   async generateAllTypes(): Promise<void> {
     console.log('🔍 Analyzing blueprints...');
-    const analysisResults = this.parser.parseAllBlueprints(this.marketplacePath);
+    const analysisResults = this.parser.parseAllBlueprints(this.marketplacePath) as ExtendedBlueprintAnalysisResult[];
     
     console.log(`📊 Found ${analysisResults.length} modules to analyze`);
     
     // Group results by module type
     const adapters = analysisResults.filter(r => r.moduleType === 'adapter');
     const integrations = analysisResults.filter(r => r.moduleType === 'integration');
+    const connectors = analysisResults.filter(r => r.moduleType === 'connector');
+    const features = analysisResults.filter(r => r.moduleType === 'feature');
     
-    console.log(`📦 ${adapters.length} adapters, ${integrations.length} integrations`);
+    console.log(`📦 ${adapters.length} adapters, ${integrations.length} integrations, ${connectors.length} connectors, ${features.length} features`);
     
     // Generate adapter types
     for (const adapter of adapters) {
@@ -52,13 +59,18 @@ export class SmartTypeGenerator {
       await this.generateIntegrationTypes(integration);
     }
     
-    // Generate capability types
-    console.log('🎯 Generating capability types...');
-    const capabilityOutputPath = path.join(this.outputPath, 'capabilities.ts');
-    await this.capabilityGenerator.generateCapabilityTypes(this.marketplacePath, capabilityOutputPath);
+    // Generate connector types
+    for (const connector of connectors) {
+      await this.generateConnectorTypes(connector);
+    }
     
-    // Generate master index
-    await TypeGeneratorHelpers.generateMasterIndex(analysisResults, this.outputPath);
+    // Generate feature types
+    for (const feature of features) {
+      await this.generateFeatureTypes(feature);
+    }
+    
+    // Generate master index (includes contract exports)
+    await TypeGeneratorHelpers.generateMasterIndex(analysisResults as any, this.outputPath);
     
     console.log('✅ Type generation completed successfully!');
   }
@@ -108,7 +120,7 @@ export class SmartTypeGenerator {
     console.log(`📊 Found ${modulesToRegenerate.size} modules to regenerate`);
     
     // Parse all blueprints to get the data we need
-    const analysisResults = this.parser.parseAllBlueprints(this.marketplacePath);
+    const analysisResults = this.parser.parseAllBlueprints(this.marketplacePath) as ExtendedBlueprintAnalysisResult[];
     
     // Generate types only for changed modules
     for (const moduleKey of modulesToRegenerate) {
@@ -127,7 +139,7 @@ export class SmartTypeGenerator {
     }
     
     // Always regenerate master index when any module changes
-    await TypeGeneratorHelpers.generateMasterIndex(analysisResults, this.outputPath);
+    await TypeGeneratorHelpers.generateMasterIndex(analysisResults as any, this.outputPath);
     
     console.log('✅ Incremental type generation completed successfully!');
   }
@@ -135,7 +147,7 @@ export class SmartTypeGenerator {
   /**
    * Generate types for a single adapter
    */
-  private async generateAdapterTypes(analysis: BlueprintAnalysisResult): Promise<void> {
+  private async generateAdapterTypes(analysis: ExtendedBlueprintAnalysisResult): Promise<void> {
     const moduleId = analysis.moduleId;
     const artifacts = analysis.artifacts;
     
@@ -162,7 +174,7 @@ export class SmartTypeGenerator {
   /**
    * Generate types for a single integration
    */
-  private async generateIntegrationTypes(analysis: BlueprintAnalysisResult): Promise<void> {
+  private async generateIntegrationTypes(analysis: ExtendedBlueprintAnalysisResult): Promise<void> {
     const moduleId = analysis.moduleId;
     const artifacts = analysis.artifacts;
     
@@ -181,5 +193,54 @@ export class SmartTypeGenerator {
     await fs.promises.writeFile(outputFile, tsContent);
     
     console.log(`📝 Generated types for integration: ${moduleId}`);
+  }
+
+  /**
+   * Generate types for a single connector
+   */
+  private async generateConnectorTypes(analysis: ExtendedBlueprintAnalysisResult): Promise<void> {
+    const moduleId = analysis.moduleId;
+    const artifacts = analysis.artifacts;
+    
+    // Load connector.json for additional metadata
+    const connectorJsonPath = path.join(this.marketplacePath, 'connectors', moduleId, 'connector.json');
+    const connectorJson = TypeGeneratorHelpers.loadIntegrationJson(connectorJsonPath); // Reuse integration loader
+    
+    // Generate TypeScript content
+    const tsContent = TypeGeneratorHelpers.generateIntegrationTypeContent(moduleId, connectorJson, artifacts);
+    
+    // Write to file
+    const outputDir = path.join(this.outputPath, 'connectors', moduleId);
+    await fs.promises.mkdir(outputDir, { recursive: true });
+    
+    const outputFile = path.join(outputDir, 'index.d.ts');
+    await fs.promises.writeFile(outputFile, tsContent);
+    
+    console.log(`📝 Generated types for connector: ${moduleId}`);
+  }
+
+
+  /**
+   * Generate types for a single feature
+   */
+  private async generateFeatureTypes(analysis: ExtendedBlueprintAnalysisResult): Promise<void> {
+    const moduleId = analysis.moduleId;
+    const artifacts = analysis.artifacts;
+    
+    // Load feature.json for additional metadata
+    const featureJsonPath = path.join(this.marketplacePath, 'features', moduleId, 'feature.json');
+    const featureJson = TypeGeneratorHelpers.loadIntegrationJson(featureJsonPath); // Reuse integration loader
+    
+    // Generate TypeScript content
+    const tsContent = TypeGeneratorHelpers.generateIntegrationTypeContent(moduleId, featureJson, artifacts);
+    
+    // Write to file
+    const outputDir = path.join(this.outputPath, 'features', moduleId);
+    await fs.promises.mkdir(outputDir, { recursive: true });
+    
+    const outputFile = path.join(outputDir, 'index.d.ts');
+    await fs.promises.writeFile(outputFile, tsContent);
+    
+    console.log(`📝 Generated types for feature: ${moduleId}`);
   }
 }

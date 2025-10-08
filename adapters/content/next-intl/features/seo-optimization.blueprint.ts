@@ -4,7 +4,7 @@
  * Multilingual SEO with hreflang and metadata
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const seoOptimizationBlueprint: Blueprint = {
   id: 'next-intl-seo-optimization',
@@ -148,7 +148,7 @@ export function generateStructuredData(
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/seo/SEOHead.tsx',
       content: `import React from 'react';
-import { generateHreflangTags, generateStructuredData, SEOConfig } from '../../lib/seo.js';
+import.*';
 
 interface SEOHeadProps {
   config: SEOConfig;
@@ -188,7 +188,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ config, locale, currentPath })
       path: 'src/hooks/useSEO.ts',
       content: `import { useLocale } from 'next-intl';
 import { usePathname } from 'next/navigation';
-import { generateMetadata, generateHreflangTags, SEOConfig } from '../lib/seo.js';
+import.*';
 
 export function useSEO(config: SEOConfig) {
   const locale = useLocale();

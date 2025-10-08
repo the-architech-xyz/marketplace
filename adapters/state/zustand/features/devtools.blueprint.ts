@@ -4,7 +4,7 @@
  * Integration with Redux DevTools for debugging
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const devtoolsBlueprint: Blueprint = {
   id: 'zustand-devtools',
@@ -332,8 +332,8 @@ export function createPerformanceMonitor(storeName: string) {
       content: `'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useAppStore } from '../../lib/stores/use-app-store.js';
-import { createStoreInspector, createPerformanceMonitor } from '../../lib/devtools/devtools-utils.js';
+import.*';
+import.*';
 
 interface DevToolsPanelProps {
   isOpen: boolean;
@@ -531,8 +531,8 @@ export const DevToolsPanel: React.FC<DevToolsPanelProps> = ({ isOpen, onClose })
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/hooks/useDevTools.ts',
       content: `import { useState, useEffect } from 'react';
-import { useAppStore } from '../lib/stores/use-app-store.js';
-import { createStoreInspector, createPerformanceMonitor } from '../lib/devtools/devtools-utils.js';
+import.*';
+import.*';
 
 export function useDevTools() {
   const [isOpen, setIsOpen] = useState(false);

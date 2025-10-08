@@ -4,7 +4,7 @@
  * Adds OAuth providers (Google, GitHub, Discord, Twitter) to Better Auth
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const oauthProvidersBlueprint: Blueprint = {
   id: 'better-auth-oauth-providers',

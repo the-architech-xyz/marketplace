@@ -5,7 +5,7 @@
  * with caching, background updates, and optimistic updates for React applications
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
 
 export const tanstackQueryBlueprint: Blueprint = {
   id: 'tanstack-query-setup',
@@ -37,7 +37,7 @@ export const tanstackQueryBlueprint: Blueprint = {
     // Create Query Client Configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/query-client.ts',
+      path: '{{paths.shared_library}}query-client.ts',
       template: 'templates/query-client.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -47,7 +47,7 @@ export const tanstackQueryBlueprint: Blueprint = {
     // Create Standard Query Hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-query.ts',
+      path: '{{paths.hooks}}use-query.ts',
       template: 'templates/use-query.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -57,7 +57,7 @@ export const tanstackQueryBlueprint: Blueprint = {
     // Create Standard Mutation Hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-mutation.ts',
+      path: '{{paths.hooks}}use-mutation.ts',
       template: 'templates/use-mutation.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -67,7 +67,7 @@ export const tanstackQueryBlueprint: Blueprint = {
     // Create Infinite Query Hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-infinite-query.ts',
+      path: '{{paths.hooks}}use-infinite-query.ts',
       template: 'templates/use-infinite-query.ts.tpl',
       condition: '{{#if module.features.infinite}}',
       conflictResolution: {
@@ -78,7 +78,7 @@ export const tanstackQueryBlueprint: Blueprint = {
     // Create Optimistic Update Utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/optimistic-updates.ts',
+      path: '{{paths.shared_library}}optimistic-updates.ts',
       template: 'templates/optimistic-updates.ts.tpl',
       condition: '{{#if module.features.optimistic}}',
       conflictResolution: {
@@ -89,7 +89,7 @@ export const tanstackQueryBlueprint: Blueprint = {
     // Create Offline Support
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/offline-support.ts',
+      path: '{{paths.shared_library}}offline-support.ts',
       template: 'templates/offline-support.ts.tpl',
       condition: '{{#if module.features.offline}}',
       conflictResolution: {
@@ -100,7 +100,7 @@ export const tanstackQueryBlueprint: Blueprint = {
     // Create Query Keys Factory
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/lib/query-keys.ts',
+      path: '{{paths.shared_library}}query-keys.ts',
       template: 'templates/query-keys.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -110,7 +110,7 @@ export const tanstackQueryBlueprint: Blueprint = {
     // Create Error Boundary for Queries
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/QueryErrorBoundary.tsx',
+      path: '{{paths.components}}QueryErrorBoundary.tsx',
       template: 'templates/QueryErrorBoundary.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -120,7 +120,7 @@ export const tanstackQueryBlueprint: Blueprint = {
     // Create Loading States
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/components/QueryLoading.tsx',
+      path: '{{paths.components}}QueryLoading.tsx',
       template: 'templates/QueryLoading.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -130,7 +130,7 @@ export const tanstackQueryBlueprint: Blueprint = {
     // Add TypeScript Types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/types/query.ts',
+      path: '{{paths.types}}query.ts',
       template: 'templates/query-types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -140,7 +140,7 @@ export const tanstackQueryBlueprint: Blueprint = {
     // Create Query Invalidation Utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/hooks/use-query-invalidation.ts',
+      path: '{{paths.hooks}}use-query-invalidation.ts',
       template: 'templates/query-invalidation.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,

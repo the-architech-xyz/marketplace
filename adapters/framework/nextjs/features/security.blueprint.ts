@@ -5,7 +5,7 @@
  * Includes CSP, HSTS, and other security best practices
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 export const nextjsSecurityBlueprint: Blueprint = {
   id: 'nextjs-security-setup',

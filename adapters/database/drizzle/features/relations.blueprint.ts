@@ -4,7 +4,7 @@
  * Adds comprehensive relationship management for Drizzle ORM
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const relationsBlueprint: Blueprint = {
   id: 'drizzle-relations',

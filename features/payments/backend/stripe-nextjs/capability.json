@@ -1,0 +1,224 @@
+{
+  "id": "payments/backend/stripe-nextjs",
+  "name": "Payments Backend (Stripe + NextJS)",
+  "description": "Payment processing backend implementation using Stripe and NextJS",
+  "type": "backend",
+  "version": "1.0.0",
+  "implements": "payments/contract",
+  "requires": [
+    "framework/nextjs",
+    "payment/stripe"
+  ],
+  "parameters": {
+    "webhooks": {
+      "name": "Webhooks",
+      "description": "Stripe webhook handlers for payment events",
+      "type": "boolean",
+      "default": true
+    },
+    "checkout": {
+      "name": "Checkout",
+      "description": "Stripe Checkout integration for payments",
+      "type": "boolean",
+      "default": true
+    },
+    "subscriptions": {
+      "name": "Subscriptions",
+      "description": "Subscription management and billing",
+      "type": "boolean",
+      "default": false
+    },
+    "invoices": {
+      "name": "Invoices",
+      "description": "Invoice generation and management",
+      "type": "boolean",
+      "default": false
+    },
+    "refunds": {
+      "name": "Refunds",
+      "description": "Refund processing and management",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "contract": {
+    "hooks": {
+      "usePayments": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useSubscriptions": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useInvoices": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "usePaymentMethods": {
+        "parameters": [],
+        "returnType": "{\n    // Query operations\n    list: any; // UseQueryResult<PaymentMethodData[], Error>\n    \n    // Mutation operations\n    create: any; // UseMutationResult<PaymentMethodData, Error, any>\n    update: any; // UseMutationResult<PaymentMethodData, Error, { id: string; data: any }>\n    delete: any; // UseMutationResult<void, Error, string>\n  }",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useCheckout": {
+        "parameters": [],
+        "returnType": "{\n    // Mutation operations\n    createSession: any; // UseMutationResult<PaymentIntent, Error, CreatePaymentData>\n    createPortalSession: any; // UseMutationResult<{ url: string }, Error, string>\n  }",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": false
+      },
+      "useAnalytics": {
+        "parameters": [],
+        "returnType": "{\n    // Query operations\n    getAnalytics: any; // UseQueryResult<PaymentAnalytics, Error>\n  }",
+        "isAsync": true,
+        "isMutation": false,
+        "isQuery": true
+      }
+    },
+    "types": {
+      "PaymentStatus": {
+        "definition": "| 'completed' \n  | 'pending' \n  | 'failed' \n  | 'processing' \n  | 'cancelled' \n  | 'refunded'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "PaymentMethod": {
+        "definition": "| 'card' \n  | 'bank_transfer' \n  | 'paypal' \n  | 'apple_pay' \n  | 'google_pay' \n  | 'crypto' \n  | 'wallet'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "Currency": {
+        "definition": "'USD' | 'EUR' | 'GBP' | 'CAD' | 'AUD' | 'JPY' | 'CHF'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "SubscriptionStatus": {
+        "definition": "| 'active' \n  | 'inactive' \n  | 'cancelled' \n  | 'past_due' \n  | 'unpaid' \n  | 'trialing'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "InvoiceStatus": {
+        "definition": "| 'draft' \n  | 'open' \n  | 'paid' \n  | 'void' \n  | 'uncollectible'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "Payment": {
+        "definition": "export interface Payment {\n  id: string;\n  amount: number;\n  currency: Currency;\n  status: PaymentStatus;\n  method: PaymentMethod;\n  customer: {\n    id: string;\n    name: string;\n    email: string;\n  };\n  description?: string;\n  metadata?: Record<string, any>;\n  createdAt: string;\n  updatedAt: string;\n  processedAt?: string;\n  failureReason?: string;\n  refundedAmount?: number;\n  refundedAt?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "PaymentMethodData": {
+        "definition": "export interface PaymentMethodData {\n  id: string;\n  type: PaymentMethod;\n  last4?: string;\n  brand?: string;\n  expMonth?: number;\n  expYear?: number;\n  isDefault: boolean;\n  createdAt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "Subscription": {
+        "definition": "export interface Subscription {\n  id: string;\n  customerId: string;\n  planId: string;\n  planName: string;\n  status: SubscriptionStatus;\n  currentPeriodStart: string;\n  currentPeriodEnd: string;\n  cancelAtPeriodEnd: boolean;\n  canceledAt?: string;\n  trialStart?: string;\n  trialEnd?: string;\n  amount: number;\n  currency: Currency;\n  interval: 'day' | 'week' | 'month' | 'year';\n  intervalCount: number;\n  createdAt: string;\n  updatedAt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "Invoice": {
+        "definition": "export interface Invoice {\n  id: string;\n  customerId: string;\n  subscriptionId?: string;\n  status: InvoiceStatus;\n  amount: number;\n  currency: Currency;\n  amountPaid: number;\n  amountDue: number;\n  subtotal: number;\n  tax?: number;\n  discount?: number;\n  description?: string;\n  dueDate: string;\n  paidAt?: string;\n  createdAt: string;\n  updatedAt: string;\n  lineItems: InvoiceLineItem[];\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "InvoiceLineItem": {
+        "definition": "export interface InvoiceLineItem {\n  id: string;\n  description: string;\n  quantity: number;\n  unitAmount: number;\n  totalAmount: number;\n  taxRate?: number;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "PaymentIntent": {
+        "definition": "export interface PaymentIntent {\n  id: string;\n  amount: number;\n  currency: Currency;\n  status: PaymentStatus;\n  clientSecret: string;\n  customerId?: string;\n  description?: string;\n  metadata?: Record<string, any>;\n  createdAt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "Refund": {
+        "definition": "export interface Refund {\n  id: string;\n  paymentId: string;\n  amount: number;\n  currency: Currency;\n  status: 'succeeded' | 'pending' | 'failed' | 'cancelled';\n  reason: 'duplicate' | 'fraudulent' | 'requested_by_customer' | 'other';\n  createdAt: string;\n  processedAt?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "CreatePaymentData": {
+        "definition": "export interface CreatePaymentData {\n  amount: number;\n  currency: Currency;\n  method: PaymentMethod;\n  customerId?: string;\n  description?: string;\n  metadata?: Record<string, any>;\n  saveCard?: boolean;\n  returnUrl?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "CreateSubscriptionData": {
+        "definition": "export interface CreateSubscriptionData {\n  customerId: string;\n  planId: string;\n  paymentMethodId?: string;\n  trialPeriodDays?: number;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "CreateInvoiceData": {
+        "definition": "export interface CreateInvoiceData {\n  customerId: string;\n  subscriptionId?: string;\n  description?: string;\n  dueDate?: string;\n  lineItems: Omit<InvoiceLineItem, 'id' | 'totalAmount'>[];\n  taxRate?: number;\n  discount?: number;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "UpdatePaymentData": {
+        "definition": "export interface UpdatePaymentData {\n  description?: string;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "UpdateSubscriptionData": {
+        "definition": "export interface UpdateSubscriptionData {\n  planId?: string;\n  status?: SubscriptionStatus;\n  cancelAtPeriodEnd?: boolean;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "PaymentAnalytics": {
+        "definition": "export interface PaymentAnalytics {\n  totalRevenue: number;\n  monthlyRevenue: number;\n  totalTransactions: number;\n  activeSubscriptions: number;\n  revenueGrowth: number;\n  transactionGrowth: number;\n  subscriptionGrowth: number;\n  invoiceGrowth: number;\n  averageTransactionValue: number;\n  conversionRate: number;\n  churnRate: number;\n  mrr: number; // Monthly Recurring Revenue\n  arr: number; // Annual Recurring Revenue\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "PaymentFilters": {
+        "definition": "export interface PaymentFilters {\n  status?: PaymentStatus[];\n  method?: PaymentMethod[];\n  currency?: Currency[];\n  dateFrom?: string;\n  dateTo?: string;\n  amountMin?: number;\n  amountMax?: number;\n  customerId?: string;\n  search?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "PaymentError": {
+        "definition": "export interface PaymentError {\n  code: string;\n  message: string;\n  type: 'card_error' | 'invalid_request_error' | 'api_error' | 'authentication_error';\n  decline_code?: string;\n  param?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "PaymentWebhookEvent": {
+        "definition": "export interface PaymentWebhookEvent {\n  id: string;\n  type: string;\n  data: {\n    object: Payment | Subscription | Invoice | Refund;\n  };\n  created: number;\n  livemode: boolean;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "IPaymentService": {
+        "definition": "export interface IPaymentService {\n  /**\n   * Payment Management Service\n   * Provides all payment-related operations in a cohesive interface\n   */\n  usePayments: () => {\n    // Query operations\n    list: any; // UseQueryResult<Payment[], Error>\n    get: (id: string) => any; // UseQueryResult<Payment, Error>\n    \n    // Mutation operations\n    create: any; // UseMutationResult<Payment, Error, CreatePaymentData>\n    update: any; // UseMutationResult<Payment, Error, { id: string; data: UpdatePaymentData }>\n    delete: any; // UseMutationResult<void, Error, string>\n    refund: any; // UseMutationResult<Refund, Error, { paymentId: string; amount?: number }>\n  };\n\n  /**\n   * Subscription Management Service\n   * Provides all subscription-related operations in a cohesive interface\n   */\n  useSubscriptions: () => {\n    // Query operations\n    list: any; // UseQueryResult<Subscription[], Error>\n    get: (id: string) => any; // UseQueryResult<Subscription, Error>\n    \n    // Mutation operations\n    create: any; // UseMutationResult<Subscription, Error, CreateSubscriptionData>\n    update: any; // UseMutationResult<Subscription, Error, { id: string; data: UpdateSubscriptionData }>\n    cancel: any; // UseMutationResult<Subscription, Error, string>\n  };\n\n  /**\n   * Invoice Management Service\n   * Provides all invoice-related operations in a cohesive interface\n   */\n  useInvoices: () => {\n    // Query operations\n    list: any; // UseQueryResult<Invoice[], Error>\n    get: (id: string) => any; // UseQueryResult<Invoice, Error>\n    \n    // Mutation operations\n    create: any; // UseMutationResult<Invoice, Error, CreateInvoiceData>\n    update: any; // UseMutationResult<Invoice, Error, { id: string; data: any }>\n  };\n\n  /**\n   * Payment Method Management Service\n   * Provides all payment method-related operations in a cohesive interface\n   */\n  usePaymentMethods: () => {\n    // Query operations\n    list: any; // UseQueryResult<PaymentMethodData[], Error>\n    \n    // Mutation operations\n    create: any; // UseMutationResult<PaymentMethodData, Error, any>\n    update: any; // UseMutationResult<PaymentMethodData, Error, { id: string; data: any }>\n    delete: any; // UseMutationResult<void, Error, string>\n  };\n\n  /**\n   * Checkout Service\n   * Provides payment session and checkout operations\n   */\n  useCheckout: () => {\n    // Mutation operations\n    createSession: any; // UseMutationResult<PaymentIntent, Error, CreatePaymentData>\n    createPortalSession: any; // UseMutationResult<{ url: string }, Error, string>\n  };\n\n  /**\n   * Analytics Service\n   * Provides payment analytics and reporting\n   */\n  useAnalytics: () => {\n    // Query operations\n    getAnalytics: any; // UseQueryResult<PaymentAnalytics, Error>\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      }
+    }
+  }
+}

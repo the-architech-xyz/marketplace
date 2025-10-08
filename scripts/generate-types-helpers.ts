@@ -4,7 +4,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { BlueprintAnalysisResult, ModuleArtifacts } from '@thearchitech.xyz/types';
+import { BlueprintAnalysisResult, ModuleArtifacts } from '@thearchitech.xyz/marketplace/types';
 
 export class TypeGeneratorHelpers {
   /**
@@ -13,16 +13,33 @@ export class TypeGeneratorHelpers {
   static async generateMasterIndex(analysisResults: BlueprintAnalysisResult[], outputPath: string): Promise<void> {
     const exports: string[] = [];
     const artifactExports: string[] = [];
+    const contractExports: string[] = [];
     
     // Generate exports for all modules
     for (const analysis of analysisResults) {
       const moduleId = analysis.moduleId;
       const moduleType = analysis.moduleType;
-      const modulePath = `${moduleType}s/${moduleId}`;
+      
+      // Build the correct path based on module type and moduleId
+      let modulePath: string;
+      if (moduleType === 'adapter') {
+        modulePath = `adapters/${moduleId}`;
+      } else if (moduleType === 'connector') {
+        modulePath = `connectors/${moduleId}`;
+      } else if (moduleType === 'feature') {
+        modulePath = `features/${moduleId}`;
+      } else {
+        // For integrations, use the moduleId as-is
+        modulePath = moduleId;
+      }
       
       exports.push(`export * from './${modulePath}';`);
       artifactExports.push(`  '${moduleId}': (): Promise<ModuleArtifacts> => import('./${modulePath}').then(m => m.${this.getArtifactsExportName(moduleId)}),`);
     }
+    
+    // Generate contract exports for features
+    const contractExportsResult = await this.generateContractExports(outputPath);
+    contractExports.push(...contractExportsResult);
     
     const tsContent = `/**
  * The Architech Marketplace Types
@@ -31,9 +48,12 @@ export class TypeGeneratorHelpers {
  */
 
 // Import base types from the types package
-import { Recipe, Module, ProjectConfig, ModuleArtifacts as ModuleArtifactsType } from '@thearchitech.xyz/types';
+import { Module, ProjectConfig, ModuleArtifacts as ModuleArtifactsType } from '@thearchitech.xyz/marketplace/types';
 
 ${exports.join('\n')}
+
+// 🎯 Cohesive Contract Exports
+${contractExports.join('\n')}
 
 // 🚀 Auto-discovered module artifacts
 export declare const ModuleArtifacts: {
@@ -42,18 +62,11 @@ export declare const ModuleArtifacts: {
 
 export type ModuleId = keyof typeof ModuleArtifacts;
 
-// 🧬 Genome Type - Extended Recipe with marketplace-specific features
-export interface Genome extends Recipe {
-  version: string;
-  project: ProjectConfig & {
-    framework: string;
-    path?: string;
-  };
-  modules: Module[];
-}
-
 // Re-export base types for convenience
-export { Recipe, Module, ProjectConfig } from '@thearchitech.xyz/types';
+export { Module, ProjectConfig } from '@thearchitech.xyz/marketplace/types';
+
+// Re-export Genome type from shared types package
+export { Genome } from '@thearchitech.xyz/marketplace/types';
 `;
 
     const outputFile = path.join(outputPath, 'index.d.ts');
@@ -324,5 +337,131 @@ export type ${moduleName}Enhances = typeof ${artifactsConst}.enhances[number];
     } catch {
       return {};
     }
+  }
+
+  /**
+   * Generate contract exports for features
+   */
+  static async generateContractExports(outputPath: string): Promise<string[]> {
+    const contractExports: string[] = [];
+    const featuresPath = path.join(outputPath, '..', 'features');
+    
+    try {
+      // Find all contract.ts files in features
+      const contractFiles = await this.findContractFiles(featuresPath);
+      
+      for (const contractFile of contractFiles) {
+        const featureName = this.extractFeatureName(contractFile);
+        if (featureName) {
+          // Create individual contract type file
+          await this.generateContractTypeFile(contractFile, featureName, outputPath);
+          
+          // Add export to master index
+          contractExports.push(`export * from './contracts/${featureName}';`);
+        }
+      }
+    } catch (error) {
+      console.warn('⚠️ Could not generate contract exports:', error);
+    }
+    
+    return contractExports;
+  }
+
+  /**
+   * Find all contract.ts files in features directory
+   */
+  private static async findContractFiles(featuresPath: string): Promise<string[]> {
+    const contractFiles: string[] = [];
+    
+    try {
+      const features = await fs.promises.readdir(featuresPath);
+      
+      for (const feature of features) {
+        const featurePath = path.join(featuresPath, feature);
+        const stat = await fs.promises.stat(featurePath);
+        
+        if (stat.isDirectory()) {
+          const contractPath = path.join(featurePath, 'contract.ts');
+          try {
+            await fs.promises.access(contractPath);
+            contractFiles.push(contractPath);
+          } catch {
+            // Contract file doesn't exist, skip
+          }
+        }
+      }
+    } catch (error) {
+      console.warn('⚠️ Could not scan features directory:', error);
+    }
+    
+    return contractFiles;
+  }
+
+  /**
+   * Extract feature name from contract file path
+   */
+  private static extractFeatureName(contractPath: string): string | null {
+    const match = contractPath.match(/features\/([^\/]+)\/contract\.ts$/);
+    return match ? match[1] : null;
+  }
+
+  /**
+   * Generate individual contract type file
+   */
+  private static async generateContractTypeFile(contractPath: string, featureName: string, outputPath: string): Promise<void> {
+    try {
+      // Read the contract file
+      const contractContent = await fs.promises.readFile(contractPath, 'utf-8');
+      
+      // Create contracts directory
+      const contractsDir = path.join(outputPath, 'contracts');
+      await fs.promises.mkdir(contractsDir, { recursive: true });
+      
+      // Generate the contract type file
+      const contractTypeContent = this.generateContractTypeContent(contractContent, featureName);
+      
+      // Write the file
+      const outputFile = path.join(contractsDir, `${featureName}.d.ts`);
+      await fs.promises.writeFile(outputFile, contractTypeContent);
+      
+      console.log(`📝 Generated contract types for: ${featureName}`);
+    } catch (error) {
+      console.warn(`⚠️ Could not generate contract types for ${featureName}:`, error);
+    }
+  }
+
+  /**
+   * Generate contract type content
+   */
+  private static generateContractTypeContent(contractContent: string, featureName: string): string {
+    // Extract all exported interfaces and types from the contract
+    const lines = contractContent.split('\n');
+    const exports: string[] = [];
+    
+    // Add header
+    exports.push(`/**
+ * ${featureName} Contract Types
+ * 
+ * Auto-generated from contract.ts
+ */`);
+    
+    // Add all non-import lines that contain exports
+    for (const line of lines) {
+      const trimmed = line.trim();
+      
+      // Skip imports and comments
+      if (trimmed.startsWith('import ') || 
+          trimmed.startsWith('//') || 
+          trimmed.startsWith('/*') ||
+          trimmed === '' ||
+          trimmed.startsWith('*')) {
+        continue;
+      }
+      
+      // Include all other lines (interfaces, types, etc.)
+      exports.push(line);
+    }
+    
+    return exports.join('\n');
   }
 }

@@ -1,4 +1,4 @@
-import { Genome } from "@thearchitech.xyz/types";
+import { Genome } from "@thearchitech.xyz/marketplace/types";
 /**
  * AI-Powered Blog Genome
  *

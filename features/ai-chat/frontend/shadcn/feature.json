@@ -1,0 +1,42 @@
+{
+  "id": "feature:ai-chat/shadcn",
+  "name": "AI Chat Feature (Shadcn)",
+  "description": "Complete AI chat interface using Shadcn components",
+  "type": "feature",
+  "version": "1.0.0",
+  "prerequisites": {
+    "capabilities": ["ai-chat-backend-vercel-ai-nextjs"],
+    "adapters": ["ui/shadcn-ui"]
+  },
+  "provides": ["ai-chat-ui"],
+  "parameters": {
+    "features": {
+      "type": "object",
+      "default": {
+        "chatInterface": true,
+        "messageHistory": true,
+        "fileUpload": true,
+        "voiceInput": false,
+        "voiceOutput": false,
+        "codeHighlighting": true,
+        "markdownSupport": true,
+        "exportImport": true,
+        "customPrompts": false,
+        "settingsPanel": true
+      },
+      "description": "AI chat UI features to enable",
+      "required": false
+    },
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false,
+      "options": ["default", "dark", "light", "minimal"]
+    }
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

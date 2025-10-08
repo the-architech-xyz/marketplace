@@ -1,51 +1,15 @@
 {
-  "id": "auth/frontend/shadcn",
-  "name": "Authentication Frontend (Shadcn)",
-  "description": "Authentication UI components using Shadcn/UI",
+  "id": "feature:auth/shadcn",
+  "name": "Authentication Feature (Shadcn)",
+  "description": "Complete authentication UI using Shadcn components",
+  "type": "feature",
   "version": "1.0.0",
-  "category": "feature",
-  "contract": {
-    "hooks": {
-      "useAuthForm": "UseFormReturn<AuthFormData, any, AuthFormData>",
-      "useLoginForm": "UseFormReturn<LoginFormData, any, LoginFormData>",
-      "useSignupForm": "UseFormReturn<SignupFormData, any, SignupFormData>",
-      "usePasswordResetForm": "UseFormReturn<PasswordResetFormData, any, PasswordResetFormData>"
-    },
-    "components": {
-      "AuthForm": "React.ComponentType<AuthFormProps>",
-      "LoginForm": "React.ComponentType<LoginFormProps>",
-      "SignupForm": "React.ComponentType<SignupFormProps>",
-      "PasswordResetForm": "React.ComponentType<PasswordResetFormProps>",
-      "UserProfile": "React.ComponentType<UserProfileProps>",
-      "UserSettings": "React.ComponentType<UserSettingsProps>"
-    },
-    "types": ["AuthFormData", "LoginFormData", "SignupFormData", "PasswordResetFormData", "UserProfileData"]
-  },
   "prerequisites": {
-    "adapters": [
-      "better-auth",
-      "shadcn-ui"
-    ],
-    "integrators": [
-      "better-auth-nextjs-integration",
-      "rhf-zod-shadcn-integration"
-    ]
+    "capabilities": ["auth-backend-better-auth-nextjs"],
+    "adapters": ["ui/shadcn-ui"]
   },
-  "provides": {
-    "capabilities": [
-      "auth-ui-components",
-      "form-validation",
-      "responsive-design"
-    ]
-  },
+  "provides": ["auth-ui"],
   "parameters": {
-    "theme": {
-      "type": "string",
-      "default": "default",
-      "description": "UI theme variant",
-      "required": false,
-      "options": ["default", "dark", "light"]
-    },
     "features": {
       "type": "object",
       "default": {
@@ -54,10 +18,20 @@
         "passwordReset": true,
         "profileManagement": true,
         "userSettings": true,
-        "sessionManagement": true
+        "sessionManagement": true,
+        "twoFactorAuth": false,
+        "socialAuth": true,
+        "emailVerification": false
       },
-      "description": "UI features to enable",
+      "description": "Authentication UI features to enable",
       "required": false
+    },
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false,
+      "options": ["default", "dark", "light", "minimal"]
     }
   },
   "constraints": {

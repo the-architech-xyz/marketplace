@@ -4,7 +4,7 @@
  * Modern wallet integration using viem with MetaMask, WalletConnect, and other wallets
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
 
 const walletIntegrationBlueprint: Blueprint = {
   id: 'web3-wallet-integration',
@@ -31,8 +31,8 @@ const walletIntegrationBlueprint: Blueprint = {
   getAddress,
   isAddress
 } from 'viem';
-import { NETWORKS, getCurrentNetwork, type SupportedChain } from './config.js';
-import { Web3Error } from './core.js';
+import { NETWORKS, getCurrentNetwork, type SupportedChain } from './config';
+import { Web3Error } from './core';
 
 // Wallet state interface
 export interface WalletState {
@@ -335,8 +335,8 @@ export const walletManager = new WalletManager();`
       path: 'src/hooks/web3/useWallet.ts',
       content: `import { useState, useEffect, useCallback } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { walletManager, WalletState, WalletConnectionOptions } from '../../lib/web3/wallet.js';
-import { Web3Error } from '../../lib/web3/core.js';
+import.*';
+import.*';
 
 // Modern wallet hook with React Query integration
 export const useWallet = () => {
@@ -512,11 +512,11 @@ export const useWalletTransaction = () => {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/web3/WalletConnect.tsx',
       content: `import React from 'react';
-import { useWallet } from '../../hooks/web3/useWallet.js';
-import { Button } from '../ui/button.js';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card.js';
-import { Badge } from '../ui/badge.js';
-import { Alert, AlertDescription } from '../ui/alert.js';
+import.*';
+import.*';
+import.*';
+import.*';
+import.*';
 
 export const WalletConnect: React.FC = () => {
   const { 

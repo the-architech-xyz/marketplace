@@ -2,19 +2,31 @@
 
 ## Overview
 
-Features are the business capability layer that provides high-level, end-user functionality. They consume Adapters and Integrators to deliver complete, working features.
+Features are the business capability layer that provides high-level, end-user functionality. They use the **Cohesive Contract Architecture** to define standardized business capabilities through TypeScript interfaces that serve as contracts between backend implementations and frontend consumers.
 
 ## Feature Structure
 
 ```
 marketplace/features/
 └── feature-name/
-    └── framework-ui/
-        ├── feature.json
-        ├── blueprint.ts
-        └── templates/
-            └── *.tpl
+    ├── contract.ts              # Contract definition (single source of truth)
+    ├── backend/
+    │   └── technology-stack/
+    │       ├── blueprint.ts     # Generates service implementation
+    │       ├── capability.json  # Capability metadata
+    │       └── templates/
+    │           └── ServiceName.ts.tpl
+    └── frontend/
+        └── ui-framework/
+            ├── blueprint.ts     # Generates UI components
+            ├── feature.json     # Feature metadata
+            └── templates/
+                └── *.tsx.tpl
 ```
+
+## Contract-Driven Development
+
+Every feature must define a `contract.ts` file that serves as the single source of truth for its API. This contract defines cohesive business services that group related functionality.
 
 ## Creating a Feature
 
@@ -23,9 +35,68 @@ marketplace/features/
 # Navigate to marketplace directory
 cd marketplace
 
-# Create feature directory
-mkdir -p features/feature-name/framework-ui
-mkdir -p features/feature-name/framework-ui/templates
+# Create feature directory with contract-driven structure
+mkdir -p features/feature-name/backend/technology-stack/templates
+mkdir -p features/feature-name/frontend/ui-framework/templates
+```
+
+### 2. Create Contract Definition
+```typescript
+// features/feature-name/contract.ts
+export interface I{FeatureName}Service {
+  use{Capability}: () => {
+    list: any; // UseQueryResult<{Type}[], Error>
+    get: (id: string) => any; // UseQueryResult<{Type}, Error>
+    create: any; // UseMutationResult<{Type}, Error, Create{Type}Data>
+    update: any; // UseMutationResult<{Type}, Error, { id: string; data: Update{Type}Data }>
+    delete: any; // UseMutationResult<void, Error, string>
+  };
+  // ... other cohesive services
+}
+```
+
+### 3. Create Backend Implementation
+```typescript
+// features/feature-name/backend/technology-stack/blueprint.ts
+export const blueprint: Blueprint = {
+  id: 'feature-name/backend/technology-stack',
+  name: 'Feature Name Backend',
+  description: 'Backend implementation providing I{FeatureName}Service.',
+  version: '1.0.0',
+  actions: [
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: 'src/lib/services/{FeatureName}Service.ts',
+      template: 'templates/{FeatureName}Service.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    }
+  ]
+};
+```
+
+### 4. Create Frontend Implementation
+```typescript
+// features/feature-name/frontend/ui-framework/blueprint.ts
+export const blueprint: Blueprint = {
+  id: 'feature-name/frontend/ui-framework',
+  name: 'Feature Name Frontend',
+  description: 'Frontend implementation consuming I{FeatureName}Service.',
+  version: '1.0.0',
+  actions: [
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: 'src/components/{FeatureName}Form.tsx',
+      template: 'templates/{FeatureName}Form.tsx.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    }
+  ]
+};
 ```
 
 ### 2. Create feature.json
