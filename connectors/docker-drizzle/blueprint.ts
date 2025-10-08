@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ModifierType } from '@thearchitech.xyz/types';
 
 const dockerDrizzleIntegrationBlueprint: Blueprint = {
   id: 'docker-drizzle-integration',

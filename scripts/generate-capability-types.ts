@@ -6,7 +6,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { CapabilityRegistry, ModuleProvider } from '@thearchitech.xyz/marketplace/types';
+import { CapabilityRegistry, ModuleProvider } from '@thearchitech.xyz/types';
 
 export class CapabilityTypeGenerator {
   private capabilityRegistry: CapabilityRegistry = {};

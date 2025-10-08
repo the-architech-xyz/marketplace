@@ -5,7 +5,7 @@
  * Configuration and integration is handled by integrators
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const accessibilityBlueprint: Blueprint = {
   id: 'shadcn-ui-accessibility-installer',

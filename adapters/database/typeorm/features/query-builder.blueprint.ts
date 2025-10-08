@@ -4,7 +4,7 @@
  * Adds advanced query building and optimization tools
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const queryBuilderBlueprint: Blueprint = {
   id: 'typeorm-query-builder',

@@ -4,7 +4,7 @@
  * Adds admin utilities and management functions for Better Auth
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const adminPanelBlueprint: Blueprint = {
   id: 'better-auth-admin-panel',

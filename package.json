@@ -2,11 +2,11 @@
   "name": "@thearchitech.xyz/marketplace",
   "version": "1.9.1",
   "description": "The Architech Marketplace - Adapters, Connectors, Capabilities, and Features",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "exports": {
     ".": "./index.js",
-    "./types": "./types/index.d.ts",
+    "./types": "./types/index.js",
     "./adapters/*": "./adapters/*/adapter.json",
     "./connectors/*": "./connectors/*/connector.json",
     "./capabilities/*": "./capabilities/*/capability.json",

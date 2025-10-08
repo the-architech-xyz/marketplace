@@ -4,7 +4,7 @@
  * Integration with Redux DevTools for debugging
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const devtoolsBlueprint: Blueprint = {
   id: 'zustand-devtools',

@@ -5,7 +5,7 @@
  * Only installs dependencies once, even if multiple modules need them
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const coreDependenciesBlueprint: Blueprint = {
   id: 'core-dependencies-setup',

@@ -4,7 +4,7 @@
  * Adds database migrations and schema versioning
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const migrationSystemBlueprint: Blueprint = {
   id: 'typeorm-migration-system',

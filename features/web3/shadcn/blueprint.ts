@@ -6,7 +6,7 @@
  * in the contract.ts file.
  */
 
-import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy } from '@thearchitech.xyz/types';
 
 export const web3ShadcnBlueprint: Blueprint = {
   id: 'web3-frontend-shadcn',

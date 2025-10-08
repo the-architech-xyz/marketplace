@@ -5,7 +5,7 @@
  * Creates payment components, API routes, and webhook handling
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const stripeBlueprint: Blueprint = {
   id: 'stripe-payment-setup',

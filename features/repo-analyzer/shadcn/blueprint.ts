@@ -4,7 +4,7 @@
  * Provides UI components and functionality for analyzing existing repositories
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const repoAnalyzerBlueprint: Blueprint = {
   id: 'repo-analyzer-setup',

@@ -4,7 +4,7 @@
  * Advanced model relationships and associations
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const associationsBlueprint: Blueprint = {
   id: 'sequelize-associations',

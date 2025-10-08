@@ -4,7 +4,7 @@
  * Golden Core code formatting with Prettier for consistent code style
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const prettierBlueprint: Blueprint = {
   id: 'prettier-golden-core-setup',

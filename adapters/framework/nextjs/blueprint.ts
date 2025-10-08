@@ -5,7 +5,7 @@
  * This blueprint provides the core foundation - UI and styling are handled by other modules
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const nextjsBlueprint: Blueprint = {
   id: 'nextjs-base-setup',

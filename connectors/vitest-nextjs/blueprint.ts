@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy, EnhanceFileFallbackStrategy } from '@thearchitech.xyz/types';
 
 const vitestNextjsIntegrationBlueprint: Blueprint = {
   id: 'vitest-nextjs-integration',
@@ -69,6 +69,7 @@ const vitestNextjsIntegrationBlueprint: Blueprint = {
       type: BlueprintActionType.ENHANCE_FILE,
       path: 'vitest.config.ts',
       modifier: ModifierType.TS_MODULE_ENHANCER,
+      fallback: EnhanceFileFallbackStrategy.CREATE,
       params: {
         enhancements: [
           {

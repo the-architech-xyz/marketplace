@@ -4,7 +4,7 @@
  * Adds data seeding and fixtures management to Drizzle
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const seedingBlueprint: Blueprint = {
   id: 'drizzle-seeding',

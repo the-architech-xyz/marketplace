@@ -4,7 +4,7 @@
  * Adds advanced session management capabilities to Better Auth
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const sessionManagementBlueprint: Blueprint = {
   id: 'better-auth-session-management',

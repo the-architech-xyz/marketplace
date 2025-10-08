@@ -4,7 +4,7 @@
  * Production-ready configuration with security and monitoring
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const productionReadyBlueprint: Blueprint = {
   id: 'docker-production-ready',

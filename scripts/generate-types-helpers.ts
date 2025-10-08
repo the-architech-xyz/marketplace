@@ -4,7 +4,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { BlueprintAnalysisResult, ModuleArtifacts } from '@thearchitech.xyz/marketplace/types';
+import { BlueprintAnalysisResult, ModuleArtifacts } from '@thearchitech.xyz/types';
 
 export class TypeGeneratorHelpers {
   /**
@@ -48,7 +48,7 @@ export class TypeGeneratorHelpers {
  */
 
 // Import base types from the types package
-import { Module, ProjectConfig, ModuleArtifacts as ModuleArtifactsType } from '@thearchitech.xyz/marketplace/types';
+import { Module, ProjectConfig, ModuleArtifacts as ModuleArtifactsType } from '@thearchitech.xyz/types';
 
 ${exports.join('\n')}
 
@@ -63,10 +63,10 @@ export declare const ModuleArtifacts: {
 export type ModuleId = keyof typeof ModuleArtifacts;
 
 // Re-export base types for convenience
-export { Module, ProjectConfig } from '@thearchitech.xyz/marketplace/types';
+export { Module, ProjectConfig } from '@thearchitech.xyz/types';
 
 // Re-export Genome type from shared types package
-export { Genome } from '@thearchitech.xyz/marketplace/types';
+export { Genome } from '@thearchitech.xyz/types';
 `;
 
     const outputFile = path.join(outputPath, 'index.d.ts');

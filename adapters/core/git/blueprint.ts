@@ -4,7 +4,7 @@
  * Provides local git repository management functionality
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const gitBlueprint: Blueprint = {
   id: 'git-setup',

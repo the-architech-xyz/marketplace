@@ -4,8 +4,8 @@
  * Auto-generated TypeScript definitions with artifact discovery
  */
 
-// Export base types
-export * from './base';
+// Re-export all types from the shared types package
+export * from '@thearchitech.xyz/types';
 
 export * from './adapters/ai/vercel-ai-sdk';
 export * from './adapters/auth/better-auth';
@@ -68,13 +68,9 @@ export * from './contracts/teams-management';
 
 // 🚀 Auto-discovered module artifacts
 export declare const ModuleArtifacts: {
-  [key: string]: () => Promise<ModuleArtifactsType>;
+  [key: string]: () => Promise<ModuleArtifacts>;
 };
 
 export type ModuleId = keyof typeof ModuleArtifacts;
 
-// Re-export base types for convenience
-export { Module, ProjectConfig } from '@thearchitech.xyz/marketplace/types';
-
-// Re-export Genome type from shared types package
-export { Genome } from '@thearchitech.xyz/marketplace/types';
+// All types are already re-exported above

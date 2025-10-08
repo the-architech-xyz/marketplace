@@ -1,4 +1,4 @@
-import { Genome } from "@thearchitech.xyz/marketplace/types";
+import { Genome } from "@thearchitech.xyz/types";
 /**
  * SaaS Starter Genome
  *

@@ -5,7 +5,7 @@
  * with caching, background updates, and optimistic updates for React applications
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const tanstackQueryBlueprint: Blueprint = {
   id: 'tanstack-query-setup',

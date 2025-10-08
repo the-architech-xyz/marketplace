@@ -4,7 +4,7 @@
  * Adds advanced entity management with decorators and relationships
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const entityManagementBlueprint: Blueprint = {
   id: 'typeorm-entity-management',

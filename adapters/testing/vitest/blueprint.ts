@@ -4,7 +4,7 @@
  * Sets up Vitest testing framework with coverage
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const vitestBlueprint: Blueprint = {
   id: 'vitest-base-setup',

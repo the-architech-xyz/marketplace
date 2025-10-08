@@ -4,7 +4,7 @@
  * Modern wallet integration using viem with MetaMask, WalletConnect, and other wallets
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const walletIntegrationBlueprint: Blueprint = {
   id: 'web3-wallet-integration',

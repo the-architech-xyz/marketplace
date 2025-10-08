@@ -5,7 +5,7 @@
  * Handles all UI and styling configuration
  */
 
-import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 const shadcnUiBlueprint: Blueprint = {
   id: 'shadcn-ui-installer',

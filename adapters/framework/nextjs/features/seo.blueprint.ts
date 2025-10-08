@@ -5,7 +5,7 @@
  * Includes next-seo and next-sitemap for better search engine visibility
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const nextjsSeoBlueprint: Blueprint = {
   id: 'nextjs-seo-setup',

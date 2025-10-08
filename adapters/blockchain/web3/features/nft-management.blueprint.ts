@@ -4,7 +4,7 @@
  * Modern NFT management using viem with type-safe contract interactions
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const nftManagementBlueprint: Blueprint = {
   id: 'web3-nft-management',

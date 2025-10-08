@@ -5,7 +5,7 @@
  * Provides powerful, type-safe, and accessible form utilities
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const formsBlueprint: Blueprint = {
   id: 'forms-golden-core-setup',

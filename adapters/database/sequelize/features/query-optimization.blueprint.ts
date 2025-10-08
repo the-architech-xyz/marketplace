@@ -4,7 +4,7 @@
  * Advanced query building and optimization tools
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const queryOptimizationBlueprint: Blueprint = {
   id: 'sequelize-query-optimization',

@@ -4,7 +4,7 @@
  * Adds comprehensive code coverage reporting
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const coverageBlueprint: Blueprint = {
   id: 'vitest-coverage',

@@ -4,7 +4,7 @@
  * Sets up Sequelize ORM with basic configuration
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const sequelizeBlueprint: Blueprint = {
   id: 'sequelize-base-setup',

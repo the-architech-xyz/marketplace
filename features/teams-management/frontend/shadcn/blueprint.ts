@@ -5,7 +5,7 @@
  * Uses template-based component generation for maintainability
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const teamsManagementFrontendBlueprint: Blueprint = {
   id: 'teams-management-frontend-shadcn',

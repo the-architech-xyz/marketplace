@@ -5,7 +5,7 @@
  * Includes pluralization, rich text, dynamic imports, and more
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const nextIntlBlueprint: Blueprint = {
   id: 'next-intl-base-setup',

@@ -1,4 +1,4 @@
-import { Genome } from '@thearchitech.xyz/marketplace/types';
+import { Genome } from '@thearchitech.xyz/types';
 /**
  * Simple App Genome
  * 
@@ -78,16 +78,6 @@ const simpleAppGenome: Genome = {
       }
     },
     
-    // === DATABASE ===
-    {
-      id: 'database/drizzle',
-      parameters: {
-        orm: 'drizzle',
-        database: 'postgresql',
-        migrations: true,
-        seeding: true
-      }
-    },
     
     // === TESTING ===
     {
@@ -174,18 +164,6 @@ const simpleAppGenome: Genome = {
     },
     
     // === TESTING & QUALITY ===
-    {
-      id: 'testing/vitest',
-      parameters: {
-        jsx: true,
-        environment: 'jsdom',
-        coverage: true
-      },
-      features: {
-        coverage: true,
-        ui: true
-      }
-    },
     
     {
       id: 'quality/eslint',

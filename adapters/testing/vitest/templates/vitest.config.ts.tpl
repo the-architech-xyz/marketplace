@@ -8,7 +8,8 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['./tests/setup/setup.ts'],
+    // Remove setupFiles reference to avoid dependency on non-existent files
+    // setupFiles: ['./tests/setup/setup.ts'],
   },
   resolve: {
     alias: {

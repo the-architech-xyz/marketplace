@@ -4,7 +4,7 @@
  * Golden Core code linting with ESLint for JavaScript and TypeScript
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const eslintBlueprint: Blueprint = {
   id: 'eslint-golden-core-setup',

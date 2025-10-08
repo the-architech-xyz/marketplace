@@ -4,7 +4,7 @@
  * Adds automated database schema migrations and versioning to Drizzle
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const migrationsBlueprint: Blueprint = {
   id: 'drizzle-migrations',

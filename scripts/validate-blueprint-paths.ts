@@ -10,7 +10,7 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { glob } from 'glob';
-import { PathKey } from '@thearchitech.xyz/marketplace/types';
+import { PathKey } from '@thearchitech.xyz/types';
 
 interface ValidationResult {
   file: string;

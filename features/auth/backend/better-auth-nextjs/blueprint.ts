@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const blueprint: Blueprint = {
   id: 'better-auth-nextjs-integration',

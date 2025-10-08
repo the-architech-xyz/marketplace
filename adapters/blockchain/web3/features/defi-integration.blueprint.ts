@@ -4,7 +4,7 @@
  * Modern DeFi integration using viem with type-safe contract interactions
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const defiIntegrationBlueprint: Blueprint = {
   id: 'web3-defi-integration',

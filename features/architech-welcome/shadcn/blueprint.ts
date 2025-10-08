@@ -5,7 +5,7 @@
  * capabilities, technology stack, and provides quick start guidance.
  */
 
-import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const architechWelcomeBlueprint: Blueprint = {
   id: 'architech-welcome-setup',

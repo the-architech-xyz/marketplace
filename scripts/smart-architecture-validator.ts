@@ -4,7 +4,7 @@
  * Uses auto-generated ModuleArtifacts to perform pre-execution architectural validation
  */
 
-import { ModuleArtifacts, ValidationResult, ValidationError, ValidationWarning, ModuleArtifactsRegistry } from '@thearchitech.xyz/marketplace/types';
+import { ModuleArtifacts, ValidationResult, ValidationError, ValidationWarning, ModuleArtifactsRegistry } from '@thearchitech.xyz/types';
 import { TemplatePathResolver } from './template-path-resolver';
 
 export interface Module {

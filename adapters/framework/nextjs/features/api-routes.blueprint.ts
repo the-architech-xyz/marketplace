@@ -4,7 +4,7 @@
  * Comprehensive API routes with middleware, error handling, and utilities
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const nextjsApiRoutesBlueprint: Blueprint = {
   id: 'nextjs-api-routes',

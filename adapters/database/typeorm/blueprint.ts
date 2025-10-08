@@ -5,7 +5,7 @@
  * Advanced features are available as separate features
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const typeormBlueprint: Blueprint = {
   id: 'typeorm-base-setup',

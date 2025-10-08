@@ -6,7 +6,7 @@
  * Advanced features are available through optional features
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const web3Blueprint: Blueprint = {
   id: 'web3-base-setup',

@@ -8,7 +8,7 @@
 import * as ts from 'typescript';
 import * as path from 'path';
 import * as fs from 'fs';
-import { FileArtifact, PackageArtifact, EnvVarArtifact, ModuleArtifacts, BlueprintAnalysisResult } from '@thearchitech.xyz/marketplace/types';
+import { FileArtifact, PackageArtifact, EnvVarArtifact, ModuleArtifacts, BlueprintAnalysisResult } from '@thearchitech.xyz/types';
 
 export class BlueprintParser {
   private program: ts.Program;

@@ -5,7 +5,7 @@
  * for Application Authorization (not user authentication)
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const betterAuthGitHubConnectorBlueprint: Blueprint = {
   id: 'better-auth-github-connector-setup',

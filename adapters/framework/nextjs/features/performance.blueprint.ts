@@ -5,7 +5,7 @@
  * Includes bundle analysis, image optimization, and performance monitoring
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const nextjsPerformanceBlueprint: Blueprint = {
   id: 'nextjs-performance-setup',

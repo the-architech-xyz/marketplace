@@ -8,7 +8,7 @@
  * - TypeScript type safety for configuration validation
  */
 
-import { Genome } from '@thearchitech.xyz/marketplace/types';
+import { Genome } from '@thearchitech.xyz/types';
 
 const genome: Genome = {
   version: '1.0.0',

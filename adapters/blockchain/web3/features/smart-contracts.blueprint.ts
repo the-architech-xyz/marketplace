@@ -4,7 +4,7 @@
  * Modern smart contract integration using viem with type-safe contract interactions
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const smartContractsBlueprint: Blueprint = {
   id: 'web3-smart-contracts',

@@ -5,7 +5,7 @@
  * Framework-agnostic implementation
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const performanceMonitoringBlueprint: Blueprint = {
   id: 'sentry-performance-monitoring',

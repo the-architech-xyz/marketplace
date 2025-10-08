@@ -4,7 +4,7 @@
  * Adds advanced email template system with React components
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const templatesBlueprint: Blueprint = {
   id: 'resend-templates',

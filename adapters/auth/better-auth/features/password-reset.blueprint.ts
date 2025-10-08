@@ -4,7 +4,7 @@
  * Adds secure password reset flow to Better Auth
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const passwordResetBlueprint: Blueprint = {
   id: 'better-auth-password-reset',

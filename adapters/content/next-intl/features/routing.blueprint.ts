@@ -4,7 +4,7 @@
  * Locale-based routing with pathname translations
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const routingBlueprint: Blueprint = {
   id: 'next-intl-routing',

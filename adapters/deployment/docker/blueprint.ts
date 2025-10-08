@@ -5,7 +5,7 @@
  * Creates Dockerfile, docker-compose.yml, and deployment configuration
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const dockerBlueprint: Blueprint = {
   id: 'docker-base-setup',

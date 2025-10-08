@@ -10,7 +10,7 @@ import { BlueprintParser } from './blueprint-parser';
 import { TemplatePathResolver } from './template-path-resolver';
 import { TypeGeneratorHelpers } from './generate-types-helpers';
 import { CapabilityTypeGenerator } from './generate-capability-types';
-import { BlueprintAnalysisResult, ModuleArtifacts } from '@thearchitech.xyz/marketplace/types';
+import { BlueprintAnalysisResult, ModuleArtifacts } from '@thearchitech.xyz/types';
 
 // Extend the imported type to support new module types
 type ExtendedBlueprintAnalysisResult = Omit<BlueprintAnalysisResult, 'moduleType'> & {

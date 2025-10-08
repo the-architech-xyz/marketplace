@@ -5,7 +5,7 @@
  * Provides powerful, performant, and minimal boilerplate state management
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const zustandBlueprint: Blueprint = {
   id: 'zustand-golden-core-setup',

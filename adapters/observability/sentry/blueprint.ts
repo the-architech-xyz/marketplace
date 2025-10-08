@@ -5,7 +5,7 @@
  * Creates Sentry configuration, error boundaries, and monitoring utilities that work with any framework
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const sentryBlueprint: Blueprint = {
   id: 'sentry-observability-setup',

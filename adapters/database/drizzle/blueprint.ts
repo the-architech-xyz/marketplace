@@ -5,7 +5,7 @@
  * Advanced features are available as separate features
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 export const drizzleBlueprint: Blueprint = {
   id: 'drizzle-base-setup',

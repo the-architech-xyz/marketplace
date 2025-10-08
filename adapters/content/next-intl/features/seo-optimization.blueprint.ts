@@ -4,7 +4,7 @@
  * Multilingual SEO with hreflang and metadata
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const seoOptimizationBlueprint: Blueprint = {
   id: 'next-intl-seo-optimization',

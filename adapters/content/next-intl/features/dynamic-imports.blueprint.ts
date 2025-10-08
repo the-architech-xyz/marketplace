@@ -4,7 +4,7 @@
  * Lazy loading of translations and locale-specific content
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const dynamicImportsBlueprint: Blueprint = {
   id: 'next-intl-dynamic-imports',

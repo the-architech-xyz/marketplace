@@ -4,7 +4,7 @@
  * Automated database schema migrations and versioning
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 const migrationsBlueprint: Blueprint = {
   id: 'sequelize-migrations',

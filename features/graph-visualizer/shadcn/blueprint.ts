@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 const graphVisualizerBlueprint: Blueprint = {
   id: 'graph-visualizer-react-flow',

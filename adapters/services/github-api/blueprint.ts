@@ -5,7 +5,7 @@
  * file operations, pull requests, and more.
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const githubApiBlueprint: Blueprint = {
   id: 'github-api-setup',

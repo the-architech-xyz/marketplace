@@ -5,7 +5,7 @@
  * Provides self-contained examples without external dependencies
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
 
 export const nextjsServerActionsBlueprint: Blueprint = {
   id: 'nextjs-server-actions-setup',

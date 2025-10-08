@@ -1,4 +1,4 @@
-import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/marketplace/types';
+import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 const vercelAiSdkBlueprint: Blueprint = {
   id: 'vercel-ai-sdk',
