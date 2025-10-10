@@ -71,11 +71,11 @@ module.exports = {
     },
   },
   plugins: [
-    {{#if module.parameters.typography}}require('@tailwindcss/typography'),{{/if}}
-    {{#if module.parameters.forms}}require('@tailwindcss/forms'),{{/if}}
-    {{#if module.parameters.aspectRatio}}require('@tailwindcss/aspect-ratio'),{{/if}}
+    {{#if context.hasTypography}}require('@tailwindcss/typography'),{{/if}}
+    {{#if context.hasForms}}require('@tailwindcss/forms'),{{/if}}
+    {{#if context.hasAspectRatio}}require('@tailwindcss/aspect-ratio'),{{/if}}
   ],
-  {{#if module.parameters.darkMode}}darkMode: 'class',{{/if}}
+  {{#if context.hasDarkMode}}darkMode: 'class',{{/if}}
 };
 
 

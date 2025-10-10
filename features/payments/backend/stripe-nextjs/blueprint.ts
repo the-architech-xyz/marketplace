@@ -1,11 +1,7 @@
-import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ModifierType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const blueprint: Blueprint = {
-  id: 'stripe-nextjs-integration',
-  name: 'Stripe Next.js Integration',
-  description: 'Complete Next.js integration for Stripe with cohesive PaymentService implementation',
-  version: '4.0.0',
-  actions: [
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  return [
     // Create the main PaymentService that implements IPaymentService
     {
       type: BlueprintActionType.CREATE_FILE,
@@ -82,7 +78,5 @@ export const blueprint: Blueprint = {
         priority: 1
       }
     }
-  ]
-};
-
-export default blueprint;
+  ];
+}

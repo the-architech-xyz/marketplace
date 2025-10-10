@@ -1,226 +1,164 @@
-import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy, EnhanceFileFallbackStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ModifierType, ConflictResolutionStrategy, EnhanceFileFallbackStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-const vitestNextjsIntegrationBlueprint: Blueprint = {
-  id: 'vitest-nextjs-integration',
-  name: 'Vitest Next.js Integration',
-  description: 'Complete Vitest testing setup for Next.js applications with standardized testing hooks',
-  version: '2.0.0',
-  actions: [
-    // Create standardized testing hooks (REVOLUTIONARY!)
+/**
+ * Dynamic Vitest-NextJS Connector Blueprint
+ * 
+ * Enhances Vitest testing with Next.js-specific utilities and configurations.
+ * This connector enhances the core Vitest adapter instead of duplicating functionality.
+ */
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  return [
+    // Create consolidated testing hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-test.ts',
-      template: 'templates/use-test.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE, 
-        priority: 1
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-test-suite.ts',
-      template: 'templates/use-test-suite.ts.tpl',
+      path: "{{paths.hooks}}use-test.ts",
+      template: "templates/use-test.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-test-runner.ts',
-      template: 'templates/use-test-runner.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-test-coverage.ts',
-      template: 'templates/use-test-coverage.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-test-mocks.ts',
-      template: 'templates/use-test-mocks.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+        priority: 1,
+      },
+    },
     // Create testing API service layer
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}testing/api.ts',
-      template: 'templates/testing-api.ts.tpl',
+      path: "{{paths.shared_library}}testing/api.ts",
+      template: "templates/testing-api.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}testing/types.ts',
-      template: 'templates/testing-types.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
-    // Enhance existing Vitest configuration for Next.js
-    {
-      type: BlueprintActionType.ENHANCE_FILE,
-      path: 'vitest.config.ts',
-      modifier: ModifierType.TS_MODULE_ENHANCER,
-      fallback: EnhanceFileFallbackStrategy.CREATE,
-      params: {
-        enhancements: [
-          {
-            type: 'addImport',
-            module: './vitest.nextjs.config.ts',
-            name: 'nextjsConfig'
-          },
-          {
-            type: 'mergeConfig',
-            path: 'test.nextjs',
-            value: 'nextjsConfig'
-          }
-        ]
-      }
+        priority: 1,
+      },
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'vitest.nextjs.config.ts',
-      template: 'templates/vitest.nextjs.config.ts.tpl',
+      path: "{{paths.shared_library}}testing/types.ts",
+      template: "templates/testing-types.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+        priority: 1,
+      },
+    },
+    // Create unified Vitest configuration for Next.js
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'vitest.config.unit.ts',
-      template: 'templates/vitest.config.unit.ts.tpl',
+      path: "vitest.config.ts",
+      template: "templates/vitest.config.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'vitest.config.integration.ts',
-      template: 'templates/vitest.config.integration.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'vitest.config.e2e.ts',
-      template: 'templates/vitest.config.e2e.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+        priority: 1,
+      },
+    },
     // Create Next.js-specific Test Utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'test-utils/nextjs-test-utils.ts',
-      template: 'templates/nextjs-test-utils.ts.tpl',
+      path: "test-utils/nextjs-test-utils.ts",
+      template: "templates/nextjs-test-utils.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+        priority: 1,
+      },
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'test-utils/mock-next-router.ts',
-      template: 'templates/mock-next-router.ts.tpl',
+      path: "test-utils/mock-next-router.ts",
+      template: "templates/mock-next-router.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+        priority: 1,
+      },
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'test-utils/mock-next-auth.ts',
-      template: 'templates/mock-next-auth.ts.tpl',
+      path: "test-utils/mock-next-auth.ts",
+      template: "templates/mock-next-auth.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+        priority: 1,
+      },
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'test-utils/mock-next-fetch.ts',
-      template: 'templates/mock-next-fetch.ts.tpl',
+      path: "test-utils/mock-next-fetch.ts",
+      template: "templates/mock-next-fetch.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+        priority: 1,
+      },
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'test-utils/nextjs-test-server.ts',
-      template: 'templates/nextjs-test-server.ts.tpl',
+      path: "test-utils/nextjs-test-server.ts",
+      template: "templates/nextjs-test-server.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+        priority: 1,
+      },
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'test-utils/nextjs-test-client.ts',
-      template: 'templates/nextjs-test-client.ts.tpl',
+      path: "test-utils/nextjs-test-client.ts",
+      template: "templates/nextjs-test-client.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+        priority: 1,
+      },
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'test-utils/nextjs-test-helpers.ts',
-      template: 'templates/nextjs-test-helpers.ts.tpl',
+      path: "test-utils/nextjs-test-helpers.ts",
+      template: "templates/nextjs-test-helpers.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+        priority: 1,
+      },
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'test-utils/nextjs-test-setup.ts',
-      template: 'templates/nextjs-test-setup.ts.tpl',
+      path: "test-utils/nextjs-test-setup.ts",
+      template: "templates/nextjs-test-setup.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+        priority: 1,
+      },
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'test-utils/nextjs-test-teardown.ts',
-      template: 'templates/nextjs-test-teardown.ts.tpl',
+      path: "test-utils/nextjs-test-teardown.ts",
+      template: "templates/nextjs-test-teardown.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }},
+        priority: 1,
+      },
+    },
     // Install Next.js-specific Testing Dependencies
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
-        '@testing-library/next',
-        'next-test-utils',
-        'msw',
-        'happy-dom'
+        "@testing-library/react",
+        "@testing-library/jest-dom",
+        "@testing-library/user-event",
+        "msw",
+        "happy-dom",
       ],
-      isDev: true
+      isDev: true,
     },
     // Add Test Scripts to package.json
     {
       type: BlueprintActionType.ENHANCE_FILE,
-      path: 'package.json',
+      path: "package.json",
       modifier: ModifierType.PACKAGE_JSON_MERGER,
       params: {
         scriptsToAdd: {
-          'test:nextjs': 'vitest --config vitest.nextjs.config.ts',
-          'test:nextjs:ui': 'vitest --ui --config vitest.nextjs.config.ts',
-          'test:nextjs:run': 'vitest run --config vitest.nextjs.config.ts',
-          'test:nextjs:coverage': 'vitest run --coverage --config vitest.nextjs.config.ts',
-          'test:nextjs:unit': 'vitest run --config vitest.config.unit.ts',
-          'test:nextjs:integration': 'vitest run --config vitest.config.integration.ts',
-          'test:nextjs:e2e': 'vitest run --config vitest.config.e2e.ts',
-          'test:nextjs:watch': 'vitest --watch --config vitest.nextjs.config.ts',
-          'test:nextjs:debug': 'vitest --inspect-brk --config vitest.nextjs.config.ts'
-        }
-      }
+          "test": "vitest",
+          "test:ui": "vitest --ui",
+          "test:run": "vitest run",
+          "test:coverage": "vitest run --coverage",
+          "test:unit": "vitest run --config vitest.config.ts --testNamePattern=unit",
+          "test:integration": "vitest run --config vitest.config.ts --testNamePattern=integration",
+          "test:e2e": "vitest run --config vitest.config.ts --testNamePattern=e2e",
+          "test:watch": "vitest --watch",
+          "test:debug": "vitest --inspect-brk",
+        },
+      },
     }
-  ]
-};
-
-export default vitestNextjsIntegrationBlueprint;
+  ];
+}

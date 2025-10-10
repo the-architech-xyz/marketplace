@@ -5,43 +5,10 @@
  * Uses template-based component generation for maintainability
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
-
-export const emailingShadcnBlueprint: Blueprint = {
-  id: 'emailing-frontend-shadcn',
-  name: 'Emailing Frontend (Shadcn/ui)',
-  description: 'Complete email management system with composition, templates, and analytics',
-  actions: [
-    // Install core dependencies (no duplicates - handled by core-dependencies)
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: [
-        'date-fns@^2.30.0',
-        'lucide-react@^0.294.0'
-      ]
-    },
-
-    // Create emailing hooks
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}emailing/hooks.ts',
-      template: 'templates/hooks.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-
-    // Create emailing types
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}emailing/types.ts',
-      template: 'templates/types.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+  
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  return [
 
     // Create email composer component (using template)
     {
@@ -87,6 +54,4 @@ export const emailingShadcnBlueprint: Blueprint = {
       }
     }
   ]
-};
-
-export default emailingShadcnBlueprint;
+}

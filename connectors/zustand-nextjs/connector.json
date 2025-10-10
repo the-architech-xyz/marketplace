@@ -1,5 +1,5 @@
 {
-  "id": "connector:zustand-nextjs",
+  "id": "connectors/zustand-nextjs",
   "name": "Zustand NextJS Connector",
   "description": "Zustand state management setup and configuration for NextJS applications",
   "type": "connector",

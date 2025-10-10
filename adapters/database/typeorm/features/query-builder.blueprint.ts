@@ -45,7 +45,7 @@ export class QueryBuilder {
 
     const performance = duration < 100 ? 'fast' : duration < 500 ? 'medium' : 'slow';
 
-    {{#if module.parameters.performance-monitoring}}
+    {{#if context..performance-monitoring}}
     this.queryLog.push({
       query: queryName,
       duration,
@@ -117,7 +117,7 @@ export class QueryBuilder {
     });
   }
 
-  {{#if module.parameters.query-caching}}
+  {{#if context..query-caching}}
   async findWithCache<T>(
     entity: string,
     cacheKey: string,

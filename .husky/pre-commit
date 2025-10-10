@@ -3,6 +3,10 @@
 
 echo "🔍 Running comprehensive marketplace validation..."
 
+# Generate Constitutional Architecture types first
+echo "📝 Generating Constitutional Architecture types..."
+npm run types:generate:constitutional
+
 # Run comprehensive validation
 npm run validate:comprehensive
 

@@ -1,10 +1,12 @@
 /**
  * connectors/docker-drizzle
  * 
- * Auto-generated integration types
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
 export interface ConnectorsDockerDrizzleParams {}
+
+export interface ConnectorsDockerDrizzleFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const ConnectorsDockerDrizzleArtifacts: {

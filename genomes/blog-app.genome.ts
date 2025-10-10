@@ -1,11 +1,11 @@
-import { Genome } from "@thearchitech.xyz/types";
+import { defineGenome } from "@thearchitech.xyz/types";
 /**
  * Blog Application Template
  *
  * A modern blog platform with content management, SEO optimization, and social features.
  * Perfect for building personal blogs, company blogs, or content sites.
  */
-const blogAppGenome: Genome = {
+const blogAppGenome= defineGenome({
   version: "1.0.0",
   project: {
     name: "blog-app",

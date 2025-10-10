@@ -347,7 +347,7 @@ export class BatchManager {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/email/campaign-manager.tsx',
-      content: `{{#if module.parameters.campaigns}}
+      content: `{{#if context..campaigns}}
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -637,7 +637,7 @@ export function CampaignManager({ batchManager }: CampaignManagerProps) {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/email/list-manager.tsx',
-      content: `{{#if module.parameters.list-management}}
+      content: `{{#if context..list-management}}
 'use client';
 
 import React, { useState, useEffect } from 'react';

@@ -1,11 +1,7 @@
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const blueprint: Blueprint = {
-  id: 'teams-management-backend-better-auth-nextjs',
-  name: 'Teams Capability (Better Auth + NextJS)',
-  description: 'Complete teams management backend with Better Auth and NextJS, providing ITeamsService.',
-  version: '2.0.0',
-  actions: [
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  return [
     // Create the main TeamsService that implements ITeamsService
     {
       type: BlueprintActionType.CREATE_FILE,
@@ -63,7 +59,5 @@ export const blueprint: Blueprint = {
         priority: 1
       }
     }
-  ]
-};
-
-export default blueprint;
+  ];
+}

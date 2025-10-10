@@ -8,6 +8,12 @@
   "dependencies": [
     "framework/nextjs"
   ],
+  "provides": [
+    "testing-core",
+    "{{#if features.coverage}}testing-coverage{{/if}}",
+    "{{#if features.ui}}testing-ui{{/if}}",
+    "{{#if features.e2e}}testing-e2e{{/if}}"
+  ],
   "capabilities": [
     "unit-testing",
     "integration-testing",
@@ -20,32 +26,44 @@
     "snapshots",
     "parallel"
   ],
-  "limitations": "Requires Node.js 16+ and Next.js framework",
-  "parameters": {
-    "coverage": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable code coverage reporting",
-      "required": false
+  "internal_structure": {
+    "core": {
+      "provides": ["testing-core"],
+      "templates": [
+        "vitest.config.ts",
+        "test-setup.ts",
+        "test-utils.ts",
+        "mocks.ts"
+      ]
     },
-    "watch": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable watch mode for development",
-      "required": false
+    "coverage": {
+      "prerequisites": ["testing-core"],
+      "provides": ["testing-coverage"],
+      "templates": [
+        "coverage-config.ts",
+        "coverage-scripts.ts"
+      ]
     },
     "ui": {
-      "type": "boolean",
-      "default": false,
-      "description": "Enable Vitest UI",
-      "required": false
+      "prerequisites": ["testing-core"],
+      "provides": ["testing-ui"],
+      "templates": [
+        "vitest-ui.config.ts",
+        "ui-scripts.ts"
+      ]
     },
-    "jsx": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable JSX support for React testing",
-      "required": false
-    },
+    "e2e": {
+      "prerequisites": ["testing-core"],
+      "provides": ["testing-e2e"],
+      "templates": [
+        "e2e-config.ts",
+        "e2e-setup.ts",
+        "e2e-utils.ts"
+      ]
+    }
+  },
+  "limitations": "Requires Node.js 16+ and Next.js framework",
+  "parameters": {
     "environment": {
       "type": "string",
       "default": "jsdom",
@@ -56,6 +74,24 @@
         "node",
         "happy-dom"
       ]
+    },
+    "features": {
+      "core": {
+        "description": "Basic testing setup (config, setup, utils)",
+        "default": true
+      },
+      "coverage": {
+        "description": "Code coverage reporting",
+        "default": true
+      },
+      "ui": {
+        "description": "Interactive test runner UI",
+        "default": false
+      },
+      "e2e": {
+        "description": "End-to-end testing support",
+        "default": false
+      }
     }
   },
   "features": {

@@ -15,7 +15,7 @@ export const nextjsBlueprint: Blueprint = {
     // Create Next.js project with latest versions and dynamic parameters
     {
       type: BlueprintActionType.RUN_COMMAND,
-      command: 'npx create-next-app@latest . --typescript{{#if module.parameters.eslint}} --eslint{{/if}} --app --src-dir --import-alias "{{module.parameters.importAlias}}" --yes'
+      command: 'npx create-next-app@latest . --typescript{{#if context..eslint}} --eslint{{/if}} --app --src-dir --import-alias "{{context..importAlias}}" --yes'
     }
   ]
 }

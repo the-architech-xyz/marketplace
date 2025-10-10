@@ -1,10 +1,12 @@
 /**
  * connectors/docker-nextjs
  * 
- * Auto-generated integration types
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
 export interface ConnectorsDockerNextjsParams {}
+
+export interface ConnectorsDockerNextjsFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const ConnectorsDockerNextjsArtifacts: {

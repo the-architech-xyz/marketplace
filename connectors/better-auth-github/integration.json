@@ -1,5 +1,5 @@
 {
-  "id": "connector:better-auth-github",
+  "id": "connectors/better-auth-github",
   "name": "Better Auth + GitHub Connector",
   "description": "OAuth integration between Better Auth and GitHub for Application Authorization",
   "version": "1.0.0",

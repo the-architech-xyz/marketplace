@@ -83,10 +83,10 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: 'app-store',
-      {{#if module.parameters.storage}}
-      storage: {{module.parameters.storage}},
+      {{#if context..storage}}
+      storage: {{context..storage}},
       {{/if}}
-      {{#if module.parameters.encryption}}
+      {{#if context..encryption}}
       encrypt: true,
       {{/if}}
       partialize: (state) => ({

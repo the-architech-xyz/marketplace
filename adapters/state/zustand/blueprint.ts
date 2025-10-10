@@ -1,124 +1,169 @@
 /**
- * Zustand State Management Blueprint
+ * Zustand State Management Adapter Blueprint
  * 
- * Golden Core state management adapter with Zustand
- * Provides powerful, performant, and minimal boilerplate state management
+ * Generates Zustand state management based on Constitutional Architecture configuration.
+ * Core features are always included, optional features are conditionally generated.
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const zustandBlueprint: Blueprint = {
-  id: 'zustand-golden-core-setup',
-  name: 'Zustand Golden Core Setup',
-  description: 'Complete Zustand setup with best practices, TypeScript support, and persistence',
-  version: '4.4.0',
-  actions: [
-    // Install Zustand and related packages
+/**
+ * Dynamic Zustand State Management Blueprint
+ */
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Core is always generated
+  actions.push(...generateCoreActions());
+  
+  // Optional features based on configuration
+  if (config.activeFeatures.includes('persistence')) {
+    actions.push(...generatePersistenceActions());
+  }
+  
+  if (config.activeFeatures.includes('devtools')) {
+    actions.push(...generateDevtoolsActions());
+  }
+  
+  if (config.activeFeatures.includes('immer')) {
+    actions.push(...generateImmerActions());
+  }
+  
+  return actions;
+}
+
+// ============================================================================
+// CORE STATE MANAGEMENT (Always Generated)
+// ============================================================================
+
+function generateCoreActions(): BlueprintAction[] {
+  return [
+    // Install core package
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['zustand']
     },
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['immer'],
-      condition: '{{#if module.parameters.immer}}'
-    },
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['zustand/middleware'],
-      condition: '{{#if module.parameters.middleware}}'
-    },
-    // Create core store utilities
+
+    // Core store files
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}stores/create-store.ts',
+      path: '{{paths.stores}}create-store.ts',
       template: 'templates/create-store.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}stores/store-types.ts',
-      template: 'templates/store-types.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }},
-    // Create app store
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.stores}}use-app-store.ts',
-      template: 'templates/use-app-store.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 0
-      }},
-    // Create feature stores
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.stores}}use-ui-store.ts',
-      template: 'templates/use-ui-store.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 0
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.stores}}use-auth-store.ts',
-      template: 'templates/use-auth-store.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 0
-      }},
-    // Create persistence utilities
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}stores/persistence.ts',
-      template: 'templates/persistence.ts.tpl',
-      condition: '{{#if module.parameters.persistence}}',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }},
-
-    // Create middleware utilities
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}stores/middleware.ts',
-      template: 'templates/middleware.ts.tpl',
-      condition: '{{#if module.parameters.middleware}}',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }},
-
-    // Create store hooks
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-store.ts',
-      template: 'templates/use-store.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }},
-    // Create store provider
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'src/providers/StoreProvider.tsx',
-      template: 'templates/StoreProvider.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 0
-      }},
-    // Create store index
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.stores}}index.ts',
       template: 'templates/index.ts.tpl',
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
+        strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }}
-  ]
-};
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.stores}}store-types.ts',
+      template: 'templates/store-types.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.stores}}use-store.ts',
+      template: 'templates/use-store.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.providers}}StoreProvider.tsx',
+      template: 'templates/StoreProvider.tsx.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
+
+    // Example stores
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.stores}}use-app-store.ts',
+      template: 'templates/use-app-store.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.stores}}use-ui-store.ts',
+      template: 'templates/use-ui-store.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    }
+  ];
+}
+
+// ============================================================================
+// PERSISTENCE FEATURES (Optional)
+// ============================================================================
+
+function generatePersistenceActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.stores}}middleware/persistence.ts',
+      template: 'templates/persistence.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    }
+  ];
+}
+
+// ============================================================================
+// DEVTOOLS FEATURES (Optional)
+// ============================================================================
+
+function generateDevtoolsActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['zustand/middleware'],
+      isDev: true
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.stores}}middleware/devtools.ts',
+      template: 'templates/middleware.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    }
+  ];
+}
+
+// ============================================================================
+// IMMER FEATURES (Optional)
+// ============================================================================
+
+function generateImmerActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['immer']
+    }
+    // Immer integration is handled in middleware.ts template via conditional rendering
+  ];
+}

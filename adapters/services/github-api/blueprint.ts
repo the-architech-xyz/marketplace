@@ -85,7 +85,7 @@ export const githubApiBlueprint: Blueprint = {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'GITHUB_TOKEN',
-      value: '{{module.parameters.token}}',
+      value: '{{context..token}}',
       description: 'GitHub Personal Access Token or OAuth access token'
     },
     
@@ -93,7 +93,7 @@ export const githubApiBlueprint: Blueprint = {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'GITHUB_API_URL',
-      value: '{{module.parameters.baseUrl}}',
+      value: '{{context..baseUrl}}',
       description: 'GitHub API base URL'
     }
   ]

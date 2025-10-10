@@ -6,30 +6,10 @@
  * Advanced features are available through optional features
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const web3Blueprint: Blueprint = {
-  id: 'web3-base-setup',
-  name: 'Viem Base Setup',
-  description: 'Core Web3 utilities and configuration using viem',
-  actions: [
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['viem@^2.0.0', '@tanstack/react-query@^5.0.0', 'zod@^3.22.0']
-    },
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['@types/node@^20.0.0'],
-      isDev: true
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}web3/config.ts',
-      template: 'templates/config.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }},
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  return [
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}web3/core.ts',

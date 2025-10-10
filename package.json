@@ -66,28 +66,32 @@
     "access": "public"
   },
   "scripts": {
-    "validate": "tsx scripts/validate-blueprints.ts",
-    "validate:templates": "tsx scripts/validate-templates.ts",
-    "validate:conflicts": "tsx scripts/validate-conflict-resolution.ts",
-    "validate:contracts": "tsx scripts/validate-contract-correctness.ts",
-    "validate:comprehensive": "tsx scripts/validate-comprehensive.ts",
-    "validate:correctness": "tsx scripts/validate-contract-correctness.ts",
-    "validate:correctness:changed": "tsx scripts/validate-contract-correctness.ts --changed",
-    "generate:schemas": "tsx scripts/generate-schemas-from-contracts.ts",
-    "generate:manifest": "tsx scripts/generate-marketplace-manifest.ts",
+    "validate": "tsx scripts/validation/validate-blueprints.ts",
+    "validate:templates": "tsx scripts/validation/validate-templates.ts",
+    "validate:conflicts": "tsx scripts/validation/validate-conflict-resolution.ts",
+    "validate:contracts": "tsx scripts/validation/validate-contract-correctness.ts",
+    "validate:comprehensive": "tsx scripts/validation/validate-comprehensive.ts",
+    "validate:dead-templates": "tsx scripts/validation/dead-template-detector.ts",
+    "validate:actions": "tsx scripts/validation/validate-blueprint-actions.ts",
+    "validate:issues": "tsx scripts/validation/validate-blueprint-issues.ts",
+    "validate:correctness": "tsx scripts/validation/validate-contract-correctness.ts",
+    "validate:correctness:changed": "tsx scripts/validation/validate-contract-correctness.ts --changed",
+    "generate:schemas": "tsx scripts/generation/generate-schemas-from-contracts.ts",
+    "generate:manifest": "tsx scripts/generation/generate-marketplace-manifest.ts",
+    "generate:feature-manifests": "tsx scripts/generation/generate-feature-manifests.ts",
     "validate:all": "npm run generate:schemas && npm run validate:correctness",
     "validate:legacy": "npm run validate && npm run validate:templates && npm run validate:conflicts && npm run validate:contracts",
-    "fix:conflicts": "tsx scripts/fix-conflict-resolution.ts",
-    "types:generate": "tsx scripts/generate-types-cli.ts",
+    "fix:conflicts": "tsx scripts/utilities/fix-conflict-resolution.ts",
+    "types:generate:constitutional": "tsx scripts/generation/generate-constitutional-types-cli.ts",
     "compile": "tsc",
-    "build": "npm run validate:all && npm run types:generate && npm run compile",
+    "build": "npm run validate:all && npm run types:generate:constitutional && npm run compile",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "prepare": "husky install",
-    "precommit": "npm run validate:all && npm run types:generate"
+    "precommit": "npm run validate:all && npm run types:generate:constitutional"
   },
   "dependencies": {
-    "@thearchitech.xyz/types": "file:../types-package",
+    "@thearchitech.xyz/types": "^1.11.20",
     "@types/glob": "^9.0.0"
   },
   "devDependencies": {
@@ -102,6 +106,9 @@
   "lint-staged": {
     "adapters/**/*.json": "node scripts/lint-staged-wrapper.js",
     "integrations/**/*.json": "node scripts/lint-staged-wrapper.js",
-    "scripts/generate-types.ts": "node scripts/lint-staged-wrapper.js"
+    "connectors/**/*.json": "node scripts/lint-staged-wrapper.js",
+    "features/**/*.json": "node scripts/lint-staged-wrapper.js",
+    "scripts/generate-types.ts": "node scripts/lint-staged-wrapper.js",
+    "scripts/generate-constitutional-types.ts": "node scripts/lint-staged-wrapper.js"
   }
 }

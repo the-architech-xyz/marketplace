@@ -70,7 +70,7 @@ export function generateMetadata(
       description: config.description,
       images: config.image ? [config.image] : undefined,
     },
-    {{#if module.parameters.canonicalUrls}}
+    {{#if context..canonicalUrls}}
     alternates: {
       canonical: config.url || localeUrl,
     },

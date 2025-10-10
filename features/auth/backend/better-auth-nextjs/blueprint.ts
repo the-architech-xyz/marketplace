@@ -1,11 +1,7 @@
-import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ModifierType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const blueprint: Blueprint = {
-  id: 'better-auth-nextjs-integration',
-  name: 'Better Auth Next.js Integration',
-  description: 'Complete Next.js integration for Better Auth with cohesive AuthService implementation',
-  version: '4.0.0',
-  actions: [
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  return [
     // Add Next.js specific environment variables
     {
       type: BlueprintActionType.ADD_ENV_VAR,
@@ -94,7 +90,5 @@ export const blueprint: Blueprint = {
         priority: 1
       }
     }
-  ]
-};
-
-export default blueprint;
+  ];
+}

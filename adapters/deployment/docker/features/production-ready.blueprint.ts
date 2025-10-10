@@ -20,7 +20,7 @@ const productionReadyBlueprint: Blueprint = {
 FROM gcr.io/distroless/nodejs18-debian11 AS base
 
 # Dependencies stage
-FROM node:{{module.parameters.nodeVersion}}-alpine AS deps
+FROM node:{{context..nodeVersion}}-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
@@ -29,7 +29,7 @@ RUN npm ci --only=production --frozen-lockfile && \\
     npm cache clean --force
 
 # Builder stage
-FROM node:{{module.parameters.nodeVersion}}-alpine AS builder
+FROM node:{{context..nodeVersion}}-alpine AS builder
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
@@ -82,7 +82,7 @@ services:
     env_file:
       - .env.production
     restart: unless-stopped
-    {{#if module.parameters.monitoring}}
+    {{#if context..monitoring}}
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
       interval: 30s
@@ -98,7 +98,7 @@ services:
         reservations:
           memory: 256M
           cpus: '0.25'
-    {{#if module.parameters.security}}
+    {{#if context..security}}
     security_opt:
       - no-new-privileges:true
     read_only: true
@@ -124,7 +124,7 @@ services:
     depends_on:
       - app
     restart: unless-stopped
-    {{#if module.parameters.security}}
+    {{#if context..security}}
     security_opt:
       - no-new-privileges:true
     {{/if}}
@@ -139,7 +139,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
-    {{#if module.parameters.security}}
+    {{#if context..security}}
     security_opt:
       - no-new-privileges:true
     {{/if}}
@@ -155,7 +155,7 @@ services:
     volumes:
       - redis_data:/data
     restart: unless-stopped
-    {{#if module.parameters.security}}
+    {{#if context..security}}
     security_opt:
       - no-new-privileges:true
     {{/if}}
@@ -165,7 +165,7 @@ services:
           memory: 128M
           cpus: '0.1'
 
-  {{#if module.parameters.monitoring}}
+  {{#if context..monitoring}}
   # Monitoring with Prometheus
   prometheus:
     image: prom/prometheus:latest
@@ -198,7 +198,7 @@ services:
 volumes:
   postgres_data:
   redis_data:
-  {{#if module.parameters.monitoring}}
+  {{#if context..monitoring}}
   prometheus_data:
   grafana_data:
   {{/if}}`

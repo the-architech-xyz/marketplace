@@ -19,6 +19,8 @@ import {
   UseTemplatesReturn,
   UseEmailAnalyticsReturn
 } from './types';
+import { useEmailContext } from './use-email-context';
+import { EmailService } from '@/features/emailing/backend/resend-nextjs/EmailService';
 
 // Query keys for consistent caching
 export const emailKeys = {
@@ -127,6 +129,10 @@ const templateApi = {
 // Email hooks
 export function useEmails(filters: EmailListFilters = {}, page = 1, limit = 20): UseEmailsReturn {
   const queryClient = useQueryClient();
+  const { userContext, isLoading: authLoading, error: authError } = useEmailContext();
+
+  // Use EmailService with user context
+  const emailService = EmailService.useEmails(userContext);
 
   const {
     data,
@@ -140,6 +146,7 @@ export function useEmails(filters: EmailListFilters = {}, page = 1, limit = 20):
     queryKey: emailKeys.list(filters),
     queryFn: ({ pageParam = page }) => emailApi.getEmails(filters, pageParam, limit),
     getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.page + 1 : undefined,
+    enabled: !authLoading && !!userContext, // Only run when auth is loaded and user is authenticated
   });
 
   const emails = data?.pages.flatMap(page => page.emails) ?? [];
@@ -153,8 +160,8 @@ export function useEmails(filters: EmailListFilters = {}, page = 1, limit = 20):
 
   return {
     emails,
-    isLoading,
-    error: error as Error | null,
+    isLoading: isLoading || authLoading,
+    error: (error as Error) || authError || null,
     refetch,
     hasMore,
     loadMore,
@@ -171,33 +178,31 @@ export function useEmail(id: string) {
 
 export function useSendEmail() {
   const queryClient = useQueryClient();
+  const { userContext, isLoading: authLoading, error: authError } = useEmailContext();
 
-  return useMutation({
-    mutationFn: emailApi.sendEmail,
-    onSuccess: () => {
-      // Invalidate email lists to refresh data
-      queryClient.invalidateQueries({ queryKey: emailKeys.lists() });
-      queryClient.invalidateQueries({ queryKey: emailKeys.analytics() });
-    },
-  });
+  // Use EmailService with user context
+  const emailService = EmailService.useEmails(userContext);
+
+  return emailService.send();
 }
 
 export function useEmailAnalytics(): UseEmailAnalyticsReturn {
+  const { userContext, isLoading: authLoading, error: authError } = useEmailContext();
+  
+  // Use EmailService with user context
+  const emailService = EmailService.useAnalytics(userContext);
+
   const {
     data: analytics,
     isLoading,
     error,
     refetch,
-  } = useQuery({
-    queryKey: emailKeys.analytics(),
-    queryFn: emailApi.getAnalytics,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-  });
+  } = emailService.getEmailAnalytics();
 
   return {
-    analytics: analytics ?? null,
-    isLoading,
-    error: error as Error | null,
+    analytics: analytics?.data ?? null,
+    isLoading: isLoading || authLoading,
+    error: (error as Error) || authError || null,
     refetch,
   };
 }

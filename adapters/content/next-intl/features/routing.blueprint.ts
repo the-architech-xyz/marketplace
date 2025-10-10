@@ -18,12 +18,12 @@ import {createNavigation} from 'next-intl/navigation';
 
 export const routing = defineRouting({
   // A list of all locales that are supported
-  locales: {{module.parameters.locales}},
+  locales: {{context..locales}},
 
   // Used when no locale matches
-  defaultLocale: '{{module.parameters.defaultLocale}}',
+  defaultLocale: '{{context..defaultLocale}}',
 
-  {{#if module.parameters.pathnames}}
+  {{#if context..pathnames}}
   // The \`pathnames\` object holds pairs of internal and
   // external paths. Based on the locale, the external
   // paths are rewritten to the shared, internal ones.
@@ -80,7 +80,7 @@ import {routing} from './src/i18n/routing';
 export default createMiddleware(routing);
 
 export const config = {
-  matcher: ['/', '/({{module.parameters.locales.join('|')}})/:path*']
+  matcher: ['/', '/({{context..locales.join('|')}})/:path*']
 };`
     },
     {
@@ -116,7 +116,7 @@ export function LanguageSwitcher() {
   };
 
   const supportedLanguages = languages.filter(lang => 
-    {{module.parameters.locales}}.includes(lang.code)
+    {{context..locales}}.includes(lang.code)
   );
 
   return (

@@ -28,7 +28,7 @@ export interface DatabaseSequelizeParams {
   pool?: boolean;
 
   /** Database type */
-  databaseType: string;
+  databaseType: 'postgresql' | 'mysql' | 'sqlite' | 'mariadb' | 'mssql';
 }
 
 export interface DatabaseSequelizeFeatures {}

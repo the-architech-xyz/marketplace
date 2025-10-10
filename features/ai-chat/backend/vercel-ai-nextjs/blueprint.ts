@@ -1,11 +1,7 @@
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const blueprint: Blueprint = {
-  id: 'ai-chat-backend-vercel-ai-nextjs',
-  name: 'AI Chat Capability (Vercel AI + NextJS)',
-  description: 'Complete AI chat backend with Vercel AI SDK and NextJS, providing IAIChatService.',
-  version: '2.0.0',
-  actions: [
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  return [
     // Create the main AIChatService that implements IAIChatService
     {
       type: BlueprintActionType.CREATE_FILE,
@@ -54,7 +50,5 @@ export const blueprint: Blueprint = {
         priority: 1
       }
     }
-  ]
-};
-
-export default blueprint;
+  ];
+}

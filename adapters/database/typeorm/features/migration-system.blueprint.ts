@@ -95,7 +95,7 @@ export class MigrationManager {
     }
   }
 
-  {{#if module.parameters.auto-migration}}
+  {{#if context..auto-migration}}
   async autoMigrate(): Promise<void> {
     try {
       console.log('🔄 Running automatic migration...');

@@ -8,9 +8,21 @@ export interface AiVercelAiSdkParams {
 
   /** AI providers to include */
   providers: string[];
+  /** Constitutional Architecture features configuration */
+  features?: {
 
-  /** Feature flags */
-  features: Record<string, any>;
+    /** Essential AI functionality (chat, text generation) */
+    core: boolean;
+
+    /** Real-time streaming responses */
+    streaming: boolean;
+
+    /** Advanced AI features (image generation, embeddings, function calling) */
+    advanced: boolean;
+
+    /** Enterprise features (caching, edge runtime, tool use) */
+    enterprise: boolean;
+  };
 
   /** Default AI model */
   defaultModel: 'gpt-3.5-turbo' | 'gpt-4' | 'gpt-4-turbo' | 'claude-3-sonnet' | 'claude-3-opus';
@@ -22,7 +34,20 @@ export interface AiVercelAiSdkParams {
   temperature: number;
 }
 
-export interface AiVercelAiSdkFeatures {}
+export interface AiVercelAiSdkFeatures {
+
+  /** Essential AI functionality (chat, text generation) */
+  core: boolean;
+
+  /** Real-time streaming responses */
+  streaming: boolean;
+
+  /** Advanced AI features (image generation, embeddings, function calling) */
+  advanced: boolean;
+
+  /** Enterprise features (caching, edge runtime, tool use) */
+  enterprise: boolean;
+}
 
 // 🚀 Auto-discovered artifacts
 export declare const AiVercelAiSdkArtifacts: {

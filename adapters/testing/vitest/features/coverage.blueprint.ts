@@ -27,20 +27,20 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: '{{module.parameters.environment}}',
+    environment: '{{context..environment}}',
     setupFiles: ['./tests/setup/setup.ts'],
-    {{#if module.parameters.watch}}
+    {{#if context..watch}}
     watch: true,
     {{/if}}
     coverage: {
       provider: 'v8',
-      reporter: {{module.parameters.reports}},
+      reporter: {{context..reports}},
       threshold: {
         global: {
-          branches: {{module.parameters.threshold}},
-          functions: {{module.parameters.threshold}},
-          lines: {{module.parameters.threshold}},
-          statements: {{module.parameters.threshold}}
+          branches: {{context..threshold}},
+          functions: {{context..threshold}},
+          lines: {{context..threshold}},
+          statements: {{context..threshold}}
         }
       },
       exclude: [

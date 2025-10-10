@@ -1,10 +1,50 @@
 /**
- * features/payments/frontend/shadcn
+ * Payments Frontend (Shadcn)
  * 
- * Auto-generated integration types
+ * Payment processing UI using Shadcn components
  */
 
-export interface FeaturesPaymentsFrontendShadcnParams {}
+export interface FeaturesPaymentsFrontendShadcnParams {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Essential payment functionality (forms, checkout, transactions) */
+    core: boolean;
+
+    /** Subscription management and billing */
+    subscriptions: boolean;
+
+    /** Invoice generation and management */
+    invoicing: boolean;
+
+    /** Payment webhook handling */
+    webhooks: boolean;
+
+    /** Payment analytics and reporting */
+    analytics: boolean;
+  };
+
+  /** UI theme variant */
+  theme?: 'default' | 'dark' | 'light' | 'minimal';
+}
+
+export interface FeaturesPaymentsFrontendShadcnFeatures {
+
+  /** Essential payment functionality (forms, checkout, transactions) */
+  core: boolean;
+
+  /** Subscription management and billing */
+  subscriptions: boolean;
+
+  /** Invoice generation and management */
+  invoicing: boolean;
+
+  /** Payment webhook handling */
+  webhooks: boolean;
+
+  /** Payment analytics and reporting */
+  analytics: boolean;
+}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesPaymentsFrontendShadcnArtifacts: {

@@ -1,4 +1,4 @@
-import { Genome } from '@thearchitech.xyz/types';
+import { defineGenome } from '@thearchitech.xyz/types';
 /**
  * Simple App Genome
  * 
@@ -14,7 +14,7 @@ import { Genome } from '@thearchitech.xyz/types';
  * - Form handling with React Hook Form + Zod
  * - Data fetching with TanStack Query
  */
-const simpleAppGenome: Genome = {
+const simpleAppGenome = defineGenome({
   version: '1.0.0',
   project: {
     name: 'simple-app',
@@ -101,7 +101,7 @@ const simpleAppGenome: Genome = {
     
     // === AUTHENTICATION ===
     {
-      id: 'features/auth',
+      id: 'features/auth/frontend/shadcn',
       parameters: {
         providers: ['email'],
         session: 'jwt',
@@ -184,7 +184,7 @@ const simpleAppGenome: Genome = {
     
     // === CONNECTORS ===
     {
-      id: 'connector:docker-drizzle',
+      id: 'connectors/docker-drizzle',
       parameters: {
         postgresService: true,
         migrationService: true,
@@ -202,14 +202,14 @@ const simpleAppGenome: Genome = {
     },
     
     {
-      id: 'connector:better-auth-github',
+      id: 'connectors/better-auth-github',
       parameters: {
         enabled: true
       }
     },
     
     {
-      id: 'connector:tanstack-query-nextjs',
+      id: 'connectors/tanstack-query-nextjs',
       parameters: {
         devtools: true,
         ssr: true,
@@ -220,7 +220,7 @@ const simpleAppGenome: Genome = {
     },
     
     {
-      id: 'connector:zustand-nextjs',
+      id: 'connectors/zustand-nextjs',
       parameters: {
         persistence: true,
         devtools: true,
@@ -229,7 +229,7 @@ const simpleAppGenome: Genome = {
     },
     
     {
-      id: 'connector:rhf-zod-shadcn',
+      id: 'connectors/rhf-zod-shadcn',
       parameters: {
         formComponents: true,
         validation: true,
@@ -238,7 +238,7 @@ const simpleAppGenome: Genome = {
     },
     
     {
-      id: 'connector:vitest-nextjs',
+      id: 'connectors/vitest-nextjs',
       parameters: {
         testing: true,
         coverage: true,
@@ -248,7 +248,7 @@ const simpleAppGenome: Genome = {
     
     // === FEATURES ===
     {
-      id: 'features/auth',
+      id: 'features/auth/frontend/shadcn',
       parameters: {
         backend: 'better-auth-nextjs',
         frontend: 'shadcn',
@@ -269,7 +269,7 @@ const simpleAppGenome: Genome = {
     
     // === WELCOME FEATURE ===
     {
-      id: 'features/architech-welcome',
+      id: 'features/architech-welcome/shadcn',
       parameters: {
         theme: 'default',
         features: {
@@ -281,6 +281,6 @@ const simpleAppGenome: Genome = {
       }
     }
   ]
-};
+});
 
 export default simpleAppGenome;

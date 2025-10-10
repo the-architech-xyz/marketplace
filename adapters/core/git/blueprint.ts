@@ -77,7 +77,7 @@ export const gitBlueprint: Blueprint = {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'GIT_USER_NAME',
-      value: '{{module.parameters.userName}}',
+      value: '{{context..userName}}',
       description: 'Git user name for commits'
     },
     
@@ -85,7 +85,7 @@ export const gitBlueprint: Blueprint = {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'GIT_USER_EMAIL',
-      value: '{{module.parameters.userEmail}}',
+      value: '{{context..userEmail}}',
       description: 'Git user email for commits'
     },
     
@@ -93,7 +93,7 @@ export const gitBlueprint: Blueprint = {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'GIT_DEFAULT_BRANCH',
-      value: '{{module.parameters.defaultBranch}}',
+      value: '{{context..defaultBranch}}',
       description: 'Default branch name for new repositories'
     }
   ]

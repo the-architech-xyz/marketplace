@@ -1,872 +1,633 @@
 # 🔌 Adapter Development Guide
 
-> **Complete guide to creating custom adapters for The Architech**
+> **Complete guide to creating adapters with Constitutional Architecture**
 
 ## 📋 Table of Contents
 
 1. [Overview](#overview)
-2. [Adapter Structure](#adapter-structure)
-3. [Creating Your First Adapter](#creating-your-first-adapter)
-4. [Blueprint Actions](#blueprint-actions)
-5. [Template Variables](#template-variables)
-6. [Best Practices](#best-practices)
-7. [Testing Your Adapter](#testing-your-adapter)
-8. [Publishing Your Adapter](#publishing-your-adapter)
+2. [Constitutional Architecture for Adapters](#constitutional-architecture-for-adapters)
+3. [Adapter Structure](#adapter-structure)
+4. [Creating Your First Adapter](#creating-your-first-adapter)
+5. [Dynamic Blueprint Functions](#dynamic-blueprint-functions)
+6. [Template Development](#template-development)
+7. [Capability Definition](#capability-definition)
+8. [Best Practices](#best-practices)
+9. [Testing Your Adapter](#testing-your-adapter)
+10. [Publishing Your Adapter](#publishing-your-adapter)
 
 ## 🎯 Overview
 
-Adapters are the core building blocks of The Architech. The system uses a **three-tier adapter architecture** with Agnostic Adapters, Dependent Adapters, and Integration Adapters. They follow a **CLI-first approach** and use **declarative blueprints** to define their behavior.
-
-### Three-Tier Adapter System
-
-- **🔌 Agnostic Adapters** - Technology-agnostic implementations (e.g., Stripe, Drizzle)
-- **🔗 Dependent Adapters** - Framework-specific implementations (e.g., next-intl, vitest)
-- **🔗 Integration Adapters** - Cross-adapter integrations using "Requester-Provider" pattern
+Adapters in The Architech's Constitutional Architecture are **capability-based modules** that provide specific business or technical capabilities. They use **dynamic blueprint functions** and **intelligent template context** to generate code based on user configuration.
 
 ### Key Principles
 
-- **⚡ CLI-First** - Leverage existing tools and commands
-- **📋 Declarative** - Blueprints define actions, not implementation
-- **🛡️ Type-Safe** - Full TypeScript support
-- **🎯 Clear Separation** - Each adapter type has distinct responsibilities
+- **🏛️ Constitutional Architecture** - Organize around business capabilities
+- **🤖 Intelligent Defaults** - Define sensible defaults, users only specify overrides
+- **⚡ Dynamic Blueprints** - Blueprints are TypeScript functions that adapt to configuration
+- **🎨 Intelligent Templates** - Templates receive rich context for conditional rendering
+- **🔗 Capability Dependencies** - Define prerequisites and resolve conflicts automatically
 
-## 🏗️ Adapter Types
+## 🏛️ Constitutional Architecture for Adapters
 
-### 1. Agnostic Adapters
-**Location**: `src/adapters/{category}/{adapter-id}/`
-**Purpose**: Technology-agnostic implementations that can work with any framework
-**Examples**: Stripe, Drizzle, Better Auth, Resend, Sentry
-**Dependencies**: None (tech-agnostic)
+### Business Capability Hierarchy
 
-```json
-{
-  "dependencies": [],
-  "tech_stack": {
-    "agnostic": true
-  }
-}
-```
-
-### 2. Dependent Adapters  
-**Location**: `src/adapters/{category}/{adapter-id}/`
-**Purpose**: Tech-specific implementations inherently tied to specific technologies
-**Examples**: next-intl that can be used only with nextjs
-**Dependencies**: Framework-specific
+Adapters are organized around **business capabilities** rather than technical implementation:
 
 ```json
 {
-  "dependencies": ["framework/nextjs"],
-  "tech_stack": {
-    "framework": "nextjs"
-  }
-}
-```
-
-### 3. Integration Adapters
-**Location**: `src/integrations/{requester}-{provider}-integration/`
-**Purpose**: Cross-adapter integrations using "Requester-Provider" pattern
-**Examples**: stripe-nextjs-integration, drizzle-nextjs-integration, web3-shadcn-integration
-**Dependencies**: Multiple adapters
-
-```json
-{
-  "tech_stack": {
-    "framework": "nextjs",
-    "adapters": ["stripe"]
+  "id": "adapter:database/drizzle",
+  "provides": ["database", "orm", "migrations", "type-safety"],
+  "parameters": {
+    "features": {
+      "migrations": { "default": true },
+      "studio": { "default": false },
+      "relations": { "default": true },
+      "seeding": { "default": false }
+    }
   },
-  "requirements": {
-    "modules": ["stripe", "nextjs"]
+  "internal_structure": {
+    "core": ["schema", "client", "type-safety"],
+    "optional": {
+      "migrations": {
+        "prerequisites": ["core"],
+        "provides": ["migration-system"],
+        "templates": ["migration-files.tpl", "migration-config.tpl"]
+      },
+      "studio": {
+        "prerequisites": ["core"],
+        "provides": ["database-studio"],
+        "templates": ["studio-config.tpl"]
+      }
+    }
   }
 }
 ```
+
+### Capability Resolution
+
+The system automatically resolves:
+- **Prerequisites** - What capabilities must be available first
+- **Conflicts** - Multiple adapters providing the same capability
+- **Dependencies** - Required modules and execution order
+- **Validation** - Ensures all prerequisites are met
 
 ## 🏗️ Adapter Structure
 
-Every adapter follows this structure:
+### Directory Structure
 
 ```
-src/adapters/{category}/{adapter-id}/
-├── adapter.json          # Adapter metadata and configuration
-└── blueprint.ts          # Blueprint definition with actions
+marketplace/adapters/{category}/{adapter-name}/
+├── adapter.json              # Capability definition and configuration
+├── blueprint.ts              # Dynamic blueprint function
+└── templates/
+    ├── core-feature.ts.tpl   # Core functionality templates
+    ├── optional-feature.ts.tpl # Optional feature templates
+    └── ...
 ```
 
-### Example Structure
-
-```
-src/adapters/database/drizzle/
-├── adapter.json
-└── blueprint.ts
-```
-
-## 📄 Adapter Configuration (`adapter.json`)
-
-The `adapter.json` file defines the adapter's metadata and capabilities:
+### Adapter Configuration (`adapter.json`)
 
 ```json
 {
-  "id": "drizzle",
+  "id": "adapter:database/drizzle",
   "name": "Drizzle ORM",
-  "description": "Type-safe SQL ORM with excellent TypeScript support",
-  "category": "database",
+  "description": "TypeScript-first ORM with full type safety",
   "version": "1.0.0",
-  "blueprint": "blueprint.ts",
-  "dependencies": {
-    "required": ["framework"],
-    "optional": ["auth"],
-    "conflicts": []
-  },
-  "capabilities": {
-    "database-orm": {
-      "version": "1.0.0",
-      "description": "Type-safe SQL ORM with excellent TypeScript support",
-      "provides": ["sql", "postgresql", "mysql", "sqlite", "serverless", "migrations", "schema-validation", "type-safety", "query-builder", "relations"]
-    },
-    "database-migrations": {
-      "version": "1.0.0",
-      "description": "Database schema migration management",
-      "provides": ["migrations", "schema-validation", "rollback"]
-    },
-    "database-relations": {
-      "version": "1.0.0",
-      "description": "Advanced relationship management and queries",
-      "provides": ["relations", "joins", "foreign-keys"]
+  "category": "database",
+  "provides": ["database", "orm", "migrations", "type-safety"],
+  "parameters": {
+    "features": {
+      "migrations": {
+        "default": true,
+        "description": "Database migration system",
+        "type": "boolean"
+      },
+      "studio": {
+        "default": false,
+        "description": "Database studio interface",
+        "type": "boolean"
+      },
+      "relations": {
+        "default": true,
+        "description": "Database relations support",
+        "type": "boolean"
+      },
+      "seeding": {
+        "default": false,
+        "description": "Database seeding functionality",
+        "type": "boolean"
+      }
     }
   },
-    "integrations": {
-      "auth": "User schema generation",
-      "framework": "Next.js API routes"
+  "internal_structure": {
+    "core": ["schema", "client", "type-safety"],
+    "optional": {
+      "migrations": {
+        "prerequisites": ["core"],
+        "provides": ["migration-system"],
+        "templates": ["migration-files.tpl", "migration-config.tpl"]
+      },
+      "studio": {
+        "prerequisites": ["core"],
+        "provides": ["database-studio"],
+        "templates": ["studio-config.tpl"]
+      },
+      "relations": {
+        "prerequisites": ["core"],
+        "provides": ["relation-system"],
+        "templates": ["relation-definitions.tpl"]
+      },
+      "seeding": {
+        "prerequisites": ["core", "migrations"],
+        "provides": ["seeding-system"],
+        "templates": ["seed-files.tpl", "seed-config.tpl"]
+      }
     }
-  },
-  "environment": {
-    "required": ["DATABASE_URL"],
-    "optional": ["DATABASE_POOL_SIZE"]
-  },
-  "files": {
-    "generates": ["src/lib/db/", "drizzle.config.ts"],
-    "modifies": ["package.json", ".env.example"]
   }
 }
 ```
 
-### Configuration Fields
+## 🚀 Creating Your First Adapter
 
-| Field | Type | Description | Required |
-|-------|------|-------------|----------|
-| `id` | string | Unique adapter identifier | ✅ |
-| `name` | string | Human-readable name | ✅ |
-| `description` | string | Brief description | ✅ |
-| `category` | string | Category (framework, database, auth, etc.) | ✅ |
-| `version` | string | Semantic version | ✅ |
-| `blueprint` | string | Blueprint file name | ✅ |
-| `dependencies` | object | Module dependencies | ❌ |
-| `capabilities` | object | Feature capabilities | ❌ |
-| `environment` | object | Environment variables | ❌ |
-| `files` | object | File generation info | ❌ |
+### Step 1: Define Capabilities
 
-## 🔧 Creating Your First Adapter
-
-Let's create a simple adapter for a logging library:
-
-### Step 1: Create the Directory Structure
-
-```bash
-mkdir -p src/adapters/logging/winston
-cd src/adapters/logging/winston
-```
-
-### Step 2: Create `adapter.json`
+Start by defining what your adapter provides:
 
 ```json
 {
-  "id": "winston",
-  "name": "Winston Logger",
-  "description": "A multi-transport async logging library for Node.js",
-  "category": "logging",
-  "version": "1.0.0",
-  "blueprint": "blueprint.ts",
-  "capabilities": {
-    "logging": {
-      "version": "1.0.0",
-      "description": "Multi-transport async logging library",
-      "provides": ["console-logging", "file-logging", "database-logging", "json-format", "simple-format", "colorize-format", "error-level", "warn-level", "info-level", "debug-level"]
+  "id": "adapter:email/resend",
+  "provides": ["email", "transactions", "templates", "analytics"],
+  "parameters": {
+    "features": {
+      "templates": { "default": true },
+      "analytics": { "default": false },
+      "campaigns": { "default": false }
     }
-  },
-  "environment": {
-    "optional": ["LOG_LEVEL", "LOG_FILE_PATH"]
-  },
-  "files": {
-    "generates": ["src/lib/logger/"],
-    "modifies": ["package.json"]
   }
 }
 ```
 
-### Step 3: Create `blueprint.ts`
+### Step 2: Create Dynamic Blueprint Function
 
 ```typescript
-import { Blueprint } from '../../../types/adapter.js';
+// blueprint.ts
+import { BlueprintAction, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const winstonBlueprint: Blueprint = {
-  id: 'winston-logging-setup',
-  name: 'Winston Logging Setup',
-  actions: [
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Always generate core actions
+  actions.push(...generateCoreActions());
+  
+  // Conditionally generate feature-specific actions
+  if (config.activeFeatures.includes('templates')) {
+    actions.push(...generateTemplatesActions());
+  }
+  
+  if (config.activeFeatures.includes('analytics')) {
+    actions.push(...generateAnalyticsActions());
+  }
+  
+  if (config.activeFeatures.includes('campaigns')) {
+    actions.push(...generateCampaignsActions());
+  }
+  
+  return actions;
+}
+
+function generateCoreActions(): BlueprintAction[] {
+  return [
     {
-      type: BlueprintActionType.RUN_COMMAND,
-      command: 'npm install winston'
+      type: 'CREATE_FILE',
+      path: 'src/lib/email/resend.ts',
+      template: 'templates/resend-client.ts.tpl',
+      context: { features: ['core'] }
     },
     {
-      type: 'ADD_CONTENT',
-      target: 'src/lib/logger/config.ts',
-      content: `import winston from 'winston';
+      type: 'INSTALL_PACKAGES',
+      packages: ['resend']
+    }
+  ];
+}
 
-// Create logger instance
-export const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || 'info',
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.errors({ stack: true }),
-    winston.format.json()
-  ),
-  defaultMeta: { service: '{{project.name}}' },
-  transports: [
-    new winston.transports.Console({
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.simple()
-      )
-    })
-  ]
+function generateTemplatesActions(): BlueprintAction[] {
+  return [
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/email/templates.ts',
+      template: 'templates/email-templates.ts.tpl',
+      context: { 
+        features: ['templates'],
+        hasTemplates: true 
+      }
+    }
+  ];
+}
+```
+
+### Step 3: Create Templates with Context
+
+```handlebars
+{{!-- templates/resend-client.ts.tpl --}}
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export async function sendEmail({
+  to,
+  subject,
+  html,
+  from = 'noreply@{{project.name}}.com'
+}: {
+  to: string;
+  subject: string;
+  html: string;
+  from?: string;
+}) {
+  return await resend.emails.send({
+    from,
+    to,
+    subject,
+    html
+  });
+}
+
+{{#if context.hasTemplates}}
+// Template functionality
+export async function sendTemplateEmail({
+  to,
+  templateId,
+  data
+}: {
+  to: string;
+  templateId: string;
+  data: Record<string, any>;
+}) {
+  // Template email logic
+}
+{{/if}}
+```
+
+## ⚡ Dynamic Blueprint Functions
+
+### Function Signature
+
+```typescript
+export default function generateBlueprint(
+  config: MergedConfiguration
+): BlueprintAction[] {
+  // Your blueprint logic here
+}
+```
+
+### Configuration Object
+
+The `MergedConfiguration` object contains:
+
+```typescript
+interface MergedConfiguration {
+  activeFeatures: string[];        // Features enabled by user
+  resolvedCapabilities: string[];  // Capabilities this adapter provides
+  executionOrder: string[];        // Order of capability execution
+  conflicts: ConfigurationConflict[]; // Any conflicts detected
+  templateContext?: Record<string, any>; // Global template context
+}
+```
+
+### Conditional Generation
+
+Use the configuration to conditionally generate actions:
+
+```typescript
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Always generate core
+  actions.push(...generateCoreActions());
+  
+  // Conditional features
+  if (config.activeFeatures.includes('migrations')) {
+    actions.push(...generateMigrationsActions());
+  }
+  
+  if (config.activeFeatures.includes('studio')) {
+    actions.push(...generateStudioActions());
+  }
+  
+  return actions;
+}
+```
+
+## 🎨 Template Development
+
+### Intelligent Template Context
+
+Templates receive rich context for conditional rendering:
+
+```handlebars
+{{!-- templates/database-schema.ts.tpl --}}
+import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL!);
+export const db = drizzle(sql);
+
+// Core schema
+export const users = pgTable('users', {
+  id: serial('id').primaryKey(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  name: varchar('name', { length: 255 }),
+  createdAt: timestamp('created_at').defaultNow()
 });
 
-// Add file transport in production
-if (process.env.NODE_ENV === 'production') {
-  logger.add(new winston.transports.File({
-    filename: process.env.LOG_FILE_PATH || 'logs/error.log',
-    level: 'error'
-  }));
-}
+{{#if context.hasRelations}}
+// Relations
+export const posts = pgTable('posts', {
+  id: serial('id').primaryKey(),
+  title: varchar('title', { length: 255 }).notNull(),
+  content: text('content'),
+  authorId: integer('author_id').references(() => users.id),
+  createdAt: timestamp('created_at').defaultNow()
+});
 
-export default logger;`
-    },
-    {
-      type: 'ADD_CONTENT',
-      target: 'src/lib/logger/index.ts',
-      content: `export { logger, default } from './config.js';
-export * from './types.js';`
-    },
-    {
-      type: 'ADD_CONTENT',
-      target: 'src/lib/logger/types.ts',
-      content: `export interface LogContext {
-  userId?: string;
-  requestId?: string;
-  action?: string;
-  metadata?: Record<string, any>;
-}
+export const usersRelations = relations(users, ({ many }) => ({
+  posts: many(posts)
+}));
+{{/if}}
 
-export type LogLevel = 'error' | 'warn' | 'info' | 'debug';`
-    }
-  ]
+{{#if context.hasMigrations}}
+// Migration utilities
+export const migrate = async () => {
+  // Migration logic
 };
+{{/if}}
 ```
 
-## 📋 Blueprint Interface
+### Context Properties
 
-### Blueprint Structure
+Templates have access to:
 
-```typescript
-export interface Blueprint {
-  id: string;
-  name: string;
-  description: string;
-  version: string;
-  contextualFiles?: string[];  // NEW: Files to pre-load into VFS
-  actions: BlueprintAction[];
-}
-```
+- **`context.features`** - Array of active features
+- **`context.hasFeatureName`** - Boolean for specific features
+- **`context.project`** - Project information
+- **`context.module`** - Module information
+- **Custom context** - Passed from blueprint actions
 
-### Contextual Files Property
+## 🔗 Capability Definition
 
-The `contextualFiles` property allows you to explicitly declare which files your blueprint needs to be pre-loaded into the VFS. This is especially useful for:
+### Defining Capabilities
 
-- **ENHANCE_FILE actions** that need to modify existing files
-- **Integration blueprints** that depend on files created by other adapters
-- **Complex blueprints** that need specific file context
+Each adapter defines what capabilities it provides:
 
-#### Example Usage
-
-```typescript
-export const stripeNextjsBlueprint: Blueprint = {
-  id: 'stripe-nextjs-integration',
-  name: 'Stripe Next.js Integration',
-  contextualFiles: [
-    'src/lib/payment/stripe.ts',  // Created by stripe adapter
-    'package.json'                // For dependency checks
-  ],
-  actions: [
-    {
-      type: BlueprintActionType.ENHANCE_FILE,
-
-      path: 'src/app/api/stripe/webhooks/route.ts',
-      modifier: ModifierType.TS_MODULE_ENHANCER,
-      fallback: 'create',  // Auto-create if missing
-      params: { /* ... */ }
-    }
-  ]
-};
-```
-
-#### When to Use Contextual Files
-
-| Use Case | Example | Why |
-|----------|---------|-----|
-| **ENHANCE_FILE dependencies** | `src/lib/auth/config.ts` | ENHANCE_FILE needs the file to exist |
-| **Integration requirements** | `src/lib/payment/stripe.ts` | Integration needs adapter files |
-| **Configuration files** | `package.json`, `tsconfig.json` | For dependency/configuration checks |
-| **Schema files** | `src/db/schema.ts` | For database integration blueprints |
-
-## ⚡ Blueprint Actions
-
-Blueprints use **high-level semantic actions** that express intent rather than implementation details. This makes blueprint creation simple, clear, and error-free.
-
-### 🎯 **Semantic Actions (Recommended)**
-
-#### 1. `INSTALL_PACKAGES` - Install Dependencies
-
-```typescript
+```json
 {
-  type: BlueprintActionType.INSTALL_PACKAGES,
-  packages: ['stripe', '@stripe/stripe-js'],
-  isDev: false  // optional, defaults to false
-}
-```
-
-**What it does:** Adds packages to `package.json` and runs `npm install`
-
-#### 2. `ADD_SCRIPT` - Add NPM Scripts
-
-```typescript
-{
-  type: BlueprintActionType.ADD_SCRIPT,
-
-  name: 'stripe:listen',
-  command: 'stripe listen --forward-to localhost:3000/api/stripe/webhook'
-}
-```
-
-**What it does:** Adds script to `package.json` scripts section
-
-#### 3. `ADD_ENV_VAR` - Add Environment Variables
-
-```typescript
-{
-  type: BlueprintActionType.ADD_ENV_VAR,
-
-  key: 'STRIPE_SECRET_KEY',
-  value: 'sk_test_...',
-  description: 'Stripe secret key for payments'  // optional
-}
-```
-
-**What it does:** Adds variable to `.env` and `.env.example` files
-
-#### 4. `CREATE_FILE` - Create New Files
-
-```typescript
-{
-  type: BlueprintActionType.CREATE_FILE,
-  path: 'src/lib/stripe.ts',
-  content: `import Stripe from 'stripe';
-
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-`,
-  overwrite: false  // optional, defaults to false
-}
-```
-
-**What it does:** Creates new file with content, handles directory creation
-
-#### 5. `UPDATE_TS_CONFIG` - Update TypeScript Configs
-
-```typescript
-{
-  type: 'UPDATE_TS_CONFIG',
-  path: 'src/lib/config.ts',
-  modifications: {
-    stripe: {
-      enabled: true,
-      webhookSecret: 'process.env.STRIPE_WEBHOOK_SECRET'
-    }
-  }
-}
-```
-
-**What it does:** Intelligently merges TypeScript configuration objects
-
-#### 6. `APPEND_TO_FILE` / `PREPEND_TO_FILE` - Modify Files
-
-```typescript
-{
-  type: 'APPEND_TO_FILE',
-  path: '.gitignore',
-  content: `
-# Stripe
-.env.stripe
-stripe.log
-`
-}
-```
-
-**What it does:** Appends or prepends content to existing files
-
-#### 7. `RUN_COMMAND` - Execute Commands
-
-```typescript
-{
-  type: BlueprintActionType.RUN_COMMAND,
-  command: 'npm run build',
-  workingDir: '.'  // optional
-}
-```
-
-**What it does:** Executes shell commands
-
-#### 8. `ENHANCE_FILE` - Complex File Modifications
-
-```typescript
-{
-  type: BlueprintActionType.ENHANCE_FILE,
-
-  path: 'src/app/api/auth/[...all]/route.ts',
-  modifier: ModifierType.TS_MODULE_ENHANCER,
-  fallback: 'create',  // Smart fallback strategy
-  params: {
-    importsToAdd: [
-      { name: 'toNextJsHandler', from: 'better-auth/next-js', type: 'import' }
-    ],
-    statementsToAppend: [
-      {
-        type: 'raw',
-        content: `export const { GET, POST } = toNextJsHandler(authHandler);`
+  "provides": ["database", "orm", "migrations", "type-safety"],
+  "internal_structure": {
+    "core": ["schema", "client", "type-safety"],
+    "optional": {
+      "migrations": {
+        "prerequisites": ["core"],
+        "provides": ["migration-system"],
+        "templates": ["migration-files.tpl"]
       }
-    ]
-  }
-}
-```
-
-**What it does:** Performs complex file modifications using registered modifiers
-
-**Fallback Strategies:**
-- `'create'`: Auto-create missing files (recommended for API routes)
-- `'skip'`: Skip silently if file doesn't exist
-- `'error'`: Throw error if file doesn't exist (default)
-
-**When to use:** Complex file modifications that need AST manipulation or smart merging
-
-### 🔧 **Legacy Actions (Advanced)**
-
-#### `ADD_CONTENT` - Low-Level File Operations
-
-```typescript
-{
-  type: 'ADD_CONTENT',
-  target: 'src/lib/config.ts',
-  strategy: 'merge',        // merge, replace, append, prepend
-  fileType: 'typescript',   // typescript, javascript, json, env, auto
-  content: `export const config = {
-  apiUrl: '{{project.apiUrl}}',
-  version: '{{project.version}}'
-};`
-}
-```
-
-**Use only for advanced cases not covered by semantic actions.**
-
-### 📊 **Before vs After Comparison**
-
-#### **BEFORE (Complex, Error-Prone):**
-```typescript
-{
-  type: 'ADD_CONTENT',
-  target: 'package.json',
-  strategy: 'merge',
-  fileType: 'json',
-  content: `{
-    "dependencies": {
-      "stripe": "^1.0.0",
-      "@stripe/stripe-js": "^2.0.0"
-    },
-    "scripts": {
-      "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe/webhook"
     }
-  }`
-}
-```
-
-#### **AFTER (Simple, Clear, Safe):**
-```typescript
-[
-  {
-    type: BlueprintActionType.INSTALL_PACKAGES,
-    packages: ['stripe', '@stripe/stripe-js']
-  },
-  {
-    type: BlueprintActionType.ADD_SCRIPT,
-
-    name: 'stripe:listen',
-    command: 'stripe listen --forward-to localhost:3000/api/stripe/webhook'
   }
-]
+}
 ```
 
-**Benefits:**
-- ✅ **80% less code** - Semantic actions are much more concise
-- ✅ **90% fewer errors** - No more JSON formatting mistakes
-- ✅ **100% clearer intent** - What you want to do is obvious
-- ✅ **Self-documenting** - Action names clearly express purpose
+### Prerequisites
 
-#### File Update Strategies
+Define what capabilities must be available first:
 
-| Strategy | Description | Use Case | Example |
-|----------|-------------|----------|---------|
-| `replace` | Replace entire file (default) | New files, complete rewrites | New component files |
-| `merge` | Intelligently merge content | TypeScript/JS files | Updating existing configs |
-| `append` | Add content to end of file | Environment variables, logs | Adding to .env files |
-| `prepend` | Add content to beginning | Imports, setup code | Adding imports to existing files |
+```json
+{
+  "seeding": {
+    "prerequisites": ["core", "migrations"],
+    "provides": ["seeding-system"],
+    "templates": ["seed-files.tpl"]
+  }
+}
+```
 
-#### File Type Detection
+### Capability Conflicts
 
-The system automatically detects file types, but you can specify explicitly:
-
-| File Type | Auto-Detection | Description |
-|-----------|----------------|-------------|
-| `typescript` | `.ts`, `.tsx` | TypeScript files with intelligent merging |
-| `javascript` | `.js`, `.jsx` | JavaScript files with intelligent merging |
-| `json` | `.json` | JSON files with deep merging |
-| `env` | `.env`, `.env.example` | Environment files with deduplication |
-| `auto` | All others | Default handling |
-
-**Best Practices:**
-- Use `strategy: 'merge'` for TypeScript/JavaScript files to avoid duplication
-- Use `strategy: 'append'` for environment variables and logs
-- Use `strategy: 'replace'` for new files or complete rewrites
-- Let the system auto-detect file types unless you need specific behavior
-
-#### When to Use Each Action Type
-
-| Action Type | Use Case | Complexity | Reliability |
-|-------------|----------|------------|-------------|
-| **`ADD_CONTENT`** | New files, simple configs | Low | High |
-| **`RUN_COMMAND`** | Package installation, scripts | Low | High |
-| **`ADD_TS_IMPORT`** | Adding imports to existing files | Medium | Very High |
-| **`MERGE_TS_CONFIG_OBJECT`** | Merging TypeScript configs | Medium | Very High |
-| **`ADD_DB_SCHEMA`** | Adding database schemas | Medium | Very High |
-
-**Decision Guide:**
-- ✅ **Basic Adapters**: Use `ADD_CONTENT` and `RUN_COMMAND`
-- ✅ **Integration Features**: Use semantic actions for complex merges
-- ✅ **Simple Cases**: Stick with `ADD_CONTENT` with strategies
-- ✅ **Complex Cases**: Use semantic actions for reliability
-
-## 🔄 Template Variables
-
-Use template variables to make your adapters dynamic:
-
-### Project Variables
-
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `{{project.name}}` | Project name | `my-saas` |
-| `{{project.version}}` | Project version | `1.0.0` |
-| `{{project.description}}` | Project description | `My awesome SaaS` |
-
-### Module Variables
-
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `{{module.id}}` | Module ID | `drizzle` |
-| `{{module.version}}` | Module version | `latest` |
-| `{{module.parameters.key}}` | Module parameter | `postgresql` |
-
-### Example Usage
+The system automatically detects and resolves conflicts:
 
 ```typescript
-{
-  type: 'ADD_CONTENT',
-  target: 'src/lib/{{module.id}}/config.ts',
-  content: `export const {{module.id}}Config = {
-  name: '{{project.name}}',
-  version: '{{project.version}}',
-  database: '{{module.parameters.databaseType}}'
-};`
-}
+// Multiple adapters providing the same capability
+const conflicts = [
+  {
+    type: 'duplicate_capability',
+    message: 'Multiple adapters provide "database" capability',
+    affectedCapabilities: ['database'],
+    conflictingModules: ['adapter:database/drizzle', 'adapter:database/prisma']
+  }
+];
 ```
 
 ## 🎯 Best Practices
 
-### 1. CLI-First Approach
+### 1. Define Clear Capabilities
 
-Always use existing CLI tools when possible:
-
-```typescript
-// ✅ Good - Use existing CLI
+```json
+// ✅ Good - Clear business capabilities
 {
-  type: BlueprintActionType.RUN_COMMAND,
-  command: 'npx create-next-app@latest . --typescript --tailwind'
+  "provides": ["authentication", "user-management", "security"]
 }
 
-// ❌ Bad - Reimplement everything
+// ❌ Avoid - Technical implementation details
 {
-  type: 'ADD_CONTENT',
-  target: 'package.json',
-  content: '{"dependencies": {"next": "14.0.0"}}'
+  "provides": ["jwt-tokens", "bcrypt-hashing", "session-storage"]
 }
 ```
 
-### 2. Error Handling
+### 2. Use Sensible Defaults
 
-Include proper error handling in generated code:
-
-```typescript
+```json
+// ✅ Good - Most users want these features
 {
-  type: 'ADD_CONTENT',
-  target: 'src/lib/database/connection.ts',
-  content: `import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
-
-const connectionString = process.env.DATABASE_URL;
-if (!connectionString) {
-  throw new Error('DATABASE_URL environment variable is required');
-}
-
-export const db = drizzle(postgres(connectionString));`
+  "features": {
+    "passwordReset": { "default": true },
+    "mfa": { "default": false },
+    "socialLogins": { "default": false }
+  }
 }
 ```
 
-### 3. TypeScript Support
+### 3. Organize Templates by Capability
 
-Always include proper TypeScript types:
+```
+templates/
+├── core/
+│   ├── client.ts.tpl
+│   └── types.ts.tpl
+├── migrations/
+│   ├── migration-files.ts.tpl
+│   └── migration-config.ts.tpl
+└── studio/
+    └── studio-config.ts.tpl
+```
+
+### 4. Provide Rich Context
 
 ```typescript
+// ✅ Good - Rich context for templates
 {
-  type: 'ADD_CONTENT',
-  target: 'src/types/{{module.id}}.ts',
-  content: `export interface {{module.id}}Config {
-  apiKey: string;
-  baseUrl: string;
-  timeout?: number;
-}
-
-export interface {{module.id}}Response {
-  success: boolean;
-  data?: any;
-  error?: string;
-}`
+  type: 'CREATE_FILE',
+  path: 'src/lib/auth/index.ts',
+  template: 'templates/auth-client.ts.tpl',
+  context: {
+    features: ['passwordReset', 'mfa'],
+    hasPasswordReset: true,
+    hasMFA: true,
+    socialProviders: ['github', 'google']
+  }
 }
 ```
 
-### 4. Environment Variables
-
-Document required environment variables:
+### 5. Handle Prerequisites Gracefully
 
 ```typescript
-{
-  type: 'ADD_CONTENT',
-  target: '.env.example',
-  content: `# {{module.name}} Configuration
-{{module.id | upper}}_API_KEY=your_api_key_here
-{{module.id | upper}}_BASE_URL=https://api.example.com
-{{module.id | upper}}_TIMEOUT=5000`
+// ✅ Good - Check prerequisites
+if (config.activeFeatures.includes('seeding')) {
+  if (!config.activeFeatures.includes('migrations')) {
+    throw new Error('Seeding requires migrations to be enabled');
+  }
+  actions.push(...generateSeedingActions());
 }
 ```
 
 ## 🧪 Testing Your Adapter
 
-### 1. Create a Test Recipe
+### Test Blueprint Function
 
-Create a test recipe to verify your adapter:
+```typescript
+// test/blueprint.test.ts
+import { describe, it, expect } from 'vitest';
+import generateBlueprint from '../blueprint';
 
-```yaml
-# test-winston.yaml
-version: "1.0"
-project:
-  name: "test-winston"
-  framework: "nextjs"
-  path: "./test-winston"
-modules:
-  - id: "nextjs"
-    category: "framework"
-    version: "latest"
-  - id: "winston"
-    category: "logging"
-    version: "latest"
-    parameters:
-      level: "debug"
-      filePath: "logs/app.log"
+describe('Adapter Blueprint', () => {
+  it('should generate core actions by default', () => {
+    const config = {
+      activeFeatures: ['core'],
+      resolvedCapabilities: ['database'],
+      executionOrder: ['core'],
+      conflicts: []
+    };
+    
+    const actions = generateBlueprint(config);
+    
+    expect(actions).toHaveLength(2);
+    expect(actions[0].type).toBe('CREATE_FILE');
+    expect(actions[1].type).toBe('INSTALL_PACKAGES');
+  });
+  
+  it('should generate migration actions when enabled', () => {
+    const config = {
+      activeFeatures: ['core', 'migrations'],
+      resolvedCapabilities: ['database', 'migration-system'],
+      executionOrder: ['core', 'migrations'],
+      conflicts: []
+    };
+    
+    const actions = generateBlueprint(config);
+    
+    expect(actions.some(a => a.path?.includes('migration'))).toBe(true);
+  });
+});
 ```
 
-### 2. Test the Adapter
+### Test Template Rendering
 
-```bash
-# Build the project
-npm run build
+```typescript
+// test/templates.test.ts
+import { describe, it, expect } from 'vitest';
+import { renderTemplate } from '@thearchitech.xyz/template-engine';
 
-# Test your adapter
-node dist/index.js new test-winston.yaml
-```
-
-### 3. Verify Generated Files
-
-Check that all expected files are created:
-
-```bash
-ls -la test-winston/src/lib/logger/
-# Should show: config.ts, index.ts, types.ts
+describe('Template Rendering', () => {
+  it('should render core template correctly', async () => {
+    const template = 'templates/database-schema.ts.tpl';
+    const context = {
+      features: ['core'],
+      hasRelations: false,
+      hasMigrations: false
+    };
+    
+    const result = await renderTemplate(template, context);
+    
+    expect(result).toContain('export const db = drizzle(sql);');
+    expect(result).not.toContain('// Relations');
+    expect(result).not.toContain('// Migration utilities');
+  });
+  
+  it('should render with relations when enabled', async () => {
+    const template = 'templates/database-schema.ts.tpl';
+    const context = {
+      features: ['core', 'relations'],
+      hasRelations: true,
+      hasMigrations: false
+    };
+    
+    const result = await renderTemplate(template, context);
+    
+    expect(result).toContain('// Relations');
+    expect(result).toContain('export const usersRelations');
+  });
+});
 ```
 
 ## 📦 Publishing Your Adapter
 
-### 1. Add to Agent Registry
+### 1. Update Marketplace Manifest
 
-Update the appropriate agent to recognize your adapter:
-
-```typescript
-// src/agents/core/logging-agent.ts
-export class LoggingAgent extends SimpleAgent {
-  constructor(pathHandler: PathHandler) {
-    super('logging', pathHandler);
-  }
-
-  private validateLoggingModule(module: Module): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-    
-    const supportedLogging = ['winston', 'pino', 'bunyan'];
-    if (!supportedLogging.includes(module.id)) {
-      errors.push(`Unsupported logging library: ${module.id}. Supported: ${supportedLogging.join(', ')}`);
-    }
-    
-    return { valid: errors.length === 0, errors };
-  }
-}
-```
-
-### 2. Update Documentation
-
-Add your adapter to the official documentation:
-
-```markdown
-## Logging Adapters
-
-### Winston
-- **ID**: `winston`
-- **Description**: Multi-transport async logging library
-- **Features**: Console, file, database transports
-- **Usage**: `architech new my-project.yaml` (include winston module)
-```
-
-### 3. Create Examples
-
-Provide example recipes using your adapter:
-
-```yaml
-# examples/logging-example.yaml
-version: "1.0"
-project:
-  name: "logging-example"
-  framework: "nextjs"
-  path: "./logging-example"
-modules:
-  - id: "nextjs"
-    category: "framework"
-  - id: "winston"
-    category: "logging"
-    parameters:
-      level: "info"
-      transports: ["console", "file"]
-```
-
-## 🚀 Advanced Features
-
-### Conditional Actions
-
-Use template conditions for dynamic behavior:
-
-```typescript
+```json
+// marketplace/manifest.json
 {
-  type: 'ADD_CONTENT',
-  target: 'src/lib/config.ts',
-  content: `export const config = {
-  database: {
-    url: process.env.DATABASE_URL,
-    {{#if module.parameters.ssl}}
-    ssl: true,
-    {{/if}}
-    pool: {
-      min: 2,
-      max: 10
+  "adapters": {
+    "adapter:email/resend": {
+      "version": "1.0.0",
+      "path": "adapters/email/resend",
+      "capabilities": ["email", "transactions", "templates"]
     }
   }
-};`
 }
 ```
 
-### Multiple File Generation
-
-Generate multiple related files:
+### 2. Add to Type Definitions
 
 ```typescript
-export const complexBlueprint: Blueprint = {
-  id: 'complex-setup',
-  name: 'Complex Setup',
-  actions: [
-    // Install dependencies
-    {
-      type: BlueprintActionType.RUN_COMMAND,
-      command: 'npm install express cors helmet'
-    },
-    // Create main server file
-    {
-      type: 'ADD_CONTENT',
-      target: 'src/server.ts',
-      content: `import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
+// types/adapters/resend.ts
+export interface ResendAdapter {
+  id: 'adapter:email/resend';
+  parameters: {
+    features: {
+      templates: boolean;
+      analytics: boolean;
+      campaigns: boolean;
+    };
+  };
+}
+```
 
-const app = express();
+### 3. Test Integration
 
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
+```bash
+# Test your adapter
+architech new test-genome.ts --dry-run
 
-export default app;`
-    },
-    // Create middleware
-    {
-      type: 'ADD_CONTENT',
-      target: 'src/middleware/auth.ts',
-      content: `export const authMiddleware = (req: any, res: any, next: any) => {
-  // Auth logic here
-  next();
-};`
-    }
-  ]
-};
+# Verify capability resolution
+architech new test-genome.ts --verbose
 ```
 
 ## 📚 Additional Resources
 
-- [Blueprint Types Reference](../types/adapter.ts)
-- [Agent Development Guide](./AGENT_DEVELOPMENT_GUIDE.md)
-- [Recipe Format Documentation](./RECIPE_FORMAT.md)
-- [Example Adapters](../src/adapters/)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your adapter following this guide
-3. Add tests and documentation
-4. Submit a pull request
+- **[Constitutional Architecture Guide](../../Architech/docs/CONSTITUTIONAL_ARCHITECTURE.md)** - Deep dive into the architecture
+- **[Template Development Guide](./TEMPLATE_DEVELOPMENT_GUIDE.md)** - Advanced template techniques
+- **[Capability Design Guide](./CAPABILITY_DESIGN_GUIDE.md)** - Designing effective capabilities
+- **[Testing Guide](./TESTING_GUIDE.md)** - Comprehensive testing strategies
 
 ---
 
-**Happy coding! 🚀**
+**Happy adapter development! 🔌**
+
+*For more information about the Constitutional Architecture, see the [CLI documentation](../../Architech/docs/).*

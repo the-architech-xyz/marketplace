@@ -11,15 +11,28 @@ export interface UiReactFlowParams {
 
   /** Available themes */
   themes: string[];
+  /** Constitutional Architecture features configuration */
+  features?: {
 
-  /** Feature flags */
-  features: Record<string, any>;
+    type: boolean;
+
+    description: boolean;
+
+    properties: boolean;
+  };
 
   /** Default viewport settings */
   defaultViewport: Record<string, any>;
 }
 
-export interface UiReactFlowFeatures {}
+export interface UiReactFlowFeatures {
+
+  type: boolean;
+
+  description: boolean;
+
+  properties: boolean;
+}
 
 // 🚀 Auto-discovered artifacts
 export declare const UiReactFlowArtifacts: {

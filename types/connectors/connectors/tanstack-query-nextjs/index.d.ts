@@ -1,10 +1,12 @@
 /**
  * connectors/tanstack-query-nextjs
  * 
- * Auto-generated integration types
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
 export interface ConnectorsTanstackQueryNextjsParams {}
+
+export interface ConnectorsTanstackQueryNextjsFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const ConnectorsTanstackQueryNextjsArtifacts: {

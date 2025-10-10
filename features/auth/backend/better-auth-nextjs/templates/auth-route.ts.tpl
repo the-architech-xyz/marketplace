@@ -1,22 +1,22 @@
-import { NextRequest } from 'next/server';
-import { authHandler } from '@/lib/auth/config';
+/**
+ * Better Auth API Route
+ * 
+ * This single route handles ALL authentication endpoints automatically.
+ * Better Auth creates 50+ routes based on your configuration and plugins.
+ * 
+ * Routes created automatically:
+ * - /api/auth/sign-in/email
+ * - /api/auth/sign-up/email
+ * - /api/auth/sign-out
+ * - /api/auth/session
+ * - /api/auth/two-factor/enable
+ * - /api/auth/two-factor/verify
+ * - /api/auth/organization/create
+ * - ... and many more
+ */
 
-export async function GET(request: NextRequest) {
-  return authHandler(request);
-}
+import { auth } from '@/lib/auth/config';
+import { toNextJsHandler } from 'better-auth/next-js';
 
-export async function POST(request: NextRequest) {
-  return authHandler(request);
-}
-
-export async function PUT(request: NextRequest) {
-  return authHandler(request);
-}
-
-export async function DELETE(request: NextRequest) {
-  return authHandler(request);
-}
-
-export async function PATCH(request: NextRequest) {
-  return authHandler(request);
-}
+// ✅ This ONE line creates ALL routes automatically
+export const { GET, POST } = toNextJsHandler(auth);

@@ -37,14 +37,13 @@ export type { UIState } from './use-ui-store';
 export type { AuthState, User } from './use-auth-store';
 
 // Store creation utilities
-export { createStore, createSlice, createSelector, createAction } from '@/lib/stores/create-store';
-export { createSubscription, createPersistence } from '@/lib/stores/create-store';
+export { createStore, createSlice, createSelector, createAction } from './create-store';
+export { createSubscription, createPersistence, createSSRStore, useHydration } from './create-store';
 
 // Store types
-export type { StoreConfig, StoreCreator, SliceCreator, StoreSelector, StoreAction } from '@/lib/stores/store-types';
-export type { StoreSubscription, PersistenceOptions, DevtoolsOptions, MiddlewareOptions } from '@/lib/stores/store-types';
-export type { StoreError, StoreValidator, StoreMiddleware, UseStoreHook } from '@/lib/stores/store-types';
-export type { StoreSubscription as StoreSubscriptionType, StorePersistence, StoreDevtools } from '@/lib/stores/store-types';
+export type { StoreConfig, StoreCreator, SliceCreator, StoreSelector, StoreAction } from './store-types';
+export type { StoreSubscription, PersistenceOptions, DevtoolsOptions, MiddlewareOptions } from './store-types';
+export type { StoreError, StoreValidator, StoreMiddleware, UseStoreHook } from './store-types';
 
 // Default exports
 export { useAppStore as default } from './use-app-store';

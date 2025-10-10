@@ -1,5 +1,5 @@
 {
-  "id": "connector:docker-nextjs",
+  "id": "connectors/docker-nextjs",
   "name": "Docker Next.js Connector",
   "description": "Complete Docker containerization for Next.js applications with multi-stage builds, optimization, and production-ready configuration",
   "type": "connector",

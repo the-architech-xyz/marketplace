@@ -11,15 +11,37 @@ export interface EmailResendParams {
 
   /** Default from email address */
   fromEmail: string;
+  /** Constitutional Architecture features configuration */
+  features?: {
 
-  /** Enable webhook handling */
-  webhooks?: boolean;
+    /** Essential email functionality (sending, basic templates) */
+    core: boolean;
 
-  /** Enable email analytics */
-  analytics?: boolean;
+    /** Advanced email template system */
+    templates: boolean;
+
+    /** Email analytics and tracking */
+    analytics: boolean;
+
+    /** Batch sending and campaign management */
+    campaigns: boolean;
+  };
 }
 
-export interface EmailResendFeatures {}
+export interface EmailResendFeatures {
+
+  /** Essential email functionality (sending, basic templates) */
+  core: boolean;
+
+  /** Advanced email template system */
+  templates: boolean;
+
+  /** Email analytics and tracking */
+  analytics: boolean;
+
+  /** Batch sending and campaign management */
+  campaigns: boolean;
+}
 
 // 🚀 Auto-discovered artifacts
 export declare const EmailResendArtifacts: {

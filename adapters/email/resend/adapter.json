@@ -6,14 +6,11 @@
   "version": "1.0.0",
   "blueprint": "blueprint.ts",
   "dependencies": [],
-  "capabilities": [
-    "transactional-emails",
-    "templates",
-    "analytics",
-    "webhooks",
-    "batch-sending",
-    "delivery-tracking",
-    "suppression-management"
+  "provides": [
+    "email-core",
+    "{{#if features.templates}}email-templates{{/if}}",
+    "{{#if features.analytics}}email-analytics{{/if}}",
+    "{{#if features.campaigns}}email-campaigns{{/if}}"
   ],
   "limitations": "Requires Resend API key",
   "parameters": {
@@ -29,99 +26,60 @@
       "description": "Default from email address",
       "required": true
     },
-    "webhooks": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable webhook handling",
-      "required": false
-    },
-    "analytics": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable email analytics",
-      "required": false
+    "features": {
+      "core": {
+        "description": "Essential email functionality (sending, basic templates)",
+        "default": true
+      },
+      "templates": {
+        "description": "Advanced email template system",
+        "default": true
+      },
+      "analytics": {
+        "description": "Email analytics and tracking",
+        "default": false
+      },
+      "campaigns": {
+        "description": "Batch sending and campaign management",
+        "default": false
+      }
     }
   },
-  "features": {
+  "internal_structure": {
+    "core": {
+      "provides": ["email-core"],
+      "templates": [
+        "resend-client.ts",
+        "email-types.ts",
+        "send-email.ts"
+      ]
+    },
     "templates": {
-      "id": "templates",
-      "name": "Email Templates",
-      "description": "Advanced email template system with React components",
-      "blueprint": "features/templates.blueprint.ts",
-      "category": "core",
-      "parameters": {
-        "template-engine": {
-          "type": "string",
-          "default": "react-email",
-          "description": "Template engine to use",
-          "required": false,
-          "options": [
-            "react-email",
-            "handlebars",
-            "mjml"
-          ]
-        },
-        "preview-mode": {
-          "type": "boolean",
-          "default": true,
-          "description": "Enable template preview mode",
-          "required": false
-        }
-      }
+      "prerequisites": ["email-core"],
+      "provides": ["email-templates"],
+      "templates": [
+        "template-engine.ts",
+        "react-email.ts",
+        "preview-mode.ts"
+      ]
     },
     "analytics": {
-      "id": "analytics",
-      "name": "Email Analytics",
-      "description": "Detailed email tracking, open rates, and click analytics",
-      "blueprint": "features/analytics.blueprint.ts",
-      "category": "premium",
-      "parameters": {
-        "track-opens": {
-          "type": "boolean",
-          "default": true,
-          "description": "Track email opens",
-          "required": false
-        },
-        "track-clicks": {
-          "type": "boolean",
-          "default": true,
-          "description": "Track link clicks",
-          "required": false
-        },
-        "dashboard": {
-          "type": "boolean",
-          "default": true,
-          "description": "Include analytics dashboard",
-          "required": false
-        }
-      }
+      "prerequisites": ["email-core"],
+      "provides": ["email-analytics"],
+      "templates": [
+        "analytics.ts",
+        "tracking.ts",
+        "dashboard.ts"
+      ]
     },
-    "batch-sending": {
-      "id": "batch-sending",
-      "name": "Batch Sending",
-      "description": "Bulk email sending, list management, and campaign tools",
-      "blueprint": "features/batch-sending.blueprint.ts",
-      "category": "premium",
-      "parameters": {
-        "list-management": {
-          "type": "boolean",
-          "default": true,
-          "description": "Email list management",
-          "required": false
-        },
-        "campaigns": {
-          "type": "boolean",
-          "default": true,
-          "description": "Email campaign management",
-          "required": false
-        },
-        "scheduling": {
-          "type": "boolean",
-          "default": true,
-          "description": "Scheduled email sending",
-          "required": false
-        }
-      }
+    "campaigns": {
+      "prerequisites": ["email-core", "email-templates"],
+      "provides": ["email-campaigns"],
+      "templates": [
+        "batch-sending.ts",
+        "list-management.ts",
+        "campaigns.ts"
+      ]
     }
   },
   "constraints": {}

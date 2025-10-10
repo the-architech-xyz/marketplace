@@ -103,7 +103,7 @@ export class StudioManager {
         port: 5555,
         host: 'localhost',
         browser: 'default',
-        {{#if module.parameters.custom-theme}}
+        {{#if context..custom-theme}}
         theme: {
           primary: '#0070f3',
           secondary: '#7928ca',
@@ -114,7 +114,7 @@ export class StudioManager {
           'base-300': '#e5e5e5',
         },
         {{/if}}
-        {{#if module.parameters.user-management}}
+        {{#if context..user-management}}
         auth: {
           enabled: true,
           users: [

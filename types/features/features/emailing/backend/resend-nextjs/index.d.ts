@@ -1,10 +1,25 @@
 /**
- * features/emailing/backend/resend-nextjs
+ * Email Capability (Resend + NextJS)
  * 
- * Auto-generated integration types
+ * Complete email sending backend with Resend and NextJS
  */
 
-export interface FeaturesEmailingBackendResendNextjsParams {}
+export interface FeaturesEmailingBackendResendNextjsParams {
+
+  /** Bulk email sending capabilities */
+  bulkEmail: boolean;
+
+  /** Email template management */
+  templates: boolean;
+
+  /** Email delivery and engagement analytics */
+  analytics: boolean;
+
+  /** Email event webhooks */
+  webhooks: boolean;
+}
+
+export interface FeaturesEmailingBackendResendNextjsFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesEmailingBackendResendNextjsArtifacts: {

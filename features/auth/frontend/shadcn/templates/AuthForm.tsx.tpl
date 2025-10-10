@@ -12,7 +12,8 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Separator } from '@/components/ui/separator';
-import { useSignIn, useSignUp } from '@/lib/hooks/use-auth';
+import { useAuthService } from '@/hooks/useAuthService';
+import type { SignInData, SignUpData } from '@/features/auth/contract';
 
 const authSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -37,8 +38,9 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
   const [showPassword, setShowPassword] = useState(false);
   const [success, setSuccess] = useState(false);
   
-  const signInMutation = useSignIn();
-  const signUpMutation = useSignUp();
+  // Use the contract - no knowledge of Better Auth, JWT, etc.
+  const { useAuthentication } = useAuthService();
+  const { signIn, signUp, oauthSignIn } = useAuthentication();
   
   const form = useForm<AuthFormData>({
     resolver: zodResolver(authSchema),
@@ -56,14 +58,37 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
     
     try {
       if (mode === 'signin') {
-        await signInMutation.mutateAsync(data);
+        const result = await signIn.mutateAsync({
+          email: data.email,
+          password: data.password,
+          rememberMe: false, // Could be from form
+        });
+        
+        if (result.success) {
+          setSuccess(true);
+          setTimeout(() => {
+            onSuccess?.();
+          }, 1000);
+        } else {
+          setError(result.message || 'Sign in failed');
+        }
       } else {
-        await signUpMutation.mutateAsync(data);
+        const result = await signUp.mutateAsync({
+          email: data.email,
+          password: data.password,
+          name: data.name || '',
+          acceptTerms: true, // Should be from form
+        });
+        
+        if (result.success) {
+          setSuccess(true);
+          setTimeout(() => {
+            onSuccess?.();
+          }, 1000);
+        } else {
+          setError(result.message || 'Sign up failed');
+        }
       }
-      setSuccess(true);
-      setTimeout(() => {
-      onSuccess?.();
-      }, 1000);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
@@ -71,9 +96,20 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
     }
   };
 
-  const handleSocialAuth = (provider: 'google' | 'github') => {
-    // Implement social authentication
-    console.log(`Sign in with ${provider}`);
+  const handleSocialAuth = async (provider: 'google' | 'github') => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      
+      await oauthSignIn.mutateAsync({
+        provider,
+        redirectTo: window.location.origin + '/dashboard',
+      });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Social authentication failed');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -97,13 +133,13 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
             {mode === 'signin' ? 'Welcome Back' : 'Create Account'}
           </CardTitle>
           <CardDescription className="text-gray-600 dark:text-gray-400">
-          {mode === 'signin' 
-              ? 'Sign in to your account to continue'
-              : 'Get started with your free account today'
-          }
-        </CardDescription>
-      </CardHeader>
-        
+            {mode === 'signin' 
+                ? 'Sign in to your account to continue'
+                : 'Get started with your free account today'
+            }
+          </CardDescription>
+        </CardHeader>
+          
         <CardContent className="space-y-6">
           <AnimatePresence mode="wait">
             {success ? (
@@ -171,7 +207,7 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                 )}
 
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-          {mode === 'signup' && (
+                  {mode === 'signup' && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
@@ -183,16 +219,16 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                       </Label>
                       <div className="relative">
                         <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <Input
-                id="name"
-                {...form.register('name')}
+                        <Input
+                          id="name"
+                          {...form.register('name')}
                           placeholder="Enter your full name"
-                disabled={isLoading}
+                          disabled={isLoading}
                           className="pl-10 h-11 border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-blue-500"
-              />
+                        />
                       </div>
                       <AnimatePresence>
-              {form.formState.errors.name && (
+                        {form.formState.errors.name && (
                           <motion.p
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -200,30 +236,30 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                             className="text-sm text-red-500 flex items-center gap-1"
                           >
                             <AlertCircle className="w-3 h-3" />
-                  {form.formState.errors.name.message}
+                            {form.formState.errors.name.message}
                           </motion.p>
-              )}
+                        )}
                       </AnimatePresence>
                     </motion.div>
-          )}
-          
-          <div className="space-y-2">
+                  )}
+                  
+                  <div className="space-y-2">
                     <Label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Email Address
                     </Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <Input
-              id="email"
-              type="email"
-              {...form.register('email')}
+                      <Input
+                        id="email"
+                        type="email"
+                        {...form.register('email')}
                         placeholder="Enter your email address"
-              disabled={isLoading}
+                        disabled={isLoading}
                         className="pl-10 h-11 border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-blue-500"
-            />
+                      />
                     </div>
                     <AnimatePresence>
-            {form.formState.errors.email && (
+                      {form.formState.errors.email && (
                         <motion.p
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -231,24 +267,24 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                           className="text-sm text-red-500 flex items-center gap-1"
                         >
                           <AlertCircle className="w-3 h-3" />
-                {form.formState.errors.email.message}
+                          {form.formState.errors.email.message}
                         </motion.p>
-            )}
+                      )}
                     </AnimatePresence>
-          </div>
-          
-          <div className="space-y-2">
+                  </div>
+                  
+                  <div className="space-y-2">
                     <Label htmlFor="password" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Password
                     </Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <Input
-              id="password"
+                      <Input
+                        id="password"
                         type={showPassword ? 'text' : 'password'}
-              {...form.register('password')}
-              placeholder="Enter your password"
-              disabled={isLoading}
+                        {...form.register('password')}
+                        placeholder="Enter your password"
+                        disabled={isLoading}
                         className="pl-10 pr-10 h-11 border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-blue-500"
                       />
                       <button
@@ -261,7 +297,7 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                       </button>
                     </div>
                     <AnimatePresence>
-            {form.formState.errors.password && (
+                      {form.formState.errors.password && (
                         <motion.p
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -269,14 +305,14 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                           className="text-sm text-red-500 flex items-center gap-1"
                         >
                           <AlertCircle className="w-3 h-3" />
-                {form.formState.errors.password.message}
+                          {form.formState.errors.password.message}
                         </motion.p>
-            )}
+                      )}
                     </AnimatePresence>
-          </div>
-          
+                  </div>
+                  
                   <AnimatePresence>
-          {error && (
+                    {error && (
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -287,7 +323,7 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                           <AlertDescription className="text-red-800 dark:text-red-200">
                             {error}
                           </AlertDescription>
-            </Alert>
+                        </Alert>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -309,14 +345,14 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                       ) : (
                         mode === 'signin' ? 'Sign In' : 'Create Account'
                       )}
-          </Button>
+                    </Button>
                   </motion.div>
-        </form>
+                </form>
               </motion.div>
             )}
           </AnimatePresence>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
     </motion.div>
   );
 }

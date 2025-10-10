@@ -1,15 +1,10 @@
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy, ModifierType } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, ModifierType, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const blueprint: Blueprint = {
-  id: 'docker-nextjs-integration',
-  name: 'Docker Next.js Integration',
-  description: 'Complete Next.js integration for Docker',
-  version: '1.0.0',
-  actions: [
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  return [
     // Enhance existing Dockerfile for Next.js
     {
       type: BlueprintActionType.ENHANCE_FILE,
-
       path: 'Dockerfile',
       modifier: ModifierType.DOCKERFILE_MERGER,
       params: {
@@ -19,7 +14,6 @@ export const blueprint: Blueprint = {
     // Enhance existing .dockerignore for Next.js
     {
       type: BlueprintActionType.ENHANCE_FILE,
-
       path: '.dockerignore',
       modifier: ModifierType.DOCKERIGNORE_MERGER,
       params: {
@@ -36,5 +30,5 @@ export const blueprint: Blueprint = {
         priority: 1
       }
     }
-  ]
-};
+  ];
+}

@@ -1,11 +1,47 @@
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const blueprint: Blueprint = {
-  id: 'feature:auth/shadcn',
-  name: 'Authentication Feature (Shadcn)',
-  description: 'Complete authentication solution with beautiful UI using Shadcn components',
-  version: '1.0.0',
-  actions: [
+/**
+ * Dynamic Auth UI Feature Blueprint
+ * 
+ * Generates authentication UI components based on Constitutional Architecture configuration.
+ * Core features are always included, optional features are conditionally generated.
+ */
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Core is always generated
+  actions.push(...generateCoreActions());
+  
+  // Optional features based on configuration
+  if (config.activeFeatures.includes('passwordReset')) {
+    actions.push(...generatePasswordResetActions());
+  }
+  
+  if (config.activeFeatures.includes('mfa')) {
+    actions.push(...generateMFAActions());
+  }
+  
+  if (config.activeFeatures.includes('socialLogins')) {
+    actions.push(...generateSocialLoginsActions());
+  }
+  
+  if (config.activeFeatures.includes('profileManagement')) {
+    actions.push(...generateProfileManagementActions());
+  }
+  
+  if (config.activeFeatures.includes('accountSettingsPage')) {
+    actions.push(...generateAccountSettingsPageActions());
+  }
+  
+  return actions;
+}
+
+// ============================================================================
+// CORE AUTH FEATURES (Always Generated)
+// ============================================================================
+
+function generateCoreActions(): BlueprintAction[] {
+  return [
     // Auth Pages
     {
       type: BlueprintActionType.CREATE_FILE,
@@ -27,51 +63,15 @@ export const blueprint: Blueprint = {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(auth)/forgot-password/page.tsx',
-      template: 'templates/forgot-password-page.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(auth)/reset-password/page.tsx',
-      template: 'templates/reset-password-page.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(auth)/verify-email/page.tsx',
-      template: 'templates/verify-email-page.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(dashboard)/profile/page.tsx',
+      path: '{{paths.app_root}}(auth)/profile/page.tsx',
       template: 'templates/profile-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
     },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(dashboard)/settings/page.tsx',
-      template: 'templates/settings-page.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
 
-    // Auth Components
+    // Core Auth Components
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}auth/AuthForm.tsx',
@@ -101,24 +101,6 @@ export const blueprint: Blueprint = {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/ForgotPasswordForm.tsx',
-      template: 'templates/ForgotPasswordForm.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/ResetPasswordForm.tsx',
-      template: 'templates/ResetPasswordForm.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}auth/UserProfile.tsx',
       template: 'templates/UserProfile.tsx.tpl',
       conflictResolution: {
@@ -128,71 +110,8 @@ export const blueprint: Blueprint = {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/ProfileManager.tsx',
-      template: 'templates/ProfileManager.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/AccountSettings.tsx',
-      template: 'templates/AccountSettings.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/SecuritySettings.tsx',
-      template: 'templates/SecuritySettings.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/ConnectedAccounts.tsx',
-      template: 'templates/ConnectedAccounts.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}auth/AuthGuard.tsx',
       template: 'templates/AuthGuard.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/ProtectedRoute.tsx',
-      template: 'templates/ProtectedRoute.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/TwoFactorSetup.tsx',
-      template: 'templates/TwoFactorSetup.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/EmailVerification.tsx',
-      template: 'templates/EmailVerification.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
@@ -219,7 +138,7 @@ export const blueprint: Blueprint = {
       }
     },
 
-    // Auth Hooks
+    // Core Auth Hooks
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}hooks/use-auth.ts',
@@ -229,10 +148,93 @@ export const blueprint: Blueprint = {
         priority: 1
       }
     },
+
+    // Auth Types & Utils
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}hooks/use-profile.ts',
-      template: 'templates/use-profile.ts.tpl',
+      path: '{{paths.shared_library}}types/auth.ts',
+      template: 'templates/auth-types.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.shared_library}}utils/auth-utils.ts',
+      template: 'templates/auth-utils.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    }
+  ];
+}
+
+// ============================================================================
+// PASSWORD RESET FEATURES (Optional)
+// ============================================================================
+
+function generatePasswordResetActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.app_root}}(auth)/forgot-password/page.tsx',
+      template: 'templates/forgot-password-page.tsx.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.app_root}}(auth)/reset-password/page.tsx',
+      template: 'templates/reset-password-page.tsx.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.components}}auth/ForgotPasswordForm.tsx',
+      template: 'templates/ForgotPasswordForm.tsx.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.components}}auth/ResetPasswordForm.tsx',
+      template: 'templates/ResetPasswordForm.tsx.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    }
+  ];
+}
+
+// ============================================================================
+// MFA FEATURES (Optional)
+// ============================================================================
+
+function generateMFAActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.components}}auth/TwoFactorSetup.tsx',
+      template: 'templates/TwoFactorSetup.tsx.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.components}}auth/EmailVerification.tsx',
+      template: 'templates/EmailVerification.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
@@ -246,28 +248,87 @@ export const blueprint: Blueprint = {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
-    },
+    }
+  ];
+}
 
-    // Auth Types
+// ============================================================================
+// SOCIAL LOGINS FEATURES (Optional)
+// ============================================================================
+
+function generateSocialLoginsActions(): BlueprintAction[] {
+  return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}types/auth.ts',
-      template: 'templates/auth-types.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-
-    // Auth Utils
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}utils/auth-utils.ts',
-      template: 'templates/auth-utils.ts.tpl',
+      path: '{{paths.components}}auth/ConnectedAccounts.tsx',
+      template: 'templates/ConnectedAccounts.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
     }
-  ]
-};
+  ];
+}
+
+// ============================================================================
+// PROFILE MANAGEMENT FEATURES (Optional)
+// ============================================================================
+
+function generateProfileManagementActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.components}}auth/ProfileManager.tsx',
+      template: 'templates/ProfileManager.tsx.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.shared_library}}hooks/use-profile.ts',
+      template: 'templates/use-profile.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    }
+  ];
+}
+
+// ============================================================================
+// ACCOUNT SETTINGS PAGE FEATURES (Optional)
+// ============================================================================
+
+function generateAccountSettingsPageActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.app_root}}(auth)/settings/page.tsx',
+      template: 'templates/settings-page.tsx.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.components}}auth/AccountSettings.tsx',
+      template: 'templates/AccountSettings.tsx.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.components}}auth/SecuritySettings.tsx',
+      template: 'templates/SecuritySettings.tsx.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    }
+  ];
+}

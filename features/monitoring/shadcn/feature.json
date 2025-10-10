@@ -1,5 +1,5 @@
 {
-  "id": "monitoring",
+  "id": "features/monitoring/shadcn",
   "name": "Monitoring Capability",
   "description": "Complete monitoring capability with error tracking, performance monitoring, and user feedback using Sentry",
   "version": "1.0.0",
@@ -36,14 +36,12 @@
       "performance-tracking"
     ]
   },
-  "provides": {
-    "capabilities": [
-      "error-tracking",
-      "performance-monitoring",
-      "user-feedback",
-      "monitoring-analytics"
-    ]
-  },
+  "provides": [
+    "monitoring-core",
+    "{{#if features.performance}}monitoring-performance{{/if}}",
+    "{{#if features.feedback}}monitoring-feedback{{/if}}",
+    "{{#if features.analytics}}monitoring-analytics{{/if}}"
+  ],
   "parameters": {
     "backend": {
       "type": "select",
@@ -60,15 +58,22 @@
       "options": ["shadcn", "mui", "chakra"]
     },
     "features": {
-      "type": "object",
-      "default": {
-        "errorTracking": true,
-        "performanceMonitoring": true,
-        "userFeedback": true,
-        "monitoringAnalytics": true
+      "core": {
+        "description": "Essential monitoring (error tracking, basic performance)",
+        "default": true
       },
-      "description": "Monitoring features to enable",
-      "required": false
+      "performance": {
+        "description": "Advanced performance monitoring",
+        "default": false
+      },
+      "feedback": {
+        "description": "User feedback collection",
+        "default": false
+      },
+      "analytics": {
+        "description": "Monitoring analytics and reporting",
+        "default": false
+      }
     },
     "environments": {
       "type": "array",
@@ -88,6 +93,43 @@
       "mui",
       "chakra"
     ]
+  },
+  "internal_structure": {
+    "core": {
+      "provides": ["monitoring-core"],
+      "templates": [
+        "ErrorBoundary.tsx",
+        "BasicMetrics.tsx",
+        "useErrorTracking.ts"
+      ]
+    },
+    "performance": {
+      "prerequisites": ["monitoring-core"],
+      "provides": ["monitoring-performance"],
+      "templates": [
+        "PerformanceChart.tsx",
+        "WebVitals.tsx",
+        "usePerformance.ts"
+      ]
+    },
+    "feedback": {
+      "prerequisites": ["monitoring-core"],
+      "provides": ["monitoring-feedback"],
+      "templates": [
+        "UserFeedback.tsx",
+        "FeedbackForm.tsx",
+        "useFeedback.ts"
+      ]
+    },
+    "analytics": {
+      "prerequisites": ["monitoring-core", "monitoring-performance"],
+      "provides": ["monitoring-analytics"],
+      "templates": [
+        "AnalyticsDashboard.tsx",
+        "TrendsChart.tsx",
+        "useAnalytics.ts"
+      ]
+    }
   },
   "constraints": {
     "minReactVersion": ">=18.0.0",

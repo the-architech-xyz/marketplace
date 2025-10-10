@@ -3,15 +3,15 @@ import { QueryClient } from '@tanstack/react-query';
 // Default query options
 const defaultQueryOptions = {
   queries: {
-    staleTime: {{#if module.parameters.defaultOptions.queries.staleTime}}{{module.parameters.defaultOptions.queries.staleTime}}{{else}}5 * 60 * 1000{{/if}}, // 5 minutes
-    gcTime: {{#if module.parameters.defaultOptions.queries.gcTime}}{{module.parameters.defaultOptions.queries.gcTime}}{{else}}10 * 60 * 1000{{/if}}, // 10 minutes
-    retry: {{#if module.parameters.defaultOptions.queries.retry}}{{module.parameters.defaultOptions.queries.retry}}{{else}}3{{/if}},
-    refetchOnWindowFocus: {{#if module.parameters.defaultOptions.queries.refetchOnWindowFocus}}{{module.parameters.defaultOptions.queries.refetchOnWindowFocus}}{{else}}false{{/if}},
+    staleTime: {{#if context.hasCustomStaleTime}}{{context.staleTime}}{{else}}5 * 60 * 1000{{/if}}, // 5 minutes
+    gcTime: {{#if context.hasCustomGcTime}}{{context.gcTime}}{{else}}10 * 60 * 1000{{/if}}, // 10 minutes
+    retry: {{#if context.hasCustomRetry}}{{context.retry}}{{else}}3{{/if}},
+    refetchOnWindowFocus: {{#if context.hasCustomRefetchOnWindowFocus}}{{context.refetchOnWindowFocus}}{{else}}false{{/if}},
     refetchOnMount: true,
     refetchOnReconnect: true,
   },
   mutations: {
-    retry: {{#if module.parameters.defaultOptions.mutations.retry}}{{module.parameters.defaultOptions.mutations.retry}}{{else}}1{{/if}},
+    retry: {{#if context.hasCustomMutationRetry}}{{context.mutationRetry}}{{else}}1{{/if}},
   },
 };
 

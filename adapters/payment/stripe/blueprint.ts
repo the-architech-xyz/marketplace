@@ -1,16 +1,46 @@
 /**
- * Stripe Payment Processing Blueprint
+ * Dynamic Stripe Payment Processing Blueprint
  * 
- * Sets up complete Stripe integration for payments and subscriptions
- * Creates payment components, API routes, and webhook handling
+ * Generates Stripe integration based on Constitutional Architecture configuration.
+ * Core features are always included, optional features are conditionally generated.
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const stripeBlueprint: Blueprint = {
-  id: 'stripe-payment-setup',
-  name: 'Stripe Payment Processing Setup',
-  actions: [
+/**
+ * Dynamic Stripe Payment Processing Blueprint
+ * 
+ * Generates Stripe integration based on Constitutional Architecture configuration.
+ * Core features are always included, optional features are conditionally generated.
+ */
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Core is always generated
+  actions.push(...generateCoreActions());
+  
+  // Optional features based on configuration
+  if (config.activeFeatures.includes('subscriptions')) {
+    actions.push(...generateSubscriptionsActions());
+  }
+  
+  if (config.activeFeatures.includes('webhooks')) {
+    actions.push(...generateWebhooksActions());
+  }
+  
+  if (config.activeFeatures.includes('analytics')) {
+    actions.push(...generateAnalyticsActions());
+  }
+  
+  return actions;
+}
+
+// ============================================================================
+// CORE STRIPE FEATURES (Always Generated)
+// ============================================================================
+
+function generateCoreActions(): BlueprintAction[] {
+  return [
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['stripe', '@stripe/stripe-js']
@@ -103,7 +133,37 @@ export const stripeBlueprint: Blueprint = {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.payment_config}}/INTEGRATION_GUIDE.md',
-      template: 'templates/INTEGRATION_GUIDE.md.tpl',
+      template: 'templates/INTEGRATION_GUIDE.md.tpl'
     }
-  ]
-};
+  ];
+}
+
+// ============================================================================
+// SUBSCRIPTIONS FEATURES (Optional)
+// ============================================================================
+
+function generateSubscriptionsActions(): BlueprintAction[] {
+  return [
+    // Add subscription-specific actions here
+  ];
+}
+
+// ============================================================================
+// WEBHOOKS FEATURES (Optional)
+// ============================================================================
+
+function generateWebhooksActions(): BlueprintAction[] {
+  return [
+    // Add webhook-specific actions here
+  ];
+}
+
+// ============================================================================
+// ANALYTICS FEATURES (Optional)
+// ============================================================================
+
+function generateAnalyticsActions(): BlueprintAction[] {
+  return [
+    // Add analytics-specific actions here
+  ];
+}

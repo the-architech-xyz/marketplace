@@ -58,7 +58,7 @@ export function useSuspenseQuery<TData = unknown, TError = Error>(
   queryFn: () => Promise<TData>,
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<TData, TError> {
-  {{#if module.parameters.suspense}}
+  {{#if context.hasSuspense}}
   return useQuery({
     queryKey: queryKey,
     queryFn: queryFn,

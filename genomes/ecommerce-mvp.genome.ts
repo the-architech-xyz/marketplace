@@ -1,4 +1,4 @@
-import { Genome } from "@thearchitech.xyz/types";
+import { defineGenome } from "@thearchitech.xyz/types";
 /**
  * E-commerce MVP Genome
  *
@@ -18,7 +18,7 @@ import { Genome } from "@thearchitech.xyz/types";
  * - Tax calculation
  * - Shipping management
  */
-const ecommerceMvpGenome: Genome = {
+const ecommerceMvpGenome= defineGenome({
   version: "1.0.0",
   project: {
     name: "ecommerce-mvp",
@@ -438,6 +438,6 @@ const ecommerceMvpGenome: Genome = {
       },
     },
   ],
-};
+});
 
 export default ecommerceMvpGenome;

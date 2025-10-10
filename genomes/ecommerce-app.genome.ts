@@ -1,11 +1,11 @@
-import { Genome } from "@thearchitech.xyz/types";
+import { defineGenome } from "@thearchitech.xyz/types";
 /**
  * E-commerce Application Template
  *
  * A complete e-commerce platform with product management, shopping cart, payments, and order tracking.
  * Perfect for building online stores and marketplaces.
  */
-const ecommerceAppGenome: Genome = {
+const ecommerceAppGenome = defineGenome({
   version: "1.0.0",
   project: {
     name: "ecommerce-app",
@@ -162,7 +162,7 @@ const ecommerceAppGenome: Genome = {
 
     // === INTEGRATIONS ===
     {
-      id: "integrations/drizzle-nextjs-integration",
+      id: "connectors/docker-drizzle",
       parameters: {
         apiRoutes: true,
         middleware: true,
@@ -178,7 +178,7 @@ const ecommerceAppGenome: Genome = {
     },
 
     {
-      id: "integrations/better-auth-nextjs-integration",
+      id: "connectors/better-auth-github",
       parameters: {
         apiRoutes: true,
         middleware: true,
@@ -191,7 +191,7 @@ const ecommerceAppGenome: Genome = {
     },
 
     {
-      id: "integrations/stripe-nextjs-integration",
+      id: "connectors/stripe-nextjs",
       parameters: {
         webhooks: true,
         apiRoutes: true,
@@ -200,7 +200,7 @@ const ecommerceAppGenome: Genome = {
     },
 
     {
-      id: "integrations/stripe-shadcn-integration",
+      id: "connectors/stripe-shadcn",
       parameters: {
         paymentForms: true,
         subscriptionCards: false,
@@ -210,7 +210,7 @@ const ecommerceAppGenome: Genome = {
     },
 
     {
-      id: "integrations/tanstack-query-nextjs-integration",
+      id: "connectors/tanstack-query-nextjs",
       parameters: {
         devtools: true,
         ssr: true,
@@ -305,6 +305,6 @@ const ecommerceAppGenome: Genome = {
       }
     },
   ],
-};
+});
 
 export default ecommerceAppGenome;

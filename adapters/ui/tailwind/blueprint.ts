@@ -1,40 +1,55 @@
 /**
- * Tailwind CSS Blueprint
+ * Dynamic Tailwind CSS Blueprint
  * 
- * Provides Tailwind CSS with optional plugins for typography, forms, and aspect ratio
- * Framework-agnostic CSS utilities that work with any project
+ * Generates Tailwind CSS configuration based on Constitutional Architecture configuration.
+ * Core features are always included, optional features are conditionally generated.
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const tailwindBlueprint: Blueprint = {
-  id: 'tailwind-setup',
-  name: 'Tailwind CSS Setup',
-  actions: [
+/**
+ * Dynamic Tailwind CSS Blueprint
+ * 
+ * Generates Tailwind CSS configuration based on Constitutional Architecture configuration.
+ * Core features are always included, optional features are conditionally generated.
+ */
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Core is always generated
+  actions.push(...generateCoreActions());
+  
+  // Optional features based on configuration
+  if (config.activeFeatures.includes('typography')) {
+    actions.push(...generateTypographyActions());
+  }
+  
+  if (config.activeFeatures.includes('forms')) {
+    actions.push(...generateFormsActions());
+  }
+  
+  if (config.activeFeatures.includes('aspectRatio')) {
+    actions.push(...generateAspectRatioActions());
+  }
+  
+  if (config.activeFeatures.includes('darkMode')) {
+    actions.push(...generateDarkModeActions());
+  }
+  
+  return actions;
+}
+
+// ============================================================================
+// CORE TAILWIND FEATURES (Always Generated)
+// ============================================================================
+
+function generateCoreActions(): BlueprintAction[] {
+  return [
     // Install Tailwind CSS
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['tailwindcss', 'postcss', 'autoprefixer'],
       isDev: true
-    },
-    // Install Tailwind plugins
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['@tailwindcss/typography'],
-      isDev: true,
-      condition: '{{#if module.parameters.typography}}'
-    },
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['@tailwindcss/forms'],
-      isDev: true,
-      condition: '{{#if module.parameters.forms}}'
-    },
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['@tailwindcss/aspect-ratio'],
-      isDev: true,
-      condition: '{{#if module.parameters.aspectRatio}}'
     },
     // Create Tailwind config
     {
@@ -61,7 +76,59 @@ export const tailwindBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.app_root}}globals.css',
       template: 'templates/globals.css.tpl',
-      conflictResolution: { strategy: ConflictResolutionStrategy.REPLACE },
+      conflictResolution: { strategy: ConflictResolutionStrategy.REPLACE }
     }
-  ]
-};
+  ];
+}
+
+// ============================================================================
+// TYPOGRAPHY FEATURES (Optional)
+// ============================================================================
+
+function generateTypographyActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['@tailwindcss/typography'],
+      isDev: true
+    }
+  ];
+}
+
+// ============================================================================
+// FORMS FEATURES (Optional)
+// ============================================================================
+
+function generateFormsActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['@tailwindcss/forms'],
+      isDev: true
+    }
+  ];
+}
+
+// ============================================================================
+// ASPECT RATIO FEATURES (Optional)
+// ============================================================================
+
+function generateAspectRatioActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['@tailwindcss/aspect-ratio'],
+      isDev: true
+    }
+  ];
+}
+
+// ============================================================================
+// DARK MODE FEATURES (Optional)
+// ============================================================================
+
+function generateDarkModeActions(): BlueprintAction[] {
+  return [
+    // Dark mode is handled in the template, no additional packages needed
+  ];
+}

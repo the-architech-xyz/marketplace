@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "framework": "{{module.parameters.framework || 'nextjs'}}",
-  "buildCommand": "{{module.parameters.buildCommand || 'npm run build'}}",
-  "outputDirectory": "{{module.parameters.outputDirectory || '.next'}}",
-  "installCommand": "{{module.parameters.installCommand || 'npm install'}}",
-  "devCommand": "{{module.parameters.devCommand || 'npm run dev'}}",
+  "framework": "{{context..framework || 'nextjs'}}",
+  "buildCommand": "{{context..buildCommand || 'npm run build'}}",
+  "outputDirectory": "{{context..outputDirectory || '.next'}}",
+  "installCommand": "{{context..installCommand || 'npm install'}}",
+  "devCommand": "{{context..devCommand || 'npm run dev'}}",
   "functions": {
     "src/app/api/**/*.ts": {
       "runtime": "nodejs18.x",
       "regions": {{JSON.stringify(module.parameters.functions?.regions || ['iad1'])}},
-      "maxDuration": {{module.parameters.functions?.maxDuration || 10}}
+      "maxDuration": {{context..functions?.maxDuration || 10}}
     }
   },
   "env": {

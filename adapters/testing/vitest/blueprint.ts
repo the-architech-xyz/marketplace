@@ -1,20 +1,54 @@
 /**
- * Vitest Testing Blueprint
+ * Vitest Testing Adapter Blueprint
  * 
- * Sets up Vitest testing framework with coverage
+ * Implements capability-based generation with dependency resolution
+ * Core features are always included, optional features are conditionally generated
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const vitestBlueprint: Blueprint = {
-  id: 'vitest-base-setup',
-  name: 'Vitest Base Setup',
-  actions: [
+/**
+ * Dynamic Vitest Testing Adapter Blueprint
+ * 
+ * Generates testing configuration based on Constitutional Architecture configuration.
+ * Core features are always included, optional features are conditionally generated.
+ */
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Core is always generated
+  actions.push(...generateCoreActions());
+  
+  // Optional features based on configuration
+  if (config.activeFeatures.includes('coverage')) {
+    actions.push(...generateCoverageActions());
+  }
+  
+  if (config.activeFeatures.includes('ui')) {
+    actions.push(...generateUIActions());
+  }
+  
+  if (config.activeFeatures.includes('e2e')) {
+    actions.push(...generateE2EActions());
+  }
+  
+  return actions;
+}
+
+// ============================================================================
+// CORE TESTING FEATURES (Always Generated)
+// ============================================================================
+
+function generateCoreActions(): BlueprintAction[] {
+  return [
+    // Install core packages
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['vitest', '@vitejs/plugin-react', 'jsdom', '@testing-library/react', '@testing-library/jest-dom', '@testing-library/user-event', '@types/react', '@types/react-dom'],
       isDev: true
     },
+
+    // Core testing files
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'vitest.config.ts',
@@ -22,7 +56,8 @@ export const vitestBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'tests/setup/setup.ts',
@@ -30,7 +65,8 @@ export const vitestBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'tests/setup/utils.tsx',
@@ -38,7 +74,17 @@ export const vitestBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: 'tests/setup/mocks.ts',
+      template: 'templates/setup.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'tests/unit/example.test.tsx',
@@ -46,18 +92,86 @@ export const vitestBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
+      }
+    },
+
+    // Core scripts
     {
       type: BlueprintActionType.ADD_SCRIPT,
-
       name: 'test',
       command: 'vitest'
     },
     {
       type: BlueprintActionType.ADD_SCRIPT,
-
       name: 'test:run',
       command: 'vitest run'
     }
-  ]
-};
+  ];
+}
+
+// ============================================================================
+// COVERAGE FEATURES (Optional)
+// ============================================================================
+
+function generateCoverageActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['@vitest/coverage-v8'],
+      isDev: true
+    },
+    {
+      type: BlueprintActionType.ADD_SCRIPT,
+      name: 'test:coverage',
+      command: 'vitest run --coverage'
+    },
+    {
+      type: BlueprintActionType.ADD_SCRIPT,
+      name: 'test:coverage:ui',
+      command: 'vitest run --coverage --reporter=html'
+    }
+  ];
+}
+
+// ============================================================================
+// UI FEATURES (Optional)
+// ============================================================================
+
+function generateUIActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['@vitest/ui'],
+      isDev: true
+    },
+    {
+      type: BlueprintActionType.ADD_SCRIPT,
+      name: 'test:ui',
+      command: 'vitest --ui'
+    }
+  ];
+}
+
+// ============================================================================
+// E2E FEATURES (Optional)
+// ============================================================================
+
+function generateE2EActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['@playwright/test', 'playwright'],
+      isDev: true
+    },
+    {
+      type: BlueprintActionType.ADD_SCRIPT,
+      name: 'test:e2e',
+      command: 'playwright test'
+    },
+    {
+      type: BlueprintActionType.ADD_SCRIPT,
+      name: 'test:e2e:ui',
+      command: 'playwright test --ui'
+    }
+  ];
+}

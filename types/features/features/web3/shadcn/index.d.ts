@@ -1,10 +1,36 @@
 /**
- * features/web3/shadcn
+ * Web3 Feature (Shadcn)
  * 
- * Auto-generated integration types
+ * Complete Web3 wallet connection and blockchain interaction UI using Shadcn components
  */
 
-export interface FeaturesWeb3ShadcnParams {}
+export interface FeaturesWeb3ShadcnParams {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    type: boolean;
+
+    default: boolean;
+
+    description: boolean;
+
+    required: boolean;
+  };
+
+  /** UI theme variant */
+  theme?: string;
+}
+
+export interface FeaturesWeb3ShadcnFeatures {
+
+  type: boolean;
+
+  default: boolean;
+
+  description: boolean;
+
+  required: boolean;
+}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesWeb3ShadcnArtifacts: {

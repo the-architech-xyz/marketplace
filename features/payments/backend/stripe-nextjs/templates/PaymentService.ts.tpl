@@ -1,8 +1,9 @@
 /**
- * PaymentService - Cohesive Business Hook Services Implementation
+ * PaymentService - Pure TanStack Query Implementation
  * 
- * This service implements the IPaymentService interface using Stripe and TanStack Query.
- * It provides cohesive business services that group related functionality.
+ * This service implements the IPaymentService interface using pure TanStack Query hooks.
+ * All server-side logic is handled by the Stripe-NextJS-Drizzle connector.
+ * This service only makes HTTP calls to API endpoints.
  */
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -11,7 +12,6 @@ import {
   Payment, Subscription, Invoice, PaymentMethodData, PaymentIntent, Refund, PaymentAnalytics,
   CreatePaymentData, CreateSubscriptionData, CreateInvoiceData, UpdatePaymentData, UpdateSubscriptionData, PaymentFilters
 } from '@/features/payments/contract';
-import { stripeClient } from '@/lib/stripe/client';
 
 /**
  * PaymentService - Main service implementation
@@ -368,5 +368,242 @@ export const PaymentService: IPaymentService = {
     });
 
     return { getAnalytics };
+  },
+
+  /**
+   * Organization Billing Service
+   * Provides organization-level billing operations
+   */
+  useOrganizationBilling: (orgId: string) => {
+    const queryClient = useQueryClient();
+
+    // Subscription Management
+    const subscription = useQuery({
+      queryKey: ['organization-subscription', orgId],
+      queryFn: async () => {
+        const response = await fetch(`/api/organizations/${orgId}/subscriptions`);
+        if (!response.ok) {
+          if (response.status === 404) return null;
+          throw new Error('Failed to fetch organization subscription');
+        }
+        return response.json();
+      },
+      enabled: !!orgId
+    });
+
+    const createSubscription = useMutation({
+      mutationFn: async (data: any) => {
+        const response = await fetch(`/api/organizations/${orgId}/subscriptions`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error('Failed to create organization subscription');
+        return response.json();
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['organization-subscription', orgId] });
+      }
+    });
+
+    const updateSubscription = useMutation({
+      mutationFn: async (data: any) => {
+        const response = await fetch(`/api/organizations/${orgId}/subscriptions`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error('Failed to update organization subscription');
+        return response.json();
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['organization-subscription', orgId] });
+      }
+    });
+
+    const cancelSubscription = useMutation({
+      mutationFn: async (cancelAtPeriodEnd: boolean = true) => {
+        const response = await fetch(`/api/organizations/${orgId}/subscriptions?cancelAtPeriodEnd=${cancelAtPeriodEnd}`, {
+          method: 'DELETE'
+        });
+        if (!response.ok) throw new Error('Failed to cancel organization subscription');
+        return response.json();
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['organization-subscription', orgId] });
+      }
+    });
+
+    // Seat Management
+    const seats = useQuery({
+      queryKey: ['organization-seats', orgId],
+      queryFn: async () => {
+        const response = await fetch(`/api/organizations/${orgId}/seats`);
+        if (!response.ok) {
+          if (response.status === 404) return null;
+          throw new Error('Failed to fetch organization seats');
+        }
+        return response.json();
+      },
+      enabled: !!orgId
+    });
+
+    const updateSeats = useMutation({
+      mutationFn: async (seats: number) => {
+        const response = await fetch(`/api/organizations/${orgId}/seats`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ seats })
+        });
+        if (!response.ok) throw new Error('Failed to update organization seats');
+        return response.json();
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['organization-seats', orgId] });
+        queryClient.invalidateQueries({ queryKey: ['organization-subscription', orgId] });
+      }
+    });
+
+    // Usage Tracking
+    const usage = useQuery({
+      queryKey: ['organization-usage', orgId],
+      queryFn: async () => {
+        const response = await fetch(`/api/organizations/${orgId}/usage`);
+        if (!response.ok) {
+          if (response.status === 404) return null;
+          throw new Error('Failed to fetch organization usage');
+        }
+        return response.json();
+      },
+      enabled: !!orgId
+    });
+
+    const trackUsage = useMutation({
+      mutationFn: async (data: any) => {
+        const response = await fetch(`/api/organizations/${orgId}/usage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error('Failed to track organization usage');
+        return response.json();
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['organization-usage', orgId] });
+      }
+    });
+
+    // Billing Info
+    const billingInfo = useQuery({
+      queryKey: ['organization-billing-info', orgId],
+      queryFn: async () => {
+        const response = await fetch(`/api/organizations/${orgId}/billing`);
+        if (!response.ok) {
+          if (response.status === 404) return null;
+          throw new Error('Failed to fetch organization billing info');
+        }
+        return response.json();
+      },
+      enabled: !!orgId
+    });
+
+    const updateBillingInfo = useMutation({
+      mutationFn: async (data: any) => {
+        const response = await fetch(`/api/organizations/${orgId}/billing`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error('Failed to update organization billing info');
+        return response.json();
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['organization-billing-info', orgId] });
+      }
+    });
+
+    // Invoices
+    const invoices = useQuery({
+      queryKey: ['organization-invoices', orgId],
+      queryFn: async () => {
+        const response = await fetch(`/api/organizations/${orgId}/invoices`);
+        if (!response.ok) throw new Error('Failed to fetch organization invoices');
+        return response.json();
+      },
+      enabled: !!orgId
+    });
+
+    const downloadInvoice = async (invoiceId: string): Promise<Blob> => {
+      const response = await fetch(`/api/organizations/${orgId}/invoices/${invoiceId}/download`);
+      if (!response.ok) throw new Error('Failed to download invoice');
+      return response.blob();
+    };
+
+    // Customer Portal
+    const createPortalSession = async (): Promise<{ url: string }> => {
+      const response = await fetch(`/api/organizations/${orgId}/billing/portal`, {
+        method: 'POST'
+      });
+      if (!response.ok) throw new Error('Failed to create portal session');
+      return response.json();
+    };
+
+    return {
+      subscription,
+      createSubscription,
+      updateSubscription,
+      cancelSubscription,
+      seats,
+      updateSeats,
+      usage,
+      trackUsage,
+      billingInfo,
+      updateBillingInfo,
+      invoices,
+      downloadInvoice,
+      createPortalSession
+    };
+  },
+
+  /**
+   * Team Usage Service
+   * Provides team-level usage tracking
+   */
+  useTeamUsage: (orgId: string, teamId: string) => {
+    const queryClient = useQueryClient();
+
+    const usage = useQuery({
+      queryKey: ['team-usage', orgId, teamId],
+      queryFn: async () => {
+        const response = await fetch(`/api/organizations/${orgId}/teams/${teamId}/usage`);
+        if (!response.ok) {
+          if (response.status === 404) return null;
+          throw new Error('Failed to fetch team usage');
+        }
+        return response.json();
+      },
+      enabled: !!orgId && !!teamId
+    });
+
+    const trackUsage = useMutation({
+      mutationFn: async (data: any) => {
+        const response = await fetch(`/api/organizations/${orgId}/teams/${teamId}/usage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error('Failed to track team usage');
+        return response.json();
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['team-usage', orgId, teamId] });
+        queryClient.invalidateQueries({ queryKey: ['organization-usage', orgId] });
+      }
+    });
+
+    return {
+      usage,
+      trackUsage
+    };
   }
 };

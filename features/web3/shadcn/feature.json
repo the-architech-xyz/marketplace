@@ -1,5 +1,5 @@
 {
-  "id": "feature:web3/shadcn",
+  "id": "features/web3/shadcn",
   "name": "Web3 Feature (Shadcn)",
   "description": "Complete Web3 wallet connection and blockchain interaction UI using Shadcn components",
   "type": "feature",

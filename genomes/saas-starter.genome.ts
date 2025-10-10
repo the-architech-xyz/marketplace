@@ -1,4 +1,4 @@
-import { Genome } from "@thearchitech.xyz/types";
+import { defineGenome } from "@thearchitech.xyz/types";
 /**
  * SaaS Starter Genome
  *
@@ -17,7 +17,7 @@ import { Genome } from "@thearchitech.xyz/types";
  * - Comprehensive testing setup
  * - Production-ready deployment configuration
  */
-const saasStarterGenome: Genome = {
+const saasStarterGenome= defineGenome({
   version: "1.0.0",
   project: {
     name: "saas-starter",
@@ -489,6 +489,6 @@ const saasStarterGenome: Genome = {
       }
     },
   ],
-};
+});  
 
 export default saasStarterGenome;

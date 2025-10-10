@@ -19,7 +19,7 @@ const seedingBlueprint: Blueprint = {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@faker-js/faker'],
       isDev: true,
-      condition: '{{#if module.parameters.faker}}'
+      condition: '{{#if context..faker}}'
     },
     {
       type: BlueprintActionType.CREATE_FILE,
@@ -27,7 +27,7 @@ const seedingBlueprint: Blueprint = {
       content: `import { db } from '../index';
 import { users, posts, comments, categories, postCategories } from '../schema';
 import { eq } from 'drizzle-orm';
-{{#if module.parameters.faker}}
+{{#if context..faker}}
 import { faker } from '@faker-js/faker';
 {{/if}}
 

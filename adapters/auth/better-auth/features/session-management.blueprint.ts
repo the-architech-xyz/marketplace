@@ -15,7 +15,7 @@ const sessionManagementBlueprint: Blueprint = {
       path: 'src/lib/auth/session-config.ts',
       content: `// Advanced Session Management Configuration
 export const sessionConfig = {
-  strategy: '{{module.parameters.strategy}}',
+  strategy: '{{context..strategy}}',
   {{#if (eq module.parameters.strategy "jwt")}}
   jwt: {
     expiresIn: 60 * 60 * 24 * 7, // 7 days

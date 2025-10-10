@@ -1,28 +1,54 @@
 /**
- * TanStack Query Blueprint
+ * Dynamic TanStack Query Blueprint
  * 
- * The Golden Core data fetching adapter - provides powerful data synchronization
- * with caching, background updates, and optimistic updates for React applications
+ * Generates TanStack Query data fetching based on Constitutional Architecture configuration.
+ * Core features are always included, optional features are conditionally generated.
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const tanstackQueryBlueprint: Blueprint = {
-  id: 'tanstack-query-setup',
-  name: 'TanStack Query Setup',
-  description: 'Complete TanStack Query setup with best practices and TypeScript support',
-  version: '5.0.0',
-  actions: [
+/**
+ * Dynamic TanStack Query Blueprint
+ * 
+ * Generates TanStack Query data fetching based on Constitutional Architecture configuration.
+ * Core features are always included, optional features are conditionally generated.
+ */
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Core is always generated
+  actions.push(...generateCoreActions());
+  
+  // Optional features based on configuration
+  if (config.activeFeatures.includes('devtools')) {
+    actions.push(...generateDevtoolsActions());
+  }
+  
+  if (config.activeFeatures.includes('infinite')) {
+    actions.push(...generateInfiniteActions());
+  }
+  
+  if (config.activeFeatures.includes('optimistic')) {
+    actions.push(...generateOptimisticActions());
+  }
+  
+  if (config.activeFeatures.includes('offline')) {
+    actions.push(...generateOfflineActions());
+  }
+  
+  return actions;
+}
+
+// ============================================================================
+// CORE TANSTACK QUERY FEATURES (Always Generated)
+// ============================================================================
+
+function generateCoreActions(): BlueprintAction[] {
+  return [
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@tanstack/react-query'],
       isDev: false
-    },
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['@tanstack/react-query-devtools'],
-      isDev: true,
-      condition: '{{#if module.parameters.devtools}}'
     },
     // Create Query Client Provider
     {
@@ -59,39 +85,6 @@ export const tanstackQueryBlueprint: Blueprint = {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.hooks}}use-mutation.ts',
       template: 'templates/use-mutation.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    // Create Infinite Query Hooks
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-infinite-query.ts',
-      template: 'templates/use-infinite-query.ts.tpl',
-      condition: '{{#if module.features.infinite}}',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      },
-    },
-    // Create Optimistic Update Utilities
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}optimistic-updates.ts',
-      template: 'templates/optimistic-updates.ts.tpl',
-      condition: '{{#if module.features.optimistic}}',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    // Create Offline Support
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}offline-support.ts',
-      template: 'templates/offline-support.ts.tpl',
-      condition: '{{#if module.features.offline}}',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -147,7 +140,73 @@ export const tanstackQueryBlueprint: Blueprint = {
         priority: 0
       }
     }
-  ]
-};
+  ];
+}
 
-export default tanstackQueryBlueprint;
+// ============================================================================
+// DEVTOOLS FEATURES (Optional)
+// ============================================================================
+
+function generateDevtoolsActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['@tanstack/react-query-devtools'],
+      isDev: true
+    }
+  ];
+}
+
+// ============================================================================
+// INFINITE QUERY FEATURES (Optional)
+// ============================================================================
+
+function generateInfiniteActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.hooks}}use-infinite-query.ts',
+      template: 'templates/use-infinite-query.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    }
+  ];
+}
+
+// ============================================================================
+// OPTIMISTIC UPDATE FEATURES (Optional)
+// ============================================================================
+
+function generateOptimisticActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.shared_library}}optimistic-updates.ts',
+      template: 'templates/optimistic-updates.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    }
+  ];
+}
+
+// ============================================================================
+// OFFLINE SUPPORT FEATURES (Optional)
+// ============================================================================
+
+function generateOfflineActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.shared_library}}offline-support.ts',
+      template: 'templates/offline-support.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    }
+  ];
+}

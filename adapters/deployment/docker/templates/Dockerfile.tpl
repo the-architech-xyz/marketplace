@@ -1,5 +1,5 @@
 # Use the official Node.js image as base
-FROM node:{{module.parameters.nodeVersion}} AS base
+FROM node:{{context..nodeVersion}} AS base
 
 # Install dependencies only when needed
 FROM base AS deps

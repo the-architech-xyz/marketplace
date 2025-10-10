@@ -54,11 +54,11 @@ export default function WelcomePage() {
           </motion.div>
           
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-            {{feature.parameters.customTitle}}
+            {{context.customTitle}}
           </h1>
           
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            {{feature.parameters.customDescription}}
+            {{context.customDescription}}
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export default function WelcomePage() {
       </motion.div>
 
       {/* Technology Stack */}
-      {{#if feature.parameters.showTechStack}}
+      {{#if context.showTechStack}}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -107,7 +107,7 @@ export default function WelcomePage() {
       {{/if}}
 
       {/* Component Showcase */}
-      {{#if feature.parameters.showComponents}}
+      {{#if context.showComponents}}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -124,7 +124,7 @@ export default function WelcomePage() {
       {{/if}}
 
       {/* Project Structure */}
-      {{#if feature.parameters.showProjectStructure}}
+      {{#if context.showProjectStructure}}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -141,7 +141,7 @@ export default function WelcomePage() {
       {{/if}}
 
       {/* Quick Start Guide */}
-      {{#if feature.parameters.showQuickStart}}
+      {{#if context.showQuickStart}}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -158,7 +158,7 @@ export default function WelcomePage() {
       {{/if}}
 
       {/* Footer */}
-      {{#if feature.parameters.showArchitechBranding}}
+      {{#if context.showArchitechBranding}}
       <motion.footer
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

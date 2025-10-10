@@ -6,31 +6,31 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    {{#if module.parameters.typescript}}'@typescript-eslint/recommended',{{/if}}
-    {{#if module.parameters.react}}'plugin:react/recommended',
+    {{#if context.hasTypeScript}}'@typescript-eslint/recommended',{{/if}}
+    {{#if context.hasReact}}'plugin:react/recommended',
     'plugin:react-hooks/recommended',{{/if}}
-    {{#if module.parameters.nextjs}}'next/core-web-vitals',{{/if}}
-    {{#if module.parameters.accessibility}}'plugin:jsx-a11y/recommended',{{/if}}
-    {{#if module.parameters.imports}}'plugin:import/recommended',
+    {{#if context.hasNextJS}}'next/core-web-vitals',{{/if}}
+    {{#if context.hasAccessibility}}'plugin:jsx-a11y/recommended',{{/if}}
+    {{#if context.hasImports}}'plugin:import/recommended',
     'plugin:import/typescript',{{/if}}
-    {{#if module.parameters.format}}'plugin:prettier/recommended',{{/if}}
+    {{#if context.hasFormat}}'plugin:prettier/recommended',{{/if}}
   ],
-  parser: {{#if module.parameters.typescript}}'@typescript-eslint/parser'{{else}}'@babel/eslint-parser'{{/if}},
+  parser: {{#if context.hasTypeScript}}'@typescript-eslint/parser'{{else}}'@babel/eslint-parser'{{/if}},
   parserOptions: {
     ecmaVersion: 2022,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
-    {{#if module.parameters.typescript}}project: './tsconfig.json',{{/if}}
+    {{#if context.hasTypeScript}}project: './tsconfig.json',{{/if}}
   },
   plugins: [
-    {{#if module.parameters.typescript}}'@typescript-eslint',{{/if}}
-    {{#if module.parameters.react}}'react',
+    {{#if context.hasTypeScript}}'@typescript-eslint',{{/if}}
+    {{#if context.hasReact}}'react',
     'react-hooks',{{/if}}
-    {{#if module.parameters.accessibility}}'jsx-a11y',{{/if}}
-    {{#if module.parameters.imports}}'import',{{/if}}
-    {{#if module.parameters.format}}'prettier',{{/if}}
+    {{#if context.hasAccessibility}}'jsx-a11y',{{/if}}
+    {{#if context.hasImports}}'import',{{/if}}
+    {{#if context.hasFormat}}'prettier',{{/if}}
   ],
   rules: {
     // Basic rules
@@ -59,7 +59,7 @@ module.exports = {
     'no-multiple-empty-lines': ['error', { max: 1 }],
     'no-mixed-spaces-and-tabs': 'error',
 
-    {{#if module.parameters.typescript}}
+    {{#if context.hasTypeScript}}
     // TypeScript-specific rules
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-explicit-any': 'warn',
@@ -78,7 +78,7 @@ module.exports = {
     '@typescript-eslint/prefer-includes': 'error',
     {{/if}}
 
-    {{#if module.parameters.react}}
+    {{#if context.hasReact}}
     // React-specific rules
     'react/react-in-jsx-scope': 'off', // Not needed in React 17+
     'react/prop-types': 'off', // Using TypeScript for prop validation
@@ -110,7 +110,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     {{/if}}
 
-    {{#if module.parameters.accessibility}}
+    {{#if context.hasAccessibility}}
     // Accessibility rules
     'jsx-a11y/alt-text': 'error',
     'jsx-a11y/anchor-has-content': 'error',
@@ -139,7 +139,7 @@ module.exports = {
     'jsx-a11y/tabindex-no-positive': 'error',
     {{/if}}
 
-    {{#if module.parameters.imports}}
+    {{#if context.hasImports}}
     // Import rules
     'import/order': [
       'error',
@@ -185,18 +185,18 @@ module.exports = {
     'import/prefer-default-export': 'off',
     {{/if}}
 
-    {{#if module.parameters.format}}
+    {{#if context.hasFormat}}
     // Prettier rules
     'prettier/prettier': 'error',
     {{/if}}
   },
   settings: {
-    {{#if module.parameters.react}}
+    {{#if context.hasReact}}
     react: {
       version: 'detect',
     },
     {{/if}}
-    {{#if module.parameters.imports}}
+    {{#if context.hasImports}}
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,

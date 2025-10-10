@@ -1,10 +1,25 @@
 /**
- * features/teams-management/backend/better-auth-nextjs
+ * Teams Capability (Better Auth + NextJS)
  * 
- * Auto-generated integration types
+ * Complete teams management backend with Better Auth and NextJS
  */
 
-export interface FeaturesTeamsManagementBackendBetterAuthNextjsParams {}
+export interface FeaturesTeamsManagementBackendBetterAuthNextjsParams {
+
+  /** Team invitation system */
+  invites: boolean;
+
+  /** Granular role-based permissions */
+  permissions: boolean;
+
+  /** Team performance analytics */
+  analytics: boolean;
+
+  /** Team billing and subscription management */
+  billing: boolean;
+}
+
+export interface FeaturesTeamsManagementBackendBetterAuthNextjsFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesTeamsManagementBackendBetterAuthNextjsArtifacts: {

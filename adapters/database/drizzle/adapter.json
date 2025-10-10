@@ -6,6 +6,13 @@
   "version": "0.29.0",
   "blueprint": "blueprint.ts",
   "dependencies": [],
+  "provides": [
+    "database-core",
+    "{{#if features.migrations}}database-migrations{{/if}}",
+    "{{#if features.studio}}database-studio{{/if}}",
+    "{{#if features.relations}}database-relations{{/if}}",
+    "{{#if features.seeding}}database-seeding{{/if}}"
+  ],
   "capabilities": {
     "database-orm": {
       "version": "1.0.0",
@@ -23,6 +30,45 @@
       "provides": ["relations", "joins", "foreign-keys"]
     }
   },
+  "internal_structure": {
+    "core": {
+      "provides": ["database-core"],
+      "templates": [
+        "schema.ts",
+        "db-index.ts",
+        "drizzle.config.ts"
+      ]
+    },
+    "migrations": {
+      "prerequisites": ["database-core"],
+      "provides": ["database-migrations"],
+      "templates": [
+        "migrate.ts"
+      ]
+    },
+    "studio": {
+      "prerequisites": ["database-core"],
+      "provides": ["database-studio"],
+      "templates": [
+        "studio.ts"
+      ]
+    },
+    "relations": {
+      "prerequisites": ["database-core"],
+      "provides": ["database-relations"],
+      "templates": [
+        "relations.ts"
+      ]
+    },
+    "seeding": {
+      "prerequisites": ["database-core"],
+      "provides": ["database-seeding"],
+      "templates": [
+        "seed.ts",
+        "seed-scripts.ts"
+      ]
+    }
+  },
   "limitations": "Requires a supported database (PostgreSQL, MySQL, SQLite)",
   "parameters": {
     "provider": {
@@ -37,18 +83,6 @@
         "local"
       ]
     },
-    "migrations": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable database migrations",
-      "required": false
-    },
-    "studio": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable Drizzle Studio",
-      "required": false
-    },
     "databaseType": {
       "type": "string",
       "default": "postgresql",
@@ -59,6 +93,28 @@
         "mysql",
         "sqlite"
       ]
+    },
+    "features": {
+      "core": {
+        "description": "Essential database functionality (schema, queries, types)",
+        "default": true
+      },
+      "migrations": {
+        "description": "Database schema migrations and versioning",
+        "default": true
+      },
+      "studio": {
+        "description": "Visual database browser and query interface",
+        "default": false
+      },
+      "relations": {
+        "description": "Advanced relationship management and queries",
+        "default": false
+      },
+      "seeding": {
+        "description": "Data seeding and fixtures management",
+        "default": false
+      }
     }
   },
   "features": {

@@ -1,6 +1,6 @@
 {
-  "id": "feature:auth/shadcn",
-  "name": "Authentication Feature (Shadcn)",
+  "id": "features/auth-ui/shadcn",
+  "name": "Authentication UI (Shadcn)",
   "description": "Complete authentication UI using Shadcn components",
   "type": "feature",
   "version": "1.0.0",
@@ -8,23 +8,36 @@
     "capabilities": ["auth-backend-better-auth-nextjs"],
     "adapters": ["ui/shadcn-ui"]
   },
-  "provides": ["auth-ui"],
+  "provides": [
+    "auth-ui-core",
+    "{{#if features.passwordReset}}auth-ui-password-reset{{/if}}",
+    "{{#if features.mfa}}auth-ui-mfa{{/if}}",
+    "{{#if features.socialLogins}}auth-ui-social{{/if}}",
+    "{{#if features.accountSettingsPage}}auth-ui-settings{{/if}}",
+    "{{#if features.profileManagement}}auth-ui-profile{{/if}}"
+  ],
   "parameters": {
     "features": {
-      "type": "object",
-      "default": {
-        "loginForm": true,
-        "signupForm": true,
-        "passwordReset": true,
-        "profileManagement": true,
-        "userSettings": true,
-        "sessionManagement": true,
-        "twoFactorAuth": false,
-        "socialAuth": true,
-        "emailVerification": false
+      "passwordReset": {
+        "description": "Enables password reset functionality (forms and pages)",
+        "default": true
       },
-      "description": "Authentication UI features to enable",
-      "required": false
+      "mfa": {
+        "description": "Enables Multi-Factor Authentication setup and verification",
+        "default": false
+      },
+      "socialLogins": {
+        "description": "Enables UI for Google, GitHub, etc. logins",
+        "default": false
+      },
+      "accountSettingsPage": {
+        "description": "Generates a full page for managing account settings",
+        "default": false
+      },
+      "profileManagement": {
+        "description": "Enables advanced profile management features",
+        "default": true
+      }
     },
     "theme": {
       "type": "string",
@@ -32,6 +45,66 @@
       "description": "UI theme variant",
       "required": false,
       "options": ["default", "dark", "light", "minimal"]
+    }
+  },
+  "internal_structure": {
+    "core": {
+      "provides": ["auth-ui-core"],
+      "templates": [
+        "AuthForm.tsx",
+        "LoginForm.tsx", 
+        "SignupForm.tsx",
+        "UserProfile.tsx",
+        "AuthGuard.tsx",
+        "AuthLayout.tsx",
+        "DashboardLayout.tsx",
+        "useAuth.ts",
+        "auth-types.ts",
+        "auth-utils.ts"
+      ]
+    },
+    "passwordReset": {
+      "prerequisites": ["auth-ui-core"],
+      "provides": ["auth-ui-password-reset"],
+      "templates": [
+        "ForgotPasswordForm.tsx",
+        "ResetPasswordForm.tsx",
+        "forgot-password/page.tsx",
+        "reset-password/page.tsx"
+      ]
+    },
+    "mfa": {
+      "prerequisites": ["auth-ui-core"],
+      "provides": ["auth-ui-mfa"],
+      "templates": [
+        "TwoFactorSetup.tsx",
+        "EmailVerification.tsx",
+        "useTwoFactor.ts"
+      ]
+    },
+    "socialLogins": {
+      "prerequisites": ["auth-ui-core"],
+      "provides": ["auth-ui-social"],
+      "templates": [
+        "ConnectedAccounts.tsx"
+      ]
+    },
+    "profileManagement": {
+      "prerequisites": ["auth-ui-core"],
+      "provides": ["auth-ui-profile"],
+      "templates": [
+        "ProfileManager.tsx",
+        "useProfile.ts"
+      ]
+    },
+    "accountSettingsPage": {
+      "prerequisites": ["auth-ui-core", "auth-ui-password-reset", "auth-ui-mfa", "auth-ui-social"],
+      "provides": ["auth-ui-settings"],
+      "templates": [
+        "AccountSettings.tsx",
+        "SecuritySettings.tsx",
+        "settings-page.tsx"
+      ]
     }
   },
   "constraints": {

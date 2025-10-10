@@ -20,9 +20,9 @@ const studioBlueprint: Blueprint = {
       path: 'src/lib/db/studio/studio-config.ts',
       content: `// Drizzle Studio Configuration
 export const studioConfig = {
-  host: '{{module.parameters.host}}',
-  port: {{module.parameters.port}},
-  database: '{{module.parameters.database}}',
+  host: '{{context..host}}',
+  port: {{context..port}},
+  database: '{{context..database}}',
   schema: './src/lib/db/schema/index.ts',
   out: './drizzle',
   verbose: true,

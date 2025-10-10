@@ -14,7 +14,7 @@ export const STRIPE_CONFIG = {
   webhookSecret: process.env.STRIPE_WEBHOOK_SECRET!,
   successUrl: process.env.APP_URL + '/payment/success',
   cancelUrl: process.env.APP_URL + '/payment/cancel',
-  currency: '{{module.parameters.currency}}',
+  currency: '{{context..currency}}',
   mode: 'payment' as const,
 };
 

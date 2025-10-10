@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "{{module.parameters.provider}}"
+  provider = "{{context..provider}}"
   url      = env("DATABASE_URL")
 }
 

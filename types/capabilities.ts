@@ -5,12 +5,6 @@
  */
 
 // Individual capability types
-export type 0 = '0';
-export type 1 = '1';
-export type 2 = '2';
-export type 3 = '3';
-export type 4 = '4';
-export type 5 = '5';
 export type AuthNextjsIntegration = 'auth-nextjs-integration';
 export type UserAuthentication = 'user-authentication';
 export type ApiRoutes = 'api-routes';

@@ -1,133 +1,245 @@
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+/**
+ * Social Profile Frontend Implementation: Shadcn/ui
+ * 
+ * Complete social profile management system with user profiles, settings, and preferences
+ * Uses template-based component generation for maintainability
+ */
 
-const userProfileNextjsShadcnBlueprint: Blueprint = {
-  id: 'user-profile-nextjs-shadcn',
-  name: 'User Profile Management (Next.js + Shadcn)',
-  description: 'Complete user profile management system with Next.js and Shadcn/ui',
-  version: '1.0.0',
-  actions: [
-    // Create main profile components
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Core is always generated
+  actions.push(...generateCoreActions());
+  
+  // Optional features based on configuration
+  if (config.activeFeatures.includes('socialConnections')) {
+    actions.push(...generateSocialConnectionsActions());
+  }
+  
+  if (config.activeFeatures.includes('activityFeeds')) {
+    actions.push(...generateActivityFeedsActions());
+  }
+  
+  if (config.activeFeatures.includes('notifications')) {
+    actions.push(...generateNotificationsActions());
+  }
+  
+  if (config.activeFeatures.includes('privacyControls')) {
+    actions.push(...generatePrivacyControlsActions());
+  }
+  
+  if (config.activeFeatures.includes('socialSettings')) {
+    actions.push(...generateSocialSettingsActions());
+  }
+  
+  if (config.activeFeatures.includes('avatarUpload')) {
+    actions.push(...generateAvatarUploadActions());
+  }
+  
+  if (config.activeFeatures.includes('blocking')) {
+    actions.push(...generateBlockingActions());
+  }
+  
+  if (config.activeFeatures.includes('reporting')) {
+    actions.push(...generateReportingActions());
+  }
+  
+  return actions;
+}
+
+function generateCoreActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: [
+        'react-hook-form',
+        '@hookform/resolvers',
+        'zod',
+        'date-fns',
+        'lucide-react',
+        'recharts',
+        'react-dropzone',
+        'file-type'
+      ]
+    },
+
+    // Core profile components (only existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}profile/ProfileDashboard.tsx',
-      template: 'templates/ProfileDashboard.tsx.tpl', 
+      template: 'templates/ProfileDashboard.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasProfileManagement: true
+      },
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        priority: 1
+      }
+    },
+
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}profile/ProfileForm.tsx',
       template: 'templates/ProfileForm.tsx.tpl',
-     
+      context: { 
+        features: ['core'],
+        hasProfileManagement: true
+      },
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        priority: 1
+      }
+    },
+
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}profile/AvatarUpload.tsx',
       template: 'templates/AvatarUpload.tsx.tpl',
-      condition: '{{#if feature.parameters.features.avatarUpload}}',
+      context: { 
+        features: ['core'],
+        hasProfileManagement: true
+      },
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}profile/PreferencesSettings.tsx',
-      template: 'templates/PreferencesSettings.tsx.tpl',
-      condition: '{{#if feature.parameters.features.preferences}}',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}profile/SecuritySettings.tsx',
-      template: 'templates/SecuritySettings.tsx.tpl',
-      condition: '{{#if feature.parameters.features.security}}',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}profile/NotificationSettings.tsx',
-      template: 'templates/NotificationSettings.tsx.tpl',
-      condition: '{{#if feature.parameters.features.notifications}}',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
+        priority: 1
       }
     },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}profile/DataExport.tsx',
-      template: 'templates/DataExport.tsx.tpl',
-      condition: '{{#if feature.parameters.features.exportData}}',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      },
-    },
-    // Create profile pages
+
+    // Profile pages
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.app_root}}profile/page.tsx',
       template: 'templates/profile-page.tsx.tpl',
-    
+      context: { 
+        features: ['core'],
+        hasProfileManagement: true
+      },
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        priority: 1
+      }
+    },
+
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.app_root}}profile/settings/page.tsx',
       template: 'templates/profile-settings-page.tsx.tpl',
-    
+      context: { 
+        features: ['core'],
+        hasProfileManagement: true
+      },
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        priority: 1
+      }
+    },
+
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.app_root}}profile/security/page.tsx',
       template: 'templates/profile-security-page.tsx.tpl',
-      condition: '{{#if feature.parameters.features.security}}',
-      conflictResolution: { 
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    // Create profile-specific utilities
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'src/features/profile/utils.ts',
-      template: 'templates/profile-utils.ts.tpl',
-    
+      context: { 
+        features: ['core'],
+        hasProfileManagement: true
+      },
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'src/features/profile/constants.ts',
-      template: 'templates/profile-constants.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'src/features/profile/types.ts',
-      template: 'templates/profile-types.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }}
-  ]
-};
+        priority: 1
+      }
+    },
 
-export default userProfileNextjsShadcnBlueprint;
+    // Profile utilities
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.lib}}profile/profile-types.ts',
+      template: 'templates/profile-types.ts.tpl',
+      context: { 
+        features: ['core'],
+        hasProfileManagement: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.lib}}profile/profile-utils.ts',
+      template: 'templates/profile-utils.ts.tpl',
+      context: { 
+        features: ['core'],
+        hasProfileManagement: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.lib}}profile/profile-constants.ts',
+      template: 'templates/profile-constants.ts.tpl',
+      context: { 
+        features: ['core'],
+        hasProfileManagement: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    }
+  ];
+}
+
+function generateSocialConnectionsActions(): BlueprintAction[] {
+  return [
+    // TODO: Create social connections templates when feature is implemented
+  ];
+}
+
+function generateActivityFeedsActions(): BlueprintAction[] {
+  return [
+    // TODO: Create activity feeds templates when feature is implemented
+  ];
+}
+
+function generateNotificationsActions(): BlueprintAction[] {
+  return [
+    // TODO: Create notifications templates when feature is implemented
+  ];
+}
+
+function generatePrivacyControlsActions(): BlueprintAction[] {
+  return [
+    // TODO: Create privacy controls templates when feature is implemented
+  ];
+}
+
+function generateSocialSettingsActions(): BlueprintAction[] {
+  return [
+    // TODO: Create social settings templates when feature is implemented
+  ];
+}
+
+function generateAvatarUploadActions(): BlueprintAction[] {
+  return [
+    // Avatar upload is already included in core actions
+  ];
+}
+
+function generateBlockingActions(): BlueprintAction[] {
+  return [
+    // TODO: Create blocking templates when feature is implemented
+  ];
+}
+
+function generateReportingActions(): BlueprintAction[] {
+  return [
+    // TODO: Create reporting templates when feature is implemented
+  ];
+}

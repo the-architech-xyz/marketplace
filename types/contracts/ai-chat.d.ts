@@ -1,12 +1,26 @@
 /**
- * ai-chat Contract Types
+ * AI Chat Feature Contract
  * 
- * Auto-generated from contract.ts
+ * This is the single source of truth for the AI Chat feature.
+ * All backend implementations must implement these hooks and types.
+ * All frontend implementations must consume these hooks and types.
  */
+
+// Note: TanStack Query types are imported by the implementing service, not the contract
+
+// ============================================================================
+// CORE TYPES
+// ============================================================================
+
 export type MessageRole = 'user' | 'assistant' | 'system';
 export type MessageStatus = 'sending' | 'sent' | 'failed' | 'streaming';
 export type ChatStatus = 'idle' | 'loading' | 'streaming' | 'error';
 export type ModelProvider = 'openai' | 'anthropic' | 'google' | 'azure' | 'custom';
+
+// ============================================================================
+// DATA TYPES
+// ============================================================================
+
 export interface Message {
   id: string;
   role: MessageRole;
@@ -22,6 +36,7 @@ export interface Message {
   };
   attachments?: MessageAttachment[];
 }
+
 export interface MessageAttachment {
   id: string;
   type: 'image' | 'file' | 'code' | 'url';
@@ -31,6 +46,7 @@ export interface MessageAttachment {
   mimeType?: string;
   metadata?: Record<string, any>;
 }
+
 export interface Chat {
   id: string;
   title: string;
@@ -49,6 +65,7 @@ export interface Chat {
     lastActivity?: string;
   };
 }
+
 export interface ChatSession {
   id: string;
   chatId: string;
@@ -58,6 +75,7 @@ export interface ChatSession {
   endedAt?: string;
   metadata?: Record<string, any>;
 }
+
 export interface AIModel {
   id: string;
   name: string;
@@ -69,6 +87,11 @@ export interface AIModel {
   isAvailable: boolean;
   metadata?: Record<string, any>;
 }
+
+// ============================================================================
+// INPUT TYPES
+// ============================================================================
+
 export interface SendMessageData {
   content: string;
   chatId?: string;
@@ -79,6 +102,7 @@ export interface SendMessageData {
   maxTokens?: number;
   stream?: boolean;
 }
+
 export interface CreateChatData {
   title: string;
   description?: string;
@@ -86,6 +110,7 @@ export interface CreateChatData {
   systemPrompt?: string;
   metadata?: Record<string, any>;
 }
+
 export interface UpdateChatData {
   title?: string;
   description?: string;
@@ -93,25 +118,34 @@ export interface UpdateChatData {
   systemPrompt?: string;
   metadata?: Record<string, any>;
 }
+
 export interface UploadFileData {
   file: File;
   chatId?: string;
   type?: 'image' | 'document' | 'code';
 }
+
 export interface ExportChatData {
   chatId: string;
   format: 'json' | 'markdown' | 'pdf' | 'txt';
   includeMetadata?: boolean;
 }
+
 export interface ImportChatData {
   file: File;
   format: 'json' | 'markdown' | 'txt';
 }
+
+// ============================================================================
+// RESULT TYPES
+// ============================================================================
+
 export interface SendMessageResult {
   message: Message;
   chat: Chat;
   streamId?: string;
 }
+
 export interface StreamMessageResult {
   messageId: string;
   content: string;
@@ -121,20 +155,34 @@ export interface StreamMessageResult {
     cost?: number;
   };
 }
+
 export interface UploadFileResult {
   attachment: MessageAttachment;
   message?: Message;
 }
+
 export interface ExportChatResult {
   url: string;
   filename: string;
   size: number;
 }
+
 export interface ImportChatResult {
   chat: Chat;
   messageCount: number;
   importedAt: string;
 }
+
+// ============================================================================
+// HOOK CONTRACTS
+// ============================================================================
+
+// Old granular contract removed - using cohesive IAIChatService instead
+
+// ============================================================================
+// ANALYTICS TYPES
+// ============================================================================
+
 export interface ChatAnalytics {
   totalChats: number;
   totalMessages: number;
@@ -147,6 +195,7 @@ export interface ChatAnalytics {
   tokenUsage: Array<{ date: string; tokens: number }>;
   costTrend: Array<{ date: string; cost: number }>;
 }
+
 export interface UsageStats {
   daily: {
     chats: number;
@@ -179,6 +228,11 @@ export interface UsageStats {
     dailyCost: number;
   };
 }
+
+// ============================================================================
+// CONFIGURATION TYPES
+// ============================================================================
+
 export interface AIChatConfig {
   models: {
     default: string;
@@ -210,6 +264,11 @@ export interface AIChatConfig {
     enableAnimations: boolean;
   };
 }
+
+// ============================================================================
+// ERROR TYPES
+// ============================================================================
+
 export interface AIChatError {
   code: string;
   message: string;
@@ -225,6 +284,11 @@ export interface AIChatError {
     };
   };
 }
+
+// ============================================================================
+// CONVERSATION TYPES (for service compatibility)
+// ============================================================================
+
 export interface Conversation {
   id: string;
   title: string;
@@ -240,24 +304,29 @@ export interface Conversation {
   createdAt: string;
   updatedAt: string;
 }
+
 export interface CreateConversationData {
   title?: string;
   settings?: Partial<Conversation['settings']>;
 }
+
 export interface UpdateConversationData {
   title?: string;
   settings?: Partial<Conversation['settings']>;
 }
+
 export interface UpdateMessageData {
   content?: string;
   metadata?: Record<string, any>;
 }
+
 export interface ChatSettings {
   model: string;
   temperature: number;
   maxTokens: number;
   systemPrompt: string;
 }
+
 export interface ConversationAnalytics {
   conversationId: string;
   messageCount: number;
@@ -265,29 +334,70 @@ export interface ConversationAnalytics {
   userSatisfaction: number;
   topics: string[];
 }
+
+// ============================================================================
+// HOOK SERVICE CONTRACT
+// ============================================================================
+
+/**
+ * AI Chat Service Contract
+ *
+ * This interface defines the cohesive business services for the AI Chat feature.
+ * Backend implementations must provide an object that implements this interface.
+ * Frontend implementations must consume this service.
+ */
 export interface IAIChatService {
+  /**
+   * Conversation Management Service
+   * Provides all conversation-related operations in a cohesive interface
+   */
   useConversations: () => {
+    // Query operations
     list: any; // UseQueryResult<Conversation[], Error>
     get: (id: string) => any; // UseQueryResult<Conversation, Error>
+    
+    // Mutation operations
     create: any; // UseMutationResult<Conversation, Error, CreateConversationData>
     update: any; // UseMutationResult<Conversation, Error, { id: string; data: UpdateConversationData }>
     delete: any; // UseMutationResult<void, Error, string>
     clear: any; // UseMutationResult<void, Error, string>
   };
+
+  /**
+   * Message Management Service
+   * Provides all message-related operations in a cohesive interface
+   */
   useMessages: () => {
+    // Query operations
     list: (conversationId: string) => any; // UseQueryResult<Message[], Error>
     get: (id: string) => any; // UseQueryResult<Message, Error>
+    
+    // Mutation operations
     send: any; // UseMutationResult<Message, Error, SendMessageData>
     update: any; // UseMutationResult<Message, Error, { id: string; data: UpdateMessageData }>
     delete: any; // UseMutationResult<void, Error, string>
     regenerate: any; // UseMutationResult<Message, Error, string>
   };
+
+  /**
+   * Chat Settings Service
+   * Provides chat configuration and settings management
+   */
   useSettings: () => {
+    // Query operations
     getSettings: any; // UseQueryResult<ChatSettings, Error>
+    
+    // Mutation operations
     updateSettings: any; // UseMutationResult<ChatSettings, Error, ChatSettings>
     resetSettings: any; // UseMutationResult<ChatSettings, Error, void>
   };
+
+  /**
+   * Analytics Service
+   * Provides chat analytics and reporting
+   */
   useAnalytics: () => {
+    // Query operations
     getChatAnalytics: any; // UseQueryResult<ChatAnalytics, Error>
     getConversationAnalytics: (conversationId: string) => any; // UseQueryResult<ConversationAnalytics, Error>
   };

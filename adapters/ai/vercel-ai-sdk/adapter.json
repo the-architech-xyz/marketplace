@@ -32,6 +32,12 @@
     "edgeRuntime": true,
     "caching": true
   },
+  "provides": [
+    "ai-core",
+    "{{#if features.streaming}}ai-streaming{{/if}}",
+    "{{#if features.advanced}}ai-advanced{{/if}}",
+    "{{#if features.enterprise}}ai-enterprise{{/if}}"
+  ],
   "parameters": {
     "providers": {
       "type": "array",
@@ -40,33 +46,21 @@
       "enum": ["openai", "anthropic", "google", "cohere", "huggingface"]
     },
     "features": {
-      "type": "object",
-      "description": "Feature flags",
-      "properties": {
-        "streaming": {
-          "type": "boolean",
-          "default": true
-        },
-        "chat": {
-          "type": "boolean",
-          "default": true
-        },
-        "textGeneration": {
-          "type": "boolean",
-          "default": true
-        },
-        "imageGeneration": {
-          "type": "boolean",
-          "default": false
-        },
-        "embeddings": {
-          "type": "boolean",
-          "default": false
-        },
-        "functionCalling": {
-          "type": "boolean",
-          "default": false
-        }
+      "core": {
+        "description": "Essential AI functionality (chat, text generation)",
+        "default": true
+      },
+      "streaming": {
+        "description": "Real-time streaming responses",
+        "default": true
+      },
+      "advanced": {
+        "description": "Advanced AI features (image generation, embeddings, function calling)",
+        "default": false
+      },
+      "enterprise": {
+        "description": "Enterprise features (caching, edge runtime, tool use)",
+        "default": false
       }
     },
     "defaultModel": {
@@ -86,6 +80,45 @@
       "default": 0.7,
       "minimum": 0,
       "maximum": 2
+    }
+  },
+  "internal_structure": {
+    "core": {
+      "provides": ["ai-core"],
+      "templates": [
+        "ai-config.ts",
+        "ai-types.ts",
+        "use-chat.ts",
+        "chat-route.ts"
+      ]
+    },
+    "streaming": {
+      "prerequisites": ["ai-core"],
+      "provides": ["ai-streaming"],
+      "templates": [
+        "use-streaming.ts",
+        "streaming-utils.ts"
+      ]
+    },
+    "advanced": {
+      "prerequisites": ["ai-core"],
+      "provides": ["ai-advanced"],
+      "templates": [
+        "image-generation.ts",
+        "embeddings.ts",
+        "function-calling.ts",
+        "completion-route.ts"
+      ]
+    },
+    "enterprise": {
+      "prerequisites": ["ai-core", "ai-streaming"],
+      "provides": ["ai-enterprise"],
+      "templates": [
+        "caching.ts",
+        "edge-runtime.ts",
+        "tool-use.ts",
+        "ai-providers.ts"
+      ]
     }
   },
   "blueprint": {

@@ -1,5 +1,5 @@
 {
-  "id": "feature:teams-management/shadcn",
+  "id": "features/teams-management/frontend/shadcn",
   "name": "Teams Management Feature (Shadcn)",
   "description": "Complete team management UI using Shadcn components",
   "type": "feature",
@@ -8,22 +8,30 @@
     "capabilities": ["teams-management-backend-better-auth-nextjs"],
     "adapters": ["ui/shadcn-ui"]
   },
-  "provides": ["teams-ui"],
+  "provides": [
+    "teams-core",
+    "{{#if features.advanced}}teams-advanced{{/if}}",
+    "{{#if features.analytics}}teams-analytics{{/if}}",
+    "{{#if features.billing}}teams-billing{{/if}}"
+  ],
   "parameters": {
     "features": {
-      "type": "object",
-      "default": {
-        "teamList": true,
-        "teamCreation": true,
-        "memberManagement": true,
-        "teamSettings": true,
-        "teamDashboard": true,
-        "advancedPermissions": false,
-        "teamAnalytics": false,
-        "teamBilling": false
+      "core": {
+        "description": "Basic team management (list, creation, member management)",
+        "default": true
       },
-      "description": "Teams management UI features to enable",
-      "required": false
+      "advanced": {
+        "description": "Advanced team features (settings, permissions, dashboard)",
+        "default": false
+      },
+      "analytics": {
+        "description": "Team analytics and reporting",
+        "default": false
+      },
+      "billing": {
+        "description": "Team billing and usage tracking",
+        "default": false
+      }
     },
     "theme": {
       "type": "string",
@@ -31,6 +39,51 @@
       "description": "UI theme variant",
       "required": false,
       "options": ["default", "dark", "light", "minimal"]
+    }
+  },
+  "internal_structure": {
+    "core": {
+      "provides": ["teams-core"],
+      "templates": [
+        "TeamList.tsx",
+        "TeamCreation.tsx",
+        "MemberManagement.tsx",
+        "TeamTypes.tsx",
+        "useTeams.ts"
+      ]
+    },
+    "advanced": {
+      "prerequisites": ["teams-core"],
+      "provides": ["teams-advanced"],
+      "templates": [
+        "TeamSettings.tsx",
+        "Permissions.tsx",
+        "TeamDashboard.tsx",
+        "AdvancedTypes.tsx",
+        "useAdvancedTeams.ts"
+      ]
+    },
+    "analytics": {
+      "prerequisites": ["teams-core"],
+      "provides": ["teams-analytics"],
+      "templates": [
+        "TeamMetrics.tsx",
+        "UsageCharts.tsx",
+        "AnalyticsDashboard.tsx",
+        "AnalyticsTypes.tsx",
+        "useTeamAnalytics.ts"
+      ]
+    },
+    "billing": {
+      "prerequisites": ["teams-core", "teams-advanced"],
+      "provides": ["teams-billing"],
+      "templates": [
+        "BillingDashboard.tsx",
+        "UsageTracking.tsx",
+        "BillingSettings.tsx",
+        "BillingTypes.tsx",
+        "useTeamBilling.ts"
+      ]
     }
   },
   "constraints": {

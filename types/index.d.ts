@@ -1,11 +1,11 @@
 /**
- * The Architech Marketplace Types
+ * The Architech Marketplace Types - Constitutional Architecture
  * 
- * Auto-generated TypeScript definitions with artifact discovery
+ * Auto-generated TypeScript definitions with Constitutional Architecture support
  */
 
-// Re-export all types from the shared types package
-export * from '@thearchitech.xyz/types';
+// Import base types from the types package
+import { Module, ProjectConfig, ModuleArtifacts as ModuleArtifactsType } from '@thearchitech.xyz/types';
 
 export * from './adapters/ai/vercel-ai-sdk';
 export * from './adapters/auth/better-auth';
@@ -68,9 +68,16 @@ export * from './contracts/teams-management';
 
 // 🚀 Auto-discovered module artifacts
 export declare const ModuleArtifacts: {
-  [key: string]: () => Promise<ModuleArtifacts>;
+  [key: string]: () => Promise<ModuleArtifactsType>;
 };
 
 export type ModuleId = keyof typeof ModuleArtifacts;
 
-// All types are already re-exported above
+// Re-export base types for convenience
+export { Module, ProjectConfig } from '@thearchitech.xyz/types';
+
+// Re-export Genome type from shared types package
+export { Genome } from '@thearchitech.xyz/types';
+
+// Re-export defineGenome function
+export * from './define-genome';

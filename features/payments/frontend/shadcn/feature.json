@@ -8,22 +8,35 @@
     "adapters": ["ui/shadcn-ui"],
     "backend": ["payments/backend/stripe-nextjs"]
   },
-  "provides": ["payments-ui"],
+  "provides": [
+    "payments-core",
+    "{{#if features.subscriptions}}payments-subscriptions{{/if}}",
+    "{{#if features.invoicing}}payments-invoicing{{/if}}",
+    "{{#if features.webhooks}}payments-webhooks{{/if}}",
+    "{{#if features.analytics}}payments-analytics{{/if}}"
+  ],
   "parameters": {
     "features": {
-      "type": "object",
-      "default": {
-        "paymentForm": true,
-        "checkout": true,
-        "subscriptions": true,
-        "invoices": true,
-        "transactions": true,
-        "analytics": true,
-        "refunds": false,
-        "paymentMethods": true
+      "core": {
+        "description": "Essential payment functionality (forms, checkout, transactions)",
+        "default": true
       },
-      "description": "Payment UI features to enable",
-      "required": false
+      "subscriptions": {
+        "description": "Subscription management and billing",
+        "default": false
+      },
+      "invoicing": {
+        "description": "Invoice generation and management",
+        "default": false
+      },
+      "webhooks": {
+        "description": "Payment webhook handling",
+        "default": false
+      },
+      "analytics": {
+        "description": "Payment analytics and reporting",
+        "default": false
+      }
     },
     "theme": {
       "type": "string",
@@ -31,6 +44,60 @@
       "description": "UI theme variant",
       "required": false,
       "options": ["default", "dark", "light", "minimal"]
+    }
+  },
+  "internal_structure": {
+    "core": {
+      "provides": ["payments-core"],
+      "templates": [
+        "PaymentForm.tsx",
+        "Checkout.tsx",
+        "TransactionList.tsx",
+        "PaymentTypes.tsx",
+        "usePayments.ts"
+      ]
+    },
+    "subscriptions": {
+      "prerequisites": ["payments-core"],
+      "provides": ["payments-subscriptions"],
+      "templates": [
+        "SubscriptionManager.tsx",
+        "BillingDashboard.tsx",
+        "PlanSelector.tsx",
+        "SubscriptionTypes.tsx",
+        "useSubscriptions.ts"
+      ]
+    },
+    "invoicing": {
+      "prerequisites": ["payments-core"],
+      "provides": ["payments-invoicing"],
+      "templates": [
+        "InvoiceGenerator.tsx",
+        "InvoiceList.tsx",
+        "InvoicePDF.tsx",
+        "InvoiceTypes.tsx",
+        "useInvoices.ts"
+      ]
+    },
+    "webhooks": {
+      "prerequisites": ["payments-core"],
+      "provides": ["payments-webhooks"],
+      "templates": [
+        "WebhookHandler.ts",
+        "WebhookVerification.ts",
+        "WebhookTypes.ts"
+      ]
+    },
+    "analytics": {
+      "prerequisites": ["payments-core", "payments-subscriptions"],
+      "provides": ["payments-analytics"],
+      "templates": [
+        "RevenueChart.tsx",
+        "PaymentMetrics.tsx",
+        "AnalyticsDashboard.tsx",
+        "AnalyticsTypes.tsx",
+        "useAnalytics.ts"
+      ]
     }
   },
   "constraints": {

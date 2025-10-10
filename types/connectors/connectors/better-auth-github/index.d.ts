@@ -1,10 +1,12 @@
 /**
  * connectors/better-auth-github
  * 
- * Auto-generated integration types
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
 export interface ConnectorsBetterAuthGithubParams {}
+
+export interface ConnectorsBetterAuthGithubFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const ConnectorsBetterAuthGithubArtifacts: {

@@ -1,12 +1,37 @@
-import { Blueprint, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-const vercelAiSdkBlueprint: Blueprint = {
-  id: 'vercel-ai-sdk',
-  name: 'Vercel AI SDK',
-  description: 'Pure Vercel AI SDK for building AI-powered applications',
-  version: '1.0.0',
-  actions: [
-    // Install AI SDK packages
+/**
+ * Dynamic AI/Vercel-AI-SDK Adapter Blueprint
+ * 
+ * Generates AI capabilities based on Constitutional Architecture configuration.
+ * Core features are always included, optional features are conditionally generated.
+ */
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Core is always generated
+  actions.push(...generateCoreActions());
+  
+  // Optional features based on configuration
+  if (config.activeFeatures.includes('streaming')) {
+    actions.push(...generateStreamingActions());
+  }
+  
+  if (config.activeFeatures.includes('advanced')) {
+    actions.push(...generateAdvancedActions());
+  }
+  
+  if (config.activeFeatures.includes('enterprise')) {
+    actions.push(...generateEnterpriseActions());
+  }
+  
+  return actions;
+}
+
+// Helper functions for each capability
+function generateCoreActions(): BlueprintAction[] {
+  return [
+    // Install core AI SDK packages
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
@@ -23,127 +48,119 @@ const vercelAiSdkBlueprint: Blueprint = {
       ],
       isDev: true
     },
-    // Create AI configuration
+    // Core AI configuration
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}ai/config.ts',
       template: 'templates/ai-config.ts.tpl',
-    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
-    // Create AI providers
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}ai/providers.ts',
-      template: 'templates/ai-providers.ts.tpl',
-    
+      path: '{{paths.shared_library}}ai/types.ts',
+      template: 'templates/ai-types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
-    // Create chat hooks
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.hooks}}use-chat.ts',
       template: 'templates/use-chat.ts.tpl',
-    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
-    // Create text generation hooks
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-completion.ts',
-      template: 'templates/use-completion.ts.tpl',
-    
+      path: '{{paths.api_routes}}chat/route.ts',
+      template: 'templates/chat-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
-    // Create streaming hooks
+      }
+    }
+  ];
+}
+
+function generateStreamingActions(): BlueprintAction[] {
+  return [
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.hooks}}use-streaming.ts',
       template: 'templates/use-streaming.ts.tpl',
-    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
-    // Create AI utilities
+      }
+    }
+  ];
+}
+
+function generateAdvancedActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: [
+        '@ai-sdk/google',
+        '@ai-sdk/cohere',
+        '@ai-sdk/huggingface'
+      ]
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.hooks}}use-completion.ts',
+      template: 'templates/use-completion.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.api_routes}}completion/route.ts',
+      template: 'templates/completion-route.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    }
+  ];
+}
+
+function generateEnterpriseActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.shared_library}}ai/providers.ts',
+      template: 'templates/ai-providers.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}ai/utils.ts',
       template: 'templates/ai-utils.ts.tpl',
-    
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
-    // Create AI types
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.types}}ai.ts',
-      template: 'templates/ai-types.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }},
-    // Create API routes for AI
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/chat/route.ts',
-      template: 'templates/chat-route.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 0
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/completion/route.ts',
-      template: 'templates/completion-route.ts.tpl',
-        
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 0
-      }},
-    // Create AI context provider
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'src/contexts/AIProvider.tsx',
+      path: '{{paths.components}}AIProvider.tsx',
       template: 'templates/AIProvider.tsx.tpl',
-    
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
+        strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
-      }},
-    // Add environment variables
-    {
-      type: BlueprintActionType.ENHANCE_FILE,
-
-      path: '{{paths.env}}.example',
-      modifier: ModifierType.ENV_MERGER,
-      params: {
-        variables: [
-          {
-            name: 'OPENAI_API_KEY',
-            value: 'your-openai-api-key-here',
-            description: 'OpenAI API key for text generation'
-          },
-          {
-            name: 'ANTHROPIC_API_KEY',
-            value: 'your-anthropic-api-key-here',
-            description: 'Anthropic API key for Claude models'
-          }
-        ]
       }
     }
-  ]
-};
-
-export default vercelAiSdkBlueprint;
+  ];
+}

@@ -32,7 +32,7 @@ export abstract class BaseEntity {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/entities/Product.ts',
-      content: `{{#if module.parameters.relationships}}
+      content: `{{#if context..relationships}}
 import { Entity, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { BaseEntity } from './BaseEntity';
 import { Category } from './Category';

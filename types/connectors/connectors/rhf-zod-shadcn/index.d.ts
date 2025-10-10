@@ -1,10 +1,12 @@
 /**
  * connectors/rhf-zod-shadcn
  * 
- * Auto-generated integration types
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
 export interface ConnectorsRhfZodShadcnParams {}
+
+export interface ConnectorsRhfZodShadcnFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const ConnectorsRhfZodShadcnArtifacts: {

@@ -19,7 +19,7 @@ export interface QualityPrettierParams {
   useTabs?: boolean;
 
   /** Print trailing commas where valid in ES5 */
-  trailingComma?: string;
+  trailingComma?: 'none' | 'es5' | 'all';
 
   /** Wrap lines that exceed this length */
   printWidth?: number;
@@ -28,10 +28,10 @@ export interface QualityPrettierParams {
   bracketSpacing?: boolean;
 
   /** Include parentheses around a sole arrow function parameter */
-  arrowParens?: string;
+  arrowParens?: 'avoid' | 'always';
 
   /** Line ending style */
-  endOfLine?: string;
+  endOfLine?: 'lf' | 'crlf' | 'cr' | 'auto';
 
   /** Prettier plugins to use */
   plugins?: string[];

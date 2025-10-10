@@ -20,7 +20,7 @@ export const coreDependenciesBlueprint: Blueprint = {
         '@hookform/resolvers@^3.3.2',
         'zod@^3.22.4'
       ],
-      condition: '{{#if module.parameters.forms}}'
+      condition: '{{#if context..forms}}'
     },
 
     // Core UI dependencies (used by multiple modules)
@@ -30,7 +30,7 @@ export const coreDependenciesBlueprint: Blueprint = {
         'lucide-react@^0.294.0',
         'date-fns@^2.30.0'
       ],
-      condition: '{{#if module.parameters.ui}}'
+      condition: '{{#if context..ui}}'
     },
 
     // Core data fetching dependencies
@@ -39,7 +39,7 @@ export const coreDependenciesBlueprint: Blueprint = {
       packages: [
         '@tanstack/react-query@^5.0.0'
       ],
-      condition: '{{#if module.parameters.dataFetching}}'
+      condition: '{{#if context..dataFetching}}'
     },
 
     // Core state management dependencies
@@ -48,7 +48,7 @@ export const coreDependenciesBlueprint: Blueprint = {
       packages: [
         'zustand@^4.4.0'
       ],
-      condition: '{{#if module.parameters.stateManagement}}'
+      condition: '{{#if context..stateManagement}}'
     }
   ]
 };

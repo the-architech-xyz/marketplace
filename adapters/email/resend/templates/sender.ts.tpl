@@ -5,6 +5,9 @@ import { EmailVerificationEmail } from './templates/email-verification-email';
 import { PaymentConfirmationEmail } from './templates/payment-confirmation-email';
 import { SubscriptionCreatedEmail } from './templates/subscription-created-email';
 import { SubscriptionCancelledEmail } from './templates/subscription-cancelled-email';
+import { OrganizationInvitationEmail } from './templates/organization-invitation-email';
+import { MagicLinkEmail } from './templates/magic-link-email';
+import { TwoFactorSetupEmail } from './templates/two-factor-setup-email';
 
 // Email template mapping
 const EMAIL_TEMPLATE_COMPONENTS = {
@@ -14,6 +17,9 @@ const EMAIL_TEMPLATE_COMPONENTS = {
   'payment-confirmation': PaymentConfirmationEmail,
   'subscription-created': SubscriptionCreatedEmail,
   'subscription-cancelled': SubscriptionCancelledEmail,
+  'organization-invitation': OrganizationInvitationEmail,
+  'magic-link': MagicLinkEmail,
+  'two-factor-setup': TwoFactorSetupEmail,
 };
 
 /**
@@ -128,6 +134,70 @@ export async function sendSubscriptionCancelledEmail(to: string, planName: strin
     subject: EMAIL_TEMPLATES.subscriptionCancelled.subject,
     template: EMAIL_TEMPLATES.subscriptionCancelled.template,
     data: { planName, baseUrl: EMAIL_CONFIG.baseUrl },
+  });
+}
+
+/**
+ * Send organization invitation email
+ */
+export async function sendOrganizationInvitationEmail(
+  to: string, 
+  organizationName: string, 
+  inviterName: string, 
+  invitationUrl: string, 
+  role: string
+): Promise<EmailResponse> {
+  return sendEmail({
+    to,
+    subject: `You've been invited to join ${organizationName}`,
+    template: 'organization-invitation',
+    data: { 
+      organizationName, 
+      inviterName, 
+      invitationUrl, 
+      role,
+      projectName: process.env.APP_NAME || 'The Architech'
+    },
+  });
+}
+
+/**
+ * Send magic link email
+ */
+export async function sendMagicLinkEmail(
+  to: string, 
+  magicLinkUrl: string, 
+  userName?: string
+): Promise<EmailResponse> {
+  return sendEmail({
+    to,
+    subject: 'Your magic link to sign in',
+    template: 'magic-link',
+    data: { 
+      magicLinkUrl, 
+      userName: userName || 'User',
+      projectName: process.env.APP_NAME || 'The Architech'
+    },
+  });
+}
+
+/**
+ * Send two-factor setup email
+ */
+export async function sendTwoFactorSetupEmail(
+  to: string, 
+  userName?: string,
+  setupUrl?: string
+): Promise<EmailResponse> {
+  return sendEmail({
+    to,
+    subject: 'Two-factor authentication enabled',
+    template: 'two-factor-setup',
+    data: { 
+      userName: userName || 'User',
+      projectName: process.env.APP_NAME || 'The Architech',
+      setupUrl
+    },
   });
 }`,
     },

@@ -25,8 +25,8 @@ if (changedFiles.length === 0) {
 }
 
 try {
-  // Run the type generation CLI with the changed files
-  const command = `tsx scripts/generate-types-cli.ts ${changedFiles.map(f => `"${f}"`).join(' ')}`;
+  // Run the Constitutional Architecture type generation CLI with the changed files
+  const command = `tsx scripts/generate-constitutional-types-cli.ts ${changedFiles.map(f => `"${f}"`).join(' ')}`;
   console.log(`🚀 Executing: ${command}`);
   
   execSync(command, {
@@ -34,8 +34,8 @@ try {
     cwd: marketplacePath
   });
   
-  console.log('✅ Incremental type generation completed successfully!');
+  console.log('✅ Constitutional Architecture type generation completed successfully!');
 } catch (error) {
-  console.error('❌ Type generation failed:', error.message);
+  console.error('❌ Constitutional Architecture type generation failed:', error.message);
   process.exit(1);
 }

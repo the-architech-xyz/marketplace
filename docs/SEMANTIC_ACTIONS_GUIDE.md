@@ -222,7 +222,7 @@ Available variables:
 - `{{project.name}}` - Project name
 - `{{project.path}}` - Project path
 - `{{module.id}}` - Module ID
-- `{{module.parameters.paramName}}` - Module parameters
+- `{{context..paramName}}` - Module parameters
 
 ## Conditional Execution
 
@@ -232,7 +232,7 @@ Actions can be conditionally executed:
 {
   type: BlueprintActionType.INSTALL_PACKAGES,
   packages: ['@types/node'],
-  condition: '{{module.parameters.typescript}}'
+  condition: '{{context..typescript}}'
 }
 ```
 

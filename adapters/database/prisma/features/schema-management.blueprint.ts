@@ -94,7 +94,7 @@ export class SchemaManager {
     }
   }
 
-  {{#if module.parameters.introspection}}
+  {{#if context..introspection}}
   static async introspectDatabase(): Promise<void> {
     try {
       console.log('🔄 Introspecting database...');
@@ -110,7 +110,7 @@ export class SchemaManager {
   }
   {{/if}}
 
-  {{#if module.parameters.schema-validation}}
+  {{#if context..schema-validation}}
   static async checkSchemaHealth(): Promise<{
     isValid: boolean;
     issues: string[];
@@ -366,7 +366,7 @@ export function SchemaManagerComponent() {
             >
               Pull Schema
             </Button>
-            {{#if module.parameters.introspection}}
+            {{#if context..introspection}}
             <Button 
               onClick={() => executeAction(() => SchemaManager.introspectDatabase(), 'Database introspection')}
               disabled={isLoading}

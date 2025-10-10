@@ -12,7 +12,7 @@ export const sequelizeBlueprint: Blueprint = {
   actions: [
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['sequelize', '{{module.parameters.databaseType}}']
+      packages: ['sequelize', '{{context..databaseType}}']
     },
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
@@ -42,49 +42,49 @@ export const sequelizeBlueprint: Blueprint = {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'DB_HOST',
-      value: '{{module.parameters.host}}',
+      value: '{{context..host}}',
       description: 'Database host'
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'DB_PORT',
-      value: '{{module.parameters.port}}',
+      value: '{{context..port}}',
       description: 'Database port'
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'DB_USERNAME',
-      value: '{{module.parameters.username}}',
+      value: '{{context..username}}',
       description: 'Database username'
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'DB_PASSWORD',
-      value: '{{module.parameters.password}}',
+      value: '{{context..password}}',
       description: 'Database password'
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'DB_NAME',
-      value: '{{module.parameters.databaseName}}',
+      value: '{{context..databaseName}}',
       description: 'Database name'
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'DB_LOGGING',
-      value: '{{module.parameters.logging}}',
+      value: '{{context..logging}}',
       description: 'Sequelize logging'
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'DB_POOL',
-      value: '{{module.parameters.pool}}',
+      value: '{{context..pool}}',
       description: 'Sequelize connection pool'
     }
   ]

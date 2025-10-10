@@ -27,12 +27,12 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: '{{module.parameters.environment}}',
+    environment: '{{context..environment}}',
     setupFiles: ['./src/test/setup.ts'],
-    {{#if module.parameters.watch}}
+    {{#if context..watch}}
     watch: true,
     {{/if}}
-    {{#if module.parameters.coverage}}
+    {{#if context..coverage}}
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
@@ -47,8 +47,8 @@ export default defineConfig({
     },
     {{/if}}
     ui: {
-      port: {{module.parameters.port}},
-      open: {{module.parameters.open}}
+      port: {{context..port}},
+      open: {{context..open}}
     }
   },
   resolve: {
@@ -74,14 +74,14 @@ export default defineConfig({
       type: BlueprintActionType.ADD_SCRIPT,
 
       name: 'test:ui',
-      command: 'vitest --ui --port {{module.parameters.port}}'
+      command: 'vitest --ui --port {{context..port}}'
     },
     {
       type: BlueprintActionType.ADD_SCRIPT,
 
       name: 'test:coverage',
       command: 'vitest run --coverage',
-      condition: '{{#if module.parameters.coverage}}'
+      condition: '{{#if context..coverage}}'
     },
     {
       type: BlueprintActionType.CREATE_FILE,

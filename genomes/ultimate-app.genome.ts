@@ -8,9 +8,9 @@
  * - TypeScript type safety for configuration validation
  */
 
-import { Genome } from '@thearchitech.xyz/types';
+import { defineGenome } from '@thearchitech.xyz/types';
 
-const genome: Genome = {
+const genome = defineGenome({
   version: '1.0.0',
   project: {
     name: 'ultimate-app',
@@ -623,6 +623,6 @@ const genome: Genome = {
       }
     }
   ]
-};
+});
 
 export default genome;

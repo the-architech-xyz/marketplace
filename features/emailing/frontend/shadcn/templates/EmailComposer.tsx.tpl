@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useSendEmail, useTemplates } from '@/lib/emailing/hooks';
+import { useEmailContext } from './use-email-context';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -27,6 +28,7 @@ type EmailComposerFormData = z.infer<typeof emailComposerSchema>;
 
 export function EmailComposer() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { userContext, canSendEmails, isAuthenticated } = useEmailContext();
   const sendEmail = useSendEmail();
   const { data: templates } = useTemplates({ isActive: true });
 
@@ -58,6 +60,16 @@ export function EmailComposer() {
   }, [selectedTemplateId, templates, setValue]);
 
   const onSubmit = async (data: EmailComposerFormData) => {
+    if (!isAuthenticated) {
+      alert('Please sign in to send emails');
+      return;
+    }
+
+    if (!canSendEmails) {
+      alert('You do not have permission to send emails');
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       await sendEmail.mutateAsync({
@@ -81,6 +93,38 @@ export function EmailComposer() {
       setIsSubmitting(false);
     }
   };
+
+  if (!isAuthenticated) {
+    return (
+      <Card className="w-full max-w-4xl mx-auto">
+        <CardHeader>
+          <CardTitle>Email Composer</CardTitle>
+          <CardDescription>Please sign in to compose and send emails</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="text-center text-muted-foreground py-8">
+            You need to be signed in to use the email composer.
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (!canSendEmails) {
+    return (
+      <Card className="w-full max-w-4xl mx-auto">
+        <CardHeader>
+          <CardTitle>Email Composer</CardTitle>
+          <CardDescription>You don't have permission to send emails</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="text-center text-muted-foreground py-8">
+            Contact your organization administrator for email permissions.
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="w-full max-w-4xl mx-auto">

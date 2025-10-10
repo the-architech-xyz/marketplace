@@ -1,5 +1,5 @@
 {
-  "id": "connector:vitest-nextjs",
+  "id": "connectors/vitest-nextjs",
   "name": "Vitest Next.js Connector",
   "description": "Complete Vitest testing setup for Next.js applications with unit tests, integration tests, and coverage reporting",
   "type": "connector",

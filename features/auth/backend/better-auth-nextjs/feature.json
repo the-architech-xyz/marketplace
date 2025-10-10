@@ -1,0 +1,270 @@
+{
+  "id": "auth-backend-better-auth-nextjs",
+  "name": "Authentication Capability (Better Auth + NextJS)",
+  "description": "Complete authentication backend with Better Auth and NextJS",
+  "type": "capability",
+  "version": "1.0.0",
+  "contract": {
+    "hooks": {
+      "useAuthentication": {
+        "parameters": [],
+        "returnType": "{\n    // Query operations\n    getAuthState: any; // UseQueryResult<AuthState, Error>\n    getSession: any; // UseQueryResult<Session, Error>\n    isAuthenticated: any; // UseQueryResult<boolean, Error>\n    \n    // Mutation operations\n    signIn: any; // UseMutationResult<AuthResult, Error, SignInData>\n    signUp: any; // UseMutationResult<AuthResult, Error, SignUpData>\n    signOut: any; // UseMutationResult<void, Error, void>\n    oauthSignIn: any; // UseMutationResult<OAuthResult, Error, OAuthSignInData>\n    refreshSession: any; // UseMutationResult<Session, Error, void>\n  }",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useProfile": {
+        "parameters": [],
+        "returnType": "{\n    // Query operations\n    getUser: any; // UseQueryResult<User, Error>\n    \n    // Mutation operations\n    updateProfile: any; // UseMutationResult<AuthResult, Error, UpdateProfileData>\n    changePassword: any; // UseMutationResult<PasswordResetResult, Error, ChangePasswordData>\n    deleteAccount: any; // UseMutationResult<void, Error, string>\n  }",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useSecurity": {
+        "parameters": [],
+        "returnType": "{\n    // Query operations\n    getAccounts: any; // UseQueryResult<Account[], Error>\n    \n    // Mutation operations\n    setupTwoFactor: any; // UseMutationResult<{ qrCode: string; secret: string }, Error, void>\n    verifyTwoFactor: any; // UseMutationResult<{ success: boolean }, Error, string>\n    disableTwoFactor: any; // UseMutationResult<{ success: boolean }, Error, string>\n    unlinkAccount: any; // UseMutationResult<void, Error, string>\n  }",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "usePasswordManagement": {
+        "parameters": [],
+        "returnType": "{\n    // Mutation operations\n    forgotPassword: any; // UseMutationResult<PasswordResetResult, Error, ForgotPasswordData>\n    resetPassword: any; // UseMutationResult<PasswordResetResult, Error, ResetPasswordData>\n  }",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": false
+      },
+      "useEmailVerification": {
+        "parameters": [],
+        "returnType": "{\n    // Mutation operations\n    verifyEmail: any; // UseMutationResult<EmailVerificationResult, Error, VerifyEmailData>\n    resendVerification: any; // UseMutationResult<EmailVerificationResult, Error, ResendVerificationData>\n  }",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": false
+      }
+    },
+    "types": {
+      "AuthStatus": {
+        "definition": "| 'authenticated' \n  | 'unauthenticated' \n  | 'loading' \n  | 'error'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "OAuthProvider": {
+        "definition": "| 'google' \n  | 'github' \n  | 'discord' \n  | 'twitter' \n  | 'facebook' \n  | 'apple' \n  | 'microsoft' \n  | 'linkedin'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "SessionStatus": {
+        "definition": "| 'active' \n  | 'expired' \n  | 'invalid' \n  | 'revoked'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "User": {
+        "definition": "export interface User {\n  id: string;\n  email: string;\n  name: string;\n  image?: string;\n  emailVerified: boolean;\n  twoFactorEnabled: boolean;\n  createdAt: string;\n  updatedAt: string;\n  lastLoginAt?: string;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "Session": {
+        "definition": "export interface Session {\n  id: string;\n  userId: string;\n  status: SessionStatus;\n  expiresAt: string;\n  createdAt: string;\n  updatedAt: string;\n  ipAddress?: string;\n  userAgent?: string;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "Account": {
+        "definition": "export interface Account {\n  id: string;\n  userId: string;\n  provider: OAuthProvider;\n  providerAccountId: string;\n  accessToken?: string;\n  refreshToken?: string;\n  expiresAt?: number;\n  scope?: string;\n  createdAt: string;\n  updatedAt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "AuthState": {
+        "definition": "export interface AuthState {\n  user: User | null;\n  session: Session | null;\n  status: AuthStatus;\n  isLoading: boolean;\n  error: string | null;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "SignInData": {
+        "definition": "export interface SignInData {\n  email: string;\n  password: string;\n  rememberMe?: boolean;\n  twoFactorCode?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "SignUpData": {
+        "definition": "export interface SignUpData {\n  email: string;\n  password: string;\n  name: string;\n  acceptTerms: boolean;\n  marketingEmails?: boolean;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "OAuthSignInData": {
+        "definition": "export interface OAuthSignInData {\n  provider: OAuthProvider;\n  redirectTo?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ForgotPasswordData": {
+        "definition": "export interface ForgotPasswordData {\n  email: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ResetPasswordData": {
+        "definition": "export interface ResetPasswordData {\n  token: string;\n  password: string;\n  confirmPassword: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "UpdateProfileData": {
+        "definition": "export interface UpdateProfileData {\n  name?: string;\n  image?: string;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ChangePasswordData": {
+        "definition": "export interface ChangePasswordData {\n  currentPassword: string;\n  newPassword: string;\n  confirmPassword: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "VerifyEmailData": {
+        "definition": "export interface VerifyEmailData {\n  token: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ResendVerificationData": {
+        "definition": "export interface ResendVerificationData {\n  email: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "AuthResult": {
+        "definition": "export interface AuthResult {\n  user: User;\n  session: Session;\n  success: boolean;\n  message?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "OAuthResult": {
+        "definition": "export interface OAuthResult {\n  user: User;\n  session: Session;\n  account: Account;\n  success: boolean;\n  message?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "PasswordResetResult": {
+        "definition": "export interface PasswordResetResult {\n  success: boolean;\n  message: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "EmailVerificationResult": {
+        "definition": "export interface EmailVerificationResult {\n  success: boolean;\n  message: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "AuthError": {
+        "definition": "export interface AuthError {\n  code: string;\n  message: string;\n  type: 'validation_error' | 'authentication_error' | 'authorization_error' | 'network_error';\n  field?: string;\n  details?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "AuthConfig": {
+        "definition": "export interface AuthConfig {\n  providers: {\n    email: boolean;\n    oauth: OAuthProvider[];\n  };\n  features: {\n    emailVerification: boolean;\n    twoFactorAuth: boolean;\n    passwordReset: boolean;\n    accountLinking: boolean;\n    sessionManagement: boolean;\n  };\n  security: {\n    passwordMinLength: number;\n    passwordRequireUppercase: boolean;\n    passwordRequireLowercase: boolean;\n    passwordRequireNumbers: boolean;\n    passwordRequireSymbols: boolean;\n    sessionTimeout: number; // minutes\n    maxLoginAttempts: number;\n  };\n  ui: {\n    theme: 'default' | 'dark' | 'light' | 'minimal';\n    showSocialAuth: boolean;\n    showRememberMe: boolean;\n    showForgotPassword: boolean;\n    showSignUp: boolean;\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "AuthMiddleware": {
+        "definition": "export interface AuthMiddleware {\n  requireAuth: (options?: { redirectTo?: string }) => void;\n  requireGuest: (options?: { redirectTo?: string }) => void;\n  requireRole: (role: string, options?: { redirectTo?: string }) => void;\n  requirePermission: (permission: string, options?: { redirectTo?: string }) => void;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "AuthProviderProps": {
+        "definition": "export interface AuthProviderProps {\n  children: any; // React.ReactNode\n  config?: Partial<AuthConfig>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "AuthContextValue": {
+        "definition": "export interface AuthContextValue {\n  user: User | null;\n  session: Session | null;\n  status: AuthStatus;\n  isLoading: boolean;\n  error: string | null;\n  signIn: (data: SignInData) => Promise<AuthResult>;\n  signUp: (data: SignUpData) => Promise<AuthResult>;\n  signOut: () => Promise<void>;\n  oauthSignIn: (data: OAuthSignInData) => Promise<OAuthResult>;\n  forgotPassword: (data: ForgotPasswordData) => Promise<PasswordResetResult>;\n  resetPassword: (data: ResetPasswordData) => Promise<PasswordResetResult>;\n  updateProfile: (data: UpdateProfileData) => Promise<AuthResult>;\n  changePassword: (data: ChangePasswordData) => Promise<PasswordResetResult>;\n  verifyEmail: (data: VerifyEmailData) => Promise<EmailVerificationResult>;\n  resendVerification: (data: ResendVerificationData) => Promise<EmailVerificationResult>;\n  refreshSession: () => Promise<Session>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "IAuthService": {
+        "definition": "export interface IAuthService {\n  /**\n   * Authentication Service\n   * Provides all authentication-related operations in a cohesive interface\n   */\n  useAuthentication: () => {\n    // Query operations\n    getAuthState: any; // UseQueryResult<AuthState, Error>\n    getSession: any; // UseQueryResult<Session, Error>\n    isAuthenticated: any; // UseQueryResult<boolean, Error>\n    \n    // Mutation operations\n    signIn: any; // UseMutationResult<AuthResult, Error, SignInData>\n    signUp: any; // UseMutationResult<AuthResult, Error, SignUpData>\n    signOut: any; // UseMutationResult<void, Error, void>\n    oauthSignIn: any; // UseMutationResult<OAuthResult, Error, OAuthSignInData>\n    refreshSession: any; // UseMutationResult<Session, Error, void>\n  };\n\n  /**\n   * Profile Management Service\n   * Provides all user profile-related operations in a cohesive interface\n   */\n  useProfile: () => {\n    // Query operations\n    getUser: any; // UseQueryResult<User, Error>\n    \n    // Mutation operations\n    updateProfile: any; // UseMutationResult<AuthResult, Error, UpdateProfileData>\n    changePassword: any; // UseMutationResult<PasswordResetResult, Error, ChangePasswordData>\n    deleteAccount: any; // UseMutationResult<void, Error, string>\n  };\n\n  /**\n   * Security Service\n   * Provides all security-related operations in a cohesive interface\n   */\n  useSecurity: () => {\n    // Query operations\n    getAccounts: any; // UseQueryResult<Account[], Error>\n    \n    // Mutation operations\n    setupTwoFactor: any; // UseMutationResult<{ qrCode: string; secret: string }, Error, void>\n    verifyTwoFactor: any; // UseMutationResult<{ success: boolean }, Error, string>\n    disableTwoFactor: any; // UseMutationResult<{ success: boolean }, Error, string>\n    unlinkAccount: any; // UseMutationResult<void, Error, string>\n  };\n\n  /**\n   * Password Management Service\n   * Provides all password-related operations in a cohesive interface\n   */\n  usePasswordManagement: () => {\n    // Mutation operations\n    forgotPassword: any; // UseMutationResult<PasswordResetResult, Error, ForgotPasswordData>\n    resetPassword: any; // UseMutationResult<PasswordResetResult, Error, ResetPasswordData>\n  };\n\n  /**\n   * Email Verification Service\n   * Provides all email verification-related operations in a cohesive interface\n   */\n  useEmailVerification: () => {\n    // Mutation operations\n    verifyEmail: any; // UseMutationResult<EmailVerificationResult, Error, VerifyEmailData>\n    resendVerification: any; // UseMutationResult<EmailVerificationResult, Error, ResendVerificationData>\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      }
+    }
+  },
+  "provides": [
+    "auth"
+  ],
+  "requires": [
+    "framework/nextjs",
+    "auth/better-auth"
+  ],
+  "capabilities": {
+    "organizations": {
+      "enabled": true,
+      "features": {
+        "management": true,
+        "members": true,
+        "invitations": true,
+        "permissions": true,
+        "sessionContext": true
+      }
+    },
+    "teams": {
+      "enabled": true,
+      "features": {
+        "management": true,
+        "members": true,
+        "invitations": true,
+        "sessionContext": true
+      }
+    }
+  },
+  "parameters": {
+    "apiRoutes": {
+      "name": "API Routes",
+      "description": "Next.js API routes for authentication endpoints",
+      "type": "boolean",
+      "default": true
+    },
+    "middleware": {
+      "name": "Middleware",
+      "description": "Next.js middleware for authentication and route protection",
+      "type": "boolean",
+      "default": true
+    },
+    "adminPanel": {
+      "name": "Admin Panel",
+      "description": "Admin API routes for user management",
+      "type": "boolean",
+      "default": false
+    },
+    "emailVerification": {
+      "name": "Email Verification",
+      "description": "Email verification API routes and components",
+      "type": "boolean",
+      "default": false
+    },
+    "mfa": {
+      "name": "Multi-Factor Authentication",
+      "description": "MFA API routes and components",
+      "type": "boolean",
+      "default": false
+    },
+    "passwordReset": {
+      "name": "Password Reset",
+      "description": "Password reset API routes and components",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

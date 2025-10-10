@@ -1,408 +1,761 @@
-# Blueprint Authoring Guide
+# 📝 Blueprint Authoring Guide
 
-> A step-by-step tutorial for creating your first Adapter
+> **Complete guide to creating modules with Constitutional Architecture**
 
-Welcome to The Architech's contributor ecosystem! This guide will walk you through creating your first **Adapter** - a pure, framework-agnostic building block that adds specific functionality to projects.
+## 📋 Table of Contents
 
-## Table of Contents
+1. [Overview](#overview)
+2. [Constitutional Architecture Principles](#constitutional-architecture-principles)
+3. [Creating Your First Module](#creating-your-first-module)
+4. [Dynamic Blueprint Functions](#dynamic-blueprint-functions)
+5. [Template Development](#template-development)
+6. [Capability Design](#capability-design)
+7. [Testing Your Module](#testing-your-module)
+8. [Publishing Your Module](#publishing-your-module)
+9. [Best Practices](#best-practices)
 
-- [Philosophy](#philosophy) - Understanding Adapters vs Integrators
-- [Step 1: File Structure](#step-1-file-structure) - Setting up your adapter
-- [Step 2: The Manifest](#step-2-the-manifest-adapterjson) - Defining your adapter
-- [Step 3: The Blueprint](#step-3-the-blueprint-blueprintts) - Creating your blueprint
-- [Step 4: The Template](#step-4-the-template) - Writing your template
-- [Step 5: Advanced Enhancement](#step-5-advanced-enhancement) - Using modifiers
-- [Best Practices](#best-practices) - Tips for success
+## 🎯 Overview
 
----
+This guide walks you through creating modules (adapters and features) using The Architech's Constitutional Architecture. You'll learn how to create dynamic blueprint functions, design business capabilities, and develop intelligent templates.
 
-## Philosophy
+### Key Concepts
 
-The Architech follows a clear separation of concerns:
+- **🏛️ Constitutional Architecture** - Organize around business capabilities
+- **🤖 Intelligent Defaults** - Define sensible defaults, users only specify overrides
+- **⚡ Dynamic Blueprints** - Blueprints are TypeScript functions that adapt to configuration
+- **🎨 Intelligent Templates** - Templates receive rich context for conditional rendering
+- **🔗 Capability Dependencies** - Define prerequisites and resolve conflicts automatically
 
-- **Adapters** create isolated functionality (e.g., "install Drizzle ORM")
-- **Integrators** connect adapters to frameworks (e.g., "make Drizzle work with Next.js")
+## 🏛️ Constitutional Architecture Principles
 
-This guide focuses on creating **Adapters** - the pure building blocks that can be used across any framework.
+### 1. "Defaults are Implicit, Overrides are Explicit"
 
----
+Users only specify what they want to change. Everything else uses sensible defaults.
 
-## Step 1: File Structure
-
-Create the following directory structure for your adapter:
-
-```
-marketplace/adapters/your-category/your-adapter/
-├── adapter.json          # Adapter manifest
-├── blueprint.ts          # Blueprint definition
-└── templates/            # Template files
-    ├── config.ts.tpl
-    └── index.ts.tpl
-```
-
-**Example:** Let's create a "logger" adapter for structured logging:
-
-```
-marketplace/adapters/tooling/logger/
-├── adapter.json
-├── blueprint.ts
-└── templates/
-    ├── logger.ts.tpl
-    └── index.ts.tpl
+```typescript
+// ✅ User only specifies overrides
+{
+  id: 'feature:auth-ui/shadcn',
+  parameters: {
+    mfa: true,  // ← Only specify what you want to change
+    socialLogins: ['github', 'google']
+    // passwordReset: true (already default)
+    // profileManagement: true (already default)
+  }
+}
 ```
 
----
+### 2. Business Capability Hierarchy
 
-## Step 2: The Manifest (`adapter.json`)
-
-The `adapter.json` file defines your adapter's metadata, parameters, and capabilities.
+Organize modules around what they do, not how they do it.
 
 ```json
 {
-  "id": "logger",
-  "name": "Structured Logger",
-  "description": "A modern, structured logging solution with multiple transports",
-  "category": "tooling",
-  "version": "1.0.0",
-  "blueprint": "blueprint.ts",
-  "dependencies": [],
-  "capabilities": [
-    "structured-logging",
-    "multiple-transports",
-    "log-levels",
-    "context-preservation",
-    "performance-tracking"
-  ],
-  "limitations": "Requires Node.js 16+ for modern logging features",
-  "parameters": {
-    "level": {
-      "type": "string",
-      "default": "info",
-      "description": "Default log level",
-      "required": false,
-      "options": ["error", "warn", "info", "debug", "trace"]
-    },
-    "transports": {
-      "type": "array",
-      "default": ["console"],
-      "description": "Log transport types",
-      "required": false,
-      "options": ["console", "file", "json"]
-    },
-    "enablePerformance": {
-      "type": "boolean",
-      "default": true,
-      "description": "Enable performance tracking",
-      "required": false
-    }
-  }
-}
-```
-
-### Key Properties Explained
-
-- **`id`**: Unique identifier (used in genomes)
-- **`name`**: Human-readable name
-- **`description`**: What your adapter does
-- **`category`**: One of: `framework`, `database`, `auth`, `ui`, `tooling`, `deployment`, `email`, `content`, `observability`, `state`, `blockchain`
-- **`parameters`**: User-configurable options with types and validation
-
----
-
-## Step 3: The Blueprint (`blueprint.ts`)
-
-The blueprint defines what your adapter does when executed. It's a series of **Semantic Actions**.
-
-```typescript
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
-
-export const loggerBlueprint: Blueprint = {
-  id: 'logger-setup',
-  name: 'Logger Setup',
-  description: 'Sets up structured logging with configurable transports',
-  actions: [
-    // 1. Install packages
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['winston', 'winston-daily-rotate-file']
-    },
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['@types/winston'],
-      isDev: true
-    },
-    
-    // 2. Create configuration file
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}/logger.ts',
-      template: 'templates/logger.ts.tpl'
-    },
-    
-    // 3. Create index file
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}/index.ts',
-      template: 'templates/index.ts.tpl'
-    },
-    
-    // 4. Add environment variables
-    {
-      type: BlueprintActionType.ADD_ENV_VAR,
-
-      key: 'LOG_LEVEL',
-      value: '{{module.parameters.level}}',
-      description: 'Default log level'
-    },
-    
-    // 5. Add npm script
-    {
-      type: BlueprintActionType.ADD_SCRIPT,
-
-      name: 'logs:view',
-      command: 'tail -f logs/app.log'
-    }
-  ]
-};
-```
-
-### Available Actions
-
-- **`INSTALL_PACKAGES`**: Install npm packages
-- **`CREATE_FILE`**: Create files from templates
-- **`ADD_ENV_VAR`**: Add environment variables
-- **`ADD_SCRIPT`**: Add npm scripts
-- **`ENHANCE_FILE`**: Modify existing files (advanced)
-
-### Template Variables
-
-Use `{{variable}}` syntax for dynamic content:
-- `{{module.parameters.level}}` - User parameters
-- `{{paths.shared_library}}` - Framework paths
-- `{{project.name}}` - Project information
-
----
-
-## Step 4: The Template
-
-Create template files that will be processed with your variables.
-
-**`templates/logger.ts.tpl`:**
-```typescript
-import winston from 'winston';
-import DailyRotateFile from 'winston-daily-rotate-file';
-
-const logLevel = process.env.LOG_LEVEL || '{{module.parameters.level}}';
-
-// Create transports based on configuration
-const transports: winston.transport[] = [];
-
-{{#if module.parameters.transports.includes('console')}}
-transports.push(
-  new winston.transports.Console({
-    format: winston.format.combine(
-      winston.format.colorize(),
-      winston.format.simple()
-    )
-  })
-);
-{{/if}}
-
-{{#if module.parameters.transports.includes('file')}}
-transports.push(
-  new DailyRotateFile({
-    filename: 'logs/app-%DATE%.log',
-    datePattern: 'YYYY-MM-DD',
-    maxSize: '20m',
-    maxFiles: '14d'
-  })
-);
-{{/if}}
-
-{{#if module.parameters.transports.includes('json')}}
-transports.push(
-  new winston.transports.File({
-    filename: 'logs/error.json',
-    level: 'error',
-    format: winston.format.json()
-  })
-);
-{{/if}}
-
-export const logger = winston.createLogger({
-  level: logLevel,
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.errors({ stack: true }),
-    winston.format.json()
-  ),
-  transports
-});
-
-{{#if module.parameters.enablePerformance}}
-// Performance tracking utilities
-export const performanceLogger = {
-  start: (operation: string) => {
-    const start = Date.now();
-    logger.info(`Starting ${operation}`, { operation, start });
-    return start;
-  },
-  
-  end: (operation: string, start: number) => {
-    const duration = Date.now() - start;
-    logger.info(`Completed ${operation}`, { operation, duration });
-    return duration;
-  }
-};
-{{/if}}
-```
-
-**`templates/index.ts.tpl`:**
-```typescript
-export { logger{{#if module.parameters.enablePerformance}}, performanceLogger{{/if}} } from './logger';
-
-// Re-export common log levels for convenience
-export const LOG_LEVELS = {
-  ERROR: 'error',
-  WARN: 'warn',
-  INFO: 'info',
-  DEBUG: 'debug',
-  TRACE: 'trace'
-} as const;
-```
-
----
-
-## Step 5: Advanced Enhancement
-
-For more sophisticated adapters, you can use **modifiers** to enhance existing files.
-
-### Example: Adding a logger to package.json
-
-```typescript
-{
-  type: BlueprintActionType.ENHANCE_FILE,
-
-  file: 'package.json',
-  modifier: 'json-merger',
-  params: {
-    merge: {
-      scripts: {
-        "logs:clear": "rm -rf logs/*",
-        "logs:tail": "tail -f logs/app.log"
+  "provides": ["authentication", "user-management", "security"],
+  "internal_structure": {
+    "core": ["loginForm", "signupForm"],
+    "optional": {
+      "passwordReset": {
+        "prerequisites": ["core"],
+        "provides": ["password-reset"]
       }
     }
   }
 }
 ```
 
-### Example: Adding imports to an existing TypeScript file
+### 3. Intelligent Dependency Resolution
+
+The system automatically resolves prerequisites and conflicts.
 
 ```typescript
-{
-  type: BlueprintActionType.ENHANCE_FILE,
-
-  file: 'src/app/layout.tsx',
-  modifier: ModifierType.TS_MODULE_ENHANCER,
-  params: {
-    importsToAdd: [
-      { name: 'logger', from: '@/lib/logger' }
-    ],
-    statementsToAppend: [
-      {
-        type: 'raw',
-        content: 'logger.info("Application started");'
-      }
-    ]
-  }
-}
+// System automatically ensures:
+// 1. 'core' capabilities are always available
+// 2. 'passwordReset' requires 'core' to be available first
+// 3. No conflicts between modules providing the same capability
 ```
 
----
+## 🚀 Creating Your First Module
 
-## Best Practices
+### Step 1: Choose Module Type
 
-### 1. Keep Adapters Pure
-- Don't assume a specific framework
-- Use path variables (`{{paths.shared_library}}`)
-- Make functionality framework-agnostic
+#### Adapter (Technical Capability)
+- **Purpose**: Single technology implementation
+- **Examples**: Database, Email, State Management
+- **Location**: `marketplace/adapters/{category}/{name}/`
 
-### 2. Provide Sensible Defaults
-- Set reasonable defaults for all parameters
-- Make optional parameters truly optional
-- Document what each parameter does
+#### Feature (Business Capability)
+- **Purpose**: Complete business functionality
+- **Examples**: Authentication, Payments, Teams
+- **Location**: `marketplace/features/{name}/{frontend|backend}/{framework}/`
 
-### 3. Use Conditional Templates
-- Use `{{#if}}` blocks for optional features
-- Provide multiple transport options
-- Allow users to enable/disable features
+### Step 2: Create Directory Structure
 
-### 4. Handle Edge Cases
-- Check if files already exist
-- Provide fallbacks for missing parameters
-- Validate user input
-
-### 5. Test Your Adapter
-- Test with different parameter combinations
-- Verify template rendering
-- Check that all files are created correctly
-
-### 6. Follow Naming Conventions
-- Use kebab-case for adapter IDs
-- Use descriptive names for capabilities
-- Be consistent with existing adapters
-
----
-
-## Example: Complete Logger Adapter
-
-Here's the complete file structure for our logger adapter:
-
+#### For an Adapter
 ```
-marketplace/adapters/tooling/logger/
-├── adapter.json
-├── blueprint.ts
+marketplace/adapters/{category}/{adapter-name}/
+├── adapter.json              # Capability definition
+├── blueprint.ts              # Dynamic blueprint function
 └── templates/
-    ├── logger.ts.tpl
-    └── index.ts.tpl
+    ├── core-feature.ts.tpl   # Core functionality
+    └── optional-feature.ts.tpl # Optional features
 ```
 
-**Usage in a genome:**
-```typescript
-import { defineGenome } from '@thearchitech.xyz/marketplace';
+#### For a Feature
+```
+marketplace/features/{feature-name}/
+├── contract.ts               # Business contracts
+├── frontend/{ui-framework}/
+│   ├── feature.json         # Frontend capabilities
+│   ├── blueprint.ts         # Frontend blueprint
+│   └── templates/
+└── backend/{technology-stack}/
+    ├── feature.json         # Backend capabilities
+    ├── blueprint.ts         # Backend blueprint
+    └── templates/
+```
 
-export default defineGenome({
-  project: {
-    name: 'my-app',
-    framework: 'nextjs',
-    // ...
-  },
-  modules: [
-    {
-      id: 'framework/nextjs',
-      parameters: {}
-    },
-    {
-      id: 'tooling/logger',
-      parameters: {
-        level: 'debug',
-        transports: ['console', 'file'],
-        enablePerformance: true
+### Step 3: Define Capabilities
+
+#### Adapter Example
+```json
+{
+  "id": "adapter:email/resend",
+  "name": "Resend Email Service",
+  "description": "Transactional email service with templates and analytics",
+  "version": "1.0.0",
+  "category": "email",
+  "provides": ["email", "transactions", "templates", "analytics"],
+  "parameters": {
+    "features": {
+      "templates": {
+        "default": true,
+        "description": "Email template management",
+        "type": "boolean"
+      },
+      "analytics": {
+        "default": false,
+        "description": "Email analytics and tracking",
+        "type": "boolean"
+      },
+      "campaigns": {
+        "default": false,
+        "description": "Email campaign management",
+        "type": "boolean"
       }
     }
-  ]
+  },
+  "internal_structure": {
+    "core": ["client", "send-email"],
+    "optional": {
+      "templates": {
+        "prerequisites": ["core"],
+        "provides": ["template-management"],
+        "templates": ["template-service.ts.tpl"]
+      },
+      "analytics": {
+        "prerequisites": ["core"],
+        "provides": ["email-analytics"],
+        "templates": ["analytics-service.ts.tpl"]
+      }
+    }
+  }
+}
+```
+
+#### Feature Example
+```json
+{
+  "id": "feature:auth-ui/shadcn",
+  "name": "Authentication UI Components",
+  "description": "Complete authentication UI with Shadcn/UI components",
+  "version": "1.0.0",
+  "category": "feature",
+  "provides": ["authentication", "user-management", "security"],
+  "parameters": {
+    "features": {
+      "passwordReset": {
+        "default": true,
+        "description": "Password reset functionality",
+        "type": "boolean"
+      },
+      "mfa": {
+        "default": false,
+        "description": "Multi-factor authentication",
+        "type": "boolean"
+      },
+      "socialLogins": {
+        "default": false,
+        "description": "Social login providers",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["github", "google", "microsoft"]
+        }
+      }
+    }
+  },
+  "internal_structure": {
+    "core": ["loginForm", "signupForm", "profileManagement"],
+    "optional": {
+      "passwordReset": {
+        "prerequisites": ["core"],
+        "provides": ["password-reset"],
+        "templates": ["password-reset-form.tsx.tpl"]
+      },
+      "mfa": {
+        "prerequisites": ["core"],
+        "provides": ["multi-factor-auth"],
+        "templates": ["mfa-setup.tsx.tpl"]
+      }
+    }
+  }
+}
+```
+
+## ⚡ Dynamic Blueprint Functions
+
+### Function Signature
+
+```typescript
+import { BlueprintAction, MergedConfiguration } from '@thearchitech.xyz/types';
+
+export default function generateBlueprint(
+  config: MergedConfiguration
+): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Your blueprint logic here
+  
+  return actions;
+}
+```
+
+### Configuration Object
+
+```typescript
+interface MergedConfiguration {
+  activeFeatures: string[];        // Features enabled by user
+  resolvedCapabilities: string[];  // Capabilities this module provides
+  executionOrder: string[];        // Order of capability execution
+  conflicts: ConfigurationConflict[]; // Any conflicts detected
+  templateContext?: Record<string, any>; // Global template context
+}
+```
+
+### Basic Blueprint Pattern
+
+```typescript
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Always generate core actions
+  actions.push(...generateCoreActions());
+  
+  // Conditionally generate feature-specific actions
+  if (config.activeFeatures.includes('templates')) {
+    actions.push(...generateTemplatesActions());
+  }
+  
+  if (config.activeFeatures.includes('analytics')) {
+    actions.push(...generateAnalyticsActions());
+  }
+  
+  return actions;
+}
+
+function generateCoreActions(): BlueprintAction[] {
+  return [
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/email/resend.ts',
+      template: 'templates/resend-client.ts.tpl',
+      context: { features: ['core'] }
+    },
+    {
+      type: 'INSTALL_PACKAGES',
+      packages: ['resend']
+    }
+  ];
+}
+
+function generateTemplatesActions(): BlueprintAction[] {
+  return [
+    {
+      type: 'CREATE_FILE',
+      path: 'src/lib/email/templates.ts',
+      template: 'templates/email-templates.ts.tpl',
+      context: { 
+        features: ['templates'],
+        hasTemplates: true 
+      }
+    }
+  ];
+}
+```
+
+### Advanced Blueprint Pattern
+
+```typescript
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Core functionality
+  actions.push(...generateCoreActions());
+  
+  // Feature-specific functionality
+  for (const feature of config.activeFeatures) {
+    switch (feature) {
+      case 'templates':
+        actions.push(...generateTemplatesActions());
+        break;
+      case 'analytics':
+        actions.push(...generateAnalyticsActions());
+        break;
+      case 'campaigns':
+        actions.push(...generateCampaignsActions());
+        break;
+    }
+  }
+  
+  // API routes (for features)
+  if (config.resolvedCapabilities.includes('api')) {
+    actions.push(...generateAPIActions());
+  }
+  
+  return actions;
+}
+```
+
+## 🎨 Template Development
+
+### Template Context
+
+Templates receive rich context for conditional rendering:
+
+```handlebars
+{{!-- templates/email-client.ts.tpl --}}
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export async function sendEmail({
+  to,
+  subject,
+  html,
+  from = 'noreply@{{project.name}}.com'
+}: {
+  to: string;
+  subject: string;
+  html: string;
+  from?: string;
+}) {
+  return await resend.emails.send({
+    from,
+    to,
+    subject,
+    html
+  });
+}
+
+{{#if context.hasTemplates}}
+// Template functionality
+export async function sendTemplateEmail({
+  to,
+  templateId,
+  data
+}: {
+  to: string;
+  templateId: string;
+  data: Record<string, any>;
+}) {
+  // Template email logic
+}
+{{/if}}
+
+{{#if context.hasAnalytics}}
+// Analytics functionality
+export async function trackEmailEvent({
+  emailId,
+  event,
+  data
+}: {
+  emailId: string;
+  event: string;
+  data: Record<string, any>;
+}) {
+  // Analytics tracking logic
+}
+{{/if}}
+```
+
+### Context Properties
+
+Templates have access to:
+
+- **`context.features`** - Array of active features
+- **`context.hasFeatureName`** - Boolean for specific features
+- **`context.project`** - Project information
+- **`context.module`** - Module information
+- **Custom context** - Passed from blueprint actions
+
+### Template Organization
+
+```
+templates/
+├── core/
+│   ├── client.ts.tpl
+│   └── types.ts.tpl
+├── templates/
+│   ├── template-service.ts.tpl
+│   └── template-types.ts.tpl
+├── analytics/
+│   ├── analytics-service.ts.tpl
+│   └── analytics-types.ts.tpl
+└── campaigns/
+    ├── campaign-service.ts.tpl
+    └── campaign-types.ts.tpl
+```
+
+## 🔗 Capability Design
+
+### Designing Effective Capabilities
+
+#### 1. Think Business Value
+
+```json
+// ✅ Good - Business capabilities
+{
+  "provides": ["authentication", "user-management", "security"]
+}
+
+// ❌ Avoid - Technical implementation
+{
+  "provides": ["jwt-tokens", "bcrypt-hashing", "session-storage"]
+}
+```
+
+#### 2. Define Clear Prerequisites
+
+```json
+{
+  "internal_structure": {
+    "core": ["client", "send-email"],
+    "optional": {
+      "templates": {
+        "prerequisites": ["core"],
+        "provides": ["template-management"]
+      },
+      "analytics": {
+        "prerequisites": ["core"],
+        "provides": ["email-analytics"]
+      }
+    }
+  }
+}
+```
+
+#### 3. Use Sensible Defaults
+
+```json
+{
+  "parameters": {
+    "features": {
+      "templates": { "default": true },    // Most users want this
+      "analytics": { "default": false },   // Advanced feature
+      "campaigns": { "default": false }    // Optional feature
+    }
+  }
+}
+```
+
+### Capability Dependencies
+
+#### Simple Dependencies
+
+```json
+{
+  "templates": {
+    "prerequisites": ["core"],
+    "provides": ["template-management"]
+  }
+}
+```
+
+#### Complex Dependencies
+
+```json
+{
+  "campaigns": {
+    "prerequisites": ["core", "templates", "analytics"],
+    "provides": ["campaign-management"]
+  }
+}
+```
+
+#### Circular Dependencies (Avoid)
+
+```json
+// ❌ Avoid - Circular dependencies
+{
+  "featureA": {
+    "prerequisites": ["featureB"]
+  },
+  "featureB": {
+    "prerequisites": ["featureA"]
+  }
+}
+```
+
+## 🧪 Testing Your Module
+
+### Test Blueprint Function
+
+```typescript
+// test/blueprint.test.ts
+import { describe, it, expect } from 'vitest';
+import generateBlueprint from '../blueprint';
+
+describe('Module Blueprint', () => {
+  it('should generate core actions by default', () => {
+    const config = {
+      activeFeatures: ['core'],
+      resolvedCapabilities: ['email'],
+      executionOrder: ['core'],
+      conflicts: []
+    };
+    
+    const actions = generateBlueprint(config);
+    
+    expect(actions).toHaveLength(2);
+    expect(actions[0].type).toBe('CREATE_FILE');
+    expect(actions[1].type).toBe('INSTALL_PACKAGES');
+  });
+  
+  it('should generate template actions when enabled', () => {
+    const config = {
+      activeFeatures: ['core', 'templates'],
+      resolvedCapabilities: ['email', 'template-management'],
+      executionOrder: ['core', 'templates'],
+      conflicts: []
+    };
+    
+    const actions = generateBlueprint(config);
+    
+    expect(actions.some(a => a.path?.includes('templates'))).toBe(true);
+  });
 });
 ```
 
+### Test Template Rendering
+
+```typescript
+// test/templates.test.ts
+import { describe, it, expect } from 'vitest';
+import { renderTemplate } from '@thearchitech.xyz/template-engine';
+
+describe('Template Rendering', () => {
+  it('should render core template correctly', async () => {
+    const template = 'templates/email-client.ts.tpl';
+    const context = {
+      features: ['core'],
+      hasTemplates: false,
+      hasAnalytics: false
+    };
+    
+    const result = await renderTemplate(template, context);
+    
+    expect(result).toContain('export async function sendEmail');
+    expect(result).not.toContain('// Template functionality');
+    expect(result).not.toContain('// Analytics functionality');
+  });
+  
+  it('should render with templates when enabled', async () => {
+    const template = 'templates/email-client.ts.tpl';
+    const context = {
+      features: ['core', 'templates'],
+      hasTemplates: true,
+      hasAnalytics: false
+    };
+    
+    const result = await renderTemplate(template, context);
+    
+    expect(result).toContain('// Template functionality');
+    expect(result).toContain('sendTemplateEmail');
+  });
+});
+```
+
+## 📦 Publishing Your Module
+
+### 1. Update Marketplace Manifest
+
+```json
+// marketplace/manifest.json
+{
+  "adapters": {
+    "adapter:email/resend": {
+      "version": "1.0.0",
+      "path": "adapters/email/resend",
+      "capabilities": ["email", "transactions", "templates"]
+    }
+  },
+  "features": {
+    "feature:auth-ui/shadcn": {
+      "version": "1.0.0",
+      "path": "features/auth/frontend/shadcn",
+      "capabilities": ["authentication", "user-management"]
+    }
+  }
+}
+```
+
+### 2. Add to Type Definitions
+
+```typescript
+// types/adapters/resend.ts
+export interface ResendAdapter {
+  id: 'adapter:email/resend';
+  parameters: {
+    features: {
+      templates: boolean;
+      analytics: boolean;
+      campaigns: boolean;
+    };
+  };
+}
+
+// types/features/auth.ts
+export interface AuthFeature {
+  id: 'feature:auth-ui/shadcn';
+  parameters: {
+    features: {
+      passwordReset: boolean;
+      mfa: boolean;
+      socialLogins: string[];
+    };
+  };
+}
+```
+
+### 3. Test Integration
+
+```bash
+# Test your module
+architech new test-genome.ts --dry-run
+
+# Verify capability resolution
+architech new test-genome.ts --verbose
+```
+
+## 🎯 Best Practices
+
+### 1. Design for Business Value
+
+```json
+// ✅ Good - Business capabilities
+{
+  "provides": ["authentication", "user-management", "security"]
+}
+
+// ❌ Avoid - Technical implementation
+{
+  "provides": ["jwt-tokens", "bcrypt-hashing", "session-storage"]
+}
+```
+
+### 2. Use Clear Prerequisites
+
+```json
+{
+  "campaigns": {
+    "prerequisites": ["core", "templates", "analytics"],
+    "provides": ["campaign-management"]
+  }
+}
+```
+
+### 3. Provide Rich Context
+
+```typescript
+{
+  type: 'CREATE_FILE',
+  path: 'src/components/auth/LoginForm.tsx',
+  template: 'templates/LoginForm.tsx.tpl',
+  context: {
+    features: ['passwordReset', 'socialLogins'],
+    hasPasswordReset: true,
+    hasSocialLogins: true,
+    socialProviders: ['github', 'google']
+  }
+}
+```
+
+### 4. Organize Templates by Capability
+
+```
+templates/
+├── core/
+│   ├── client.ts.tpl
+│   └── types.ts.tpl
+├── templates/
+│   ├── template-service.ts.tpl
+│   └── template-types.ts.tpl
+└── analytics/
+    ├── analytics-service.ts.tpl
+    └── analytics-types.ts.tpl
+```
+
+### 5. Handle Dependencies Gracefully
+
+```typescript
+// Check prerequisites before generating actions
+if (config.activeFeatures.includes('campaigns')) {
+  const requiredFeatures = ['core', 'templates', 'analytics'];
+  const missingFeatures = requiredFeatures.filter(
+    feature => !config.activeFeatures.includes(feature)
+  );
+  
+  if (missingFeatures.length > 0) {
+    throw new Error(`Campaigns requires: ${missingFeatures.join(', ')}`);
+  }
+  
+  actions.push(...generateCampaignsActions());
+}
+```
+
+### 6. Use Type Safety
+
+```typescript
+// ✅ Good - Type-safe configuration
+interface ModuleConfig {
+  features: {
+    templates: boolean;
+    analytics: boolean;
+    campaigns: boolean;
+  };
+}
+
+export default function generateBlueprint(
+  config: MergedConfiguration
+): BlueprintAction[] {
+  // TypeScript will validate the configuration
+  const { features } = config as { features: ModuleConfig['features'] };
+  
+  // Your blueprint logic here
+}
+```
+
+## 📚 Additional Resources
+
+- **[Constitutional Architecture Guide](../../Architech/docs/CONSTITUTIONAL_ARCHITECTURE.md)** - Deep dive into the architecture
+- **[Adapter Development Guide](./ADAPTER_DEVELOPMENT_GUIDE.md)** - Creating adapters
+- **[Feature Development Guide](./FEATURE_GUIDE.md)** - Creating features
+- **[Template Development Guide](./TEMPLATE_DEVELOPMENT_GUIDE.md)** - Advanced template techniques
+- **[Testing Guide](./TESTING_GUIDE.md)** - Comprehensive testing strategies
+
 ---
 
-## Next Steps
+**Happy module development! 📝**
 
-1. **Test your adapter** with different parameter combinations
-2. **Create integration modules** that connect your adapter to specific frameworks
-3. **Contribute to the ecosystem** by sharing your adapter
-4. **Read the [Modifier Cookbook](./MODIFIER_COOKBOOK.md)** for advanced techniques
-
----
-
-*Congratulations! You've created your first adapter. You're now part of The Architech's contributor ecosystem. Happy coding! 🎉*
+*For more information about the Constitutional Architecture, see the [CLI documentation](../../Architech/docs/).*

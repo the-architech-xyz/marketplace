@@ -17,7 +17,7 @@ const multiStageBlueprint: Blueprint = {
 # Optimized for production with multiple build stages
 
 # Base stage with common dependencies
-FROM node:{{module.parameters.nodeVersion}} AS base
+FROM node:{{context..nodeVersion}} AS base
 
 # Install system dependencies
 RUN apk add --no-cache libc6-compat curl
@@ -41,7 +41,7 @@ COPY package.json package-lock.json* ./
 RUN npm ci --frozen-lockfile
 
 # Test stage
-{{#if module.parameters.stages.includes('test')}}
+{{#if context..stages.includes('test')}}
 FROM dev-deps AS test
 WORKDIR /app
 
@@ -52,7 +52,7 @@ COPY . .
 RUN npm run test:ci
 
 # Lint stage
-{{#if module.parameters.stages.includes('lint')}}
+{{#if context..stages.includes('lint')}}
 FROM dev-deps AS lint
 WORKDIR /app
 
@@ -75,7 +75,7 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV NODE_ENV production
 
-{{#if module.parameters.optimization}}
+{{#if context..optimization}}
 # Enable build optimizations
 ENV NEXT_BUILD_OPTIMIZE 1
 {{/if}}

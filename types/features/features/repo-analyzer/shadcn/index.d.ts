@@ -1,10 +1,22 @@
 /**
- * features/repo-analyzer/shadcn
+ * Repository Analyzer
  * 
- * Auto-generated integration types
+ * Analyze existing GitHub repositories and detect their architecture
  */
 
-export interface FeaturesRepoAnalyzerShadcnParams {}
+export interface FeaturesRepoAnalyzerShadcnParams {
+
+  /** Enable visual architecture diagram */
+  enableVisualization?: boolean;
+
+  /** Enable genome export functionality */
+  enableExport?: boolean;
+
+  /** Minimum confidence threshold for suggestions */
+  confidenceThreshold?: number;
+}
+
+export interface FeaturesRepoAnalyzerShadcnFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesRepoAnalyzerShadcnArtifacts: {

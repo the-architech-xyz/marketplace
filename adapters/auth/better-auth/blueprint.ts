@@ -5,12 +5,10 @@
  * Advanced features are available as separate features
  */
 
-import { Blueprint, BlueprintActionType } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, MergedConfiguration } from '@thearchitech.xyz/types';
 
-export const betterAuthBlueprint: Blueprint = {
-  id: 'better-auth-base-setup',
-  name: 'Better Auth Base Setup',
-  actions: [
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  return [
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['better-auth']
@@ -32,21 +30,18 @@ export const betterAuthBlueprint: Blueprint = {
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
-
       key: 'AUTH_SECRET',
       value: 'your-secret-key-here',
       description: 'Better Auth secret key'
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
-
       key: 'AUTH_URL',
       value: '{{env.APP_URL}}',
       description: 'Authentication base URL'
     },
     {
       type: BlueprintActionType.ADD_ENV_VAR,
-
       key: 'DATABASE_URL',
       value: 'postgresql://username:password@localhost:5432/{{project.name}}',
       description: 'Database connection string (if using Drizzle)'
@@ -56,5 +51,5 @@ export const betterAuthBlueprint: Blueprint = {
       path: '{{paths.auth_config}}/INTEGRATION_GUIDE.md',
       template: 'templates/INTEGRATION_GUIDE.md.tpl',
     }
-  ]
-};
+  ];
+}

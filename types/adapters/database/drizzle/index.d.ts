@@ -7,19 +7,47 @@
 export interface DatabaseDrizzleParams {
 
   /** Database provider */
-  provider?: string;
-
-  /** Enable database migrations */
-  migrations?: boolean;
-
-  /** Enable Drizzle Studio */
-  studio?: boolean;
+  provider?: 'neon' | 'planetscale' | 'supabase' | 'local';
 
   /** Database type to use */
-  databaseType: string;
+  databaseType: 'postgresql' | 'mysql' | 'sqlite';
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Essential database functionality (schema, queries, types) */
+    core: boolean;
+
+    /** Database schema migrations and versioning */
+    migrations: boolean;
+
+    /** Visual database browser and query interface */
+    studio: boolean;
+
+    /** Advanced relationship management and queries */
+    relations: boolean;
+
+    /** Data seeding and fixtures management */
+    seeding: boolean;
+  };
 }
 
-export interface DatabaseDrizzleFeatures {}
+export interface DatabaseDrizzleFeatures {
+
+  /** Essential database functionality (schema, queries, types) */
+  core: boolean;
+
+  /** Database schema migrations and versioning */
+  migrations: boolean;
+
+  /** Visual database browser and query interface */
+  studio: boolean;
+
+  /** Advanced relationship management and queries */
+  relations: boolean;
+
+  /** Data seeding and fixtures management */
+  seeding: boolean;
+}
 
 // 🚀 Auto-discovered artifacts
 export declare const DatabaseDrizzleArtifacts: {

@@ -1,5 +1,5 @@
 {
-  "id": "feature:ai-chat/shadcn",
+  "id": "features/ai-chat/frontend/shadcn",
   "name": "AI Chat Feature (Shadcn)",
   "description": "Complete AI chat interface using Shadcn components",
   "type": "feature",
@@ -8,24 +8,30 @@
     "capabilities": ["ai-chat-backend-vercel-ai-nextjs"],
     "adapters": ["ui/shadcn-ui"]
   },
-  "provides": ["ai-chat-ui"],
+  "provides": [
+    "ai-chat-core",
+    "{{#if features.media}}ai-chat-media{{/if}}",
+    "{{#if features.voice}}ai-chat-voice{{/if}}",
+    "{{#if features.advanced}}ai-chat-advanced{{/if}}"
+  ],
   "parameters": {
     "features": {
-      "type": "object",
-      "default": {
-        "chatInterface": true,
-        "messageHistory": true,
-        "fileUpload": true,
-        "voiceInput": false,
-        "voiceOutput": false,
-        "codeHighlighting": true,
-        "markdownSupport": true,
-        "exportImport": true,
-        "customPrompts": false,
-        "settingsPanel": true
+      "core": {
+        "description": "Essential chat functionality (interface, message history)",
+        "default": true
       },
-      "description": "AI chat UI features to enable",
-      "required": false
+      "media": {
+        "description": "File upload and media support",
+        "default": true
+      },
+      "voice": {
+        "description": "Voice input and output",
+        "default": false
+      },
+      "advanced": {
+        "description": "Advanced features (custom prompts, export/import)",
+        "default": false
+      }
     },
     "theme": {
       "type": "string",
@@ -33,6 +39,43 @@
       "description": "UI theme variant",
       "required": false,
       "options": ["default", "dark", "light", "minimal"]
+    }
+  },
+  "internal_structure": {
+    "core": {
+      "provides": ["ai-chat-core"],
+      "templates": [
+        "ChatInterface.tsx",
+        "MessageHistory.tsx",
+        "useChat.ts"
+      ]
+    },
+    "media": {
+      "prerequisites": ["ai-chat-core"],
+      "provides": ["ai-chat-media"],
+      "templates": [
+        "FileUpload.tsx",
+        "MediaPreview.tsx",
+        "useFileUpload.ts"
+      ]
+    },
+    "voice": {
+      "prerequisites": ["ai-chat-core"],
+      "provides": ["ai-chat-voice"],
+      "templates": [
+        "VoiceInput.tsx",
+        "VoiceOutput.tsx",
+        "useVoice.ts"
+      ]
+    },
+    "advanced": {
+      "prerequisites": ["ai-chat-core"],
+      "provides": ["ai-chat-advanced"],
+      "templates": [
+        "CustomPrompts.tsx",
+        "ExportImport.tsx",
+        "SettingsPanel.tsx"
+      ]
     }
   },
   "constraints": {

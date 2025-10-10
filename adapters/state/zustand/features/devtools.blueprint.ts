@@ -99,8 +99,8 @@ export const useAppStore = create<AppState>()(
         set(initialState, false, 'reset'),
     }),
     {
-      name: '{{module.parameters.name}}',
-      {{#if module.parameters.enabled}}
+      name: '{{context..name}}',
+      {{#if context..enabled}}
       enabled: true,
       {{else}}
       enabled: false,

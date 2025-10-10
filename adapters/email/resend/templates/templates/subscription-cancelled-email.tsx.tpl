@@ -110,7 +110,7 @@ export default SubscriptionCancelledEmail;`,
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'EMAIL_FROM',
-      value: '{{module.parameters.fromEmail}}',
+      value: '{{context..fromEmail}}',
       description: 'Default sender email address'
     },
     {

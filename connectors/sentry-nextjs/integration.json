@@ -1,7 +1,7 @@
 {
-  "id": "connector:sentry-nextjs",
+  "id": "connectors/sentry-nextjs",
   "name": "Sentry Next.js Connector",
-  "description": "Complete Sentry integration for Next.js applications with error tracking, performance monitoring, and middleware",
+  "description": "Enhances Sentry adapter with NextJS-specific optimizations, middleware, and monitoring hooks",
   "type": "connector",
   "version": "1.0.0",
   "tech_stack": {
@@ -15,27 +15,25 @@
   "capabilities": {
     "sentry-nextjs-integration": {
       "version": "1.0.0",
-      "description": "Complete Sentry integration for Next.js",
-      "provides": ["error-tracking", "performance-monitoring", "sentry-middleware", "sentry-components"]
+      "description": "NextJS-specific Sentry enhancements",
+      "provides": ["sentry-nextjs-config", "sentry-middleware", "sentry-hooks", "sentry-ssr"]
     }
   },
   "provides": {
+    "enhancements": [
+      "Enhances sentry-config.ts with NextJS optimizations",
+      "Enhances error-tracking.ts with NextJS-specific features",
+      "Enhances basic-performance.ts with NextJS performance monitoring"
+    ],
     "files": [
       "src/app/sentry.client.config.ts",
-      "src/app/sentry.server.config.ts",
+      "src/app/sentry.server.config.ts", 
       "src/app/sentry.edge.config.ts",
-      "src/middleware.ts",
-      "src/lib/sentry/client.ts",
-      "src/lib/sentry/server.ts",
-      "src/lib/sentry/performance.ts",
-      "src/lib/sentry/errors.ts",
-      "src/lib/sentry/user-feedback.ts"
-    ],
-    "components": [],
-    "pages": [
-      "src/app/admin/sentry/page.tsx",
-      "src/app/admin/sentry/errors/page.tsx",
-      "src/app/admin/sentry/performance/page.tsx"
+      "src/middleware/sentry.ts",
+      "src/hooks/use-sentry.ts",
+      "src/hooks/use-error-tracking.ts",
+      "src/hooks/use-performance-monitoring.ts",
+      "src/hooks/use-user-feedback.ts"
     ]
   },
   "sub_features": {

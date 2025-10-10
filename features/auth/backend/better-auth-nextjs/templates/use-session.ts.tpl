@@ -1,20 +1,24 @@
 /**
- * Session Hook
+ * useSession Hook
  * 
- * Standardized session hook for Better Auth
- * EXTERNAL API IDENTICAL ACROSS ALL AUTH PROVIDERS - Features work with ANY auth system!
+ * Provides session management functionality using TanStack Query.
+ * This hook handles session state, loading, and error states.
+ * 
+ * Uses Better Auth client directly (Option A - simpler approach)
  */
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { queryKeys } from '@/lib/query-keys';
-import { authApi } from '@/lib/auth/api';
-import type { Session, AuthError } from '@/lib/auth/types';
+import { authClient } from '@/lib/auth/client';
+import { authKeys } from '@/lib/auth/query-keys';
 
 // Get current session
 export function useSession() {
   return useQuery({
-    queryKey: queryKeys.auth.session(),
-    queryFn: () => authApi.getSession(),
+    queryKey: authKeys.session.get(),
+    queryFn: async () => {
+      const { data } = await authClient.getSession();
+      return data;
+    },
     staleTime: 5 * 60 * 1000, // 5 minutes
     retry: false,
   });
@@ -121,12 +125,15 @@ export function useRefreshSession() {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: () => authApi.getSession(),
-    onSuccess: (newSession: Session) => {
-      // Update session in cache
-      queryClient.setQueryData(queryKeys.auth.session(), newSession);
+    mutationFn: async () => {
+      const { data } = await authClient.getSession();
+      return data;
     },
-    onError: (error: AuthError) => {
+    onSuccess: (newSession) => {
+      // Update session in cache
+      queryClient.setQueryData(authKeys.session.get(), newSession);
+    },
+    onError: (error) => {
       console.error('Refresh session failed:', error);
     },
   });
@@ -137,12 +144,15 @@ export function useExtendSession() {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: () => authApi.getSession(), // This would be a different API call in real implementation
-    onSuccess: (newSession: Session) => {
-      // Update session in cache
-      queryClient.setQueryData(queryKeys.auth.session(), newSession);
+    mutationFn: async () => {
+      const { data } = await authClient.getSession();
+      return data;
     },
-    onError: (error: AuthError) => {
+    onSuccess: (newSession) => {
+      // Update session in cache
+      queryClient.setQueryData(authKeys.session.get(), newSession);
+    },
+    onError: (error) => {
       console.error('Extend session failed:', error);
     },
   });

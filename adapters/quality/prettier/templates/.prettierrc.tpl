@@ -1,16 +1,16 @@
 {
-  "semi": {{#if module.parameters.semi}}true{{else}}false{{/if}},
-  "singleQuote": {{#if module.parameters.singleQuote}}true{{else}}false{{/if}},
-  "tabWidth": {{module.parameters.tabWidth}},
-  "useTabs": {{#if module.parameters.useTabs}}true{{else}}false{{/if}},
-  "trailingComma": "{{module.parameters.trailingComma}}",
-  "printWidth": {{module.parameters.printWidth}},
-  "bracketSpacing": {{#if module.parameters.bracketSpacing}}true{{else}}false{{/if}},
-  "arrowParens": "{{module.parameters.arrowParens}}",
-  "endOfLine": "{{module.parameters.endOfLine}}",
-  {{#if module.parameters.plugins}}
+  "semi": {{#if context.hasSemi}}true{{else}}false{{/if}},
+  "singleQuote": {{#if context.hasSingleQuote}}true{{else}}false{{/if}},
+  "tabWidth": {{context.tabWidth}},
+  "useTabs": {{#if context.hasUseTabs}}true{{else}}false{{/if}},
+  "trailingComma": "{{context.trailingComma}}",
+  "printWidth": {{context.printWidth}},
+  "bracketSpacing": {{#if context.hasBracketSpacing}}true{{else}}false{{/if}},
+  "arrowParens": "{{context.arrowParens}}",
+  "endOfLine": "{{context.endOfLine}}",
+  {{#if context.hasPlugins}}
   "plugins": [
-    {{#each module.parameters.plugins}}
+    {{#each context.plugins}}
     "{{this}}"{{#unless @last}},{{/unless}}
     {{/each}}
   ],

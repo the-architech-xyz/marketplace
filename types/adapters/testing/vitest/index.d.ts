@@ -6,23 +6,39 @@
 
 export interface TestingVitestParams {
 
-  /** Enable code coverage reporting */
-  coverage?: boolean;
-
-  /** Enable watch mode for development */
-  watch?: boolean;
-
-  /** Enable Vitest UI */
-  ui?: boolean;
-
-  /** Enable JSX support for React testing */
-  jsx?: boolean;
-
   /** Test environment */
-  environment?: string;
+  environment?: 'jsdom' | 'node' | 'happy-dom';
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Basic testing setup (config, setup, utils) */
+    core: boolean;
+
+    /** Code coverage reporting */
+    coverage: boolean;
+
+    /** Interactive test runner UI */
+    ui: boolean;
+
+    /** End-to-end testing support */
+    e2e: boolean;
+  };
 }
 
-export interface TestingVitestFeatures {}
+export interface TestingVitestFeatures {
+
+  /** Basic testing setup (config, setup, utils) */
+  core: boolean;
+
+  /** Code coverage reporting */
+  coverage: boolean;
+
+  /** Interactive test runner UI */
+  ui: boolean;
+
+  /** End-to-end testing support */
+  e2e: boolean;
+}
 
 // 🚀 Auto-discovered artifacts
 export declare const TestingVitestArtifacts: {

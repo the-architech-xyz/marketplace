@@ -1,11 +1,11 @@
-import { Genome } from "@thearchitech.xyz/types";
+import { defineGenome } from "@thearchitech.xyz/types";
 /**
  * SaaS Application Template
  *
  * A complete SaaS application with authentication, payments, dashboard, and admin panel.
  * Perfect for building subscription-based software products.
  */
-const saasAppGenome: Genome = {
+const saasAppGenome = defineGenome({
   version: "1.0.0",
   project: {
     name: "saas-app",
@@ -128,7 +128,7 @@ const saasAppGenome: Genome = {
 
     // === INTEGRATIONS ===
     {
-      id: "better-auth-drizzle-integration",
+      id: "connectors/better-auth-github",
       parameters: {
         features: {
           userManagement: true,
@@ -139,7 +139,7 @@ const saasAppGenome: Genome = {
     },
 
     {
-      id: "stripe-drizzle-integration",
+      id: "connectors/stripe-nextjs",
       parameters: {
         features: {
           subscriptionTracking: true,
@@ -150,7 +150,7 @@ const saasAppGenome: Genome = {
     },
 
     {
-      id: "shadcn-zustand-integration",
+      id: "connectors/zustand-nextjs",
       parameters: {
         features: {
           formManagement: true,
@@ -310,6 +310,6 @@ const saasAppGenome: Genome = {
       }
     }
   ],
-};
+});
 
 export default saasAppGenome;

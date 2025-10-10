@@ -1,10 +1,12 @@
 /**
  * connectors/vitest-nextjs
  * 
- * Auto-generated integration types
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
 export interface ConnectorsVitestNextjsParams {}
+
+export interface ConnectorsVitestNextjsFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const ConnectorsVitestNextjsArtifacts: {

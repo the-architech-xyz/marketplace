@@ -13,6 +13,8 @@ import {
   CreateCampaignData, UpdateCampaignData, EmailFilters, TemplateFilters, CampaignFilters, AnalyticsFilters
 } from '@/features/emailing/contract';
 import { emailApi } from '@/lib/email/api';
+import { sendEmail } from '@/adapters/email/resend/sender';
+import { EmailPermissions, UserContext } from './permissions';
 
 /**
  * EmailService - Main service implementation
@@ -25,7 +27,7 @@ export const EmailService: IEmailService = {
    * Email Management Service
    * Provides all email-related operations in a cohesive interface
    */
-  useEmails: () => {
+  useEmails: (userContext?: UserContext) => {
     const queryClient = useQueryClient();
 
     // Query operations
@@ -47,7 +49,23 @@ export const EmailService: IEmailService = {
     // Mutation operations
     const send = () => useMutation({
       mutationFn: async (data: SendEmailData) => {
-        return await emailApi.sendEmail(data);
+        // Check permissions
+        if (userContext) {
+          const permission = EmailPermissions.canSendEmail(userContext);
+          if (!permission.allowed) {
+            throw new Error(permission.reason || 'Insufficient permissions to send email');
+          }
+        }
+        
+        // Add user context to the email data
+        const emailDataWithContext = {
+          ...data,
+          userId: userContext?.userId,
+          organizationId: userContext?.organizationId,
+          teamId: userContext?.teamId
+        };
+        
+        return await emailApi.sendEmail(emailDataWithContext);
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['emails'] });
@@ -56,7 +74,23 @@ export const EmailService: IEmailService = {
 
     const sendBulk = () => useMutation({
       mutationFn: async (data: SendBulkEmailData) => {
-        return await emailApi.sendBulkEmail(data);
+        // Check permissions for bulk email
+        if (userContext) {
+          const permission = EmailPermissions.canSendBulkEmails(userContext);
+          if (!permission.allowed) {
+            throw new Error(permission.reason || 'Insufficient permissions to send bulk emails');
+          }
+        }
+        
+        // Add user context to the bulk email data
+        const bulkEmailDataWithContext = {
+          ...data,
+          userId: userContext?.userId,
+          organizationId: userContext?.organizationId,
+          teamId: userContext?.teamId
+        };
+        
+        return await emailApi.sendBulkEmail(bulkEmailDataWithContext);
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['emails'] });
@@ -89,7 +123,7 @@ export const EmailService: IEmailService = {
    * Template Management Service
    * Provides all email template-related operations in a cohesive interface
    */
-  useTemplates: () => {
+  useTemplates: (userContext?: UserContext) => {
     const queryClient = useQueryClient();
 
     // Query operations
@@ -111,7 +145,22 @@ export const EmailService: IEmailService = {
     // Mutation operations
     const create = () => useMutation({
       mutationFn: async (data: CreateTemplateData) => {
-        return await emailApi.createTemplate(data);
+        // Check permissions
+        if (userContext) {
+          const permission = EmailPermissions.canManageTemplates(userContext);
+          if (!permission.allowed) {
+            throw new Error(permission.reason || 'Insufficient permissions to create templates');
+          }
+        }
+        
+        // Add user context to the template data
+        const templateDataWithContext = {
+          ...data,
+          userId: userContext?.userId,
+          organizationId: userContext?.organizationId
+        };
+        
+        return await emailApi.createTemplate(templateDataWithContext);
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['email-templates'] });
@@ -154,7 +203,7 @@ export const EmailService: IEmailService = {
    * Campaign Management Service
    * Provides all email campaign-related operations in a cohesive interface
    */
-  useCampaigns: () => {
+  useCampaigns: (userContext?: UserContext) => {
     const queryClient = useQueryClient();
 
     // Query operations
@@ -240,13 +289,29 @@ export const EmailService: IEmailService = {
    * Analytics Service
    * Provides email analytics and reporting
    */
-  useAnalytics: () => {
+  useAnalytics: (userContext?: UserContext) => {
     // Query operations
     const getEmailAnalytics = (filters?: AnalyticsFilters) => useQuery({
       queryKey: ['email-analytics', filters],
       queryFn: async () => {
-        return await emailApi.getEmailAnalytics(filters);
-      }
+        // Check permissions
+        if (userContext) {
+          const permission = EmailPermissions.canViewAnalytics(userContext);
+          if (!permission.allowed) {
+            throw new Error(permission.reason || 'Insufficient permissions to view analytics');
+          }
+        }
+        
+        // Add user context to filters
+        const filtersWithContext = {
+          ...filters,
+          userId: userContext?.userId,
+          organizationId: userContext?.organizationId
+        };
+        
+        return await emailApi.getEmailAnalytics(filtersWithContext);
+      },
+      enabled: !userContext || EmailPermissions.canViewAnalytics(userContext).allowed
     });
 
     const getTemplateAnalytics = (templateId: string) => useQuery({
@@ -268,3 +333,104 @@ export const EmailService: IEmailService = {
     return { getEmailAnalytics, getTemplateAnalytics, getCampaignAnalytics };
   }
 };
+
+/**
+ * Static EmailService methods for direct use by other services (like Auth)
+ * These methods don't use TanStack Query and can be called directly
+ */
+export class EmailServiceStatic {
+  /**
+   * Send email directly (for use by Auth and other services)
+   */
+  static async send(data: {
+    to: string;
+    subject: string;
+    template: string;
+    context?: Record<string, any>;
+  }): Promise<{ success: boolean; messageId?: string; error?: string }> {
+    try {
+      const result = await sendEmail({
+        to: data.to,
+        subject: data.subject,
+        template: data.template,
+        data: data.context || {}
+      });
+      
+      return {
+        success: result.success,
+        messageId: result.messageId,
+        error: result.error
+      };
+    } catch (error) {
+      console.error('EmailService.send error:', error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      };
+    }
+  }
+
+  /**
+   * Send organization invitation email
+   */
+  static async sendOrganizationInvitation(data: {
+    to: string;
+    organizationName: string;
+    inviterName: string;
+    invitationUrl: string;
+    role: string;
+  }): Promise<{ success: boolean; messageId?: string; error?: string }> {
+    return this.send({
+      to: data.to,
+      subject: `You've been invited to join ${data.organizationName}`,
+      template: 'organization-invitation',
+      context: {
+        organizationName: data.organizationName,
+        inviterName: data.inviterName,
+        invitationUrl: data.invitationUrl,
+        role: data.role,
+        projectName: process.env.APP_NAME || 'The Architech'
+      }
+    });
+  }
+
+  /**
+   * Send magic link email
+   */
+  static async sendMagicLink(data: {
+    to: string;
+    magicLinkUrl: string;
+    userName?: string;
+  }): Promise<{ success: boolean; messageId?: string; error?: string }> {
+    return this.send({
+      to: data.to,
+      subject: 'Your magic link to sign in',
+      template: 'magic-link',
+      context: {
+        magicLinkUrl: data.magicLinkUrl,
+        userName: data.userName || 'User',
+        projectName: process.env.APP_NAME || 'The Architech'
+      }
+    });
+  }
+
+  /**
+   * Send two-factor setup email
+   */
+  static async sendTwoFactorSetup(data: {
+    to: string;
+    userName?: string;
+    setupUrl?: string;
+  }): Promise<{ success: boolean; messageId?: string; error?: string }> {
+    return this.send({
+      to: data.to,
+      subject: 'Two-factor authentication enabled',
+      template: 'two-factor-setup',
+      context: {
+        userName: data.userName || 'User',
+        projectName: process.env.APP_NAME || 'The Architech',
+        setupUrl: data.setupUrl
+      }
+    });
+  }
+}

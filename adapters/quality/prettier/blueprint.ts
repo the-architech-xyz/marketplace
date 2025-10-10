@@ -22,19 +22,19 @@ export const prettierBlueprint: Blueprint = {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['prettier-plugin-tailwindcss'],
       isDev: true,
-      condition: '{{#if module.parameters.plugins}}'
+      condition: '{{#if context..plugins}}'
     },
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['prettier-plugin-sort-imports'],
       isDev: true,
-      condition: '{{#if module.parameters.plugins}}'
+      condition: '{{#if context..plugins}}'
     },
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['prettier-plugin-organize-imports'],
       isDev: true,
-      condition: '{{#if module.parameters.plugins}}'
+      condition: '{{#if context..plugins}}'
     },
     // Create Prettier configuration
     {

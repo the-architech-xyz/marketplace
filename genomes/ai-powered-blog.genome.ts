@@ -1,4 +1,4 @@
-import { Genome } from "@thearchitech.xyz/types";
+import { defineGenome } from '@thearchitech.xyz/types';
 /**
  * AI-Powered Blog Genome
  *
@@ -17,7 +17,7 @@ import { Genome } from "@thearchitech.xyz/types";
  * - Content scheduling and publishing
  * - Social media integration
  */
-const aiPoweredBlogGenome: Genome = {
+const aiPoweredBlogGenome = defineGenome({
   version: "1.0.0",
   project: {
     name: "ai-powered-blog",
@@ -411,6 +411,6 @@ const aiPoweredBlogGenome: Genome = {
       },
     },
   ],
-};
+});
 
 export default aiPoweredBlogGenome;

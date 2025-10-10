@@ -1,10 +1,39 @@
 /**
- * features/graph-visualizer/shadcn
+ * Graph Visualizer Capability
  * 
- * Auto-generated integration types
+ * Interactive graph visualizer for displaying project architecture and dependencies
  */
 
-export interface FeaturesGraphVisualizerShadcnParams {}
+export interface FeaturesGraphVisualizerShadcnParams {
+
+  /** Backend implementation for graph data management */
+  backend: any;
+
+  /** Frontend implementation for graph visualization */
+  frontend: any;
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    type: boolean;
+
+    default: boolean;
+
+    description: boolean;
+
+    required: boolean;
+  };
+}
+
+export interface FeaturesGraphVisualizerShadcnFeatures {
+
+  type: boolean;
+
+  default: boolean;
+
+  description: boolean;
+
+  required: boolean;
+}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesGraphVisualizerShadcnArtifacts: {

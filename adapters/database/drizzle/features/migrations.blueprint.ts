@@ -23,16 +23,16 @@ const migrationsBlueprint: Blueprint = {
 export default defineConfig({
   schema: './src/lib/db/schema/index.ts',
   out: './drizzle',
-  dialect: '{{module.parameters.database}}',
+  dialect: '{{context..database}}',
   dbCredentials: {
     url: process.env.DATABASE_URL!,
   },
   verbose: true,
   strict: true,
-  {{#if module.parameters.auto-generate}}
+  {{#if context..auto-generate}}
   autoGenerate: true,
   {{/if}}
-  {{#if module.parameters.backup}}
+  {{#if context..backup}}
   backup: true,
   {{/if}}
 });`
@@ -40,7 +40,7 @@ export default defineConfig({
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/lib/db/migrations/migration-manager.ts',
-      content: `import { migrate } from 'drizzle-orm/{{module.parameters.database}}-migrator';
+      content: `import { migrate } from 'drizzle-orm/{{context..database}}-migrator';
 import { db } from '../index';
 import path from 'path';
 

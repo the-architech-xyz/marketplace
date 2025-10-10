@@ -1,4 +1,4 @@
-import { Genome } from "@thearchitech.xyz/types";
+import { defineGenome } from "@thearchitech.xyz/types";
 /**
  * Web3 Dashboard Genome
  *
@@ -17,7 +17,7 @@ import { Genome } from "@thearchitech.xyz/types";
  * - Gas optimization
  * - Multi-chain support
  */
-const web3DashboardGenome: Genome = {
+const web3DashboardGenome= defineGenome({
   version: "1.0.0",
   project: {
     name: "web3-dashboard",
@@ -388,6 +388,6 @@ const web3DashboardGenome: Genome = {
       },
     },
   ],
-};
+});  
 
 export default web3DashboardGenome;

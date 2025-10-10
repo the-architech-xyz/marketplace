@@ -91,7 +91,7 @@ const storeConfig: StoreConfig = {
       name: 'App Store',
       enabled: process.env.NODE_ENV === 'development',
     },
-    immer: {{#if module.parameters.immer}}true{{else}}false{{/if}},
+    immer: {{#if context..immer}}true{{else}}false{{/if}},
     subscribeWithSelector: true,
   },
 };

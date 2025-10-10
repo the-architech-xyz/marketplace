@@ -1,5 +1,5 @@
 {
-  "id": "connector:tanstack-query-nextjs",
+  "id": "connectors/tanstack-query-nextjs",
   "name": "TanStack Query NextJS Connector",
   "description": "TanStack Query setup and configuration for NextJS applications",
   "type": "connector",

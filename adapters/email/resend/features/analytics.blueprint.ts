@@ -230,7 +230,7 @@ export class AnalyticsManager {
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/components/email/analytics-dashboard.tsx',
-      content: `{{#if module.parameters.dashboard}}
+      content: `{{#if context..dashboard}}
 'use client';
 
 import React, { useState, useEffect } from 'react';

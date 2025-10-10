@@ -1,5 +1,5 @@
 {
-  "id": "connector:docker-drizzle",
+  "id": "connectors/docker-drizzle",
   "name": "Docker Drizzle Connector",
   "description": "Complete Docker containerization for Drizzle ORM with database services, migrations, and production-ready configuration",
   "type": "connector",

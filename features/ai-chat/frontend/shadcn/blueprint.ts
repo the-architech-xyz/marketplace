@@ -1,19 +1,38 @@
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
 
-const aiChatBlueprint: Blueprint = {
-  id: 'ai-chat-shadcn',
-  name: 'AI Chat Interface (Shadcn)',
-  description: 'Complete AI chat interface using Vercel AI SDK and Shadcn UI',
-  version: '1.0.0',
-  actions: [
-    // Install AI SDK and dependencies
+export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+  const actions: BlueprintAction[] = [];
+  
+  // Core is always generated
+  actions.push(...generateCoreActions());
+  
+  // Optional features based on configuration
+  if (config.activeFeatures.includes('media')) {
+    actions.push(...generateMediaActions());
+  }
+  
+  if (config.activeFeatures.includes('voice')) {
+    actions.push(...generateVoiceActions());
+  }
+  
+  if (config.activeFeatures.includes('advanced')) {
+    actions.push(...generateAdvancedActions());
+  }
+  
+  return actions;
+}
+
+// Helper functions for each capability
+function generateCoreActions(): BlueprintAction[] {
+  return [
+    // Install core AI chat packages
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         'ai',
+        '@ai-sdk/react',
         '@ai-sdk/openai',
         '@ai-sdk/anthropic',
-        '@ai-sdk/cohere',
         'react-markdown',
         'remark-gfm',
         'rehype-highlight',
@@ -23,310 +42,231 @@ const aiChatBlueprint: Blueprint = {
         'class-variance-authority',
         'clsx',
         'tailwind-merge'
-      ],
+      ]
     },
-
-    // Create AI chat types
+    // Core AI chat types
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}ai-chat/types.ts',
-      template: 'templates/ai-chat-types.ts.tpl',
-    
+      template: 'templates/types.ts.tpl',
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-
-    // Create AI chat hooks
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}ai-chat/hooks.ts',
-      template: 'templates/ai-chat-hooks.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-
-    // Create AI chat store
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}ai-chat/store.ts',
-      template: 'templates/ai-chat-store.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-
-    // Create AI chat utilities
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}ai-chat/utils.ts',
-      template: 'templates/ai-chat-utils.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-
-    // Create AI chat services
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}ai-chat/services.ts',
-      template: 'templates/ai-chat-services.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-
-    // Create API routes
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/chat/route.ts',
-      template: 'templates/api-chat.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/chat/messages/route.ts',
-      template: 'templates/api-chat-messages.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/chat/stream/route.ts',
-      template: 'templates/api-chat-stream.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/chat/export/route.ts',
-      template: 'templates/api-chat-export.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/chat/import/route.ts',
-      template: 'templates/api-chat-import.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/chat/upload/route.ts',
-      template: 'templates/api-chat-upload.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/chat/voice/route.ts',
-      template: 'templates/api-chat-voice.ts.tpl',
-    
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-
-    // Create AI chat components
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
+    // Core AI chat components
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}ai-chat/ChatInterface.tsx',
       template: 'templates/ChatInterface.tsx.tpl',
-
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}ai-chat/MessageList.tsx',
-      template: 'templates/MessageList.tsx.tpl',
-
+      path: '{{paths.components}}ai-chat/MessageHistory.tsx',
+      template: 'templates/MessageHistory.tsx.tpl',
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}ai-chat/MessageInput.tsx',
-      template: 'templates/MessageInput.tsx.tpl',
-
+      path: '{{paths.components}}ai-chat/ConversationSidebar.tsx',
+      template: 'templates/ConversationSidebar.tsx.tpl',
       conflictResolution: {
-        strategy  : ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
+    // Core AI chat hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}ai-chat/MessageBubble.tsx',
-      template: 'templates/MessageBubble.tsx.tpl',
-
+      path: '{{paths.hooks}}useAIChatExtended.ts',
+      template: 'templates/useAIChatExtended.ts.tpl',
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    }
+  ];
+}
+
+function generateMediaActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: [
+        'react-dropzone',
+        'file-type',
+        'image-size'
+      ]
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}ai-chat/ChatToolbar.tsx',
-      template: 'templates/ChatToolbar.tsx.tpl',
-
+      path: '{{paths.components}}ai-chat/MediaPreview.tsx',
+      template: 'templates/MediaPreview.tsx.tpl',
+      context: {
+        features: ['media'],
+        hasMedia: true
+      },
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}ai-chat/FileUpload.tsx',
-      template: 'templates/FileUpload.tsx.tpl',
-
+      path: '{{paths.hooks}}useFileUpload.ts',
+      template: 'templates/useFileUpload.ts.tpl',
+      context: {
+        features: ['media'],
+        hasMedia: true
+      },
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    }
+  ];
+}
+
+function generateVoiceActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: [
+        'react-speech-recognition',
+        'react-speech-kit',
+        'web-speech-api'
+      ]
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}ai-chat/VoiceInput.tsx',
       template: 'templates/VoiceInput.tsx.tpl',
-
+      context: {
+        features: ['voice'],
+        hasVoice: true
+      },
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}ai-chat/VoiceOutput.tsx',
       template: 'templates/VoiceOutput.tsx.tpl',
-
+      context: {
+        features: ['voice'],
+        hasVoice: true
+      },
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}ai-chat/CodeBlock.tsx',
-      template: 'templates/CodeBlock.tsx.tpl',
-
+      path: '{{paths.hooks}}useVoice.ts',
+      template: 'templates/useVoice.ts.tpl',
+      context: {
+        features: ['voice'],
+        hasVoice: true
+      },
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    }
+  ];
+}
+
+function generateAdvancedActions(): BlueprintAction[] {
+  return [
+    // Phase 2: Essential Features
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}ai-chat/MarkdownRenderer.tsx',
-      template: 'templates/MarkdownRenderer.tsx.tpl',
-
+      path: '{{paths.components}}ai-chat/CustomPrompts.tsx',
+      template: 'templates/CustomPrompts.tsx.tpl',
+      context: {
+        features: ['advanced'],
+        hasAdvanced: true
+      },
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}ai-chat/ChatExport.tsx',
-      template: 'templates/ChatExport.tsx.tpl',
-
+      path: '{{paths.components}}ai-chat/ExportImport.tsx',
+      template: 'templates/ExportImport.tsx.tpl',
+      context: {
+        features: ['advanced'],
+        hasAdvanced: true
+      },
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}ai-chat/ChatImport.tsx',
-      template: 'templates/ChatImport.tsx.tpl',
-
+      path: '{{paths.components}}ai-chat/SettingsPanel.tsx',
+      template: 'templates/SettingsPanel.tsx.tpl',
+      context: {
+        features: ['advanced'],
+        hasAdvanced: true
+      },
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
+    // Phase 3: Advanced Features
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}ai-chat/ChatHistory.tsx',
-      template: 'templates/ChatHistory.tsx.tpl',
-
+      path: '{{paths.components}}ai-chat/LoadingIndicator.tsx',
+      template: 'templates/LoadingIndicator.tsx.tpl',
+      context: {
+        features: ['advanced'],
+        hasAdvanced: true
+      },
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}ai-chat/ChatSettings.tsx',
-      template: 'templates/ChatSettings.tsx.tpl',
-
+      path: '{{paths.components}}ai-chat/ErrorDisplay.tsx',
+      template: 'templates/ErrorDisplay.tsx.tpl',
+      context: {
+        features: ['advanced'],
+        hasAdvanced: true
+      },
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-
-    // Create AI chat pages
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}chat/page.tsx',
-      template: 'templates/chat-page.tsx.tpl',
-
+      path: '{{paths.components}}ai-chat/ChatAnalytics.tsx',
+      template: 'templates/ChatAnalytics.tsx.tpl',
+      context: {
+        features: ['advanced'],
+        hasAdvanced: true
+      },
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}chat/[id]/page.tsx',
-      template: 'templates/chat-detail-page.tsx.tpl',
-
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-
-    // Create AI chat context
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'src/contexts/ChatContext.tsx',
-      template: 'templates/ChatContext.tsx.tpl',
-
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-
-    // Create AI chat provider
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'src/providers/ChatProvider.tsx',
-      template: 'templates/ChatProvider.tsx.tpl',
-
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }},
-
-    // Create AI chat middleware
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.middleware}}chat-middleware.ts',
-      template: 'templates/chat-middleware.ts.tpl',
-
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }}
-  ]
-};
-
-export default aiChatBlueprint;
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    }
+  ];
+}

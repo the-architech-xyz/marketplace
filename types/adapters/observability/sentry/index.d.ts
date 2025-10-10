@@ -11,15 +11,40 @@ export interface ObservabilitySentryParams {
 
   /** Environment name */
   environment?: string;
+  /** Constitutional Architecture features configuration */
+  features?: {
 
-  /** Enable performance monitoring */
-  performance?: boolean;
+    /** Essential monitoring (error tracking, basic performance) */
+    core: boolean;
+
+    /** Advanced performance monitoring */
+    performance: boolean;
+
+    /** Custom alerts and dashboard */
+    alerts: boolean;
+
+    /** Enterprise features (profiling, custom metrics) */
+    enterprise: boolean;
+  };
 
   /** Release version */
   release?: string;
 }
 
-export interface ObservabilitySentryFeatures {}
+export interface ObservabilitySentryFeatures {
+
+  /** Essential monitoring (error tracking, basic performance) */
+  core: boolean;
+
+  /** Advanced performance monitoring */
+  performance: boolean;
+
+  /** Custom alerts and dashboard */
+  alerts: boolean;
+
+  /** Enterprise features (profiling, custom metrics) */
+  enterprise: boolean;
+}
 
 // 🚀 Auto-discovered artifacts
 export declare const ObservabilitySentryArtifacts: {

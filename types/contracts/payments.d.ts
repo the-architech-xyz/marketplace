@@ -1,8 +1,19 @@
 /**
- * payments Contract Types
+ * Payment Feature Contract - Cohesive Business Hook Services
  * 
- * Auto-generated from contract.ts
+ * This is the single source of truth for the Payment feature.
+ * All backend implementations must implement the IPaymentService interface.
+ * All frontend implementations must consume the IPaymentService interface.
+ * 
+ * The contract defines cohesive business services, not individual hooks.
  */
+
+// Note: TanStack Query types are imported by the implementing service, not the contract
+
+// ============================================================================
+// CORE TYPES
+// ============================================================================
+
 export type PaymentStatus = 
   | 'completed' 
   | 'pending' 
@@ -10,6 +21,7 @@ export type PaymentStatus =
   | 'processing' 
   | 'cancelled' 
   | 'refunded';
+
 export type PaymentMethod = 
   | 'card' 
   | 'bank_transfer' 
@@ -18,7 +30,9 @@ export type PaymentMethod =
   | 'google_pay' 
   | 'crypto' 
   | 'wallet';
+
 export type Currency = 'USD' | 'EUR' | 'GBP' | 'CAD' | 'AUD' | 'JPY' | 'CHF';
+
 export type SubscriptionStatus = 
   | 'active' 
   | 'inactive' 
@@ -26,12 +40,18 @@ export type SubscriptionStatus =
   | 'past_due' 
   | 'unpaid' 
   | 'trialing';
+
 export type InvoiceStatus = 
   | 'draft' 
   | 'open' 
   | 'paid' 
   | 'void' 
   | 'uncollectible';
+
+// ============================================================================
+// DATA TYPES
+// ============================================================================
+
 export interface Payment {
   id: string;
   amount: number;
@@ -52,6 +72,7 @@ export interface Payment {
   refundedAmount?: number;
   refundedAt?: string;
 }
+
 export interface PaymentMethodData {
   id: string;
   type: PaymentMethod;
@@ -62,6 +83,7 @@ export interface PaymentMethodData {
   isDefault: boolean;
   createdAt: string;
 }
+
 export interface Subscription {
   id: string;
   customerId: string;
@@ -81,6 +103,7 @@ export interface Subscription {
   createdAt: string;
   updatedAt: string;
 }
+
 export interface Invoice {
   id: string;
   customerId: string;
@@ -100,6 +123,7 @@ export interface Invoice {
   updatedAt: string;
   lineItems: InvoiceLineItem[];
 }
+
 export interface InvoiceLineItem {
   id: string;
   description: string;
@@ -108,6 +132,7 @@ export interface InvoiceLineItem {
   totalAmount: number;
   taxRate?: number;
 }
+
 export interface PaymentIntent {
   id: string;
   amount: number;
@@ -119,6 +144,7 @@ export interface PaymentIntent {
   metadata?: Record<string, any>;
   createdAt: string;
 }
+
 export interface Refund {
   id: string;
   paymentId: string;
@@ -129,6 +155,11 @@ export interface Refund {
   createdAt: string;
   processedAt?: string;
 }
+
+// ============================================================================
+// INPUT TYPES
+// ============================================================================
+
 export interface CreatePaymentData {
   amount: number;
   currency: Currency;
@@ -139,6 +170,7 @@ export interface CreatePaymentData {
   saveCard?: boolean;
   returnUrl?: string;
 }
+
 export interface CreateSubscriptionData {
   customerId: string;
   planId: string;
@@ -146,6 +178,7 @@ export interface CreateSubscriptionData {
   trialPeriodDays?: number;
   metadata?: Record<string, any>;
 }
+
 export interface CreateInvoiceData {
   customerId: string;
   subscriptionId?: string;
@@ -156,16 +189,23 @@ export interface CreateInvoiceData {
   discount?: number;
   metadata?: Record<string, any>;
 }
+
 export interface UpdatePaymentData {
   description?: string;
   metadata?: Record<string, any>;
 }
+
 export interface UpdateSubscriptionData {
   planId?: string;
   status?: SubscriptionStatus;
   cancelAtPeriodEnd?: boolean;
   metadata?: Record<string, any>;
 }
+
+// ============================================================================
+// ANALYTICS TYPES
+// ============================================================================
+
 export interface PaymentAnalytics {
   totalRevenue: number;
   monthlyRevenue: number;
@@ -181,6 +221,7 @@ export interface PaymentAnalytics {
   mrr: number; // Monthly Recurring Revenue
   arr: number; // Annual Recurring Revenue
 }
+
 export interface PaymentFilters {
   status?: PaymentStatus[];
   method?: PaymentMethod[];
@@ -192,6 +233,11 @@ export interface PaymentFilters {
   customerId?: string;
   search?: string;
 }
+
+// ============================================================================
+// ERROR TYPES
+// ============================================================================
+
 export interface PaymentError {
   code: string;
   message: string;
@@ -199,6 +245,11 @@ export interface PaymentError {
   decline_code?: string;
   param?: string;
 }
+
+// ============================================================================
+// WEBHOOK TYPES
+// ============================================================================
+
 export interface PaymentWebhookEvent {
   id: string;
   type: string;
@@ -208,39 +259,96 @@ export interface PaymentWebhookEvent {
   created: number;
   livemode: boolean;
 }
+
+// ============================================================================
+// COHESIVE BUSINESS HOOK SERVICES
+// ============================================================================
+
+/**
+ * Payment Service Contract - Cohesive Business Hook Services
+ * 
+ * This interface defines cohesive business services that group related functionality.
+ * Each service method returns an object containing all related queries and mutations.
+ * 
+ * Backend implementations must provide this service.
+ * Frontend implementations must consume this service.
+ */
 export interface IPaymentService {
+  /**
+   * Payment Management Service
+   * Provides all payment-related operations in a cohesive interface
+   */
   usePayments: () => {
+    // Query operations
     list: any; // UseQueryResult<Payment[], Error>
     get: (id: string) => any; // UseQueryResult<Payment, Error>
+    
+    // Mutation operations
     create: any; // UseMutationResult<Payment, Error, CreatePaymentData>
     update: any; // UseMutationResult<Payment, Error, { id: string; data: UpdatePaymentData }>
     delete: any; // UseMutationResult<void, Error, string>
     refund: any; // UseMutationResult<Refund, Error, { paymentId: string; amount?: number }>
   };
+
+  /**
+   * Subscription Management Service
+   * Provides all subscription-related operations in a cohesive interface
+   */
   useSubscriptions: () => {
+    // Query operations
     list: any; // UseQueryResult<Subscription[], Error>
     get: (id: string) => any; // UseQueryResult<Subscription, Error>
+    
+    // Mutation operations
     create: any; // UseMutationResult<Subscription, Error, CreateSubscriptionData>
     update: any; // UseMutationResult<Subscription, Error, { id: string; data: UpdateSubscriptionData }>
     cancel: any; // UseMutationResult<Subscription, Error, string>
   };
+
+  /**
+   * Invoice Management Service
+   * Provides all invoice-related operations in a cohesive interface
+   */
   useInvoices: () => {
+    // Query operations
     list: any; // UseQueryResult<Invoice[], Error>
     get: (id: string) => any; // UseQueryResult<Invoice, Error>
+    
+    // Mutation operations
     create: any; // UseMutationResult<Invoice, Error, CreateInvoiceData>
     update: any; // UseMutationResult<Invoice, Error, { id: string; data: any }>
   };
+
+  /**
+   * Payment Method Management Service
+   * Provides all payment method-related operations in a cohesive interface
+   */
   usePaymentMethods: () => {
+    // Query operations
     list: any; // UseQueryResult<PaymentMethodData[], Error>
+    
+    // Mutation operations
     create: any; // UseMutationResult<PaymentMethodData, Error, any>
     update: any; // UseMutationResult<PaymentMethodData, Error, { id: string; data: any }>
     delete: any; // UseMutationResult<void, Error, string>
   };
+
+  /**
+   * Checkout Service
+   * Provides payment session and checkout operations
+   */
   useCheckout: () => {
+    // Mutation operations
     createSession: any; // UseMutationResult<PaymentIntent, Error, CreatePaymentData>
     createPortalSession: any; // UseMutationResult<{ url: string }, Error, string>
   };
+
+  /**
+   * Analytics Service
+   * Provides payment analytics and reporting
+   */
   useAnalytics: () => {
+    // Query operations
     getAnalytics: any; // UseQueryResult<PaymentAnalytics, Error>
   };
 }

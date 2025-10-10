@@ -1,10 +1,36 @@
 /**
- * features/project-management/shadcn
+ * Project Management System
  * 
- * Auto-generated integration types
+ * Complete project management system with kanban boards, task management, and team collaboration
  */
 
-export interface FeaturesProjectManagementShadcnParams {}
+export interface FeaturesProjectManagementShadcnParams {
+
+  /** UI theme variant */
+  theme?: 'default' | 'dark' | 'light';
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    type: boolean;
+
+    default: boolean;
+
+    description: boolean;
+
+    required: boolean;
+  };
+}
+
+export interface FeaturesProjectManagementShadcnFeatures {
+
+  type: boolean;
+
+  default: boolean;
+
+  description: boolean;
+
+  required: boolean;
+}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesProjectManagementShadcnArtifacts: {

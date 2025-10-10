@@ -1,5 +1,5 @@
 {
-  "id": "feature:emailing/shadcn",
+  "id": "features/emailing/shadcn",
   "name": "Emailing Feature (Shadcn)",
   "description": "Complete email management UI using Shadcn components",
   "type": "feature",

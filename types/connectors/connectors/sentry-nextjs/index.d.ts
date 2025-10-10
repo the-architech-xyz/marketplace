@@ -1,10 +1,12 @@
 /**
  * connectors/sentry-nextjs
  * 
- * Auto-generated integration types
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
 export interface ConnectorsSentryNextjsParams {}
+
+export interface ConnectorsSentryNextjsFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const ConnectorsSentryNextjsArtifacts: {

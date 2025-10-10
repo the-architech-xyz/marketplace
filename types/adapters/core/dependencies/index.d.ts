@@ -1,7 +1,7 @@
 /**
  * core/dependencies
  * 
- * Auto-generated adapter types
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
 export interface CoreDependenciesParams {}

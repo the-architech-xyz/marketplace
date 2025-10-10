@@ -1,19 +1,32 @@
 /**
- * emailing Contract Types
+ * Emailing Feature Contract - Cohesive Business Hook Services
  * 
- * Auto-generated from contract.ts
+ * This is the single source of truth for the Emailing feature.
+ * All backend implementations must implement the IEmailService interface.
+ * All frontend implementations must consume the IEmailService interface.
+ * 
+ * The contract defines cohesive business services, not individual hooks.
  */
+
+// Note: TanStack Query types are imported by the implementing service, not the contract
+
+// ============================================================================
+// CORE TYPES
+// ============================================================================
+
 export type EmailStatus = 
   | 'draft' 
   | 'sending' 
   | 'sent' 
   | 'delivered' 
   | 'failed';
+
 export type EmailPriority = 
   | 'low' 
   | 'normal' 
   | 'high' 
   | 'urgent';
+
 export type EmailType = 
   | 'transactional' 
   | 'marketing' 
@@ -21,9 +34,15 @@ export type EmailType =
   | 'newsletter' 
   | 'welcome' 
   | 'reminder';
+
 export type TemplateType = 
   | 'html' 
   | 'text';
+
+// ============================================================================
+// DATA TYPES
+// ============================================================================
+
 export interface Email {
   id: string;
   subject: string;
@@ -44,6 +63,7 @@ export interface Email {
   createdAt: string;
   updatedAt: string;
 }
+
 export interface EmailRecipient {
   email: string;
   name?: string;
@@ -55,6 +75,7 @@ export interface EmailRecipient {
   bouncedAt?: string;
   errorMessage?: string;
 }
+
 export interface EmailContent {
   html?: string;
   text?: string;
@@ -64,6 +85,7 @@ export interface EmailContent {
     url: string;
   }>;
 }
+
 export interface EmailAttachment {
   id: string;
   filename: string;
@@ -72,6 +94,7 @@ export interface EmailAttachment {
   url: string;
   createdAt: string;
 }
+
 export interface EmailTemplate {
   id: string;
   name: string;
@@ -92,6 +115,7 @@ export interface EmailTemplate {
   createdAt: string;
   updatedAt: string;
 }
+
 export interface EmailCampaign {
   id: string;
   name: string;
@@ -113,6 +137,7 @@ export interface EmailCampaign {
   createdAt: string;
   updatedAt: string;
 }
+
 export interface EmailAnalytics {
   emailsSent: number;
   emailsDelivered: number;
@@ -134,6 +159,11 @@ export interface EmailAnalytics {
     clicks: number;
   }>;
 }
+
+// ============================================================================
+// INPUT TYPES
+// ============================================================================
+
 export interface SendEmailData {
   subject: string;
   content: EmailContent;
@@ -144,6 +174,7 @@ export interface SendEmailData {
   scheduledAt?: string;
   metadata?: Record<string, any>;
 }
+
 export interface SendBulkEmailData {
   subject: string;
   content: EmailContent;
@@ -156,6 +187,7 @@ export interface SendBulkEmailData {
   delayBetweenBatches?: number;
   metadata?: Record<string, any>;
 }
+
 export interface CreateTemplateData {
   name: string;
   description?: string;
@@ -171,6 +203,7 @@ export interface CreateTemplateData {
   isPublic?: boolean;
   metadata?: Record<string, any>;
 }
+
 export interface UpdateTemplateData {
   name?: string;
   description?: string;
@@ -185,6 +218,7 @@ export interface UpdateTemplateData {
   isPublic?: boolean;
   metadata?: Record<string, any>;
 }
+
 export interface CreateCampaignData {
   name: string;
   description?: string;
@@ -199,6 +233,7 @@ export interface CreateCampaignData {
   };
   metadata?: Record<string, any>;
 }
+
 export interface UpdateCampaignData {
   name?: string;
   description?: string;
@@ -213,11 +248,17 @@ export interface UpdateCampaignData {
   };
   metadata?: Record<string, any>;
 }
+
+// ============================================================================
+// RESULT TYPES
+// ============================================================================
+
 export interface SendEmailResult {
   email: Email;
   success: boolean;
   message?: string;
 }
+
 export interface SendBulkEmailResult {
   emails: Email[];
   success: boolean;
@@ -225,16 +266,23 @@ export interface SendBulkEmailResult {
   totalSent: number;
   totalFailed: number;
 }
+
 export interface TemplateResult {
   template: EmailTemplate;
   success: boolean;
   message?: string;
 }
+
 export interface CampaignResult {
   campaign: EmailCampaign;
   success: boolean;
   message?: string;
 }
+
+// ============================================================================
+// FILTER TYPES
+// ============================================================================
+
 export interface EmailFilters {
   status?: EmailStatus[];
   type?: EmailType[];
@@ -245,6 +293,7 @@ export interface EmailFilters {
   dateTo?: string;
   search?: string;
 }
+
 export interface TemplateFilters {
   type?: TemplateType[];
   category?: string[];
@@ -252,6 +301,7 @@ export interface TemplateFilters {
   isPublic?: boolean;
   search?: string;
 }
+
 export interface CampaignFilters {
   status?: ('draft' | 'scheduled' | 'running' | 'paused' | 'completed' | 'cancelled')[];
   templateId?: string;
@@ -259,6 +309,7 @@ export interface CampaignFilters {
   dateTo?: string;
   search?: string;
 }
+
 export interface AnalyticsFilters {
   dateFrom?: string;
   dateTo?: string;
@@ -266,6 +317,11 @@ export interface AnalyticsFilters {
   templateId?: string;
   campaignId?: string;
 }
+
+// ============================================================================
+// ERROR TYPES
+// ============================================================================
+
 export interface EmailingError {
   code: string;
   message: string;
@@ -273,6 +329,11 @@ export interface EmailingError {
   field?: string;
   details?: Record<string, any>;
 }
+
+// ============================================================================
+// CONFIGURATION TYPES
+// ============================================================================
+
 export interface EmailingConfig {
   provider: {
     name: string;
@@ -300,27 +361,64 @@ export interface EmailingConfig {
     trackUserActivity: boolean;
   };
 }
+
+// ============================================================================
+// COHESIVE BUSINESS HOOK SERVICES
+// ============================================================================
+
+/**
+ * Email Service Contract - Cohesive Business Hook Services
+ * 
+ * This interface defines cohesive business services that group related functionality.
+ * Each service method returns an object containing all related queries and mutations.
+ * 
+ * Backend implementations must provide this service.
+ * Frontend implementations must consume this service.
+ */
 export interface IEmailService {
+  /**
+   * Email Management Service
+   * Provides all email-related operations in a cohesive interface
+   */
   useEmails: () => {
+    // Query operations
     list: any; // UseQueryResult<Email[], Error>
     get: (id: string) => any; // UseQueryResult<Email, Error>
+    
+    // Mutation operations
     send: any; // UseMutationResult<SendEmailResult, Error, SendEmailData>
     sendBulk: any; // UseMutationResult<SendBulkEmailResult, Error, SendBulkEmailData>
     delete: any; // UseMutationResult<void, Error, string>
     bulkDelete: any; // UseMutationResult<void, Error, string[]>
     resend: any; // UseMutationResult<SendEmailResult, Error, string>
   };
+
+  /**
+   * Template Management Service
+   * Provides all email template-related operations in a cohesive interface
+   */
   useTemplates: () => {
+    // Query operations
     list: any; // UseQueryResult<EmailTemplate[], Error>
     get: (id: string) => any; // UseQueryResult<EmailTemplate, Error>
+    
+    // Mutation operations
     create: any; // UseMutationResult<TemplateResult, Error, CreateTemplateData>
     update: any; // UseMutationResult<TemplateResult, Error, { id: string; data: UpdateTemplateData }>
     delete: any; // UseMutationResult<void, Error, string>
     duplicate: any; // UseMutationResult<TemplateResult, Error, string>
   };
+
+  /**
+   * Campaign Management Service
+   * Provides all email campaign-related operations in a cohesive interface
+   */
   useCampaigns: () => {
+    // Query operations
     list: any; // UseQueryResult<EmailCampaign[], Error>
     get: (id: string) => any; // UseQueryResult<EmailCampaign, Error>
+    
+    // Mutation operations
     create: any; // UseMutationResult<CampaignResult, Error, CreateCampaignData>
     update: any; // UseMutationResult<CampaignResult, Error, { id: string; data: UpdateCampaignData }>
     delete: any; // UseMutationResult<void, Error, string>
@@ -328,7 +426,13 @@ export interface IEmailService {
     pause: any; // UseMutationResult<CampaignResult, Error, string>
     cancel: any; // UseMutationResult<CampaignResult, Error, string>
   };
+
+  /**
+   * Analytics Service
+   * Provides email analytics and reporting
+   */
   useAnalytics: () => {
+    // Query operations
     getEmailAnalytics: (filters?: AnalyticsFilters) => any; // UseQueryResult<EmailAnalytics, Error>
     getTemplateAnalytics: (templateId: string) => any; // UseQueryResult<EmailAnalytics, Error>
     getCampaignAnalytics: (campaignId: string) => any; // UseQueryResult<EmailAnalytics, Error>

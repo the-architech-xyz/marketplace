@@ -1,10 +1,31 @@
 /**
- * features/auth/backend/better-auth-nextjs
+ * Authentication Capability (Better Auth + NextJS)
  * 
- * Auto-generated integration types
+ * Complete authentication backend with Better Auth and NextJS
  */
 
-export interface FeaturesAuthBackendBetterAuthNextjsParams {}
+export interface FeaturesAuthBackendBetterAuthNextjsParams {
+
+  /** Next.js API routes for authentication endpoints */
+  apiRoutes: boolean;
+
+  /** Next.js middleware for authentication and route protection */
+  middleware: boolean;
+
+  /** Admin API routes for user management */
+  adminPanel: boolean;
+
+  /** Email verification API routes and components */
+  emailVerification: boolean;
+
+  /** MFA API routes and components */
+  mfa: boolean;
+
+  /** Password reset API routes and components */
+  passwordReset: boolean;
+}
+
+export interface FeaturesAuthBackendBetterAuthNextjsFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesAuthBackendBetterAuthNextjsArtifacts: {
