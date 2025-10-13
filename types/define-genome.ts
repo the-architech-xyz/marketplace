@@ -2,7 +2,7 @@
  * Define Genome with Full Type Safety - Implementation
  */
 
-import type { TypedGenome } from './genome-types.d.ts';
+import type { TypedGenome } from './genome-types';
 
 /**
  * Define a genome with full type safety

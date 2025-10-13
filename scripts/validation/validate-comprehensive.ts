@@ -359,8 +359,8 @@ class ComprehensiveValidator {
           // Check for common import/export issues
           const content = readFileSync(filePath, 'utf8');
           
-          // Skip blueprint files - they contain template content, not real imports
-          if (tsFile.includes('.blueprint.ts') || tsFile.includes('blueprint.ts')) {
+          // Skip blueprint files and generator scripts - they contain template content, not real imports
+          if (tsFile.includes('.blueprint.ts') || tsFile.includes('blueprint.ts') || tsFile.includes('generate-') || tsFile.includes('generation/')) {
             continue;
           }
           
@@ -378,7 +378,7 @@ class ComprehensiveValidator {
               const path = importPath.match(/['"`]([^'"`]+)['"`]/)?.[1];
               if (path) {
                 const fullPath = join(dirname(filePath), path);
-                if (!existsSync(fullPath) && !existsSync(fullPath + '.ts') && !existsSync(fullPath + '.js')) {
+                if (!existsSync(fullPath) && !existsSync(fullPath + '.ts') && !existsSync(fullPath + '.js') && !existsSync(fullPath + '.d.ts')) {
                   importErrors++;
                   console.log(`❌ Broken import in ${tsFile}: ${path}`);
                 }
