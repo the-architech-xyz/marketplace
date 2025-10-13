@@ -13,7 +13,7 @@ export interface DatabaseTypeormParams {
   logging?: boolean;
 
   /** Database type */
-  databaseType: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
+  databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
 }
 
 export interface DatabaseTypeormFeatures {}

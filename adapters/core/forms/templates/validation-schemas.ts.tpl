@@ -14,14 +14,14 @@ import { z } from 'zod';
 const VALIDATION_CONFIG = {
   // Simple validation (default)
   password: {
-    minLength: {{#if context.hasAdvancedValidation}}8{{else}}6{{/if}},
-    requireUppercase: {{#if context.hasAdvancedValidation}}true{{else}}false{{/if}},
-    requireLowercase: {{#if context.hasAdvancedValidation}}true{{else}}false{{/if}},
-    requireNumbers: {{#if context.hasAdvancedValidation}}true{{else}}false{{/if}},
-    requireSpecialChars: {{#if context.hasAdvancedValidation}}true{{else}}false{{/if}}
+    minLength: <% if (context.hasAdvancedValidation) { %>8<% } else { %>6<% } %>,
+    requireUppercase: <% if (context.hasAdvancedValidation) { %>true<% } else { %>false<% } %>,
+    requireLowercase: <% if (context.hasAdvancedValidation) { %>true<% } else { %>false<% } %>,
+    requireNumbers: <% if (context.hasAdvancedValidation) { %>true<% } else { %>false<% } %>,
+    requireSpecialChars: <% if (context.hasAdvancedValidation) { %>true<% } else { %>false<% } %>
   },
   email: {
-    strict: {{#if context.hasAdvancedValidation}}true{{else}}false{{/if}}
+    strict: <% if (context.hasAdvancedValidation) { %>true<% } else { %>false<% } %>
   }
 };
 
@@ -40,15 +40,15 @@ export const simplePasswordSchema = z.string()
  */
 export const advancedPasswordSchema = z.string()
   .min(VALIDATION_CONFIG.password.minLength, `Password must be at least ${VALIDATION_CONFIG.password.minLength} characters`)
-  {{#if context.hasAdvancedValidation}}
+  <% if (context.hasAdvancedValidation) { %>
   .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
   .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
   .regex(/\d/, 'Password must contain at least one number')
   .regex(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character')
-  {{/if}};
+  <% } %>;
 
 // Export the appropriate password schema based on configuration
-export const passwordSchema = {{#if context.hasAdvancedValidation}}advancedPasswordSchema{{else}}simplePasswordSchema{{/if}};
+export const passwordSchema = <% if (context.hasAdvancedValidation) { %>advancedPasswordSchema<% } else { %>simplePasswordSchema<% } %>;
 
 // ============================================================================
 // EMAIL VALIDATION
@@ -65,7 +65,7 @@ export const simpleEmailSchema = z.string()
  */
 export const advancedEmailSchema = z.string()
   .email('Please enter a valid email address')
-  {{#if context.hasAdvancedValidation}}
+  <% if (context.hasAdvancedValidation) { %>
   .refine(
     (email) => {
       // Additional checks for advanced validation
@@ -74,10 +74,10 @@ export const advancedEmailSchema = z.string()
     },
     'Please enter a valid email address with a proper domain'
   )
-  {{/if}};
+  <% } %>;
 
 // Export the appropriate email schema based on configuration
-export const emailSchema = {{#if context.hasAdvancedValidation}}advancedEmailSchema{{else}}simpleEmailSchema{{/if}};
+export const emailSchema = <% if (context.hasAdvancedValidation) { %>advancedEmailSchema<% } else { %>simpleEmailSchema<% } %>;
 
 // ============================================================================
 // COMMON FORM SCHEMAS

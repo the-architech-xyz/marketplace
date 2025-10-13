@@ -1,0 +1,78 @@
+{
+  "id": "connectors/sentry/react",
+  "name": "Sentry React Connector",
+  "description": "React-specific Sentry integration with @sentry/react",
+  "category": "connectors",
+  "version": "1.0.0",
+  "blueprint": "blueprint.ts",
+  "dependencies": ["technologies/observability/sentry-core"],
+  "provides": [
+    "monitoring-react-core",
+    "{{#if features.performance}}monitoring-react-performance{{/if}}",
+    "{{#if features.error-boundary}}monitoring-react-error-boundary{{/if}}"
+  ],
+  "limitations": "Requires Sentry DSN and React framework",
+  "parameters": {
+    "dsn": {
+      "type": "string",
+      "default": "",
+      "description": "Sentry DSN",
+      "required": true
+    },
+    "environment": {
+      "type": "string",
+      "default": "development",
+      "description": "Environment name",
+      "required": false
+    },
+    "features": {
+      "core": {
+        "description": "Essential React Sentry integration",
+        "default": true
+      },
+      "performance": {
+        "description": "React performance monitoring",
+        "default": false
+      },
+      "error-boundary": {
+        "description": "React Error Boundary components",
+        "default": true
+      }
+    },
+    "release": {
+      "type": "string",
+      "default": "",
+      "description": "Release version",
+      "required": false
+    }
+  },
+  "internal_structure": {
+    "core": {
+      "provides": ["monitoring-react-core"],
+      "templates": [
+        "sentry-config.ts",
+        "sentry-init.ts",
+        "profiler.tsx"
+      ]
+    },
+    "performance": {
+      "prerequisites": ["monitoring-react-core"],
+      "provides": ["monitoring-react-performance"],
+      "templates": [
+        "performance.ts",
+        "web-vitals.ts"
+      ]
+    },
+    "error-boundary": {
+      "prerequisites": ["monitoring-react-core"],
+      "provides": ["monitoring-react-error-boundary"],
+      "templates": [
+        "error-boundary.tsx",
+        "error-fallback.tsx"
+      ]
+    }
+  },
+  "constraints": {
+    "framework": "react"
+  }
+}

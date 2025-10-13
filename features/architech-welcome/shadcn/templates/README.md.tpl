@@ -1,6 +1,6 @@
-# {{project.name}}
+# <%= project.name %>
 
-{{project.description}}
+<%= project.description %>
 
 ## 🚀 Quick Start
 
@@ -18,9 +18,9 @@ npm run dev
 
 This project was generated with The Architech and includes:
 
-{{#each modules}}
-- **{{name}}**: {{description}}
-{{/each}}
+<% modules.forEach((item, index) => { %>
+- **<%= item.id %>** (<%= item.version %>)
+<% }); %>
 
 ## 📁 Project Structure
 

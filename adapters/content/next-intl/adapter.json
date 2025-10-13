@@ -45,6 +45,23 @@
       "default": true,
       "description": "Enable SEO optimization",
       "required": false
+    },
+    "features": {
+      "routing": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable locale-based routing"
+      },
+      "dateFormatting": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable date formatting features"
+      },
+      "numberFormatting": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable number formatting features"
+      }
     }
   },
   "features": {

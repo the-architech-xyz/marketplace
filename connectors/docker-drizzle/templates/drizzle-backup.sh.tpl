@@ -21,6 +21,6 @@ if ! docker info > /dev/null 2>&1; then
 fi
 
 # Create backup
-docker-compose -f docker-compose.drizzle.yml exec -T drizzle-db pg_dump -U drizzle_user -d {{project.name}}_drizzle > "$BACKUP_DIR/$BACKUP_FILE"
+docker-compose -f docker-compose.drizzle.yml exec -T drizzle-db pg_dump -U drizzle_user -d <%= project.name %>_drizzle > "$BACKUP_DIR/$BACKUP_FILE"
 
 echo "✅ Backup created: $BACKUP_DIR/$BACKUP_FILE"

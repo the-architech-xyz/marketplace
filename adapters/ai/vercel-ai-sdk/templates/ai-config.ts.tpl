@@ -8,9 +8,9 @@ import { anthropic } from '@ai-sdk/anthropic';
 
 export const AI_CONFIG = {
   // Default model settings
-  defaultModel: '{{context.defaultModel || "gpt-3.5-turbo"}}',
-  maxTokens: {{context.maxTokens || 1000}},
-  temperature: {{context.temperature || 0.7}},
+  defaultModel: '<%= context.defaultModel || "gpt-3.5-turbo" %>',
+  maxTokens: <%= context.maxTokens || 1000 %>,
+  temperature: <%= context.temperature || 0.7 %>,
   
   // Available models
   models: {
@@ -52,12 +52,12 @@ export const AI_CONFIG = {
   
   // Feature flags
   features: {
-    streaming: {{context.hasStreaming ?? true}},
-    chat: {{context.hasChat ?? true}},
-    textGeneration: {{context.hasTextGeneration ?? true}},
-    imageGeneration: {{context.hasImageGeneration ?? false}},
-    embeddings: {{context.hasEmbeddings ?? false}},
-    functionCalling: {{context.hasFunctionCalling ?? false}},
+    streaming: <%= context.hasStreaming ?? true %>,
+    chat: <%= context.hasChat ?? true %>,
+    textGeneration: <%= context.hasTextGeneration ?? true %>,
+    imageGeneration: <%= context.hasImageGeneration ?? false %>,
+    embeddings: <%= context.hasEmbeddings ?? false %>,
+    functionCalling: <%= context.hasFunctionCalling ?? false %>,
   },
   
   // Rate limiting

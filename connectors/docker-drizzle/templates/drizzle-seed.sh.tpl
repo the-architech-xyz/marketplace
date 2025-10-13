@@ -14,6 +14,6 @@ if ! docker info > /dev/null 2>&1; then
 fi
 
 # Run seeding using Docker Compose
-docker-compose -f docker-compose.drizzle.yml exec drizzle-db psql -U drizzle_user -d {{project.name}}_drizzle -f /docker-entrypoint-initdb.d/drizzle-seed.sql
+docker-compose -f docker-compose.drizzle.yml exec drizzle-db psql -U drizzle_user -d <%= project.name %>_drizzle -f /docker-entrypoint-initdb.d/drizzle-seed.sql
 
 echo "✅ Database seeding completed successfully!"

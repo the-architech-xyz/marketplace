@@ -11,13 +11,13 @@ export function QueryProvider({ children }: QueryProviderProps) {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      {{#if context..devtools}}
+      <% if (context..devtools) { %>
       <ReactQueryDevtools 
         initialIsOpen={false}
         position="bottom-right"
         buttonPosition="bottom-right"
       />
-      {{/if}}
+      <% } %>
     </QueryClientProvider>
   );
 }

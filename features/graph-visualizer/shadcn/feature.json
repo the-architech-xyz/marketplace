@@ -33,14 +33,12 @@
   },
   "prerequisites": {
     "adapters": [
-      "react-flow",
       "shadcn-ui"
     ],
     "integrators": [
       "zustand-nextjs-integration"
     ],
     "capabilities": [
-      "graph-visualization",
       "state-management"
     ]
   },
@@ -70,23 +68,66 @@
       "options": ["react-flow", "vis-network", "d3"]
     },
     "features": {
-      "type": "object",
-      "default": {
-        "interactiveGraph": true,
-        "nodeTypes": true,
-        "edgeTypes": true,
-        "minimap": true,
-        "controls": true,
-        "background": true,
-        "selection": true,
-        "dragging": true,
-        "zooming": true,
-        "panning": true,
-        "export": true,
-        "import": true
+      "interactiveGraph": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable interactive graph functionality"
       },
-      "description": "Graph visualizer features to enable",
-      "required": false
+      "nodeTypes": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable different node types"
+      },
+      "minimap": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable minimap navigation"
+      },
+      "export": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable graph export functionality"
+      },
+      "edgeTypes": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable different edge types"
+      },
+      "controls": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable graph controls"
+      },
+      "background": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable background grid"
+      },
+      "selection": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable node/edge selection"
+      },
+      "dragging": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable node dragging"
+      },
+      "zooming": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable zoom functionality"
+      },
+      "panning": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable pan functionality"
+      },
+      "import": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable graph import functionality"
+      }
     }
   },
   "implementations": {

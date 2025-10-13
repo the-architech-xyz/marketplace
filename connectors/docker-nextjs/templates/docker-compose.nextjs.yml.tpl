@@ -28,7 +28,7 @@ services:
   postgres:
     image: postgres:15-alpine
     environment:
-      POSTGRES_DB: {{project.name}}
+      POSTGRES_DB: <%= project.name %>
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:

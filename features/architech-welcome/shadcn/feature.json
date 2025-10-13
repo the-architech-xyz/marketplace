@@ -14,35 +14,52 @@
     "required": ["framework/nextjs", "ui/shadcn-ui"],
     "optional": ["ui/tailwind"]
   },
+  "requires": {
+    "components": {
+      "ui/shadcn-ui": [
+        "button",
+        "card",
+        "input",
+        "label",
+        "badge",
+        "checkbox",
+        "switch",
+        "tabs",
+        "alert"
+      ]
+    }
+  },
   "parameters": {
-    "showTechStack": {
-      "type": "boolean",
-      "default": true,
-      "description": "Show technology stack visualization"
-    },
-    "showComponents": {
-      "type": "boolean", 
-      "default": true,
-      "description": "Show interactive component library showcase"
-    },
-    "showProjectStructure": {
-      "type": "boolean",
-      "default": true,
-      "description": "Show project structure and architecture"
-    },
-    "showQuickStart": {
-      "type": "boolean",
-      "default": true,
-      "description": "Show quick start guide"
+    "features": {
+      "techStack": {
+        "description": "Show technology stack visualization",
+        "default": true
+      },
+      "componentShowcase": {
+        "description": "Show interactive component library showcase",
+        "default": true
+      },
+      "projectStructure": {
+        "description": "Show project structure and architecture",
+        "default": true
+      },
+      "quickStart": {
+        "description": "Show quick start guide",
+        "default": true
+      },
+      "architechBranding": {
+        "description": "Show Architech branding and links",
+        "default": true
+      }
     },
     "customTitle": {
       "type": "string",
-      "default": "Welcome to {{project.name}}",
+      "default": "Welcome to Your New App",
       "description": "Custom welcome page title"
     },
     "customDescription": {
       "type": "string",
-      "default": "Your {{project.name}} application is ready! Explore the features and technologies that power your project.",
+      "default": "Your modern application is ready! Explore the features and technologies that power your project.",
       "description": "Custom welcome page description"
     },
     "primaryColor": {
@@ -51,10 +68,15 @@
       "choices": ["blue", "green", "purple", "red", "orange", "pink"],
       "description": "Primary color theme for the welcome page"
     },
-    "showArchitechBranding": {
+    "showArchitecture": {
       "type": "boolean",
       "default": true,
-      "description": "Show Architech branding and links"
+      "description": "Show architecture documentation section"
+    },
+    "showDocumentation": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show documentation links section"
     }
   },
   "capabilities": {

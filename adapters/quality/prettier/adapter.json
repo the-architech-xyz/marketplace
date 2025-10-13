@@ -91,6 +91,18 @@
         "prettier-plugin-sort-imports",
         "prettier-plugin-organize-imports"
       ]
+    },
+    "tailwind": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable Tailwind CSS class sorting plugin",
+      "required": false
+    },
+    "organizeImports": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable import organization",
+      "required": false
     }
   },
   "constraints": {

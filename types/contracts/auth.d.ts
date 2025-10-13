@@ -1,17 +1,17 @@
 /**
- * Auth Feature Contract - Cohesive Business Hook Services
+ * Auth Feature Contract - Universal Authentication Interface
  * 
- * This is the single source of truth for the Auth feature.
- * All backend implementations must implement the IAuthService interface.
- * All frontend implementations must consume the IAuthService interface.
+ * This contract enables ANY backend to provide auth features and ANY UI to consume them.
+ * Backend implementations: Better Auth, Auth0, Supabase, Firebase, etc.
+ * Frontend implementations: React, Vue, Svelte, Angular, etc.
  * 
  * The contract defines cohesive business services, not individual hooks.
+ * All security concerns (JWT, CSRF, cookies, tokens) are handled by the backend.
+ * Frontend only knows about User, Session, and business operations.
  */
 
-// Note: TanStack Query types are imported by the implementing service, not the contract
-
 // ============================================================================
-// CORE TYPES
+// CORE TYPES - What Frontend Sees (No JWT, CSRF, or Security Details)
 // ============================================================================
 
 export type AuthStatus = 
@@ -36,8 +36,13 @@ export type SessionStatus =
   | 'invalid' 
   | 'revoked';
 
+export type TwoFactorMethod = 
+  | 'totp' 
+  | 'sms' 
+  | 'email';
+
 // ============================================================================
-// DATA TYPES
+// DATA TYPES - Frontend Only Knows These
 // ============================================================================
 
 export interface User {
@@ -63,19 +68,107 @@ export interface Session {
   ipAddress?: string;
   userAgent?: string;
   metadata?: Record<string, any>;
+  
+  // Multi-tenancy context
+  activeOrganizationId?: string;
+  activeTeamId?: string;
 }
 
-export interface Account {
+export interface ConnectedAccount {
   id: string;
   userId: string;
   provider: OAuthProvider;
   providerAccountId: string;
-  accessToken?: string;
-  refreshToken?: string;
-  expiresAt?: number;
-  scope?: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface TwoFactorSecret {
+  qrCode: string;
+  secret: string;
+  recoveryCodes: string[];
+}
+
+export interface Organization {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  role: 'owner' | 'admin' | 'member';
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Team {
+  id: string;
+  name: string;
+  description?: string;
+  organizationId: string;
+  role: 'owner' | 'admin' | 'member';
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Member {
+  id: string;
+  userId: string;
+  email: string;
+  name: string;
+  role: 'owner' | 'admin' | 'member';
+  joinedAt: string;
+}
+
+export interface TeamMember {
+  id: string;
+  userId: string;
+  email: string;
+  name: string;
+  role: 'owner' | 'admin' | 'member';
+  teamId: string;
+  organizationId: string;
+  joinedAt: string;
+}
+
+export interface Invitation {
+  id: string;
+  email: string;
+  role: string;
+  organizationId: string;
+  status: 'pending' | 'accepted' | 'declined' | 'expired';
+  expiresAt: string;
+  createdAt: string;
+}
+
+export interface TeamInvitation {
+  id: string;
+  email: string;
+  role: string;
+  organizationId: string;
+  teamId: string;
+  status: 'pending' | 'accepted' | 'declined' | 'expired';
+  expiresAt: string;
+  createdAt: string;
+}
+
+// Data transfer objects
+export interface CreateOrganizationData {
+  name: string;
+  description?: string;
+}
+
+export interface UpdateOrganizationData {
+  name?: string;
+  description?: string;
+}
+
+export interface CreateTeamData {
+  name: string;
+  description?: string;
+}
+
+export interface UpdateTeamData {
+  name?: string;
+  description?: string;
 }
 
 export interface AuthState {
@@ -87,7 +180,7 @@ export interface AuthState {
 }
 
 // ============================================================================
-// INPUT TYPES
+// INPUT TYPES - What Frontend Sends
 // ============================================================================
 
 export interface SignInData {
@@ -140,8 +233,21 @@ export interface ResendVerificationData {
   email: string;
 }
 
+export interface TwoFactorSetupData {
+  password: string;
+}
+
+export interface TwoFactorVerifyData {
+  code: string;
+}
+
+export interface MagicLinkData {
+  email: string;
+  redirectTo?: string;
+}
+
 // ============================================================================
-// RESULT TYPES
+// RESULT TYPES - What Frontend Receives
 // ============================================================================
 
 export interface AuthResult {
@@ -154,7 +260,7 @@ export interface AuthResult {
 export interface OAuthResult {
   user: User;
   session: Session;
-  account: Account;
+  account: ConnectedAccount;
   success: boolean;
   message?: string;
 }
@@ -169,8 +275,21 @@ export interface EmailVerificationResult {
   message: string;
 }
 
+export interface TwoFactorResult {
+  success: boolean;
+  message?: string;
+  qrCode?: string;
+  secret?: string;
+  recoveryCodes?: string[];
+}
+
+export interface MagicLinkResult {
+  success: boolean;
+  message: string;
+}
+
 // ============================================================================
-// ERROR TYPES
+// ERROR TYPES - Frontend Error Handling
 // ============================================================================
 
 export interface AuthError {
@@ -182,13 +301,14 @@ export interface AuthError {
 }
 
 // ============================================================================
-// CONFIGURATION TYPES
+// CONFIGURATION TYPES - Backend Configuration
 // ============================================================================
 
 export interface AuthConfig {
   providers: {
     email: boolean;
     oauth: OAuthProvider[];
+    magicLink: boolean;
   };
   features: {
     emailVerification: boolean;
@@ -196,6 +316,7 @@ export interface AuthConfig {
     passwordReset: boolean;
     accountLinking: boolean;
     sessionManagement: boolean;
+    organizations: boolean;
   };
   security: {
     passwordMinLength: number;
@@ -216,56 +337,31 @@ export interface AuthConfig {
 }
 
 // ============================================================================
-// MIDDLEWARE TYPES
-// ============================================================================
-
-export interface AuthMiddleware {
-  requireAuth: (options?: { redirectTo?: string }) => void;
-  requireGuest: (options?: { redirectTo?: string }) => void;
-  requireRole: (role: string, options?: { redirectTo?: string }) => void;
-  requirePermission: (permission: string, options?: { redirectTo?: string }) => void;
-}
-
-// ============================================================================
-// PROVIDER TYPES
-// ============================================================================
-
-export interface AuthProviderProps {
-  children: any; // React.ReactNode
-  config?: Partial<AuthConfig>;
-}
-
-export interface AuthContextValue {
-  user: User | null;
-  session: Session | null;
-  status: AuthStatus;
-  isLoading: boolean;
-  error: string | null;
-  signIn: (data: SignInData) => Promise<AuthResult>;
-  signUp: (data: SignUpData) => Promise<AuthResult>;
-  signOut: () => Promise<void>;
-  oauthSignIn: (data: OAuthSignInData) => Promise<OAuthResult>;
-  forgotPassword: (data: ForgotPasswordData) => Promise<PasswordResetResult>;
-  resetPassword: (data: ResetPasswordData) => Promise<PasswordResetResult>;
-  updateProfile: (data: UpdateProfileData) => Promise<AuthResult>;
-  changePassword: (data: ChangePasswordData) => Promise<PasswordResetResult>;
-  verifyEmail: (data: VerifyEmailData) => Promise<EmailVerificationResult>;
-  resendVerification: (data: ResendVerificationData) => Promise<EmailVerificationResult>;
-  refreshSession: () => Promise<Session>;
-}
-
-// ============================================================================
-// COHESIVE BUSINESS HOOK SERVICES
+// UNIVERSAL AUTH SERVICE CONTRACT
 // ============================================================================
 
 /**
- * Auth Service Contract - Cohesive Business Hook Services
+ * Universal Auth Service Contract
  * 
- * This interface defines cohesive business services that group related functionality.
+ * This interface enables ANY backend to provide auth features and ANY UI to consume them.
+ * 
+ * Backend Implementations:
+ * - Better Auth (your current choice)
+ * - Auth0
+ * - Supabase Auth
+ * - Firebase Auth
+ * - NextAuth.js
+ * - Custom JWT implementation
+ * 
+ * Frontend Implementations:
+ * - React (Next.js, Vite, CRA)
+ * - Vue (Nuxt, Vite)
+ * - Svelte (SvelteKit)
+ * - Angular
+ * - Vanilla JS
+ * 
+ * The contract defines cohesive business services that group related functionality.
  * Each service method returns an object containing all related queries and mutations.
- * 
- * Backend implementations must provide this service.
- * Frontend implementations must consume this service.
  */
 export interface IAuthService {
   /**
@@ -283,6 +379,7 @@ export interface IAuthService {
     signUp: any; // UseMutationResult<AuthResult, Error, SignUpData>
     signOut: any; // UseMutationResult<void, Error, void>
     oauthSignIn: any; // UseMutationResult<OAuthResult, Error, OAuthSignInData>
+    magicLinkSignIn: any; // UseMutationResult<MagicLinkResult, Error, MagicLinkData>
     refreshSession: any; // UseMutationResult<Session, Error, void>
   };
 
@@ -306,12 +403,13 @@ export interface IAuthService {
    */
   useSecurity: () => {
     // Query operations
-    getAccounts: any; // UseQueryResult<Account[], Error>
+    getAccounts: any; // UseQueryResult<ConnectedAccount[], Error>
     
     // Mutation operations
-    setupTwoFactor: any; // UseMutationResult<{ qrCode: string; secret: string }, Error, void>
-    verifyTwoFactor: any; // UseMutationResult<{ success: boolean }, Error, string>
-    disableTwoFactor: any; // UseMutationResult<{ success: boolean }, Error, string>
+    setupTwoFactor: any; // UseMutationResult<TwoFactorResult, Error, TwoFactorSetupData>
+    verifyTwoFactor: any; // UseMutationResult<TwoFactorResult, Error, TwoFactorVerifyData>
+    disableTwoFactor: any; // UseMutationResult<TwoFactorResult, Error, TwoFactorVerifyData>
+    regenerateRecoveryCodes: any; // UseMutationResult<TwoFactorResult, Error, void>
     unlinkAccount: any; // UseMutationResult<void, Error, string>
   };
 
@@ -333,5 +431,114 @@ export interface IAuthService {
     // Mutation operations
     verifyEmail: any; // UseMutationResult<EmailVerificationResult, Error, VerifyEmailData>
     resendVerification: any; // UseMutationResult<EmailVerificationResult, Error, ResendVerificationData>
+    changeEmail: any; // UseMutationResult<EmailVerificationResult, Error, ResendVerificationData>
   };
+
+  /**
+   * Session Management Service
+   * Provides all session-related operations in a cohesive interface
+   */
+  useSessionManagement: () => {
+    // Query operations
+    getActiveSessions: any; // UseQueryResult<Session[], Error>
+    
+    // Mutation operations
+    revokeSession: any; // UseMutationResult<void, Error, string>
+    revokeAllSessions: any; // UseMutationResult<void, Error, void>
+  };
+
+  /**
+   * Organization Service (if organizations feature is enabled)
+   * Provides all organization-related operations in a cohesive interface
+   */
+  useOrganizations?: () => {
+    // Query operations
+    getOrganizations: any; // UseQueryResult<Organization[], Error>
+    getOrganization: any; // UseQueryResult<Organization, Error>
+    getMembers: any; // UseQueryResult<Member[], Error>
+    getInvitations: any; // UseQueryResult<Invitation[], Error>
+    
+    // Mutation operations
+    createOrganization: any; // UseMutationResult<Organization, Error, CreateOrganizationData>
+    updateOrganization: any; // UseMutationResult<Organization, Error, { id: string; data: UpdateOrganizationData }>
+    deleteOrganization: any; // UseMutationResult<void, Error, string>
+    inviteMember: any; // UseMutationResult<void, Error, { orgId: string; email: string; role: string }>
+    removeMember: any; // UseMutationResult<void, Error, { orgId: string; userId: string }>
+    updateMemberRole: any; // UseMutationResult<void, Error, { orgId: string; userId: string; role: string }>
+    acceptInvitation: any; // UseMutationResult<void, Error, string>
+    rejectInvitation: any; // UseMutationResult<void, Error, string>
+    cancelInvitation: any; // UseMutationResult<void, Error, string>
+    leaveOrganization: any; // UseMutationResult<void, Error, string>
+    
+    // Session Context
+    switchActiveOrganization: any; // UseMutationResult<void, Error, string>
+    getActiveOrganization: any; // UseQueryResult<Organization | null, Error>
+  };
+
+  /**
+   * Teams Service (if teams feature is enabled within organizations)
+   * Provides all team-related operations in a cohesive interface
+   */
+  useTeams?: () => {
+    // Query operations
+    getTeams: any; // UseQueryResult<Team[], Error>
+    getTeam: any; // UseQueryResult<Team, Error>
+    getTeamMembers: any; // UseQueryResult<TeamMember[], Error>
+    getTeamInvitations: any; // UseQueryResult<TeamInvitation[], Error>
+    
+    // Mutation operations
+    createTeam: any; // UseMutationResult<Team, Error, { orgId: string; data: CreateTeamData }>
+    updateTeam: any; // UseMutationResult<Team, Error, { orgId: string; teamId: string; data: UpdateTeamData }>
+    deleteTeam: any; // UseMutationResult<void, Error, { orgId: string; teamId: string }>
+    addTeamMember: any; // UseMutationResult<void, Error, { orgId: string; teamId: string; userId: string; role: string }>
+    removeTeamMember: any; // UseMutationResult<void, Error, { orgId: string; teamId: string; userId: string }>
+    updateTeamMemberRole: any; // UseMutationResult<void, Error, { orgId: string; teamId: string; userId: string; role: string }>
+    inviteToTeam: any; // UseMutationResult<void, Error, { orgId: string; teamId: string; email: string; role: string }>
+    acceptTeamInvitation: any; // UseMutationResult<void, Error, string>
+    rejectTeamInvitation: any; // UseMutationResult<void, Error, string>
+    
+    // Session Context
+    switchActiveTeam: any; // UseMutationResult<void, Error, { orgId: string; teamId: string }>
+    getActiveTeam: any; // UseQueryResult<Team | null, Error>
+  };
+}
+
+// ============================================================================
+// PROVIDER TYPES - For React Context (if using React)
+// ============================================================================
+
+export interface AuthProviderProps {
+  children: any; // React.ReactNode
+  config?: Partial<AuthConfig>;
+}
+
+export interface AuthContextValue {
+  user: User | null;
+  session: Session | null;
+  status: AuthStatus;
+  isLoading: boolean;
+  error: string | null;
+  signIn: (data: SignInData) => Promise<AuthResult>;
+  signUp: (data: SignUpData) => Promise<AuthResult>;
+  signOut: () => Promise<void>;
+  oauthSignIn: (data: OAuthSignInData) => Promise<OAuthResult>;
+  magicLinkSignIn: (data: MagicLinkData) => Promise<MagicLinkResult>;
+  forgotPassword: (data: ForgotPasswordData) => Promise<PasswordResetResult>;
+  resetPassword: (data: ResetPasswordData) => Promise<PasswordResetResult>;
+  updateProfile: (data: UpdateProfileData) => Promise<AuthResult>;
+  changePassword: (data: ChangePasswordData) => Promise<PasswordResetResult>;
+  verifyEmail: (data: VerifyEmailData) => Promise<EmailVerificationResult>;
+  resendVerification: (data: ResendVerificationData) => Promise<EmailVerificationResult>;
+  refreshSession: () => Promise<Session>;
+}
+
+// ============================================================================
+// MIDDLEWARE TYPES - For Route Protection
+// ============================================================================
+
+export interface AuthMiddleware {
+  requireAuth: (options?: { redirectTo?: string }) => void;
+  requireGuest: (options?: { redirectTo?: string }) => void;
+  requireRole: (role: string, options?: { redirectTo?: string }) => void;
+  requirePermission: (permission: string, options?: { redirectTo?: string }) => void;
 }

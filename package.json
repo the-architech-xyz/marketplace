@@ -84,7 +84,7 @@
     "fix:conflicts": "tsx scripts/utilities/fix-conflict-resolution.ts",
     "types:generate:constitutional": "tsx scripts/generation/generate-constitutional-types-cli.ts",
     "compile": "tsc",
-    "build": "npm run validate:all && npm run types:generate:constitutional && npm run compile",
+    "build": "npm run validate:all && npm run types:generate:constitutional && npm run generate:feature-manifests && npm run compile",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "prepare": "husky install",

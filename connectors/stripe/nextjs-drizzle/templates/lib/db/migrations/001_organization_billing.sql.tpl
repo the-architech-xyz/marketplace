@@ -1,6 +1,6 @@
 -- Migration: 001_organization_billing.sql
 -- Description: Create organization billing tables for Stripe integration
--- Created: {{new Date().toISOString()}}
+-- Created: <%= new Date().toISOString() %>
 
 -- ============================================================================
 -- ORGANIZATION STRIPE CUSTOMERS

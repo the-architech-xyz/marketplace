@@ -140,15 +140,19 @@ export class ConstitutionalTypeGenerator {
     const moduleId = analysis.moduleId;
     const artifacts = analysis.artifacts;
     
+    // moduleId already includes 'connectors/' prefix (e.g., 'connectors/sentry/nextjs')
+    // Strip the prefix to get the actual path
+    const connectorPath = moduleId.replace(/^connectors\//, '');
+    
     // Load connector.json for Constitutional Architecture metadata
-    const connectorJsonPath = path.join(this.marketplacePath, 'connectors', moduleId, 'connector.json');
+    const connectorJsonPath = path.join(this.marketplacePath, 'connectors', connectorPath, 'connector.json');
     const connectorJson = ConstitutionalTypeGeneratorHelpers.loadConstitutionalSchema(connectorJsonPath);
     
     // Generate Constitutional Architecture TypeScript content
     const tsContent = ConstitutionalTypeGeneratorHelpers.generateConstitutionalConnectorTypeContent(moduleId, connectorJson, artifacts);
     
-    // Write to file
-    const outputDir = path.join(this.outputPath, 'connectors', moduleId);
+    // Write to file - use moduleId as-is (already has 'connectors/' prefix)
+    const outputDir = path.join(this.outputPath, moduleId);
     await fs.promises.mkdir(outputDir, { recursive: true });
     
     const outputFile = path.join(outputDir, 'index.d.ts');
@@ -164,15 +168,19 @@ export class ConstitutionalTypeGenerator {
     const moduleId = analysis.moduleId;
     const artifacts = analysis.artifacts;
     
+    // moduleId already includes 'features/' prefix (e.g., 'features/auth/frontend/shadcn')
+    // Strip the prefix to get the actual path
+    const featurePath = moduleId.replace(/^features\//, '');
+    
     // Load feature.json for Constitutional Architecture metadata
-    const featureJsonPath = path.join(this.marketplacePath, 'features', moduleId.replace('features/', ''), 'feature.json');
+    const featureJsonPath = path.join(this.marketplacePath, 'features', featurePath, 'feature.json');
     const featureJson = ConstitutionalTypeGeneratorHelpers.loadConstitutionalSchema(featureJsonPath);
     
     // Generate Constitutional Architecture TypeScript content
     const tsContent = ConstitutionalTypeGeneratorHelpers.generateConstitutionalFeatureTypeContent(moduleId, featureJson, artifacts);
     
-    // Write to file
-    const outputDir = path.join(this.outputPath, 'features', moduleId);
+    // Write to file - use moduleId as-is (already has 'features/' prefix)
+    const outputDir = path.join(this.outputPath, moduleId);
     await fs.promises.mkdir(outputDir, { recursive: true });
     
     const outputFile = path.join(outputDir, 'index.d.ts');
@@ -263,9 +271,67 @@ export declare function defineGenome<T extends TypedGenome>(genome: T): T;
 export { Genome } from '@thearchitech.xyz/types';
 `;
 
-    const outputFile = path.join(this.outputPath, 'define-genome.d.ts');
-    await fs.promises.writeFile(outputFile, defineGenomeContent);
+    // Write TYPE DEFINITIONS to genome-types.d.ts
+    const genomeTypesContent = `/**
+ * Marketplace-Generated Genome Types
+ * 
+ * Auto-generated type definitions for type-safe genome authoring.
+ */
+
+import { Genome } from '@thearchitech.xyz/types';
+
+// Generated ModuleId union type
+export type ModuleId = ${this.moduleIds.map(id => `'${id}'`).join(' | ')};
+
+${moduleParametersType}
+
+// Discriminated union for better IDE support
+${discriminatedUnionType}
+
+export interface TypedGenome {
+  version: string;
+  project: {
+    name: string;
+    framework: string;
+    path?: string;
+    description?: string;
+    version?: string;
+    author?: string;
+    license?: string;
+  };
+  modules: TypedGenomeModule[];
+  options?: Record<string, any>;
+}
+
+// Re-export for convenience
+export { Genome } from '@thearchitech.xyz/types';
+`;
+
+    // Write IMPLEMENTATION to define-genome.ts (with strict constraint)
+    const defineGenomeImplContent = `/**
+ * Define Genome with Full Type Safety - Implementation
+ */
+
+import type { TypedGenome } from './genome-types.d.ts';
+
+/**
+ * Define a genome with full type safety
+ * 
+ * @param genome - The genome configuration with type safety
+ * @returns The genome with validated types
+ */
+export function defineGenome<T extends TypedGenome>(genome: T): T {
+  return genome;
+}
+`;
+
+    const genomeTypesFile = path.join(this.outputPath, 'genome-types.d.ts');
+    const defineGenomeFile = path.join(this.outputPath, 'define-genome.ts');
     
-    console.log('📝 Generated defineGenome function with full type safety');
+    await fs.promises.writeFile(genomeTypesFile, genomeTypesContent);
+    await fs.promises.writeFile(defineGenomeFile, defineGenomeImplContent);
+    
+    console.log('📝 Generated genome-types.d.ts with all type definitions');
+    console.log('📝 Generated define-genome.ts with strict type constraint');
   }
 }

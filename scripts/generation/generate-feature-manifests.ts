@@ -67,7 +67,7 @@ class FeatureManifestGenerator {
   private distDir: string;
 
   constructor() {
-    this.marketplaceRoot = path.join(path.dirname(new URL(import.meta.url).pathname), '..');
+    this.marketplaceRoot = path.join(path.dirname(new URL(import.meta.url).pathname), '..', '..');
     this.featuresDir = path.join(this.marketplaceRoot, 'features');
     this.distDir = path.join(this.marketplaceRoot, 'dist', 'features');
   }
@@ -308,16 +308,19 @@ class FeatureManifestGenerator {
       }
     }
 
-    // Extract from requires
+    // Extract from requires (handle both array and object formats)
     if (metadata.requires) {
-      for (const req of metadata.requires) {
-        if (req.includes('/')) {
-          const tech = req.split('/')[1];
-          if (!stack.includes(tech)) {
-            stack.push(tech);
+      if (Array.isArray(metadata.requires)) {
+        for (const req of metadata.requires) {
+          if (req.includes('/')) {
+            const tech = req.split('/')[1];
+            if (!stack.includes(tech)) {
+              stack.push(tech);
+            }
           }
         }
       }
+      // If requires is an object, skip iteration (it's a different format)
     }
 
     return stack.length > 0 ? stack : ['unknown'];

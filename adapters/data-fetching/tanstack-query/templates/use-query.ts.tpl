@@ -58,20 +58,20 @@ export function useSuspenseQuery<TData = unknown, TError = Error>(
   queryFn: () => Promise<TData>,
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<TData, TError> {
-  {{#if context.hasSuspense}}
+  <% if (context.hasSuspense) { %>
   return useQuery({
     queryKey: queryKey,
     queryFn: queryFn,
     suspense: true,
     ...options,
   });
-  {{else}}
+  <% } else { %>
   return useQuery({
     queryKey: queryKey,
     queryFn: queryFn,
     ...options,
   });
-  {{/if}}
+  <% } %>
 }
 
 // Utility hook for invalidating queries

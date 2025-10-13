@@ -38,17 +38,51 @@
       "options": ["default", "dark", "light"]
     },
     "features": {
-      "type": "object",
-      "default": {
-        "kanbanBoard": true,
-        "taskCreation": true,
-        "taskManagement": true,
-        "projectOrganization": true,
-        "teamCollaboration": true,
-        "basicAnalytics": true
+      "kanban": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable kanban board functionality"
       },
-      "description": "Core project management features to enable",
-      "required": false
+      "timeline": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable timeline view"
+      },
+      "sprint": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable sprint management"
+      },
+      "kanbanBoard": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable kanban board functionality"
+      },
+      "taskCreation": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable task creation"
+      },
+      "taskManagement": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable task management"
+      },
+      "projectOrganization": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable project organization"
+      },
+      "teamCollaboration": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable team collaboration"
+      },
+      "basicAnalytics": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable basic analytics"
+      }
     }
   },
   "sub_features": {

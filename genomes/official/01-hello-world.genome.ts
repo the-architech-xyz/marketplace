@@ -1,0 +1,65 @@
+/**
+ * HELLO WORLD STARTER
+ * 
+ * The most minimal, production-ready Next.js application.
+ * Perfect for learning The Architech or starting a simple project.
+ * 
+ * Stack: Next.js + TypeScript + Tailwind + Shadcn UI
+ * Pattern: Minimal complexity, maximum clarity
+ * Use Case: First-time users, prototypes, simple landing pages
+ */
+
+import { defineGenome } from '@thearchitech.xyz/marketplace/types';  
+
+export default defineGenome({
+  version: '1.0.0',
+  project: {
+    name: 'hello-world-starter',
+    description: 'A minimal, production-ready Next.js starter',
+    version: '1.0.0',
+    framework: 'nextjs',
+  },
+  
+  modules: [
+    // Core Framework
+    {
+      id: 'framework/nextjs',
+      parameters: {
+        typescript: true,
+        tailwind: true,
+        eslint: true,
+        appRouter: true,
+        srcDir: true,
+        importAlias: '@',
+      },
+    },
+
+    // UI Foundation
+    {
+      id: 'ui/shadcn-ui',
+      parameters: {
+        theme: 'default',
+        components: ['button', 'card', 'input', 'label'],
+      },
+    },
+    // Quality Tools
+    {
+      id: 'quality/prettier',
+      parameters: {
+        tailwind: true,
+        semi: true,
+        singleQuote: true,
+      },
+    },
+
+    // Welcome Screen
+    {
+      id: 'features/architech-welcome/shadcn',
+      parameters: {
+        showArchitecture: true,
+        showDocumentation: true,
+      },
+    },
+  ],
+});
+

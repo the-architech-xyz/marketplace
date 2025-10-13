@@ -20,4 +20,4 @@ if ! docker-compose -f docker-compose.drizzle.yml ps drizzle-db | grep -q "Up"; 
 fi
 
 # Open database shell
-docker-compose -f docker-compose.drizzle.yml exec drizzle-db psql -U drizzle_user -d {{project.name}}_drizzle
+docker-compose -f docker-compose.drizzle.yml exec drizzle-db psql -U drizzle_user -d <%= project.name %>_drizzle

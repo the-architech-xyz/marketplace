@@ -8,8 +8,21 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    // Remove setupFiles reference to avoid dependency on non-existent files
-    // setupFiles: ['./tests/setup/setup.ts'],
+    setupFiles: ['./tests/setup/setup.ts'],
+    // Coverage configuration (uncomment if using coverage feature)
+    // coverage: {
+    //   provider: 'v8',
+    //   reporter: ['text', 'json', 'html'],
+    //   exclude: [
+    //     'node_modules/',
+    //     'tests/',
+    //     '**/*.d.ts',
+    //     '**/*.config.*',
+    //   ],
+    // },
+    // E2E testing with Playwright (uncomment if using e2e feature)
+    // testTimeout: 30000,
+    // hookTimeout: 30000,
   },
   resolve: {
     alias: {

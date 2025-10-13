@@ -10,8 +10,8 @@ NEXTAUTH_URL="http://localhost:3000"
 
 # API Keys
 {{#each module.parameters.envVars}}
-{{this.name}}="{{this.value}}"
-{{/each}}
+<%= item.name %>="<%= item.value %>"
+<% }); %>
 
 # Vercel specific
 VERCEL_URL=""

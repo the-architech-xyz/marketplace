@@ -77,20 +77,34 @@
     },
     "features": {
       "core": {
-        "description": "Basic testing setup (config, setup, utils)",
-        "default": true
+        "type": "boolean",
+        "default": true,
+        "description": "Basic testing setup (config, setup, utils)"
+      },
+      "unitTests": {
+        "type": "boolean",
+        "default": true,
+        "description": "Unit testing capabilities"
       },
       "coverage": {
-        "description": "Code coverage reporting",
-        "default": true
+        "type": "boolean",
+        "default": true,
+        "description": "Code coverage reporting"
       },
       "ui": {
-        "description": "Interactive test runner UI",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Interactive test runner UI"
       },
       "e2e": {
-        "description": "End-to-end testing support",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "End-to-end testing support"
+      },
+      "integrationTests": {
+        "type": "boolean",
+        "default": false,
+        "description": "Integration testing support"
       }
     }
   },

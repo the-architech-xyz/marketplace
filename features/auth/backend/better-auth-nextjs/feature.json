@@ -265,6 +265,38 @@
       "description": "Password reset API routes and components",
       "type": "boolean",
       "default": false
+    },
+    "features": {
+      "emailPassword": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable email/password authentication"
+      },
+      "emailVerification": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable email verification"
+      },
+      "passwordReset": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable password reset functionality"
+      },
+      "sessions": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable session management"
+      },
+      "organizations": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable organization/team management"
+      },
+      "twoFactor": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable two-factor authentication"
+      }
     }
   }
 }

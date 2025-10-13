@@ -144,6 +144,38 @@
       "default": "@/*",
       "description": "Import alias for absolute imports",
       "required": false
+    },
+    "features": {
+      "seo": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable SEO optimization features"
+      },
+      "imageOptimization": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable Next.js image optimization"
+      },
+      "mdx": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable MDX support for markdown content"
+      },
+      "performance": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable performance optimization features"
+      },
+      "streaming": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable streaming features"
+      },
+      "i18n": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable internationalization features"
+      }
     }
   },
   "features": {

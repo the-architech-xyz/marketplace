@@ -47,20 +47,34 @@
     },
     "features": {
       "core": {
-        "description": "Essential AI functionality (chat, text generation)",
-        "default": true
+        "type": "boolean",
+        "default": true,
+        "description": "Essential AI functionality (chat, text generation)"
       },
       "streaming": {
-        "description": "Real-time streaming responses",
-        "default": true
+        "type": "boolean",
+        "default": true,
+        "description": "Real-time streaming responses"
+      },
+      "tools": {
+        "type": "boolean",
+        "default": false,
+        "description": "Function calling and tool use"
+      },
+      "embeddings": {
+        "type": "boolean",
+        "default": false,
+        "description": "Text embeddings functionality"
       },
       "advanced": {
-        "description": "Advanced AI features (image generation, embeddings, function calling)",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Advanced AI features (image generation, embeddings, function calling)"
       },
       "enterprise": {
-        "description": "Enterprise features (caching, edge runtime, tool use)",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Enterprise features (caching, edge runtime, tool use)"
       }
     },
     "defaultModel": {

@@ -12,16 +12,22 @@ export interface TestingVitestParams {
   features?: {
 
     /** Basic testing setup (config, setup, utils) */
-    core: boolean;
+    core?: boolean;
+
+    /** Unit testing capabilities */
+    unitTests?: boolean;
 
     /** Code coverage reporting */
-    coverage: boolean;
+    coverage?: boolean;
 
     /** Interactive test runner UI */
-    ui: boolean;
+    ui?: boolean;
 
     /** End-to-end testing support */
-    e2e: boolean;
+    e2e?: boolean;
+
+    /** Integration testing support */
+    integrationTests?: boolean;
   };
 }
 
@@ -29,6 +35,9 @@ export interface TestingVitestFeatures {
 
   /** Basic testing setup (config, setup, utils) */
   core: boolean;
+
+  /** Unit testing capabilities */
+  unitTests: boolean;
 
   /** Code coverage reporting */
   coverage: boolean;
@@ -38,6 +47,9 @@ export interface TestingVitestFeatures {
 
   /** End-to-end testing support */
   e2e: boolean;
+
+  /** Integration testing support */
+  integrationTests: boolean;
 }
 
 // 🚀 Auto-discovered artifacts

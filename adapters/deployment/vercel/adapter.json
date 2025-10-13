@@ -67,6 +67,18 @@
           "default": 10
         }
       }
+    },
+    "analytics": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Vercel Analytics",
+      "required": false
+    },
+    "speedInsights": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Vercel Speed Insights",
+      "required": false
     }
   },
   "blueprint": {

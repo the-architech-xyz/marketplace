@@ -261,6 +261,141 @@ export interface PaymentWebhookEvent {
 }
 
 // ============================================================================
+// ORGANIZATION BILLING TYPES
+// ============================================================================
+
+export interface OrganizationSubscription {
+  id: string;
+  organizationId: string;
+  stripeSubscriptionId: string;
+  stripeCustomerId: string;
+  status: 'active' | 'trialing' | 'past_due' | 'canceled' | 'unpaid';
+  planId: string;
+  planName: string;
+  planAmount: number; // in cents
+  planInterval: 'month' | 'year';
+  seatsIncluded: number;
+  seatsAdditional: number;
+  seatsTotal: number;
+  currentPeriodStart: string;
+  currentPeriodEnd: string;
+  trialStart?: string;
+  trialEnd?: string;
+  cancelAtPeriodEnd: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SeatInfo {
+  current: number;
+  included: number;
+  additional: number;
+  total: number;
+  cost: number; // cost of additional seats in cents
+  pricePerSeat: number; // price per additional seat in cents
+}
+
+export interface OrganizationUsage {
+  organizationId: string;
+  teamId?: string;
+  period: {
+    start: string;
+    end: string;
+  };
+  metrics: {
+    apiCalls: number;
+    storage: number; // in GB
+    computeTime: number; // in hours
+    [key: string]: number;
+  };
+  costs: {
+    base: number; // base subscription cost
+    seats: number; // additional seats cost
+    usage: number; // usage-based costs
+    total: number; // total for period
+  };
+  lastUpdated: string;
+}
+
+export interface TeamUsage {
+  teamId: string;
+  organizationId: string;
+  period: {
+    start: string;
+    end: string;
+  };
+  metrics: {
+    apiCalls: number;
+    storage: number; // in GB
+    computeTime: number; // in hours
+    [key: string]: number;
+  };
+  lastUpdated: string;
+}
+
+export interface BillingInfo {
+  organizationId: string;
+  stripeCustomerId: string;
+  paymentMethod: {
+    type: 'card' | 'bank_account';
+    last4: string;
+    brand?: string;
+    expiryMonth?: number;
+    expiryYear?: number;
+  };
+  email: string;
+  name: string;
+  address?: {
+    line1: string;
+    line2?: string;
+    city: string;
+    state: string;
+    postalCode: string;
+    country: string;
+  };
+  taxId?: string;
+}
+
+// ============================================================================
+// ORGANIZATION BILLING INPUT TYPES
+// ============================================================================
+
+export interface CreateOrgSubscriptionData {
+  planId: string;
+  paymentMethodId: string;
+  seats?: number;
+  trialDays?: number;
+  metadata?: Record<string, any>;
+}
+
+export interface UpdateOrgSubscriptionData {
+  planId?: string;
+  cancelAtPeriodEnd?: boolean;
+  metadata?: Record<string, any>;
+}
+
+export interface UpdateBillingInfoData {
+  email?: string;
+  name?: string;
+  address?: {
+    line1: string;
+    line2?: string;
+    city: string;
+    state: string;
+    postalCode: string;
+    country: string;
+  };
+  taxId?: string;
+}
+
+export interface TrackUsageData {
+  metric: string;
+  quantity: number;
+  teamId?: string;
+  metadata?: Record<string, any>;
+}
+
+// ============================================================================
 // COHESIVE BUSINESS HOOK SERVICES
 // ============================================================================
 
@@ -350,5 +485,71 @@ export interface IPaymentService {
   useAnalytics: () => {
     // Query operations
     getAnalytics: any; // UseQueryResult<PaymentAnalytics, Error>
+  };
+
+  /**
+   * Organization Billing Service
+   * Provides organization-level billing operations
+   */
+  useOrganizationBilling: (orgId: string) => {
+    // Subscription Management
+    subscription: {
+      data: OrganizationSubscription | null;
+      loading: boolean;
+      error: Error | null;
+    };
+    
+    createSubscription: any; // UseMutationResult<OrganizationSubscription, Error, CreateOrgSubscriptionData>
+    updateSubscription: any; // UseMutationResult<OrganizationSubscription, Error, UpdateOrgSubscriptionData>
+    cancelSubscription: any; // UseMutationResult<void, Error, boolean>
+    
+    // Seat Management
+    seats: {
+      data: SeatInfo | null;
+      loading: boolean;
+      error: Error | null;
+    };
+    
+    updateSeats: any; // UseMutationResult<SeatInfo, Error, number>
+    
+    // Usage Tracking
+    usage: {
+      data: OrganizationUsage | null;
+      loading: boolean;
+    };
+    
+    trackUsage: any; // UseMutationResult<void, Error, TrackUsageData>
+    
+    // Billing Info
+    billingInfo: {
+      data: BillingInfo | null;
+      loading: boolean;
+    };
+    
+    updateBillingInfo: any; // UseMutationResult<BillingInfo, Error, UpdateBillingInfoData>
+    
+    // Invoices
+    invoices: {
+      data: Invoice[] | null;
+      loading: boolean;
+    };
+    
+    downloadInvoice: (invoiceId: string) => Promise<Blob>;
+    
+    // Customer Portal
+    createPortalSession: () => Promise<{ url: string }>;
+  };
+
+  /**
+   * Team Usage Service
+   * Provides team-level usage tracking
+   */
+  useTeamUsage: (orgId: string, teamId: string) => {
+    usage: {
+      data: TeamUsage | null;
+      loading: boolean;
+    };
+    
+    trackUsage: any; // UseMutationResult<void, Error, TrackUsageData>
   };
 }

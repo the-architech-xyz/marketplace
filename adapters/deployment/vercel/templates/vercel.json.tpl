@@ -1,21 +1,21 @@
 {
   "version": 2,
-  "framework": "{{context..framework || 'nextjs'}}",
-  "buildCommand": "{{context..buildCommand || 'npm run build'}}",
-  "outputDirectory": "{{context..outputDirectory || '.next'}}",
-  "installCommand": "{{context..installCommand || 'npm install'}}",
-  "devCommand": "{{context..devCommand || 'npm run dev'}}",
+  "framework": "<%= context..framework || 'nextjs' %>",
+  "buildCommand": "<%= context..buildCommand || 'npm run build' %>",
+  "outputDirectory": "<%= context..outputDirectory || '.next' %>",
+  "installCommand": "<%= context..installCommand || 'npm install' %>",
+  "devCommand": "<%= context..devCommand || 'npm run dev' %>",
   "functions": {
     "src/app/api/**/*.ts": {
       "runtime": "nodejs18.x",
-      "regions": {{JSON.stringify(module.parameters.functions?.regions || ['iad1'])}},
-      "maxDuration": {{context..functions?.maxDuration || 10}}
+      "regions": <%= JSON.stringify(module.parameters.functions?.regions || ['iad1']) %>,
+      "maxDuration": <%= context..functions?.maxDuration || 10 %>
     }
   },
   "env": {
     {{#each module.parameters.envVars}}
-    "{{this.name}}": "{{this.value}}",
-    {{/each}}
+    "<%= item.name %>": "<%= item.value %>",
+    <% }); %>
   },
   "build": {
     "env": {

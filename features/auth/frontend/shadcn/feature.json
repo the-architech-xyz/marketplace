@@ -18,25 +18,55 @@
   ],
   "parameters": {
     "features": {
+      "signIn": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable sign-in UI components"
+      },
+      "signUp": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable sign-up UI components"
+      },
       "passwordReset": {
-        "description": "Enables password reset functionality (forms and pages)",
-        "default": true
+        "type": "boolean",
+        "default": true,
+        "description": "Enables password reset functionality (forms and pages)"
+      },
+      "profile": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable profile management UI components"
       },
       "mfa": {
-        "description": "Enables Multi-Factor Authentication setup and verification",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Enables Multi-Factor Authentication setup and verification"
       },
       "socialLogins": {
-        "description": "Enables UI for Google, GitHub, etc. logins",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Enables UI for Google, GitHub, etc. logins"
       },
       "accountSettingsPage": {
-        "description": "Generates a full page for managing account settings",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Generates a full page for managing account settings"
       },
       "profileManagement": {
-        "description": "Enables advanced profile management features",
-        "default": true
+        "type": "boolean",
+        "default": true,
+        "description": "Enables advanced profile management features"
+      },
+      "twoFactor": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable two-factor authentication UI"
+      },
+      "organizationManagement": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable organization management UI"
       }
     },
     "theme": {

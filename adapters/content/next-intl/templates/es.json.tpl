@@ -1,6 +1,6 @@
 {
   "common": {
-    "welcome": "Bienvenue sur {{project.name}}",
+    "welcome": "Bienvenue sur <%= project.name %>",
     "loading": "Chargement...",
     "error": "Une erreur s'est produite",
     "success": "Succès !",

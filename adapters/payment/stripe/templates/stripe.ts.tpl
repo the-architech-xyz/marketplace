@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 // Initialize Stripe with your secret key
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   appInfo: {
-    name: '{{project.name}}',
+    name: '<%= project.name %>',
     version: '1.0.0',
   },
 });
@@ -14,7 +14,7 @@ export const STRIPE_CONFIG = {
   webhookSecret: process.env.STRIPE_WEBHOOK_SECRET!,
   successUrl: process.env.APP_URL + '/payment/success',
   cancelUrl: process.env.APP_URL + '/payment/cancel',
-  currency: '{{context..currency}}',
+  currency: '<%= context..currency %>',
   mode: 'payment' as const,
 };
 

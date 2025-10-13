@@ -38,29 +38,37 @@
     }
   },
   "parameters": {
-    "organizationBilling": {
-      "name": "Organization Billing",
-      "description": "Enable organization-level billing features",
-      "type": "boolean",
-      "default": true
-    },
-    "seatManagement": {
-      "name": "Seat Management",
-      "description": "Enable seat-based billing",
-      "type": "boolean",
-      "default": true
-    },
-    "usageTracking": {
-      "name": "Usage Tracking",
-      "description": "Enable usage-based billing tracking",
-      "type": "boolean",
-      "default": true
-    },
-    "webhooks": {
-      "name": "Webhooks",
-      "description": "Enable Stripe webhook handling",
-      "type": "boolean",
-      "default": true
+    "features": {
+      "organizationBilling": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable organization-level billing features"
+      },
+      "seats": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable seat-based billing"
+      },
+      "usage": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable usage-based billing"
+      },
+      "webhooks": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable Stripe webhook handling"
+      },
+      "seatManagement": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable seat-based billing"
+      },
+      "usageTracking": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable usage-based billing tracking"
+      }
     }
   }
 }

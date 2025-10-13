@@ -19,7 +19,7 @@ export interface DatabaseSequelizeParams {
   password?: string;
 
   /** Database name */
-  databaseName: string;
+  databaseName?: string;
 
   /** Enable SQL logging */
   logging?: boolean;
@@ -28,7 +28,7 @@ export interface DatabaseSequelizeParams {
   pool?: boolean;
 
   /** Database type */
-  databaseType: 'postgresql' | 'mysql' | 'sqlite' | 'mariadb' | 'mssql';
+  databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mariadb' | 'mssql';
 }
 
 export interface DatabaseSequelizeFeatures {}

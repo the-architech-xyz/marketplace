@@ -20,7 +20,7 @@ if ! docker-compose -f docker-compose.drizzle.yml ps drizzle-db | grep -q "Up"; 
 fi
 
 # Check database connectivity
-if docker-compose -f docker-compose.drizzle.yml exec drizzle-db pg_isready -U drizzle_user -d {{project.name}}_drizzle; then
+if docker-compose -f docker-compose.drizzle.yml exec drizzle-db pg_isready -U drizzle_user -d <%= project.name %>_drizzle; then
     echo "✅ Database is healthy and accessible."
 else
     echo "❌ Database is not accessible."
@@ -29,6 +29,6 @@ fi
 
 # Check migration status
 echo "📊 Migration status:"
-docker-compose -f docker-compose.drizzle.yml exec drizzle-db psql -U drizzle_user -d {{project.name}}_drizzle -c "SELECT * FROM drizzle_migrations ORDER BY created_at DESC LIMIT 5;"
+docker-compose -f docker-compose.drizzle.yml exec drizzle-db psql -U drizzle_user -d <%= project.name %>_drizzle -c "SELECT * FROM drizzle_migrations ORDER BY created_at DESC LIMIT 5;"
 
 echo "✅ Health check completed successfully!"

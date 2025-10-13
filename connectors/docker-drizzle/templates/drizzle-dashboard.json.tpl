@@ -11,7 +11,7 @@
         "type": "stat",
         "targets": [
           {
-            "expr": "pg_stat_database_numbackends{datname=\"{{project.name}}_drizzle\"}",
+            "expr": "pg_stat_database_numbackends{datname=\"<%= project.name %>_drizzle\"}",
             "legendFormat": "Active Connections"
           }
         ]
@@ -22,7 +22,7 @@
         "type": "stat",
         "targets": [
           {
-            "expr": "pg_database_size_bytes{datname=\"{{project.name}}_drizzle\"}",
+            "expr": "pg_database_size_bytes{datname=\"<%= project.name %>_drizzle\"}",
             "legendFormat": "Database Size"
           }
         ]

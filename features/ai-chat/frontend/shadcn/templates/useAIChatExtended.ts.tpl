@@ -413,34 +413,27 @@ export function useAIChatExtended(options: UseAIChatExtendedOptions = {}): UseAI
       throw new Error('No conversation to export');
     }
     
-    const response = await fetch(`/api/chat/export`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ conversationId: currentConversationId, format }),
+    // ✅ CORRECT: Use backend service
+    const { export: exportMutation } = conversationsService;
+    const result = await exportMutation().mutateAsync({
+      chatId: currentConversationId,
+      format,
+      includeMetadata: true
     });
     
-    if (!response.ok) {
-      throw new Error('Failed to export conversation');
-    }
-    
-    return response.text();
-  }, [currentConversationId]);
+    return result.url;
+  }, [currentConversationId, conversationsService]);
 
   const importConversation = useCallback(async (data: string, format: 'json' | 'markdown'): Promise<Conversation> => {
-    const response = await fetch(`/api/chat/import`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data, format }),
+    // ✅ CORRECT: Use backend service
+    const { import: importMutation } = conversationsService;
+    const result = await importMutation().mutateAsync({
+      file: new File([data], `import.${format}`, { type: 'application/json' }),
+      format
     });
     
-    if (!response.ok) {
-      throw new Error('Failed to import conversation');
-    }
-    
-    const conversation = await response.json();
-    queryClient.invalidateQueries({ queryKey: ['conversations'] });
-    return conversation;
-  }, [queryClient]);
+    return result.chat;
+  }, [conversationsService]);
 
   // Update current conversation when conversationId changes
   useEffect(() => {

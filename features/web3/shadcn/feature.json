@@ -11,16 +11,46 @@
   "provides": ["web3-ui"],
   "parameters": {
     "features": {
-      "type": "object",
-      "default": {
-        "walletConnection": true,
-        "transactionHistory": true,
-        "nftGallery": false,
-        "defiIntegration": false,
-        "stakingInterface": false
+      "walletConnect": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable wallet connection UI"
       },
-      "description": "Web3 UI features to enable",
-      "required": false
+      "networkSwitch": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable network switching UI"
+      },
+      "transactionHistory": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable transaction history UI"
+      },
+      "tokenBalances": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable token balances UI"
+      },
+      "nftGallery": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable NFT gallery UI"
+      },
+      "walletConnection": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable wallet connection UI"
+      },
+      "defiIntegration": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable DeFi integration UI"
+      },
+      "stakingInterface": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable staking interface UI"
+      }
     },
     "theme": {
       "type": "string",

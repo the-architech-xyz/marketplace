@@ -93,6 +93,38 @@
       "default": [],
       "description": "Smart contract addresses",
       "required": false
+    },
+    "features": {
+      "walletConnect": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable wallet connection"
+      },
+      "smartContracts": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable smart contract interactions"
+      },
+      "transactions": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable transaction management"
+      },
+      "events": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable blockchain event listening"
+      },
+      "ens": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable ENS name resolution"
+      },
+      "nft": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable NFT functionality"
+      }
     }
   },
   "features": {

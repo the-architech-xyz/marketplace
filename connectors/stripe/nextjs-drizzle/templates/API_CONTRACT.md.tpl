@@ -5,7 +5,7 @@ This document defines the HTTP API contract for the Stripe Organization Billing 
 ## Base URL
 
 ```
-{{env.APP_URL}}/api
+<%= env.APP_URL %>/api
 ```
 
 ## Authentication

@@ -31,6 +31,6 @@ if ! docker info > /dev/null 2>&1; then
 fi
 
 # Restore backup
-docker-compose -f docker-compose.drizzle.yml exec -T drizzle-db psql -U drizzle_user -d {{project.name}}_drizzle < "$BACKUP_DIR/$BACKUP_FILE"
+docker-compose -f docker-compose.drizzle.yml exec -T drizzle-db psql -U drizzle_user -d <%= project.name %>_drizzle < "$BACKUP_DIR/$BACKUP_FILE"
 
 echo "✅ Database restored successfully!"

@@ -14,9 +14,31 @@ export interface DeploymentDockerParams {
 
   /** Enable health check endpoint */
   healthCheck?: boolean;
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable development environment */
+    development?: boolean;
+
+    /** Enable production environment */
+    production?: boolean;
+
+    /** Enable docker-compose setup */
+    compose?: boolean;
+  };
 }
 
-export interface DeploymentDockerFeatures {}
+export interface DeploymentDockerFeatures {
+
+  /** Enable development environment */
+  development: boolean;
+
+  /** Enable production environment */
+  production: boolean;
+
+  /** Enable docker-compose setup */
+  compose: boolean;
+}
 
 // 🚀 Auto-discovered artifacts
 export declare const DeploymentDockerArtifacts: {

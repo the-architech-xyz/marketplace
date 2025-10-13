@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 interface TechStackCardProps {
-  feature: {
+  capability: {
     id: string;
     name: string;
     description: string;

@@ -5,7 +5,7 @@ services:
   drizzle-db:
     image: postgres:15-alpine
     environment:
-      POSTGRES_DB: {{project.name}}_drizzle
+      POSTGRES_DB: <%= project.name %>_drizzle
       POSTGRES_USER: drizzle_user
       POSTGRES_PASSWORD: drizzle_password
     ports:
@@ -15,7 +15,7 @@ services:
       - ./database/drizzle-init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U drizzle_user -d {{project.name}}_drizzle"]
+      test: ["CMD-SHELL", "pg_isready -U drizzle_user -d <%= project.name %>_drizzle"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -29,7 +29,7 @@ services:
       drizzle-db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://drizzle_user:drizzle_password@drizzle-db:5432/{{project.name}}_drizzle
+      DATABASE_URL: postgresql://drizzle_user:drizzle_password@drizzle-db:5432/<%= project.name %>_drizzle
     volumes:
       - ./database/drizzle-migrations:/migrations
     command: ["drizzle-kit", "migrate"]

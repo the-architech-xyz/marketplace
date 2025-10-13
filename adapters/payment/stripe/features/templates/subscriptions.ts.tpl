@@ -33,7 +33,7 @@ export class SubscriptionManager {
   static async updateSubscription(
     subscriptionId: string,
     newPriceId: string,
-    prorationBehavior: 'create_prorations' | 'none' = '{{#if context..proration}}create_prorations{{else}}none{{/if}}'
+    prorationBehavior: 'create_prorations' | 'none' = '<% if (context..proration) { %>create_prorations<% } else { %>none<% } %>'
   ) {
     const subscription = await stripe.subscriptions.retrieve(subscriptionId);
     

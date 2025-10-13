@@ -39,6 +39,24 @@
       "description": "Refund processing and management",
       "type": "boolean",
       "default": false
+    },
+    "paymentMethods": {
+      "name": "Payment Methods",
+      "description": "Payment methods management",
+      "type": "boolean",
+      "default": true
+    },
+    "analytics": {
+      "name": "Analytics",
+      "description": "Payment analytics and reporting",
+      "type": "boolean",
+      "default": false
+    },
+    "organizationBilling": {
+      "name": "Organization Billing",
+      "description": "Organization-level billing features",
+      "type": "boolean",
+      "default": false
     }
   },
   "contract": {

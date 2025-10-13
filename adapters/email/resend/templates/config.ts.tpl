@@ -5,15 +5,15 @@ export const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Email configuration
 export const EMAIL_CONFIG = {
-  from: process.env.EMAIL_FROM || '{{context..fromEmail}}',
-  replyTo: process.env.EMAIL_REPLY_TO || 'support@{{project.name}}.com',
-  baseUrl: process.env.APP_URL || '{{env.APP_URL}}',
+  from: process.env.EMAIL_FROM || '<%= context..fromEmail %>',
+  replyTo: process.env.EMAIL_REPLY_TO || 'support@<%= project.name %>.com',
+  baseUrl: process.env.APP_URL || '<%= env.APP_URL %>',
 };
 
 // Email templates
 export const EMAIL_TEMPLATES = {
   welcome: {
-    subject: 'Welcome to {{project.name}}!',
+    subject: 'Welcome to <%= project.name %>!',
     template: 'welcome',
   },
   passwordReset: {

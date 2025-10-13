@@ -155,7 +155,7 @@ const storeConfig: StoreConfig = {
       name: 'Auth Store',
       enabled: process.env.NODE_ENV === 'development',
     },
-    immer: {{#if context..immer}}true{{else}}false{{/if}},
+    immer: <% if (context..immer) { %>true<% } else { %>false<% } %>,
     subscribeWithSelector: true,
   },
 };

@@ -1,13 +1,13 @@
 /**
- * Sentry Error Monitoring
+ * Sentry Core (Tech-Agnostic)
  * 
- * Complete error monitoring and performance tracking with Sentry
+ * Tech-agnostic Sentry types and utilities. Framework-specific implementations handled by Connectors.
  */
 
 export interface ObservabilitySentryParams {
 
   /** Sentry DSN */
-  dsn: string;
+  dsn?: string;
 
   /** Environment name */
   environment?: string;
@@ -15,16 +15,22 @@ export interface ObservabilitySentryParams {
   features?: {
 
     /** Essential monitoring (error tracking, basic performance) */
-    core: boolean;
+    core?: boolean;
+
+    /** Error tracking and reporting */
+    errorTracking?: boolean;
 
     /** Advanced performance monitoring */
-    performance: boolean;
+    performance?: boolean;
 
     /** Custom alerts and dashboard */
-    alerts: boolean;
+    alerts?: boolean;
 
     /** Enterprise features (profiling, custom metrics) */
-    enterprise: boolean;
+    enterprise?: boolean;
+
+    /** Session replay for debugging */
+    replay?: boolean;
   };
 
   /** Release version */
@@ -36,6 +42,9 @@ export interface ObservabilitySentryFeatures {
   /** Essential monitoring (error tracking, basic performance) */
   core: boolean;
 
+  /** Error tracking and reporting */
+  errorTracking: boolean;
+
   /** Advanced performance monitoring */
   performance: boolean;
 
@@ -44,6 +53,9 @@ export interface ObservabilitySentryFeatures {
 
   /** Enterprise features (profiling, custom metrics) */
   enterprise: boolean;
+
+  /** Session replay for debugging */
+  replay: boolean;
 }
 
 // 🚀 Auto-discovered artifacts

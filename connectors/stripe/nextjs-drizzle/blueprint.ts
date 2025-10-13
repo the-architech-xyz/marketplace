@@ -14,22 +14,22 @@ export default function generateBlueprint(config: MergedConfiguration): Blueprin
   actions.push(...generateCoreActions());
   
   // Organization billing features
-  if (config.parameters?.organizationBilling !== false) {
+  if (config.activeFeatures.includes('organizationBilling')) {
     actions.push(...generateOrganizationBillingActions());
   }
   
   // Seat management features
-  if (config.parameters?.seatManagement !== false) {
+  if (config.activeFeatures.includes('seatManagement')) {
     actions.push(...generateSeatManagementActions());
   }
   
   // Usage tracking features
-  if (config.parameters?.usageTracking !== false) {
+  if (config.activeFeatures.includes('usageTracking')) {
     actions.push(...generateUsageTrackingActions());
   }
   
   // Webhook handling
-  if (config.parameters?.webhooks !== false) {
+  if (config.activeFeatures.includes('webhooks')) {
     actions.push(...generateWebhookActions());
   }
   

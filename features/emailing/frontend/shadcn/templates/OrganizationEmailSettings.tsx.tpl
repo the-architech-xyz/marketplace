@@ -98,15 +98,15 @@ export function OrganizationEmailSettings() {
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          {{#if context.hasTemplates}}
+          <% if (context.hasTemplates) { %>
           <TabsTrigger value="templates">Templates</TabsTrigger>
-          {{/if}}
-          {{#if context.hasBulkEmail}}
+          <% } %>
+          <% if (context.hasBulkEmail) { %>
           <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
-          {{/if}}
-          {{#if context.hasAnalytics}}
+          <% } %>
+          <% if (context.hasAnalytics) { %>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
-          {{/if}}
+          <% } %>
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
 
@@ -209,7 +209,7 @@ export function OrganizationEmailSettings() {
           </Card>
         </TabsContent>
 
-        {{#if context.hasTemplates}}
+        <% if (context.hasTemplates) { %>
         <TabsContent value="templates" className="space-y-6">
           <Card>
             <CardHeader>
@@ -240,9 +240,9 @@ export function OrganizationEmailSettings() {
             </CardContent>
           </Card>
         </TabsContent>
-        {{/if}}
+        <% } %>
 
-        {{#if context.hasBulkEmail}}
+        <% if (context.hasBulkEmail) { %>
         <TabsContent value="campaigns" className="space-y-6">
           <Card>
             <CardHeader>
@@ -273,9 +273,9 @@ export function OrganizationEmailSettings() {
             </CardContent>
           </Card>
         </TabsContent>
-        {{/if}}
+        <% } %>
 
-        {{#if context.hasAnalytics}}
+        <% if (context.hasAnalytics) { %>
         <TabsContent value="analytics" className="space-y-6">
           <Card>
             <CardHeader>
@@ -303,7 +303,7 @@ export function OrganizationEmailSettings() {
             </CardContent>
           </Card>
         </TabsContent>
-        {{/if}}
+        <% } %>
 
         <TabsContent value="settings" className="space-y-6">
           <Card>

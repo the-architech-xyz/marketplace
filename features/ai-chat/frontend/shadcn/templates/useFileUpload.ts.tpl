@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { MessageAttachment, UploadFileData, UploadFileResult } from '@/types/ai-chat';
+import { AIChatService } from '@/lib/services/AIChatService';
 
 export interface UseFileUploadOptions {
   maxFiles?: number;
@@ -158,22 +159,14 @@ export function useFileUpload(options: UseFileUploadOptions = {}): UseFileUpload
 
   // Upload functionality
   const uploadSingleFile = useCallback(async (file: File): Promise<UploadFileResult> => {
-    const formData = new FormData();
-    formData.append('file', file);
-
     try {
-      const response = await fetch('/api/chat/upload', {
-        method: 'POST',
-        body: formData,
-        signal: abortControllerRef.current?.signal,
+      // ✅ CORRECT: Use backend service
+      const { upload } = AIChatService.useFileUpload();
+      
+      const result = await upload().mutateAsync({
+        file,
+        type: file.type.startsWith('image/') ? 'image' : 'document',
       });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Upload failed');
-      }
-
-      const result: UploadFileResult = await response.json();
       
       // Add to attachments
       setAttachments(prev => [...prev, result.attachment]);

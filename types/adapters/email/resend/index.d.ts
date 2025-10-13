@@ -7,24 +7,24 @@
 export interface EmailResendParams {
 
   /** Resend API key */
-  apiKey: string;
+  apiKey?: string;
 
   /** Default from email address */
-  fromEmail: string;
+  fromEmail?: string;
   /** Constitutional Architecture features configuration */
   features?: {
 
     /** Essential email functionality (sending, basic templates) */
-    core: boolean;
+    core?: boolean;
 
     /** Advanced email template system */
-    templates: boolean;
+    templates?: boolean;
 
     /** Email analytics and tracking */
-    analytics: boolean;
+    analytics?: boolean;
 
     /** Batch sending and campaign management */
-    campaigns: boolean;
+    campaigns?: boolean;
   };
 }
 

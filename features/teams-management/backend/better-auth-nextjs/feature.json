@@ -232,6 +232,28 @@
       "description": "Team billing and subscription management",
       "type": "boolean",
       "default": false
+    },
+    "features": {
+      "teams": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable team management"
+      },
+      "invitations": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable team invitations"
+      },
+      "roles": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable role-based access control"
+      },
+      "permissions": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable granular permissions"
+      }
     }
   }
 }

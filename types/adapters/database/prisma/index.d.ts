@@ -7,7 +7,7 @@
 export interface DatabasePrismaParams {
 
   /** Database provider */
-  provider: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
+  provider?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
 
   /** Enable Prisma Studio */
   studio?: boolean;
@@ -16,7 +16,7 @@ export interface DatabasePrismaParams {
   migrations?: boolean;
 
   /** Database type */
-  databaseType: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
+  databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
 }
 
 export interface DatabasePrismaFeatures {}

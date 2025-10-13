@@ -12,20 +12,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Sparkles, Code, Palette, Database, Shield } from 'lucide-react';
 
-// Mock project data - in real implementation, this would come from the genome
+// Project data from genome
 const projectData = {
-  name: '{{project.name}}',
-  description: '{{project.description}}',
-  version: '{{project.version}}',
+  name: '<%= project.name %>',
+  description: '<%= project.description %>',
+  version: '<%= project.version %>',
   modules: [
-    {{#each modules}}
+    <% modules.forEach((item, index) => { %>
     {
-      id: '{{id}}',
-      name: '{{name}}',
-      description: '{{description}}',
-      version: '{{version}}'
-    }{{#unless @last}},{{/unless}}
-    {{/each}}
+      id: '<%= item.id %>',
+      name: '<%= item.id %>',
+      description: 'Module: <%= item.id %>',
+      version: '<%= item.version %>'
+    }<% if (index !== modules.length - 1) { %>,<% } %>
+    <% }); %>
   ]
 };
 
@@ -54,11 +54,11 @@ export default function WelcomePage() {
           </motion.div>
           
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-            {{context.customTitle}}
+            <%= context.customTitle %>
           </h1>
           
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            {{context.customDescription}}
+            <%= context.customDescription %>
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export default function WelcomePage() {
       </motion.div>
 
       {/* Technology Stack */}
-      {{#if context.showTechStack}}
+      <% if (context.showTechStack) { %>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -104,10 +104,10 @@ export default function WelcomePage() {
           ))}
         </div>
       </motion.section>
-      {{/if}}
+      <% } %>
 
       {/* Component Showcase */}
-      {{#if context.showComponents}}
+      <% if (context.showComponents) { %>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -121,10 +121,10 @@ export default function WelcomePage() {
         
         <ComponentShowcase />
       </motion.section>
-      {{/if}}
+      <% } %>
 
       {/* Project Structure */}
-      {{#if context.showProjectStructure}}
+      <% if (context.showProjectStructure) { %>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -138,10 +138,10 @@ export default function WelcomePage() {
         
         <ProjectStructure structure={projectStructure} />
       </motion.section>
-      {{/if}}
+      <% } %>
 
       {/* Quick Start Guide */}
-      {{#if context.showQuickStart}}
+      <% if (context.showQuickStart) { %>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -155,10 +155,9 @@ export default function WelcomePage() {
         
         <QuickStartGuide />
       </motion.section>
-      {{/if}}
+      <% } %>
 
       {/* Footer */}
-      {{#if context.showArchitechBranding}}
       <motion.footer
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -166,6 +165,7 @@ export default function WelcomePage() {
         className="py-8 border-t border-gray-200"
       >
         <div className="text-center space-y-4">
+          <% if (context.showArchitechBranding) { %>
           <p className="text-gray-600">
             Generated with ❤️ by{' '}
             <a 
@@ -182,9 +182,13 @@ export default function WelcomePage() {
             <a href="https://github.com/architech-xyz" className="hover:text-gray-700">GitHub</a>
             <a href="https://discord.gg/architech" className="hover:text-gray-700">Discord</a>
           </div>
+          <% } else { %>
+          <div className="text-sm text-gray-500">
+            Built with Next.js, TypeScript, and Tailwind CSS
+          </div>
+          <% } %>
         </div>
       </motion.footer>
-      {{/if}}
     </WelcomeLayout>
   );
 }

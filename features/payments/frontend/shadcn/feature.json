@@ -18,24 +18,49 @@
   "parameters": {
     "features": {
       "core": {
-        "description": "Essential payment functionality (forms, checkout, transactions)",
-        "default": true
+        "type": "boolean",
+        "default": true,
+        "description": "Essential payment functionality (forms, checkout, transactions)"
+      },
+      "checkout": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable checkout UI components"
       },
       "subscriptions": {
-        "description": "Subscription management and billing",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Subscription management and billing"
+      },
+      "invoices": {
+        "type": "boolean",
+        "default": false,
+        "description": "Invoice generation and management"
+      },
+      "paymentMethods": {
+        "type": "boolean",
+        "default": true,
+        "description": "Payment methods management UI"
+      },
+      "billingPortal": {
+        "type": "boolean",
+        "default": false,
+        "description": "Billing portal UI"
       },
       "invoicing": {
-        "description": "Invoice generation and management",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Invoice generation and management"
       },
       "webhooks": {
-        "description": "Payment webhook handling",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Payment webhook handling"
       },
       "analytics": {
-        "description": "Payment analytics and reporting",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Payment analytics and reporting"
       }
     },
     "theme": {

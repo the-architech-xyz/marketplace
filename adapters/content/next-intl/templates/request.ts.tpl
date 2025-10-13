@@ -5,8 +5,8 @@ export default getRequestConfig(async ({requestLocale}) => {
   let locale = await requestLocale;
 
   // Ensure that a valid locale is used
-  const supportedLocales = {{context..locales}};
-  const defaultLocale = '{{context..defaultLocale}}';
+  const supportedLocales = <%= context..locales %>;
+  const defaultLocale = '<%= context..defaultLocale %>';
   
   if (!locale || !supportedLocales.includes(locale as string)) {
     locale = defaultLocale;

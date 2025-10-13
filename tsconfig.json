@@ -21,19 +21,21 @@
     "types": ["node"],
     "paths": {
       "@thearchitech.xyz/marketplace": ["./index.js"],
-      "@thearchitech.xyz/marketplace/types": ["./types/index.d.ts"]
+      "@thearchitech.xyz/marketplace/types": ["./types/index.ts"]
     }
   },
   "include": [
     "adapters/**/blueprint.ts",
     "connectors/**/blueprint.ts",
     "features/**/blueprint.ts",
-    "genomes/simple-app.genome.ts"
+    "genomes/**/*.genome.ts",
+    "types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     "dist",
     "**/*.test.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "genomes/test/**"
   ]
 }

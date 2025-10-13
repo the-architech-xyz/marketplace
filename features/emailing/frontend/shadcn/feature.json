@@ -11,18 +11,41 @@
   "provides": ["emailing-ui"],
   "parameters": {
     "features": {
-      "type": "object",
-      "default": {
-        "emailComposer": true,
-        "emailList": true,
-        "templates": true,
-        "analytics": false,
-        "campaigns": false,
-        "scheduling": false,
-        "advancedTemplates": false
+      "emailComposer": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable email composer UI"
       },
-      "description": "Emailing UI features to enable",
-      "required": false
+      "emailList": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable email list UI"
+      },
+      "templates": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable email templates UI"
+      },
+      "analytics": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable email analytics UI"
+      },
+      "campaigns": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable email campaigns UI"
+      },
+      "scheduling": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable email scheduling UI"
+      },
+      "advancedTemplates": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable advanced email templates UI"
+      }
     },
     "theme": {
       "type": "string",

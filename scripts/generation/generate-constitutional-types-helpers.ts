@@ -25,13 +25,17 @@ export class ConstitutionalTypeGeneratorHelpers {
       const moduleType = analysis.moduleType;
       
       // Build the correct path based on module type and moduleId
+      // NOTE: moduleId for connectors/features ALREADY includes the prefix
+      // Adapters: 'database/drizzle' (no prefix) → 'adapters/database/drizzle'
+      // Connectors: 'connectors/sentry/nextjs' (has prefix) → use as-is
+      // Features: 'features/auth/frontend/shadcn' (has prefix) → use as-is
       let modulePath: string;
       if (moduleType === 'adapter') {
         modulePath = `adapters/${moduleId}`;
       } else if (moduleType === 'connector') {
-        modulePath = `connectors/${moduleId}`;
+        modulePath = moduleId; // Already has 'connectors/' prefix
       } else if (moduleType === 'feature') {
-        modulePath = `features/${moduleId}`;
+        modulePath = moduleId; // Already has 'features/' prefix
       } else {
         // Skip unknown types
         continue;
@@ -245,7 +249,7 @@ export type ${moduleName}Enhances = typeof ${artifactsConst}.enhances[number];
       }
       
       const type = this.getTypeScriptType(value);
-      const optional = value.required === false ? '?' : '';
+      const optional = (value.required === false || value.default !== undefined) ? '?' : '';
       const description = value.description ? `\n  /** ${value.description} */` : '';
       return `${description}\n  ${key}${optional}: ${type};`;
     }).join('\n');
@@ -265,7 +269,8 @@ export type ${moduleName}Enhances = typeof ${artifactsConst}.enhances[number];
     const featureProperties = Object.entries(features).map(([featureName, featureConfig]: [string, any]) => {
       const description = featureConfig.description ? `\n    /** ${featureConfig.description} */` : '';
       const type = this.getConstitutionalFeatureType(featureConfig);
-      return `${description}\n    ${featureName}: ${type};`;
+      const optional = (featureConfig.required === false || featureConfig.default !== undefined) ? '?' : '';
+      return `${description}\n    ${featureName}${optional}: ${type};`;
     }).join('\n');
     
     return `  /** Constitutional Architecture features configuration */
@@ -669,7 +674,7 @@ ${moduleTypes.join('\n')};`;
       }
       
       const type = this.getTypeScriptType(value);
-      const optional = value.required === false ? '?' : '';
+      const optional = (value.required === false || value.default !== undefined) ? '?' : '';
       const description = value.description ? `\n    /** ${value.description} */` : '';
       return `${description}\n    ${key}${optional}: ${type};`;
     }).join('\n');

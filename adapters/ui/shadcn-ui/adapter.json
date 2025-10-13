@@ -37,6 +37,14 @@
     ]
   },
   "capabilities": {
+    "installableComponents": [
+      "button", "input", "card", "dialog", "form", "table", "badge", "avatar",
+      "dropdown-menu", "sonner", "sheet", "tabs", "accordion", "carousel",
+      "calendar", "date-picker", "alert-dialog", "alert", "checkbox", "switch",
+      "collapsible", "context-menu", "hover-card", "menubar", "navigation-menu",
+      "popover", "progress", "radio-group", "scroll-area", "slider", "toggle",
+      "toggle-group", "label"
+    ],
     "ui-components": {
       "version": "1.0.0",
       "description": "Beautifully designed React components",
@@ -60,6 +68,13 @@
   },
   "limitations": "Requires React framework and Tailwind CSS",
   "parameters": {
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false,
+      "options": ["default", "dark", "light", "minimal"]
+    },
     "components": {
       "type": "array",
       "default": [
@@ -99,34 +114,40 @@
       "items": {
         "type": "string",
         "enum": [
-          "button",
-          "input",
-          "card",
-          "dialog",
-          "form",
-          "table",
-          "badge",
-          "avatar",
-          "dropdown-menu",
-          "sonner",
-          "sheet",
-          "tabs",
-          "accordion",
-          "carousel",
-          "calendar",
-          "date-picker",
+          "alert",
           "alert-dialog",
+          "accordion",
+          "avatar",
+          "badge",
+          "button",
+          "calendar",
+          "card",
+          "carousel",
           "checkbox",
           "collapsible",
           "context-menu",
+          "date-picker",
+          "dialog",
+          "dropdown-menu",
+          "form",
           "hover-card",
+          "input",
+          "label",
           "menubar",
           "navigation-menu",
+          "pagination",
           "popover",
           "progress",
           "radio-group",
           "scroll-area",
+          "separator",
+          "sheet",
           "slider",
+          "sonner",
+          "switch",
+          "table",
+          "tabs",
+          "textarea",
           "toggle",
           "toggle-group"
         ]

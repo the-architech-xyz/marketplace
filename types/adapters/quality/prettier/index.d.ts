@@ -35,6 +35,12 @@ export interface QualityPrettierParams {
 
   /** Prettier plugins to use */
   plugins?: string[];
+
+  /** Enable Tailwind CSS class sorting plugin */
+  tailwind?: boolean;
+
+  /** Enable import organization */
+  organizeImports?: boolean;
 }
 
 export interface QualityPrettierFeatures {}

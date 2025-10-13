@@ -10,24 +10,24 @@ export interface DatabaseDrizzleParams {
   provider?: 'neon' | 'planetscale' | 'supabase' | 'local';
 
   /** Database type to use */
-  databaseType: 'postgresql' | 'mysql' | 'sqlite';
+  databaseType?: 'postgresql' | 'mysql' | 'sqlite';
   /** Constitutional Architecture features configuration */
   features?: {
 
     /** Essential database functionality (schema, queries, types) */
-    core: boolean;
+    core?: boolean;
 
     /** Database schema migrations and versioning */
-    migrations: boolean;
+    migrations?: boolean;
 
     /** Visual database browser and query interface */
-    studio: boolean;
+    studio?: boolean;
 
     /** Advanced relationship management and queries */
-    relations: boolean;
+    relations?: boolean;
 
     /** Data seeding and fixtures management */
-    seeding: boolean;
+    seeding?: boolean;
   };
 }
 

@@ -23,9 +23,49 @@ export interface FrameworkNextjsParams {
 
   /** Import alias for absolute imports */
   importAlias?: string;
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable SEO optimization features */
+    seo?: boolean;
+
+    /** Enable Next.js image optimization */
+    imageOptimization?: boolean;
+
+    /** Enable MDX support for markdown content */
+    mdx?: boolean;
+
+    /** Enable performance optimization features */
+    performance?: boolean;
+
+    /** Enable streaming features */
+    streaming?: boolean;
+
+    /** Enable internationalization features */
+    i18n?: boolean;
+  };
 }
 
-export interface FrameworkNextjsFeatures {}
+export interface FrameworkNextjsFeatures {
+
+  /** Enable SEO optimization features */
+  seo: boolean;
+
+  /** Enable Next.js image optimization */
+  imageOptimization: boolean;
+
+  /** Enable MDX support for markdown content */
+  mdx: boolean;
+
+  /** Enable performance optimization features */
+  performance: boolean;
+
+  /** Enable streaming features */
+  streaming: boolean;
+
+  /** Enable internationalization features */
+  i18n: boolean;
+}
 
 // 🚀 Auto-discovered artifacts
 export declare const FrameworkNextjsArtifacts: {

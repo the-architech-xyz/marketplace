@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { useAIProvider } from './AIProvider';
+import { AIChatService } from '@/lib/services/AIChatService';
 
 // Types
 interface ChatMessage {
@@ -146,126 +147,40 @@ export const useChat = (options: UseChatOptions = {}): UseChatReturn => {
     lastMessageRef.current = assistantMessage;
 
     try {
-      // Abort previous request if exists
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-
-      abortControllerRef.current = new AbortController();
-
-      const response = await fetch('/api/ai/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': process.env.NEXT_PUBLIC_AI_API_KEY || '',
-        },
-        body: JSON.stringify({
-          messages: [...messages, userMessage].map(msg => ({
-            role: msg.role,
-            content: msg.content,
-          })),
-          settings: {
-            model: currentModel,
-            provider: currentProvider,
-            ...settings,
-          },
-          stream,
-        }),
-        signal: abortControllerRef.current.signal,
+      // ✅ CORRECT: Use backend service
+      const { send } = AIChatService.useMessages();
+      
+      const result = await send().mutateAsync({
+        content: content.trim(),
+        model: currentModel,
+        temperature: settings.temperature,
+        maxTokens: settings.maxTokens,
+        stream,
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to send message');
-      }
+      // Update assistant message with result
+      updateMessage(assistantMessage.id, {
+        content: result.message.content,
+        metadata: {
+          tokens: result.message.metadata?.tokens,
+          model: currentModel,
+          provider: currentProvider,
+          cost: result.message.metadata?.cost,
+          duration: result.message.metadata?.duration,
+        },
+      });
 
-      if (stream && response.body) {
-        // Handle streaming response
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let fullContent = '';
-
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-
-          const chunk = decoder.decode(value);
-          const lines = chunk.split('\n');
-
-          for (const line of lines) {
-            if (line.startsWith('data: ')) {
-              const data = line.slice(6);
-              if (data === '[DONE]') continue;
-
-              try {
-                const parsed = JSON.parse(data);
-                if (parsed.chunk) {
-                  fullContent += parsed.chunk;
-                  updateMessage(assistantMessage.id, {
-                    content: fullContent,
-                  });
-                }
-
-                if (parsed.isComplete) {
-                  updateMessage(assistantMessage.id, {
-                    content: fullContent,
-                    metadata: {
-                      tokens: parsed.usage?.totalTokens,
-                      model: currentModel,
-                      provider: currentProvider,
-                      cost: parsed.cost,
-                      duration: parsed.duration,
-                    },
-                  });
-
-                  // Update usage
-                  if (parsed.usage) {
-                    updateUsage({
-                      totalTokens: prev => prev + parsed.usage.totalTokens,
-                      totalCost: prev => prev + (parsed.cost || 0),
-                      totalRequests: prev => prev + 1,
-                    });
-                  }
-
-                  onComplete?.(assistantMessage);
-                }
-              } catch (e) {
-                // Ignore parsing errors for streaming
-              }
-            }
-          }
-        }
-      } else {
-        // Handle non-streaming response
-        const data = await response.json();
-        updateMessage(assistantMessage.id, {
-          content: data.message.content,
-          metadata: {
-            tokens: data.usage?.totalTokens,
-            model: currentModel,
-            provider: currentProvider,
-            cost: data.cost,
-            duration: data.duration,
-          },
+      // Update usage stats
+      if (result.message.metadata?.tokens) {
+        updateUsage({
+          totalTokens: prev => prev + result.message.metadata.tokens,
+          totalCost: prev => prev + (result.message.metadata.cost || 0),
+          totalRequests: prev => prev + 1,
         });
-
-        // Update usage
-        if (data.usage) {
-          updateUsage({
-            totalTokens: prev => prev + data.usage.totalTokens,
-            totalCost: prev => prev + (data.cost || 0),
-            totalRequests: prev => prev + 1,
-          });
-        }
-
-        onComplete?.(assistantMessage);
       }
+
+      onComplete?.(assistantMessage);
     } catch (error) {
-      if (error instanceof Error && error.name === 'AbortError') {
-        // Request was aborted, don't show error
-        return;
-      }
-
       const errorMessage = error instanceof Error ? error.message : 'An error occurred';
       setError(errorMessage);
       updateMessage(assistantMessage.id, {
@@ -274,7 +189,6 @@ export const useChat = (options: UseChatOptions = {}): UseChatReturn => {
       onError?.(error instanceof Error ? error : new Error(errorMessage));
     } finally {
       setIsLoading(false);
-      abortControllerRef.current = null;
     }
   }, [
     messages,

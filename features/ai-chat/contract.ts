@@ -361,6 +361,8 @@ export interface IAIChatService {
     update: any; // UseMutationResult<Conversation, Error, { id: string; data: UpdateConversationData }>
     delete: any; // UseMutationResult<void, Error, string>
     clear: any; // UseMutationResult<void, Error, string>
+    export: any; // UseMutationResult<ExportChatResult, Error, ExportChatData>
+    import: any; // UseMutationResult<ImportChatResult, Error, ImportChatData>
   };
 
   /**
@@ -400,5 +402,15 @@ export interface IAIChatService {
     // Query operations
     getChatAnalytics: any; // UseQueryResult<ChatAnalytics, Error>
     getConversationAnalytics: (conversationId: string) => any; // UseQueryResult<ConversationAnalytics, Error>
+  };
+
+  /**
+   * File Upload Service
+   * Provides file upload and attachment management
+   */
+  useFileUpload: () => {
+    // Mutation operations
+    upload: any; // UseMutationResult<UploadFileResult, Error, UploadFileData>
+    delete: any; // UseMutationResult<void, Error, string>
   };
 }

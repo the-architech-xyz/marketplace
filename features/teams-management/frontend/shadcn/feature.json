@@ -17,20 +17,44 @@
   "parameters": {
     "features": {
       "core": {
-        "description": "Basic team management (list, creation, member management)",
-        "default": true
+        "type": "boolean",
+        "default": true,
+        "description": "Basic team management (list, creation, member management)"
       },
-      "advanced": {
-        "description": "Advanced team features (settings, permissions, dashboard)",
-        "default": false
+      "teams": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable team management UI"
       },
-      "analytics": {
-        "description": "Team analytics and reporting",
-        "default": false
+      "members": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable member management UI"
+      },
+      "invitations": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable team invitations UI"
+      },
+      "roles": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable role management UI"
       },
       "billing": {
-        "description": "Team billing and usage tracking",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Team billing and usage tracking"
+      },
+      "analytics": {
+        "type": "boolean",
+        "default": false,
+        "description": "Team analytics and reporting"
+      },
+      "advanced": {
+        "type": "boolean",
+        "default": false,
+        "description": "Advanced team features (settings, permissions, dashboard)"
       }
     },
     "theme": {
@@ -76,6 +100,13 @@
     },
     "billing": {
       "prerequisites": ["teams-core", "teams-advanced"],
+      "requires_capabilities": [
+        "payments-core",
+        "payments-subscriptions"
+      ],
+      "requires_features": [
+        "payments/frontend/shadcn"
+      ],
       "provides": ["teams-billing"],
       "templates": [
         "BillingDashboard.tsx",

@@ -1,10 +1,15 @@
 /**
  * Email Management Hooks
  * 
- * React hooks for email management functionality using TanStack Query
+ * Pure frontend hooks that consume the EmailService from backend.
+ * NO direct API calls - all data fetching delegated to backend service.
+ * 
+ * This follows The Architech's contract architecture:
+ * - Frontend imports ONLY from contract and backend service
+ * - Frontend makes ZERO direct fetch() calls
+ * - Frontend consumes backend hooks via IEmailService interface
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { 
   Email, 
   EmailTemplate, 
@@ -20,251 +25,107 @@ import {
   UseEmailAnalyticsReturn
 } from './types';
 import { useEmailContext } from './use-email-context';
-import { EmailService } from '@/features/emailing/backend/resend-nextjs/EmailService';
+import { EmailService } from '@/lib/services/EmailService';
 
-// Query keys for consistent caching
-export const emailKeys = {
-  all: ['emails'] as const,
-  lists: () => [...emailKeys.all, 'list'] as const,
-  list: (filters: EmailListFilters) => [...emailKeys.lists(), filters] as const,
-  details: () => [...emailKeys.all, 'detail'] as const,
-  detail: (id: string) => [...emailKeys.details(), id] as const,
-  analytics: () => [...emailKeys.all, 'analytics'] as const,
-};
+// Note: Query keys are managed by backend service
+// Frontend just uses the hooks provided by IEmailService
 
-export const templateKeys = {
-  all: ['templates'] as const,
-  lists: () => [...templateKeys.all, 'list'] as const,
-  list: (filters: { isActive?: boolean; category?: string }) => [...templateKeys.lists(), filters] as const,
-  details: () => [...templateKeys.all, 'detail'] as const,
-  detail: (id: string) => [...templateKeys.details(), id] as const,
-};
+/**
+ * Email Management Hooks
+ * 
+ * Pure frontend hooks that delegate to EmailService from backend.
+ * These are convenience wrappers that follow The Architech's gold standard pattern.
+ */
 
-// API functions (these would be implemented in your API layer)
-const emailApi = {
-  getEmails: async (filters: EmailListFilters, page = 1, limit = 20): Promise<EmailListResponse> => {
-    const params = new URLSearchParams({
-      page: page.toString(),
-      limit: limit.toString(),
-      ...(filters.status && { status: filters.status }),
-      ...(filters.templateId && { templateId: filters.templateId }),
-      ...(filters.dateFrom && { dateFrom: filters.dateFrom.toISOString() }),
-      ...(filters.dateTo && { dateTo: filters.dateTo.toISOString() }),
-      ...(filters.search && { search: filters.search }),
-    });
+// ============================================================================
+// EMAIL HOOKS - Delegate to EmailService.useEmails()
+// ============================================================================
 
-    const response = await fetch(`/api/emails?${params}`);
-    if (!response.ok) throw new Error('Failed to fetch emails');
-    return response.json();
-  },
-
-  getEmail: async (id: string): Promise<Email> => {
-    const response = await fetch(`/api/emails/${id}`);
-    if (!response.ok) throw new Error('Failed to fetch email');
-    return response.json();
-  },
-
-  sendEmail: async (data: EmailSendRequest): Promise<{ success: boolean; emailId?: string }> => {
-    const response = await fetch('/api/emails/send', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) throw new Error('Failed to send email');
-    return response.json();
-  },
-
-  getAnalytics: async (): Promise<EmailAnalytics> => {
-    const response = await fetch('/api/emails/analytics');
-    if (!response.ok) throw new Error('Failed to fetch analytics');
-    return response.json();
-  },
-};
-
-const templateApi = {
-  getTemplates: async (filters: { isActive?: boolean; category?: string } = {}): Promise<TemplateListResponse> => {
-    const params = new URLSearchParams();
-    if (filters.isActive !== undefined) params.append('isActive', filters.isActive.toString());
-    if (filters.category) params.append('category', filters.category);
-
-    const response = await fetch(`/api/templates?${params}`);
-    if (!response.ok) throw new Error('Failed to fetch templates');
-    return response.json();
-  },
-
-  getTemplate: async (id: string): Promise<EmailTemplate> => {
-    const response = await fetch(`/api/templates/${id}`);
-    if (!response.ok) throw new Error('Failed to fetch template');
-    return response.json();
-  },
-
-  createTemplate: async (data: TemplateCreateRequest): Promise<EmailTemplate> => {
-    const response = await fetch('/api/templates', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) throw new Error('Failed to create template');
-    return response.json();
-  },
-
-  updateTemplate: async (data: TemplateUpdateRequest): Promise<EmailTemplate> => {
-    const response = await fetch(`/api/templates/${data.id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) throw new Error('Failed to update template');
-    return response.json();
-  },
-
-  deleteTemplate: async (id: string): Promise<void> => {
-    const response = await fetch(`/api/templates/${id}`, {
-      method: 'DELETE',
-    });
-    if (!response.ok) throw new Error('Failed to delete template');
-  },
-};
-
-// Email hooks
-export function useEmails(filters: EmailListFilters = {}, page = 1, limit = 20): UseEmailsReturn {
-  const queryClient = useQueryClient();
+export function useEmails(filters: EmailListFilters = {}): UseEmailsReturn {
   const { userContext, isLoading: authLoading, error: authError } = useEmailContext();
 
-  // Use EmailService with user context
-  const emailService = EmailService.useEmails(userContext);
+  // ✅ CORRECT: Use backend service
+  const { list, get } = EmailService.useEmails();
 
-  const {
-    data,
-    isLoading,
-    error,
-    refetch,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useQuery({
-    queryKey: emailKeys.list(filters),
-    queryFn: ({ pageParam = page }) => emailApi.getEmails(filters, pageParam, limit),
-    getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.page + 1 : undefined,
-    enabled: !authLoading && !!userContext, // Only run when auth is loaded and user is authenticated
-  });
-
-  const emails = data?.pages.flatMap(page => page.emails) ?? [];
-  const hasMore = hasNextPage ?? false;
-
-  const loadMore = () => {
-    if (hasMore && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  };
+  // Call backend hooks
+  const listQuery = list(filters);
 
   return {
-    emails,
-    isLoading: isLoading || authLoading,
-    error: (error as Error) || authError || null,
-    refetch,
-    hasMore,
-    loadMore,
+    emails: listQuery.data ?? [],
+    isLoading: listQuery.isLoading || authLoading,
+    error: listQuery.error || authError,
+    refetch: listQuery.refetch,
+    hasMore: false, // Pagination handled by backend
+    loadMore: () => {}, // Pagination handled by backend
   };
 }
 
 export function useEmail(id: string) {
-  return useQuery({
-    queryKey: emailKeys.detail(id),
-    queryFn: () => emailApi.getEmail(id),
-    enabled: !!id,
-  });
+  // ✅ CORRECT: Use backend service
+  const { get } = EmailService.useEmails();
+  return get(id);
 }
 
 export function useSendEmail() {
-  const queryClient = useQueryClient();
-  const { userContext, isLoading: authLoading, error: authError } = useEmailContext();
-
-  // Use EmailService with user context
-  const emailService = EmailService.useEmails(userContext);
-
-  return emailService.send();
+  // ✅ CORRECT: Use backend service mutation
+  const { send } = EmailService.useEmails();
+  return send();
 }
 
 export function useEmailAnalytics(): UseEmailAnalyticsReturn {
   const { userContext, isLoading: authLoading, error: authError } = useEmailContext();
   
-  // Use EmailService with user context
-  const emailService = EmailService.useAnalytics(userContext);
-
-  const {
-    data: analytics,
-    isLoading,
-    error,
-    refetch,
-  } = emailService.getEmailAnalytics();
+  // ✅ CORRECT: Use backend service
+  const { getEmailAnalytics } = EmailService.useAnalytics();
+  
+  const analyticsQuery = getEmailAnalytics();
 
   return {
-    analytics: analytics?.data ?? null,
-    isLoading: isLoading || authLoading,
-    error: (error as Error) || authError || null,
-    refetch,
+    analytics: analyticsQuery.data ?? null,
+    isLoading: analyticsQuery.isLoading || authLoading,
+    error: analyticsQuery.error || authError,
+    refetch: analyticsQuery.refetch,
   };
 }
 
-// Template hooks
+// ============================================================================
+// TEMPLATE HOOKS - Delegate to EmailService.useTemplates()
+// ============================================================================
+
 export function useTemplates(filters: { isActive?: boolean; category?: string } = {}): UseTemplatesReturn {
-  const {
-    data,
-    isLoading,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: templateKeys.list(filters),
-    queryFn: () => templateApi.getTemplates(filters),
-  });
+  // ✅ CORRECT: Use backend service
+  const { list } = EmailService.useTemplates();
+  
+  const templatesQuery = list(filters);
 
   return {
-    templates: data?.templates ?? [],
-    isLoading,
-    error: error as Error | null,
-    refetch,
+    templates: templatesQuery.data ?? [],
+    isLoading: templatesQuery.isLoading,
+    error: templatesQuery.error,
+    refetch: templatesQuery.refetch,
   };
 }
 
 export function useTemplate(id: string) {
-  return useQuery({
-    queryKey: templateKeys.detail(id),
-    queryFn: () => templateApi.getTemplate(id),
-    enabled: !!id,
-  });
+  // ✅ CORRECT: Use backend service
+  const { get } = EmailService.useTemplates();
+  return get(id);
 }
 
 export function useCreateTemplate() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: templateApi.createTemplate,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: templateKeys.lists() });
-    },
-  });
+  // ✅ CORRECT: Use backend service mutation
+  const { create } = EmailService.useTemplates();
+  return create();
 }
 
 export function useUpdateTemplate() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: templateApi.updateTemplate,
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: templateKeys.lists() });
-      queryClient.invalidateQueries({ queryKey: templateKeys.detail(data.id) });
-    },
-  });
+  // ✅ CORRECT: Use backend service mutation
+  const { update } = EmailService.useTemplates();
+  return update();
 }
 
 export function useDeleteTemplate() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: templateApi.deleteTemplate,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: templateKeys.lists() });
-    },
-  });
+  // ✅ CORRECT: Use backend service mutation
+  const { delete: deleteTemplate } = EmailService.useTemplates();
+  return deleteTemplate();
 }

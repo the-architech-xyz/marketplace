@@ -5,7 +5,7 @@ This document defines the HTTP API contract between the PaymentService (TanStack
 ## Base URL
 
 ```
-{{env.APP_URL}}/api
+<%= env.APP_URL %>/api
 ```
 
 ## Authentication

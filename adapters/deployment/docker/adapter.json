@@ -37,6 +37,23 @@
       "default": true,
       "description": "Enable health check endpoint",
       "required": false
+    },
+    "features": {
+      "development": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable development environment"
+      },
+      "production": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable production environment"
+      },
+      "compose": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable docker-compose setup"
+      }
     }
   },
   "features": {

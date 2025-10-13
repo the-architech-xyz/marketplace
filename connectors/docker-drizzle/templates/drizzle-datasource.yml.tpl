@@ -5,7 +5,7 @@ datasources:
     type: 'postgres'
     access: 'proxy'
     url: drizzle-db:5432
-    database: {{project.name}}_drizzle
+    database: <%= project.name %>_drizzle
     user: drizzle_user
     secureJsonData:
       password: drizzle_password

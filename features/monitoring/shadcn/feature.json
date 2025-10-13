@@ -59,20 +59,29 @@
     },
     "features": {
       "core": {
-        "description": "Essential monitoring (error tracking, basic performance)",
-        "default": true
+        "type": "boolean",
+        "default": true,
+        "description": "Essential monitoring (error tracking, basic performance)"
       },
       "performance": {
-        "description": "Advanced performance monitoring",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Advanced performance monitoring"
+      },
+      "errors": {
+        "type": "boolean",
+        "default": true,
+        "description": "Error tracking and reporting"
       },
       "feedback": {
-        "description": "User feedback collection",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "User feedback collection"
       },
       "analytics": {
-        "description": "Monitoring analytics and reporting",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Monitoring analytics and reporting"
       }
     },
     "environments": {

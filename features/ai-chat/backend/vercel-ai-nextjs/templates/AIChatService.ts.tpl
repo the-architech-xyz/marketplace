@@ -10,7 +10,8 @@ import {
   IAIChatService, 
   Conversation, Message, ChatAnalytics, ChatSettings,
   CreateConversationData, UpdateConversationData, SendMessageData, UpdateMessageData,
-  ConversationFilters, MessageFilters, AnalyticsFilters
+  ConversationFilters, MessageFilters, AnalyticsFilters,
+  ExportChatData, ImportChatData, UploadFileData
 } from '@/features/ai-chat/contract';
 import { aiChatApi } from '@/lib/ai-chat/api';
 
@@ -85,7 +86,22 @@ export const AIChatService: IAIChatService = {
       }
     });
 
-    return { list, get, create, update, delete, clear };
+    const exportChat = () => useMutation({
+      mutationFn: async (data: ExportChatData) => {
+        return await aiChatApi.exportChat(data);
+      }
+    });
+
+    const importChat = () => useMutation({
+      mutationFn: async (data: ImportChatData) => {
+        return await aiChatApi.importChat(data);
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['conversations'] });
+      }
+    });
+
+    return { list, get, create, update, delete, clear, export: exportChat, import: importChat };
   },
 
   /**
@@ -214,5 +230,31 @@ export const AIChatService: IAIChatService = {
     });
 
     return { getChatAnalytics, getConversationAnalytics };
+  },
+
+  /**
+   * File Upload Service
+   * Provides file upload and attachment management
+   */
+  useFileUpload: () => {
+    const queryClient = useQueryClient();
+
+    // Mutation operations
+    const upload = () => useMutation({
+      mutationFn: async (data: UploadFileData) => {
+        return await aiChatApi.uploadFile(data);
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['messages'] });
+      }
+    });
+
+    const deleteAttachment = () => useMutation({
+      mutationFn: async (id: string) => {
+        return await aiChatApi.deleteAttachment(id);
+      }
+    });
+
+    return { upload, delete: deleteAttachment };
   }
 };

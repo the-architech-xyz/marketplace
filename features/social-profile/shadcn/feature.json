@@ -69,20 +69,66 @@
       "options": ["shadcn", "mui", "chakra"]
     },
     "features": {
-      "type": "object",
-      "default": {
-        "profileManagement": true,
-        "socialConnections": true,
-        "activityFeeds": true,
-        "notifications": true,
-        "privacyControls": true,
-        "socialSettings": true,
-        "avatarUpload": true,
-        "blocking": true,
-        "reporting": true
+      "walletProfile": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable wallet profile features"
       },
-      "description": "Social profile features to enable",
-      "required": false
+      "web3Social": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable Web3 social features"
+      },
+      "achievements": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable achievements and badges"
+      },
+      "profileManagement": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable profile management"
+      },
+      "socialConnections": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable social connections"
+      },
+      "activityFeeds": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable activity feeds"
+      },
+      "notifications": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable notifications"
+      },
+      "privacyControls": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable privacy controls"
+      },
+      "socialSettings": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable social settings"
+      },
+      "avatarUpload": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable avatar upload"
+      },
+      "blocking": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable user blocking"
+      },
+      "reporting": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable user reporting"
+      }
     }
   },
   "implementations": {

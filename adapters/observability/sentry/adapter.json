@@ -1,7 +1,7 @@
 {
-  "id": "sentry",
-  "name": "Sentry Error Monitoring",
-  "description": "Complete error monitoring and performance tracking with Sentry",
+  "id": "technologies/observability/sentry-core",
+  "name": "Sentry Core (Tech-Agnostic)",
+  "description": "Tech-agnostic Sentry types and utilities. Framework-specific implementations handled by Connectors.",
   "category": "observability",
   "version": "1.0.0",
   "blueprint": "blueprint.ts",
@@ -12,7 +12,7 @@
     "{{#if features.alerts}}monitoring-alerts{{/if}}",
     "{{#if features.enterprise}}monitoring-enterprise{{/if}}"
   ],
-  "limitations": "Requires Sentry DSN",
+  "limitations": "Tech-agnostic core only. Requires Connector for framework-specific implementation.",
   "parameters": {
     "dsn": {
       "type": "string",
@@ -28,20 +28,34 @@
     },
     "features": {
       "core": {
-        "description": "Essential monitoring (error tracking, basic performance)",
-        "default": true
+        "type": "boolean",
+        "default": true,
+        "description": "Essential monitoring (error tracking, basic performance)"
+      },
+      "errorTracking": {
+        "type": "boolean",
+        "default": true,
+        "description": "Error tracking and reporting"
       },
       "performance": {
-        "description": "Advanced performance monitoring",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Advanced performance monitoring"
       },
       "alerts": {
-        "description": "Custom alerts and dashboard",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Custom alerts and dashboard"
       },
       "enterprise": {
-        "description": "Enterprise features (profiling, custom metrics)",
-        "default": false
+        "type": "boolean",
+        "default": false,
+        "description": "Enterprise features (profiling, custom metrics)"
+      },
+      "replay": {
+        "type": "boolean",
+        "default": false,
+        "description": "Session replay for debugging"
       }
     },
     "release": {

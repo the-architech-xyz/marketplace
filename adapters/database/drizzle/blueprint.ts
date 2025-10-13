@@ -192,15 +192,6 @@ function generateSeedingActions(): BlueprintAction[] {
       }
     },
     {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}db/seed-scripts.ts',
-      template: 'templates/seed-scripts.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    {
       type: BlueprintActionType.ADD_SCRIPT,
       name: 'db:seed',
       command: 'tsx {{paths.shared_library}}db/seed.ts'

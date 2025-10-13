@@ -84,6 +84,16 @@ function generateCoreActions(): BlueprintAction[] {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
       }
+    },
+    // Optional examples file with advanced usage patterns
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.shared_library}}ai/examples.ts',
+      template: 'templates/ai-examples.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
     }
   ];
 }

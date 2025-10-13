@@ -17,7 +17,8 @@ const shadcnUiBlueprint: Blueprint = {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
         'tailwindcss@next',
-        '@tailwindcss/postcss@next'
+        '@tailwindcss/postcss@next',
+        'tailwindcss-animate'
       ]
     },   
     // Create PostCSS configuration for Tailwind CSS v4
@@ -90,10 +91,18 @@ export default config;`
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
+  
+  *::before,
+  *::after {
+    border-color: hsl(var(--border));
+  }
+  
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
@@ -102,7 +111,7 @@ export default config;`
     cursor: pointer;
   }
   [class*="border"] {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
 }`
     },
@@ -131,16 +140,12 @@ export default config;`
         'sonner@^1.2.4'
       ]
     },
-    // Set npm to use legacy peer deps for React 19 compatibility
-    {
-      type: BlueprintActionType.RUN_COMMAND,
-      command: 'npm config set legacy-peer-deps true'
-    },
-
     // Initialize Shadcn/ui (non-interactive, Tailwind v4 compatible)
+    // Note: Removed --silent to see any errors during initialization
+    // Using --pm npm to ensure npm is used (not yarn/pnpm)
     {
       type: BlueprintActionType.RUN_COMMAND,
-      command: 'npx shadcn@latest init --yes --defaults --force --silent --src-dir --css-variables --base-color slate'
+      command: 'npx shadcn@latest init --yes --defaults --force --src-dir --css-variables --base-color slate'
     },
     // Install components from genome parameters
     // Shadcn will automatically install the required Radix UI dependencies for each component

@@ -84,7 +84,7 @@ export const auth = betterAuth({
   
   // Trusted origins for CSRF protection
   trustedOrigins: [
-    process.env.AUTH_URL || "{{env.APP_URL}}",
+    process.env.AUTH_URL || "<%= env.APP_URL %>",
     process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   ],
   

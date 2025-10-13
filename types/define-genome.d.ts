@@ -8,7 +8,7 @@
 import { Genome } from '@thearchitech.xyz/types';
 
 // Generated ModuleId union type
-export type ModuleId = 'ai/vercel-ai-sdk' | 'auth/better-auth' | 'blockchain/web3' | 'content/next-intl' | 'core/dependencies' | 'core/forms' | 'core/git' | 'data-fetching/tanstack-query' | 'database/drizzle' | 'database/prisma' | 'database/sequelize' | 'database/typeorm' | 'deployment/docker' | 'deployment/vercel' | 'email/resend' | 'framework/nextjs' | 'observability/sentry' | 'payment/stripe' | 'quality/eslint' | 'quality/prettier' | 'services/github-api' | 'state/zustand' | 'testing/vitest' | 'ui/react-flow' | 'ui/shadcn-ui' | 'ui/tailwind' | 'connectors/better-auth-github' | 'connectors/docker-drizzle' | 'connectors/docker-nextjs' | 'connectors/rhf-zod-shadcn' | 'connectors/sentry-nextjs' | 'connectors/tanstack-query-nextjs' | 'connectors/vitest-nextjs' | 'connectors/zustand-nextjs' | 'features/ai-chat/backend/vercel-ai-nextjs' | 'features/ai-chat/frontend/shadcn' | 'features/architech-welcome/shadcn' | 'features/auth/backend/better-auth-nextjs' | 'features/auth/frontend/shadcn' | 'features/emailing/backend/resend-nextjs' | 'features/emailing/frontend/shadcn' | 'features/graph-visualizer/shadcn' | 'features/monitoring/shadcn' | 'features/payments/backend/stripe-nextjs' | 'features/payments/frontend/shadcn' | 'features/project-management/shadcn' | 'features/repo-analyzer/shadcn' | 'features/social-profile/shadcn' | 'features/teams-management/backend/better-auth-nextjs' | 'features/teams-management/frontend/shadcn' | 'features/web3/shadcn';
+export type ModuleId = 'ai/vercel-ai-sdk' | 'auth/better-auth' | 'blockchain/web3' | 'content/next-intl' | 'core/dependencies' | 'core/forms' | 'core/git' | 'data-fetching/tanstack-query' | 'database/drizzle' | 'database/prisma' | 'database/sequelize' | 'database/typeorm' | 'deployment/docker' | 'deployment/vercel' | 'email/resend' | 'framework/nextjs' | 'observability/sentry' | 'payment/stripe' | 'quality/eslint' | 'quality/prettier' | 'services/github-api' | 'state/zustand' | 'testing/vitest' | 'ui/shadcn-ui' | 'ui/tailwind' | 'connectors/better-auth-github' | 'connectors/docker-drizzle' | 'connectors/docker-nextjs' | 'connectors/rhf-zod-shadcn' | 'connectors/sentry/nextjs' | 'connectors/sentry/react' | 'connectors/sentry-nextjs' | 'connectors/stripe/nextjs-drizzle' | 'connectors/tanstack-query-nextjs' | 'connectors/vitest-nextjs' | 'connectors/zustand-nextjs' | 'features/ai-chat/backend/vercel-ai-nextjs' | 'features/ai-chat/frontend/shadcn' | 'features/architech-welcome/shadcn' | 'features/auth/backend/better-auth-nextjs' | 'features/auth/frontend/shadcn' | 'features/email/react-email-templates' | 'features/emailing/backend/resend-nextjs' | 'features/emailing/frontend/shadcn' | 'features/graph-visualizer/shadcn' | 'features/monitoring/shadcn' | 'features/observability/sentry-shadcn' | 'features/payments/backend/stripe-nextjs' | 'features/payments/frontend/shadcn' | 'features/project-management/shadcn' | 'features/repo-analyzer/shadcn' | 'features/social-profile/shadcn' | 'features/teams-management/backend/better-auth-nextjs' | 'features/teams-management/frontend/shadcn' | 'features/web3/shadcn';
 
 export type ModuleParameters = {
   'ai/vercel-ai-sdk': {
@@ -418,26 +418,6 @@ export type ModuleParameters = {
     e2e: boolean;
   };
   };
-  'ui/react-flow': {
-
-    /** React Flow components to include */
-    components: string[];
-
-    /** Available themes */
-    themes: string[];
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    type: boolean;
-
-    description: boolean;
-
-    properties: boolean;
-  };
-
-    /** Default viewport settings */
-    defaultViewport: Record<string, any>;
-  };
   'ui/shadcn-ui': {
 
     /** Components to install (comprehensive set by default) */
@@ -484,6 +464,23 @@ export type ModuleParameters = {
 
     /** React Hook Form DevTools */
     devtools: boolean;
+  };
+  'connectors/stripe/nextjs-drizzle': {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable organization-level billing features */
+    organizationBilling: boolean;
+
+    /** Enable seat-based billing */
+    seatManagement: boolean;
+
+    /** Enable usage-based billing tracking */
+    usageTracking: boolean;
+
+    /** Enable Stripe webhook handling */
+    webhooks: boolean;
+  };
   };
   'connectors/tanstack-query-nextjs': {
 
@@ -548,18 +545,24 @@ export type ModuleParameters = {
     theme?: 'default' | 'dark' | 'light' | 'minimal';
   };
   'features/architech-welcome/shadcn': {
+  /** Constitutional Architecture features configuration */
+  features?: {
 
     /** Show technology stack visualization */
-    showTechStack: boolean;
+    techStack: boolean;
 
     /** Show interactive component library showcase */
-    showComponents: boolean;
+    componentShowcase: boolean;
 
     /** Show project structure and architecture */
-    showProjectStructure: boolean;
+    projectStructure: boolean;
 
     /** Show quick start guide */
-    showQuickStart: boolean;
+    quickStart: boolean;
+
+    /** Show Architech branding and links */
+    architechBranding: boolean;
+  };
 
     /** Custom welcome page title */
     customTitle: string;
@@ -569,9 +572,6 @@ export type ModuleParameters = {
 
     /** Primary color theme for the welcome page */
     primaryColor: string;
-
-    /** Show Architech branding and links */
-    showArchitechBranding: boolean;
   };
   'features/auth/backend/better-auth-nextjs': {
 
@@ -616,6 +616,29 @@ export type ModuleParameters = {
     /** UI theme variant */
     theme?: 'default' | 'dark' | 'light' | 'minimal';
   };
+  'features/email/react-email-templates': {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Core email templates (welcome, notifications) */
+    core: boolean;
+
+    /** Authentication email templates (password reset, verification, 2FA) */
+    auth: boolean;
+
+    /** Payment email templates (confirmation, receipts) */
+    payments: boolean;
+
+    /** Organization email templates (invitations, updates) */
+    organizations: boolean;
+  };
+
+    /** Primary brand color for email templates */
+    brandColor: string;
+
+    /** URL to company logo for email headers */
+    logo: string;
+  };
   'features/emailing/backend/resend-nextjs': {
 
     /** Bulk email sending capabilities */
@@ -629,6 +652,12 @@ export type ModuleParameters = {
 
     /** Email event webhooks */
     webhooks: boolean;
+
+    /** Enable organization-scoped email management */
+    organizations: boolean;
+
+    /** Enable team-scoped email management */
+    teams: boolean;
   };
   'features/emailing/frontend/shadcn': {
   /** Constitutional Architecture features configuration */
@@ -690,6 +719,29 @@ export type ModuleParameters = {
 
     /** Environments to monitor */
     environments?: string[];
+  };
+  'features/observability/sentry-shadcn': {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Main Sentry dashboard with overview */
+    dashboard: boolean;
+
+    /** Browse and filter captured errors */
+    errorBrowser: boolean;
+
+    /** Performance metrics and charts */
+    performance: boolean;
+
+    /** Alert configuration UI */
+    alerts: boolean;
+  };
+
+    /** Path to mount the Sentry dashboard */
+    dashboardPath: string;
+
+    /** Auto-refresh interval (ms) for dashboard data */
+    refreshInterval: number;
   };
   'features/payments/backend/stripe-nextjs': {
 
@@ -1238,26 +1290,6 @@ export type TypedGenomeModule =
     e2e: boolean;
   };
   }; }
-  | { id: 'ui/react-flow'; parameters?: {
-
-    /** React Flow components to include */
-    components: string[];
-
-    /** Available themes */
-    themes: string[];
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    type: boolean;
-
-    description: boolean;
-
-    properties: boolean;
-  };
-
-    /** Default viewport settings */
-    defaultViewport: Record<string, any>;
-  }; }
   | { id: 'ui/shadcn-ui'; parameters?: {
 
     /** Components to install (comprehensive set by default) */
@@ -1304,6 +1336,23 @@ export type TypedGenomeModule =
 
     /** React Hook Form DevTools */
     devtools: boolean;
+  }; }
+  | { id: 'connectors/stripe/nextjs-drizzle'; parameters?: {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable organization-level billing features */
+    organizationBilling: boolean;
+
+    /** Enable seat-based billing */
+    seatManagement: boolean;
+
+    /** Enable usage-based billing tracking */
+    usageTracking: boolean;
+
+    /** Enable Stripe webhook handling */
+    webhooks: boolean;
+  };
   }; }
   | { id: 'connectors/tanstack-query-nextjs'; parameters?: {
 
@@ -1368,18 +1417,24 @@ export type TypedGenomeModule =
     theme?: 'default' | 'dark' | 'light' | 'minimal';
   }; }
   | { id: 'features/architech-welcome/shadcn'; parameters?: {
+  /** Constitutional Architecture features configuration */
+  features?: {
 
     /** Show technology stack visualization */
-    showTechStack: boolean;
+    techStack: boolean;
 
     /** Show interactive component library showcase */
-    showComponents: boolean;
+    componentShowcase: boolean;
 
     /** Show project structure and architecture */
-    showProjectStructure: boolean;
+    projectStructure: boolean;
 
     /** Show quick start guide */
-    showQuickStart: boolean;
+    quickStart: boolean;
+
+    /** Show Architech branding and links */
+    architechBranding: boolean;
+  };
 
     /** Custom welcome page title */
     customTitle: string;
@@ -1389,9 +1444,6 @@ export type TypedGenomeModule =
 
     /** Primary color theme for the welcome page */
     primaryColor: string;
-
-    /** Show Architech branding and links */
-    showArchitechBranding: boolean;
   }; }
   | { id: 'features/auth/backend/better-auth-nextjs'; parameters?: {
 
@@ -1436,6 +1488,29 @@ export type TypedGenomeModule =
     /** UI theme variant */
     theme?: 'default' | 'dark' | 'light' | 'minimal';
   }; }
+  | { id: 'features/email/react-email-templates'; parameters?: {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Core email templates (welcome, notifications) */
+    core: boolean;
+
+    /** Authentication email templates (password reset, verification, 2FA) */
+    auth: boolean;
+
+    /** Payment email templates (confirmation, receipts) */
+    payments: boolean;
+
+    /** Organization email templates (invitations, updates) */
+    organizations: boolean;
+  };
+
+    /** Primary brand color for email templates */
+    brandColor: string;
+
+    /** URL to company logo for email headers */
+    logo: string;
+  }; }
   | { id: 'features/emailing/backend/resend-nextjs'; parameters?: {
 
     /** Bulk email sending capabilities */
@@ -1449,6 +1524,12 @@ export type TypedGenomeModule =
 
     /** Email event webhooks */
     webhooks: boolean;
+
+    /** Enable organization-scoped email management */
+    organizations: boolean;
+
+    /** Enable team-scoped email management */
+    teams: boolean;
   }; }
   | { id: 'features/emailing/frontend/shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */
@@ -1510,6 +1591,29 @@ export type TypedGenomeModule =
 
     /** Environments to monitor */
     environments?: string[];
+  }; }
+  | { id: 'features/observability/sentry-shadcn'; parameters?: {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Main Sentry dashboard with overview */
+    dashboard: boolean;
+
+    /** Browse and filter captured errors */
+    errorBrowser: boolean;
+
+    /** Performance metrics and charts */
+    performance: boolean;
+
+    /** Alert configuration UI */
+    alerts: boolean;
+  };
+
+    /** Path to mount the Sentry dashboard */
+    dashboardPath: string;
+
+    /** Auto-refresh interval (ms) for dashboard data */
+    refreshInterval: number;
   }; }
   | { id: 'features/payments/backend/stripe-nextjs'; parameters?: {
 

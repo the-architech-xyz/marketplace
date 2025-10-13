@@ -17,7 +17,7 @@ export default function generateBlueprint(config: MergedConfiguration): Blueprin
   const actions: BlueprintAction[] = [];
   
   // Core is always generated
-  actions.push(...generateCoreActions());
+  actions.push(...generateCoreActions(config));
   
   // Optional features based on configuration
   if (config.activeFeatures.includes('techStack')) {
@@ -47,7 +47,27 @@ export default function generateBlueprint(config: MergedConfiguration): Blueprin
 // CORE WELCOME FEATURES (Always Generated)
 // ============================================================================
 
-function generateCoreActions(): BlueprintAction[] {
+function generateCoreActions(config: MergedConfiguration): BlueprintAction[] {
+  // Extract template data from config
+  const templateData = config.templateContext || {};
+
+  const featureContext = {
+    ...templateData,
+    context: {
+      // Boolean features → activeFeatures
+      showTechStack: config.activeFeatures.includes('techStack'),
+      showComponents: config.activeFeatures.includes('componentShowcase'),
+      showProjectStructure: config.activeFeatures.includes('projectStructure'),
+      showQuickStart: config.activeFeatures.includes('quickStart'),
+      showArchitechBranding: config.activeFeatures.includes('architechBranding'),
+      
+      // Config values → templateContext
+      customTitle: templateData.module?.parameters?.customTitle || `Welcome to ${templateData.project?.name || 'Your App'}`,
+      customDescription: templateData.module?.parameters?.customDescription || 'Your modern Next.js application is ready! Explore the technologies and features that power your project.',
+      primaryColor: templateData.module?.parameters?.primaryColor || 'blue',
+    }
+  };
+  
   return [
     // Install additional dependencies for the welcome page
     {
@@ -69,7 +89,9 @@ function generateCoreActions(): BlueprintAction[] {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2
-      }},
+      },
+      context: featureContext  // Pass feature context for Handlebars rendering
+    } as any,
 
     // Create welcome page layout
     {
@@ -144,11 +166,7 @@ export interface ProjectCapability {
   version?: string;
   icon?: string;
   color?: string;
-
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }}
+}
 
 export interface ProjectStructure {
   name: string;
@@ -299,7 +317,11 @@ export class ProjectAnalyzer {
       ]
     };
   }
-}`
+}`,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }
     },
 
     // Create welcome page styles
@@ -310,11 +332,7 @@ export class ProjectAnalyzer {
 
 .welcome-gradient {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }}
+}
 
 .tech-card {
   transition: all 0.3s ease;
@@ -366,17 +384,39 @@ export class ProjectAnalyzer {
 
 .animate-delay-300 {
   animation-delay: 0.3s;
-}`
+}`,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2
+      }
     },
 
-    // Update globals.css to include welcome styles
+      // Update globals.css to include welcome styles (ADDITIVE, not REPLACEMENT)
+      {
+        type: BlueprintActionType.ENHANCE_FILE,
+        path: '{{paths.app_root}}globals.css',
+        modifier: 'css-enhancer',
+        params: {
+          content: `@import "../styles/welcome.css";`
+        },
+        fallback: 'create'
+      },
+
+    // Create Framer Motion type declarations (Industry Standard Fix)
     {
-      type: BlueprintActionType.ENHANCE_FILE,
-      path: '{{paths.app_root}}globals.css',
-      modifier: ModifierType.CSS_ENHANCER,
-      fallback: EnhanceFileFallbackStrategy.CREATE,
-      params: {
-        content: `@import "../styles/welcome.css";`
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.source_root}}types/framer-motion.d.ts',
+      content: `import { MotionProps as OriginalMotionProps } from 'framer-motion';
+
+declare module 'framer-motion' {
+  interface MotionProps extends OriginalMotionProps {
+    className?: string;
+    style?: React.CSSProperties;
+  }
+}`,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 2 
       }
     },
 

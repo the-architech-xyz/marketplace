@@ -24,7 +24,7 @@ docker-compose -f docker-compose.drizzle.yml up -d drizzle-db
 
 # Wait for database to be ready
 echo "⏳ Waiting for database to be ready..."
-until docker-compose -f docker-compose.drizzle.yml exec drizzle-db pg_isready -U drizzle_user -d {{project.name}}_drizzle; do
+until docker-compose -f docker-compose.drizzle.yml exec drizzle-db pg_isready -U drizzle_user -d <%= project.name %>_drizzle; do
     echo "   Database is unavailable - sleeping"
     sleep 2
 done
