@@ -7,28 +7,28 @@
 export interface DatabaseSequelizeParams {
 
   /** Database host */
-  host?: string;
+  host?: any;
 
   /** Database port */
-  port?: number;
+  port?: any;
 
   /** Database username */
-  username?: string;
+  username?: any;
 
   /** Database password */
-  password?: string;
+  password?: any;
 
   /** Database name */
-  databaseName?: string;
+  databaseName?: any;
 
   /** Enable SQL logging */
-  logging?: boolean;
+  logging?: any;
 
   /** Enable connection pooling */
-  pool?: boolean;
+  pool?: any;
 
   /** Database type */
-  databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mariadb' | 'mssql';
+  databaseType?: any;
 }
 
 export interface DatabaseSequelizeFeatures {}

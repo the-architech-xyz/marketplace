@@ -1,4 +1,5 @@
-import { BlueprintAction, BlueprintActionType, ModifierType, ConflictResolutionStrategy, EnhanceFileFallbackStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ModifierType, ConflictResolutionStrategy, EnhanceFileFallbackStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../types/blueprint-config-types.js';
 
 /**
  * Dynamic RHF-Zod-Shadcn Connector Blueprint
@@ -6,7 +7,12 @@ import { BlueprintAction, BlueprintActionType, ModifierType, ConflictResolutionS
  * Enhances core forms system with Shadcn UI components.
  * This connector enhances the core forms adapter instead of duplicating functionality.
  */
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'connectors/rhf-zod-shadcn'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   return [
     // Enhance core forms with Shadcn-specific components
     {

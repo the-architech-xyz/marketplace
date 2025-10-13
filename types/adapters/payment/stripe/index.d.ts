@@ -13,10 +13,10 @@ export interface PaymentStripeParams {
   mode?: any;
 
   /** Enable webhook handling */
-  webhooks?: boolean;
+  webhooks?: any;
 
   /** Enable Stripe Dashboard integration */
-  dashboard?: boolean;
+  dashboard?: any;
 }
 
 export interface PaymentStripeFeatures {}

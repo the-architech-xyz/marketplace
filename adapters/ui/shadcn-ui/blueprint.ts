@@ -147,8 +147,8 @@ export default config;`
       type: BlueprintActionType.RUN_COMMAND,
       command: 'npx shadcn@latest init --yes --defaults --force --src-dir --css-variables --base-color slate'
     },
-    // Install components from genome parameters
-    // Shadcn will automatically install the required Radix UI dependencies for each component
+    // Install components from genome parameters - DYNAMIC LOOP
+    // Shadcn CLI automatically installs the required Radix UI dependencies for each component
     {
       type: BlueprintActionType.RUN_COMMAND,
       command: 'npx shadcn@latest add {{item}} --yes --overwrite',

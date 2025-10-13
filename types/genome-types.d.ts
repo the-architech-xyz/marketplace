@@ -13,7 +13,7 @@ export type ModuleParameters = {
   'ai/vercel-ai-sdk': {
 
     /** AI providers to include */
-    providers?: string[];
+    providers?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -37,38 +37,38 @@ export type ModuleParameters = {
   };
 
     /** Default AI model */
-    defaultModel?: 'gpt-3.5-turbo' | 'gpt-4' | 'gpt-4-turbo' | 'claude-3-sonnet' | 'claude-3-opus';
+    defaultModel?: any;
 
     /** Maximum tokens for generation */
-    maxTokens?: number;
+    maxTokens?: any;
 
     /** Temperature for generation */
-    temperature?: number;
+    temperature?: any;
   };
   'auth/better-auth': {
 
     /** Authentication providers to enable */
-    providers?: string[];
+    providers?: any;
 
     /** Session management strategy */
     session?: any;
 
     /** Enable CSRF protection */
-    csrf?: boolean;
+    csrf?: any;
 
     /** Enable rate limiting */
-    rateLimit?: boolean;
+    rateLimit?: any;
   };
   'blockchain/web3': {
 
     /** Supported blockchain networks */
-    networks?: string[];
+    networks?: any;
 
     /** Enable WalletConnect support */
-    walletConnect?: boolean;
+    walletConnect?: any;
 
     /** Smart contract addresses */
-    contracts?: string[];
+    contracts?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -94,16 +94,16 @@ export type ModuleParameters = {
   'content/next-intl': {
 
     /** Supported locales */
-    locales?: string[];
+    locales?: any;
 
     /** Default locale */
-    defaultLocale?: string;
+    defaultLocale?: any;
 
     /** Enable locale-based routing */
-    routing?: boolean;
+    routing?: any;
 
     /** Enable SEO optimization */
-    seo?: boolean;
+    seo?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -120,52 +120,52 @@ export type ModuleParameters = {
   'core/forms': {
 
     /** Enable Zod for schema validation */
-    zod?: boolean;
+    zod?: any;
 
     /** Enable React Hook Form for form handling */
-    reactHookForm?: boolean;
+    reactHookForm?: any;
 
     /** Enable @hookform/resolvers for Zod integration */
-    resolvers?: boolean;
+    resolvers?: any;
 
     /** Enable accessibility features */
-    accessibility?: boolean;
+    accessibility?: any;
 
     /** Enable React Hook Form DevTools */
-    devtools?: boolean;
+    devtools?: any;
   };
   'core/git': {
 
     /** Git user name for commits */
-    userName?: string;
+    userName?: any;
 
     /** Git user email for commits */
-    userEmail?: string;
+    userEmail?: any;
 
     /** Default branch name for new repositories */
-    defaultBranch?: string;
+    defaultBranch?: any;
 
     /** Automatically initialize git repository after project creation */
-    autoInit?: boolean;
+    autoInit?: any;
   };
   'data-fetching/tanstack-query': {
 
     /** Enable TanStack Query DevTools */
-    devtools?: boolean;
+    devtools?: any;
 
     /** Default query and mutation options */
-    defaultOptions?: Record<string, any>;
+    defaultOptions?: any;
 
     /** Enable Suspense mode for queries */
-    suspense?: boolean;
+    suspense?: any;
   };
   'database/drizzle': {
 
     /** Database provider */
-    provider?: 'neon' | 'planetscale' | 'supabase' | 'local';
+    provider?: any;
 
     /** Database type to use */
-    databaseType?: 'postgresql' | 'mysql' | 'sqlite';
+    databaseType?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -188,64 +188,64 @@ export type ModuleParameters = {
   'database/prisma': {
 
     /** Database provider */
-    provider?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
+    provider?: any;
 
     /** Enable Prisma Studio */
-    studio?: boolean;
+    studio?: any;
 
     /** Enable database migrations */
-    migrations?: boolean;
+    migrations?: any;
 
     /** Database type */
-    databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
+    databaseType?: any;
   };
   'database/sequelize': {
 
     /** Database host */
-    host?: string;
+    host?: any;
 
     /** Database port */
-    port?: number;
+    port?: any;
 
     /** Database username */
-    username?: string;
+    username?: any;
 
     /** Database password */
-    password?: string;
+    password?: any;
 
     /** Database name */
-    databaseName?: string;
+    databaseName?: any;
 
     /** Enable SQL logging */
-    logging?: boolean;
+    logging?: any;
 
     /** Enable connection pooling */
-    pool?: boolean;
+    pool?: any;
 
     /** Database type */
-    databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mariadb' | 'mssql';
+    databaseType?: any;
   };
   'database/typeorm': {
 
     /** Enable schema synchronization */
-    synchronize?: boolean;
+    synchronize?: any;
 
     /** Enable query logging */
-    logging?: boolean;
+    logging?: any;
 
     /** Database type */
-    databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
+    databaseType?: any;
   };
   'deployment/docker': {
 
     /** Node.js version for Docker image */
-    nodeVersion?: string;
+    nodeVersion?: any;
 
     /** Enable production optimizations */
-    optimization?: boolean;
+    optimization?: any;
 
     /** Enable health check endpoint */
-    healthCheck?: boolean;
+    healthCheck?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -262,39 +262,39 @@ export type ModuleParameters = {
   'deployment/vercel': {
 
     /** Target framework */
-    framework?: 'nextjs' | 'react' | 'vue' | 'svelte' | 'angular';
+    framework?: any;
 
     /** Build command to run */
-    buildCommand?: string;
+    buildCommand?: any;
 
     /** Output directory for build */
-    outputDirectory?: string;
+    outputDirectory?: any;
 
     /** Install command */
-    installCommand?: string;
+    installCommand?: any;
 
     /** Development command */
-    devCommand?: string;
+    devCommand?: any;
 
     /** Environment variables to configure */
-    envVars?: string[];
+    envVars?: any;
 
     /** Serverless function configuration */
-    functions: Record<string, any>;
+    functions: any;
 
     /** Enable Vercel Analytics */
-    analytics?: boolean;
+    analytics?: any;
 
     /** Enable Vercel Speed Insights */
-    speedInsights?: boolean;
+    speedInsights?: any;
   };
   'email/resend': {
 
     /** Resend API key */
-    apiKey?: string;
+    apiKey?: any;
 
     /** Default from email address */
-    fromEmail?: string;
+    fromEmail?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -314,22 +314,25 @@ export type ModuleParameters = {
   'framework/nextjs': {
 
     /** Enable TypeScript support */
-    typescript?: boolean;
+    typescript?: any;
 
     /** Enable Tailwind CSS */
-    tailwind?: boolean;
+    tailwind?: any;
 
     /** Enable ESLint */
-    eslint?: boolean;
+    eslint?: any;
 
     /** Use App Router (recommended) */
-    appRouter?: boolean;
+    appRouter?: any;
 
     /** Use src/ directory */
-    srcDir?: boolean;
+    srcDir?: any;
 
     /** Import alias for absolute imports */
-    importAlias?: string;
+    importAlias?: any;
+
+    /** React version to use (18 for Radix UI compatibility, 19 for latest, or specify exact version like '18.2.0') */
+    reactVersion?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -355,10 +358,10 @@ export type ModuleParameters = {
   'observability/sentry': {
 
     /** Sentry DSN */
-    dsn?: string;
+    dsn?: any;
 
     /** Environment name */
-    environment?: string;
+    environment?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -382,7 +385,7 @@ export type ModuleParameters = {
   };
 
     /** Release version */
-    release?: string;
+    release?: any;
   };
   'payment/stripe': {
 
@@ -393,104 +396,104 @@ export type ModuleParameters = {
     mode?: any;
 
     /** Enable webhook handling */
-    webhooks?: boolean;
+    webhooks?: any;
 
     /** Enable Stripe Dashboard integration */
-    dashboard?: boolean;
+    dashboard?: any;
   };
   'quality/eslint': {
 
     /** Enable TypeScript support */
-    typescript?: boolean;
+    typescript?: any;
 
     /** Enable React support */
-    react?: boolean;
+    react?: any;
 
     /** Enable Next.js specific rules */
-    nextjs?: boolean;
+    nextjs?: any;
 
     /** Enable Node.js specific rules */
-    nodejs?: boolean;
+    nodejs?: any;
 
     /** Enable accessibility rules */
-    accessibility?: boolean;
+    accessibility?: any;
 
     /** Enable import/export rules */
-    imports?: boolean;
+    imports?: any;
 
     /** Enable strict mode rules */
-    strict?: boolean;
+    strict?: any;
 
     /** Enable formatting rules */
-    format?: boolean;
+    format?: any;
   };
   'quality/prettier': {
 
     /** Add semicolons at the end of statements */
-    semi?: boolean;
+    semi?: any;
 
     /** Use single quotes instead of double quotes */
-    singleQuote?: boolean;
+    singleQuote?: any;
 
     /** Number of spaces per indentation level */
-    tabWidth?: number;
+    tabWidth?: any;
 
     /** Use tabs instead of spaces for indentation */
-    useTabs?: boolean;
+    useTabs?: any;
 
     /** Print trailing commas where valid in ES5 */
-    trailingComma?: 'none' | 'es5' | 'all';
+    trailingComma?: any;
 
     /** Wrap lines that exceed this length */
-    printWidth?: number;
+    printWidth?: any;
 
     /** Print spaces between brackets in object literals */
-    bracketSpacing?: boolean;
+    bracketSpacing?: any;
 
     /** Include parentheses around a sole arrow function parameter */
-    arrowParens?: 'avoid' | 'always';
+    arrowParens?: any;
 
     /** Line ending style */
-    endOfLine?: 'lf' | 'crlf' | 'cr' | 'auto';
+    endOfLine?: any;
 
     /** Prettier plugins to use */
-    plugins?: string[];
+    plugins?: any;
 
     /** Enable Tailwind CSS class sorting plugin */
-    tailwind?: boolean;
+    tailwind?: any;
 
     /** Enable import organization */
-    organizeImports?: boolean;
+    organizeImports?: any;
   };
   'services/github-api': {
 
     /** GitHub Personal Access Token or OAuth access token */
-    token: string;
+    token: any;
 
     /** GitHub API base URL (for GitHub Enterprise) */
-    baseUrl?: string;
+    baseUrl?: any;
 
     /** User agent string for API requests */
-    userAgent?: string;
+    userAgent?: any;
   };
   'state/zustand': {
 
     /** Enable state persistence */
-    persistence?: boolean;
+    persistence?: any;
 
     /** Enable Redux DevTools */
-    devtools?: boolean;
+    devtools?: any;
 
     /** Enable Immer for immutable updates */
-    immer?: boolean;
+    immer?: any;
 
     /** Middleware to use */
-    middleware?: string[];
+    middleware?: any;
   };
   'testing/vitest': {
 
     /** Test environment */
-    environment?: 'jsdom' | 'node' | 'happy-dom';
+    environment?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -516,52 +519,52 @@ export type ModuleParameters = {
   'ui/shadcn-ui': {
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light' | 'minimal';
+    theme?: any;
 
     /** Components to install (comprehensive set by default) */
-    components?: Array<'alert' | 'alert-dialog' | 'accordion' | 'avatar' | 'badge' | 'button' | 'calendar' | 'card' | 'carousel' | 'checkbox' | 'collapsible' | 'context-menu' | 'date-picker' | 'dialog' | 'dropdown-menu' | 'form' | 'hover-card' | 'input' | 'label' | 'menubar' | 'navigation-menu' | 'pagination' | 'popover' | 'progress' | 'radio-group' | 'scroll-area' | 'separator' | 'sheet' | 'slider' | 'sonner' | 'switch' | 'table' | 'tabs' | 'textarea' | 'toggle' | 'toggle-group'>;
+    components?: any;
   };
   'ui/tailwind': {
 
     /** Enable @tailwindcss/typography plugin */
-    typography?: boolean;
+    typography?: any;
 
     /** Enable @tailwindcss/forms plugin */
-    forms?: boolean;
+    forms?: any;
 
     /** Enable @tailwindcss/aspect-ratio plugin */
-    aspectRatio?: boolean;
+    aspectRatio?: any;
 
     /** Enable dark mode support */
-    darkMode?: boolean;
+    darkMode?: any;
   };
   'connectors/better-auth-github': {
 
     /** GitHub OAuth App Client ID */
-    clientId: string;
+    clientId: any;
 
     /** GitHub OAuth App Client Secret */
-    clientSecret: string;
+    clientSecret: any;
 
     /** OAuth redirect URI */
-    redirectUri: string;
+    redirectUri: any;
 
     /** GitHub OAuth scopes */
-    scopes?: string[];
+    scopes?: any;
 
     /** Encryption key for storing tokens securely */
-    encryptionKey: string;
+    encryptionKey: any;
   };
   'connectors/rhf-zod-shadcn': {
 
     /** Zod schema validation */
-    validation?: boolean;
+    validation?: any;
 
     /** Form accessibility features */
-    accessibility?: boolean;
+    accessibility?: any;
 
     /** React Hook Form DevTools */
-    devtools?: boolean;
+    devtools?: any;
   };
   'connectors/stripe/nextjs-drizzle': {
   /** Constitutional Architecture features configuration */
@@ -589,44 +592,44 @@ export type ModuleParameters = {
   'connectors/tanstack-query-nextjs': {
 
     /** SSR support for TanStack Query */
-    ssr?: boolean;
+    ssr?: any;
 
     /** Client-side hydration support */
-    hydration?: boolean;
+    hydration?: any;
 
     /** Error boundary for query errors */
-    errorBoundary?: boolean;
+    errorBoundary?: any;
 
     /** TanStack Query DevTools integration */
-    devtools?: boolean;
+    devtools?: any;
   };
   'connectors/zustand-nextjs': {
 
     /** State persistence support */
-    persistence?: boolean;
+    persistence?: any;
 
     /** Zustand DevTools integration */
-    devtools?: boolean;
+    devtools?: any;
 
     /** Server-side rendering support */
-    ssr?: boolean;
+    ssr?: any;
   };
   'features/ai-chat/backend/vercel-ai-nextjs': {
 
     /** Real-time message streaming */
-    streaming?: boolean;
+    streaming?: any;
 
     /** File upload capabilities */
-    fileUpload?: boolean;
+    fileUpload?: any;
 
     /** Voice input capabilities */
-    voiceInput?: boolean;
+    voiceInput?: any;
 
     /** Voice output capabilities */
-    voiceOutput?: boolean;
+    voiceOutput?: any;
 
     /** Chat export and import capabilities */
-    exportImport?: boolean;
+    exportImport?: any;
   };
   'features/ai-chat/frontend/shadcn': {
   /** Constitutional Architecture features configuration */
@@ -646,7 +649,7 @@ export type ModuleParameters = {
   };
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light' | 'minimal';
+    theme?: any;
   };
   'features/architech-welcome/shadcn': {
   /** Constitutional Architecture features configuration */
@@ -669,39 +672,48 @@ export type ModuleParameters = {
   };
 
     /** Custom welcome page title */
-    customTitle?: string;
+    customTitle?: any;
 
     /** Custom welcome page description */
-    customDescription?: string;
+    customDescription?: any;
 
     /** Primary color theme for the welcome page */
-    primaryColor?: string;
+    primaryColor?: any;
 
-    /** Show architecture documentation section */
-    showArchitecture?: boolean;
+    /** Show technology stack visualization */
+    showTechStack?: any;
 
-    /** Show documentation links section */
-    showDocumentation?: boolean;
+    /** Show interactive component library showcase */
+    showComponents?: any;
+
+    /** Show project structure and architecture */
+    showProjectStructure?: any;
+
+    /** Show quick start guide */
+    showQuickStart?: any;
+
+    /** Show Architech branding and links */
+    showArchitechBranding?: any;
   };
   'features/auth/backend/better-auth-nextjs': {
 
     /** Next.js API routes for authentication endpoints */
-    apiRoutes?: boolean;
+    apiRoutes?: any;
 
     /** Next.js middleware for authentication and route protection */
-    middleware?: boolean;
+    middleware?: any;
 
     /** Admin API routes for user management */
-    adminPanel?: boolean;
+    adminPanel?: any;
 
     /** Email verification API routes and components */
-    emailVerification?: boolean;
+    emailVerification?: any;
 
     /** MFA API routes and components */
-    mfa?: boolean;
+    mfa?: any;
 
     /** Password reset API routes and components */
-    passwordReset?: boolean;
+    passwordReset?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -760,7 +772,7 @@ export type ModuleParameters = {
   };
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light' | 'minimal';
+    theme?: any;
   };
   'features/email/react-email-templates': {
   /** Constitutional Architecture features configuration */
@@ -780,30 +792,30 @@ export type ModuleParameters = {
   };
 
     /** Primary brand color for email templates */
-    brandColor?: string;
+    brandColor?: any;
 
     /** URL to company logo for email headers */
-    logo?: string;
+    logo?: any;
   };
   'features/emailing/backend/resend-nextjs': {
 
     /** Bulk email sending capabilities */
-    bulkEmail?: boolean;
+    bulkEmail?: any;
 
     /** Email template management */
-    templates?: boolean;
+    templates?: any;
 
     /** Email delivery and engagement analytics */
-    analytics?: boolean;
+    analytics?: any;
 
     /** Email event webhooks */
-    webhooks?: boolean;
+    webhooks?: any;
 
     /** Enable organization-scoped email management */
-    organizations?: boolean;
+    organizations?: any;
 
     /** Enable team-scoped email management */
-    teams?: boolean;
+    teams?: any;
   };
   'features/emailing/frontend/shadcn': {
   /** Constitutional Architecture features configuration */
@@ -832,7 +844,7 @@ export type ModuleParameters = {
   };
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light' | 'minimal';
+    theme?: any;
   };
   'features/graph-visualizer/shadcn': {
 
@@ -908,7 +920,7 @@ export type ModuleParameters = {
   };
 
     /** Environments to monitor */
-    environments?: string[];
+    environments?: any;
   };
   'features/observability/sentry-shadcn': {
   /** Constitutional Architecture features configuration */
@@ -928,36 +940,36 @@ export type ModuleParameters = {
   };
 
     /** Path to mount the Sentry dashboard */
-    dashboardPath?: string;
+    dashboardPath?: any;
 
     /** Auto-refresh interval (ms) for dashboard data */
-    refreshInterval?: number;
+    refreshInterval?: any;
   };
   'features/payments/backend/stripe-nextjs': {
 
     /** Stripe webhook handlers for payment events */
-    webhooks?: boolean;
+    webhooks?: any;
 
     /** Stripe Checkout integration for payments */
-    checkout?: boolean;
+    checkout?: any;
 
     /** Subscription management and billing */
-    subscriptions?: boolean;
+    subscriptions?: any;
 
     /** Invoice generation and management */
-    invoices?: boolean;
+    invoices?: any;
 
     /** Refund processing and management */
-    refunds?: boolean;
+    refunds?: any;
 
     /** Payment methods management */
-    paymentMethods?: boolean;
+    paymentMethods?: any;
 
     /** Payment analytics and reporting */
-    analytics?: boolean;
+    analytics?: any;
 
     /** Organization-level billing features */
-    organizationBilling?: boolean;
+    organizationBilling?: any;
   };
   'features/payments/frontend/shadcn': {
   /** Constitutional Architecture features configuration */
@@ -992,12 +1004,12 @@ export type ModuleParameters = {
   };
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light' | 'minimal';
+    theme?: any;
   };
   'features/project-management/shadcn': {
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light';
+    theme?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1032,13 +1044,13 @@ export type ModuleParameters = {
   'features/repo-analyzer/shadcn': {
 
     /** Enable visual architecture diagram */
-    enableVisualization?: boolean;
+    enableVisualization?: any;
 
     /** Enable genome export functionality */
-    enableExport?: boolean;
+    enableExport?: any;
 
     /** Minimum confidence threshold for suggestions */
-    confidenceThreshold?: number;
+    confidenceThreshold?: any;
   };
   'features/social-profile/shadcn': {
 
@@ -1090,16 +1102,16 @@ export type ModuleParameters = {
   'features/teams-management/backend/better-auth-nextjs': {
 
     /** Team invitation system */
-    invites?: boolean;
+    invites?: any;
 
     /** Granular role-based permissions */
-    permissions?: boolean;
+    permissions?: any;
 
     /** Team performance analytics */
-    analytics?: boolean;
+    analytics?: any;
 
     /** Team billing and subscription management */
-    billing?: boolean;
+    billing?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1146,7 +1158,7 @@ export type ModuleParameters = {
   };
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light' | 'minimal';
+    theme?: any;
   };
   'features/web3/shadcn': {
   /** Constitutional Architecture features configuration */
@@ -1178,7 +1190,7 @@ export type ModuleParameters = {
   };
 
     /** UI theme variant */
-    theme?: string;
+    theme?: any;
   };
 };
 
@@ -1187,7 +1199,7 @@ export type TypedGenomeModule =
   | { id: 'ai/vercel-ai-sdk'; parameters?: {
 
     /** AI providers to include */
-    providers?: string[];
+    providers?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1211,38 +1223,38 @@ export type TypedGenomeModule =
   };
 
     /** Default AI model */
-    defaultModel?: 'gpt-3.5-turbo' | 'gpt-4' | 'gpt-4-turbo' | 'claude-3-sonnet' | 'claude-3-opus';
+    defaultModel?: any;
 
     /** Maximum tokens for generation */
-    maxTokens?: number;
+    maxTokens?: any;
 
     /** Temperature for generation */
-    temperature?: number;
+    temperature?: any;
   }; }
   | { id: 'auth/better-auth'; parameters?: {
 
     /** Authentication providers to enable */
-    providers?: string[];
+    providers?: any;
 
     /** Session management strategy */
     session?: any;
 
     /** Enable CSRF protection */
-    csrf?: boolean;
+    csrf?: any;
 
     /** Enable rate limiting */
-    rateLimit?: boolean;
+    rateLimit?: any;
   }; }
   | { id: 'blockchain/web3'; parameters?: {
 
     /** Supported blockchain networks */
-    networks?: string[];
+    networks?: any;
 
     /** Enable WalletConnect support */
-    walletConnect?: boolean;
+    walletConnect?: any;
 
     /** Smart contract addresses */
-    contracts?: string[];
+    contracts?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1268,16 +1280,16 @@ export type TypedGenomeModule =
   | { id: 'content/next-intl'; parameters?: {
 
     /** Supported locales */
-    locales?: string[];
+    locales?: any;
 
     /** Default locale */
-    defaultLocale?: string;
+    defaultLocale?: any;
 
     /** Enable locale-based routing */
-    routing?: boolean;
+    routing?: any;
 
     /** Enable SEO optimization */
-    seo?: boolean;
+    seo?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1294,52 +1306,52 @@ export type TypedGenomeModule =
   | { id: 'core/forms'; parameters?: {
 
     /** Enable Zod for schema validation */
-    zod?: boolean;
+    zod?: any;
 
     /** Enable React Hook Form for form handling */
-    reactHookForm?: boolean;
+    reactHookForm?: any;
 
     /** Enable @hookform/resolvers for Zod integration */
-    resolvers?: boolean;
+    resolvers?: any;
 
     /** Enable accessibility features */
-    accessibility?: boolean;
+    accessibility?: any;
 
     /** Enable React Hook Form DevTools */
-    devtools?: boolean;
+    devtools?: any;
   }; }
   | { id: 'core/git'; parameters?: {
 
     /** Git user name for commits */
-    userName?: string;
+    userName?: any;
 
     /** Git user email for commits */
-    userEmail?: string;
+    userEmail?: any;
 
     /** Default branch name for new repositories */
-    defaultBranch?: string;
+    defaultBranch?: any;
 
     /** Automatically initialize git repository after project creation */
-    autoInit?: boolean;
+    autoInit?: any;
   }; }
   | { id: 'data-fetching/tanstack-query'; parameters?: {
 
     /** Enable TanStack Query DevTools */
-    devtools?: boolean;
+    devtools?: any;
 
     /** Default query and mutation options */
-    defaultOptions?: Record<string, any>;
+    defaultOptions?: any;
 
     /** Enable Suspense mode for queries */
-    suspense?: boolean;
+    suspense?: any;
   }; }
   | { id: 'database/drizzle'; parameters?: {
 
     /** Database provider */
-    provider?: 'neon' | 'planetscale' | 'supabase' | 'local';
+    provider?: any;
 
     /** Database type to use */
-    databaseType?: 'postgresql' | 'mysql' | 'sqlite';
+    databaseType?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1362,64 +1374,64 @@ export type TypedGenomeModule =
   | { id: 'database/prisma'; parameters?: {
 
     /** Database provider */
-    provider?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
+    provider?: any;
 
     /** Enable Prisma Studio */
-    studio?: boolean;
+    studio?: any;
 
     /** Enable database migrations */
-    migrations?: boolean;
+    migrations?: any;
 
     /** Database type */
-    databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
+    databaseType?: any;
   }; }
   | { id: 'database/sequelize'; parameters?: {
 
     /** Database host */
-    host?: string;
+    host?: any;
 
     /** Database port */
-    port?: number;
+    port?: any;
 
     /** Database username */
-    username?: string;
+    username?: any;
 
     /** Database password */
-    password?: string;
+    password?: any;
 
     /** Database name */
-    databaseName?: string;
+    databaseName?: any;
 
     /** Enable SQL logging */
-    logging?: boolean;
+    logging?: any;
 
     /** Enable connection pooling */
-    pool?: boolean;
+    pool?: any;
 
     /** Database type */
-    databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mariadb' | 'mssql';
+    databaseType?: any;
   }; }
   | { id: 'database/typeorm'; parameters?: {
 
     /** Enable schema synchronization */
-    synchronize?: boolean;
+    synchronize?: any;
 
     /** Enable query logging */
-    logging?: boolean;
+    logging?: any;
 
     /** Database type */
-    databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
+    databaseType?: any;
   }; }
   | { id: 'deployment/docker'; parameters?: {
 
     /** Node.js version for Docker image */
-    nodeVersion?: string;
+    nodeVersion?: any;
 
     /** Enable production optimizations */
-    optimization?: boolean;
+    optimization?: any;
 
     /** Enable health check endpoint */
-    healthCheck?: boolean;
+    healthCheck?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1436,39 +1448,39 @@ export type TypedGenomeModule =
   | { id: 'deployment/vercel'; parameters?: {
 
     /** Target framework */
-    framework?: 'nextjs' | 'react' | 'vue' | 'svelte' | 'angular';
+    framework?: any;
 
     /** Build command to run */
-    buildCommand?: string;
+    buildCommand?: any;
 
     /** Output directory for build */
-    outputDirectory?: string;
+    outputDirectory?: any;
 
     /** Install command */
-    installCommand?: string;
+    installCommand?: any;
 
     /** Development command */
-    devCommand?: string;
+    devCommand?: any;
 
     /** Environment variables to configure */
-    envVars?: string[];
+    envVars?: any;
 
     /** Serverless function configuration */
-    functions: Record<string, any>;
+    functions: any;
 
     /** Enable Vercel Analytics */
-    analytics?: boolean;
+    analytics?: any;
 
     /** Enable Vercel Speed Insights */
-    speedInsights?: boolean;
+    speedInsights?: any;
   }; }
   | { id: 'email/resend'; parameters?: {
 
     /** Resend API key */
-    apiKey?: string;
+    apiKey?: any;
 
     /** Default from email address */
-    fromEmail?: string;
+    fromEmail?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1488,22 +1500,25 @@ export type TypedGenomeModule =
   | { id: 'framework/nextjs'; parameters?: {
 
     /** Enable TypeScript support */
-    typescript?: boolean;
+    typescript?: any;
 
     /** Enable Tailwind CSS */
-    tailwind?: boolean;
+    tailwind?: any;
 
     /** Enable ESLint */
-    eslint?: boolean;
+    eslint?: any;
 
     /** Use App Router (recommended) */
-    appRouter?: boolean;
+    appRouter?: any;
 
     /** Use src/ directory */
-    srcDir?: boolean;
+    srcDir?: any;
 
     /** Import alias for absolute imports */
-    importAlias?: string;
+    importAlias?: any;
+
+    /** React version to use (18 for Radix UI compatibility, 19 for latest, or specify exact version like '18.2.0') */
+    reactVersion?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1529,10 +1544,10 @@ export type TypedGenomeModule =
   | { id: 'observability/sentry'; parameters?: {
 
     /** Sentry DSN */
-    dsn?: string;
+    dsn?: any;
 
     /** Environment name */
-    environment?: string;
+    environment?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1556,7 +1571,7 @@ export type TypedGenomeModule =
   };
 
     /** Release version */
-    release?: string;
+    release?: any;
   }; }
   | { id: 'payment/stripe'; parameters?: {
 
@@ -1567,104 +1582,104 @@ export type TypedGenomeModule =
     mode?: any;
 
     /** Enable webhook handling */
-    webhooks?: boolean;
+    webhooks?: any;
 
     /** Enable Stripe Dashboard integration */
-    dashboard?: boolean;
+    dashboard?: any;
   }; }
   | { id: 'quality/eslint'; parameters?: {
 
     /** Enable TypeScript support */
-    typescript?: boolean;
+    typescript?: any;
 
     /** Enable React support */
-    react?: boolean;
+    react?: any;
 
     /** Enable Next.js specific rules */
-    nextjs?: boolean;
+    nextjs?: any;
 
     /** Enable Node.js specific rules */
-    nodejs?: boolean;
+    nodejs?: any;
 
     /** Enable accessibility rules */
-    accessibility?: boolean;
+    accessibility?: any;
 
     /** Enable import/export rules */
-    imports?: boolean;
+    imports?: any;
 
     /** Enable strict mode rules */
-    strict?: boolean;
+    strict?: any;
 
     /** Enable formatting rules */
-    format?: boolean;
+    format?: any;
   }; }
   | { id: 'quality/prettier'; parameters?: {
 
     /** Add semicolons at the end of statements */
-    semi?: boolean;
+    semi?: any;
 
     /** Use single quotes instead of double quotes */
-    singleQuote?: boolean;
+    singleQuote?: any;
 
     /** Number of spaces per indentation level */
-    tabWidth?: number;
+    tabWidth?: any;
 
     /** Use tabs instead of spaces for indentation */
-    useTabs?: boolean;
+    useTabs?: any;
 
     /** Print trailing commas where valid in ES5 */
-    trailingComma?: 'none' | 'es5' | 'all';
+    trailingComma?: any;
 
     /** Wrap lines that exceed this length */
-    printWidth?: number;
+    printWidth?: any;
 
     /** Print spaces between brackets in object literals */
-    bracketSpacing?: boolean;
+    bracketSpacing?: any;
 
     /** Include parentheses around a sole arrow function parameter */
-    arrowParens?: 'avoid' | 'always';
+    arrowParens?: any;
 
     /** Line ending style */
-    endOfLine?: 'lf' | 'crlf' | 'cr' | 'auto';
+    endOfLine?: any;
 
     /** Prettier plugins to use */
-    plugins?: string[];
+    plugins?: any;
 
     /** Enable Tailwind CSS class sorting plugin */
-    tailwind?: boolean;
+    tailwind?: any;
 
     /** Enable import organization */
-    organizeImports?: boolean;
+    organizeImports?: any;
   }; }
   | { id: 'services/github-api'; parameters?: {
 
     /** GitHub Personal Access Token or OAuth access token */
-    token: string;
+    token: any;
 
     /** GitHub API base URL (for GitHub Enterprise) */
-    baseUrl?: string;
+    baseUrl?: any;
 
     /** User agent string for API requests */
-    userAgent?: string;
+    userAgent?: any;
   }; }
   | { id: 'state/zustand'; parameters?: {
 
     /** Enable state persistence */
-    persistence?: boolean;
+    persistence?: any;
 
     /** Enable Redux DevTools */
-    devtools?: boolean;
+    devtools?: any;
 
     /** Enable Immer for immutable updates */
-    immer?: boolean;
+    immer?: any;
 
     /** Middleware to use */
-    middleware?: string[];
+    middleware?: any;
   }; }
   | { id: 'testing/vitest'; parameters?: {
 
     /** Test environment */
-    environment?: 'jsdom' | 'node' | 'happy-dom';
+    environment?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1690,52 +1705,52 @@ export type TypedGenomeModule =
   | { id: 'ui/shadcn-ui'; parameters?: {
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light' | 'minimal';
+    theme?: any;
 
     /** Components to install (comprehensive set by default) */
-    components?: Array<'alert' | 'alert-dialog' | 'accordion' | 'avatar' | 'badge' | 'button' | 'calendar' | 'card' | 'carousel' | 'checkbox' | 'collapsible' | 'context-menu' | 'date-picker' | 'dialog' | 'dropdown-menu' | 'form' | 'hover-card' | 'input' | 'label' | 'menubar' | 'navigation-menu' | 'pagination' | 'popover' | 'progress' | 'radio-group' | 'scroll-area' | 'separator' | 'sheet' | 'slider' | 'sonner' | 'switch' | 'table' | 'tabs' | 'textarea' | 'toggle' | 'toggle-group'>;
+    components?: any;
   }; }
   | { id: 'ui/tailwind'; parameters?: {
 
     /** Enable @tailwindcss/typography plugin */
-    typography?: boolean;
+    typography?: any;
 
     /** Enable @tailwindcss/forms plugin */
-    forms?: boolean;
+    forms?: any;
 
     /** Enable @tailwindcss/aspect-ratio plugin */
-    aspectRatio?: boolean;
+    aspectRatio?: any;
 
     /** Enable dark mode support */
-    darkMode?: boolean;
+    darkMode?: any;
   }; }
   | { id: 'connectors/better-auth-github'; parameters?: {
 
     /** GitHub OAuth App Client ID */
-    clientId: string;
+    clientId: any;
 
     /** GitHub OAuth App Client Secret */
-    clientSecret: string;
+    clientSecret: any;
 
     /** OAuth redirect URI */
-    redirectUri: string;
+    redirectUri: any;
 
     /** GitHub OAuth scopes */
-    scopes?: string[];
+    scopes?: any;
 
     /** Encryption key for storing tokens securely */
-    encryptionKey: string;
+    encryptionKey: any;
   }; }
   | { id: 'connectors/rhf-zod-shadcn'; parameters?: {
 
     /** Zod schema validation */
-    validation?: boolean;
+    validation?: any;
 
     /** Form accessibility features */
-    accessibility?: boolean;
+    accessibility?: any;
 
     /** React Hook Form DevTools */
-    devtools?: boolean;
+    devtools?: any;
   }; }
   | { id: 'connectors/stripe/nextjs-drizzle'; parameters?: {
   /** Constitutional Architecture features configuration */
@@ -1763,44 +1778,44 @@ export type TypedGenomeModule =
   | { id: 'connectors/tanstack-query-nextjs'; parameters?: {
 
     /** SSR support for TanStack Query */
-    ssr?: boolean;
+    ssr?: any;
 
     /** Client-side hydration support */
-    hydration?: boolean;
+    hydration?: any;
 
     /** Error boundary for query errors */
-    errorBoundary?: boolean;
+    errorBoundary?: any;
 
     /** TanStack Query DevTools integration */
-    devtools?: boolean;
+    devtools?: any;
   }; }
   | { id: 'connectors/zustand-nextjs'; parameters?: {
 
     /** State persistence support */
-    persistence?: boolean;
+    persistence?: any;
 
     /** Zustand DevTools integration */
-    devtools?: boolean;
+    devtools?: any;
 
     /** Server-side rendering support */
-    ssr?: boolean;
+    ssr?: any;
   }; }
   | { id: 'features/ai-chat/backend/vercel-ai-nextjs'; parameters?: {
 
     /** Real-time message streaming */
-    streaming?: boolean;
+    streaming?: any;
 
     /** File upload capabilities */
-    fileUpload?: boolean;
+    fileUpload?: any;
 
     /** Voice input capabilities */
-    voiceInput?: boolean;
+    voiceInput?: any;
 
     /** Voice output capabilities */
-    voiceOutput?: boolean;
+    voiceOutput?: any;
 
     /** Chat export and import capabilities */
-    exportImport?: boolean;
+    exportImport?: any;
   }; }
   | { id: 'features/ai-chat/frontend/shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */
@@ -1820,7 +1835,7 @@ export type TypedGenomeModule =
   };
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light' | 'minimal';
+    theme?: any;
   }; }
   | { id: 'features/architech-welcome/shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */
@@ -1843,39 +1858,48 @@ export type TypedGenomeModule =
   };
 
     /** Custom welcome page title */
-    customTitle?: string;
+    customTitle?: any;
 
     /** Custom welcome page description */
-    customDescription?: string;
+    customDescription?: any;
 
     /** Primary color theme for the welcome page */
-    primaryColor?: string;
+    primaryColor?: any;
 
-    /** Show architecture documentation section */
-    showArchitecture?: boolean;
+    /** Show technology stack visualization */
+    showTechStack?: any;
 
-    /** Show documentation links section */
-    showDocumentation?: boolean;
+    /** Show interactive component library showcase */
+    showComponents?: any;
+
+    /** Show project structure and architecture */
+    showProjectStructure?: any;
+
+    /** Show quick start guide */
+    showQuickStart?: any;
+
+    /** Show Architech branding and links */
+    showArchitechBranding?: any;
   }; }
   | { id: 'features/auth/backend/better-auth-nextjs'; parameters?: {
 
     /** Next.js API routes for authentication endpoints */
-    apiRoutes?: boolean;
+    apiRoutes?: any;
 
     /** Next.js middleware for authentication and route protection */
-    middleware?: boolean;
+    middleware?: any;
 
     /** Admin API routes for user management */
-    adminPanel?: boolean;
+    adminPanel?: any;
 
     /** Email verification API routes and components */
-    emailVerification?: boolean;
+    emailVerification?: any;
 
     /** MFA API routes and components */
-    mfa?: boolean;
+    mfa?: any;
 
     /** Password reset API routes and components */
-    passwordReset?: boolean;
+    passwordReset?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1934,7 +1958,7 @@ export type TypedGenomeModule =
   };
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light' | 'minimal';
+    theme?: any;
   }; }
   | { id: 'features/email/react-email-templates'; parameters?: {
   /** Constitutional Architecture features configuration */
@@ -1954,30 +1978,30 @@ export type TypedGenomeModule =
   };
 
     /** Primary brand color for email templates */
-    brandColor?: string;
+    brandColor?: any;
 
     /** URL to company logo for email headers */
-    logo?: string;
+    logo?: any;
   }; }
   | { id: 'features/emailing/backend/resend-nextjs'; parameters?: {
 
     /** Bulk email sending capabilities */
-    bulkEmail?: boolean;
+    bulkEmail?: any;
 
     /** Email template management */
-    templates?: boolean;
+    templates?: any;
 
     /** Email delivery and engagement analytics */
-    analytics?: boolean;
+    analytics?: any;
 
     /** Email event webhooks */
-    webhooks?: boolean;
+    webhooks?: any;
 
     /** Enable organization-scoped email management */
-    organizations?: boolean;
+    organizations?: any;
 
     /** Enable team-scoped email management */
-    teams?: boolean;
+    teams?: any;
   }; }
   | { id: 'features/emailing/frontend/shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */
@@ -2006,7 +2030,7 @@ export type TypedGenomeModule =
   };
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light' | 'minimal';
+    theme?: any;
   }; }
   | { id: 'features/graph-visualizer/shadcn'; parameters?: {
 
@@ -2082,7 +2106,7 @@ export type TypedGenomeModule =
   };
 
     /** Environments to monitor */
-    environments?: string[];
+    environments?: any;
   }; }
   | { id: 'features/observability/sentry-shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */
@@ -2102,36 +2126,36 @@ export type TypedGenomeModule =
   };
 
     /** Path to mount the Sentry dashboard */
-    dashboardPath?: string;
+    dashboardPath?: any;
 
     /** Auto-refresh interval (ms) for dashboard data */
-    refreshInterval?: number;
+    refreshInterval?: any;
   }; }
   | { id: 'features/payments/backend/stripe-nextjs'; parameters?: {
 
     /** Stripe webhook handlers for payment events */
-    webhooks?: boolean;
+    webhooks?: any;
 
     /** Stripe Checkout integration for payments */
-    checkout?: boolean;
+    checkout?: any;
 
     /** Subscription management and billing */
-    subscriptions?: boolean;
+    subscriptions?: any;
 
     /** Invoice generation and management */
-    invoices?: boolean;
+    invoices?: any;
 
     /** Refund processing and management */
-    refunds?: boolean;
+    refunds?: any;
 
     /** Payment methods management */
-    paymentMethods?: boolean;
+    paymentMethods?: any;
 
     /** Payment analytics and reporting */
-    analytics?: boolean;
+    analytics?: any;
 
     /** Organization-level billing features */
-    organizationBilling?: boolean;
+    organizationBilling?: any;
   }; }
   | { id: 'features/payments/frontend/shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */
@@ -2166,12 +2190,12 @@ export type TypedGenomeModule =
   };
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light' | 'minimal';
+    theme?: any;
   }; }
   | { id: 'features/project-management/shadcn'; parameters?: {
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light';
+    theme?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -2206,13 +2230,13 @@ export type TypedGenomeModule =
   | { id: 'features/repo-analyzer/shadcn'; parameters?: {
 
     /** Enable visual architecture diagram */
-    enableVisualization?: boolean;
+    enableVisualization?: any;
 
     /** Enable genome export functionality */
-    enableExport?: boolean;
+    enableExport?: any;
 
     /** Minimum confidence threshold for suggestions */
-    confidenceThreshold?: number;
+    confidenceThreshold?: any;
   }; }
   | { id: 'features/social-profile/shadcn'; parameters?: {
 
@@ -2264,16 +2288,16 @@ export type TypedGenomeModule =
   | { id: 'features/teams-management/backend/better-auth-nextjs'; parameters?: {
 
     /** Team invitation system */
-    invites?: boolean;
+    invites?: any;
 
     /** Granular role-based permissions */
-    permissions?: boolean;
+    permissions?: any;
 
     /** Team performance analytics */
-    analytics?: boolean;
+    analytics?: any;
 
     /** Team billing and subscription management */
-    billing?: boolean;
+    billing?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -2320,7 +2344,7 @@ export type TypedGenomeModule =
   };
 
     /** UI theme variant */
-    theme?: 'default' | 'dark' | 'light' | 'minimal';
+    theme?: any;
   }; }
   | { id: 'features/web3/shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */
@@ -2352,7 +2376,7 @@ export type TypedGenomeModule =
   };
 
     /** UI theme variant */
-    theme?: string;
+    theme?: any;
   }; };
 
 export interface TypedGenome {

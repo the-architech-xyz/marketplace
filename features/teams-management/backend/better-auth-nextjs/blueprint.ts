@@ -1,6 +1,12 @@
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../../types/blueprint-config-types.js';
 
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'features/teams-management/backend/better-auth-nextjs'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   return [
     // Create the main TeamsService that implements ITeamsService
     {

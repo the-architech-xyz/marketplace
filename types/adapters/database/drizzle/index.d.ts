@@ -7,10 +7,10 @@
 export interface DatabaseDrizzleParams {
 
   /** Database provider */
-  provider?: 'neon' | 'planetscale' | 'supabase' | 'local';
+  provider?: any;
 
   /** Database type to use */
-  databaseType?: 'postgresql' | 'mysql' | 'sqlite';
+  databaseType?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 

@@ -54,11 +54,11 @@ export default function WelcomePage() {
           </motion.div>
           
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-            <%= context.customTitle %>
+            <%= module.parameters.customTitle %>
           </h1>
           
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            <%= context.customDescription %>
+            <%= module.parameters.customDescription %>
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export default function WelcomePage() {
       </motion.div>
 
       {/* Technology Stack */}
-      <% if (context.showTechStack) { %>
+      <% if (module.parameters.showTechStack) { %>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -107,7 +107,7 @@ export default function WelcomePage() {
       <% } %>
 
       {/* Component Showcase */}
-      <% if (context.showComponents) { %>
+      <% if (module.parameters.showComponents) { %>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -124,7 +124,7 @@ export default function WelcomePage() {
       <% } %>
 
       {/* Project Structure */}
-      <% if (context.showProjectStructure) { %>
+      <% if (module.parameters.showProjectStructure) { %>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -141,7 +141,7 @@ export default function WelcomePage() {
       <% } %>
 
       {/* Quick Start Guide */}
-      <% if (context.showQuickStart) { %>
+      <% if (module.parameters.showQuickStart) { %>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -165,7 +165,7 @@ export default function WelcomePage() {
         className="py-8 border-t border-gray-200"
       >
         <div className="text-center space-y-4">
-          <% if (context.showArchitechBranding) { %>
+          <% if (module.parameters.showArchitechBranding) { %>
           <p className="text-gray-600">
             Generated with ❤️ by{' '}
             <a 

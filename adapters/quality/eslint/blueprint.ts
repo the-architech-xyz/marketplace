@@ -5,7 +5,8 @@
  * Core features are always included, optional features are conditionally generated.
  */
 
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
 /**
  * Dynamic ESLint Adapter Blueprint
@@ -13,38 +14,43 @@ import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, Merge
  * Generates ESLint configuration based on Constitutional Architecture configuration.
  * Core features are always included, optional features are conditionally generated.
  */
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'quality/eslint'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   const actions: BlueprintAction[] = [];
   
   // Core is always generated
   actions.push(...generateCoreActions());
   
   // Optional features based on configuration
-  if (config.activeFeatures.includes('typescript')) {
+  if (params.typescript) {
     actions.push(...generateTypeScriptActions());
   }
   
-  if (config.activeFeatures.includes('react')) {
+  if (params.react) {
     actions.push(...generateReactActions());
   }
   
-  if (config.activeFeatures.includes('nextjs')) {
+  if (params.nextjs) {
     actions.push(...generateNextJSActions());
   }
   
-  if (config.activeFeatures.includes('nodejs')) {
+  if (params.nodejs) {
     actions.push(...generateNodeJSActions());
   }
   
-  if (config.activeFeatures.includes('accessibility')) {
+  if (params.accessibility) {
     actions.push(...generateAccessibilityActions());
   }
   
-  if (config.activeFeatures.includes('imports')) {
+  if (params.imports) {
     actions.push(...generateImportActions());
   }
   
-  if (config.activeFeatures.includes('format')) {
+  if (params.format) {
     actions.push(...generateFormatActions());
   }
   

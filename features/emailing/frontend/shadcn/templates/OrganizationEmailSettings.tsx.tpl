@@ -98,13 +98,13 @@ export function OrganizationEmailSettings() {
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <% if (context.hasTemplates) { %>
+          <% if (module.parameters.hasTemplates) { %>
           <TabsTrigger value="templates">Templates</TabsTrigger>
           <% } %>
-          <% if (context.hasBulkEmail) { %>
+          <% if (module.parameters.hasBulkEmail) { %>
           <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
           <% } %>
-          <% if (context.hasAnalytics) { %>
+          <% if (module.parameters.hasAnalytics) { %>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <% } %>
           <TabsTrigger value="settings">Settings</TabsTrigger>
@@ -209,7 +209,7 @@ export function OrganizationEmailSettings() {
           </Card>
         </TabsContent>
 
-        <% if (context.hasTemplates) { %>
+        <% if (module.parameters.hasTemplates) { %>
         <TabsContent value="templates" className="space-y-6">
           <Card>
             <CardHeader>
@@ -242,7 +242,7 @@ export function OrganizationEmailSettings() {
         </TabsContent>
         <% } %>
 
-        <% if (context.hasBulkEmail) { %>
+        <% if (module.parameters.hasBulkEmail) { %>
         <TabsContent value="campaigns" className="space-y-6">
           <Card>
             <CardHeader>
@@ -275,7 +275,7 @@ export function OrganizationEmailSettings() {
         </TabsContent>
         <% } %>
 
-        <% if (context.hasAnalytics) { %>
+        <% if (module.parameters.hasAnalytics) { %>
         <TabsContent value="analytics" className="space-y-6">
           <Card>
             <CardHeader>

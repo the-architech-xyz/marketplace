@@ -7,22 +7,25 @@
 export interface FrameworkNextjsParams {
 
   /** Enable TypeScript support */
-  typescript?: boolean;
+  typescript?: any;
 
   /** Enable Tailwind CSS */
-  tailwind?: boolean;
+  tailwind?: any;
 
   /** Enable ESLint */
-  eslint?: boolean;
+  eslint?: any;
 
   /** Use App Router (recommended) */
-  appRouter?: boolean;
+  appRouter?: any;
 
   /** Use src/ directory */
-  srcDir?: boolean;
+  srcDir?: any;
 
   /** Import alias for absolute imports */
-  importAlias?: string;
+  importAlias?: any;
+
+  /** React version to use (18 for Radix UI compatibility, 19 for latest, or specify exact version like '18.2.0') */
+  reactVersion?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 

@@ -31,7 +31,7 @@ export interface FeaturesEmailingFrontendShadcnParams {
   };
 
   /** UI theme variant */
-  theme?: 'default' | 'dark' | 'light' | 'minimal';
+  theme?: any;
 }
 
 export interface FeaturesEmailingFrontendShadcnFeatures {

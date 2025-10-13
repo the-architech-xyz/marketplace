@@ -21,7 +21,7 @@ export default defineGenome({
   },
   
   modules: [
-    // Core Framework
+    // Core Framework with React 18 for Radix UI compatibility
     {
       id: 'framework/nextjs',
       parameters: {
@@ -31,6 +31,7 @@ export default defineGenome({
         appRouter: true,
         srcDir: true,
         importAlias: '@',
+        reactVersion: '18', // Use React 18 for Radix UI compatibility
       },
     },
 
@@ -42,22 +43,18 @@ export default defineGenome({
         components: ['button', 'card', 'input', 'label'],
       },
     },
-    // Quality Tools
-    {
-      id: 'quality/prettier',
-      parameters: {
-        tailwind: true,
-        semi: true,
-        singleQuote: true,
-      },
-    },
+    // Quality Tools (auto-included by marketplace defaults)
+    // No need to specify - they're automatically included for all Next.js projects
 
     // Welcome Screen
     {
       id: 'features/architech-welcome/shadcn',
       parameters: {
-        showArchitecture: true,
-        showDocumentation: true,
+        showTechStack: true,
+        showComponents: true,
+        showProjectStructure: true,
+        showQuickStart: true,
+        showArchitechBranding: true,
       },
     },
   ],

@@ -58,7 +58,7 @@ export function useSuspenseQuery<TData = unknown, TError = Error>(
   queryFn: () => Promise<TData>,
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<TData, TError> {
-  <% if (context.hasSuspense) { %>
+  <% if (module.parameters.suspense) { %>
   return useQuery({
     queryKey: queryKey,
     queryFn: queryFn,

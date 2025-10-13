@@ -5,7 +5,8 @@
  * Core features are always included, optional features are conditionally generated.
  */
 
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
 /**
  * Dynamic Tailwind CSS Blueprint
@@ -13,26 +14,31 @@ import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, Merge
  * Generates Tailwind CSS configuration based on Constitutional Architecture configuration.
  * Core features are always included, optional features are conditionally generated.
  */
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'ui/tailwind'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   const actions: BlueprintAction[] = [];
   
   // Core is always generated
   actions.push(...generateCoreActions());
   
   // Optional features based on configuration
-  if (config.activeFeatures.includes('typography')) {
+  if (features.typography) {
     actions.push(...generateTypographyActions());
   }
   
-  if (config.activeFeatures.includes('forms')) {
+  if (features.forms) {
     actions.push(...generateFormsActions());
   }
   
-  if (config.activeFeatures.includes('aspectRatio')) {
+  if (features.aspectRatio) {
     actions.push(...generateAspectRatioActions());
   }
   
-  if (config.activeFeatures.includes('darkMode')) {
+  if (features.darkMode) {
     actions.push(...generateDarkModeActions());
   }
   

@@ -7,10 +7,10 @@
 export interface UiShadcnUiParams {
 
   /** UI theme variant */
-  theme?: 'default' | 'dark' | 'light' | 'minimal';
+  theme?: any;
 
   /** Components to install (comprehensive set by default) */
-  components?: Array<'alert' | 'alert-dialog' | 'accordion' | 'avatar' | 'badge' | 'button' | 'calendar' | 'card' | 'carousel' | 'checkbox' | 'collapsible' | 'context-menu' | 'date-picker' | 'dialog' | 'dropdown-menu' | 'form' | 'hover-card' | 'input' | 'label' | 'menubar' | 'navigation-menu' | 'pagination' | 'popover' | 'progress' | 'radio-group' | 'scroll-area' | 'separator' | 'sheet' | 'slider' | 'sonner' | 'switch' | 'table' | 'tabs' | 'textarea' | 'toggle' | 'toggle-group'>;
+  components?: any;
 }
 
 export interface UiShadcnUiFeatures {}

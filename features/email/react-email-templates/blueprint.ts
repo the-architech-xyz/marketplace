@@ -1,4 +1,5 @@
-import { BlueprintAction, BlueprintActionType, MergedConfiguration, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
 /**
  * React Email Templates Feature Blueprint
@@ -6,22 +7,27 @@ import { BlueprintAction, BlueprintActionType, MergedConfiguration, ConflictReso
  * Provides React-based email templates that compile to HTML strings.
  * These templates are provider-agnostic and can be used with any email adapter.
  */
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'features/email/react-email-templates'>
+): BlueprintAction[] {
   const actions: BlueprintAction[] = [];
+  
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
   
   // Core templates are always generated
   actions.push(...generateCoreActions(config));
   
-  // Optional template sets based on configuration
-  if (config.activeFeatures.includes('auth')) {
+  // Optional template sets based on schema parameters
+  if (features.auth) {
     actions.push(...generateAuthActions());
   }
   
-  if (config.activeFeatures.includes('payments')) {
+  if (features.payments) {
     actions.push(...generatePaymentsActions());
   }
   
-  if (config.activeFeatures.includes('organizations')) {
+  if (features.organizations) {
     actions.push(...generateOrganizationsActions());
   }
   

@@ -7,28 +7,28 @@
 export interface FeaturesPaymentsBackendStripeNextjsParams {
 
   /** Stripe webhook handlers for payment events */
-  webhooks?: boolean;
+  webhooks?: any;
 
   /** Stripe Checkout integration for payments */
-  checkout?: boolean;
+  checkout?: any;
 
   /** Subscription management and billing */
-  subscriptions?: boolean;
+  subscriptions?: any;
 
   /** Invoice generation and management */
-  invoices?: boolean;
+  invoices?: any;
 
   /** Refund processing and management */
-  refunds?: boolean;
+  refunds?: any;
 
   /** Payment methods management */
-  paymentMethods?: boolean;
+  paymentMethods?: any;
 
   /** Payment analytics and reporting */
-  analytics?: boolean;
+  analytics?: any;
 
   /** Organization-level billing features */
-  organizationBilling?: boolean;
+  organizationBilling?: any;
 }
 
 export interface FeaturesPaymentsBackendStripeNextjsFeatures {}

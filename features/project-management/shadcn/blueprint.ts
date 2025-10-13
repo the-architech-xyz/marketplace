@@ -5,24 +5,30 @@
  * Uses template-based component generation for maintainability
  */
 
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'features/project-management/shadcn'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   const actions: BlueprintAction[] = [];
   
   // Core is always generated
   actions.push(...generateCoreActions());
   
   // Optional features based on configuration
-  if (config.activeFeatures.includes('timeTracking')) {
+  if (features.timeTracking) {
     actions.push(...generateTimeTrackingActions());
   }
   
-  if (config.activeFeatures.includes('ganttView')) {
+  if (features.ganttView) {
     actions.push(...generateGanttViewActions());
   }
   
-  if (config.activeFeatures.includes('projectReporting')) {
+  if (features.projectReporting) {
     actions.push(...generateProjectReportingActions());
   }
   

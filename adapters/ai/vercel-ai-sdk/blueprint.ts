@@ -1,4 +1,5 @@
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
 /**
  * Dynamic AI/Vercel-AI-SDK Adapter Blueprint
@@ -6,22 +7,27 @@ import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, Merge
  * Generates AI capabilities based on Constitutional Architecture configuration.
  * Core features are always included, optional features are conditionally generated.
  */
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'ai/vercel-ai-sdk'>
+): BlueprintAction[] {
   const actions: BlueprintAction[] = [];
+  
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
   
   // Core is always generated
   actions.push(...generateCoreActions());
   
-  // Optional features based on configuration
-  if (config.activeFeatures.includes('streaming')) {
+  // Optional features based on schema parameters
+  if (features.streaming) {
     actions.push(...generateStreamingActions());
   }
   
-  if (config.activeFeatures.includes('advanced')) {
+  if (features.advanced) {
     actions.push(...generateAdvancedActions());
   }
   
-  if (config.activeFeatures.includes('enterprise')) {
+  if (features.enterprise) {
     actions.push(...generateEnterpriseActions());
   }
   

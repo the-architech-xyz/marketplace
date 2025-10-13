@@ -22,7 +22,7 @@ export interface FeaturesAiChatFrontendShadcnParams {
   };
 
   /** UI theme variant */
-  theme?: 'default' | 'dark' | 'light' | 'minimal';
+  theme?: any;
 }
 
 export interface FeaturesAiChatFrontendShadcnFeatures {

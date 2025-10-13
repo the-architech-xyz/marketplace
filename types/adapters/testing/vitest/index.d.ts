@@ -7,7 +7,7 @@
 export interface TestingVitestParams {
 
   /** Test environment */
-  environment?: 'jsdom' | 'node' | 'happy-dom';
+  environment?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 

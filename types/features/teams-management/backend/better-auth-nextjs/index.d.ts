@@ -7,16 +7,16 @@
 export interface FeaturesTeamsManagementBackendBetterAuthNextjsParams {
 
   /** Team invitation system */
-  invites?: boolean;
+  invites?: any;
 
   /** Granular role-based permissions */
-  permissions?: boolean;
+  permissions?: any;
 
   /** Team performance analytics */
-  analytics?: boolean;
+  analytics?: any;
 
   /** Team billing and subscription management */
-  billing?: boolean;
+  billing?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 

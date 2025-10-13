@@ -7,16 +7,16 @@
 export interface StateZustandParams {
 
   /** Enable state persistence */
-  persistence?: boolean;
+  persistence?: any;
 
   /** Enable Redux DevTools */
-  devtools?: boolean;
+  devtools?: any;
 
   /** Enable Immer for immutable updates */
-  immer?: boolean;
+  immer?: any;
 
   /** Middleware to use */
-  middleware?: string[];
+  middleware?: any;
 }
 
 export interface StateZustandFeatures {}

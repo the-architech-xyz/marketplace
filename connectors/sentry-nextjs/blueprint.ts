@@ -1,4 +1,5 @@
-import { BlueprintAction, BlueprintActionType, ModifierType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ModifierType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../types/blueprint-config-types.js';
 
 /**
  * Dynamic Sentry-NextJS Connector Blueprint
@@ -6,7 +7,12 @@ import { BlueprintAction, BlueprintActionType, ModifierType, ConflictResolutionS
  * Enhances Sentry adapter with NextJS-specific optimizations and integrations.
  * This connector enhances the core Sentry adapter instead of duplicating functionality.
  */
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'connectors/sentry-nextjs'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   return [
     // Install Next.js specific Sentry package
     {

@@ -7,16 +7,16 @@
 export interface ContentNextIntlParams {
 
   /** Supported locales */
-  locales?: string[];
+  locales?: any;
 
   /** Default locale */
-  defaultLocale?: string;
+  defaultLocale?: any;
 
   /** Enable locale-based routing */
-  routing?: boolean;
+  routing?: any;
 
   /** Enable SEO optimization */
-  seo?: boolean;
+  seo?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 

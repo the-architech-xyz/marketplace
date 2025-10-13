@@ -20,7 +20,7 @@ export const STRIPE_CONFIG = {
   returnUrl: process.env.APP_URL + '/payment/return',
   
   // Currency and Locale
-  currency: '<%= context.currency %>' || 'usd',
+  currency: '<%= module.parameters.currency %>' || 'usd',
   locale: 'en',
   
   // Payment Configuration

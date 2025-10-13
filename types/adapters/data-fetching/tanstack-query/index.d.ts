@@ -7,13 +7,13 @@
 export interface DataFetchingTanstackQueryParams {
 
   /** Enable TanStack Query DevTools */
-  devtools?: boolean;
+  devtools?: any;
 
   /** Default query and mutation options */
-  defaultOptions?: Record<string, any>;
+  defaultOptions?: any;
 
   /** Enable Suspense mode for queries */
-  suspense?: boolean;
+  suspense?: any;
 }
 
 export interface DataFetchingTanstackQueryFeatures {}

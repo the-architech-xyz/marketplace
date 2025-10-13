@@ -34,7 +34,7 @@ export interface FeaturesWeb3ShadcnParams {
   };
 
   /** UI theme variant */
-  theme?: string;
+  theme?: any;
 }
 
 export interface FeaturesWeb3ShadcnFeatures {

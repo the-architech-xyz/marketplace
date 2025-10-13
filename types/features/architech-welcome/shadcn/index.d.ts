@@ -25,19 +25,28 @@ export interface FeaturesArchitechWelcomeShadcnParams {
   };
 
   /** Custom welcome page title */
-  customTitle?: string;
+  customTitle?: any;
 
   /** Custom welcome page description */
-  customDescription?: string;
+  customDescription?: any;
 
   /** Primary color theme for the welcome page */
-  primaryColor?: string;
+  primaryColor?: any;
 
-  /** Show architecture documentation section */
-  showArchitecture?: boolean;
+  /** Show technology stack visualization */
+  showTechStack?: any;
 
-  /** Show documentation links section */
-  showDocumentation?: boolean;
+  /** Show interactive component library showcase */
+  showComponents?: any;
+
+  /** Show project structure and architecture */
+  showProjectStructure?: any;
+
+  /** Show quick start guide */
+  showQuickStart?: any;
+
+  /** Show Architech branding and links */
+  showArchitechBranding?: any;
 }
 
 export interface FeaturesArchitechWelcomeShadcnFeatures {

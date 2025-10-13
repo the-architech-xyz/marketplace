@@ -615,6 +615,118 @@ ${moduleParameters.join('\n')}
   }
 
   /**
+   * Generate BlueprintParameter types for each module
+   */
+  static async generateBlueprintParameterTypes(
+    analysisResults: BlueprintAnalysisResult[], 
+    marketplacePath: string
+  ): Promise<string> {
+    const blueprintParameterTypes: string[] = [];
+    
+    for (const analysis of analysisResults) {
+      const moduleId = analysis.moduleId;
+      const moduleType = analysis.moduleType;
+      
+      // Determine the schema file path based on module type
+      let schemaPath: string;
+      if (moduleType === 'adapter') {
+        schemaPath = path.join(marketplacePath, 'adapters', moduleId, 'adapter.json');
+      } else if (moduleType === 'connector') {
+        // Try both connector.json and integration.json
+        const connectorPath = path.join(marketplacePath, 'connectors', moduleId.replace('connectors/', ''), 'connector.json');
+        const integrationPath = path.join(marketplacePath, 'connectors', moduleId.replace('connectors/', ''), 'integration.json');
+        schemaPath = fs.existsSync(connectorPath) ? connectorPath : integrationPath;
+      } else if (moduleType === 'feature') {
+        schemaPath = path.join(marketplacePath, 'features', moduleId.replace('features/', ''), 'feature.json');
+      } else {
+        continue; // Skip other types for now
+      }
+      
+      try {
+        const schema = this.loadConstitutionalSchema(schemaPath);
+        if (schema && schema.parameters) {
+          const typeName = this.getBlueprintParameterTypeName(moduleId);
+          const parameterType = this.generateBlueprintParameterType(moduleId, schema.parameters);
+          blueprintParameterTypes.push(`export interface ${typeName} ${parameterType}`);
+        }
+      } catch (error) {
+        console.warn(`⚠️ Could not load schema for ${moduleId}:`, error);
+      }
+    }
+    
+    return blueprintParameterTypes.join('\n\n');
+  }
+
+  /**
+   * Get the TypeScript type name for a module's blueprint parameters
+   */
+  private static getBlueprintParameterTypeName(moduleId: string): string {
+    // Convert module ID to PascalCase type name
+    // e.g., 'features/architech-welcome/shadcn' → 'ArchitechWelcomeShadcnParameters'
+    const parts = moduleId.split('/');
+    const typeName = parts
+      .map(part => part.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(''))
+      .join('');
+    return `${typeName}Parameters`;
+  }
+
+  /**
+   * Generate TypeScript interface for blueprint parameters
+   */
+  private static generateBlueprintParameterType(moduleId: string, parameters: any): string {
+    const properties: string[] = [];
+    
+    // Handle features object
+    if (parameters.features) {
+      properties.push('  features: {');
+      for (const [featureName, featureConfig] of Object.entries(parameters.features)) {
+        if (typeof featureConfig === 'object' && featureConfig !== null) {
+          const config = featureConfig as any;
+          const type = config.type || 'boolean';
+          const required = config.required !== false ? '' : '?';
+          properties.push(`    ${featureName}${required}: ${type};`);
+        }
+      }
+      properties.push('  };');
+    }
+    
+    // Handle other parameters
+    for (const [paramName, paramConfig] of Object.entries(parameters)) {
+      if (paramName === 'features') continue; // Already handled above
+      
+      if (typeof paramConfig === 'object' && paramConfig !== null) {
+        const config = paramConfig as any;
+        const type = this.getTypeScriptType(config.type, config.options);
+        const required = config.required !== false ? '' : '?';
+        properties.push(`  ${paramName}${required}: ${type};`);
+      }
+    }
+    
+    return `{\n${properties.join('\n')}\n}`;
+  }
+
+  /**
+   * Convert schema type to TypeScript type
+   */
+  private static getTypeScriptType(type: string, options?: any[]): string {
+    switch (type) {
+      case 'string':
+        return 'string';
+      case 'boolean':
+        return 'boolean';
+      case 'number':
+        return 'number';
+      case 'array':
+        return 'any[]';
+      default:
+        if (options && Array.isArray(options)) {
+          return options.map(opt => `'${opt}'`).join(' | ');
+        }
+        return 'any';
+    }
+  }
+
+  /**
    * Generate discriminated union types for better IDE support
    */
   static async generateDiscriminatedUnionTypes(

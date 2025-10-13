@@ -260,10 +260,10 @@ const prettierConfig = {
 // Export the configuration
 export default [
   baseConfig,
-  <% if (context.hasTypeScript) { %>typescriptConfig,<% } %>
-  <% if (context.hasReact) { %>reactConfig,<% } %>
-  <% if (context.hasNextJS) { %>nextjsConfig,<% } %>
-  <% if (context.hasAccessibility) { %>accessibilityConfig,<% } %>
-  <% if (context.hasImports) { %>importConfig,<% } %>
-  <% if (context.hasFormat) { %>prettierConfig,<% } %>
+  <% if (module.parameters.hasTypeScript) { %>typescriptConfig,<% } %>
+  <% if (module.parameters.hasReact) { %>reactConfig,<% } %>
+  <% if (module.parameters.hasNextJS) { %>nextjsConfig,<% } %>
+  <% if (module.parameters.hasAccessibility) { %>accessibilityConfig,<% } %>
+  <% if (module.parameters.hasImports) { %>importConfig,<% } %>
+  <% if (module.parameters.hasFormat) { %>prettierConfig,<% } %>
 ];

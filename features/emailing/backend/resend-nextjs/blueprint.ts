@@ -1,33 +1,39 @@
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../../types/blueprint-config-types.js';
 
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'features/emailing/backend/resend-nextjs'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   const actions: BlueprintAction[] = [];
   
   // Core is always generated
   actions.push(...generateCoreActions());
   
   // Optional features based on configuration
-  if (config.activeFeatures.includes('templates')) {
+  if (params.templates) {
     actions.push(...generateTemplatesActions());
   }
   
-  if (config.activeFeatures.includes('analytics')) {
+  if (params.analytics) {
     actions.push(...generateAnalyticsActions());
   }
   
-  if (config.activeFeatures.includes('bulkEmail')) {
+  if (params.bulkEmail) {
     actions.push(...generateBulkEmailActions());
   }
   
-  if (config.activeFeatures.includes('webhooks')) {
+  if (params.webhooks) {
     actions.push(...generateWebhooksActions());
   }
   
-  if (config.activeFeatures.includes('organizations')) {
+  if (params.organizations) {
     actions.push(...generateOrganizationsActions());
   }
   
-  if (config.activeFeatures.includes('teams')) {
+  if (params.teams) {
     actions.push(...generateTeamsActions());
   }
   

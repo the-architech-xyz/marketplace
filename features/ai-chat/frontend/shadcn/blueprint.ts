@@ -1,21 +1,27 @@
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../../types/blueprint-config-types.js';
 
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'features/ai-chat/frontend/shadcn'>
+): BlueprintAction[] {
   const actions: BlueprintAction[] = [];
+  
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
   
   // Core is always generated
   actions.push(...generateCoreActions());
   
-  // Optional features based on configuration
-  if (config.activeFeatures.includes('media')) {
+  // Optional features based on schema parameters
+  if (features.media) {
     actions.push(...generateMediaActions());
   }
   
-  if (config.activeFeatures.includes('voice')) {
+  if (features.voice) {
     actions.push(...generateVoiceActions());
   }
   
-  if (config.activeFeatures.includes('advanced')) {
+  if (features.advanced) {
     actions.push(...generateAdvancedActions());
   }
   
@@ -148,10 +154,7 @@ function generateVoiceActions(): BlueprintAction[] {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}ai-chat/VoiceInput.tsx',
       template: 'templates/VoiceInput.tsx.tpl',
-      context: {
-        features: ['voice'],
-        hasVoice: true
-      },
+
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -161,10 +164,7 @@ function generateVoiceActions(): BlueprintAction[] {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}ai-chat/VoiceOutput.tsx',
       template: 'templates/VoiceOutput.tsx.tpl',
-      context: {
-        features: ['voice'],
-        hasVoice: true
-      },
+
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -174,10 +174,7 @@ function generateVoiceActions(): BlueprintAction[] {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.hooks}}useVoice.ts',
       template: 'templates/useVoice.ts.tpl',
-      context: {
-        features: ['voice'],
-        hasVoice: true
-      },
+
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -193,10 +190,7 @@ function generateAdvancedActions(): BlueprintAction[] {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}ai-chat/CustomPrompts.tsx',
       template: 'templates/CustomPrompts.tsx.tpl',
-      context: {
-        features: ['advanced'],
-        hasAdvanced: true
-      },
+
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -206,10 +200,7 @@ function generateAdvancedActions(): BlueprintAction[] {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}ai-chat/ExportImport.tsx',
       template: 'templates/ExportImport.tsx.tpl',
-      context: {
-        features: ['advanced'],
-        hasAdvanced: true
-      },
+ 
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -219,10 +210,6 @@ function generateAdvancedActions(): BlueprintAction[] {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}ai-chat/SettingsPanel.tsx',
       template: 'templates/SettingsPanel.tsx.tpl',
-      context: {
-        features: ['advanced'],
-        hasAdvanced: true
-      },
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -233,10 +220,7 @@ function generateAdvancedActions(): BlueprintAction[] {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}ai-chat/LoadingIndicator.tsx',
       template: 'templates/LoadingIndicator.tsx.tpl',
-      context: {
-        features: ['advanced'],
-        hasAdvanced: true
-      },
+
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -246,10 +230,7 @@ function generateAdvancedActions(): BlueprintAction[] {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}ai-chat/ErrorDisplay.tsx',
       template: 'templates/ErrorDisplay.tsx.tpl',
-      context: {
-        features: ['advanced'],
-        hasAdvanced: true
-      },
+  
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
@@ -259,10 +240,6 @@ function generateAdvancedActions(): BlueprintAction[] {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.components}}ai-chat/ChatAnalytics.tsx',
       template: 'templates/ChatAnalytics.tsx.tpl',
-      context: {
-        features: ['advanced'],
-        hasAdvanced: true
-      },
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0

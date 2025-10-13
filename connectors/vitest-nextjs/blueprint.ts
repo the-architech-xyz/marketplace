@@ -1,4 +1,5 @@
-import { BlueprintAction, BlueprintActionType, ModifierType, ConflictResolutionStrategy, EnhanceFileFallbackStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ModifierType, ConflictResolutionStrategy, EnhanceFileFallbackStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../types/blueprint-config-types.js';
 
 /**
  * Dynamic Vitest-NextJS Connector Blueprint
@@ -6,7 +7,12 @@ import { BlueprintAction, BlueprintActionType, ModifierType, ConflictResolutionS
  * Enhances Vitest testing with Next.js-specific utilities and configurations.
  * This connector enhances the core Vitest adapter instead of duplicating functionality.
  */
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'connectors/vitest-nextjs'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   return [
     // Create consolidated testing hooks
     {

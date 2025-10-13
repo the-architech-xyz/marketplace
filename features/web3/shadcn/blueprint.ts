@@ -5,28 +5,34 @@
  * Uses template-based component generation for maintainability
  */
 
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'features/web3/shadcn'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   const actions: BlueprintAction[] = [];
   
   // Core is always generated
   actions.push(...generateCoreActions());
   
   // Optional features based on configuration
-  if (config.activeFeatures.includes('transactionHistory')) {
+  if (features.transactionHistory) {
     actions.push(...generateTransactionHistoryActions());
   }
   
-  if (config.activeFeatures.includes('nftGallery')) {
+  if (features.nftGallery) {
     actions.push(...generateNFTGalleryActions());
   }
   
-  if (config.activeFeatures.includes('defiIntegration')) {
+  if (features.defiIntegration) {
     actions.push(...generateDeFiIntegrationActions());
   }
   
-  if (config.activeFeatures.includes('stakingInterface')) {
+  if (features.stakingInterface) {
     actions.push(...generateStakingInterfaceActions());
   }
   

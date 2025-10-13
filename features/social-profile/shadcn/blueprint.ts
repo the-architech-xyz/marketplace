@@ -5,44 +5,50 @@
  * Uses template-based component generation for maintainability
  */
 
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'features/social-profile/shadcn'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   const actions: BlueprintAction[] = [];
   
   // Core is always generated
   actions.push(...generateCoreActions());
   
   // Optional features based on configuration
-  if (config.activeFeatures.includes('socialConnections')) {
+  if (features.socialConnections) {
     actions.push(...generateSocialConnectionsActions());
   }
   
-  if (config.activeFeatures.includes('activityFeeds')) {
+  if (features.activityFeeds) {
     actions.push(...generateActivityFeedsActions());
   }
   
-  if (config.activeFeatures.includes('notifications')) {
+  if (features.notifications) {
     actions.push(...generateNotificationsActions());
   }
   
-  if (config.activeFeatures.includes('privacyControls')) {
+  if (features.privacyControls) {
     actions.push(...generatePrivacyControlsActions());
   }
   
-  if (config.activeFeatures.includes('socialSettings')) {
+  if (features.socialSettings) {
     actions.push(...generateSocialSettingsActions());
   }
   
-  if (config.activeFeatures.includes('avatarUpload')) {
+  if (features.avatarUpload) {
     actions.push(...generateAvatarUploadActions());
   }
   
-  if (config.activeFeatures.includes('blocking')) {
+  if (features.blocking) {
     actions.push(...generateBlockingActions());
   }
   
-  if (config.activeFeatures.includes('reporting')) {
+  if (features.reporting) {
     actions.push(...generateReportingActions());
   }
   

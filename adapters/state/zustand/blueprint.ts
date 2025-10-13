@@ -5,27 +5,33 @@
  * Core features are always included, optional features are conditionally generated.
  */
 
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
 /**
  * Dynamic Zustand State Management Blueprint
  */
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'state/zustand'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   const actions: BlueprintAction[] = [];
   
   // Core is always generated
   actions.push(...generateCoreActions());
   
   // Optional features based on configuration
-  if (config.activeFeatures.includes('persistence')) {
+  if (features.persistence) {
     actions.push(...generatePersistenceActions());
   }
   
-  if (config.activeFeatures.includes('devtools')) {
+  if (features.devtools) {
     actions.push(...generateDevtoolsActions());
   }
   
-  if (config.activeFeatures.includes('immer')) {
+  if (features.immer) {
     actions.push(...generateImmerActions());
   }
   

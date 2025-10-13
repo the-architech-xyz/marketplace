@@ -7,16 +7,16 @@
 export interface UiTailwindParams {
 
   /** Enable @tailwindcss/typography plugin */
-  typography?: boolean;
+  typography?: any;
 
   /** Enable @tailwindcss/forms plugin */
-  forms?: boolean;
+  forms?: any;
 
   /** Enable @tailwindcss/aspect-ratio plugin */
-  aspectRatio?: boolean;
+  aspectRatio?: any;
 
   /** Enable dark mode support */
-  darkMode?: boolean;
+  darkMode?: any;
 }
 
 export interface UiTailwindFeatures {}

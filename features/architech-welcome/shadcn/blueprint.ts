@@ -5,7 +5,8 @@
  * Core features are always included, optional features are conditionally generated.
  */
 
-import { BlueprintAction, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
 /**
  * Dynamic Architech Welcome Feature Blueprint
@@ -13,30 +14,35 @@ import { BlueprintAction, BlueprintActionType, ModifierType, EnhanceFileFallback
  * Generates a beautiful welcome page based on Constitutional Architecture configuration.
  * Core features are always included, optional features are conditionally generated.
  */
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'features/architech-welcome/shadcn'>
+): BlueprintAction[] {
   const actions: BlueprintAction[] = [];
+  
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
   
   // Core is always generated
   actions.push(...generateCoreActions(config));
   
-  // Optional features based on configuration
-  if (config.activeFeatures.includes('techStack')) {
+  // Optional features based on schema parameters
+  if (features.techStack) {
     actions.push(...generateTechStackActions());
   }
   
-  if (config.activeFeatures.includes('components')) {
+  if (features.componentShowcase) {
     actions.push(...generateComponentsActions());
   }
   
-  if (config.activeFeatures.includes('projectStructure')) {
+  if (features.projectStructure) {
     actions.push(...generateProjectStructureActions());
   }
   
-  if (config.activeFeatures.includes('quickStart')) {
+  if (features.quickStart) {
     actions.push(...generateQuickStartActions());
   }
   
-  if (config.activeFeatures.includes('architechBranding')) {
+  if (features.architechBranding) {
     actions.push(...generateArchitechBrandingActions());
   }
   
@@ -47,26 +53,9 @@ export default function generateBlueprint(config: MergedConfiguration): Blueprin
 // CORE WELCOME FEATURES (Always Generated)
 // ============================================================================
 
-function generateCoreActions(config: MergedConfiguration): BlueprintAction[] {
-  // Extract template data from config
-  const templateData = config.templateContext || {};
-
-  const featureContext = {
-    ...templateData,
-    context: {
-      // Boolean features → activeFeatures
-      showTechStack: config.activeFeatures.includes('techStack'),
-      showComponents: config.activeFeatures.includes('componentShowcase'),
-      showProjectStructure: config.activeFeatures.includes('projectStructure'),
-      showQuickStart: config.activeFeatures.includes('quickStart'),
-      showArchitechBranding: config.activeFeatures.includes('architechBranding'),
-      
-      // Config values → templateContext
-      customTitle: templateData.module?.parameters?.customTitle || `Welcome to ${templateData.project?.name || 'Your App'}`,
-      customDescription: templateData.module?.parameters?.customDescription || 'Your modern Next.js application is ready! Explore the technologies and features that power your project.',
-      primaryColor: templateData.module?.parameters?.primaryColor || 'blue',
-    }
-  };
+function generateCoreActions(config: TypedMergedConfiguration<'features/architech-welcome/shadcn'>): BlueprintAction[] {
+  // Use schema parameters directly - no custom context creation
+  // The template will access module.parameters.* directly from the base context
   
   return [
     // Install additional dependencies for the welcome page
@@ -89,9 +78,9 @@ function generateCoreActions(config: MergedConfiguration): BlueprintAction[] {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2
-      },
-      context: featureContext  // Pass feature context for Handlebars rendering
-    } as any,
+      }
+      // No custom context - template accesses module.parameters.* directly
+    },
 
     // Create welcome page layout
     {
@@ -395,11 +384,11 @@ export class ProjectAnalyzer {
       {
         type: BlueprintActionType.ENHANCE_FILE,
         path: '{{paths.app_root}}globals.css',
-        modifier: 'css-enhancer',
+        modifier: ModifierType.CSS_ENHANCER,
         params: {
           content: `@import "../styles/welcome.css";`
         },
-        fallback: 'create'
+        fallback: EnhanceFileFallbackStrategy.CREATE
       },
 
     // Create Framer Motion type declarations (Industry Standard Fix)

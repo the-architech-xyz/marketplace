@@ -7,19 +7,19 @@
 export interface CoreFormsParams {
 
   /** Enable Zod for schema validation */
-  zod?: boolean;
+  zod?: any;
 
   /** Enable React Hook Form for form handling */
-  reactHookForm?: boolean;
+  reactHookForm?: any;
 
   /** Enable @hookform/resolvers for Zod integration */
-  resolvers?: boolean;
+  resolvers?: any;
 
   /** Enable accessibility features */
-  accessibility?: boolean;
+  accessibility?: any;
 
   /** Enable React Hook Form DevTools */
-  devtools?: boolean;
+  devtools?: any;
 }
 
 export interface CoreFormsFeatures {}

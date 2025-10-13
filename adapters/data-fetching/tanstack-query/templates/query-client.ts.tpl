@@ -3,15 +3,15 @@ import { QueryClient } from '@tanstack/react-query';
 // Default query options
 const defaultQueryOptions = {
   queries: {
-    staleTime: <% if (context.hasCustomStaleTime) { %><%= context.staleTime %><% } else { %>5 * 60 * 1000<% } %>, // 5 minutes
-    gcTime: <% if (context.hasCustomGcTime) { %><%= context.gcTime %><% } else { %>10 * 60 * 1000<% } %>, // 10 minutes
-    retry: <% if (context.hasCustomRetry) { %><%= context.retry %><% } else { %>3<% } %>,
-    refetchOnWindowFocus: <% if (context.hasCustomRefetchOnWindowFocus) { %><%= context.refetchOnWindowFocus %><% } else { %>false<% } %>,
+    staleTime: <% if (module.parameters.defaultOptions && module.parameters.defaultOptions.queries && module.parameters.defaultOptions.queries.staleTime) { %><%= module.parameters.defaultOptions.queries.staleTime %><% } else { %>5 * 60 * 1000<% } %>, // 5 minutes
+    gcTime: <% if (module.parameters.defaultOptions && module.parameters.defaultOptions.queries && module.parameters.defaultOptions.queries.gcTime) { %><%= module.parameters.defaultOptions.queries.gcTime %><% } else { %>10 * 60 * 1000<% } %>, // 10 minutes
+    retry: <% if (module.parameters.defaultOptions && module.parameters.defaultOptions.queries && module.parameters.defaultOptions.queries.retry) { %><%= module.parameters.defaultOptions.queries.retry %><% } else { %>3<% } %>,
+    refetchOnWindowFocus: <% if (module.parameters.defaultOptions && module.parameters.defaultOptions.queries && module.parameters.defaultOptions.queries.refetchOnWindowFocus) { %><%= module.parameters.defaultOptions.queries.refetchOnWindowFocus %><% } else { %>false<% } %>,
     refetchOnMount: true,
     refetchOnReconnect: true,
   },
   mutations: {
-    retry: <% if (context.hasCustomMutationRetry) { %><%= context.mutationRetry %><% } else { %>1<% } %>,
+    retry: <% if (module.parameters.defaultOptions && module.parameters.defaultOptions.mutations && module.parameters.defaultOptions.mutations.retry) { %><%= module.parameters.defaultOptions.mutations.retry %><% } else { %>1<% } %>,
   },
 };
 

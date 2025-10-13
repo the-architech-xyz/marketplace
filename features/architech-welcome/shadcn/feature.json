@@ -68,15 +68,30 @@
       "choices": ["blue", "green", "purple", "red", "orange", "pink"],
       "description": "Primary color theme for the welcome page"
     },
-    "showArchitecture": {
+    "showTechStack": {
       "type": "boolean",
       "default": true,
-      "description": "Show architecture documentation section"
+      "description": "Show technology stack visualization"
     },
-    "showDocumentation": {
+    "showComponents": {
       "type": "boolean",
       "default": true,
-      "description": "Show documentation links section"
+      "description": "Show interactive component library showcase"
+    },
+    "showProjectStructure": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show project structure and architecture"
+    },
+    "showQuickStart": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show quick start guide"
+    },
+    "showArchitechBranding": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show Architech branding and links"
     }
   },
   "capabilities": {

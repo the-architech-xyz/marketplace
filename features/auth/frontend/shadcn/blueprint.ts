@@ -1,4 +1,5 @@
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../../types/blueprint-config-types.js';
 
 /**
  * Dynamic Auth UI Feature Blueprint
@@ -6,30 +7,35 @@ import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, Merge
  * Generates authentication UI components based on Constitutional Architecture configuration.
  * Core features are always included, optional features are conditionally generated.
  */
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'features/auth/frontend/shadcn'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   const actions: BlueprintAction[] = [];
   
   // Core is always generated
   actions.push(...generateCoreActions());
   
   // Optional features based on configuration
-  if (config.activeFeatures.includes('passwordReset')) {
+  if (features.passwordReset) {
     actions.push(...generatePasswordResetActions());
   }
   
-  if (config.activeFeatures.includes('mfa')) {
+  if (features.mfa) {
     actions.push(...generateMFAActions());
   }
   
-  if (config.activeFeatures.includes('socialLogins')) {
+  if (features.socialLogins) {
     actions.push(...generateSocialLoginsActions());
   }
   
-  if (config.activeFeatures.includes('profileManagement')) {
+  if (features.profileManagement) {
     actions.push(...generateProfileManagementActions());
   }
   
-  if (config.activeFeatures.includes('accountSettingsPage')) {
+  if (features.accountSettingsPage) {
     actions.push(...generateAccountSettingsPageActions());
   }
   

@@ -6,31 +6,31 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    {{#if context.hasTypeScript}}'@typescript-eslint/recommended',{{/if}}
-    {{#if context.hasReact}}'plugin:react/recommended',
-    'plugin:react-hooks/recommended',{{/if}}
-    {{#if context.hasNextJS}}'next/core-web-vitals',{{/if}}
-    {{#if context.hasAccessibility}}'plugin:jsx-a11y/recommended',{{/if}}
-    {{#if context.hasImports}}'plugin:import/recommended',
-    'plugin:import/typescript',{{/if}}
-    {{#if context.hasFormat}}'plugin:prettier/recommended',{{/if}}
+    <% if (module.parameters.hasTypeScript) { %>'@typescript-eslint/recommended',<% } %>
+    <% if (module.parameters.hasReact) { %>'plugin:react/recommended',
+    'plugin:react-hooks/recommended',<% } %>
+    <% if (module.parameters.hasNextJS) { %>'next/core-web-vitals',<% } %>
+    <% if (module.parameters.hasAccessibility) { %>'plugin:jsx-a11y/recommended',<% } %>
+    <% if (module.parameters.hasImports) { %>'plugin:import/recommended',
+    'plugin:import/typescript',<% } %>
+    <% if (module.parameters.hasFormat) { %>'plugin:prettier/recommended',<% } %>
   ],
-  parser: {{#if context.hasTypeScript}}'@typescript-eslint/parser'{{else}}'@babel/eslint-parser'{{/if}},
+  parser: <% if (module.parameters.hasTypeScript) { %>'@typescript-eslint/parser'<% } else { %>'@babel/eslint-parser'<% } %>,
   parserOptions: {
     ecmaVersion: 2022,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
-    {{#if context.hasTypeScript}}project: './tsconfig.json',{{/if}}
+    <% if (module.parameters.hasTypeScript) { %>project: './tsconfig.json',<% } %>
   },
   plugins: [
-    {{#if context.hasTypeScript}}'@typescript-eslint',{{/if}}
-    {{#if context.hasReact}}'react',
-    'react-hooks',{{/if}}
-    {{#if context.hasAccessibility}}'jsx-a11y',{{/if}}
-    {{#if context.hasImports}}'import',{{/if}}
-    {{#if context.hasFormat}}'prettier',{{/if}}
+    <% if (module.parameters.hasTypeScript) { %>'@typescript-eslint',<% } %>
+    <% if (module.parameters.hasReact) { %>'react',
+    'react-hooks',<% } %>
+    <% if (module.parameters.hasAccessibility) { %>'jsx-a11y',<% } %>
+    <% if (module.parameters.hasImports) { %>'import',<% } %>
+    <% if (module.parameters.hasFormat) { %>'prettier',<% } %>
   ],
   rules: {
     // Basic rules
@@ -59,7 +59,7 @@ module.exports = {
     'no-multiple-empty-lines': ['error', { max: 1 }],
     'no-mixed-spaces-and-tabs': 'error',
 
-    {{#if context.hasTypeScript}}
+    <% if (module.parameters.hasTypeScript) { %>
     // TypeScript-specific rules
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-explicit-any': 'warn',
@@ -76,9 +76,9 @@ module.exports = {
     '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
     '@typescript-eslint/prefer-string-starts-ends-with': 'error',
     '@typescript-eslint/prefer-includes': 'error',
-    {{/if}}
+    <% } %>
 
-    {{#if context.hasReact}}
+    <% if (module.parameters.hasReact) { %>
     // React-specific rules
     'react/react-in-jsx-scope': 'off', // Not needed in React 17+
     'react/prop-types': 'off', // Using TypeScript for prop validation
@@ -108,9 +108,9 @@ module.exports = {
     // React Hooks rules
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-    {{/if}}
+    <% } %>
 
-    {{#if context.hasAccessibility}}
+    <% if (module.parameters.hasAccessibility) { %>
     // Accessibility rules
     'jsx-a11y/alt-text': 'error',
     'jsx-a11y/anchor-has-content': 'error',
@@ -137,9 +137,9 @@ module.exports = {
     'jsx-a11y/role-supports-aria-props': 'error',
     'jsx-a11y/scope': 'error',
     'jsx-a11y/tabindex-no-positive': 'error',
-    {{/if}}
+    <% } %>
 
-    {{#if context.hasImports}}
+    <% if (module.parameters.hasImports) { %>
     // Import rules
     'import/order': [
       'error',
@@ -183,27 +183,27 @@ module.exports = {
     'import/no-unassigned-import': 'off',
     'import/no-useless-path-segments': 'error',
     'import/prefer-default-export': 'off',
-    {{/if}}
+    <% } %>
 
-    {{#if context.hasFormat}}
+    <% if (module.parameters.hasFormat) { %>
     // Prettier rules
     'prettier/prettier': 'error',
-    {{/if}}
+    <% } %>
   },
   settings: {
-    {{#if context.hasReact}}
+    <% if (module.parameters.hasReact) { %>
     react: {
       version: 'detect',
     },
-    {{/if}}
-    {{#if context.hasImports}}
+    <% } %>
+    <% if (module.parameters.hasImports) { %>
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
         project: './tsconfig.json',
       },
     },
-    {{/if}}
+    <% } %>
   },
   ignorePatterns: [
     'node_modules/',

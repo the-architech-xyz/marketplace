@@ -7,40 +7,40 @@
 export interface QualityPrettierParams {
 
   /** Add semicolons at the end of statements */
-  semi?: boolean;
+  semi?: any;
 
   /** Use single quotes instead of double quotes */
-  singleQuote?: boolean;
+  singleQuote?: any;
 
   /** Number of spaces per indentation level */
-  tabWidth?: number;
+  tabWidth?: any;
 
   /** Use tabs instead of spaces for indentation */
-  useTabs?: boolean;
+  useTabs?: any;
 
   /** Print trailing commas where valid in ES5 */
-  trailingComma?: 'none' | 'es5' | 'all';
+  trailingComma?: any;
 
   /** Wrap lines that exceed this length */
-  printWidth?: number;
+  printWidth?: any;
 
   /** Print spaces between brackets in object literals */
-  bracketSpacing?: boolean;
+  bracketSpacing?: any;
 
   /** Include parentheses around a sole arrow function parameter */
-  arrowParens?: 'avoid' | 'always';
+  arrowParens?: any;
 
   /** Line ending style */
-  endOfLine?: 'lf' | 'crlf' | 'cr' | 'auto';
+  endOfLine?: any;
 
   /** Prettier plugins to use */
-  plugins?: string[];
+  plugins?: any;
 
   /** Enable Tailwind CSS class sorting plugin */
-  tailwind?: boolean;
+  tailwind?: any;
 
   /** Enable import organization */
-  organizeImports?: boolean;
+  organizeImports?: any;
 }
 
 export interface QualityPrettierFeatures {}

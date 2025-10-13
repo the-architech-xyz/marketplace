@@ -1,20 +1,20 @@
 {
-  "semi": {{#if context.hasSemi}}true{{else}}false{{/if}},
-  "singleQuote": {{#if context.hasSingleQuote}}true{{else}}false{{/if}},
-  "tabWidth": {{context.tabWidth}},
-  "useTabs": {{#if context.hasUseTabs}}true{{else}}false{{/if}},
-  "trailingComma": "{{context.trailingComma}}",
-  "printWidth": {{context.printWidth}},
-  "bracketSpacing": {{#if context.hasBracketSpacing}}true{{else}}false{{/if}},
-  "arrowParens": "{{context.arrowParens}}",
-  "endOfLine": "{{context.endOfLine}}",
-  {{#if context.hasPlugins}}
+  "semi": <%= module.parameters.semi || true %>,
+  "singleQuote": <%= module.parameters.singleQuote || true %>,
+  "tabWidth": <%= module.parameters.tabWidth || 2 %>,
+  "useTabs": <%= module.parameters.useTabs || false %>,
+  "trailingComma": "<%= module.parameters.trailingComma || 'es5' %>",
+  "printWidth": <%= module.parameters.printWidth || 80 %>,
+  "bracketSpacing": <%= module.parameters.bracketSpacing || true %>,
+  "arrowParens": "<%= module.parameters.arrowParens || 'avoid' %>",
+  "endOfLine": "<%= module.parameters.endOfLine || 'lf' %>",
+  <% if (module.parameters.plugins && module.parameters.plugins.length > 0) { %>
   "plugins": [
-    {{#each context.plugins}}
-    "{{this}}"{{#unless @last}},{{/unless}}
-    {{/each}}
+    <% module.parameters.plugins.forEach((plugin, index) => { %>
+    "<%= plugin %>"<%= index < module.parameters.plugins.length - 1 ? ',' : '' %>
+    <% }); %>
   ],
-  {{/if}}
+  <% } %>
   "overrides": [
     {
       "files": "*.json",

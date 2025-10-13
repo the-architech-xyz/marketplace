@@ -7,22 +7,22 @@
 export interface FeaturesAuthBackendBetterAuthNextjsParams {
 
   /** Next.js API routes for authentication endpoints */
-  apiRoutes?: boolean;
+  apiRoutes?: any;
 
   /** Next.js middleware for authentication and route protection */
-  middleware?: boolean;
+  middleware?: any;
 
   /** Admin API routes for user management */
-  adminPanel?: boolean;
+  adminPanel?: any;
 
   /** Email verification API routes and components */
-  emailVerification?: boolean;
+  emailVerification?: any;
 
   /** MFA API routes and components */
-  mfa?: boolean;
+  mfa?: any;
 
   /** Password reset API routes and components */
-  passwordReset?: boolean;
+  passwordReset?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 

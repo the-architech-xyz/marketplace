@@ -13,4 +13,3 @@ import type { TypedGenome } from './genome-types.js';
 export function defineGenome<T extends TypedGenome>(genome: T): T {
   return genome;
 }
-

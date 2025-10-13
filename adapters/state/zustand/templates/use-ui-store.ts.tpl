@@ -150,7 +150,7 @@ const storeConfig: StoreConfig = {
       name: 'UI Store',
       enabled: process.env.NODE_ENV === 'development',
     },
-    immer: <% if (context.hasImmer) { %>true<% } else { %>false<% } %>,
+    immer: <% if (module.parameters.hasImmer) { %>true<% } else { %>false<% } %>,
     subscribeWithSelector: true,
   },
 };

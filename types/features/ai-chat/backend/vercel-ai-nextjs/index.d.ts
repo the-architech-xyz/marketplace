@@ -7,19 +7,19 @@
 export interface FeaturesAiChatBackendVercelAiNextjsParams {
 
   /** Real-time message streaming */
-  streaming?: boolean;
+  streaming?: any;
 
   /** File upload capabilities */
-  fileUpload?: boolean;
+  fileUpload?: any;
 
   /** Voice input capabilities */
-  voiceInput?: boolean;
+  voiceInput?: any;
 
   /** Voice output capabilities */
-  voiceOutput?: boolean;
+  voiceOutput?: any;
 
   /** Chat export and import capabilities */
-  exportImport?: boolean;
+  exportImport?: any;
 }
 
 export interface FeaturesAiChatBackendVercelAiNextjsFeatures {}

@@ -5,7 +5,8 @@
  * Core features are always included, optional features are conditionally generated.
  */
 
-import { BlueprintAction, BlueprintActionType, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
 /**
  * Dynamic Stripe Payment Processing Blueprint
@@ -13,24 +14,22 @@ import { BlueprintAction, BlueprintActionType, MergedConfiguration } from '@thea
  * Generates Stripe integration based on Constitutional Architecture configuration.
  * Core features are always included, optional features are conditionally generated.
  */
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'payment/stripe'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   const actions: BlueprintAction[] = [];
   
   // Core is always generated
   actions.push(...generateCoreActions());
   
   // Optional features based on configuration
-  if (config.activeFeatures.includes('subscriptions')) {
-    actions.push(...generateSubscriptionsActions());
-  }
-  
-  if (config.activeFeatures.includes('webhooks')) {
+  if (params.webhooks) {
     actions.push(...generateWebhooksActions());
   }
-  
-  if (config.activeFeatures.includes('analytics')) {
-    actions.push(...generateAnalyticsActions());
-  }
+
   
   return actions;
 }

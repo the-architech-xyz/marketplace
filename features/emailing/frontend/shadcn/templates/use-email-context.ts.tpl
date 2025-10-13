@@ -25,11 +25,11 @@ export function useEmailContext(): {
   // Build user context from auth session
   const userContext: UserContext | null = session ? {
     userId: session.user.id,
-    <% if (context.hasOrganizations) { %>
+    <% if (module.parameters.hasOrganizations) { %>
     organizationId: session.activeOrganizationId,
     role: session.user.role as 'owner' | 'admin' | 'member' | undefined,
     <% } %>
-    <% if (context.hasTeams) { %>
+    <% if (module.parameters.hasTeams) { %>
     teamId: session.activeTeamId,
     teamRole: session.user.teamRole as 'owner' | 'admin' | 'member' | undefined
     <% } %>

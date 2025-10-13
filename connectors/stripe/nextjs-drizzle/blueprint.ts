@@ -5,31 +5,37 @@
  * using NextJS and Drizzle ORM.
  */
 
-import { BlueprintAction, BlueprintActionType, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'connectors/stripe/nextjs-drizzle'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   const actions: BlueprintAction[] = [];
   
   // Core Stripe setup
   actions.push(...generateCoreActions());
   
   // Organization billing features
-  if (config.activeFeatures.includes('organizationBilling')) {
+  if (features.organizationBilling) {
     actions.push(...generateOrganizationBillingActions());
   }
   
   // Seat management features
-  if (config.activeFeatures.includes('seatManagement')) {
+  if (features.seatManagement) {
     actions.push(...generateSeatManagementActions());
   }
   
   // Usage tracking features
-  if (config.activeFeatures.includes('usageTracking')) {
+  if (features.usageTracking) {
     actions.push(...generateUsageTrackingActions());
   }
   
   // Webhook handling
-  if (config.activeFeatures.includes('webhooks')) {
+  if (features.webhooks) {
     actions.push(...generateWebhookActions());
   }
   

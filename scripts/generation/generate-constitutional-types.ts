@@ -77,6 +77,9 @@ export class ConstitutionalTypeGenerator {
     // Generate master index with Constitutional Architecture support
     await ConstitutionalTypeGeneratorHelpers.generateConstitutionalMasterIndex(analysisResults as any, this.outputPath, this.moduleIds);
     
+    // Generate blueprint parameter types
+    await this.generateBlueprintParameterTypes(analysisResults);
+    
     // Generate defineGenome function
     await this.generateDefineGenomeFunction();
     
@@ -187,6 +190,30 @@ export class ConstitutionalTypeGenerator {
     await fs.promises.writeFile(outputFile, tsContent);
     
     console.log(`📝 Generated Constitutional Architecture types for feature: ${moduleId}`);
+  }
+
+  /**
+   * Generate blueprint parameter types for all modules
+   */
+  private async generateBlueprintParameterTypes(analysisResults: ExtendedBlueprintAnalysisResult[]): Promise<void> {
+    console.log('🔧 Generating blueprint parameter types...');
+    
+    const blueprintParameterTypes = await ConstitutionalTypeGeneratorHelpers.generateBlueprintParameterTypes(analysisResults, this.marketplacePath);
+    
+    // Write blueprint parameter types to a dedicated file
+    const outputFile = path.join(this.outputPath, 'blueprint-parameters.d.ts');
+    const content = `/**
+ * Generated Blueprint Parameter Types
+ * 
+ * These types provide type safety for blueprint parameters based on module schemas.
+ * Import these types in your blueprints for full type safety.
+ */
+
+${blueprintParameterTypes}
+`;
+    
+    await fs.promises.writeFile(outputFile, content);
+    console.log(`📝 Generated blueprint parameter types: ${outputFile}`);
   }
 
   /**

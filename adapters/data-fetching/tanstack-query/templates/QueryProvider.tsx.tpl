@@ -11,7 +11,7 @@ export function QueryProvider({ children }: QueryProviderProps) {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      <% if (context..devtools) { %>
+      <% if (module.parameters.devtools) { %>
       <ReactQueryDevtools 
         initialIsOpen={false}
         position="bottom-right"

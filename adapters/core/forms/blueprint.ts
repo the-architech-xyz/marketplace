@@ -5,9 +5,15 @@
  * Provides powerful, type-safe, and accessible form utilities
  */
 
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'core/forms'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   const actions: BlueprintAction[] = [];
   
   // Core packages are always installed
@@ -27,7 +33,7 @@ export default function generateBlueprint(config: MergedConfiguration): Blueprin
   );
   
   // Dev tools are optional
-  if (config.activeFeatures.includes('devtools')) {
+  if (features.devtools) {
     actions.push({
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@hookform/devtools'],
@@ -67,7 +73,7 @@ export default function generateBlueprint(config: MergedConfiguration): Blueprin
   );
   
   // Accessibility features are optional
-  if (config.activeFeatures.includes('accessibility')) {
+  if (features.accessibility) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}forms/accessibility.ts',
@@ -173,7 +179,7 @@ export default function generateBlueprint(config: MergedConfiguration): Blueprin
     template: 'templates/validation-schemas.ts.tpl',
     context: {
       features: config.activeFeatures,
-      hasAdvancedValidation: config.activeFeatures.includes('advancedValidation')
+      hasAdvancedValidation: features.advancedValidation
     },
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,

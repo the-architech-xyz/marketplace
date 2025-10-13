@@ -1,4 +1,5 @@
-import { BlueprintAction, BlueprintActionType, MergedConfiguration, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, MergedConfiguration } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
 /**
  * Sentry Shadcn UI Dashboard Feature Blueprint
@@ -6,14 +7,19 @@ import { BlueprintAction, BlueprintActionType, MergedConfiguration, ConflictReso
  * Provides user-facing monitoring dashboard using Shadcn UI components.
  * Transforms Sentry backend data into a beautiful, accessible UI.
  */
-export default function generateBlueprint(config: MergedConfiguration): BlueprintAction[] {
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'features/observability/sentry-shadcn'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
   const actions: BlueprintAction[] = [];
   
   // Core dashboard is always generated
   actions.push(...generateDashboardActions(config));
   
   // Optional features based on configuration
-  if (config.activeFeatures.includes('errorBrowser')) {
+  if (features.errorBrowser) {
     actions.push(...generateErrorBrowserActions());
   }
   
