@@ -312,7 +312,7 @@ export { Genome } from '@thearchitech.xyz/types';
  * Define Genome with Full Type Safety - Implementation
  */
 
-import type { TypedGenome } from './genome-types';
+import type { TypedGenome } from './genome-types.js';
 
 /**
  * Define a genome with full type safety

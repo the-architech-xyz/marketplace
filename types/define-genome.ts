@@ -2,7 +2,7 @@
  * Define Genome with Full Type Safety - Implementation
  */
 
-import type { TypedGenome } from './genome-types';
+import type { TypedGenome } from './genome-types.js';
 
 /**
  * Define a genome with full type safety
@@ -13,3 +13,4 @@ import type { TypedGenome } from './genome-types';
 export function defineGenome<T extends TypedGenome>(genome: T): T {
   return genome;
 }
+

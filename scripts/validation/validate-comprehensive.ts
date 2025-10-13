@@ -378,7 +378,18 @@ class ComprehensiveValidator {
               const path = importPath.match(/['"`]([^'"`]+)['"`]/)?.[1];
               if (path) {
                 const fullPath = join(dirname(filePath), path);
-                if (!existsSync(fullPath) && !existsSync(fullPath + '.ts') && !existsSync(fullPath + '.js') && !existsSync(fullPath + '.d.ts')) {
+                // Check if the import resolves to an existing file
+                const possiblePaths = [
+                  fullPath,
+                  fullPath + '.ts',
+                  fullPath + '.js',
+                  fullPath + '.d.ts',
+                  // For .js imports, also check if there's a corresponding .d.ts file
+                  fullPath.replace('.js', '.d.ts')
+                ];
+                
+                const pathExists = possiblePaths.some(p => existsSync(p));
+                if (!pathExists) {
                   importErrors++;
                   console.log(`❌ Broken import in ${tsFile}: ${path}`);
                 }
