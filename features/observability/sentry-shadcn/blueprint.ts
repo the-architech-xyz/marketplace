@@ -17,13 +17,8 @@ export default function generateBlueprint(config: MergedConfiguration): Blueprin
     actions.push(...generateErrorBrowserActions());
   }
   
-  if (config.activeFeatures.includes('performance')) {
-    actions.push(...generatePerformanceActions());
-  }
-  
-  if (config.activeFeatures.includes('alerts')) {
-    actions.push(...generateAlertsActions());
-  }
+  // NOTE: Performance and Alerts UI components are handled by the monitoring/shadcn feature
+  // This connector only provides Sentry-specific monitoring dashboard and error browser
   
   return actions;
 }
@@ -144,83 +139,6 @@ function generateErrorBrowserActions(): BlueprintAction[] {
 }
 
 // ============================================================================
-// PERFORMANCE DASHBOARD (Optional)
+// NOTE: Performance and Alerts UI components have been removed
+// These are now handled by the monitoring/shadcn feature module
 // ============================================================================
-
-function generatePerformanceActions(): BlueprintAction[] {
-  return [
-    // Performance page
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(dashboard)/monitoring/performance/page.tsx',
-      template: 'templates/pages/performance-page.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }
-    },
-    
-    // Performance chart component
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.source_root}}components/monitoring/performance-chart.tsx',
-      template: 'templates/components/performance-chart.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }
-    },
-    
-    // Web Vitals card
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.source_root}}components/monitoring/web-vitals-card.tsx',
-      template: 'templates/components/web-vitals-card.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }
-    }
-  ];
-}
-
-// ============================================================================
-// ALERTS CONFIGURATION (Optional)
-// ============================================================================
-
-function generateAlertsActions(): BlueprintAction[] {
-  return [
-    // Alerts configuration page
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(dashboard)/monitoring/alerts/page.tsx',
-      template: 'templates/pages/alerts-page.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }
-    },
-    
-    // Alert configuration form
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.source_root}}components/monitoring/alert-config-form.tsx',
-      template: 'templates/components/alert-config-form.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }
-    },
-    
-    // Alert rules list
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.source_root}}components/monitoring/alert-rules-list.tsx',
-      template: 'templates/components/alert-rules-list.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }
-    }
-  ];
-}
