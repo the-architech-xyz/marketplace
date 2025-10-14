@@ -1,7 +1,7 @@
 /**
- * connectors/sentry-nextjs
+ * Sentry Next.js Connector
  * 
- * Auto-generated connector types with Constitutional Architecture support
+ * Enhances Sentry adapter with NextJS-specific optimizations, middleware, and monitoring hooks
  */
 
 export interface ConnectorsSentryNextjsParams {}

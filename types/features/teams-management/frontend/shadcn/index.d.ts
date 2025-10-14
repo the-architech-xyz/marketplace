@@ -34,7 +34,7 @@ export interface FeaturesTeamsManagementFrontendShadcnParams {
   };
 
   /** UI theme variant */
-  theme?: any;
+  theme?: 'default' | 'dark' | 'light' | 'minimal';
 }
 
 export interface FeaturesTeamsManagementFrontendShadcnFeatures {

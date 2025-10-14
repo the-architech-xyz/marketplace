@@ -33,7 +33,7 @@ export default function generateBlueprint(
   );
   
   // Dev tools are optional
-  if (features.devtools) {
+  if (params.devtools) {
     actions.push({
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['@hookform/devtools'],
@@ -73,7 +73,7 @@ export default function generateBlueprint(
   );
   
   // Accessibility features are optional
-  if (features.accessibility) {
+  if (params.accessibility) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}forms/accessibility.ts',
@@ -178,8 +178,8 @@ export default function generateBlueprint(
     path: '{{paths.shared_library}}forms/validation-schemas.ts',
     template: 'templates/validation-schemas.ts.tpl',
     context: {
-      features: config.activeFeatures,
-      hasAdvancedValidation: features.advancedValidation
+      params: params,
+      hasAdvancedValidation: params.advancedValidation
     },
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,

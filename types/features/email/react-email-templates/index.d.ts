@@ -22,10 +22,10 @@ export interface FeaturesEmailReactEmailTemplatesParams {
   };
 
   /** Primary brand color for email templates */
-  brandColor?: any;
+  brandColor?: string;
 
   /** URL to company logo for email headers */
-  logo?: any;
+  logo?: string;
 }
 
 export interface FeaturesEmailReactEmailTemplatesFeatures {

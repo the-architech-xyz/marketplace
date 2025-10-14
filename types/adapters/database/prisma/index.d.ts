@@ -7,16 +7,16 @@
 export interface DatabasePrismaParams {
 
   /** Database provider */
-  provider?: any;
+  provider?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
 
   /** Enable Prisma Studio */
-  studio?: any;
+  studio?: boolean;
 
   /** Enable database migrations */
-  migrations?: any;
+  migrations?: boolean;
 
   /** Database type */
-  databaseType?: any;
+  databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
 }
 
 export interface DatabasePrismaFeatures {}

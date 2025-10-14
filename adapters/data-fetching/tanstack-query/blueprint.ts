@@ -26,7 +26,7 @@ export default function generateBlueprint(
   actions.push(...generateCoreActions());
   
   // Optional features based on configuration
-  if (features.devtools) {
+  if (params.devtools) {
     actions.push(...generateDevtoolsActions());
   }
   

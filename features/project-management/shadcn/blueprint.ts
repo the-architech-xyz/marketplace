@@ -19,18 +19,6 @@ export default function generateBlueprint(
   // Core is always generated
   actions.push(...generateCoreActions());
   
-  // Optional features based on configuration
-  if (features.timeTracking) {
-    actions.push(...generateTimeTrackingActions());
-  }
-  
-  if (features.ganttView) {
-    actions.push(...generateGanttViewActions());
-  }
-  
-  if (features.projectReporting) {
-    actions.push(...generateProjectReportingActions());
-  }
   
   return actions;
 }
@@ -113,20 +101,3 @@ function generateCoreActions(): BlueprintAction[] {
   ];
 }
 
-function generateTimeTrackingActions(): BlueprintAction[] {
-  return [
-    // TODO: Create time tracking templates when feature is implemented
-  ];
-}
-
-function generateGanttViewActions(): BlueprintAction[] {
-  return [
-    // TODO: Create Gantt view templates when feature is implemented
-  ];
-}
-
-function generateProjectReportingActions(): BlueprintAction[] {
-  return [
-    // TODO: Create project reporting templates when feature is implemented
-  ];
-}

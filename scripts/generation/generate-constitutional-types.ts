@@ -235,7 +235,8 @@ ${blueprintParameterTypes}
 import { Genome } from '@thearchitech.xyz/types';
 
 // Generated ModuleId union type
-export type ModuleId = ${this.moduleIds.map(id => `'${id}'`).join(' | ')};
+export type ModuleId = 
+${this.moduleIds.map(id => `  | '${id}'`).join('\n')};
 
 ${moduleParametersType}
 
@@ -308,7 +309,8 @@ export { Genome } from '@thearchitech.xyz/types';
 import { Genome } from '@thearchitech.xyz/types';
 
 // Generated ModuleId union type
-export type ModuleId = ${this.moduleIds.map(id => `'${id}'`).join(' | ')};
+export type ModuleId = 
+${this.moduleIds.map(id => `  | '${id}'`).join('\n')};
 
 ${moduleParametersType}
 

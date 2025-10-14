@@ -7,13 +7,13 @@
 export interface ServicesGithubApiParams {
 
   /** GitHub Personal Access Token or OAuth access token */
-  token: any;
+  token: string;
 
   /** GitHub API base URL (for GitHub Enterprise) */
-  baseUrl?: any;
+  baseUrl?: string;
 
   /** User agent string for API requests */
-  userAgent?: any;
+  userAgent?: string;
 }
 
 export interface ServicesGithubApiFeatures {}

@@ -26,19 +26,19 @@ export default function generateBlueprint(
   actions.push(...generateCoreActions());
   
   // Optional features based on configuration
-  if (features.typography) {
+  if (params.typography) {
     actions.push(...generateTypographyActions());
   }
   
-  if (features.forms) {
+  if (params.forms) {
     actions.push(...generateFormsActions());
   }
   
-  if (features.aspectRatio) {
+  if (params.aspectRatio) {
     actions.push(...generateAspectRatioActions());
   }
   
-  if (features.darkMode) {
+  if (params.darkMode) {
     actions.push(...generateDarkModeActions());
   }
   

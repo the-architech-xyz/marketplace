@@ -22,10 +22,10 @@ export interface FeaturesObservabilitySentryShadcnParams {
   };
 
   /** Path to mount the Sentry dashboard */
-  dashboardPath?: any;
+  dashboardPath?: string;
 
   /** Auto-refresh interval (ms) for dashboard data */
-  refreshInterval?: any;
+  refreshInterval?: number;
 }
 
 export interface FeaturesObservabilitySentryShadcnFeatures {

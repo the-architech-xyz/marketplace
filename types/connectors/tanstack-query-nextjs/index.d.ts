@@ -7,16 +7,16 @@
 export interface ConnectorsTanstackQueryNextjsParams {
 
   /** SSR support for TanStack Query */
-  ssr?: any;
+  ssr?: boolean;
 
   /** Client-side hydration support */
-  hydration?: any;
+  hydration?: boolean;
 
   /** Error boundary for query errors */
-  errorBoundary?: any;
+  errorBoundary?: boolean;
 
   /** TanStack Query DevTools integration */
-  devtools?: any;
+  devtools?: boolean;
 }
 
 export interface ConnectorsTanstackQueryNextjsFeatures {}

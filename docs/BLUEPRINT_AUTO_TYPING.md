@@ -125,10 +125,8 @@ export default function generateBlueprint(
 ### Step 1: Update Imports
 
 ```typescript
-// Old imports
+// Old imports (if any)
 import { MergedConfiguration } from '@thearchitech.xyz/types';
-import { FeaturesArchitechWelcomeShadcnParameters } from '../../../types/blueprint-parameters.js';
-import { extractTypedModuleParameters } from '../../../scripts/utilities/blueprint-parameter-extractor.js';
 
 // New imports
 import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
@@ -137,18 +135,12 @@ import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../..
 ### Step 2: Update Function Signature
 
 ```typescript
-// Old signature
+// Old signature (if using manual typing)
 export default function generateBlueprint(
-  config: MergedConfiguration & { 
-    templateContext: { 
-      module: { 
-        parameters: FeaturesArchitechWelcomeShadcnParameters 
-      } 
-    } 
-  }
+  config: MergedConfiguration
 ): BlueprintAction[] {
 
-// New signature
+// New signature (automatic typing)
 export default function generateBlueprint(
   config: TypedMergedConfiguration<'features/architech-welcome/shadcn'>
 ): BlueprintAction[] {
@@ -157,8 +149,8 @@ export default function generateBlueprint(
 ### Step 3: Update Parameter Extraction
 
 ```typescript
-// Old (with manual type parameter)
-const { params, features } = extractTypedModuleParameters<FeaturesArchitechWelcomeShadcnParameters>(config);
+// Old (with manual type parameter - if using old system)
+const { params, features } = extractTypedModuleParameters<SomeManualType>(config);
 
 // New (automatic type resolution)
 const { params, features } = extractTypedModuleParameters(config);

@@ -7,7 +7,7 @@
 export interface AiVercelAiSdkParams {
 
   /** AI providers to include */
-  providers?: any;
+  providers?: string[];
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -31,13 +31,13 @@ export interface AiVercelAiSdkParams {
   };
 
   /** Default AI model */
-  defaultModel?: any;
+  defaultModel?: 'gpt-3.5-turbo' | 'gpt-4' | 'gpt-4-turbo' | 'claude-3-sonnet' | 'claude-3-opus';
 
   /** Maximum tokens for generation */
-  maxTokens?: any;
+  maxTokens?: number;
 
   /** Temperature for generation */
-  temperature?: any;
+  temperature?: number;
 }
 
 export interface AiVercelAiSdkFeatures {

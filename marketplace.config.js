@@ -7,9 +7,9 @@
 export const MARKETPLACE_DEFAULTS = {
     autoInclude: [
         'quality/eslint',
-        'quality/prettier',
-        'data-fetching/tanstack-query',
-        'state/zustand'
+        'quality/prettier'
+        // Removed 'data-fetching/tanstack-query' and 'state/zustand' 
+        // These should only be added when explicitly needed by modules
     ]
 };
 //# sourceMappingURL=marketplace.config.js.map

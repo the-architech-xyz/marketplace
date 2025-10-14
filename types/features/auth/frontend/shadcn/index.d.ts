@@ -40,7 +40,7 @@ export interface FeaturesAuthFrontendShadcnParams {
   };
 
   /** UI theme variant */
-  theme?: any;
+  theme?: 'default' | 'dark' | 'light' | 'minimal';
 }
 
 export interface FeaturesAuthFrontendShadcnFeatures {

@@ -7,13 +7,13 @@
 export interface ConnectorsZustandNextjsParams {
 
   /** State persistence support */
-  persistence?: any;
+  persistence?: boolean;
 
   /** Zustand DevTools integration */
-  devtools?: any;
+  devtools?: boolean;
 
   /** Server-side rendering support */
-  ssr?: any;
+  ssr?: boolean;
 }
 
 export interface ConnectorsZustandNextjsFeatures {}

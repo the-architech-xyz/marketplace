@@ -54,28 +54,32 @@
       "default": false,
       "description": "Enable Suspense mode for queries",
       "required": false
-    }
-  },
-  "features": {
-    "core": {
-      "id": "core",
-      "name": "Core Query Features",
-      "description": "Basic query and mutation functionality"
     },
-    "infinite": {
-      "id": "infinite",
-      "name": "Infinite Queries",
-      "description": "Infinite scrolling and pagination support"
-    },
-    "optimistic": {
-      "id": "optimistic",
-      "name": "Optimistic Updates",
-      "description": "Optimistic UI updates for better UX"
-    },
-    "offline": {
-      "id": "offline",
-      "name": "Offline Support",
-      "description": "Offline-first data synchronization"
+    "features": {
+      "core": {
+        "id": "core",
+        "name": "Core Query Features",
+        "default": true,
+        "description": "Basic query and mutation functionality"
+      },
+      "infinite": {
+        "id": "infinite",
+        "name": "Infinite Queries",
+        "default": true,
+        "description": "Infinite scrolling and pagination support"
+      },
+      "optimistic": {
+        "id": "optimistic",
+        "name": "Optimistic Updates",
+        "default": true,
+        "description": "Optimistic UI updates for better UX"
+      },
+      "offline": {
+        "id": "offline",
+        "name": "Offline Support",
+        "default": true,
+        "description": "Offline-first data synchronization"
+      }
     }
   },
   "constraints": {

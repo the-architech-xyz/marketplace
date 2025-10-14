@@ -1,12 +1,44 @@
 /**
- * connectors/sentry/react
+ * Sentry React Connector
  * 
- * Auto-generated connector types with Constitutional Architecture support
+ * React-specific Sentry integration with @sentry/react
  */
 
-export interface ConnectorsSentryReactParams {}
+export interface ConnectorsSentryReactParams {
 
-export interface ConnectorsSentryReactFeatures {}
+  /** Sentry DSN */
+  dsn?: string;
+
+  /** Environment name */
+  environment?: string;
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Essential React Sentry integration */
+    core?: boolean;
+
+    /** React performance monitoring */
+    performance?: boolean;
+
+    /** React Error Boundary components */
+    'error-boundary'?: boolean;
+  };
+
+  /** Release version */
+  release?: string;
+}
+
+export interface ConnectorsSentryReactFeatures {
+
+  /** Essential React Sentry integration */
+  core: boolean;
+
+  /** React performance monitoring */
+  performance: boolean;
+
+  /** React Error Boundary components */
+  'error-boundary': boolean;
+}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const ConnectorsSentryReactArtifacts: {

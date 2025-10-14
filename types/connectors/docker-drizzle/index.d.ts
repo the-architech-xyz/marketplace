@@ -1,7 +1,7 @@
 /**
- * connectors/docker-drizzle
+ * Docker Drizzle Connector
  * 
- * Auto-generated connector types with Constitutional Architecture support
+ * Complete Docker containerization for Drizzle ORM with database services, migrations, and production-ready configuration
  */
 
 export interface ConnectorsDockerDrizzleParams {}

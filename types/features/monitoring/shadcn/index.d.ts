@@ -31,7 +31,7 @@ export interface FeaturesMonitoringShadcnParams {
   };
 
   /** Environments to monitor */
-  environments?: any;
+  environments?: string[];
 }
 
 export interface FeaturesMonitoringShadcnFeatures {

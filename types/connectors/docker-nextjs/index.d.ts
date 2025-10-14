@@ -1,7 +1,7 @@
 /**
- * connectors/docker-nextjs
+ * Docker Next.js Connector
  * 
- * Auto-generated connector types with Constitutional Architecture support
+ * Complete Docker containerization for Next.js applications with multi-stage builds, optimization, and production-ready configuration
  */
 
 export interface ConnectorsDockerNextjsParams {}

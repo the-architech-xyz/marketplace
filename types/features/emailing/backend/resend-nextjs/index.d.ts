@@ -7,22 +7,22 @@
 export interface FeaturesEmailingBackendResendNextjsParams {
 
   /** Bulk email sending capabilities */
-  bulkEmail?: any;
+  bulkEmail?: boolean;
 
   /** Email template management */
-  templates?: any;
+  templates?: boolean;
 
   /** Email delivery and engagement analytics */
-  analytics?: any;
+  analytics?: boolean;
 
   /** Email event webhooks */
-  webhooks?: any;
+  webhooks?: boolean;
 
   /** Enable organization-scoped email management */
-  organizations?: any;
+  organizations?: boolean;
 
   /** Enable team-scoped email management */
-  teams?: any;
+  teams?: boolean;
 }
 
 export interface FeaturesEmailingBackendResendNextjsFeatures {}

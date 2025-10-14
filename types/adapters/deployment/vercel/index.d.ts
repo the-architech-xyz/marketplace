@@ -7,31 +7,31 @@
 export interface DeploymentVercelParams {
 
   /** Target framework */
-  framework?: any;
+  framework?: 'nextjs' | 'react' | 'vue' | 'svelte' | 'angular';
 
   /** Build command to run */
-  buildCommand?: any;
+  buildCommand?: string;
 
   /** Output directory for build */
-  outputDirectory?: any;
+  outputDirectory?: string;
 
   /** Install command */
-  installCommand?: any;
+  installCommand?: string;
 
   /** Development command */
-  devCommand?: any;
+  devCommand?: string;
 
   /** Environment variables to configure */
-  envVars?: any;
+  envVars?: string[];
 
   /** Serverless function configuration */
-  functions: any;
+  functions: Record<string, any>;
 
   /** Enable Vercel Analytics */
-  analytics?: any;
+  analytics?: boolean;
 
   /** Enable Vercel Speed Insights */
-  speedInsights?: any;
+  speedInsights?: boolean;
 }
 
 export interface DeploymentVercelFeatures {}

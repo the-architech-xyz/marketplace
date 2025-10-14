@@ -7,10 +7,10 @@
 export interface EmailResendParams {
 
   /** Resend API key */
-  apiKey?: any;
+  apiKey?: string;
 
   /** Default from email address */
-  fromEmail?: any;
+  fromEmail?: string;
   /** Constitutional Architecture features configuration */
   features?: {
 

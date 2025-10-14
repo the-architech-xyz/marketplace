@@ -53,6 +53,12 @@
       "default": true,
       "description": "Enable React Hook Form DevTools",
       "required": false
+    },
+    "advancedValidation": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable advanced validation features",
+      "required": false
     }
   },
   "constraints": {

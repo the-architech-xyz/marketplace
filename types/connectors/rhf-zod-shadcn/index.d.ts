@@ -7,13 +7,13 @@
 export interface ConnectorsRhfZodShadcnParams {
 
   /** Zod schema validation */
-  validation?: any;
+  validation?: boolean;
 
   /** Form accessibility features */
-  accessibility?: any;
+  accessibility?: boolean;
 
   /** React Hook Form DevTools */
-  devtools?: any;
+  devtools?: boolean;
 }
 
 export interface ConnectorsRhfZodShadcnFeatures {}

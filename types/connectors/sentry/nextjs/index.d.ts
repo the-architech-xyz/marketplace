@@ -1,12 +1,50 @@
 /**
- * connectors/sentry/nextjs
+ * Sentry Next.js Connector
  * 
- * Auto-generated connector types with Constitutional Architecture support
+ * Next.js-specific Sentry integration with @sentry/nextjs
  */
 
-export interface ConnectorsSentryNextjsParams {}
+export interface ConnectorsSentryNextjsParams {
 
-export interface ConnectorsSentryNextjsFeatures {}
+  /** Sentry DSN */
+  dsn?: string;
+
+  /** Environment name */
+  environment?: string;
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Essential Next.js Sentry integration */
+    core?: boolean;
+
+    /** Next.js performance monitoring */
+    performance?: boolean;
+
+    /** Next.js alerts and dashboard */
+    alerts?: boolean;
+
+    /** Next.js enterprise features */
+    enterprise?: boolean;
+  };
+
+  /** Release version */
+  release?: string;
+}
+
+export interface ConnectorsSentryNextjsFeatures {
+
+  /** Essential Next.js Sentry integration */
+  core: boolean;
+
+  /** Next.js performance monitoring */
+  performance: boolean;
+
+  /** Next.js alerts and dashboard */
+  alerts: boolean;
+
+  /** Next.js enterprise features */
+  enterprise: boolean;
+}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const ConnectorsSentryNextjsArtifacts: {

@@ -7,13 +7,13 @@
 export interface BlockchainWeb3Params {
 
   /** Supported blockchain networks */
-  networks?: any;
+  networks?: string[];
 
   /** Enable WalletConnect support */
-  walletConnect?: any;
+  walletConnect?: boolean;
 
   /** Smart contract addresses */
-  contracts?: any;
+  contracts?: string[];
   /** Constitutional Architecture features configuration */
   features?: {
 

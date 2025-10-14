@@ -251,7 +251,9 @@ export type ${moduleName}Enhances = typeof ${artifactsConst}.enhances[number];
       const type = this.getTypeScriptType(value);
       const optional = (value.required === false || value.default !== undefined) ? '?' : '';
       const description = value.description ? `\n  /** ${value.description} */` : '';
-      return `${description}\n  ${key}${optional}: ${type};`;
+      // Quote property names that contain hyphens or other special characters
+      const quotedKey = key.includes('-') ? `'${key}'` : key;
+      return `${description}\n  ${quotedKey}${optional}: ${type};`;
     }).join('\n');
     
     return `export interface ${interfaceName} {\n${properties}\n}`;
@@ -270,7 +272,9 @@ export type ${moduleName}Enhances = typeof ${artifactsConst}.enhances[number];
       const description = featureConfig.description ? `\n    /** ${featureConfig.description} */` : '';
       const type = this.getConstitutionalFeatureType(featureConfig);
       const optional = (featureConfig.required === false || featureConfig.default !== undefined) ? '?' : '';
-      return `${description}\n    ${featureName}${optional}: ${type};`;
+      // Quote property names that contain hyphens or other special characters
+      const quotedName = featureName.includes('-') ? `'${featureName}'` : featureName;
+      return `${description}\n    ${quotedName}${optional}: ${type};`;
     }).join('\n');
     
     return `  /** Constitutional Architecture features configuration */
@@ -290,7 +294,9 @@ ${featureProperties}
     const properties = Object.entries(features).map(([featureName, featureConfig]: [string, any]) => {
       const description = featureConfig.description ? `\n  /** ${featureConfig.description} */` : '';
       const type = this.getConstitutionalFeatureType(featureConfig);
-      return `${description}\n  ${featureName}: ${type};`;
+      // Quote property names that contain hyphens or other special characters
+      const quotedName = featureName.includes('-') ? `'${featureName}'` : featureName;
+      return `${description}\n  ${quotedName}: ${type};`;
     }).join('\n');
     
     return `export interface ${interfaceName} {\n${properties}\n}`;
@@ -684,7 +690,9 @@ ${moduleParameters.join('\n')}
           const config = featureConfig as any;
           const type = config.type || 'boolean';
           const required = config.required !== false ? '' : '?';
-          properties.push(`    ${featureName}${required}: ${type};`);
+          // Quote property names that contain hyphens or other special characters
+          const quotedName = featureName.includes('-') ? `'${featureName}'` : featureName;
+          properties.push(`    ${quotedName}${required}: ${type};`);
         }
       }
       properties.push('  };');
@@ -696,35 +704,17 @@ ${moduleParameters.join('\n')}
       
       if (typeof paramConfig === 'object' && paramConfig !== null) {
         const config = paramConfig as any;
-        const type = this.getTypeScriptType(config.type, config.options);
+        const type = this.getTypeScriptType(config);
         const required = config.required !== false ? '' : '?';
-        properties.push(`  ${paramName}${required}: ${type};`);
+        // Quote property names that contain hyphens or other special characters
+        const quotedName = paramName.includes('-') ? `'${paramName}'` : paramName;
+        properties.push(`  ${quotedName}${required}: ${type};`);
       }
     }
     
     return `{\n${properties.join('\n')}\n}`;
   }
 
-  /**
-   * Convert schema type to TypeScript type
-   */
-  private static getTypeScriptType(type: string, options?: any[]): string {
-    switch (type) {
-      case 'string':
-        return 'string';
-      case 'boolean':
-        return 'boolean';
-      case 'number':
-        return 'number';
-      case 'array':
-        return 'any[]';
-      default:
-        if (options && Array.isArray(options)) {
-          return options.map(opt => `'${opt}'`).join(' | ');
-        }
-        return 'any';
-    }
-  }
 
   /**
    * Generate discriminated union types for better IDE support
@@ -787,8 +777,10 @@ ${moduleTypes.join('\n')};`;
       
       const type = this.getTypeScriptType(value);
       const optional = (value.required === false || value.default !== undefined) ? '?' : '';
-      const description = value.description ? `\n    /** ${value.description} */` : '';
-      return `${description}\n    ${key}${optional}: ${type};`;
+      const description = value.description ? `\n  /** ${value.description} */` : '';
+      // Quote property names that contain hyphens or other special characters
+      const quotedKey = key.includes('-') ? `'${key}'` : key;
+      return `${description}\n  ${quotedKey}${optional}: ${type};`;
     }).join('\n');
     
     return `{\n${properties}\n  }`;

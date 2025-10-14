@@ -37,7 +37,7 @@ export interface FeaturesPaymentsFrontendShadcnParams {
   };
 
   /** UI theme variant */
-  theme?: any;
+  theme?: 'default' | 'dark' | 'light' | 'minimal';
 }
 
 export interface FeaturesPaymentsFrontendShadcnFeatures {

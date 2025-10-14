@@ -7,13 +7,13 @@
 export interface DatabaseTypeormParams {
 
   /** Enable schema synchronization */
-  synchronize?: any;
+  synchronize?: boolean;
 
   /** Enable query logging */
-  logging?: any;
+  logging?: boolean;
 
   /** Database type */
-  databaseType?: any;
+  databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
 }
 
 export interface DatabaseTypeormFeatures {}

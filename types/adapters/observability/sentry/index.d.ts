@@ -7,10 +7,10 @@
 export interface ObservabilitySentryParams {
 
   /** Sentry DSN */
-  dsn?: any;
+  dsn?: string;
 
   /** Environment name */
-  environment?: any;
+  environment?: string;
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -34,7 +34,7 @@ export interface ObservabilitySentryParams {
   };
 
   /** Release version */
-  release?: any;
+  release?: string;
 }
 
 export interface ObservabilitySentryFeatures {

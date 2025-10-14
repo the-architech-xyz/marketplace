@@ -7,13 +7,13 @@
 export interface DeploymentDockerParams {
 
   /** Node.js version for Docker image */
-  nodeVersion?: any;
+  nodeVersion?: string;
 
   /** Enable production optimizations */
-  optimization?: any;
+  optimization?: boolean;
 
   /** Enable health check endpoint */
-  healthCheck?: any;
+  healthCheck?: boolean;
   /** Constitutional Architecture features configuration */
   features?: {
 

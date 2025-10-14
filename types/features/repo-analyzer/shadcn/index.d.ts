@@ -7,13 +7,13 @@
 export interface FeaturesRepoAnalyzerShadcnParams {
 
   /** Enable visual architecture diagram */
-  enableVisualization?: any;
+  enableVisualization?: boolean;
 
   /** Enable genome export functionality */
-  enableExport?: any;
+  enableExport?: boolean;
 
   /** Minimum confidence threshold for suggestions */
-  confidenceThreshold?: any;
+  confidenceThreshold?: number;
 }
 
 export interface FeaturesRepoAnalyzerShadcnFeatures {}

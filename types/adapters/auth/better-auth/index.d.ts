@@ -7,16 +7,16 @@
 export interface AuthBetterAuthParams {
 
   /** Authentication providers to enable */
-  providers?: any;
+  providers?: string[];
 
   /** Session management strategy */
   session?: any;
 
   /** Enable CSRF protection */
-  csrf?: any;
+  csrf?: boolean;
 
   /** Enable rate limiting */
-  rateLimit?: any;
+  rateLimit?: boolean;
 }
 
 export interface AuthBetterAuthFeatures {}

@@ -7,7 +7,7 @@
 export interface FeaturesProjectManagementShadcnParams {
 
   /** UI theme variant */
-  theme?: any;
+  theme?: 'default' | 'dark' | 'light';
   /** Constitutional Architecture features configuration */
   features?: {
 

@@ -7,28 +7,28 @@
 export interface QualityEslintParams {
 
   /** Enable TypeScript support */
-  typescript?: any;
+  typescript?: boolean;
 
   /** Enable React support */
-  react?: any;
+  react?: boolean;
 
   /** Enable Next.js specific rules */
-  nextjs?: any;
+  nextjs?: boolean;
 
   /** Enable Node.js specific rules */
-  nodejs?: any;
+  nodejs?: boolean;
 
   /** Enable accessibility rules */
-  accessibility?: any;
+  accessibility?: boolean;
 
   /** Enable import/export rules */
-  imports?: any;
+  imports?: boolean;
 
   /** Enable strict mode rules */
-  strict?: any;
+  strict?: boolean;
 
   /** Enable formatting rules */
-  format?: any;
+  format?: boolean;
 }
 
 export interface QualityEslintFeatures {}

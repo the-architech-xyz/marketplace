@@ -7,16 +7,16 @@
 export interface CoreGitParams {
 
   /** Git user name for commits */
-  userName?: any;
+  userName?: string;
 
   /** Git user email for commits */
-  userEmail?: any;
+  userEmail?: string;
 
   /** Default branch name for new repositories */
-  defaultBranch?: any;
+  defaultBranch?: string;
 
   /** Automatically initialize git repository after project creation */
-  autoInit?: any;
+  autoInit?: boolean;
 }
 
 export interface CoreGitFeatures {}

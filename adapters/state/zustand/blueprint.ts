@@ -23,15 +23,15 @@ export default function generateBlueprint(
   actions.push(...generateCoreActions());
   
   // Optional features based on configuration
-  if (features.persistence) {
+  if (params.persistence) {
     actions.push(...generatePersistenceActions());
   }
   
-  if (features.devtools) {
+  if (params.devtools) {
     actions.push(...generateDevtoolsActions());
   }
   
-  if (features.immer) {
+  if (params.immer) {
     actions.push(...generateImmerActions());
   }
   
@@ -143,11 +143,8 @@ function generatePersistenceActions(): BlueprintAction[] {
 
 function generateDevtoolsActions(): BlueprintAction[] {
   return [
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['zustand/middleware'],
-      isDev: true
-    },
+    // Note: zustand/middleware is part of the main zustand package, not a separate package
+    // The middleware is imported from 'zustand/middleware' but installed as part of 'zustand'
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.stores}}middleware/devtools.ts',

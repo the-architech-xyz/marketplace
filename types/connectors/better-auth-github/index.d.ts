@@ -1,10 +1,26 @@
 /**
- * connectors/better-auth-github
+ * Better Auth + GitHub Connector
  * 
- * Auto-generated connector types with Constitutional Architecture support
+ * OAuth integration between Better Auth and GitHub for Application Authorization
  */
 
-export interface ConnectorsBetterAuthGithubParams {}
+export interface ConnectorsBetterAuthGithubParams {
+
+  /** GitHub OAuth App Client ID */
+  clientId: string;
+
+  /** GitHub OAuth App Client Secret */
+  clientSecret: string;
+
+  /** OAuth redirect URI */
+  redirectUri: string;
+
+  /** GitHub OAuth scopes */
+  scopes?: string[];
+
+  /** Encryption key for storing tokens securely */
+  encryptionKey: string;
+}
 
 export interface ConnectorsBetterAuthGithubFeatures {}
 

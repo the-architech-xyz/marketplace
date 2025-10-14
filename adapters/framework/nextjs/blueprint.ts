@@ -20,7 +20,7 @@ export const nextjsBlueprint: Blueprint = {
     // Dynamically install React version based on parameter
     {
       type: BlueprintActionType.RUN_COMMAND,
-      command: 'npm install react@{{module.parameters.reactVersion}} react-dom@{{module.parameters.reactVersion}} @types/react@{{module.parameters.reactVersion}} @types/react-dom@{{module.parameters.reactVersion}}'
+      command: 'npm install react@{{module.parameters.reactVersion}} react-dom@{{module.parameters.reactVersion}} @types/react@^{{module.parameters.reactVersion}}.0.0 @types/react-dom@^{{module.parameters.reactVersion}}.0.0'
     }
   ]
 }

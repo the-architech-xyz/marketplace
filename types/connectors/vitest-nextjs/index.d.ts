@@ -1,7 +1,7 @@
 /**
- * connectors/vitest-nextjs
+ * Vitest Next.js Connector
  * 
- * Auto-generated connector types with Constitutional Architecture support
+ * Complete Vitest testing setup for Next.js applications with unit tests, integration tests, and coverage reporting
  */
 
 export interface ConnectorsVitestNextjsParams {}
