@@ -1,5 +1,4351 @@
 {
-  "modules": [],
-  "lastUpdated": "2025-10-08T11:41:30.565Z",
-  "totalModules": 0
+  "version": "2.0.0",
+  "generatedAt": "2025-10-16T10:39:36.709Z",
+  "stats": {
+    "totalModules": 57,
+    "adapters": 27,
+    "connectors": 11,
+    "features": 19,
+    "genomes": 11,
+    "lastUpdated": "2025-10-16T10:39:36.710Z"
+  },
+  "modules": {
+    "adapters": [
+      {
+        "id": "ui/tailwind",
+        "name": "Tailwind CSS",
+        "description": "Utility-first CSS framework with plugins and optimizations",
+        "category": "ui",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/ui/tailwind/blueprint.ts",
+        "jsonFile": "adapters/ui/tailwind/adapter.json",
+        "provides": [
+          {
+            "name": "tailwind",
+            "version": "3.4.0",
+            "description": "Tailwind CSS utility framework"
+          },
+          {
+            "name": "postcss",
+            "version": "8.4.0",
+            "description": "PostCSS CSS processor"
+          }
+        ],
+        "parameters": {
+          "typography": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable @tailwindcss/typography plugin",
+            "required": false
+          },
+          "forms": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable @tailwindcss/forms plugin",
+            "required": false
+          },
+          "aspectRatio": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable @tailwindcss/aspect-ratio plugin",
+            "required": false
+          },
+          "darkMode": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable dark mode support",
+            "required": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "ui/shadcn-ui",
+        "name": "Shadcn/ui",
+        "description": "Beautifully designed components built with Radix UI and Tailwind CSS",
+        "category": "ui",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/ui/shadcn-ui/blueprint.ts",
+        "jsonFile": "adapters/ui/shadcn-ui/adapter.json",
+        "provides": [
+          {
+            "name": "shadcn-ui",
+            "version": "latest",
+            "description": "Shadcn/ui component library"
+          },
+          {
+            "name": "radix-ui",
+            "version": "1.0.0",
+            "description": "Radix UI primitive components"
+          },
+          {
+            "name": "tailwind",
+            "version": "4.0.0",
+            "description": "Tailwind CSS v4 with PostCSS integration"
+          }
+        ],
+        "parameters": {
+          "theme": {
+            "type": "string",
+            "default": "default",
+            "description": "UI theme variant",
+            "required": false,
+            "options": [
+              "default",
+              "dark",
+              "light",
+              "minimal"
+            ]
+          },
+          "components": {
+            "type": "array",
+            "default": [
+              "button",
+              "input",
+              "card",
+              "dialog",
+              "form",
+              "table",
+              "badge",
+              "avatar",
+              "dropdown-menu",
+              "sonner",
+              "sheet",
+              "tabs",
+              "accordion",
+              "carousel",
+              "calendar",
+              "alert-dialog",
+              "checkbox",
+              "collapsible",
+              "context-menu",
+              "hover-card",
+              "menubar",
+              "navigation-menu",
+              "popover",
+              "progress",
+              "radio-group",
+              "scroll-area",
+              "slider",
+              "toggle",
+              "toggle-group"
+            ],
+            "description": "Components to install (comprehensive set by default)",
+            "required": false,
+            "items": {
+              "type": "string",
+              "enum": [
+                "alert",
+                "alert-dialog",
+                "accordion",
+                "avatar",
+                "badge",
+                "button",
+                "calendar",
+                "card",
+                "carousel",
+                "checkbox",
+                "collapsible",
+                "context-menu",
+                "dialog",
+                "dropdown-menu",
+                "form",
+                "hover-card",
+                "input",
+                "label",
+                "menubar",
+                "navigation-menu",
+                "pagination",
+                "popover",
+                "progress",
+                "radio-group",
+                "scroll-area",
+                "separator",
+                "sheet",
+                "slider",
+                "sonner",
+                "switch",
+                "table",
+                "tabs",
+                "textarea",
+                "toggle",
+                "toggle-group"
+              ]
+            }
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "testing/vitest",
+        "name": "Vitest",
+        "description": "Fast unit test framework powered by Vite",
+        "category": "testing",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/testing/vitest/blueprint.ts",
+        "jsonFile": "adapters/testing/vitest/adapter.json",
+        "provides": [
+          "testing-core",
+          "{{#if features.coverage}}testing-coverage{{/if}}",
+          "{{#if features.ui}}testing-ui{{/if}}",
+          "{{#if features.e2e}}testing-e2e{{/if}}"
+        ],
+        "dependencies": [
+          "framework/nextjs"
+        ],
+        "parameters": {
+          "environment": {
+            "type": "string",
+            "default": "jsdom",
+            "description": "Test environment",
+            "required": false,
+            "options": [
+              "jsdom",
+              "node",
+              "happy-dom"
+            ]
+          },
+          "features": {
+            "core": {
+              "type": "boolean",
+              "default": true,
+              "description": "Basic testing setup (config, setup, utils)"
+            },
+            "unitTests": {
+              "type": "boolean",
+              "default": true,
+              "description": "Unit testing capabilities"
+            },
+            "coverage": {
+              "type": "boolean",
+              "default": true,
+              "description": "Code coverage reporting"
+            },
+            "ui": {
+              "type": "boolean",
+              "default": false,
+              "description": "Interactive test runner UI"
+            },
+            "e2e": {
+              "type": "boolean",
+              "default": false,
+              "description": "End-to-end testing support"
+            },
+            "integrationTests": {
+              "type": "boolean",
+              "default": false,
+              "description": "Integration testing support"
+            }
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "state/zustand",
+        "name": "Zustand State Management",
+        "description": "Golden Core state management with Zustand - powerful, performant, and minimal boilerplate",
+        "category": "state",
+        "type": "adapter",
+        "version": "4.4.0",
+        "blueprint": "adapters/state/zustand/blueprint.ts",
+        "jsonFile": "adapters/state/zustand/adapter.json",
+        "parameters": {
+          "persistence": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable state persistence",
+            "required": false
+          },
+          "devtools": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable Redux DevTools",
+            "required": false
+          },
+          "immer": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable Immer for immutable updates",
+            "required": false
+          },
+          "middleware": {
+            "type": "array",
+            "default": [
+              "persist",
+              "devtools"
+            ],
+            "description": "Middleware to use",
+            "required": false,
+            "options": [
+              "persist",
+              "devtools",
+              "subscribeWithSelector",
+              "immer"
+            ]
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "services/github-api",
+        "name": "GitHub API",
+        "description": "GitHub API client for repository management and operations",
+        "category": "services",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/services/github-api/blueprint.ts",
+        "jsonFile": "adapters/services/github-api/adapter.json",
+        "dependencies": [],
+        "parameters": {
+          "token": {
+            "type": "string",
+            "description": "GitHub Personal Access Token or OAuth access token",
+            "required": true
+          },
+          "baseUrl": {
+            "type": "string",
+            "default": "https://api.github.com",
+            "description": "GitHub API base URL (for GitHub Enterprise)",
+            "required": false
+          },
+          "userAgent": {
+            "type": "string",
+            "default": "the-architech-cli",
+            "description": "User agent string for API requests",
+            "required": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "quality/prettier",
+        "name": "Prettier",
+        "description": "Golden Core code formatting with Prettier for consistent code style",
+        "category": "quality",
+        "type": "adapter",
+        "version": "3.0.0",
+        "blueprint": "adapters/quality/prettier/blueprint.ts",
+        "jsonFile": "adapters/quality/prettier/adapter.json",
+        "parameters": {
+          "semi": {
+            "type": "boolean",
+            "default": true,
+            "description": "Add semicolons at the end of statements",
+            "required": false
+          },
+          "singleQuote": {
+            "type": "boolean",
+            "default": true,
+            "description": "Use single quotes instead of double quotes",
+            "required": false
+          },
+          "tabWidth": {
+            "type": "number",
+            "default": 2,
+            "description": "Number of spaces per indentation level",
+            "required": false
+          },
+          "useTabs": {
+            "type": "boolean",
+            "default": false,
+            "description": "Use tabs instead of spaces for indentation",
+            "required": false
+          },
+          "trailingComma": {
+            "type": "string",
+            "default": "es5",
+            "description": "Print trailing commas where valid in ES5",
+            "required": false,
+            "options": [
+              "none",
+              "es5",
+              "all"
+            ]
+          },
+          "printWidth": {
+            "type": "number",
+            "default": 80,
+            "description": "Wrap lines that exceed this length",
+            "required": false
+          },
+          "bracketSpacing": {
+            "type": "boolean",
+            "default": true,
+            "description": "Print spaces between brackets in object literals",
+            "required": false
+          },
+          "arrowParens": {
+            "type": "string",
+            "default": "avoid",
+            "description": "Include parentheses around a sole arrow function parameter",
+            "required": false,
+            "options": [
+              "avoid",
+              "always"
+            ]
+          },
+          "endOfLine": {
+            "type": "string",
+            "default": "lf",
+            "description": "Line ending style",
+            "required": false,
+            "options": [
+              "lf",
+              "crlf",
+              "cr",
+              "auto"
+            ]
+          },
+          "plugins": {
+            "type": "array",
+            "default": [
+              "prettier-plugin-tailwindcss"
+            ],
+            "description": "Prettier plugins to use",
+            "required": false,
+            "options": [
+              "prettier-plugin-tailwindcss",
+              "prettier-plugin-sort-imports",
+              "prettier-plugin-organize-imports"
+            ]
+          },
+          "tailwind": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable Tailwind CSS class sorting plugin",
+            "required": false
+          },
+          "organizeImports": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable import organization",
+            "required": false
+          }
+        },
+        "complexity": "advanced"
+      },
+      {
+        "id": "quality/eslint",
+        "name": "ESLint",
+        "description": "Golden Core code linting with ESLint for JavaScript and TypeScript",
+        "category": "quality",
+        "type": "adapter",
+        "version": "8.0.0",
+        "blueprint": "adapters/quality/eslint/blueprint.ts",
+        "jsonFile": "adapters/quality/eslint/adapter.json",
+        "parameters": {
+          "typescript": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable TypeScript support",
+            "required": false
+          },
+          "react": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable React support",
+            "required": false
+          },
+          "nextjs": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable Next.js specific rules",
+            "required": false
+          },
+          "nodejs": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable Node.js specific rules",
+            "required": false
+          },
+          "accessibility": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable accessibility rules",
+            "required": false
+          },
+          "imports": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable import/export rules",
+            "required": false
+          },
+          "strict": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable strict mode rules",
+            "required": false
+          },
+          "format": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable formatting rules",
+            "required": false
+          }
+        },
+        "complexity": "intermediate"
+      },
+      {
+        "id": "payment/stripe",
+        "name": "Stripe Payment Processing",
+        "description": "Complete payment processing with Stripe including subscriptions and one-time payments",
+        "category": "payment",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/payment/stripe/blueprint.ts",
+        "jsonFile": "adapters/payment/stripe/adapter.json",
+        "dependencies": [],
+        "parameters": {
+          "currency": {
+            "type": "select",
+            "choices": [
+              "usd",
+              "eur",
+              "gbp",
+              "cad",
+              "aud",
+              "jpy"
+            ],
+            "required": false,
+            "default": "usd",
+            "description": "Default currency for payments"
+          },
+          "mode": {
+            "type": "select",
+            "choices": [
+              "test",
+              "live"
+            ],
+            "required": false,
+            "default": "test",
+            "description": "Stripe mode (test or live)"
+          },
+          "webhooks": {
+            "type": "boolean",
+            "required": false,
+            "default": true,
+            "description": "Enable webhook handling"
+          },
+          "dashboard": {
+            "type": "boolean",
+            "required": false,
+            "default": true,
+            "description": "Enable Stripe Dashboard integration"
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "framework/react-native",
+        "name": "React Native",
+        "description": "A framework for building native apps using React",
+        "category": "framework",
+        "type": "adapter",
+        "version": "0.73.0",
+        "blueprint": "adapters/framework/react-native/blueprint.ts",
+        "jsonFile": "adapters/framework/react-native/adapter.json",
+        "provides": [
+          {
+            "name": "react",
+            "version": "18.2.0",
+            "description": "React library for building user interfaces"
+          },
+          {
+            "name": "react-native",
+            "version": "0.73.0",
+            "description": "React Native framework for mobile development"
+          },
+          {
+            "name": "typescript",
+            "version": "5.0.0",
+            "description": "TypeScript language support"
+          }
+        ],
+        "dependencies": [],
+        "parameters": {
+          "typescript": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable TypeScript support",
+            "required": false
+          },
+          "srcDir": {
+            "type": "boolean",
+            "default": true,
+            "description": "Use src/ directory",
+            "required": false
+          },
+          "importAlias": {
+            "type": "string",
+            "default": "@/*",
+            "description": "Import alias for absolute imports",
+            "required": false
+          },
+          "reactVersion": {
+            "type": "string",
+            "default": "18.2.0",
+            "description": "React version to use",
+            "required": false
+          },
+          "platforms": {
+            "ios": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable iOS platform support",
+              "required": false
+            },
+            "android": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable Android platform support",
+              "required": false
+            }
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "framework/react",
+        "name": "React",
+        "description": "A JavaScript library for building user interfaces",
+        "category": "framework",
+        "type": "adapter",
+        "version": "18.2.0",
+        "blueprint": "adapters/framework/react/blueprint.ts",
+        "jsonFile": "adapters/framework/react/adapter.json",
+        "provides": [
+          {
+            "name": "react",
+            "version": "18.2.0",
+            "description": "React library for building user interfaces"
+          },
+          {
+            "name": "react-dom",
+            "version": "18.2.0",
+            "description": "React DOM rendering"
+          },
+          {
+            "name": "typescript",
+            "version": "5.0.0",
+            "description": "TypeScript language support"
+          }
+        ],
+        "dependencies": [],
+        "parameters": {
+          "typescript": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable TypeScript support",
+            "required": false
+          },
+          "srcDir": {
+            "type": "boolean",
+            "default": true,
+            "description": "Use src/ directory",
+            "required": false
+          },
+          "importAlias": {
+            "type": "string",
+            "default": "@/*",
+            "description": "Import alias for absolute imports",
+            "required": false
+          },
+          "reactVersion": {
+            "type": "string",
+            "default": "18.2.0",
+            "description": "React version to use",
+            "required": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "framework/nextjs",
+        "name": "Next.js",
+        "description": "The React Framework for Production",
+        "category": "framework",
+        "type": "adapter",
+        "version": "15.0.0",
+        "blueprint": "adapters/framework/nextjs/blueprint.ts",
+        "jsonFile": "adapters/framework/nextjs/adapter.json",
+        "provides": [
+          {
+            "name": "react",
+            "version": "19.1.0",
+            "description": "React library for building user interfaces"
+          },
+          {
+            "name": "nextjs",
+            "version": "15.0.0",
+            "description": "Next.js React framework"
+          },
+          {
+            "name": "typescript",
+            "version": "5.0.0",
+            "description": "TypeScript language support"
+          },
+          {
+            "name": "tailwind",
+            "version": "4.1.0",
+            "description": "Tailwind CSS v4 utility framework with shadcn/ui compatibility"
+          },
+          {
+            "name": "eslint",
+            "version": "8.0.0",
+            "description": "ESLint code linting"
+          }
+        ],
+        "dependencies": [],
+        "parameters": {
+          "typescript": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable TypeScript support",
+            "required": false
+          },
+          "tailwind": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable Tailwind CSS",
+            "required": false
+          },
+          "eslint": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable ESLint",
+            "required": false
+          },
+          "appRouter": {
+            "type": "boolean",
+            "default": true,
+            "description": "Use App Router (recommended)",
+            "required": false
+          },
+          "srcDir": {
+            "type": "boolean",
+            "default": true,
+            "description": "Use src/ directory",
+            "required": false
+          },
+          "importAlias": {
+            "type": "string",
+            "default": "@/*",
+            "description": "Import alias for absolute imports",
+            "required": false
+          },
+          "reactVersion": {
+            "type": "string",
+            "default": "19.1.0",
+            "description": "React version to use (18 for Radix UI compatibility, 19 for latest, or specify exact version like '18.2.0')",
+            "required": false
+          },
+          "features": {
+            "seo": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable SEO optimization features"
+            },
+            "imageOptimization": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable Next.js image optimization"
+            },
+            "mdx": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable MDX support for markdown content"
+            },
+            "performance": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable performance optimization features"
+            },
+            "streaming": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable streaming features"
+            },
+            "i18n": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable internationalization features"
+            }
+          }
+        },
+        "complexity": "intermediate"
+      },
+      {
+        "id": "observability/sentry",
+        "name": "Sentry Core (Tech-Agnostic)",
+        "description": "Tech-agnostic Sentry types and utilities. Framework-specific implementations handled by Connectors.",
+        "category": "observability",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/observability/sentry/blueprint.ts",
+        "jsonFile": "adapters/observability/sentry/adapter.json",
+        "provides": [
+          "monitoring-core",
+          "{{#if features.performance}}monitoring-performance{{/if}}",
+          "{{#if features.alerts}}monitoring-alerts{{/if}}",
+          "{{#if features.enterprise}}monitoring-enterprise{{/if}}"
+        ],
+        "dependencies": [],
+        "parameters": {
+          "dsn": {
+            "type": "string",
+            "default": "",
+            "description": "Sentry DSN",
+            "required": true
+          },
+          "environment": {
+            "type": "string",
+            "default": "development",
+            "description": "Environment name",
+            "required": false
+          },
+          "features": {
+            "core": {
+              "type": "boolean",
+              "default": true,
+              "description": "Essential monitoring (error tracking, basic performance)"
+            },
+            "errorTracking": {
+              "type": "boolean",
+              "default": true,
+              "description": "Error tracking and reporting"
+            },
+            "performance": {
+              "type": "boolean",
+              "default": false,
+              "description": "Advanced performance monitoring"
+            },
+            "alerts": {
+              "type": "boolean",
+              "default": false,
+              "description": "Custom alerts and dashboard"
+            },
+            "enterprise": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enterprise features (profiling, custom metrics)"
+            },
+            "replay": {
+              "type": "boolean",
+              "default": false,
+              "description": "Session replay for debugging"
+            }
+          },
+          "release": {
+            "type": "string",
+            "default": "",
+            "description": "Release version",
+            "required": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "framework/expo",
+        "name": "React Native with Expo",
+        "description": "A framework for building native apps using React Native and Expo",
+        "category": "framework",
+        "type": "adapter",
+        "version": "50.0.0",
+        "blueprint": "adapters/framework/expo/blueprint.ts",
+        "jsonFile": "adapters/framework/expo/adapter.json",
+        "provides": [
+          {
+            "name": "react",
+            "version": "18.2.0",
+            "description": "React library for building user interfaces"
+          },
+          {
+            "name": "react-native",
+            "version": "0.73.0",
+            "description": "React Native framework for mobile development"
+          },
+          {
+            "name": "expo",
+            "version": "50.0.0",
+            "description": "Expo framework for React Native development"
+          },
+          {
+            "name": "typescript",
+            "version": "5.0.0",
+            "description": "TypeScript language support"
+          }
+        ],
+        "dependencies": [],
+        "parameters": {
+          "typescript": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable TypeScript support",
+            "required": false
+          },
+          "srcDir": {
+            "type": "boolean",
+            "default": true,
+            "description": "Use src/ directory",
+            "required": false
+          },
+          "importAlias": {
+            "type": "string",
+            "default": "@/*",
+            "description": "Import alias for absolute imports",
+            "required": false
+          },
+          "reactVersion": {
+            "type": "string",
+            "default": "18.2.0",
+            "description": "React version to use",
+            "required": false
+          },
+          "expoRouter": {
+            "type": "boolean",
+            "default": true,
+            "description": "Use Expo Router for navigation",
+            "required": false
+          },
+          "platforms": {
+            "ios": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable iOS platform support",
+              "required": false
+            },
+            "android": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable Android platform support",
+              "required": false
+            },
+            "web": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable web platform support",
+              "required": false
+            }
+          }
+        },
+        "complexity": "intermediate"
+      },
+      {
+        "id": "email/resend",
+        "name": "Resend Email Service",
+        "description": "Modern email API for transactional emails with Resend",
+        "category": "email",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/email/resend/blueprint.ts",
+        "jsonFile": "adapters/email/resend/adapter.json",
+        "provides": [
+          "email-core",
+          "{{#if features.templates}}email-templates{{/if}}",
+          "{{#if features.analytics}}email-analytics{{/if}}",
+          "{{#if features.campaigns}}email-campaigns{{/if}}"
+        ],
+        "dependencies": [],
+        "parameters": {
+          "apiKey": {
+            "type": "string",
+            "default": "",
+            "description": "Resend API key",
+            "required": true
+          },
+          "fromEmail": {
+            "type": "string",
+            "default": "noreply@example.com",
+            "description": "Default from email address",
+            "required": true
+          },
+          "features": {
+            "core": {
+              "description": "Essential email functionality (sending, basic templates)",
+              "default": true
+            },
+            "templates": {
+              "description": "Advanced email template system",
+              "default": true
+            },
+            "analytics": {
+              "description": "Email analytics and tracking",
+              "default": false
+            },
+            "campaigns": {
+              "description": "Batch sending and campaign management",
+              "default": false
+            }
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "deployment/docker",
+        "name": "Docker Deployment",
+        "description": "Containerization and deployment setup with Docker",
+        "category": "deployment",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/deployment/docker/blueprint.ts",
+        "jsonFile": "adapters/deployment/docker/adapter.json",
+        "dependencies": [],
+        "parameters": {
+          "nodeVersion": {
+            "type": "string",
+            "default": "18-alpine",
+            "description": "Node.js version for Docker image",
+            "required": false
+          },
+          "optimization": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable production optimizations",
+            "required": false
+          },
+          "healthCheck": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable health check endpoint",
+            "required": false
+          },
+          "features": {
+            "development": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable development environment"
+            },
+            "production": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable production environment"
+            },
+            "compose": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable docker-compose setup"
+            }
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "deployment/vercel",
+        "name": "Vercel Deployment",
+        "description": "Pure Vercel deployment configuration for any framework",
+        "category": "deployment",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/deployment/vercel/blueprint.ts",
+        "jsonFile": "adapters/deployment/vercel/adapter.json",
+        "dependencies": {
+          "runtime": [],
+          "dev": [
+            "vercel"
+          ]
+        },
+        "tags": [
+          "vercel",
+          "deployment",
+          "hosting",
+          "serverless"
+        ],
+        "parameters": {
+          "framework": {
+            "type": "string",
+            "description": "Target framework",
+            "default": "nextjs",
+            "enum": [
+              "nextjs",
+              "react",
+              "vue",
+              "svelte",
+              "angular"
+            ]
+          },
+          "buildCommand": {
+            "type": "string",
+            "description": "Build command to run",
+            "default": "npm run build"
+          },
+          "outputDirectory": {
+            "type": "string",
+            "description": "Output directory for build",
+            "default": ".next"
+          },
+          "installCommand": {
+            "type": "string",
+            "description": "Install command",
+            "default": "npm install"
+          },
+          "devCommand": {
+            "type": "string",
+            "description": "Development command",
+            "default": "npm run dev"
+          },
+          "envVars": {
+            "type": "array",
+            "description": "Environment variables to configure",
+            "default": []
+          },
+          "functions": {
+            "type": "object",
+            "description": "Serverless function configuration",
+            "properties": {
+              "regions": {
+                "type": "array",
+                "default": [
+                  "iad1"
+                ]
+              },
+              "maxDuration": {
+                "type": "number",
+                "default": 10
+              }
+            }
+          },
+          "analytics": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable Vercel Analytics",
+            "required": false
+          },
+          "speedInsights": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable Vercel Speed Insights",
+            "required": false
+          }
+        },
+        "complexity": "intermediate"
+      },
+      {
+        "id": "data-fetching/tanstack-query",
+        "name": "TanStack Query",
+        "description": "Powerful data synchronization for React applications with caching, background updates, and optimistic updates",
+        "category": "data-fetching",
+        "type": "adapter",
+        "version": "5.0.0",
+        "blueprint": "adapters/data-fetching/tanstack-query/blueprint.ts",
+        "jsonFile": "adapters/data-fetching/tanstack-query/adapter.json",
+        "parameters": {
+          "devtools": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable TanStack Query DevTools",
+            "required": false
+          },
+          "defaultOptions": {
+            "type": "object",
+            "default": {
+              "queries": {
+                "staleTime": 300000,
+                "gcTime": 600000,
+                "retry": 3,
+                "refetchOnWindowFocus": false
+              },
+              "mutations": {
+                "retry": 1
+              }
+            },
+            "description": "Default query and mutation options",
+            "required": false
+          },
+          "suspense": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable Suspense mode for queries",
+            "required": false
+          },
+          "features": {
+            "core": {
+              "id": "core",
+              "name": "Core Query Features",
+              "default": true,
+              "description": "Basic query and mutation functionality"
+            },
+            "infinite": {
+              "id": "infinite",
+              "name": "Infinite Queries",
+              "default": true,
+              "description": "Infinite scrolling and pagination support"
+            },
+            "optimistic": {
+              "id": "optimistic",
+              "name": "Optimistic Updates",
+              "default": true,
+              "description": "Optimistic UI updates for better UX"
+            },
+            "offline": {
+              "id": "offline",
+              "name": "Offline Support",
+              "default": true,
+              "description": "Offline-first data synchronization"
+            }
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "core/git",
+        "name": "Git Version Control",
+        "description": "Local git repository management and operations",
+        "category": "core",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/core/git/blueprint.ts",
+        "jsonFile": "adapters/core/git/adapter.json",
+        "dependencies": [],
+        "parameters": {
+          "userName": {
+            "type": "string",
+            "description": "Git user name for commits",
+            "required": false
+          },
+          "userEmail": {
+            "type": "string",
+            "description": "Git user email for commits",
+            "required": false
+          },
+          "defaultBranch": {
+            "type": "string",
+            "default": "main",
+            "description": "Default branch name for new repositories",
+            "required": false
+          },
+          "autoInit": {
+            "type": "boolean",
+            "default": true,
+            "description": "Automatically initialize git repository after project creation",
+            "required": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "core/forms",
+        "name": "Forms",
+        "description": "Golden Core form handling with validation using React Hook Form and Zod",
+        "category": "core",
+        "type": "adapter",
+        "version": "2.0.0",
+        "blueprint": "adapters/core/forms/blueprint.ts",
+        "jsonFile": "adapters/core/forms/adapter.json",
+        "parameters": {
+          "zod": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable Zod for schema validation",
+            "required": false
+          },
+          "reactHookForm": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable React Hook Form for form handling",
+            "required": false
+          },
+          "resolvers": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable @hookform/resolvers for Zod integration",
+            "required": false
+          },
+          "accessibility": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable accessibility features",
+            "required": false
+          },
+          "devtools": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable React Hook Form DevTools",
+            "required": false
+          },
+          "advancedValidation": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable advanced validation features",
+            "required": false
+          }
+        },
+        "complexity": "intermediate"
+      },
+      {
+        "id": "database/typeorm",
+        "name": "TypeORM",
+        "description": "TypeScript ORM for Node.js with decorators and migrations",
+        "category": "database",
+        "type": "adapter",
+        "version": "0.3.0",
+        "blueprint": "adapters/database/typeorm/blueprint.ts",
+        "jsonFile": "adapters/database/typeorm/adapter.json",
+        "dependencies": [],
+        "parameters": {
+          "synchronize": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable schema synchronization",
+            "required": false
+          },
+          "logging": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable query logging",
+            "required": false
+          },
+          "databaseType": {
+            "type": "string",
+            "default": "postgresql",
+            "description": "Database type",
+            "required": true,
+            "options": [
+              "postgresql",
+              "mysql",
+              "sqlite",
+              "mongodb"
+            ]
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "database/prisma",
+        "name": "Prisma ORM",
+        "description": "Next-generation ORM for Node.js and TypeScript",
+        "category": "database",
+        "type": "adapter",
+        "version": "5.0.0",
+        "blueprint": "adapters/database/prisma/blueprint.ts",
+        "jsonFile": "adapters/database/prisma/adapter.json",
+        "dependencies": [],
+        "parameters": {
+          "provider": {
+            "type": "string",
+            "default": "postgresql",
+            "description": "Database provider",
+            "required": true,
+            "options": [
+              "postgresql",
+              "mysql",
+              "sqlite",
+              "mongodb"
+            ]
+          },
+          "studio": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable Prisma Studio",
+            "required": false
+          },
+          "migrations": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable database migrations",
+            "required": false
+          },
+          "databaseType": {
+            "type": "string",
+            "default": "postgresql",
+            "description": "Database type",
+            "required": true,
+            "options": [
+              "postgresql",
+              "mysql",
+              "sqlite",
+              "mongodb"
+            ]
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "database/drizzle",
+        "name": "Drizzle ORM",
+        "description": "TypeScript ORM with excellent developer experience",
+        "category": "database",
+        "type": "adapter",
+        "version": "0.29.0",
+        "blueprint": "adapters/database/drizzle/blueprint.ts",
+        "jsonFile": "adapters/database/drizzle/adapter.json",
+        "provides": [
+          "database-core",
+          "{{#if features.migrations}}database-migrations{{/if}}",
+          "{{#if features.studio}}database-studio{{/if}}",
+          "{{#if features.relations}}database-relations{{/if}}",
+          "{{#if features.seeding}}database-seeding{{/if}}"
+        ],
+        "dependencies": [],
+        "parameters": {
+          "provider": {
+            "type": "string",
+            "default": "neon",
+            "description": "Database provider",
+            "required": false,
+            "options": [
+              "neon",
+              "planetscale",
+              "supabase",
+              "local"
+            ]
+          },
+          "databaseType": {
+            "type": "string",
+            "default": "postgresql",
+            "description": "Database type to use",
+            "required": true,
+            "options": [
+              "postgresql",
+              "mysql",
+              "sqlite"
+            ]
+          },
+          "features": {
+            "core": {
+              "description": "Essential database functionality (schema, queries, types)",
+              "default": true
+            },
+            "migrations": {
+              "description": "Database schema migrations and versioning",
+              "default": true
+            },
+            "studio": {
+              "description": "Visual database browser and query interface",
+              "default": false
+            },
+            "relations": {
+              "description": "Advanced relationship management and queries",
+              "default": false
+            },
+            "seeding": {
+              "description": "Data seeding and fixtures management",
+              "default": false
+            }
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "database/sequelize",
+        "name": "Sequelize ORM",
+        "description": "Promise-based Node.js ORM for PostgreSQL, MySQL, MariaDB, SQLite and Microsoft SQL Server",
+        "category": "database",
+        "type": "adapter",
+        "version": "6.0.0",
+        "blueprint": "adapters/database/sequelize/blueprint.ts",
+        "jsonFile": "adapters/database/sequelize/adapter.json",
+        "dependencies": [],
+        "parameters": {
+          "host": {
+            "type": "string",
+            "default": "localhost",
+            "description": "Database host",
+            "required": false
+          },
+          "port": {
+            "type": "number",
+            "default": 5432,
+            "description": "Database port",
+            "required": false
+          },
+          "username": {
+            "type": "string",
+            "default": "postgres",
+            "description": "Database username",
+            "required": false
+          },
+          "password": {
+            "type": "string",
+            "default": "",
+            "description": "Database password",
+            "required": false
+          },
+          "databaseName": {
+            "type": "string",
+            "default": "myapp",
+            "description": "Database name",
+            "required": true
+          },
+          "logging": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable SQL logging",
+            "required": false
+          },
+          "pool": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable connection pooling",
+            "required": false
+          },
+          "databaseType": {
+            "type": "string",
+            "default": "postgresql",
+            "description": "Database type",
+            "required": true,
+            "options": [
+              "postgresql",
+              "mysql",
+              "sqlite",
+              "mariadb",
+              "mssql"
+            ]
+          }
+        },
+        "complexity": "intermediate"
+      },
+      {
+        "id": "content/next-intl",
+        "name": "Next.js Internationalization",
+        "description": "Complete internationalization solution with next-intl including advanced features like pluralization, rich text, and dynamic imports",
+        "category": "content",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/content/next-intl/blueprint.ts",
+        "jsonFile": "adapters/content/next-intl/adapter.json",
+        "dependencies": [
+          "framework/nextjs"
+        ],
+        "parameters": {
+          "locales": {
+            "type": "array",
+            "default": [
+              "en",
+              "fr"
+            ],
+            "description": "Supported locales",
+            "required": true
+          },
+          "defaultLocale": {
+            "type": "string",
+            "default": "en",
+            "description": "Default locale",
+            "required": true
+          },
+          "routing": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable locale-based routing",
+            "required": false
+          },
+          "seo": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable SEO optimization",
+            "required": false
+          },
+          "features": {
+            "routing": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable locale-based routing"
+            },
+            "dateFormatting": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable date formatting features"
+            },
+            "numberFormatting": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable number formatting features"
+            }
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "auth/better-auth",
+        "name": "Better Auth",
+        "description": "Modern authentication library for TypeScript",
+        "category": "auth",
+        "type": "adapter",
+        "version": "0.18.0",
+        "blueprint": "adapters/auth/better-auth/blueprint.ts",
+        "jsonFile": "adapters/auth/better-auth/adapter.json",
+        "dependencies": [],
+        "parameters": {
+          "providers": {
+            "type": "array",
+            "required": false,
+            "default": [
+              "email"
+            ],
+            "description": "Authentication providers to enable"
+          },
+          "session": {
+            "type": "select",
+            "choices": [
+              "jwt",
+              "database"
+            ],
+            "required": false,
+            "default": "jwt",
+            "description": "Session management strategy"
+          },
+          "csrf": {
+            "type": "boolean",
+            "required": false,
+            "default": true,
+            "description": "Enable CSRF protection"
+          },
+          "rateLimit": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable rate limiting",
+            "required": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "ai/vercel-ai-sdk",
+        "name": "Vercel AI SDK",
+        "description": "Pure Vercel AI SDK for building AI-powered applications with streaming, chat, and text generation",
+        "category": "ai",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/ai/vercel-ai-sdk/blueprint.ts",
+        "jsonFile": "adapters/ai/vercel-ai-sdk/adapter.json",
+        "provides": [
+          "ai-core",
+          "{{#if features.streaming}}ai-streaming{{/if}}",
+          "{{#if features.advanced}}ai-advanced{{/if}}",
+          "{{#if features.enterprise}}ai-enterprise{{/if}}"
+        ],
+        "dependencies": {
+          "runtime": [
+            "ai",
+            "@ai-sdk/react",
+            "@ai-sdk/openai",
+            "@ai-sdk/anthropic"
+          ],
+          "dev": [
+            "@types/node"
+          ]
+        },
+        "tags": [
+          "ai",
+          "vercel",
+          "openai",
+          "streaming",
+          "chat",
+          "llm",
+          "generation"
+        ],
+        "parameters": {
+          "providers": {
+            "type": "array",
+            "description": "AI providers to include",
+            "default": [
+              "openai",
+              "anthropic"
+            ],
+            "enum": [
+              "openai",
+              "anthropic",
+              "google",
+              "cohere",
+              "huggingface"
+            ]
+          },
+          "features": {
+            "core": {
+              "type": "boolean",
+              "default": true,
+              "description": "Essential AI functionality (chat, text generation)"
+            },
+            "streaming": {
+              "type": "boolean",
+              "default": true,
+              "description": "Real-time streaming responses"
+            },
+            "tools": {
+              "type": "boolean",
+              "default": false,
+              "description": "Function calling and tool use"
+            },
+            "embeddings": {
+              "type": "boolean",
+              "default": false,
+              "description": "Text embeddings functionality"
+            },
+            "advanced": {
+              "type": "boolean",
+              "default": false,
+              "description": "Advanced AI features (image generation, embeddings, function calling)"
+            },
+            "enterprise": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enterprise features (caching, edge runtime, tool use)"
+            }
+          },
+          "defaultModel": {
+            "type": "string",
+            "description": "Default AI model",
+            "default": "gpt-3.5-turbo",
+            "enum": [
+              "gpt-3.5-turbo",
+              "gpt-4",
+              "gpt-4-turbo",
+              "claude-3-sonnet",
+              "claude-3-opus"
+            ]
+          },
+          "maxTokens": {
+            "type": "number",
+            "description": "Maximum tokens for generation",
+            "default": 1000
+          },
+          "temperature": {
+            "type": "number",
+            "description": "Temperature for generation",
+            "default": 0.7,
+            "minimum": 0,
+            "maximum": 2
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "blockchain/web3",
+        "name": "Viem Ethereum Integration",
+        "description": "Modern, type-safe Web3 integration using viem for Ethereum blockchain interactions",
+        "category": "blockchain",
+        "type": "adapter",
+        "version": "2.0.0",
+        "blueprint": "adapters/blockchain/web3/blueprint.ts",
+        "jsonFile": "adapters/blockchain/web3/adapter.json",
+        "provides": [
+          {
+            "name": "viem",
+            "version": "2.0.0",
+            "description": "Modern, type-safe Ethereum library"
+          },
+          {
+            "name": "web3-core",
+            "version": "2.0.0",
+            "description": "Core Web3 utilities and configuration"
+          },
+          {
+            "name": "react-query",
+            "version": "5.0.0",
+            "description": "Data fetching and caching for Web3"
+          }
+        ],
+        "dependencies": [],
+        "parameters": {
+          "networks": {
+            "type": "array",
+            "default": [
+              "mainnet",
+              "polygon",
+              "arbitrum"
+            ],
+            "description": "Supported blockchain networks",
+            "required": true,
+            "options": [
+              "mainnet",
+              "sepolia",
+              "polygon",
+              "arbitrum"
+            ]
+          },
+          "walletConnect": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable WalletConnect support",
+            "required": false
+          },
+          "contracts": {
+            "type": "array",
+            "default": [],
+            "description": "Smart contract addresses",
+            "required": false
+          },
+          "features": {
+            "walletConnect": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable wallet connection"
+            },
+            "smartContracts": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable smart contract interactions"
+            },
+            "transactions": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable transaction management"
+            },
+            "events": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable blockchain event listening"
+            },
+            "ens": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable ENS name resolution"
+            },
+            "nft": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable NFT functionality"
+            }
+          }
+        },
+        "complexity": "simple"
+      }
+    ],
+    "connectors": [
+      {
+        "id": "connectors/vitest-nextjs",
+        "name": "Vitest Next.js Connector",
+        "description": "Complete Vitest testing setup for Next.js applications with unit tests, integration tests, and coverage reporting",
+        "category": "vitest-nextjs",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/vitest-nextjs/blueprint.ts",
+        "jsonFile": "connectors/vitest-nextjs/connector.json",
+        "provides": {
+          "files": [
+            "vitest.config.ts",
+            "vitest.config.unit.ts",
+            "vitest.config.integration.ts",
+            "vitest.config.e2e.ts",
+            "vitest.setup.ts",
+            "vitest.teardown.ts",
+            "test-utils/test-utils.tsx",
+            "test-utils/mock-next-router.ts",
+            "test-utils/mock-next-auth.ts",
+            "test-utils/mock-fetch.ts",
+            "test-utils/test-db.ts",
+            "test-utils/test-server.ts",
+            "test-utils/test-client.ts",
+            "test-utils/test-helpers.ts",
+            "test-utils/test-fixtures.ts",
+            "test-utils/test-mocks.ts",
+            "test-utils/test-setup.ts",
+            "test-utils/test-teardown.ts",
+            "test-utils/test-constants.ts",
+            "test-utils/test-types.ts",
+            "tests/unit/components/Button.test.tsx",
+            "tests/unit/components/Input.test.tsx",
+            "tests/unit/hooks/useAuth.test.ts",
+            "tests/unit/utils/formatDate.test.ts",
+            "tests/unit/lib/api.test.ts",
+            "tests/integration/pages/home.test.tsx",
+            "tests/integration/pages/about.test.tsx",
+            "tests/integration/api/auth.test.ts",
+            "tests/integration/api/users.test.ts",
+            "tests/e2e/auth.spec.ts",
+            "tests/e2e/navigation.spec.ts",
+            "tests/e2e/forms.spec.ts",
+            "tests/e2e/api.spec.ts",
+            "tests/fixtures/users.json",
+            "tests/fixtures/posts.json",
+            "tests/fixtures/comments.json",
+            "tests/mocks/handlers.ts",
+            "tests/mocks/server.ts",
+            "tests/mocks/responses.ts",
+            "coverage/.gitignore",
+            "coverage/coverage-summary.json",
+            "coverage/coverage-final.json",
+            "coverage/lcov.info",
+            "coverage/index.html"
+          ],
+          "components": [],
+          "pages": []
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "connectors/zustand-nextjs",
+        "name": "Zustand NextJS Connector",
+        "description": "Zustand state management setup and configuration for NextJS applications",
+        "category": "zustand-nextjs",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/zustand-nextjs/blueprint.ts",
+        "jsonFile": "connectors/zustand-nextjs/connector.json",
+        "requires": [
+          "framework/nextjs",
+          "state/zustand"
+        ],
+        "provides": [
+          "state-management",
+          "persistence",
+          "devtools",
+          "ssr-support"
+        ],
+        "connects": [
+          "zustand",
+          "nextjs"
+        ],
+        "parameters": {
+          "persistence": {
+            "name": "Persistence",
+            "description": "State persistence support",
+            "type": "boolean",
+            "default": true
+          },
+          "devtools": {
+            "name": "DevTools",
+            "description": "Zustand DevTools integration",
+            "type": "boolean",
+            "default": false
+          },
+          "ssr": {
+            "name": "SSR Support",
+            "description": "Server-side rendering support",
+            "type": "boolean",
+            "default": true
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "connectors/tanstack-query-nextjs",
+        "name": "TanStack Query NextJS Connector",
+        "description": "TanStack Query setup and configuration for NextJS applications",
+        "category": "tanstack-query-nextjs",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/tanstack-query-nextjs/blueprint.ts",
+        "jsonFile": "connectors/tanstack-query-nextjs/connector.json",
+        "requires": [
+          "framework/nextjs",
+          "data-fetching/tanstack-query"
+        ],
+        "provides": [
+          "query-client",
+          "query-provider",
+          "ssr-support",
+          "hydration",
+          "error-boundary",
+          "devtools"
+        ],
+        "connects": [
+          "tanstack-query",
+          "nextjs"
+        ],
+        "parameters": {
+          "ssr": {
+            "name": "Server-Side Rendering",
+            "description": "SSR support for TanStack Query",
+            "type": "boolean",
+            "default": true
+          },
+          "hydration": {
+            "name": "Hydration",
+            "description": "Client-side hydration support",
+            "type": "boolean",
+            "default": true
+          },
+          "errorBoundary": {
+            "name": "Error Boundary",
+            "description": "Error boundary for query errors",
+            "type": "boolean",
+            "default": true
+          },
+          "devtools": {
+            "name": "DevTools",
+            "description": "TanStack Query DevTools integration",
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "connectors/sentry-nextjs",
+        "name": "Sentry Next.js Connector",
+        "description": "Enhances Sentry adapter with NextJS-specific optimizations, middleware, and monitoring hooks",
+        "category": "sentry-nextjs",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/sentry-nextjs/blueprint.ts",
+        "jsonFile": "connectors/sentry-nextjs/connector.json",
+        "provides": {
+          "enhancements": [
+            "Enhances sentry-config.ts with NextJS optimizations",
+            "Enhances error-tracking.ts with NextJS-specific features",
+            "Enhances basic-performance.ts with NextJS performance monitoring"
+          ],
+          "files": [
+            "src/app/sentry.client.config.ts",
+            "src/app/sentry.server.config.ts",
+            "src/app/sentry.edge.config.ts",
+            "src/middleware/sentry.ts",
+            "src/hooks/use-sentry.ts",
+            "src/hooks/use-error-tracking.ts",
+            "src/hooks/use-performance-monitoring.ts",
+            "src/hooks/use-user-feedback.ts"
+          ]
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "connectors/docker-drizzle",
+        "name": "Docker Drizzle Connector",
+        "description": "Complete Docker containerization for Drizzle ORM with database services, migrations, and production-ready configuration",
+        "category": "docker-drizzle",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/docker-drizzle/blueprint.ts",
+        "jsonFile": "connectors/docker-drizzle/connector.json",
+        "provides": {
+          "files": [
+            "docker-compose.database.yml",
+            "docker-compose.migration.yml",
+            "docker-compose.backup.yml",
+            "database/Dockerfile.postgres",
+            "database/Dockerfile.migration",
+            "database/init.sql",
+            "database/seed.sql",
+            "database/migrations/001_initial.sql",
+            "database/migrations/002_add_indexes.sql",
+            "database/migrations/003_add_constraints.sql",
+            "scripts/db-setup.sh",
+            "scripts/db-migrate.sh",
+            "scripts/db-seed.sh",
+            "scripts/db-backup.sh",
+            "scripts/db-restore.sh",
+            "scripts/db-reset.sh",
+            "scripts/db-health.sh",
+            "scripts/db-shell.sh",
+            "scripts/db-logs.sh",
+            "monitoring/database/prometheus.yml",
+            "monitoring/database/grafana/dashboards/postgres.json",
+            "monitoring/database/grafana/provisioning/dashboards/dashboard.yml",
+            "monitoring/database/grafana/provisioning/datasources/postgres.yml",
+            "backup/backup.sh",
+            "backup/restore.sh",
+            "backup/cleanup.sh"
+          ],
+          "components": [],
+          "pages": []
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "connectors/rhf-zod-shadcn",
+        "name": "React Hook Form + Zod + Shadcn Connector",
+        "description": "React Hook Form, Zod validation, and Shadcn form components setup for NextJS",
+        "category": "rhf-zod-shadcn",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/rhf-zod-shadcn/blueprint.ts",
+        "jsonFile": "connectors/rhf-zod-shadcn/connector.json",
+        "requires": [
+          "framework/nextjs",
+          "ui/shadcn-ui",
+          "core/forms"
+        ],
+        "provides": [
+          "form-validation",
+          "form-components",
+          "accessibility",
+          "devtools"
+        ],
+        "connects": [
+          "react-hook-form",
+          "zod",
+          "shadcn-ui",
+          "nextjs"
+        ],
+        "parameters": {
+          "validation": {
+            "name": "Zod Validation",
+            "description": "Zod schema validation",
+            "type": "boolean",
+            "default": true
+          },
+          "accessibility": {
+            "name": "Accessibility",
+            "description": "Form accessibility features",
+            "type": "boolean",
+            "default": true
+          },
+          "devtools": {
+            "name": "DevTools",
+            "description": "React Hook Form DevTools",
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "connectors/better-auth-github",
+        "name": "Better Auth + GitHub Connector",
+        "description": "OAuth integration between Better Auth and GitHub for Application Authorization",
+        "category": "better-auth-github",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/better-auth-github/blueprint.ts",
+        "jsonFile": "connectors/better-auth-github/connector.json",
+        "provides": [
+          "oauth-flow",
+          "token-management",
+          "user-repositories",
+          "permission-scoping",
+          "token-refresh",
+          "secure-storage"
+        ],
+        "connects": [
+          "better-auth",
+          "github-api"
+        ],
+        "dependencies": [
+          {
+            "id": "better-auth",
+            "version": "^1.0.0"
+          },
+          {
+            "id": "github-api",
+            "version": "^1.0.0"
+          }
+        ],
+        "parameters": {
+          "clientId": {
+            "type": "string",
+            "description": "GitHub OAuth App Client ID",
+            "required": true
+          },
+          "clientSecret": {
+            "type": "string",
+            "description": "GitHub OAuth App Client Secret",
+            "required": true
+          },
+          "redirectUri": {
+            "type": "string",
+            "description": "OAuth redirect URI",
+            "required": true
+          },
+          "scopes": {
+            "type": "array",
+            "default": [
+              "repo",
+              "workflow",
+              "admin:org",
+              "user:email"
+            ],
+            "description": "GitHub OAuth scopes",
+            "required": false
+          },
+          "encryptionKey": {
+            "type": "string",
+            "description": "Encryption key for storing tokens securely",
+            "required": true
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "connectors/docker-nextjs",
+        "name": "Docker Next.js Connector",
+        "description": "Complete Docker containerization for Next.js applications with multi-stage builds, optimization, and production-ready configuration",
+        "category": "docker-nextjs",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/docker-nextjs/blueprint.ts",
+        "jsonFile": "connectors/docker-nextjs/connector.json",
+        "requires": [
+          "docker",
+          "nextjs"
+        ],
+        "provides": {
+          "files": [
+            "Dockerfile",
+            "Dockerfile.dev",
+            "Dockerfile.prod",
+            ".dockerignore",
+            "docker-compose.yml",
+            "docker-compose.dev.yml",
+            "docker-compose.prod.yml",
+            "docker-compose.override.yml",
+            "scripts/docker-build.sh",
+            "scripts/docker-run.sh",
+            "scripts/docker-dev.sh",
+            "scripts/docker-prod.sh",
+            "scripts/docker-clean.sh",
+            "scripts/docker-logs.sh",
+            "scripts/docker-shell.sh",
+            "scripts/docker-health.sh",
+            "nginx/nginx.conf",
+            "nginx/nextjs.conf",
+            "nginx/ssl.conf",
+            "scripts/entrypoint.sh",
+            "scripts/healthcheck.sh",
+            "scripts/init-db.sh",
+            "scripts/backup.sh",
+            "scripts/restore.sh",
+            "monitoring/docker-compose.monitoring.yml",
+            "monitoring/prometheus.yml",
+            "monitoring/grafana/dashboards/nextjs.json",
+            "monitoring/grafana/provisioning/dashboards/dashboard.yml",
+            "monitoring/grafana/provisioning/datasources/prometheus.yml"
+          ],
+          "components": [],
+          "pages": []
+        },
+        "connects": [
+          "docker",
+          "nextjs"
+        ],
+        "complexity": "simple"
+      },
+      {
+        "id": "connectors/stripe/nextjs-drizzle",
+        "name": "Stripe NextJS Drizzle Connector",
+        "description": "Server-side API routes for Stripe payments with NextJS and Drizzle",
+        "category": "stripe",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/stripe/nextjs-drizzle/blueprint.ts",
+        "jsonFile": "connectors/stripe/nextjs-drizzle/connector.json",
+        "requires": [
+          "framework/nextjs",
+          "database/drizzle",
+          "payment/stripe"
+        ],
+        "provides": [
+          "stripe-api-routes",
+          "organization-billing-api",
+          "seat-management-api",
+          "usage-tracking-api",
+          "stripe-webhooks"
+        ],
+        "parameters": {
+          "features": {
+            "organizationBilling": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable organization-level billing features"
+            },
+            "seats": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable seat-based billing"
+            },
+            "usage": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable usage-based billing"
+            },
+            "webhooks": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable Stripe webhook handling"
+            },
+            "seatManagement": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable seat-based billing"
+            },
+            "usageTracking": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable usage-based billing tracking"
+            }
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "connectors/sentry/nextjs",
+        "name": "Sentry Next.js Connector",
+        "description": "Next.js-specific Sentry integration with @sentry/nextjs",
+        "category": "connectors",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/sentry/nextjs/blueprint.ts",
+        "jsonFile": "connectors/sentry/nextjs/connector.json",
+        "provides": [
+          "monitoring-nextjs-core",
+          "{{#if features.performance}}monitoring-nextjs-performance{{/if}}",
+          "{{#if features.alerts}}monitoring-nextjs-alerts{{/if}}",
+          "{{#if features.enterprise}}monitoring-nextjs-enterprise{{/if}}"
+        ],
+        "dependencies": [
+          "technologies/observability/sentry-core"
+        ],
+        "parameters": {
+          "dsn": {
+            "type": "string",
+            "default": "",
+            "description": "Sentry DSN",
+            "required": true
+          },
+          "environment": {
+            "type": "string",
+            "default": "development",
+            "description": "Environment name",
+            "required": false
+          },
+          "features": {
+            "core": {
+              "description": "Essential Next.js Sentry integration",
+              "default": true
+            },
+            "performance": {
+              "description": "Next.js performance monitoring",
+              "default": false
+            },
+            "alerts": {
+              "description": "Next.js alerts and dashboard",
+              "default": false
+            },
+            "enterprise": {
+              "description": "Next.js enterprise features",
+              "default": false
+            }
+          },
+          "release": {
+            "type": "string",
+            "default": "",
+            "description": "Release version",
+            "required": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "connectors/sentry/react",
+        "name": "Sentry React Connector",
+        "description": "React-specific Sentry integration with @sentry/react",
+        "category": "connectors",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/sentry/react/blueprint.ts",
+        "jsonFile": "connectors/sentry/react/connector.json",
+        "provides": [
+          "monitoring-react-core",
+          "{{#if features.performance}}monitoring-react-performance{{/if}}",
+          "{{#if features.error-boundary}}monitoring-react-error-boundary{{/if}}"
+        ],
+        "dependencies": [
+          "technologies/observability/sentry-core"
+        ],
+        "parameters": {
+          "dsn": {
+            "type": "string",
+            "default": "",
+            "description": "Sentry DSN",
+            "required": true
+          },
+          "environment": {
+            "type": "string",
+            "default": "development",
+            "description": "Environment name",
+            "required": false
+          },
+          "features": {
+            "core": {
+              "description": "Essential React Sentry integration",
+              "default": true
+            },
+            "performance": {
+              "description": "React performance monitoring",
+              "default": false
+            },
+            "error-boundary": {
+              "description": "React Error Boundary components",
+              "default": true
+            }
+          },
+          "release": {
+            "type": "string",
+            "default": "",
+            "description": "Release version",
+            "required": false
+          }
+        },
+        "complexity": "simple"
+      }
+    ],
+    "features": [
+      {
+        "id": "features/web3/shadcn",
+        "name": "Web3 Feature (Shadcn)",
+        "description": "Complete Web3 wallet connection and blockchain interaction UI using Shadcn components",
+        "category": "web3",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/web3/shadcn/blueprint.ts",
+        "jsonFile": "features/web3/shadcn/feature.json",
+        "provides": [
+          "web3-ui"
+        ],
+        "parameters": {
+          "features": {
+            "walletConnect": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable wallet connection UI"
+            },
+            "networkSwitch": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable network switching UI"
+            },
+            "transactionHistory": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable transaction history UI"
+            },
+            "tokenBalances": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable token balances UI"
+            },
+            "nftGallery": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable NFT gallery UI"
+            },
+            "walletConnection": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable wallet connection UI"
+            },
+            "defiIntegration": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable DeFi integration UI"
+            },
+            "stakingInterface": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable staking interface UI"
+            }
+          },
+          "theme": {
+            "type": "string",
+            "default": "default",
+            "description": "UI theme variant",
+            "required": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "features/teams-management/tech-stack",
+        "name": "teams-management-tech-stack",
+        "description": "Technology-agnostic stack layer for Teams Management feature",
+        "category": "tech-stack",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/teams-management/tech-stack/blueprint.ts",
+        "jsonFile": "features/teams-management/tech-stack/feature.json",
+        "dependencies": [
+          "zod",
+          "@tanstack/react-query",
+          "zustand",
+          "immer",
+          "sonner"
+        ],
+        "tags": [
+          "teams-management",
+          "types",
+          "schemas",
+          "hooks",
+          "stores",
+          "tech-stack"
+        ],
+        "complexity": "simple"
+      },
+      {
+        "id": "features/monitoring/tech-stack",
+        "name": "monitoring-tech-stack",
+        "description": "Technology-agnostic stack layer for Monitoring feature",
+        "category": "tech-stack",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/monitoring/tech-stack/blueprint.ts",
+        "jsonFile": "features/monitoring/tech-stack/feature.json",
+        "dependencies": [
+          "zod",
+          "@tanstack/react-query",
+          "zustand",
+          "immer",
+          "sonner"
+        ],
+        "tags": [
+          "monitoring",
+          "types",
+          "schemas",
+          "hooks",
+          "stores",
+          "tech-stack"
+        ],
+        "complexity": "simple"
+      },
+      {
+        "id": "features/payments/tech-stack",
+        "name": "payments-tech-stack",
+        "description": "Technology-agnostic stack layer for Payments feature",
+        "category": "tech-stack",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/payments/tech-stack/blueprint.ts",
+        "jsonFile": "features/payments/tech-stack/feature.json",
+        "dependencies": [
+          "zod",
+          "@tanstack/react-query",
+          "zustand",
+          "immer",
+          "sonner"
+        ],
+        "tags": [
+          "payments",
+          "types",
+          "schemas",
+          "hooks",
+          "stores",
+          "tech-stack"
+        ],
+        "complexity": "simple"
+      },
+      {
+        "id": "features/monitoring/shadcn",
+        "name": "Monitoring Capability",
+        "description": "Complete monitoring capability with error tracking, performance monitoring, and user feedback using Sentry",
+        "category": "feature",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/monitoring/shadcn/blueprint.ts",
+        "jsonFile": "features/monitoring/shadcn/feature.json",
+        "provides": [
+          "monitoring-core",
+          "{{#if features.performance}}monitoring-performance{{/if}}",
+          "{{#if features.feedback}}monitoring-feedback{{/if}}",
+          "{{#if features.analytics}}monitoring-analytics{{/if}}"
+        ],
+        "parameters": {
+          "backend": {
+            "type": "select",
+            "default": "sentry-nextjs",
+            "description": "Backend implementation for monitoring services",
+            "required": true,
+            "options": [
+              "sentry-nextjs",
+              "sentry-express",
+              "sentry-fastify"
+            ]
+          },
+          "frontend": {
+            "type": "select",
+            "default": "shadcn",
+            "description": "Frontend implementation for monitoring UI",
+            "required": true,
+            "options": [
+              "shadcn",
+              "mui",
+              "chakra"
+            ]
+          },
+          "features": {
+            "core": {
+              "type": "boolean",
+              "default": true,
+              "description": "Essential monitoring (error tracking, basic performance)"
+            },
+            "performance": {
+              "type": "boolean",
+              "default": false,
+              "description": "Advanced performance monitoring"
+            },
+            "errors": {
+              "type": "boolean",
+              "default": true,
+              "description": "Error tracking and reporting"
+            },
+            "feedback": {
+              "type": "boolean",
+              "default": false,
+              "description": "User feedback collection"
+            },
+            "analytics": {
+              "type": "boolean",
+              "default": false,
+              "description": "Monitoring analytics and reporting"
+            }
+          },
+          "environments": {
+            "type": "array",
+            "default": [
+              "production",
+              "staging",
+              "development"
+            ],
+            "description": "Environments to monitor",
+            "required": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "features/architech-welcome/shadcn",
+        "name": "Architech Welcome",
+        "description": "Beautiful welcome page showcasing the generated project's capabilities and technology stack",
+        "category": "core",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/architech-welcome/shadcn/blueprint.ts",
+        "jsonFile": "features/architech-welcome/shadcn/feature.json",
+        "requires": {
+          "components": {
+            "ui/shadcn-ui": [
+              "button",
+              "card",
+              "input",
+              "label",
+              "badge",
+              "checkbox",
+              "switch",
+              "tabs",
+              "alert"
+            ]
+          }
+        },
+        "dependencies": {
+          "required": [
+            "framework/nextjs",
+            "ui/shadcn-ui"
+          ],
+          "optional": [
+            "ui/tailwind"
+          ]
+        },
+        "tags": [
+          "welcome",
+          "showcase",
+          "documentation",
+          "ui"
+        ],
+        "parameters": {
+          "features": {
+            "techStack": {
+              "description": "Show technology stack visualization",
+              "default": true
+            },
+            "componentShowcase": {
+              "description": "Show interactive component library showcase",
+              "default": true
+            },
+            "projectStructure": {
+              "description": "Show project structure and architecture",
+              "default": true
+            },
+            "quickStart": {
+              "description": "Show quick start guide",
+              "default": true
+            },
+            "architechBranding": {
+              "description": "Show Architech branding and links",
+              "default": true
+            }
+          },
+          "customTitle": {
+            "type": "string",
+            "default": "Welcome to Your New App",
+            "description": "Custom welcome page title"
+          },
+          "customDescription": {
+            "type": "string",
+            "default": "Your modern application is ready! Explore the features and technologies that power your project.",
+            "description": "Custom welcome page description"
+          },
+          "primaryColor": {
+            "type": "string",
+            "default": "blue",
+            "choices": [
+              "blue",
+              "green",
+              "purple",
+              "red",
+              "orange",
+              "pink"
+            ],
+            "description": "Primary color theme for the welcome page"
+          },
+          "showTechStack": {
+            "type": "boolean",
+            "default": true,
+            "description": "Show technology stack visualization"
+          },
+          "showComponents": {
+            "type": "boolean",
+            "default": true,
+            "description": "Show interactive component library showcase"
+          },
+          "showProjectStructure": {
+            "type": "boolean",
+            "default": true,
+            "description": "Show project structure and architecture"
+          },
+          "showQuickStart": {
+            "type": "boolean",
+            "default": true,
+            "description": "Show quick start guide"
+          },
+          "showArchitechBranding": {
+            "type": "boolean",
+            "default": true,
+            "description": "Show Architech branding and links"
+          }
+        },
+        "complexity": "intermediate"
+      },
+      {
+        "id": "features/auth/tech-stack",
+        "name": "auth-tech-stack",
+        "description": "Technology-agnostic stack layer for Auth feature",
+        "category": "tech-stack",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/auth/tech-stack/blueprint.ts",
+        "jsonFile": "features/auth/tech-stack/feature.json",
+        "dependencies": [
+          "zod",
+          "@tanstack/react-query",
+          "zustand",
+          "immer",
+          "sonner"
+        ],
+        "tags": [
+          "auth",
+          "types",
+          "schemas",
+          "hooks",
+          "stores",
+          "tech-stack"
+        ],
+        "complexity": "simple"
+      },
+      {
+        "id": "features/emailing/tech-stack",
+        "name": "emailing-tech-stack",
+        "description": "Technology-agnostic stack layer for Emailing feature",
+        "category": "tech-stack",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/emailing/tech-stack/blueprint.ts",
+        "jsonFile": "features/emailing/tech-stack/feature.json",
+        "dependencies": [
+          "zod",
+          "@tanstack/react-query",
+          "zustand",
+          "immer",
+          "sonner"
+        ],
+        "tags": [
+          "emailing",
+          "types",
+          "schemas",
+          "hooks",
+          "stores",
+          "tech-stack"
+        ],
+        "complexity": "simple"
+      },
+      {
+        "id": "features/ai-chat/tech-stack",
+        "name": "ai-chat-tech-stack",
+        "description": "Technology-agnostic stack layer for AI Chat feature",
+        "category": "tech-stack",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/ai-chat/tech-stack/blueprint.ts",
+        "jsonFile": "features/ai-chat/tech-stack/feature.json",
+        "dependencies": {
+          "zod": "latest",
+          "@tanstack/react-query": "latest",
+          "zustand": "latest",
+          "immer": "latest",
+          "sonner": "latest"
+        },
+        "tags": [
+          "ai-chat",
+          "types",
+          "schemas",
+          "hooks",
+          "stores",
+          "tech-stack"
+        ],
+        "complexity": "simple"
+      },
+      {
+        "id": "features/teams-management/backend/better-auth-nextjs",
+        "name": "Teams Capability (Better Auth + NextJS)",
+        "description": "Complete teams management backend with Better Auth and NextJS",
+        "category": "teams-management",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/teams-management/backend/better-auth-nextjs/blueprint.ts",
+        "jsonFile": "features/teams-management/backend/better-auth-nextjs/feature.json",
+        "requires": [
+          "framework/nextjs",
+          "auth/better-auth"
+        ],
+        "provides": [
+          "teams"
+        ],
+        "parameters": {
+          "invites": {
+            "name": "Team Invites",
+            "description": "Team invitation system",
+            "type": "boolean",
+            "default": true
+          },
+          "permissions": {
+            "name": "Role-based Permissions",
+            "description": "Granular role-based permissions",
+            "type": "boolean",
+            "default": true
+          },
+          "analytics": {
+            "name": "Team Analytics",
+            "description": "Team performance analytics",
+            "type": "boolean",
+            "default": false
+          },
+          "billing": {
+            "name": "Team Billing",
+            "description": "Team billing and subscription management",
+            "type": "boolean",
+            "default": false
+          },
+          "features": {
+            "teams": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable team management"
+            },
+            "invitations": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable team invitations"
+            },
+            "roles": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable role-based access control"
+            },
+            "permissions": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable granular permissions"
+            }
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "features/payments/frontend/shadcn",
+        "name": "Payments Frontend (Shadcn)",
+        "description": "Payment processing UI using Shadcn components",
+        "category": "payments",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/payments/frontend/shadcn/blueprint.ts",
+        "jsonFile": "features/payments/frontend/shadcn/feature.json",
+        "provides": [
+          "payments-core",
+          "{{#if features.subscriptions}}payments-subscriptions{{/if}}",
+          "{{#if features.invoicing}}payments-invoicing{{/if}}",
+          "{{#if features.webhooks}}payments-webhooks{{/if}}",
+          "{{#if features.analytics}}payments-analytics{{/if}}"
+        ],
+        "parameters": {
+          "features": {
+            "core": {
+              "type": "boolean",
+              "default": true,
+              "description": "Essential payment functionality (forms, checkout, transactions)"
+            },
+            "checkout": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable checkout UI components"
+            },
+            "subscriptions": {
+              "type": "boolean",
+              "default": false,
+              "description": "Subscription management and billing"
+            },
+            "invoices": {
+              "type": "boolean",
+              "default": false,
+              "description": "Invoice generation and management"
+            },
+            "paymentMethods": {
+              "type": "boolean",
+              "default": true,
+              "description": "Payment methods management UI"
+            },
+            "billingPortal": {
+              "type": "boolean",
+              "default": false,
+              "description": "Billing portal UI"
+            },
+            "invoicing": {
+              "type": "boolean",
+              "default": false,
+              "description": "Invoice generation and management"
+            },
+            "webhooks": {
+              "type": "boolean",
+              "default": false,
+              "description": "Payment webhook handling"
+            },
+            "analytics": {
+              "type": "boolean",
+              "default": false,
+              "description": "Payment analytics and reporting"
+            }
+          },
+          "theme": {
+            "type": "string",
+            "default": "default",
+            "description": "UI theme variant",
+            "required": false,
+            "options": [
+              "default",
+              "dark",
+              "light",
+              "minimal"
+            ]
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "features/teams-management/frontend/shadcn",
+        "name": "Teams Management Feature (Shadcn)",
+        "description": "Complete team management UI using Shadcn components",
+        "category": "teams-management",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/teams-management/frontend/shadcn/blueprint.ts",
+        "jsonFile": "features/teams-management/frontend/shadcn/feature.json",
+        "provides": [
+          "teams-core",
+          "{{#if features.advanced}}teams-advanced{{/if}}",
+          "{{#if features.analytics}}teams-analytics{{/if}}",
+          "{{#if features.billing}}teams-billing{{/if}}"
+        ],
+        "parameters": {
+          "features": {
+            "core": {
+              "type": "boolean",
+              "default": true,
+              "description": "Basic team management (list, creation, member management)"
+            },
+            "teams": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable team management UI"
+            },
+            "members": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable member management UI"
+            },
+            "invitations": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable team invitations UI"
+            },
+            "roles": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable role management UI"
+            },
+            "billing": {
+              "type": "boolean",
+              "default": false,
+              "description": "Team billing and usage tracking"
+            },
+            "analytics": {
+              "type": "boolean",
+              "default": false,
+              "description": "Team analytics and reporting"
+            },
+            "advanced": {
+              "type": "boolean",
+              "default": false,
+              "description": "Advanced team features (settings, permissions, dashboard)"
+            }
+          },
+          "theme": {
+            "type": "string",
+            "default": "default",
+            "description": "UI theme variant",
+            "required": false,
+            "options": [
+              "default",
+              "dark",
+              "light",
+              "minimal"
+            ]
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "features/payments/backend/stripe-nextjs",
+        "name": "Payments Backend (Stripe + NextJS)",
+        "description": "Payment processing backend implementation using Stripe and NextJS",
+        "category": "payments",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/payments/backend/stripe-nextjs/blueprint.ts",
+        "jsonFile": "features/payments/backend/stripe-nextjs/feature.json",
+        "requires": [
+          "framework/nextjs",
+          "payment/stripe"
+        ],
+        "parameters": {
+          "webhooks": {
+            "name": "Webhooks",
+            "description": "Stripe webhook handlers for payment events",
+            "type": "boolean",
+            "default": true
+          },
+          "checkout": {
+            "name": "Checkout",
+            "description": "Stripe Checkout integration for payments",
+            "type": "boolean",
+            "default": true
+          },
+          "subscriptions": {
+            "name": "Subscriptions",
+            "description": "Subscription management and billing",
+            "type": "boolean",
+            "default": false
+          },
+          "invoices": {
+            "name": "Invoices",
+            "description": "Invoice generation and management",
+            "type": "boolean",
+            "default": false
+          },
+          "refunds": {
+            "name": "Refunds",
+            "description": "Refund processing and management",
+            "type": "boolean",
+            "default": false
+          },
+          "paymentMethods": {
+            "name": "Payment Methods",
+            "description": "Payment methods management",
+            "type": "boolean",
+            "default": true
+          },
+          "analytics": {
+            "name": "Analytics",
+            "description": "Payment analytics and reporting",
+            "type": "boolean",
+            "default": false
+          },
+          "organizationBilling": {
+            "name": "Organization Billing",
+            "description": "Organization-level billing features",
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "complexity": "intermediate"
+      },
+      {
+        "id": "features/emailing/backend/resend-nextjs",
+        "name": "Email Capability (Resend + NextJS)",
+        "description": "Complete email sending backend with Resend and NextJS",
+        "category": "emailing",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/emailing/backend/resend-nextjs/blueprint.ts",
+        "jsonFile": "features/emailing/backend/resend-nextjs/feature.json",
+        "requires": [
+          "framework/nextjs",
+          "email/resend"
+        ],
+        "provides": [
+          "email"
+        ],
+        "parameters": {
+          "bulkEmail": {
+            "name": "Bulk Email",
+            "description": "Bulk email sending capabilities",
+            "type": "boolean",
+            "default": false
+          },
+          "templates": {
+            "name": "Email Templates",
+            "description": "Email template management",
+            "type": "boolean",
+            "default": true
+          },
+          "analytics": {
+            "name": "Email Analytics",
+            "description": "Email delivery and engagement analytics",
+            "type": "boolean",
+            "default": false
+          },
+          "webhooks": {
+            "name": "Webhooks",
+            "description": "Email event webhooks",
+            "type": "boolean",
+            "default": false
+          },
+          "organizations": {
+            "name": "Organization Support",
+            "description": "Enable organization-scoped email management",
+            "type": "boolean",
+            "default": false,
+            "prerequisites": [
+              "auth-organizations"
+            ]
+          },
+          "teams": {
+            "name": "Team Support",
+            "description": "Enable team-scoped email management",
+            "type": "boolean",
+            "default": false,
+            "prerequisites": [
+              "auth-teams"
+            ]
+          }
+        },
+        "complexity": "intermediate"
+      },
+      {
+        "id": "features/emailing/frontend/shadcn",
+        "name": "Emailing Feature (Shadcn)",
+        "description": "Complete email management UI using Shadcn components",
+        "category": "emailing",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/emailing/frontend/shadcn/blueprint.ts",
+        "jsonFile": "features/emailing/frontend/shadcn/feature.json",
+        "provides": [
+          "emailing-ui"
+        ],
+        "parameters": {
+          "features": {
+            "emailComposer": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable email composer UI"
+            },
+            "emailList": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable email list UI"
+            },
+            "templates": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable email templates UI"
+            },
+            "analytics": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable email analytics UI"
+            },
+            "campaigns": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable email campaigns UI"
+            },
+            "scheduling": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable email scheduling UI"
+            },
+            "advancedTemplates": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable advanced email templates UI"
+            }
+          },
+          "theme": {
+            "type": "string",
+            "default": "default",
+            "description": "UI theme variant",
+            "required": false,
+            "options": [
+              "default",
+              "dark",
+              "light",
+              "minimal"
+            ]
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "features/auth/backend/better-auth-nextjs",
+        "name": "Authentication Capability (Better Auth + NextJS)",
+        "description": "Complete authentication backend with Better Auth and NextJS",
+        "category": "auth",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/auth/backend/better-auth-nextjs/blueprint.ts",
+        "jsonFile": "features/auth/backend/better-auth-nextjs/feature.json",
+        "requires": [
+          "framework/nextjs",
+          "auth/better-auth"
+        ],
+        "provides": [
+          "auth"
+        ],
+        "parameters": {
+          "apiRoutes": {
+            "name": "API Routes",
+            "description": "Next.js API routes for authentication endpoints",
+            "type": "boolean",
+            "default": true
+          },
+          "middleware": {
+            "name": "Middleware",
+            "description": "Next.js middleware for authentication and route protection",
+            "type": "boolean",
+            "default": true
+          },
+          "adminPanel": {
+            "name": "Admin Panel",
+            "description": "Admin API routes for user management",
+            "type": "boolean",
+            "default": false
+          },
+          "emailVerification": {
+            "name": "Email Verification",
+            "description": "Email verification API routes and components",
+            "type": "boolean",
+            "default": false
+          },
+          "mfa": {
+            "name": "Multi-Factor Authentication",
+            "description": "MFA API routes and components",
+            "type": "boolean",
+            "default": false
+          },
+          "passwordReset": {
+            "name": "Password Reset",
+            "description": "Password reset API routes and components",
+            "type": "boolean",
+            "default": false
+          },
+          "features": {
+            "emailPassword": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable email/password authentication"
+            },
+            "emailVerification": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable email verification"
+            },
+            "passwordReset": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable password reset functionality"
+            },
+            "sessions": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable session management"
+            },
+            "organizations": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable organization/team management"
+            },
+            "twoFactor": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable two-factor authentication"
+            }
+          }
+        },
+        "complexity": "intermediate"
+      },
+      {
+        "id": "features/auth/frontend/shadcn",
+        "name": "Authentication UI (Shadcn)",
+        "description": "Complete authentication UI using Shadcn components",
+        "category": "auth",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/auth/frontend/shadcn/blueprint.ts",
+        "jsonFile": "features/auth/frontend/shadcn/feature.json",
+        "provides": [
+          "auth-ui-core",
+          "{{#if features.passwordReset}}auth-ui-password-reset{{/if}}",
+          "{{#if features.mfa}}auth-ui-mfa{{/if}}",
+          "{{#if features.socialLogins}}auth-ui-social{{/if}}",
+          "{{#if features.accountSettingsPage}}auth-ui-settings{{/if}}",
+          "{{#if features.profileManagement}}auth-ui-profile{{/if}}"
+        ],
+        "parameters": {
+          "features": {
+            "signIn": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable sign-in UI components"
+            },
+            "signUp": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable sign-up UI components"
+            },
+            "passwordReset": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enables password reset functionality (forms and pages)"
+            },
+            "profile": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable profile management UI components"
+            },
+            "mfa": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enables Multi-Factor Authentication setup and verification"
+            },
+            "socialLogins": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enables UI for Google, GitHub, etc. logins"
+            },
+            "accountSettingsPage": {
+              "type": "boolean",
+              "default": false,
+              "description": "Generates a full page for managing account settings"
+            },
+            "profileManagement": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enables advanced profile management features"
+            },
+            "twoFactor": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable two-factor authentication UI"
+            },
+            "organizationManagement": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable organization management UI"
+            }
+          },
+          "theme": {
+            "type": "string",
+            "default": "default",
+            "description": "UI theme variant",
+            "required": false,
+            "options": [
+              "default",
+              "dark",
+              "light",
+              "minimal"
+            ]
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "features/ai-chat/backend/vercel-ai-nextjs",
+        "name": "AI Capability (Vercel AI SDK + NextJS)",
+        "description": "Complete AI chat backend with Vercel AI SDK and NextJS",
+        "category": "ai-chat",
+        "type": "feature",
+        "version": "1.0.0",
+        "blueprint": "features/ai-chat/backend/vercel-ai-nextjs/blueprint.ts",
+        "jsonFile": "features/ai-chat/backend/vercel-ai-nextjs/feature.json",
+        "requires": [
+          "framework/nextjs",
+          "ai/vercel-ai-sdk"
+        ],
+        "provides": [
+          "ai-chat"
+        ],
+        "parameters": {
+          "streaming": {
+            "name": "Streaming",
+            "description": "Real-time message streaming",
+            "type": "boolean",
+            "default": true
+          },
+          "fileUpload": {
+            "name": "File Upload",
+            "description": "File upload capabilities",
+            "type": "boolean",
+            "default": true
+          },
+          "voiceInput": {
+            "name": "Voice Input",
+            "description": "Voice input capabilities",
+            "type": "boolean",
+            "default": false
+          },
+          "voiceOutput": {
+            "name": "Voice Output",
+            "description": "Voice output capabilities",
+            "type": "boolean",
+            "default": false
+          },
+          "exportImport": {
+            "name": "Export/Import",
+            "description": "Chat export and import capabilities",
+            "type": "boolean",
+            "default": true
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "features/ai-chat/frontend/shadcn",
+        "name": "AI Chat Feature (Shadcn)",
+        "description": "Complete modular AI chat interface using Shadcn components",
+        "category": "ai-chat",
+        "type": "feature",
+        "version": "2.0.0",
+        "blueprint": "features/ai-chat/frontend/shadcn/blueprint.ts",
+        "jsonFile": "features/ai-chat/frontend/shadcn/feature.json",
+        "provides": [
+          "ai-chat-core",
+          "{{#if features.context}}ai-chat-context{{/if}}",
+          "{{#if features.media}}ai-chat-media{{/if}}",
+          "{{#if features.voice}}ai-chat-voice{{/if}}",
+          "{{#if features.history}}ai-chat-history{{/if}}",
+          "{{#if features.input}}ai-chat-input{{/if}}",
+          "{{#if features.toolbar}}ai-chat-toolbar{{/if}}",
+          "{{#if features.settings}}ai-chat-settings{{/if}}",
+          "{{#if features.prompts}}ai-chat-prompts{{/if}}",
+          "{{#if features.export}}ai-chat-export{{/if}}",
+          "{{#if features.analytics}}ai-chat-analytics{{/if}}",
+          "{{#if features.projects}}ai-chat-projects{{/if}}",
+          "{{#if features.middleware}}ai-chat-middleware{{/if}}",
+          "{{#if features.services}}ai-chat-services{{/if}}",
+          "{{#if features.completion}}ai-chat-completion{{/if}}"
+        ],
+        "parameters": {
+          "features": {
+            "core": {
+              "description": "Essential chat interface with basic messaging",
+              "default": true,
+              "templates": [
+                "ChatInterface.tsx.tpl",
+                "MessageBubble.tsx.tpl",
+                "ConversationSidebar.tsx.tpl",
+                "useAIChatExtended.ts.tpl",
+                "chat-page.tsx.tpl"
+              ]
+            },
+            "context": {
+              "description": "Chat context and provider management",
+              "default": true,
+              "templates": [
+                "ChatContext.tsx.tpl",
+                "ChatProvider.tsx.tpl",
+                "AIProvider.tsx.tpl"
+              ]
+            },
+            "media": {
+              "description": "File upload and media preview capabilities",
+              "default": false,
+              "templates": [
+                "FileUpload.tsx.tpl",
+                "MediaPreview.tsx.tpl",
+                "useFileUpload.ts.tpl"
+              ]
+            },
+            "voice": {
+              "description": "Voice input and output functionality",
+              "default": false,
+              "templates": [
+                "VoiceInput.tsx.tpl",
+                "VoiceOutput.tsx.tpl",
+                "useVoice.ts.tpl"
+              ]
+            },
+            "history": {
+              "description": "Advanced conversation history and management",
+              "default": false,
+              "templates": [
+                "ChatHistory.tsx.tpl",
+                "MessageHistory.tsx.tpl",
+                "MessageList.tsx.tpl",
+                "chat-detail-page.tsx.tpl"
+              ]
+            },
+            "input": {
+              "description": "Advanced message input with features",
+              "default": false,
+              "templates": [
+                "MessageInput.tsx.tpl",
+                "MarkdownRenderer.tsx.tpl",
+                "CodeBlock.tsx.tpl"
+              ]
+            },
+            "toolbar": {
+              "description": "Chat toolbar and controls",
+              "default": false,
+              "templates": [
+                "ChatToolbar.tsx.tpl",
+                "LoadingIndicator.tsx.tpl",
+                "ErrorDisplay.tsx.tpl"
+              ]
+            },
+            "settings": {
+              "description": "Chat settings and configuration",
+              "default": false,
+              "templates": [
+                "ChatSettings.tsx.tpl",
+                "SettingsPanel.tsx.tpl",
+                "ai-config.ts.tpl"
+              ]
+            },
+            "prompts": {
+              "description": "Custom prompts and templates",
+              "default": false,
+              "templates": [
+                "CustomPrompts.tsx.tpl"
+              ]
+            },
+            "export": {
+              "description": "Chat export and import functionality",
+              "default": false,
+              "templates": [
+                "ChatExport.tsx.tpl",
+                "ChatImport.tsx.tpl",
+                "ExportImport.tsx.tpl"
+              ]
+            },
+            "analytics": {
+              "description": "Chat analytics and insights",
+              "default": false,
+              "templates": [
+                "ChatAnalytics.tsx.tpl"
+              ]
+            },
+            "projects": {
+              "description": "Project-based chat organization",
+              "default": false,
+              "templates": [
+                "projects-page.tsx.tpl"
+              ]
+            },
+            "middleware": {
+              "description": "Chat middleware and routing",
+              "default": false,
+              "templates": [
+                "chat-middleware.ts.tpl"
+              ]
+            },
+            "services": {
+              "description": "AI chat service utilities",
+              "default": false,
+              "templates": [
+                "ai-chat-services.ts.tpl",
+                "ai-chat-utils.ts.tpl",
+                "ai-providers.ts.tpl",
+                "ai-types.ts.tpl"
+              ]
+            },
+            "completion": {
+              "description": "Text completion and generation",
+              "default": false,
+              "templates": [
+                "use-chat.ts.tpl",
+                "use-completion.ts.tpl",
+                "completion-route.ts.tpl"
+              ]
+            }
+          },
+          "theme": {
+            "type": "string",
+            "default": "default",
+            "description": "UI theme variant",
+            "required": false,
+            "options": [
+              "default",
+              "dark",
+              "light",
+              "minimal"
+            ]
+          }
+        },
+        "complexity": "simple"
+      }
+    ]
+  },
+  "genomes": [
+    {
+      "id": "valid-architecture",
+      "name": "VALID ARCHITECTURE GENOME",
+      "description": "VALID ARCHITECTURE GENOME",
+      "path": "genomes/test/valid-architecture.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "drizzle",
+        "auth",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "database/drizzle",
+          "auth/better-auth"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 3,
+      "aliases": [
+        "valid-architecture",
+        "validarchitecture"
+      ]
+    },
+    {
+      "id": "type-error",
+      "name": "Type Error Test Genome",
+      "description": "Type Error Test Genome",
+      "path": "genomes/test/type-error.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "shadcn-ui",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "ui/shadcn-ui"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 2,
+      "aliases": [
+        "type-error",
+        "typeerror"
+      ]
+    },
+    {
+      "id": "min-test",
+      "name": "Minimal Test Genome",
+      "description": "Minimal Test Genome",
+      "path": "genomes/test/min-test.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "shadcn-ui",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "ui/shadcn-ui"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 2,
+      "aliases": [
+        "min-test",
+        "mintest"
+      ]
+    },
+    {
+      "id": "invalid-test",
+      "name": "Invalid Test Genome",
+      "description": "Invalid Test Genome",
+      "path": "genomes/test/invalid-test.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "shadcn-ui",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "ui/shadcn-ui"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 2,
+      "aliases": [
+        "invalid-test",
+        "invalidtest"
+      ]
+    },
+    {
+      "id": "broken-architecture",
+      "name": "BROKEN ARCHITECTURE GENOME",
+      "description": "BROKEN ARCHITECTURE GENOME",
+      "path": "genomes/test/broken-architecture.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "drizzle",
+        "prisma",
+        "auth",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "database/drizzle",
+          "database/prisma",
+          "drizzle-nextjs-integration"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 4,
+      "aliases": [
+        "broken-architecture",
+        "brokenarchitecture"
+      ]
+    },
+    {
+      "id": "ultimate-showcase",
+      "name": "ULTIMATE SHOWCASE / KITCHEN SINK",
+      "description": "ULTIMATE SHOWCASE / KITCHEN SINK",
+      "path": "genomes/official/06-ultimate-showcase.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "drizzle",
+        "auth",
+        "payments",
+        "ai",
+        "web3",
+        "shadcn-ui",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "database/drizzle",
+          "data-fetching/tanstack-query",
+          "state/zustand",
+          "ui/shadcn-ui"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 5,
+      "stack": "Everything (Next.js + ALL modules + ALL features)",
+      "useCase": "Platform demonstration, learning, reference implementation",
+      "pattern": "Showcase platform capabilities and architectural flexibility",
+      "aliases": [
+        "ultimate-showcase",
+        "ultimateshowcase",
+        "06"
+      ]
+    },
+    {
+      "id": "web3-dapp",
+      "name": "WEB3 / DAPP STARTER",
+      "description": "WEB3 / DAPP STARTER",
+      "path": "genomes/official/05-web3-dapp.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "drizzle",
+        "auth",
+        "web3",
+        "shadcn-ui",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "ui/shadcn-ui"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 2,
+      "stack": "Next.js + Web3 + Blockchain + Shadcn UI",
+      "useCase": "DeFi platforms, NFT marketplaces, DAO dashboards, Web3 social",
+      "pattern": "Decentralized-first with optional centralized features",
+      "aliases": [
+        "web3-dapp",
+        "web3dapp",
+        "05"
+      ]
+    },
+    {
+      "id": "ai-powered-app",
+      "name": "AI-POWERED APPLICATION STARTER",
+      "description": "AI-POWERED APPLICATION STARTER",
+      "path": "genomes/official/04-ai-powered-app.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "drizzle",
+        "auth",
+        "payments",
+        "ai",
+        "shadcn-ui",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "database/drizzle",
+          "state/zustand",
+          "data-fetching/tanstack-query",
+          "ui/shadcn-ui"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 5,
+      "stack": "Next.js + Vercel AI SDK + Drizzle + Stripe (AI usage billing)",
+      "useCase": "AI chatbots, AI writing tools, AI coding assistants, AI analytics",
+      "pattern": "AI-first architecture with streaming, persistence, and monetization",
+      "aliases": [
+        "ai-powered-app",
+        "aipoweredapp",
+        "04"
+      ]
+    },
+    {
+      "id": "full-saas-platform",
+      "name": "FULL SAAS PLATFORM STARTER",
+      "description": "FULL SAAS PLATFORM STARTER",
+      "path": "genomes/official/03-full-saas-platform.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "drizzle",
+        "auth",
+        "payments",
+        "shadcn-ui",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "database/drizzle",
+          "data-fetching/tanstack-query",
+          "state/zustand",
+          "ui/shadcn-ui"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 5,
+      "stack": "Next.js + Drizzle + Stripe + Better Auth + Full Feature Set",
+      "useCase": "B2B SaaS, productivity tools, collaboration platforms",
+      "pattern": "Enterprise-grade, multi-tenant SaaS architecture",
+      "aliases": [
+        "full-saas-platform",
+        "fullsaasplatform",
+        "03"
+      ]
+    },
+    {
+      "id": "modern-blog",
+      "name": "MODERN BLOG / CMS STARTER",
+      "description": "MODERN BLOG / CMS STARTER",
+      "path": "genomes/official/02-modern-blog.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "drizzle",
+        "auth",
+        "shadcn-ui",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "database/drizzle",
+          "ui/shadcn-ui"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 3,
+      "stack": "Next.js + Drizzle + Resend + i18n + Shadcn UI",
+      "useCase": "Tech blogs, documentation sites, content publishers",
+      "pattern": "Content-first architecture with author workflow",
+      "aliases": [
+        "modern-blog",
+        "modernblog",
+        "02"
+      ]
+    },
+    {
+      "id": "hello-world",
+      "name": "HELLO WORLD STARTER",
+      "description": "HELLO WORLD STARTER",
+      "path": "genomes/official/01-hello-world.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "shadcn-ui",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "ui/shadcn-ui"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 2,
+      "stack": "Next.js + TypeScript + Tailwind + Shadcn UI",
+      "useCase": "First-time users, prototypes, simple landing pages",
+      "pattern": "Minimal complexity, maximum clarity",
+      "aliases": [
+        "hello-world",
+        "helloworld",
+        "01"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "tech-stack",
+      "name": "Tech-stack",
+      "description": "tech-stack modules",
+      "icon": "📦",
+      "moduleCount": 6,
+      "modules": [
+        "features/ai-chat/tech-stack",
+        "features/auth/tech-stack",
+        "features/emailing/tech-stack",
+        "features/monitoring/tech-stack",
+        "features/payments/tech-stack",
+        "features/teams-management/tech-stack"
+      ]
+    },
+    {
+      "id": "framework",
+      "name": "Frameworks",
+      "description": "Core application frameworks",
+      "icon": "🏗️",
+      "moduleCount": 4,
+      "modules": [
+        "framework/expo",
+        "framework/nextjs",
+        "framework/react",
+        "framework/react-native"
+      ]
+    },
+    {
+      "id": "database",
+      "name": "Databases",
+      "description": "Database ORMs and integrations",
+      "icon": "🗄️",
+      "moduleCount": 4,
+      "modules": [
+        "database/drizzle",
+        "database/prisma",
+        "database/sequelize",
+        "database/typeorm"
+      ]
+    },
+    {
+      "id": "core",
+      "name": "Core Utilities",
+      "description": "Essential utilities and tools",
+      "icon": "⚙️",
+      "moduleCount": 3,
+      "modules": [
+        "core/forms",
+        "core/git",
+        "features/architech-welcome/shadcn"
+      ]
+    },
+    {
+      "id": "auth",
+      "name": "Authentication",
+      "description": "Authentication and authorization",
+      "icon": "🔐",
+      "moduleCount": 3,
+      "modules": [
+        "auth/better-auth",
+        "features/auth/backend/better-auth-nextjs",
+        "features/auth/frontend/shadcn"
+      ]
+    },
+    {
+      "id": "ui",
+      "name": "UI Libraries",
+      "description": "User interface libraries and components",
+      "icon": "🎨",
+      "moduleCount": 2,
+      "modules": [
+        "ui/shadcn-ui",
+        "ui/tailwind"
+      ]
+    },
+    {
+      "id": "quality",
+      "name": "Code Quality",
+      "description": "Linting, formatting, and quality tools",
+      "icon": "✨",
+      "moduleCount": 2,
+      "modules": [
+        "quality/eslint",
+        "quality/prettier"
+      ]
+    },
+    {
+      "id": "deployment",
+      "name": "Deployment",
+      "description": "Deployment platforms and tools",
+      "icon": "🚀",
+      "moduleCount": 2,
+      "modules": [
+        "deployment/docker",
+        "deployment/vercel"
+      ]
+    },
+    {
+      "id": "connectors",
+      "name": "Connectors",
+      "description": "connectors modules",
+      "icon": "📦",
+      "moduleCount": 2,
+      "modules": [
+        "connectors/sentry/nextjs",
+        "connectors/sentry/react"
+      ]
+    },
+    {
+      "id": "teams-management",
+      "name": "Teams-management",
+      "description": "teams-management modules",
+      "icon": "📦",
+      "moduleCount": 2,
+      "modules": [
+        "features/teams-management/backend/better-auth-nextjs",
+        "features/teams-management/frontend/shadcn"
+      ]
+    },
+    {
+      "id": "payments",
+      "name": "Payments",
+      "description": "payments modules",
+      "icon": "📦",
+      "moduleCount": 2,
+      "modules": [
+        "features/payments/backend/stripe-nextjs",
+        "features/payments/frontend/shadcn"
+      ]
+    },
+    {
+      "id": "emailing",
+      "name": "Emailing",
+      "description": "emailing modules",
+      "icon": "📦",
+      "moduleCount": 2,
+      "modules": [
+        "features/emailing/backend/resend-nextjs",
+        "features/emailing/frontend/shadcn"
+      ]
+    },
+    {
+      "id": "ai-chat",
+      "name": "Ai-chat",
+      "description": "ai-chat modules",
+      "icon": "📦",
+      "moduleCount": 2,
+      "modules": [
+        "features/ai-chat/backend/vercel-ai-nextjs",
+        "features/ai-chat/frontend/shadcn"
+      ]
+    },
+    {
+      "id": "testing",
+      "name": "Testing",
+      "description": "Testing frameworks and tools",
+      "icon": "🧪",
+      "moduleCount": 1,
+      "modules": [
+        "testing/vitest"
+      ]
+    },
+    {
+      "id": "state",
+      "name": "State Management",
+      "description": "Client-side state management",
+      "icon": "🔄",
+      "moduleCount": 1,
+      "modules": [
+        "state/zustand"
+      ]
+    },
+    {
+      "id": "services",
+      "name": "External Services",
+      "description": "Third-party service integrations",
+      "icon": "🔌",
+      "moduleCount": 1,
+      "modules": [
+        "services/github-api"
+      ]
+    },
+    {
+      "id": "payment",
+      "name": "Payments",
+      "description": "Payment processing integrations",
+      "icon": "💳",
+      "moduleCount": 1,
+      "modules": [
+        "payment/stripe"
+      ]
+    },
+    {
+      "id": "observability",
+      "name": "Observability",
+      "description": "Monitoring, logging, and error tracking",
+      "icon": "📊",
+      "moduleCount": 1,
+      "modules": [
+        "observability/sentry"
+      ]
+    },
+    {
+      "id": "email",
+      "name": "Email",
+      "description": "Email service integrations",
+      "icon": "📧",
+      "moduleCount": 1,
+      "modules": [
+        "email/resend"
+      ]
+    },
+    {
+      "id": "data-fetching",
+      "name": "Data Fetching",
+      "description": "Data fetching and caching",
+      "icon": "📡",
+      "moduleCount": 1,
+      "modules": [
+        "data-fetching/tanstack-query"
+      ]
+    },
+    {
+      "id": "content",
+      "name": "Content Management",
+      "description": "Content and internationalization",
+      "icon": "📝",
+      "moduleCount": 1,
+      "modules": [
+        "content/next-intl"
+      ]
+    },
+    {
+      "id": "ai",
+      "name": "AI & ML",
+      "description": "Artificial intelligence and machine learning",
+      "icon": "🤖",
+      "moduleCount": 1,
+      "modules": [
+        "ai/vercel-ai-sdk"
+      ]
+    },
+    {
+      "id": "blockchain",
+      "name": "Web3 & Blockchain",
+      "description": "Blockchain and Web3 integrations",
+      "icon": "⛓️",
+      "moduleCount": 1,
+      "modules": [
+        "blockchain/web3"
+      ]
+    },
+    {
+      "id": "vitest-nextjs",
+      "name": "Vitest-nextjs",
+      "description": "vitest-nextjs modules",
+      "icon": "📦",
+      "moduleCount": 1,
+      "modules": [
+        "connectors/vitest-nextjs"
+      ]
+    },
+    {
+      "id": "zustand-nextjs",
+      "name": "Zustand-nextjs",
+      "description": "zustand-nextjs modules",
+      "icon": "📦",
+      "moduleCount": 1,
+      "modules": [
+        "connectors/zustand-nextjs"
+      ]
+    },
+    {
+      "id": "tanstack-query-nextjs",
+      "name": "Tanstack-query-nextjs",
+      "description": "tanstack-query-nextjs modules",
+      "icon": "📦",
+      "moduleCount": 1,
+      "modules": [
+        "connectors/tanstack-query-nextjs"
+      ]
+    },
+    {
+      "id": "sentry-nextjs",
+      "name": "Sentry-nextjs",
+      "description": "sentry-nextjs modules",
+      "icon": "📦",
+      "moduleCount": 1,
+      "modules": [
+        "connectors/sentry-nextjs"
+      ]
+    },
+    {
+      "id": "docker-drizzle",
+      "name": "Docker-drizzle",
+      "description": "docker-drizzle modules",
+      "icon": "📦",
+      "moduleCount": 1,
+      "modules": [
+        "connectors/docker-drizzle"
+      ]
+    },
+    {
+      "id": "rhf-zod-shadcn",
+      "name": "Rhf-zod-shadcn",
+      "description": "rhf-zod-shadcn modules",
+      "icon": "📦",
+      "moduleCount": 1,
+      "modules": [
+        "connectors/rhf-zod-shadcn"
+      ]
+    },
+    {
+      "id": "better-auth-github",
+      "name": "Better-auth-github",
+      "description": "better-auth-github modules",
+      "icon": "📦",
+      "moduleCount": 1,
+      "modules": [
+        "connectors/better-auth-github"
+      ]
+    },
+    {
+      "id": "docker-nextjs",
+      "name": "Docker-nextjs",
+      "description": "docker-nextjs modules",
+      "icon": "📦",
+      "moduleCount": 1,
+      "modules": [
+        "connectors/docker-nextjs"
+      ]
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "description": "stripe modules",
+      "icon": "📦",
+      "moduleCount": 1,
+      "modules": [
+        "connectors/stripe/nextjs-drizzle"
+      ]
+    },
+    {
+      "id": "web3",
+      "name": "Web3",
+      "description": "web3 modules",
+      "icon": "📦",
+      "moduleCount": 1,
+      "modules": [
+        "features/web3/shadcn"
+      ]
+    },
+    {
+      "id": "feature",
+      "name": "Feature",
+      "description": "feature modules",
+      "icon": "📦",
+      "moduleCount": 1,
+      "modules": [
+        "features/monitoring/shadcn"
+      ]
+    }
+  ],
+  "tags": [
+    "ai",
+    "ai-chat",
+    "auth",
+    "chat",
+    "deployment",
+    "documentation",
+    "drizzle",
+    "emailing",
+    "generation",
+    "hooks",
+    "hosting",
+    "llm",
+    "monitoring",
+    "nextjs",
+    "openai",
+    "payments",
+    "prisma",
+    "schemas",
+    "serverless",
+    "shadcn-ui",
+    "showcase",
+    "stores",
+    "streaming",
+    "tailwind",
+    "teams-management",
+    "tech-stack",
+    "types",
+    "typescript",
+    "ui",
+    "vercel",
+    "web3",
+    "welcome"
+  ]
 }
