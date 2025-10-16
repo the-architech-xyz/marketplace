@@ -1,94 +1,34 @@
 /**
- * Graph Visualizer Capability
+ * Architecture Graph Visualizer (Core)
  * 
- * Interactive graph visualizer for displaying project architecture and dependencies
+ * Core architecture visualization tool for displaying application manifest as interactive graphs
  */
 
 export interface FeaturesGraphVisualizerShadcnParams {
-
-  /** Backend implementation for graph data management */
-  backend?: any;
-
-  /** Frontend implementation for graph visualization */
-  frontend?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
-    /** Enable interactive graph functionality */
-    interactiveGraph?: boolean;
-
-    /** Enable different node types */
-    nodeTypes?: boolean;
-
-    /** Enable minimap navigation */
-    minimap?: boolean;
-
-    /** Enable graph export functionality */
-    export?: boolean;
-
-    /** Enable different edge types */
-    edgeTypes?: boolean;
-
-    /** Enable graph controls */
+    /** Enable graph navigation controls (zoom, pan, fit) */
     controls?: boolean;
 
-    /** Enable background grid */
-    background?: boolean;
+    /** Enable minimap for large graph navigation */
+    minimap?: boolean;
 
-    /** Enable node/edge selection */
-    selection?: boolean;
-
-    /** Enable node dragging */
-    dragging?: boolean;
-
-    /** Enable zoom functionality */
-    zooming?: boolean;
-
-    /** Enable pan functionality */
-    panning?: boolean;
-
-    /** Enable graph import functionality */
-    import?: boolean;
+    /** Enable automatic layout algorithm (Dagre) */
+    layout_algorithm?: boolean;
   };
 }
 
 export interface FeaturesGraphVisualizerShadcnFeatures {
 
-  /** Enable interactive graph functionality */
-  interactiveGraph: boolean;
-
-  /** Enable different node types */
-  nodeTypes: boolean;
-
-  /** Enable minimap navigation */
-  minimap: boolean;
-
-  /** Enable graph export functionality */
-  export: boolean;
-
-  /** Enable different edge types */
-  edgeTypes: boolean;
-
-  /** Enable graph controls */
+  /** Enable graph navigation controls (zoom, pan, fit) */
   controls: boolean;
 
-  /** Enable background grid */
-  background: boolean;
+  /** Enable minimap for large graph navigation */
+  minimap: boolean;
 
-  /** Enable node/edge selection */
-  selection: boolean;
-
-  /** Enable node dragging */
-  dragging: boolean;
-
-  /** Enable zoom functionality */
-  zooming: boolean;
-
-  /** Enable pan functionality */
-  panning: boolean;
-
-  /** Enable graph import functionality */
-  import: boolean;
+  /** Enable automatic layout algorithm (Dagre) */
+  layout_algorithm: boolean;
 }
 
 // 🚀 Auto-discovered artifacts with ownership info

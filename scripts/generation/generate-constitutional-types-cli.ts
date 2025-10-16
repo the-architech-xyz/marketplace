@@ -4,7 +4,7 @@
  * CLI script for generating Constitutional Architecture types
  */
 
-import { ConstitutionalTypeGenerator } from './generate-constitutional-types';
+import { ConstitutionalTypeGenerator } from './generate-constitutional-types.js';
 import * as path from 'path';
 import * as process from 'process';
 

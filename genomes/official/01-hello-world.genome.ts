@@ -9,7 +9,7 @@
  * Use Case: First-time users, prototypes, simple landing pages
  */
 
-import { defineGenome } from '@thearchitech.xyz/types';  
+import { defineGenome } from '@thearchitech.xyz/marketplace/types';  
 
 export default defineGenome({
   version: '1.0.0',

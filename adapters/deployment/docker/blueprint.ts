@@ -5,12 +5,13 @@
  * Creates Dockerfile, docker-compose.yml, and deployment configuration
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration } from '../../../types/blueprint-config-types.js';
 
-export const dockerBlueprint: Blueprint = {
-  id: 'docker-base-setup',
-  name: 'Docker Base Setup',
-  actions: [
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'deployment/docker'>
+): BlueprintAction[] {
+  return [
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'Dockerfile',
@@ -43,3 +44,4 @@ export const dockerBlueprint: Blueprint = {
     }
   ]
 };
+

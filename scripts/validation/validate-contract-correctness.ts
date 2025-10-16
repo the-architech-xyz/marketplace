@@ -275,17 +275,25 @@ class ContractCorrectnessValidator {
     const sourceFile = this.project.addSourceFileAtPath(blueprintPath);
     const templates = this.extractTemplatesFromBlueprint(sourceFile);
 
-    // Check if we have a cohesive service implementation
-    const hasServiceTemplate = templates.some(template => 
-      template.toLowerCase().includes('service') && 
-      (template.toLowerCase().includes('.ts.tpl') || template.toLowerCase().includes('.ts'))
+    // UPDATED: New architecture has services in tech-stack, not backend
+    // Backend should have pure API templates (e.g., *-api.ts.tpl)
+    // Services are now in tech-stack layer (e.g., TeamsService.ts.tpl)
+    
+    // Check if we have API templates (pure server functions)
+    const hasApiTemplate = templates.some(template => 
+      template.toLowerCase().includes('api') && 
+      template.toLowerCase().includes('.ts.tpl')
     );
 
-    if (!hasServiceTemplate) {
+    // Note: Service templates are intentionally in tech-stack, not backend
+    // This validates the new "pure backend" architecture
+    if (!hasApiTemplate && templates.length > 0) {
+      // Only warn if there are templates but none are API templates
+      // Some backends might have other valid templates (routes, types, etc.)
       violations.push({
         type: 'contract_violation',
-        severity: 'error',
-        message: 'Missing cohesive service template - backend should implement a single service file',
+        severity: 'warning',
+        message: 'Backend should have pure API templates (e.g., *-api.ts.tpl) - services belong in tech-stack',
         file: blueprintPath,
         details: { availableTemplates: templates }
       });

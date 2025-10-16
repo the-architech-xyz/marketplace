@@ -66,7 +66,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Install ESLint and core packages
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['eslint'],
+      packages: ['eslint', '@eslint/eslintrc'],
       isDev: true
     },
     // Create unified ESLint configuration
@@ -198,7 +198,7 @@ function generateImportActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['eslint-plugin-import', 'eslint-plugin-import-resolver-typescript'],
+      packages: ['eslint-plugin-import', 'eslint-import-resolver-typescript'],
       isDev: true
     }
   ];

@@ -14,7 +14,7 @@ export const betterAuthGitHubConnectorBlueprint: Blueprint = {
     // Install OAuth dependencies
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['crypto', 'jose', 'oauth4webapi']
+      packages: ['jose', 'oauth4webapi']
     },
     
     // Create OAuth configuration

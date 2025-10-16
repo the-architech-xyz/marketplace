@@ -16,7 +16,7 @@ export class QueryOptimizer {
   }
 
   private setupQueryLogging() {
-    <% if (context..query-logging) { %>
+    <% if (module.parameters.query-logging) { %>
     this.prisma.$on('query', (e) => {
       this.queryLog.push({
         query: e.query,
@@ -40,7 +40,7 @@ export class QueryOptimizer {
 
     const performance = duration < 100 ? 'fast' : duration < 500 ? 'medium' : 'slow';
 
-    <% if (context..performance-monitoring) { %>
+    <% if (module.parameters.performance-monitoring) { %>
     console.log('Query Performance:', {
       name: queryName,
       duration: duration + 'ms',

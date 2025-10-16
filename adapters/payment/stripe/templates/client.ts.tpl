@@ -6,7 +6,7 @@ export const getStripe = () => {
 };
 
 // Payment intent creation
-export const createPaymentIntent = async (amount: number, currency = '<%= context..currency %>') => {
+export const createPaymentIntent = async (amount: number, currency = '<%= module.parameters.currency %>') => {
   const response = await fetch('/api/stripe/create-payment-intent', {
     method: 'POST',
     headers: {

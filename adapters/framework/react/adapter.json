@@ -1,0 +1,132 @@
+{
+  "id": "react",
+  "name": "React",
+  "description": "A JavaScript library for building user interfaces",
+  "category": "framework",
+  "version": "18.2.0",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "provides": [
+    {
+      "name": "react",
+      "version": "18.2.0",
+      "description": "React library for building user interfaces"
+    },
+    {
+      "name": "react-dom",
+      "version": "18.2.0",
+      "description": "React DOM rendering"
+    },
+    {
+      "name": "typescript",
+      "version": "5.0.0",
+      "description": "TypeScript language support"
+    }
+  ],
+  "capabilities": {
+    "react-framework": {
+      "version": "18.2.0",
+      "description": "Complete React framework",
+      "provides": ["react", "react-dom", "typescript"]
+    },
+    "styling-system": {
+      "version": "1.0.0",
+      "description": "Styling and CSS framework integration",
+      "provides": ["css-modules", "styled-components", "emotion"]
+    },
+    "development-tools": {
+      "version": "1.0.0",
+      "description": "Development and build tools",
+      "provides": ["typescript", "eslint", "prettier", "modern-dev-tools"]
+    }
+  },
+  "limitations": "Requires Node.js 16+ and npm/yarn/pnpm/bun",
+  "paths": {
+    "source_root": "src/",
+    "app_root": "src/",
+    "shared_library": "src/lib/",
+    "utils": "src/lib/utils/",
+    "types": "src/types/",
+    "hooks": "src/hooks/",
+    "stores": "src/stores/",
+    "components": "src/components/",
+    "ui_components": "src/components/ui/",
+    "layouts": "src/components/layouts/",
+    "providers": "src/components/providers/",
+    "config": "src/config/",
+    "env": ".env",
+    "scripts": "scripts/",
+    "assets": "public/",
+    "public": "public/",
+    "static": "public/",
+    "build": "build/",
+    "dist": "dist/",
+    "docs": "docs/",
+    "readme": "README.md"
+  },
+  "parameters": {
+    "typescript": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable TypeScript support",
+      "required": false
+    },
+    "srcDir": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use src/ directory",
+      "required": false
+    },
+    "importAlias": {
+      "type": "string",
+      "default": "@/*",
+      "description": "Import alias for absolute imports",
+      "required": false
+    },
+    "reactVersion": {
+      "type": "string",
+      "default": "18.2.0",
+      "description": "React version to use",
+      "required": false
+    }
+  },
+  "context": {
+    "pathResolution": {
+      "basePaths": {
+        "app_root": "./",
+        "components": "{{srcDir ? 'src/' : ''}}components",
+        "shared_library": "{{srcDir ? 'src/' : ''}}lib",
+        "styles": "{{srcDir ? 'src/' : ''}}styles",
+        "scripts": "{{srcDir ? 'src/' : ''}}scripts",
+        "hooks": "{{srcDir ? 'src/' : ''}}hooks",
+        "public": "./public",
+        "assets": "./public",
+        "static": "./public",
+        "build": "./build",
+        "dist": "./dist"
+      },
+      "parameterBased": {
+        "srcDir": "srcDir ? 'src/' : ''"
+      }
+    },
+    "environment": {
+      "default": {
+        "APP_URL": "http://localhost:3000",
+        "NODE_ENV": "development"
+      },
+      "frameworkSpecific": {
+        "REACT_APP_URL": "http://localhost:3000",
+        "REACT_APP_TYPESCRIPT": "{{typescript ? 'true' : 'false'}}"
+      }
+    },
+    "conventions": {
+      "fileExtensions": [".tsx", ".ts", ".jsx", ".js"],
+      "importStyle": "alias",
+      "aliasPrefix": "{{importAlias || '@'}}",
+      "componentExtensions": [".tsx", ".jsx"],
+      "hookExtensions": [".ts", ".js"]
+    }
+  },
+  "constraints": {}
+}
+

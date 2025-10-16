@@ -22,21 +22,10 @@ export default function generateBlueprint(
       description: 'Better Auth base URL'
     },
     
-    // Create the main AuthService that implements IAuthService
+    // Create auth API service layer (pure server-side functions)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/services/AuthService.ts',
-      template: 'templates/AuthService.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE, 
-        priority: 1
-      }
-    },
-    
-    // Create auth API service layer
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}auth/api.ts',
+      path: '{{paths.shared_library}}auth/backend/better-auth-nextjs/auth-api.ts',
       template: 'templates/auth-api.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

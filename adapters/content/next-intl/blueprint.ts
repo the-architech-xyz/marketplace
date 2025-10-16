@@ -5,9 +5,9 @@
  * Includes pluralization, rich text, dynamic imports, and more
  */
 
-import { Blueprint, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { Blueprint, BlueprintActionType, ConflictResolutionStrategy, ModifierType } from '@thearchitech.xyz/types';
 
-export const nextIntlBlueprint: Blueprint = {
+const nextIntlBlueprint: Blueprint = {
   id: 'next-intl-base-setup',
   name: 'Next.js Internationalization Base Setup',
   actions: [
@@ -22,7 +22,8 @@ export const nextIntlBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/messages/en.json',
@@ -30,7 +31,8 @@ export const nextIntlBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/messages/es.json',
@@ -38,7 +40,8 @@ export const nextIntlBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }},
+      }
+    },
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/messages/fr.json',
@@ -46,6 +49,30 @@ export const nextIntlBlueprint: Blueprint = {
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
-      }}
+      }
+    },
+    {
+      type: BlueprintActionType.ENHANCE_FILE,
+      path: 'next.config.ts',
+      modifier: ModifierType.TS_MODULE_ENHANCER,
+      context: {
+        content: `import type { NextConfig } from "next";
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default withNextIntl(nextConfig);`,
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 0
+      }
+    }
+  },
   ]
 };
+
+export default nextIntlBlueprint;

@@ -3,10 +3,10 @@ import 'reflect-metadata';
 
 // Database configuration
 const AppDataSource = new DataSource({
-  type: '<%= context..databaseType %>',
+  type: '<%= module.parameters.databaseType %>',
   url: process.env.DATABASE_URL,
-  synchronize: <%= context..synchronize %>,
-  logging: <%= context..logging %>,
+  synchronize: <%= module.parameters.synchronize %>,
+  logging: <%= module.parameters.logging %>,
   entities: [__dirname + '/entities/*.ts'],
   migrations: [__dirname + '/migrations/*.ts'],
   subscribers: [__dirname + '/subscribers/*.ts'],

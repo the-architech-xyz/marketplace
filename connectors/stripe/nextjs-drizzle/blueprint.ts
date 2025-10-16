@@ -49,6 +49,10 @@ export default function generateBlueprint(
 function generateCoreActions(): BlueprintAction[] {
   return [
     {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['stripe']
+    },
+    {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.lib}}/stripe/server.ts',
       template: 'templates/lib/stripe/server.ts.tpl',

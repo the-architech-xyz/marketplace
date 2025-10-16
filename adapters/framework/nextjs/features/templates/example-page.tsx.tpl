@@ -111,6 +111,3 @@ export const ContactForm: React.FC = () => {
     </div>
   );
 };
-    },
-    // Create text processor component
-    {

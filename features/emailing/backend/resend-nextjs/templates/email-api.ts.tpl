@@ -39,9 +39,9 @@ export class EmailService {
     // This would typically fetch from a database or template service
     const templates = {
       welcome: {
-        subject: 'Welcome to <%= appName %>!',
-        html: '<h1>Welcome to <%= appName %>!</h1><p>Thank you for joining us.</p>',
-        text: 'Welcome to <%= appName %>! Thank you for joining us.'
+        subject: 'Welcome to [APP_NAME]!',
+        html: '<h1>Welcome to [APP_NAME]!</h1><p>Thank you for joining us.</p>',
+        text: 'Welcome to [APP_NAME]! Thank you for joining us.'
       },
       // Add more templates as needed
     };
@@ -57,7 +57,7 @@ export class EmailService {
     let text = template.text;
 
     Object.entries(variables).forEach(([key, value]) => {
-      const regex = new RegExp(`<%= ${key %>}`, 'g');
+      const regex = new RegExp('\\[' + key.toUpperCase() + '\\]', 'g');
       subject = subject.replace(regex, value);
       html = html.replace(regex, value);
       text = text.replace(regex, value);

@@ -1,94 +1,70 @@
 /**
- * Social Profile Capability
+ * Social Profile Feature (Shadcn)
  * 
- * Complete social profile management system with social features, connections, and activity feeds
+ * Complete modular social profile management interface using Shadcn components
  */
 
 export interface FeaturesSocialProfileShadcnParams {
-
-  /** Backend implementation for social profile */
-  backend?: any;
-
-  /** Frontend implementation for social profile UI */
-  frontend?: any;
   /** Constitutional Architecture features configuration */
   features?: {
 
-    /** Enable wallet profile features */
-    walletProfile?: boolean;
+    /** Basic profile management */
+    core?: boolean;
 
-    /** Enable Web3 social features */
-    web3Social?: boolean;
+    /** Avatar upload and management */
+    avatar?: boolean;
 
-    /** Enable achievements and badges */
-    achievements?: boolean;
+    /** Profile settings and preferences */
+    settings?: boolean;
 
-    /** Enable profile management */
-    profileManagement?: boolean;
+    /** Security settings and privacy */
+    security?: boolean;
 
-    /** Enable social connections */
-    socialConnections?: boolean;
-
-    /** Enable activity feeds */
-    activityFeeds?: boolean;
-
-    /** Enable notifications */
+    /** Notification preferences */
     notifications?: boolean;
 
-    /** Enable privacy controls */
-    privacyControls?: boolean;
+    /** Data export functionality */
+    export?: boolean;
 
-    /** Enable social settings */
-    socialSettings?: boolean;
+    /** Profile type definitions */
+    types?: boolean;
 
-    /** Enable avatar upload */
-    avatarUpload?: boolean;
+    /** Profile utility functions */
+    utils?: boolean;
 
-    /** Enable user blocking */
-    blocking?: boolean;
-
-    /** Enable user reporting */
-    reporting?: boolean;
+    /** Profile constants and configuration */
+    constants?: boolean;
   };
 }
 
 export interface FeaturesSocialProfileShadcnFeatures {
 
-  /** Enable wallet profile features */
-  walletProfile: boolean;
+  /** Basic profile management */
+  core: boolean;
 
-  /** Enable Web3 social features */
-  web3Social: boolean;
+  /** Avatar upload and management */
+  avatar: boolean;
 
-  /** Enable achievements and badges */
-  achievements: boolean;
+  /** Profile settings and preferences */
+  settings: boolean;
 
-  /** Enable profile management */
-  profileManagement: boolean;
+  /** Security settings and privacy */
+  security: boolean;
 
-  /** Enable social connections */
-  socialConnections: boolean;
-
-  /** Enable activity feeds */
-  activityFeeds: boolean;
-
-  /** Enable notifications */
+  /** Notification preferences */
   notifications: boolean;
 
-  /** Enable privacy controls */
-  privacyControls: boolean;
+  /** Data export functionality */
+  export: boolean;
 
-  /** Enable social settings */
-  socialSettings: boolean;
+  /** Profile type definitions */
+  types: boolean;
 
-  /** Enable avatar upload */
-  avatarUpload: boolean;
+  /** Profile utility functions */
+  utils: boolean;
 
-  /** Enable user blocking */
-  blocking: boolean;
-
-  /** Enable user reporting */
-  reporting: boolean;
+  /** Profile constants and configuration */
+  constants: boolean;
 }
 
 // 🚀 Auto-discovered artifacts with ownership info

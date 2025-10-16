@@ -8,21 +8,10 @@ export default function generateBlueprint(
   const { params, features } = extractTypedModuleParameters(config);
 
   return [
-    // Create the main PaymentService that implements IPaymentService
+    // Create Stripe API client (pure server-side functions)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}services/PaymentService.ts',
-      template: 'templates/PaymentService.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    
-    // Create Stripe API client
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.payment_config}}api.ts',
+      path: '{{paths.shared_library}}payments/backend/stripe-nextjs/stripe-api.ts',
       template: 'templates/stripe-api.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

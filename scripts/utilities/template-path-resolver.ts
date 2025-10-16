@@ -14,7 +14,20 @@ export class TemplatePathResolver {
     ['observability_config', 'src/lib/observability'],
     ['blockchain_config', 'src/lib/blockchain'],
     ['deployment_config', 'deployment'],
-    ['email_config', 'src/lib/email']
+    ['email_config', 'src/lib/email'],
+    // Framework adapter paths
+    ['source_root', 'src/'],
+    ['app_root', 'src/app/'],
+    ['pages_root', 'src/pages/'],
+    ['shared_library', 'src/lib/'],
+    ['utils', 'src/lib/utils/'],
+    ['types', 'src/types/'],
+    ['hooks', 'src/hooks/'],
+    ['stores', 'src/stores/'],
+    ['components', 'src/components/'],
+    ['ui_components', 'src/components/ui/'],
+    ['styles', 'src/styles/'],
+    ['scripts', 'scripts/']
   ]);
 
   private projectPaths: Map<string, string> = new Map([

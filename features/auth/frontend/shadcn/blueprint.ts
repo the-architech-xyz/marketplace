@@ -15,6 +15,11 @@ export default function generateBlueprint(
 
   const actions: BlueprintAction[] = [];
   
+  // ============================================================================
+  // FRONTEND-SPECIFIC IMPLEMENTATION
+  // ============================================================================
+  // Note: Technology stack layer is automatically included by the CLI
+  
   // Core is always generated
   actions.push(...generateCoreActions());
   
@@ -48,6 +53,20 @@ export default function generateBlueprint(
 
 function generateCoreActions(): BlueprintAction[] {
   return [
+    // Install auth packages + tech stack dependencies
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: [
+        // Auth specific packages
+        'better-auth',
+        'react-hook-form',
+        '@hookform/resolvers',
+        'lucide-react',
+        'class-variance-authority',
+        'clsx',
+        'tailwind-merge'
+      ]
+    },
     // Auth Pages
     {
       type: BlueprintActionType.CREATE_FILE,
@@ -144,27 +163,7 @@ function generateCoreActions(): BlueprintAction[] {
       }
     },
 
-    // Core Auth Hooks
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}hooks/use-auth.ts',
-      template: 'templates/use-auth.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-
-    // Auth Types & Utils
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}types/auth.ts',
-      template: 'templates/auth-types.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
+    // Auth Utils (types, hooks, stores are now handled by tech stack layer)
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}utils/auth-utils.ts',

@@ -8,11 +8,11 @@ export default function generateBlueprint(
   const { params, features } = extractTypedModuleParameters(config);
 
   return [
-    // Create the main TeamsService that implements ITeamsService
+    // Create pure server-side API functions (NO TanStack Query)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}services/TeamsService.ts',
-      template: 'templates/TeamsService.ts.tpl',
+      path: '{{paths.shared_library}}teams-management/backend/better-auth-nextjs/teams-api.ts',
+      template: 'templates/teams-api.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1

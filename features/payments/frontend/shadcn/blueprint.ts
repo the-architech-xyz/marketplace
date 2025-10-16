@@ -48,9 +48,9 @@ function generateCoreActions(): BlueprintAction[] {
         '@stripe/react-stripe-js',
         'react-hook-form',
         '@hookform/resolvers',
-        'zod',
         'lucide-react',
-        'date-fns'
+        'date-fns',
+        'framer-motion'
       ]
     },
 
@@ -168,20 +168,6 @@ function generateCoreActions(): BlueprintAction[] {
       }
     },
 
-    // Payment utilities
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.lib}}payments/payment-types.ts',
-      template: 'templates/payment-types.ts.tpl',
-      context: { 
-        features: ['core'],
-        hasPaymentForms: true
-      },
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
 
     {
       type: BlueprintActionType.CREATE_FILE,

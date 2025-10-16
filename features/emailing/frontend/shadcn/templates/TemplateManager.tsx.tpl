@@ -264,7 +264,7 @@ export function TemplateManager({ className }: TemplateManagerProps) {
                   <Label>Variables</Label>
                   <div className="flex gap-2">
                     <Input
-                      placeholder="Add variable (e.g., <%= name %>)"
+                      placeholder="Add variable (e.g., [NAME])"
                       value={newVariable}
                       onChange={(e) => setNewVariable(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addVariable())}

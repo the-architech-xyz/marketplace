@@ -1,33 +1,50 @@
 /**
- * Template Context Type Definitions
+ * React Project Context Type Definitions
  * 
- * Standardized TypeScript interfaces for EJS template context variables.
- * All template context variables have been migrated from context.xxx to module.parameters.xxx.
+ * React-specific extensions of the base project context types.
+ * Extends the framework-agnostic base types with React ecosystem specifics.
  */
 
-export interface ProjectContext {
-  project: {
-    name: string;
-    framework: string;
-    description?: string;
-    version?: string;
-    author?: string;
-    license?: string;
-  };
-  module: {
-    id: string;
-    parameters: ModuleParameters;
-  };
-  framework: string;
-  paths: {
-    app_root: string;
-    components: string;
-    shared_library: string;
-    styles: string;
-    scripts: string;
-    hooks: string;
-  };
-  modules?: Record<string, any>;
+import { 
+  BaseProjectContext, 
+  BaseProjectInfo, 
+  BaseModuleInfo, 
+  BaseEnvironmentContext,
+  BasePathHandler,
+  BaseModuleRegistry 
+} from '@thearchitech.xyz/types';
+
+/**
+ * React-specific path structure
+ */
+export interface ReactPathStructure {
+  app_root: string;
+  components: string;
+  shared_library: string;
+  styles: string;
+  scripts: string;
+  hooks: string;
+}
+
+/**
+ * React-specific module registry
+ */
+export interface ReactModuleRegistry extends BaseModuleRegistry {
+  [moduleId: string]: any; // React modules
+}
+
+/**
+ * React Project Context
+ * 
+ * Extends the base project context with React ecosystem specifics.
+ * This is the main interface used by React-based marketplaces.
+ */
+export interface ProjectContext extends BaseProjectContext {
+  paths: ReactPathStructure;
+  modules?: ReactModuleRegistry;
+  pathHandler?: BasePathHandler;
+  
+  // React ecosystem specific modules
   databaseModule?: any;
   paymentModule?: any;
   authModule?: any;
@@ -39,6 +56,9 @@ export interface ProjectContext {
   deploymentModule?: any;
   contentModule?: any;
   blockchainModule?: any;
+  
+  // Constitutional Architecture support
+  constitutional?: any;
 }
 
 export interface ModuleParameters {
@@ -173,7 +193,7 @@ export class TemplateContextValidator {
     while ((match = deprecatedPattern.exec(templateContent)) !== null) {
       const property = match[1];
       
-      if (!functionParams.includes(property) && !apiContext.includes(property)) {
+      if (property && !functionParams.includes(property) && !apiContext.includes(property)) {
         errors.push(`Deprecated context.${property} usage found. Use module.parameters.${property} instead.`);
       }
     }
@@ -194,7 +214,7 @@ export class TemplateContextValidator {
     while ((match = moduleParamsPattern.exec(templateContent)) !== null) {
       const property = match[1];
       
-      if (!validModuleParams.includes(property)) {
+      if (property && !validModuleParams.includes(property)) {
         warnings.push(`Unknown module.parameters.${property} usage. Consider adding to type definitions.`);
       }
     }
@@ -225,7 +245,7 @@ export class TemplateContextValidator {
     while ((match = deprecatedPattern.exec(templateContent)) !== null) {
       const property = match[1];
       
-      if (!functionParams.includes(property) && !apiContext.includes(property)) {
+      if (property && !functionParams.includes(property) && !apiContext.includes(property)) {
         deprecatedUsages.push(`context.${property}`);
         recommendations.push(`Replace context.${property} with module.parameters.${property}`);
       }

@@ -1,0 +1,170 @@
+{
+  "id": "expo",
+  "name": "React Native with Expo",
+  "description": "A framework for building native apps using React Native and Expo",
+  "category": "framework",
+  "version": "50.0.0",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "provides": [
+    {
+      "name": "react",
+      "version": "18.2.0",
+      "description": "React library for building user interfaces"
+    },
+    {
+      "name": "react-native",
+      "version": "0.73.0",
+      "description": "React Native framework for mobile development"
+    },
+    {
+      "name": "expo",
+      "version": "50.0.0",
+      "description": "Expo framework for React Native development"
+    },
+    {
+      "name": "typescript",
+      "version": "5.0.0",
+      "description": "TypeScript language support"
+    }
+  ],
+  "capabilities": {
+    "expo-framework": {
+      "version": "50.0.0",
+      "description": "Complete Expo framework with React Native",
+      "provides": ["react", "react-native", "expo", "typescript", "metro", "hermes"]
+    },
+    "styling-system": {
+      "version": "1.0.0",
+      "description": "Styling and CSS framework integration",
+      "provides": ["style-sheet", "styled-components", "emotion", "nativewind"]
+    },
+    "development-tools": {
+      "version": "1.0.0",
+      "description": "Development and build tools",
+      "provides": ["typescript", "eslint", "prettier", "metro", "expo-cli", "eas-cli"]
+    },
+    "expo-features": {
+      "version": "1.0.0",
+      "description": "Expo-specific features and APIs",
+      "provides": ["expo-router", "expo-constants", "expo-font", "expo-asset", "expo-camera", "expo-location"]
+    }
+  },
+  "limitations": "Requires Node.js 18+, Expo CLI, and Expo Go app for development",
+  "paths": {
+    "source_root": "src/",
+    "app_root": "src/",
+    "shared_library": "src/lib/",
+    "utils": "src/lib/utils/",
+    "types": "src/types/",
+    "hooks": "src/hooks/",
+    "stores": "src/stores/",
+    "components": "src/components/",
+    "ui_components": "src/components/ui/",
+    "screens": "src/screens/",
+    "navigation": "src/navigation/",
+    "config": "src/config/",
+    "env": ".env",
+    "scripts": "scripts/",
+    "assets": "assets/",
+    "images": "assets/images/",
+    "fonts": "assets/fonts/",
+    "build": "build/",
+    "dist": "dist/",
+    "docs": "docs/",
+    "readme": "README.md"
+  },
+  "parameters": {
+    "typescript": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable TypeScript support",
+      "required": false
+    },
+    "srcDir": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use src/ directory",
+      "required": false
+    },
+    "importAlias": {
+      "type": "string",
+      "default": "@/*",
+      "description": "Import alias for absolute imports",
+      "required": false
+    },
+    "reactVersion": {
+      "type": "string",
+      "default": "18.2.0",
+      "description": "React version to use",
+      "required": false
+    },
+    "expoRouter": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use Expo Router for navigation",
+      "required": false
+    },
+    "platforms": {
+      "ios": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable iOS platform support",
+        "required": false
+      },
+      "android": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable Android platform support",
+        "required": false
+      },
+      "web": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable web platform support",
+        "required": false
+      }
+    }
+  },
+  "context": {
+    "pathResolution": {
+      "basePaths": {
+        "app_root": "./",
+        "components": "{{srcDir ? 'src/' : ''}}components",
+        "shared_library": "{{srcDir ? 'src/' : ''}}lib",
+        "screens": "{{srcDir ? 'src/' : ''}}screens",
+        "navigation": "{{srcDir ? 'src/' : ''}}navigation",
+        "hooks": "{{srcDir ? 'src/' : ''}}hooks",
+        "assets": "./assets",
+        "images": "./assets/images",
+        "fonts": "./assets/fonts",
+        "build": "./build",
+        "dist": "./dist"
+      },
+      "parameterBased": {
+        "srcDir": "srcDir ? 'src/' : ''",
+        "expoRouter": "expoRouter ? 'app' : 'screens'"
+      }
+    },
+    "environment": {
+      "default": {
+        "APP_URL": "http://localhost:3000",
+        "NODE_ENV": "development"
+      },
+      "frameworkSpecific": {
+        "EXPO_PUBLIC_APP_URL": "http://localhost:3000",
+        "EXPO_PUBLIC_TYPESCRIPT": "{{typescript ? 'true' : 'false'}}"
+      }
+    },
+    "conventions": {
+      "fileExtensions": [".tsx", ".ts", ".jsx", ".js"],
+      "importStyle": "alias",
+      "aliasPrefix": "{{importAlias || '@'}}",
+      "componentExtensions": [".tsx", ".jsx"],
+      "screenExtensions": [".tsx", ".jsx"],
+      "hookExtensions": [".ts", ".js"]
+    }
+  },
+  "constraints": {}
+}
+

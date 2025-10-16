@@ -59,7 +59,7 @@ const vercelDeploymentBlueprint: Blueprint = {
           'vercel:dev': 'vercel dev'
         },
         devDependencies: {
-          '@vercel/cli': 'latest'
+          'vercel': 'latest'
         }
       }
     }

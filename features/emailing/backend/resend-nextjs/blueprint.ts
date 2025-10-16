@@ -46,22 +46,10 @@ export default function generateBlueprint(
 
 function generateCoreActions(): BlueprintAction[] {
   return [
-    // Create the main EmailService that implements IEmailService
+    // Create pure email API layer (server-side only - NO TanStack Query)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}services/EmailService.ts',
-      template: 'templates/EmailService.ts.tpl',
-      context: { features: ['core'] },
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-
-    // Create email service layer
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}email/api.ts',
+      path: '{{paths.shared_library}}emailing/backend/resend-nextjs/email-api.ts',
       template: 'templates/email-api.ts.tpl',
       context: { features: ['core'] },
       conflictResolution: {

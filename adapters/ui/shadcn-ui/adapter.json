@@ -15,6 +15,11 @@
       "name": "radix-ui",
       "version": "1.0.0",
       "description": "Radix UI primitive components"
+    },
+    {
+      "name": "tailwind",
+      "version": "4.0.0",
+      "description": "Tailwind CSS v4 with PostCSS integration"
     }
   ],
   "prerequisites": {
@@ -25,17 +30,18 @@
         "description": "React library required"
       },
       {
-        "name": "tailwind",
-        "version": ">=3.0.0",
-        "description": "Tailwind CSS required"
-      },
-      {
         "name": "typescript",
         "version": ">=4.0.0",
         "description": "TypeScript support required"
       }
     ]
   },
+  "conflicts": [
+    {
+      "module": "ui/tailwind",
+      "reason": "Shadcn/ui includes Tailwind CSS v4 setup and conflicts with standalone Tailwind adapter"
+    }
+  ],
   "capabilities": {
     "installableComponents": [
       "button", "input", "card", "dialog", "form", "table", "badge", "avatar",
@@ -93,7 +99,6 @@
         "accordion",
         "carousel",
         "calendar",
-        "date-picker",
         "alert-dialog",
         "checkbox",
         "collapsible",
@@ -126,7 +131,6 @@
           "checkbox",
           "collapsible",
           "context-menu",
-          "date-picker",
           "dialog",
           "dropdown-menu",
           "form",

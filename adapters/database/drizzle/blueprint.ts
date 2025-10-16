@@ -54,7 +54,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Install core packages
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['drizzle-orm', 'pg']
+      packages: ['drizzle-orm', 'postgres']
     },
     {
       type: BlueprintActionType.INSTALL_PACKAGES,

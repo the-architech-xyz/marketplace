@@ -9,9 +9,11 @@ NEXTAUTH_SECRET="your-secret-key-here"
 NEXTAUTH_URL="http://localhost:3000"
 
 # API Keys
-{{#each module.parameters.envVars}}
+<% if (module.parameters.envVars && module.parameters.envVars.length > 0) { %>
+<% module.parameters.envVars.forEach((item) => { %>
 <%= item.name %>="<%= item.value %>"
 <% }); %>
+<% } %>
 
 # Vercel specific
 VERCEL_URL=""

@@ -76,22 +76,21 @@
     "validate:issues": "tsx scripts/validation/validate-blueprint-issues.ts",
     "validate:correctness": "tsx scripts/validation/validate-contract-correctness.ts",
     "validate:correctness:changed": "tsx scripts/validation/validate-contract-correctness.ts --changed",
-    "generate:schemas": "tsx scripts/generation/generate-schemas-from-contracts.ts",
     "generate:manifest": "tsx scripts/generation/generate-marketplace-manifest.ts",
     "generate:feature-manifests": "tsx scripts/generation/generate-feature-manifests.ts",
-    "validate:all": "npm run generate:schemas && npm run validate:correctness",
+    "types:generate:constitutional": "tsx scripts/generation/generate-constitutional-types-cli.ts",
+    "validate:all": "npm run validate:correctness",
     "validate:legacy": "npm run validate && npm run validate:templates && npm run validate:conflicts && npm run validate:contracts",
     "fix:conflicts": "tsx scripts/utilities/fix-conflict-resolution.ts",
-    "types:generate:constitutional": "tsx scripts/generation/generate-constitutional-types-cli.ts",
     "compile": "tsc",
-    "build": "npm run validate:all && npm run types:generate:constitutional && npm run generate:feature-manifests && npm run compile",
+    "build": "npm run validate:all && npm run generate:feature-manifests && npm run compile",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "prepare": "husky install",
-    "precommit": "npm run validate:all && npm run types:generate:constitutional"
+    "precommit": "npm run validate:correctness"
   },
   "dependencies": {
-    "@thearchitech.xyz/types": "^1.11.20",
+    "@thearchitech.xyz/types": "file:../types-package",
     "@types/glob": "^9.0.0"
   },
   "devDependencies": {

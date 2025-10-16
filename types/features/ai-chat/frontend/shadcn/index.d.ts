@@ -1,24 +1,57 @@
 /**
  * AI Chat Feature (Shadcn)
  * 
- * Complete AI chat interface using Shadcn components
+ * Complete modular AI chat interface using Shadcn components
  */
 
 export interface FeaturesAiChatFrontendShadcnParams {
   /** Constitutional Architecture features configuration */
   features?: {
 
-    /** Essential chat functionality (interface, message history) */
+    /** Essential chat interface with basic messaging */
     core?: boolean;
 
-    /** File upload and media support */
+    /** Chat context and provider management */
+    context?: boolean;
+
+    /** File upload and media preview capabilities */
     media?: boolean;
 
-    /** Voice input and output */
+    /** Voice input and output functionality */
     voice?: boolean;
 
-    /** Advanced features (custom prompts, export/import) */
-    advanced?: boolean;
+    /** Advanced conversation history and management */
+    history?: boolean;
+
+    /** Advanced message input with features */
+    input?: boolean;
+
+    /** Chat toolbar and controls */
+    toolbar?: boolean;
+
+    /** Chat settings and configuration */
+    settings?: boolean;
+
+    /** Custom prompts and templates */
+    prompts?: boolean;
+
+    /** Chat export and import functionality */
+    export?: boolean;
+
+    /** Chat analytics and insights */
+    analytics?: boolean;
+
+    /** Project-based chat organization */
+    projects?: boolean;
+
+    /** Chat middleware and routing */
+    middleware?: boolean;
+
+    /** AI chat service utilities */
+    services?: boolean;
+
+    /** Text completion and generation */
+    completion?: boolean;
   };
 
   /** UI theme variant */
@@ -27,17 +60,50 @@ export interface FeaturesAiChatFrontendShadcnParams {
 
 export interface FeaturesAiChatFrontendShadcnFeatures {
 
-  /** Essential chat functionality (interface, message history) */
+  /** Essential chat interface with basic messaging */
   core: boolean;
 
-  /** File upload and media support */
+  /** Chat context and provider management */
+  context: boolean;
+
+  /** File upload and media preview capabilities */
   media: boolean;
 
-  /** Voice input and output */
+  /** Voice input and output functionality */
   voice: boolean;
 
-  /** Advanced features (custom prompts, export/import) */
-  advanced: boolean;
+  /** Advanced conversation history and management */
+  history: boolean;
+
+  /** Advanced message input with features */
+  input: boolean;
+
+  /** Chat toolbar and controls */
+  toolbar: boolean;
+
+  /** Chat settings and configuration */
+  settings: boolean;
+
+  /** Custom prompts and templates */
+  prompts: boolean;
+
+  /** Chat export and import functionality */
+  export: boolean;
+
+  /** Chat analytics and insights */
+  analytics: boolean;
+
+  /** Project-based chat organization */
+  projects: boolean;
+
+  /** Chat middleware and routing */
+  middleware: boolean;
+
+  /** AI chat service utilities */
+  services: boolean;
+
+  /** Text completion and generation */
+  completion: boolean;
 }
 
 // 🚀 Auto-discovered artifacts with ownership info

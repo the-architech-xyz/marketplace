@@ -8,36 +8,36 @@
 import { Blueprint, BlueprintActionType, ModifierType, EnhanceFileFallbackStrategy, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
 
 const shadcnUiBlueprint: Blueprint = {
-  id: 'shadcn-ui-installer',
-  name: 'Shadcn/ui Component Installer',
-  description: 'Installs Shadcn/ui components with Tailwind CSS v4 setup',
+  id: "shadcn-ui-installer",
+  name: "Shadcn/ui Component Installer",
+  description: "Installs Shadcn/ui components with Tailwind CSS v4 setup",
   actions: [
     // Install Tailwind CSS v4 and PostCSS plugin
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
-        'tailwindcss@next',
-        '@tailwindcss/postcss@next',
-        'tailwindcss-animate'
-      ]
-    },   
+        "tailwindcss@next",
+        "@tailwindcss/postcss@next",
+        "tailwindcss-animate",
+      ],
+    },
     // Create PostCSS configuration for Tailwind CSS v4
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'postcss.config.mjs',
+      path: "postcss.config.mjs",
       conflictResolution: { strategy: ConflictResolutionStrategy.REPLACE },
       content: `const config = {
   plugins: ["@tailwindcss/postcss"],
 };
 
-export default config;`
+export default config;`,
     },
     // Create Tailwind CSS v4 globals.css
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}globals.css',
+      path: "{{paths.app_root}}globals.css",
       conflictResolution: { strategy: ConflictResolutionStrategy.REPLACE },
-        content: `
+      content: `
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
@@ -113,49 +113,51 @@ export default config;`
   [class*="border"] {
     border-color: hsl(var(--border));
   }
-}`
+}`,
     },
     // Install core Shadcn/ui dependencies
     // Note: Shadcn will automatically install Radix UI dependencies for each component
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
-        '@radix-ui/react-slot@^1.0.2',
-        'class-variance-authority@^0.7.0',
-        'clsx@^2.0.0',
-        'tailwind-merge@^2.0.0',
-        'lucide-react@^0.294.0'
-      ]
+        "@radix-ui/react-slot@^1.0.2",
+        "class-variance-authority@^0.7.0",
+        "clsx@^2.0.0",
+        "tailwind-merge@^2.0.0",
+        "lucide-react@^0.294.0",
+      ],
     },
     // Install additional utilities
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
-        'cmdk@^0.2.0',
-        'date-fns@^2.30.0',
-        'react-day-picker@^8.9.1',
-        'react-hook-form@^7.48.2',
-        '@hookform/resolvers@^3.3.2',
-        'zod@^3.22.4',
-        'sonner@^1.2.4'
-      ]
+        "cmdk@^0.2.0",
+        "date-fns@^2.30.0",
+        "react-day-picker@^8.9.1",
+        "react-hook-form@^7.48.2",
+        "@hookform/resolvers@^3.3.2",
+        "zod@^3.22.4",
+        "sonner@^1.2.4",
+      ],
     },
     // Initialize Shadcn/ui (non-interactive, Tailwind v4 compatible)
     // Note: Removed --silent to see any errors during initialization
     // Using --pm npm to ensure npm is used (not yarn/pnpm)
     {
       type: BlueprintActionType.RUN_COMMAND,
-      command: 'npx shadcn@latest init --yes --defaults --force --src-dir --css-variables --base-color slate'
+      command:
+        "npx shadcn@latest init --yes --defaults --force --src-dir --css-variables --base-color slate",
     },
     // Install components from genome parameters - DYNAMIC LOOP
     // Shadcn CLI automatically installs the required Radix UI dependencies for each component
     {
       type: BlueprintActionType.RUN_COMMAND,
-      command: 'npx shadcn@latest add {{item}} --yes --overwrite',
-      forEach: 'module.parameters.components',
-      workingDir: '.'
-    }
-  ]
+      command:
+        "npx shadcn@latest add {{item}} --yes --overwrite",
+      forEach: "module.parameters.components",
+      workingDir: ".",
+    },
+  ],
 };
 
 export default shadcnUiBlueprint;

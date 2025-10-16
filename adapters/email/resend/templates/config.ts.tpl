@@ -5,7 +5,7 @@ export const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Email configuration
 export const EMAIL_CONFIG = {
-  from: process.env.EMAIL_FROM || '<%= context..fromEmail %>',
+  from: process.env.EMAIL_FROM || '<%= module.parameters.fromEmail %>',
   replyTo: process.env.EMAIL_REPLY_TO || 'support@<%= project.name %>.com',
   baseUrl: process.env.APP_URL || '<%= env.APP_URL %>',
 };

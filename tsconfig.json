@@ -21,7 +21,9 @@
     "types": ["node"],
     "paths": {
       "@thearchitech.xyz/marketplace": ["./index.js"],
-      "@thearchitech.xyz/marketplace/types": ["./types/index.ts"]
+      "@thearchitech.xyz/marketplace/types": ["./types/index.ts"],
+      "@types/*": ["./types/*"],
+      "blueprint-config-types": ["./types/blueprint-config-types.ts"]
     }
   },
   "include": [
@@ -29,7 +31,8 @@
     "connectors/**/blueprint.ts",
     "features/**/blueprint.ts",
     "genomes/**/*.genome.ts",
-    "types/**/*.ts"
+    "types/**/*.ts",
+    "scripts/**/*.ts"
   ],
   "exclude": [
     "node_modules",

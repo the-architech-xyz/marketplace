@@ -43,8 +43,7 @@ function generateCoreActions(): BlueprintAction[] {
         'date-fns@^2.30.0',
         'lucide-react@^0.294.0',
         'react-hook-form',
-        '@hookform/resolvers',
-        'zod'
+        '@hookform/resolvers'
       ]
     },
 
@@ -134,34 +133,7 @@ function generateCoreActions(): BlueprintAction[] {
       }
     },
 
-    // Core Team Types & Hooks (only existing templates)
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}teams/types.ts',
-      template: 'templates/types.ts.tpl',
-      context: { 
-        features: ['core'],
-        hasTeamManagement: true
-      },
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
 
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}hooks/teams/hooks.ts',
-      template: 'templates/hooks.ts.tpl',
-      context: { 
-        features: ['core'],
-        hasTeamManagement: true
-      },
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    }
   ];
 }
 

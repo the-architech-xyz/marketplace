@@ -1,0 +1,151 @@
+{
+  "id": "react-native",
+  "name": "React Native",
+  "description": "A framework for building native apps using React",
+  "category": "framework",
+  "version": "0.73.0",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "provides": [
+    {
+      "name": "react",
+      "version": "18.2.0",
+      "description": "React library for building user interfaces"
+    },
+    {
+      "name": "react-native",
+      "version": "0.73.0",
+      "description": "React Native framework for mobile development"
+    },
+    {
+      "name": "typescript",
+      "version": "5.0.0",
+      "description": "TypeScript language support"
+    }
+  ],
+  "capabilities": {
+    "react-native-framework": {
+      "version": "0.73.0",
+      "description": "Complete React Native framework",
+      "provides": ["react", "react-native", "typescript", "metro", "hermes"]
+    },
+    "styling-system": {
+      "version": "1.0.0",
+      "description": "Styling and CSS framework integration",
+      "provides": ["style-sheet", "styled-components", "emotion"]
+    },
+    "development-tools": {
+      "version": "1.0.0",
+      "description": "Development and build tools",
+      "provides": ["typescript", "eslint", "prettier", "metro", "flipper"]
+    }
+  },
+  "limitations": "Requires Node.js 18+, React Native CLI, and platform-specific tools (Xcode for iOS, Android Studio for Android)",
+  "paths": {
+    "source_root": "src/",
+    "app_root": "src/",
+    "shared_library": "src/lib/",
+    "utils": "src/lib/utils/",
+    "types": "src/types/",
+    "hooks": "src/hooks/",
+    "stores": "src/stores/",
+    "components": "src/components/",
+    "ui_components": "src/components/ui/",
+    "screens": "src/screens/",
+    "navigation": "src/navigation/",
+    "config": "src/config/",
+    "env": ".env",
+    "scripts": "scripts/",
+    "assets": "assets/",
+    "images": "assets/images/",
+    "fonts": "assets/fonts/",
+    "ios": "ios/",
+    "android": "android/",
+    "build": "build/",
+    "dist": "dist/",
+    "docs": "docs/",
+    "readme": "README.md"
+  },
+  "parameters": {
+    "typescript": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable TypeScript support",
+      "required": false
+    },
+    "srcDir": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use src/ directory",
+      "required": false
+    },
+    "importAlias": {
+      "type": "string",
+      "default": "@/*",
+      "description": "Import alias for absolute imports",
+      "required": false
+    },
+    "reactVersion": {
+      "type": "string",
+      "default": "18.2.0",
+      "description": "React version to use",
+      "required": false
+    },
+    "platforms": {
+      "ios": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable iOS platform support",
+        "required": false
+      },
+      "android": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable Android platform support",
+        "required": false
+      }
+    }
+  },
+  "context": {
+    "pathResolution": {
+      "basePaths": {
+        "app_root": "./",
+        "components": "{{srcDir ? 'src/' : ''}}components",
+        "shared_library": "{{srcDir ? 'src/' : ''}}lib",
+        "screens": "{{srcDir ? 'src/' : ''}}screens",
+        "navigation": "{{srcDir ? 'src/' : ''}}navigation",
+        "hooks": "{{srcDir ? 'src/' : ''}}hooks",
+        "assets": "./assets",
+        "images": "./assets/images",
+        "fonts": "./assets/fonts",
+        "ios": "./ios",
+        "android": "./android",
+        "build": "./build",
+        "dist": "./dist"
+      },
+      "parameterBased": {
+        "srcDir": "srcDir ? 'src/' : ''"
+      }
+    },
+    "environment": {
+      "default": {
+        "APP_URL": "http://localhost:3000",
+        "NODE_ENV": "development"
+      },
+      "frameworkSpecific": {
+        "REACT_NATIVE_APP_URL": "http://localhost:3000",
+        "REACT_NATIVE_APP_TYPESCRIPT": "{{typescript ? 'true' : 'false'}}"
+      }
+    },
+    "conventions": {
+      "fileExtensions": [".tsx", ".ts", ".jsx", ".js"],
+      "importStyle": "alias",
+      "aliasPrefix": "{{importAlias || '@'}}",
+      "componentExtensions": [".tsx", ".jsx"],
+      "screenExtensions": [".tsx", ".jsx"],
+      "hookExtensions": [".ts", ".js"]
+    }
+  },
+  "constraints": {}
+}
+

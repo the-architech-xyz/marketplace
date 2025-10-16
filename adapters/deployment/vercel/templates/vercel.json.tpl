@@ -1,21 +1,23 @@
 {
   "version": 2,
-  "framework": "<%= context..framework || 'nextjs' %>",
-  "buildCommand": "<%= context..buildCommand || 'npm run build' %>",
-  "outputDirectory": "<%= context..outputDirectory || '.next' %>",
-  "installCommand": "<%= context..installCommand || 'npm install' %>",
-  "devCommand": "<%= context..devCommand || 'npm run dev' %>",
+  "framework": "<%= module.parameters.framework || 'nextjs' %>",
+  "buildCommand": "<%= module.parameters.buildCommand || 'npm run build' %>",
+  "outputDirectory": "<%= module.parameters.outputDirectory || '.next' %>",
+  "installCommand": "<%= module.parameters.installCommand || 'npm install' %>",
+  "devCommand": "<%= module.parameters.devCommand || 'npm run dev' %>",
   "functions": {
     "src/app/api/**/*.ts": {
       "runtime": "nodejs18.x",
       "regions": <%= JSON.stringify(module.parameters.functions?.regions || ['iad1']) %>,
-      "maxDuration": <%= context..functions?.maxDuration || 10 %>
+      "maxDuration": <%= module.parameters.functions?.maxDuration || 10 %>
     }
   },
   "env": {
-    {{#each module.parameters.envVars}}
-    "<%= item.name %>": "<%= item.value %>",
+    <% if (module.parameters.envVars && module.parameters.envVars.length > 0) { %>
+    <% module.parameters.envVars.forEach((item, index) => { %>
+    "<%= item.name %>": "<%= item.value %>"<%= index < module.parameters.envVars.length - 1 ? ',' : '' %>
     <% }); %>
+    <% } %>
   },
   "build": {
     "env": {

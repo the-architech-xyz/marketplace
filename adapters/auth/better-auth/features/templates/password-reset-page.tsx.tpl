@@ -184,7 +184,3 @@ export default function ResetPassword() {
     </div>
   );
 }
-    }
-  ]
-};
-export default passwordResetBlueprint;

@@ -3,14 +3,14 @@ import { Sequelize } from 'sequelize';
 // Database configuration
 const config = {
   development: {
-    username: '<%= context..username %>',
-    password: '<%= context..password %>',
-    database: '<%= context..databaseName %>_dev',
-    host: '<%= context..host %>',
-    port: <%= context..port %>,
-    dialect: '<%= context..databaseType %>',
-    logging: <%= context..logging %>,
-    pool: <% if (context..pool) { %>{
+    username: '<%= module.parameters.username %>',
+    password: '<%= module.parameters.password %>',
+    database: '<%= module.parameters.databaseName %>_dev',
+    host: '<%= module.parameters.host %>',
+    port: <%= module.parameters.port %>,
+    dialect: '<%= module.parameters.databaseType %>',
+    logging: <%= module.parameters.logging %>,
+    pool: <% if (module.parameters.pool) { %>{
       max: 5,
       min: 0,
       acquire: 30000,
@@ -18,22 +18,22 @@ const config = {
     }<% } else { %>false<% } %>
   },
   test: {
-    username: '<%= context..username %>',
-    password: '<%= context..password %>',
-    database: '<%= context..databaseName %>_test',
-    host: '<%= context..host %>',
-    port: <%= context..port %>,
-    dialect: '<%= context..databaseType %>',
+    username: '<%= module.parameters.username %>',
+    password: '<%= module.parameters.password %>',
+    database: '<%= module.parameters.databaseName %>_test',
+    host: '<%= module.parameters.host %>',
+    port: <%= module.parameters.port %>,
+    dialect: '<%= module.parameters.databaseType %>',
     logging: false,
     pool: false
   },
   production: {
-    username: process.env.DB_USERNAME || '<%= context..username %>',
-    password: process.env.DB_PASSWORD || '<%= context..password %>',
-    database: process.env.DB_NAME || '<%= context..databaseName %>',
-    host: process.env.DB_HOST || '<%= context..host %>',
-    port: parseInt(process.env.DB_PORT || '<%= context..port %>'),
-    dialect: '<%= context..databaseType %>',
+    username: process.env.DB_USERNAME || '<%= module.parameters.username %>',
+    password: process.env.DB_PASSWORD || '<%= module.parameters.password %>',
+    database: process.env.DB_NAME || '<%= module.parameters.databaseName %>',
+    host: process.env.DB_HOST || '<%= module.parameters.host %>',
+    port: parseInt(process.env.DB_PORT || '<%= module.parameters.port %>'),
+    dialect: '<%= module.parameters.databaseType %>',
     logging: false,
     pool: {
       max: 20,

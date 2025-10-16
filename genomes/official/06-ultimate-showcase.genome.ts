@@ -12,28 +12,29 @@
 import { defineGenome } from '@thearchitech.xyz/marketplace/types';
 
 export default defineGenome({
-  version: '1.0.0',
+  version: "1.0.0",
   project: {
-    name: 'ultimate-showcase',
-    framework: 'nextjs',
-    path: './ultimate-app',
-    description: 'The complete showcase of every Architech capability',
+    name: "ultimate-showcase",
+    framework: "nextjs",
+    path: "./ultimate-app",
+    description: "The complete showcase of every Architech capability",
   },
-  
+
   modules: [
     // ============================================================================
     // FOUNDATION (The Essentials)
     // ============================================================================
 
     {
-      id: 'framework/nextjs',
+      id: "framework/nextjs",
       parameters: {
         typescript: true,
         tailwind: true,
         eslint: true,
         appRouter: true,
         srcDir: true,
-        importAlias: '@',
+        importAlias: "@",
+        reactVersion: "18", // Use React 18 for Radix UI compatibility
         features: {
           seo: true,
           imageOptimization: true,
@@ -45,10 +46,10 @@ export default defineGenome({
     },
 
     {
-      id: 'database/drizzle',
+      id: "database/drizzle",
       parameters: {
-        provider: 'neon',
-        databaseType: 'postgresql',
+        provider: "neon",
+        databaseType: "postgresql",
         features: {
           migrations: true,
           relations: true,
@@ -59,7 +60,7 @@ export default defineGenome({
     },
 
     {
-      id: 'data-fetching/tanstack-query',
+      id: "data-fetching/tanstack-query",
       parameters: {
         devtools: true,
         suspense: true,
@@ -67,7 +68,7 @@ export default defineGenome({
     },
 
     {
-      id: 'state/zustand',
+      id: "state/zustand",
       parameters: {
         persistence: true,
         devtools: true,
@@ -76,24 +77,54 @@ export default defineGenome({
     },
 
     {
-      id: 'ui/shadcn-ui',
+      id: "ui/shadcn-ui",
       parameters: {
-        theme: 'default',
+        theme: "default",
         components: [
-          'button', 'input', 'card', 'label', 'alert', 'alert-dialog', 'accordion', 'avatar', 'badge',
-          'calendar', 'carousel', 'checkbox', 'collapsible', 'context-menu', 'date-picker', 'dialog',
-          'dropdown-menu', 'form', 'hover-card', 'menubar', 'navigation-menu', 'pagination', 'popover',
-          'progress', 'radio-group', 'scroll-area', 'separator', 'sheet', 'slider', 'sonner', 'switch',
-          'table', 'tabs', 'textarea', 'toggle', 'toggle-group'
+          "button",
+          "input",
+          "card",
+          "label",
+          "alert",
+          "alert-dialog",
+          "accordion",
+          "avatar",
+          "badge",
+          "calendar",
+          "carousel",
+          "checkbox",
+          "collapsible",
+          "context-menu",
+          "dialog",
+          "dropdown-menu",
+          "form",
+          "hover-card",
+          "menubar",
+          "navigation-menu",
+          "pagination",
+          "popover",
+          "progress",
+          "radio-group",
+          "scroll-area",
+          "separator",
+          "sheet",
+          "slider",
+          "sonner",
+          "switch",
+          "table",
+          "tabs",
+          "textarea",
+          "toggle",
+          "toggle-group",
         ],
       },
     },
 
     {
-      id: 'content/next-intl',
+      id: "content/next-intl",
       parameters: {
-        locales: ['en', 'fr', 'es', 'de', 'ja', 'zh'],
-        defaultLocale: 'en',
+        locales: ["en", "fr", "es", "de", "ja", "zh"],
+        defaultLocale: "en",
         features: {
           routing: true,
           dateFormatting: true,
@@ -108,20 +139,20 @@ export default defineGenome({
 
     // Authentication (All Features)
     {
-      id: 'auth/better-auth',
+      id: "auth/better-auth",
       parameters: {
-        providers: ['email'],
-        session: 'jwt',
+        providers: ["email"],
+        session: "jwt",
         csrf: true,
       },
     },
 
     {
-      id: 'connectors/better-auth-github',
+      id: "connectors/better-auth-github",
     },
 
     {
-      id: 'features/auth/backend/better-auth-nextjs',
+      id: "features/auth/backend/better-auth-nextjs",
       parameters: {
         apiRoutes: true,
         middleware: true,
@@ -131,7 +162,7 @@ export default defineGenome({
     },
 
     {
-      id: 'features/auth/frontend/shadcn',
+      id: "features/auth/frontend/shadcn",
       parameters: {
         features: {
           signIn: true,
@@ -147,17 +178,17 @@ export default defineGenome({
 
     // Payments (Complete Suite)
     {
-      id: 'payment/stripe',
+      id: "payment/stripe",
       parameters: {
-        currency: 'usd',
-        mode: 'test',
+        currency: "usd",
+        mode: "test",
         webhooks: true,
         dashboard: true,
       },
     },
 
     {
-      id: 'connectors/stripe/nextjs-drizzle',
+      id: "connectors/stripe/nextjs-drizzle",
       parameters: {
         features: {
           organizationBilling: true,
@@ -169,7 +200,7 @@ export default defineGenome({
     },
 
     {
-      id: 'features/payments/backend/stripe-nextjs',
+      id: "features/payments/backend/stripe-nextjs",
       parameters: {
         checkout: true,
         subscriptions: true,
@@ -178,7 +209,7 @@ export default defineGenome({
     },
 
     {
-      id: 'features/payments/frontend/shadcn',
+      id: "features/payments/frontend/shadcn",
       parameters: {
         features: {
           checkout: true,
@@ -193,7 +224,7 @@ export default defineGenome({
 
     // Teams (Complete Suite)
     {
-      id: 'features/teams-management/backend/better-auth-nextjs',
+      id: "features/teams-management/backend/better-auth-nextjs",
       parameters: {
         features: {
           teams: true,
@@ -205,7 +236,7 @@ export default defineGenome({
     },
 
     {
-      id: 'features/teams-management/frontend/shadcn',
+      id: "features/teams-management/frontend/shadcn",
       parameters: {
         features: {
           teams: true,
@@ -218,7 +249,7 @@ export default defineGenome({
 
     // Email (Complete Suite)
     {
-      id: 'email/resend',
+      id: "email/resend",
       parameters: {
         features: {
           templates: true,
@@ -228,11 +259,11 @@ export default defineGenome({
     },
 
     {
-      id: 'features/emailing/backend/resend-nextjs',
+      id: "features/emailing/backend/resend-nextjs",
     },
 
     {
-      id: 'features/emailing/frontend/shadcn',
+      id: "features/emailing/frontend/shadcn",
       parameters: {
         features: {
           templates: true,
@@ -248,19 +279,19 @@ export default defineGenome({
 
     // AI Chat
     {
-      id: 'ai/vercel-ai-sdk',
+      id: "ai/vercel-ai-sdk",
       parameters: {
-        providers: ['openai', 'anthropic', 'google'],
+        providers: ["openai", "anthropic", "google"],
         features: {
           streaming: true,
           tools: true,
-          embeddings: true,  // For RAG
+          embeddings: true, // For RAG
         },
       },
     },
 
     {
-      id: 'features/ai-chat/backend/vercel-ai-nextjs',
+      id: "features/ai-chat/backend/vercel-ai-nextjs",
       parameters: {
         streaming: true,
         fileUpload: true,
@@ -271,7 +302,7 @@ export default defineGenome({
     },
 
     {
-      id: 'features/ai-chat/frontend/shadcn',
+      id: "features/ai-chat/frontend/shadcn",
       parameters: {
         features: {
           core: true,
@@ -284,9 +315,9 @@ export default defineGenome({
 
     // Web3 & Blockchain
     {
-      id: 'blockchain/web3',
+      id: "blockchain/web3",
       parameters: {
-        networks: ['ethereum', 'polygon', 'optimism', 'base', 'arbitrum'],
+        networks: ["ethereum", "polygon", "optimism", "base", "arbitrum"],
         features: {
           walletConnect: true,
           smartContracts: true,
@@ -299,7 +330,7 @@ export default defineGenome({
     },
 
     {
-      id: 'features/web3/shadcn',
+      id: "features/web3/shadcn",
       parameters: {
         features: {
           walletConnect: true,
@@ -311,64 +342,16 @@ export default defineGenome({
       },
     },
 
-    // Graph Visualization (Architecture Diagram)
-    {
-      id: 'features/graph-visualizer/shadcn',
-      parameters: {
-        features: {
-          interactiveGraph: true,
-          nodeTypes: true,
-          minimap: true,
-          export: true,
-        },
-      },
-    },
-
-    // Repository Analyzer
-    {
-      id: 'services/github-api',
-    },
-
-    {
-      id: 'features/repo-analyzer/shadcn',
-      parameters: {
-        enableVisualization: true,
-        enableExport: true,
-        confidenceThreshold: 80,
-      },
-    },
-
-    // Project Management
-    {
-      id: 'features/project-management/shadcn',
-      parameters: {
-        features: {
-          kanban: true,
-          timeline: true,
-          sprint: true,
-        },
-      },
-    },
-
-    // Social Profile
-    {
-      id: 'features/social-profile/shadcn',
-      parameters: {
-        features: {
-          walletProfile: true,
-          web3Social: true,
-          achievements: true,
-        },
-      },
-    },
-
+    // NOTE: graph-visualizer and repo-analyzer features are planned but not yet implemented
+    // They have been removed from this genome until they are available in the marketplace
+    
     // ============================================================================
     // OPERATIONS & QUALITY (Production-Grade)
     // ============================================================================
 
     // Monitoring (Full Suite)
     {
-      id: 'observability/sentry',
+      id: "observability/sentry",
       parameters: {
         features: {
           errorTracking: true,
@@ -378,7 +361,7 @@ export default defineGenome({
     },
 
     {
-      id: 'features/monitoring/shadcn',
+      id: "features/monitoring/shadcn",
       parameters: {
         features: {
           performance: true,
@@ -391,7 +374,7 @@ export default defineGenome({
 
     // Testing (Comprehensive)
     {
-      id: 'testing/vitest',
+      id: "testing/vitest",
       parameters: {
         features: {
           unitTests: true,
@@ -402,7 +385,7 @@ export default defineGenome({
 
     // Quality (Strict)
     {
-      id: 'quality/eslint',
+      id: "quality/eslint",
       parameters: {
         strict: true,
         react: true,
@@ -413,44 +396,44 @@ export default defineGenome({
     },
 
     {
-      id: 'quality/prettier',
+      id: "quality/prettier",
       parameters: {
         tailwind: true,
         organizeImports: true,
-        plugins: ['prettier-plugin-tailwindcss'],
+        plugins: ["prettier-plugin-tailwindcss"],
       },
     },
 
     // Git Integration
     {
-      id: 'core/git',
+      id: "core/git",
       parameters: {
-        userName: 'Architech User',
-        userEmail: 'user@architech.xyz',
-        defaultBranch: 'main',
+        userName: "Architech User",
+        userEmail: "user@architech.xyz",
+        defaultBranch: "main",
         autoInit: true,
       },
     },
 
     // Deployment (All Options)
     {
-      id: 'deployment/vercel',
+      id: "deployment/vercel",
       parameters: {
-        framework: 'nextjs',
-        buildCommand: 'npm run build',
-        outputDirectory: '.next',
-        installCommand: 'npm install',
-        devCommand: 'npm run dev',
+        framework: "nextjs",
+        buildCommand: "npm run build",
+        outputDirectory: ".next",
+        installCommand: "npm install",
+        devCommand: "npm run dev",
         functions: {
-          regions: ['iad1'],
+          regions: ["iad1"],
           memory: 1024,
-          maxDuration: 30
+          maxDuration: 30,
         },
       },
     },
 
     {
-      id: 'deployment/docker',
+      id: "deployment/docker",
       parameters: {
         features: {
           development: true,

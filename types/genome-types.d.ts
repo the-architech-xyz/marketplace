@@ -46,22 +46,22 @@ export type ModuleId =
   | 'connectors/zustand-nextjs'
   | 'features/ai-chat/backend/vercel-ai-nextjs'
   | 'features/ai-chat/frontend/shadcn'
+  | 'features/ai-chat/tech-stack'
   | 'features/architech-welcome/shadcn'
   | 'features/auth/backend/better-auth-nextjs'
   | 'features/auth/frontend/shadcn'
-  | 'features/email/react-email-templates'
+  | 'features/auth/tech-stack'
   | 'features/emailing/backend/resend-nextjs'
   | 'features/emailing/frontend/shadcn'
-  | 'features/graph-visualizer/shadcn'
+  | 'features/emailing/tech-stack'
   | 'features/monitoring/shadcn'
-  | 'features/observability/sentry-shadcn'
+  | 'features/monitoring/tech-stack'
   | 'features/payments/backend/stripe-nextjs'
   | 'features/payments/frontend/shadcn'
-  | 'features/project-management/shadcn'
-  | 'features/repo-analyzer/shadcn'
-  | 'features/social-profile/shadcn'
+  | 'features/payments/tech-stack'
   | 'features/teams-management/backend/better-auth-nextjs'
   | 'features/teams-management/frontend/shadcn'
+  | 'features/teams-management/tech-stack'
   | 'features/web3/shadcn';
 
 export type ModuleParameters = {
@@ -595,7 +595,7 @@ export type ModuleParameters = {
   theme?: 'default' | 'dark' | 'light' | 'minimal';
 
   /** Components to install (comprehensive set by default) */
-  components?: Array<'alert' | 'alert-dialog' | 'accordion' | 'avatar' | 'badge' | 'button' | 'calendar' | 'card' | 'carousel' | 'checkbox' | 'collapsible' | 'context-menu' | 'date-picker' | 'dialog' | 'dropdown-menu' | 'form' | 'hover-card' | 'input' | 'label' | 'menubar' | 'navigation-menu' | 'pagination' | 'popover' | 'progress' | 'radio-group' | 'scroll-area' | 'separator' | 'sheet' | 'slider' | 'sonner' | 'switch' | 'table' | 'tabs' | 'textarea' | 'toggle' | 'toggle-group'>;
+  components?: Array<'alert' | 'alert-dialog' | 'accordion' | 'avatar' | 'badge' | 'button' | 'calendar' | 'card' | 'carousel' | 'checkbox' | 'collapsible' | 'context-menu' | 'dialog' | 'dropdown-menu' | 'form' | 'hover-card' | 'input' | 'label' | 'menubar' | 'navigation-menu' | 'pagination' | 'popover' | 'progress' | 'radio-group' | 'scroll-area' | 'separator' | 'sheet' | 'slider' | 'sonner' | 'switch' | 'table' | 'tabs' | 'textarea' | 'toggle' | 'toggle-group'>;
   };
   'ui/tailwind': {
 
@@ -757,17 +757,50 @@ export type ModuleParameters = {
   /** Constitutional Architecture features configuration */
   features?: {
 
-    /** Essential chat functionality (interface, message history) */
+    /** Essential chat interface with basic messaging */
     core?: boolean;
 
-    /** File upload and media support */
+    /** Chat context and provider management */
+    context?: boolean;
+
+    /** File upload and media preview capabilities */
     media?: boolean;
 
-    /** Voice input and output */
+    /** Voice input and output functionality */
     voice?: boolean;
 
-    /** Advanced features (custom prompts, export/import) */
-    advanced?: boolean;
+    /** Advanced conversation history and management */
+    history?: boolean;
+
+    /** Advanced message input with features */
+    input?: boolean;
+
+    /** Chat toolbar and controls */
+    toolbar?: boolean;
+
+    /** Chat settings and configuration */
+    settings?: boolean;
+
+    /** Custom prompts and templates */
+    prompts?: boolean;
+
+    /** Chat export and import functionality */
+    export?: boolean;
+
+    /** Chat analytics and insights */
+    analytics?: boolean;
+
+    /** Project-based chat organization */
+    projects?: boolean;
+
+    /** Chat middleware and routing */
+    middleware?: boolean;
+
+    /** AI chat service utilities */
+    services?: boolean;
+
+    /** Text completion and generation */
+    completion?: boolean;
   };
 
   /** UI theme variant */
@@ -896,29 +929,6 @@ export type ModuleParameters = {
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
   };
-  'features/email/react-email-templates': {
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Core email templates (welcome, notifications) */
-    core?: boolean;
-
-    /** Authentication email templates (password reset, verification, 2FA) */
-    auth?: boolean;
-
-    /** Payment email templates (confirmation, receipts) */
-    payments?: boolean;
-
-    /** Organization email templates (invitations, updates) */
-    organizations?: boolean;
-  };
-
-  /** Primary brand color for email templates */
-  brandColor?: string;
-
-  /** URL to company logo for email headers */
-  logo?: string;
-  };
   'features/emailing/backend/resend-nextjs': {
 
   /** Bulk email sending capabilities */
@@ -968,53 +978,6 @@ export type ModuleParameters = {
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
   };
-  'features/graph-visualizer/shadcn': {
-
-  /** Backend implementation for graph data management */
-  backend?: any;
-
-  /** Frontend implementation for graph visualization */
-  frontend?: any;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable interactive graph functionality */
-    interactiveGraph?: boolean;
-
-    /** Enable different node types */
-    nodeTypes?: boolean;
-
-    /** Enable minimap navigation */
-    minimap?: boolean;
-
-    /** Enable graph export functionality */
-    export?: boolean;
-
-    /** Enable different edge types */
-    edgeTypes?: boolean;
-
-    /** Enable graph controls */
-    controls?: boolean;
-
-    /** Enable background grid */
-    background?: boolean;
-
-    /** Enable node/edge selection */
-    selection?: boolean;
-
-    /** Enable node dragging */
-    dragging?: boolean;
-
-    /** Enable zoom functionality */
-    zooming?: boolean;
-
-    /** Enable pan functionality */
-    panning?: boolean;
-
-    /** Enable graph import functionality */
-    import?: boolean;
-  };
-  };
   'features/monitoring/shadcn': {
 
   /** Backend implementation for monitoring services */
@@ -1043,29 +1006,6 @@ export type ModuleParameters = {
 
   /** Environments to monitor */
   environments?: string[];
-  };
-  'features/observability/sentry-shadcn': {
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Main Sentry dashboard with overview */
-    dashboard?: boolean;
-
-    /** Browse and filter captured errors */
-    errorBrowser?: boolean;
-
-    /** Performance metrics and charts */
-    performance?: boolean;
-
-    /** Alert configuration UI */
-    alerts?: boolean;
-  };
-
-  /** Path to mount the Sentry dashboard */
-  dashboardPath?: string;
-
-  /** Auto-refresh interval (ms) for dashboard data */
-  refreshInterval?: number;
   };
   'features/payments/backend/stripe-nextjs': {
 
@@ -1127,99 +1067,6 @@ export type ModuleParameters = {
 
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
-  };
-  'features/project-management/shadcn': {
-
-  /** UI theme variant */
-  theme?: 'default' | 'dark' | 'light';
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable kanban board functionality */
-    kanban?: boolean;
-
-    /** Enable timeline view */
-    timeline?: boolean;
-
-    /** Enable sprint management */
-    sprint?: boolean;
-
-    /** Enable kanban board functionality */
-    kanbanBoard?: boolean;
-
-    /** Enable task creation */
-    taskCreation?: boolean;
-
-    /** Enable task management */
-    taskManagement?: boolean;
-
-    /** Enable project organization */
-    projectOrganization?: boolean;
-
-    /** Enable team collaboration */
-    teamCollaboration?: boolean;
-
-    /** Enable basic analytics */
-    basicAnalytics?: boolean;
-  };
-  };
-  'features/repo-analyzer/shadcn': {
-
-  /** Enable visual architecture diagram */
-  enableVisualization?: boolean;
-
-  /** Enable genome export functionality */
-  enableExport?: boolean;
-
-  /** Minimum confidence threshold for suggestions */
-  confidenceThreshold?: number;
-  };
-  'features/social-profile/shadcn': {
-
-  /** Backend implementation for social profile */
-  backend?: any;
-
-  /** Frontend implementation for social profile UI */
-  frontend?: any;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable wallet profile features */
-    walletProfile?: boolean;
-
-    /** Enable Web3 social features */
-    web3Social?: boolean;
-
-    /** Enable achievements and badges */
-    achievements?: boolean;
-
-    /** Enable profile management */
-    profileManagement?: boolean;
-
-    /** Enable social connections */
-    socialConnections?: boolean;
-
-    /** Enable activity feeds */
-    activityFeeds?: boolean;
-
-    /** Enable notifications */
-    notifications?: boolean;
-
-    /** Enable privacy controls */
-    privacyControls?: boolean;
-
-    /** Enable social settings */
-    socialSettings?: boolean;
-
-    /** Enable avatar upload */
-    avatarUpload?: boolean;
-
-    /** Enable user blocking */
-    blocking?: boolean;
-
-    /** Enable user reporting */
-    reporting?: boolean;
-  };
   };
   'features/teams-management/backend/better-auth-nextjs': {
 
@@ -1848,7 +1695,7 @@ export type TypedGenomeModule =
   theme?: 'default' | 'dark' | 'light' | 'minimal';
 
   /** Components to install (comprehensive set by default) */
-  components?: Array<'alert' | 'alert-dialog' | 'accordion' | 'avatar' | 'badge' | 'button' | 'calendar' | 'card' | 'carousel' | 'checkbox' | 'collapsible' | 'context-menu' | 'date-picker' | 'dialog' | 'dropdown-menu' | 'form' | 'hover-card' | 'input' | 'label' | 'menubar' | 'navigation-menu' | 'pagination' | 'popover' | 'progress' | 'radio-group' | 'scroll-area' | 'separator' | 'sheet' | 'slider' | 'sonner' | 'switch' | 'table' | 'tabs' | 'textarea' | 'toggle' | 'toggle-group'>;
+  components?: Array<'alert' | 'alert-dialog' | 'accordion' | 'avatar' | 'badge' | 'button' | 'calendar' | 'card' | 'carousel' | 'checkbox' | 'collapsible' | 'context-menu' | 'dialog' | 'dropdown-menu' | 'form' | 'hover-card' | 'input' | 'label' | 'menubar' | 'navigation-menu' | 'pagination' | 'popover' | 'progress' | 'radio-group' | 'scroll-area' | 'separator' | 'sheet' | 'slider' | 'sonner' | 'switch' | 'table' | 'tabs' | 'textarea' | 'toggle' | 'toggle-group'>;
   }; }
   | { id: 'ui/tailwind'; parameters?: {
 
@@ -2010,17 +1857,50 @@ export type TypedGenomeModule =
   /** Constitutional Architecture features configuration */
   features?: {
 
-    /** Essential chat functionality (interface, message history) */
+    /** Essential chat interface with basic messaging */
     core?: boolean;
 
-    /** File upload and media support */
+    /** Chat context and provider management */
+    context?: boolean;
+
+    /** File upload and media preview capabilities */
     media?: boolean;
 
-    /** Voice input and output */
+    /** Voice input and output functionality */
     voice?: boolean;
 
-    /** Advanced features (custom prompts, export/import) */
-    advanced?: boolean;
+    /** Advanced conversation history and management */
+    history?: boolean;
+
+    /** Advanced message input with features */
+    input?: boolean;
+
+    /** Chat toolbar and controls */
+    toolbar?: boolean;
+
+    /** Chat settings and configuration */
+    settings?: boolean;
+
+    /** Custom prompts and templates */
+    prompts?: boolean;
+
+    /** Chat export and import functionality */
+    export?: boolean;
+
+    /** Chat analytics and insights */
+    analytics?: boolean;
+
+    /** Project-based chat organization */
+    projects?: boolean;
+
+    /** Chat middleware and routing */
+    middleware?: boolean;
+
+    /** AI chat service utilities */
+    services?: boolean;
+
+    /** Text completion and generation */
+    completion?: boolean;
   };
 
   /** UI theme variant */
@@ -2149,29 +2029,6 @@ export type TypedGenomeModule =
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
   }; }
-  | { id: 'features/email/react-email-templates'; parameters?: {
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Core email templates (welcome, notifications) */
-    core?: boolean;
-
-    /** Authentication email templates (password reset, verification, 2FA) */
-    auth?: boolean;
-
-    /** Payment email templates (confirmation, receipts) */
-    payments?: boolean;
-
-    /** Organization email templates (invitations, updates) */
-    organizations?: boolean;
-  };
-
-  /** Primary brand color for email templates */
-  brandColor?: string;
-
-  /** URL to company logo for email headers */
-  logo?: string;
-  }; }
   | { id: 'features/emailing/backend/resend-nextjs'; parameters?: {
 
   /** Bulk email sending capabilities */
@@ -2221,53 +2078,6 @@ export type TypedGenomeModule =
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
   }; }
-  | { id: 'features/graph-visualizer/shadcn'; parameters?: {
-
-  /** Backend implementation for graph data management */
-  backend?: any;
-
-  /** Frontend implementation for graph visualization */
-  frontend?: any;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable interactive graph functionality */
-    interactiveGraph?: boolean;
-
-    /** Enable different node types */
-    nodeTypes?: boolean;
-
-    /** Enable minimap navigation */
-    minimap?: boolean;
-
-    /** Enable graph export functionality */
-    export?: boolean;
-
-    /** Enable different edge types */
-    edgeTypes?: boolean;
-
-    /** Enable graph controls */
-    controls?: boolean;
-
-    /** Enable background grid */
-    background?: boolean;
-
-    /** Enable node/edge selection */
-    selection?: boolean;
-
-    /** Enable node dragging */
-    dragging?: boolean;
-
-    /** Enable zoom functionality */
-    zooming?: boolean;
-
-    /** Enable pan functionality */
-    panning?: boolean;
-
-    /** Enable graph import functionality */
-    import?: boolean;
-  };
-  }; }
   | { id: 'features/monitoring/shadcn'; parameters?: {
 
   /** Backend implementation for monitoring services */
@@ -2296,29 +2106,6 @@ export type TypedGenomeModule =
 
   /** Environments to monitor */
   environments?: string[];
-  }; }
-  | { id: 'features/observability/sentry-shadcn'; parameters?: {
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Main Sentry dashboard with overview */
-    dashboard?: boolean;
-
-    /** Browse and filter captured errors */
-    errorBrowser?: boolean;
-
-    /** Performance metrics and charts */
-    performance?: boolean;
-
-    /** Alert configuration UI */
-    alerts?: boolean;
-  };
-
-  /** Path to mount the Sentry dashboard */
-  dashboardPath?: string;
-
-  /** Auto-refresh interval (ms) for dashboard data */
-  refreshInterval?: number;
   }; }
   | { id: 'features/payments/backend/stripe-nextjs'; parameters?: {
 
@@ -2380,99 +2167,6 @@ export type TypedGenomeModule =
 
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
-  }; }
-  | { id: 'features/project-management/shadcn'; parameters?: {
-
-  /** UI theme variant */
-  theme?: 'default' | 'dark' | 'light';
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable kanban board functionality */
-    kanban?: boolean;
-
-    /** Enable timeline view */
-    timeline?: boolean;
-
-    /** Enable sprint management */
-    sprint?: boolean;
-
-    /** Enable kanban board functionality */
-    kanbanBoard?: boolean;
-
-    /** Enable task creation */
-    taskCreation?: boolean;
-
-    /** Enable task management */
-    taskManagement?: boolean;
-
-    /** Enable project organization */
-    projectOrganization?: boolean;
-
-    /** Enable team collaboration */
-    teamCollaboration?: boolean;
-
-    /** Enable basic analytics */
-    basicAnalytics?: boolean;
-  };
-  }; }
-  | { id: 'features/repo-analyzer/shadcn'; parameters?: {
-
-  /** Enable visual architecture diagram */
-  enableVisualization?: boolean;
-
-  /** Enable genome export functionality */
-  enableExport?: boolean;
-
-  /** Minimum confidence threshold for suggestions */
-  confidenceThreshold?: number;
-  }; }
-  | { id: 'features/social-profile/shadcn'; parameters?: {
-
-  /** Backend implementation for social profile */
-  backend?: any;
-
-  /** Frontend implementation for social profile UI */
-  frontend?: any;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable wallet profile features */
-    walletProfile?: boolean;
-
-    /** Enable Web3 social features */
-    web3Social?: boolean;
-
-    /** Enable achievements and badges */
-    achievements?: boolean;
-
-    /** Enable profile management */
-    profileManagement?: boolean;
-
-    /** Enable social connections */
-    socialConnections?: boolean;
-
-    /** Enable activity feeds */
-    activityFeeds?: boolean;
-
-    /** Enable notifications */
-    notifications?: boolean;
-
-    /** Enable privacy controls */
-    privacyControls?: boolean;
-
-    /** Enable social settings */
-    socialSettings?: boolean;
-
-    /** Enable avatar upload */
-    avatarUpload?: boolean;
-
-    /** Enable user blocking */
-    blocking?: boolean;
-
-    /** Enable user reporting */
-    reporting?: boolean;
-  };
   }; }
   | { id: 'features/teams-management/backend/better-auth-nextjs'; parameters?: {
 

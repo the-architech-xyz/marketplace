@@ -45,28 +45,29 @@ export * from './connectors/vitest-nextjs';
 export * from './connectors/zustand-nextjs';
 export * from './features/ai-chat/backend/vercel-ai-nextjs';
 export * from './features/ai-chat/frontend/shadcn';
+export * from './features/ai-chat/tech-stack';
 export * from './features/architech-welcome/shadcn';
 export * from './features/auth/backend/better-auth-nextjs';
 export * from './features/auth/frontend/shadcn';
-export * from './features/email/react-email-templates';
+export * from './features/auth/tech-stack';
 export * from './features/emailing/backend/resend-nextjs';
 export * from './features/emailing/frontend/shadcn';
-export * from './features/graph-visualizer/shadcn';
+export * from './features/emailing/tech-stack';
 export * from './features/monitoring/shadcn';
-export * from './features/observability/sentry-shadcn';
+export * from './features/monitoring/tech-stack';
 export * from './features/payments/backend/stripe-nextjs';
 export * from './features/payments/frontend/shadcn';
-export * from './features/project-management/shadcn';
-export * from './features/repo-analyzer/shadcn';
-export * from './features/social-profile/shadcn';
+export * from './features/payments/tech-stack';
 export * from './features/teams-management/backend/better-auth-nextjs';
 export * from './features/teams-management/frontend/shadcn';
+export * from './features/teams-management/tech-stack';
 export * from './features/web3/shadcn';
 
 // 🎯 Cohesive Contract Exports
 export * from './contracts/ai-chat';
 export * from './contracts/auth';
 export * from './contracts/emailing';
+export * from './contracts/monitoring';
 export * from './contracts/payments';
 export * from './contracts/teams-management';
 

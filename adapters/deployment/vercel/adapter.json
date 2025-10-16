@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "runtime": [],
-    "dev": ["@vercel/cli"]
+    "dev": ["vercel"]
   },
   "features": {
     "serverless": true,

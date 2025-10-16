@@ -243,7 +243,7 @@ export interface TestingVitestParameters {
 
 export interface UiShadcnUiParameters {
   theme?: 'default' | 'dark' | 'light' | 'minimal';
-  components?: Array<'alert' | 'alert-dialog' | 'accordion' | 'avatar' | 'badge' | 'button' | 'calendar' | 'card' | 'carousel' | 'checkbox' | 'collapsible' | 'context-menu' | 'date-picker' | 'dialog' | 'dropdown-menu' | 'form' | 'hover-card' | 'input' | 'label' | 'menubar' | 'navigation-menu' | 'pagination' | 'popover' | 'progress' | 'radio-group' | 'scroll-area' | 'separator' | 'sheet' | 'slider' | 'sonner' | 'switch' | 'table' | 'tabs' | 'textarea' | 'toggle' | 'toggle-group'>;
+  components?: Array<'alert' | 'alert-dialog' | 'accordion' | 'avatar' | 'badge' | 'button' | 'calendar' | 'card' | 'carousel' | 'checkbox' | 'collapsible' | 'context-menu' | 'dialog' | 'dropdown-menu' | 'form' | 'hover-card' | 'input' | 'label' | 'menubar' | 'navigation-menu' | 'pagination' | 'popover' | 'progress' | 'radio-group' | 'scroll-area' | 'separator' | 'sheet' | 'slider' | 'sonner' | 'switch' | 'table' | 'tabs' | 'textarea' | 'toggle' | 'toggle-group'>;
 }
 
 export interface UiTailwindParameters {
@@ -325,9 +325,20 @@ export interface FeaturesAiChatBackendVercelAiNextjsParameters {
 export interface FeaturesAiChatFrontendShadcnParameters {
   features: {
     core: boolean;
+    context: boolean;
     media: boolean;
     voice: boolean;
-    advanced: boolean;
+    history: boolean;
+    input: boolean;
+    toolbar: boolean;
+    settings: boolean;
+    prompts: boolean;
+    export: boolean;
+    analytics: boolean;
+    projects: boolean;
+    middleware: boolean;
+    services: boolean;
+    completion: boolean;
   };
   theme?: 'default' | 'dark' | 'light' | 'minimal';
 }
@@ -383,17 +394,6 @@ export interface FeaturesAuthFrontendShadcnParameters {
   theme?: 'default' | 'dark' | 'light' | 'minimal';
 }
 
-export interface FeaturesEmailReactEmailTemplatesParameters {
-  features: {
-    core: boolean;
-    auth: boolean;
-    payments: boolean;
-    organizations: boolean;
-  };
-  brandColor: string;
-  logo: string;
-}
-
 export interface FeaturesEmailingBackendResendNextjsParameters {
   bulkEmail: boolean;
   templates: boolean;
@@ -416,25 +416,6 @@ export interface FeaturesEmailingFrontendShadcnParameters {
   theme?: 'default' | 'dark' | 'light' | 'minimal';
 }
 
-export interface FeaturesGraphVisualizerShadcnParameters {
-  features: {
-    interactiveGraph: boolean;
-    nodeTypes: boolean;
-    minimap: boolean;
-    export: boolean;
-    edgeTypes: boolean;
-    controls: boolean;
-    background: boolean;
-    selection: boolean;
-    dragging: boolean;
-    zooming: boolean;
-    panning: boolean;
-    import: boolean;
-  };
-  backend: any;
-  frontend: any;
-}
-
 export interface FeaturesMonitoringShadcnParameters {
   features: {
     core: boolean;
@@ -446,17 +427,6 @@ export interface FeaturesMonitoringShadcnParameters {
   backend: any;
   frontend: any;
   environments?: string[];
-}
-
-export interface FeaturesObservabilitySentryShadcnParameters {
-  features: {
-    dashboard: boolean;
-    errorBrowser: boolean;
-    performance: boolean;
-    alerts: boolean;
-  };
-  dashboardPath: string;
-  refreshInterval: number;
 }
 
 export interface FeaturesPaymentsBackendStripeNextjsParameters {
@@ -483,46 +453,6 @@ export interface FeaturesPaymentsFrontendShadcnParameters {
     analytics: boolean;
   };
   theme?: 'default' | 'dark' | 'light' | 'minimal';
-}
-
-export interface FeaturesProjectManagementShadcnParameters {
-  features: {
-    kanban: boolean;
-    timeline: boolean;
-    sprint: boolean;
-    kanbanBoard: boolean;
-    taskCreation: boolean;
-    taskManagement: boolean;
-    projectOrganization: boolean;
-    teamCollaboration: boolean;
-    basicAnalytics: boolean;
-  };
-  theme?: 'default' | 'dark' | 'light';
-}
-
-export interface FeaturesRepoAnalyzerShadcnParameters {
-  enableVisualization?: boolean;
-  enableExport?: boolean;
-  confidenceThreshold?: number;
-}
-
-export interface FeaturesSocialProfileShadcnParameters {
-  features: {
-    walletProfile: boolean;
-    web3Social: boolean;
-    achievements: boolean;
-    profileManagement: boolean;
-    socialConnections: boolean;
-    activityFeeds: boolean;
-    notifications: boolean;
-    privacyControls: boolean;
-    socialSettings: boolean;
-    avatarUpload: boolean;
-    blocking: boolean;
-    reporting: boolean;
-  };
-  backend: any;
-  frontend: any;
 }
 
 export interface FeaturesTeamsManagementBackendBetterAuthNextjsParameters {

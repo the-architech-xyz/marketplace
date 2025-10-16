@@ -8,11 +8,11 @@ export default function generateBlueprint(
   const { params, features } = extractTypedModuleParameters(config);
 
   return [
-    // Create the main AIChatService that implements IAIChatService
+    // Create AI Chat API layer (pure server-side functions)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}services/AIChatService.ts',
-      template: 'templates/AIChatService.ts.tpl',
+      path: '{{paths.shared_library}}ai-chat/backend/vercel-ai-nextjs/ai-api.ts',
+      template: 'templates/ai-api.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1

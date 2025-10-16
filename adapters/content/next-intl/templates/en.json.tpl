@@ -38,7 +38,38 @@
     "logout": "Logout",
     "login": "Login",
     "register": "Register"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "forgotPassword": "Forgot Password",
+    "resetPassword": "Reset Password",
+    "emailVerification": "Email Verification",
+    "twoFactorAuth": "Two-Factor Authentication"
+  },
+  "dashboard": {
+    "overview": "Overview",
+    "analytics": "Analytics",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+  "profile": {
+    "personalInfo": "Personal Information",
+    "security": "Security",
+    "preferences": "Preferences",
+    "notifications": "Notifications"
+  },
+  "payments": {
+    "billing": "Billing",
+    "invoices": "Invoices",
+    "subscriptions": "Subscriptions",
+    "transactions": "Transactions"
+  },
+  "monitoring": {
+    "alerts": "Alerts",
+    "logs": "Logs",
+    "performance": "Performance",
+    "analytics": "Analytics"
   }
 }
-    },
-    {

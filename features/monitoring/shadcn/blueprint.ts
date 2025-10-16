@@ -42,7 +42,8 @@ function generateCoreActions(): BlueprintAction[] {
         'zod',
         'date-fns',
         'lucide-react',
-        'react-error-boundary'
+        'react-error-boundary',
+        'framer-motion'
       ]
     },
 

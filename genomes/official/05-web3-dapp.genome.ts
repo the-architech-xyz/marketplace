@@ -94,17 +94,6 @@ export default defineGenome({
       },
     },
 
-    // Social Profile (Web3 Identity)
-    {
-      id: 'features/social-profile/shadcn',
-      parameters: {
-        features: {
-          walletProfile: true,    // ENS + avatar
-          web3Social: true,       // Decentralized social graph
-          achievements: true,     // NFT badges
-        },
-      },
-    },
 
     // ============================================================================
     // OPTIONAL: CENTRALIZED FEATURES (FOR HYBRID dAPP)

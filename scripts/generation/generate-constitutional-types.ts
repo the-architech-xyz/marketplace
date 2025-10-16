@@ -7,9 +7,9 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { BlueprintParser } from '../utilities/blueprint-parser';
-import { TemplatePathResolver } from '../utilities/template-path-resolver';
-import { ConstitutionalTypeGeneratorHelpers } from './generate-constitutional-types-helpers';
+import { BlueprintParser } from '../utilities/blueprint-parser.js';
+import { TemplatePathResolver } from '../utilities/template-path-resolver.js';
+import { ConstitutionalTypeGeneratorHelpers } from './generate-constitutional-types-helpers.js';
 import { BlueprintAnalysisResult, ModuleArtifacts } from '@thearchitech.xyz/types';
 
 // Extend the imported type to support new module types

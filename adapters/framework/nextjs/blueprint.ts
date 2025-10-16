@@ -15,12 +15,13 @@ export const nextjsBlueprint: Blueprint = {
     // Create Next.js project with dynamic React version
     {
       type: BlueprintActionType.RUN_COMMAND,
-      command: 'npx create-next-app@latest . --typescript{{#if module.parameters.eslint}} --eslint{{/if}} --app --src-dir --import-alias "{{module.parameters.importAlias}}" --yes'
+      command: 'npx create-next-app@latest . --typescript{{#if module.parameters.eslint}} --eslint{{/if}} --app --src-dir --import-alias "{{module.parameters.importAlias || "@"}}" --yes'
     },
-    // Dynamically install React version based on parameter
+    // Dynamically install React version based on parameter (only if specified)
     {
       type: BlueprintActionType.RUN_COMMAND,
-      command: 'npm install react@{{module.parameters.reactVersion}} react-dom@{{module.parameters.reactVersion}} @types/react@^{{module.parameters.reactVersion}}.0.0 @types/react-dom@^{{module.parameters.reactVersion}}.0.0'
+      command: 'npm install react@{{module.parameters.reactVersion}} react-dom@{{module.parameters.reactVersion}} @types/react@^{{module.parameters.reactVersion}}.0.0 @types/react-dom@^{{module.parameters.reactVersion}}',
+      condition: '{{#if module.parameters.reactVersion}}'
     }
   ]
 }
