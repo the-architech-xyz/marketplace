@@ -252,14 +252,15 @@ class TemplateBlueprintAnalyzer {
     });
 
     // Check for inconsistent naming patterns
-    const expectedPatterns = {
+    const expectedPatterns: Record<string, RegExp> = {
       'module.parameters': /^[a-zA-Z_][a-zA-Z0-9_]*$/,
       'project': /^[a-zA-Z_][a-zA-Z0-9_]*$/,
       'context': /^[a-zA-Z_][a-zA-Z0-9_]*$/
     };
 
     templateVariables.forEach(tv => {
-      if (expectedPatterns[tv.type] && !expectedPatterns[tv.type].test(tv.variable)) {
+      const pattern = expectedPatterns[tv.type];
+      if (pattern && !pattern.test(tv.variable)) {
         issues.inconsistentNaming.push(`${tv.type}.${tv.variable}`);
       }
     });

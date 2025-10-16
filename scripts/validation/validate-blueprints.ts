@@ -126,7 +126,7 @@ class BlueprintValidator {
         }
       }
     } catch (error) {
-      console.warn(`⚠️  Could not scan directory ${dir}: ${error.message}`);
+      console.warn(`⚠️  Could not scan directory ${dir}: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 
@@ -155,7 +155,7 @@ class BlueprintValidator {
       };
     } catch (error) {
       this.addError(blueprintPath, 'unknown', 0, 'PARSE_ERROR', 
-        `Failed to parse blueprint: ${error.message}`, '');
+        `Failed to parse blueprint: ${error instanceof Error ? error.message : String(error)}`, '');
       return null;
     }
   }
@@ -462,7 +462,7 @@ class BlueprintValidator {
           invalidBlueprints++;
         }
       } catch (error) {
-        console.log(`  ❌ Error: ${error.message}`);
+        console.log(`  ❌ Error: ${error instanceof Error ? error.message : String(error)}`);
         invalidBlueprints++;
       }
     }
@@ -527,7 +527,7 @@ class BlueprintValidator {
       }
     }
     
-    const conflictCount = this.errors.filter(e => e.type === 'ADAPTER_INTEGRATION_CONFLICT').length;
+    const conflictCount = this.errors.filter((e: any) => e.type === 'ADAPTER_INTEGRATION_CONFLICT').length;
     if (conflictCount > 0) {
       console.log(`  ❌ Found ${conflictCount} adapter-integration conflicts`);
     } else {
@@ -608,4 +608,5 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   });
 }
 
-export { BlueprintValidator, ValidationResult, ValidationError };
+export { BlueprintValidator };
+export type { ValidationResult, ValidationError };

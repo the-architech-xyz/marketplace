@@ -48,6 +48,7 @@ interface FeatureMetadata {
   description: string;
   version: string;
   type: string;
+  requires?: string[] | Record<string, any>;
   prerequisites?: {
     capabilities?: string[];
     adapters?: string[];

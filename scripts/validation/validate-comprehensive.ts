@@ -16,7 +16,7 @@ import { execSync } from 'child_process';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join, relative } from 'path';
 import { glob } from 'glob';
-import { DeadTemplateDetector } from './dead-template-detector';
+import { DeadTemplateDetector } from './dead-template-detector.js';
 
 interface ValidationResult {
   name: string;
@@ -170,12 +170,12 @@ class ComprehensiveValidator {
       const detector = new DeadTemplateDetector(this.marketplaceRoot);
       const reports = await detector.detectDeadTemplates();
       
-      const modulesWithDeadTemplates = reports.filter(r => r.deadTemplates.length > 0).length;
-      const modulesWithUnusedReferences = reports.filter(r => r.unusedTemplates.length > 0).length;
-      const totalDeadTemplates = reports.reduce((sum, r) => sum + r.deadTemplates.length, 0);
-      const totalUnusedReferences = reports.reduce((sum, r) => sum + r.unusedTemplates.length, 0);
-      const totalTemplates = reports.reduce((sum, r) => sum + r.totalTemplates, 0);
-      const totalUsedTemplates = reports.reduce((sum, r) => sum + r.usedTemplates, 0);
+      const modulesWithDeadTemplates = reports.filter((r: any) => r.deadTemplates.length > 0).length;
+      const modulesWithUnusedReferences = reports.filter((r: any) => r.unusedTemplates.length > 0).length;
+      const totalDeadTemplates = reports.reduce((sum: number, r: any) => sum + r.deadTemplates.length, 0);
+      const totalUnusedReferences = reports.reduce((sum: number, r: any) => sum + r.unusedTemplates.length, 0);
+      const totalTemplates = reports.reduce((sum: number, r: any) => sum + r.totalTemplates, 0);
+      const totalUsedTemplates = reports.reduce((sum: number, r: any) => sum + r.usedTemplates, 0);
       
       // This is a warning, not a failure - dead templates don't break functionality
       const status = totalDeadTemplates > 0 || totalUnusedReferences > 0 ? 'warning' : 'passed';
@@ -202,13 +202,13 @@ class ComprehensiveValidator {
         
         // Show top modules with issues
         const problematicModules = reports
-          .filter(r => r.deadTemplates.length > 0 || r.unusedTemplates.length > 0)
-          .sort((a, b) => (b.deadTemplates.length + b.unusedTemplates.length) - (a.deadTemplates.length + a.unusedTemplates.length))
+          .filter((r: any) => r.deadTemplates.length > 0 || r.unusedTemplates.length > 0)
+          .sort((a: any, b: any) => (b.deadTemplates.length + b.unusedTemplates.length) - (a.deadTemplates.length + a.unusedTemplates.length))
           .slice(0, 5);
         
         if (problematicModules.length > 0) {
           console.log('\n🔍 Top modules with template issues:');
-          problematicModules.forEach(module => {
+          problematicModules.forEach((module: any) => {
             const issues = module.deadTemplates.length + module.unusedTemplates.length;
             console.log(`  • ${module.moduleId}: ${issues} issues (${module.deadTemplates.length} dead, ${module.unusedTemplates.length} unused)`);
           });

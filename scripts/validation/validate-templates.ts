@@ -300,19 +300,20 @@ async function main() {
   
   const validator = new TemplateValidator(marketplaceRoot);
   
-  await validator.validateAllModules();
+  let results = await validator.validateAllModules();
   validator.generateReport();
   
   if (autoFix) {
     await validator.generateMissingTemplates();
     console.log('\n🔄 Re-validating after auto-fix...');
-    validator.results = [];
-    await validator.validateAllModules();
-    validator.generateReport();
+    // Create a new validator instance to re-validate
+    const revalidator = new TemplateValidator(marketplaceRoot);
+    results = await revalidator.validateAllModules();
+    revalidator.generateReport();
   }
   
   // Exit with error code if any modules are invalid
-  const hasInvalidModules = validator.results.some(r => !r.isValid);
+  const hasInvalidModules = results.some(r => !r.isValid);
   process.exit(hasInvalidModules ? 1 : 0);
 }
 
