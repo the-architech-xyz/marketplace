@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { useAuth } from './use-auth';
-import AuthGuard from './AuthGuard';
+import { useAuth } from '@/hooks/use-auth';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 interface ProtectedRouteProps {
   children: ReactNode;

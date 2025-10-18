@@ -1,5 +1,7 @@
 // Login Page Component
 
+"use client";
+
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -20,8 +22,8 @@ import {
   Chrome,
   AlertCircle
 } from 'lucide-react';
-import { useSession } from './use-session';
-import { useSocialAuth } from './use-social-auth';
+import { useSession } from '@/hooks/use-session';
+import { useSocialAuth } from '@/hooks/use-social-auth';
 
 interface LoginPageProps {
   onSuccess?: () => void;

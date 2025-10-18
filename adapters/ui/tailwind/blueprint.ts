@@ -64,7 +64,7 @@ function generateCoreActions(): BlueprintAction[] {
       template: 'templates/tailwind.config.js.tpl',
     
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.MERGE,
+        strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
       }},
     // Create PostCSS config

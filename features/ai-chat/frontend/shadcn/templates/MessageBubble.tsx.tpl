@@ -16,7 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { MarkdownRenderer } from './MarkdownRenderer';
+import { MarkdownRenderer } from '@/components/ai-chat/MarkdownRenderer';
 
 export interface MessageBubbleProps {
   id: string;

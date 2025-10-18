@@ -163,11 +163,47 @@ function generateCoreActions(): BlueprintAction[] {
       }
     },
 
-    // Auth Utils (types, hooks, stores are now handled by tech stack layer)
+    // Auth Utils & Hooks
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.shared_library}}utils/auth-utils.ts',
       template: 'templates/auth-utils.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.shared_library}}hooks/use-session.ts',
+      template: 'templates/use-session.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.shared_library}}hooks/use-social-auth.ts',
+      template: 'templates/use-social-auth.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.shared_library}}hooks/use-email-verification.ts',
+      template: 'templates/use-email-verification.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.shared_library}}hooks/use-auth.ts',
+      template: 'templates/use-auth.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
@@ -195,6 +231,15 @@ function generatePasswordResetActions(): BlueprintAction[] {
       type: BlueprintActionType.CREATE_FILE,
       path: '{{paths.app_root}}(auth)/reset-password/page.tsx',
       template: 'templates/reset-password-page.tsx.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '{{paths.shared_library}}hooks/use-password-reset.ts',
+      template: 'templates/use-password-reset.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1

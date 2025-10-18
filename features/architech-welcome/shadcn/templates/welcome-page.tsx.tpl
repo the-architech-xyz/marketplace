@@ -140,23 +140,6 @@ export default function WelcomePage() {
       </motion.section>
       <% } %>
 
-      {/* Quick Start Guide */}
-      <% if (module.parameters.showQuickStart) { %>
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1.4 }}
-        className="py-12"
-      >
-        <div className="text-center space-y-4 mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">Quick Start</h2>
-          <p className="text-gray-600">Get up and running in minutes</p>
-        </div>
-        
-        <QuickStartGuide />
-      </motion.section>
-      <% } %>
-
       {/* Footer */}
       <motion.footer
         initial={{ opacity: 0 }}
@@ -178,9 +161,9 @@ export default function WelcomePage() {
             </a>
           </p>
           <div className="flex justify-center gap-4 text-sm text-gray-500">
-            <a href="https://docs.architech.xyz" className="hover:text-gray-700">Documentation</a>
-            <a href="https://github.com/architech-xyz" className="hover:text-gray-700">GitHub</a>
-            <a href="https://discord.gg/architech" className="hover:text-gray-700">Discord</a>
+            <a href="https://doc.thearchitech.xyz" className="hover:text-gray-700">Documentation</a>
+            <a href="https://github.com/the-architech-xyz" className="hover:text-gray-700">GitHub</a>
+            <a href="https://discord.gg/sxhdEEWups" className="hover:text-gray-700">Discord</a>
           </div>
           <% } else { %>
           <div className="text-sm text-gray-500">

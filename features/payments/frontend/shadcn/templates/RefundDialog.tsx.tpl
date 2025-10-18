@@ -1,5 +1,7 @@
 // Refund Dialog Component
 
+"use client";
+
 import React, { useState } from 'react';
 import {
   Dialog,

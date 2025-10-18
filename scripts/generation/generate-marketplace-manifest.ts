@@ -263,16 +263,14 @@ async function generateEnhancedManifest(): Promise<void> {
     }
     console.log(`   ✅ Found ${manifest.modules.connectors.length} connectors\n`);
 
-    // Process Features
+    // Process Features (from feature manifests)
     console.log('✨ Processing features...');
-    const featureFiles = await glob('features/**/feature.json', { cwd: process.cwd() });
-    for (const file of featureFiles) {
-      const moduleEntry = await processModuleFile(file, 'feature');
-      if (moduleEntry) {
-        manifest.modules.features.push(moduleEntry);
-      }
+    const featureManifestFiles = await glob('dist/features/*.manifest.json', { cwd: process.cwd() });
+    for (const file of featureManifestFiles) {
+      const featureModules = await processFeatureManifest(file);
+      manifest.modules.features.push(...featureModules);
     }
-    console.log(`   ✅ Found ${manifest.modules.features.length} features\n`);
+    console.log(`   ✅ Found ${manifest.modules.features.length} feature implementations\n`);
 
     // Process Genomes
     console.log('🧬 Processing genomes...');
@@ -320,6 +318,55 @@ async function generateEnhancedManifest(): Promise<void> {
   } catch (error) {
     console.error('❌ Failed to generate manifest:', error);
     process.exit(1);
+  }
+}
+
+// ============================================================================
+// FEATURE MANIFEST PROCESSOR
+// ============================================================================
+
+async function processFeatureManifest(manifestPath: string): Promise<ModuleEntry[]> {
+  try {
+    const content = await fs.readFile(manifestPath, 'utf-8');
+    const featureManifest = JSON.parse(content);
+    
+    const entries: ModuleEntry[] = [];
+    
+    // Process each implementation as a separate module entry
+    for (const impl of featureManifest.implementations || []) {
+      const entry: ModuleEntry = {
+        id: impl.moduleId,
+        name: `${featureManifest.name} (${impl.type})`,
+        description: featureManifest.description || `${featureManifest.name} ${impl.type} implementation`,
+        category: 'features',
+        type: 'feature',
+        version: featureManifest.version || '1.0.0',
+        
+        // Dependencies from implementation
+        dependencies: impl.dependencies || [],
+        
+        // Feature-specific metadata
+        tags: [featureManifest.id, impl.type, ...(impl.stack || [])],
+        
+        // Parameters from implementation
+        parameters: impl.parameters || {},
+        
+        // Paths
+        blueprint: `features/${featureManifest.id}/${impl.type}/${impl.moduleId.split('/').pop()}/blueprint.ts`,
+        jsonFile: manifestPath
+      };
+      
+      // Add feature-specific fields
+      if (impl.capabilities) entry.provides = impl.capabilities;
+      if (impl.constraints) entry.complexity = 'intermediate';
+      
+      entries.push(entry);
+    }
+    
+    return entries;
+  } catch (error) {
+    console.warn(`⚠️  Failed to process feature manifest ${manifestPath}:`, error);
+    return [];
   }
 }
 

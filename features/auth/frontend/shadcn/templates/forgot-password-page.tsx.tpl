@@ -1,5 +1,7 @@
 // Forgot Password Page Component
 
+"use client";
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,7 +16,7 @@ import {
   CheckCircle,
   ArrowLeft
 } from 'lucide-react';
-import { usePasswordReset } from './use-password-reset';
+import { usePasswordReset } from '@/hooks/use-password-reset';
 
 interface ForgotPasswordPageProps {
   onSuccess?: () => void;

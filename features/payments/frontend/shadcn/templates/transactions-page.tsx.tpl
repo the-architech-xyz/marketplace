@@ -1,5 +1,7 @@
 // Transactions Page Component
 
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,8 +27,8 @@ import {
   TrendingDown,
   Minus
 } from 'lucide-react';
-import { useTransactions } from './use-transactions';
-import { TransactionTable } from './TransactionTable';
+import { useTransactions } from '@/hooks/payments/use-transactions';
+import { TransactionTable } from '@/components/payments/TransactionTable';
 
 interface TransactionsPageProps {
   onTransactionClick?: (transaction: any) => void;

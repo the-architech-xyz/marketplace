@@ -1,5 +1,7 @@
 // AI Provider Context Component
 
+"use client";
+
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
 
 // Types

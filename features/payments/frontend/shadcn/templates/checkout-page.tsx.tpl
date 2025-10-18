@@ -1,5 +1,7 @@
 // Checkout Page Component
 
+"use client";
+
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,10 +13,10 @@ import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, CreditCard, Lock, Shield, Check } from 'lucide-react';
-import { usePayments } from './use-payments';
-import { useCart } from './use-cart';
-import { PaymentMethodSelector } from './PaymentMethodSelector';
-import { CheckoutForm } from './CheckoutForm';
+import { usePayments } from '@/hooks/payments/use-payments';
+import { useCart } from '@/hooks/payments/use-cart';
+import { PaymentMethodSelector } from '@/components/payments/PaymentMethodSelector';
+import { CheckoutForm } from '@/components/payments/CheckoutForm';
 
 interface CheckoutPageProps {
   onSuccess?: (paymentIntent: any) => void;

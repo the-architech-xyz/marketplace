@@ -88,7 +88,7 @@ function generateCoreActions(): BlueprintAction[] {
       path: 'drizzle.config.ts',
       template: 'templates/drizzle.config.ts.tpl',
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.MERGE,
+        strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
       }
     },

@@ -1,0 +1,46 @@
+# Source TypeScript (we include compiled dist/)
+# But we KEEP blueprint.ts files as they're executed directly
+
+# Development files
+tsconfig.json
+.eslintrc*
+.prettierrc*
+
+# Git and CI
+.git/
+.github/
+.husky/
+.gitignore
+
+# Documentation (use docs site instead)
+docs/
+*.md
+!README.md
+MANIFEST_V2_GUIDE.md
+GENERATION_ERROR_REPORT.md
+
+# Build artifacts
+*.log
+
+# Development scripts source (we include dist/scripts/)
+scripts/**/*.ts
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Test genomes (keep official genomes)
+genomes/test/
+
+# Node modules
+node_modules/
+
+

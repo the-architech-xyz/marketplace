@@ -36,7 +36,7 @@ export function WelcomeLayout({ children }: WelcomeLayoutProps) {
               
               <div className="flex items-center gap-4">
                 <a
-                  href="https://docs.architech.xyz"
+                  href="https://doc.thearchitech.xyz"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
@@ -44,7 +44,7 @@ export function WelcomeLayout({ children }: WelcomeLayoutProps) {
                   Documentation
                 </a>
                 <a
-                  href="https://github.com/architech-xyz"
+                  href="https://github.com/the-architech-xyz"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-gray-600 hover:text-gray-900 transition-colors"

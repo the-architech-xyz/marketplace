@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useSendEmail, useTemplates } from '@/lib/emailing/hooks';
-import { useEmailContext } from './use-email-context';
+import { useEmailContext } from '@/hooks/use-email-context';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';

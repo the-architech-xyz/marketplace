@@ -1,5 +1,7 @@
+"use client";
+
 import { ReactNode, useState } from 'react';
-import { useAuth } from './use-auth';
+import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { 

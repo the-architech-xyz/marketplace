@@ -33,7 +33,7 @@ const vercelDeploymentBlueprint: Blueprint = {
       template: 'templates/env.example.tpl',
     
       conflictResolution: {
-        strategy: ConflictResolutionStrategy.MERGE,
+        strategy: ConflictResolutionStrategy.REPLACE,
         priority: 0
       }},
     // Create Vercel deployment scripts

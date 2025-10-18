@@ -1,6 +1,6 @@
 {
   "name": "@thearchitech.xyz/marketplace",
-  "version": "1.10.2",
+  "version": "0.8.1",
   "description": "The Architech Marketplace - Adapters, Connectors, Capabilities, and Features",
   "type": "module",
   "main": "index.js",
@@ -53,12 +53,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/the-architech-xyz/marketplace.git"
+    "url": "https://github.com/thearchitech-xyz/marketplace.git"
   },
   "bugs": {
-    "url": "https://github.com/the-architech-xyz/marketplace/issues"
+    "url": "https://github.com/thearchitech-xyz/marketplace/issues"
   },
-  "homepage": "https://the-architech.dev",
+  "homepage": "https://thearchitech.xyz",
   "engines": {
     "node": ">=16.0.0"
   },
@@ -90,7 +90,7 @@
     "precommit": "npm run validate:correctness"
   },
   "dependencies": {
-    "@thearchitech.xyz/types": "file:../types-package",
+    "@thearchitech.xyz/types": "^0.8.0",
     "@types/glob": "^9.0.0"
   },
   "devDependencies": {

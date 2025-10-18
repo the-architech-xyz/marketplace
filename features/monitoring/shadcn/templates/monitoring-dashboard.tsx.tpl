@@ -31,11 +31,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { MetricsCard } from './MetricsCard';
-import { AlertCard } from './AlertCard';
-import { SystemStatus } from './SystemStatus';
-import { PerformanceChart } from './PerformanceChart';
-import { RealTimeMetrics } from './RealTimeMetrics';
+import { Label } from '@/components/ui/label';
+import { MetricsCard } from '@/components/monitoring/MetricsCard';
+import { AlertCard } from '@/components/monitoring/AlertCard';
+import { SystemStatus } from '@/components/monitoring/SystemStatus';
+import { PerformanceChart } from '@/components/monitoring/PerformanceChart';
+import { RealTimeMetrics } from '@/components/monitoring/RealTimeMetrics';
 import { useMonitoring } from '@/lib/hooks/use-monitoring';
 import { useAlerts } from '@/lib/hooks/use-alerts';
 import { useMetrics } from '@/lib/hooks/use-metrics';

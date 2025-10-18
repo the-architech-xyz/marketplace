@@ -23,8 +23,8 @@ import {
   UseEmailsReturn,
   UseTemplatesReturn,
   UseEmailAnalyticsReturn
-} from './types';
-import { useEmailContext } from './use-email-context';
+} from '@/types/emailing';
+import { useEmailContext } from '@/hooks/use-email-context';
 import { EmailService } from '@/lib/services/EmailService';
 
 // Note: Query keys are managed by backend service

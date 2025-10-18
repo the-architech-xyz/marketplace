@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useEmailContext } from './use-email-context';
-import { useEmailAnalytics } from './hooks';
+import { useEmailContext } from '@/hooks/use-email-context';
+import { useEmailAnalytics } from '@/hooks/emailing/hooks';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

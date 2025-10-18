@@ -171,41 +171,6 @@ export function QuickStartGuide() {
         ))}
       </div>
 
-      {/* Next Steps */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Zap className="w-5 h-5" />
-            Next Steps
-          </CardTitle>
-          <CardDescription>
-            Explore these features to customize your application
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                className="flex items-center gap-3 p-4 border rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                <div className={`p-2 rounded-lg ${feature.color}`}>
-                  <feature.icon className="w-5 h-5" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-medium">{feature.title}</h4>
-                  <p className="text-sm text-gray-600">{feature.description}</p>
-                </div>
-                <ArrowRight className="w-4 h-4 text-gray-400" />
-              </motion.div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Documentation Links */}
       <Card>
         <CardHeader>

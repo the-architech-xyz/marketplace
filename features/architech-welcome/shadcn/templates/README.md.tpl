@@ -2,18 +2,6 @@
 
 <%= project.description %>
 
-## 🚀 Quick Start
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Open http://localhost:3000
-```
-
 ## 🛠️ Technology Stack
 
 This project was generated with The Architech and includes:
@@ -49,7 +37,8 @@ src/
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [Shadcn/UI](https://ui.shadcn.com)
-- [The Architech](https://architech.xyz)
+- [The Architech](https://thearchitech.xyz)
+- [Documentation](https://doc.thearchitech.xyz)
 
 ## 🤝 Contributing
 
@@ -61,4 +50,4 @@ src/
 
 ---
 
-Generated with ❤️ by [The Architech](https://architech.xyz)
+Generated with ❤️ by [The Architech](https://thearchitech.xyz)

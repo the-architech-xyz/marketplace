@@ -1,5 +1,7 @@
 // Invoices Page Component
 
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -22,8 +24,8 @@ import {
   XCircle,
   AlertCircle
 } from 'lucide-react';
-import { useInvoices } from './use-invoices';
-import { InvoiceCard } from './InvoiceCard';
+import { useInvoices } from '@/hooks/payments/use-invoices';
+import { InvoiceCard } from '@/components/payments/InvoiceCard';
 
 interface InvoicesPageProps {
   onInvoiceClick?: (invoice: any) => void;

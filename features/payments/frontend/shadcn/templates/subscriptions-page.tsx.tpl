@@ -1,5 +1,7 @@
 // Subscriptions Page Component
 
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -23,8 +25,8 @@ import {
   TrendingUp,
   Users
 } from 'lucide-react';
-import { useSubscriptions } from './use-subscriptions';
-import { SubscriptionCard } from './SubscriptionCard';
+import { useSubscriptions } from '@/hooks/payments/use-subscriptions';
+import { SubscriptionCard } from '@/components/payments/SubscriptionCard';
 
 interface SubscriptionsPageProps {
   onSubscriptionClick?: (subscription: any) => void;

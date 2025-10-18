@@ -1,5 +1,7 @@
 // Reset Password Page Component
 
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -17,7 +19,7 @@ import {
   CheckCircle,
   ArrowLeft
 } from 'lucide-react';
-import { usePasswordReset } from './use-password-reset';
+import { usePasswordReset } from '@/hooks/use-password-reset';
 
 interface ResetPasswordPageProps {
   onSuccess?: () => void;
