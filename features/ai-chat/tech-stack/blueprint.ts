@@ -8,10 +8,7 @@
  */
 
 import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
-import {
-  TypedMergedConfiguration,
-  extractTypedModuleParameters,
-} from "blueprint-config-types";
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
 export default function generateBlueprint(
   config: TypedMergedConfiguration<'features/ai-chat/tech-stack'>
@@ -44,7 +41,7 @@ export default function generateBlueprint(
   // Types - Re-exported from contract (single source of truth)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/ai-chat/types.ts',
+    path: '${paths.lib}/ai-chat/types.ts',
     content: `/**
  * AI Chat Types
  * Re-exported from contract for convenience
@@ -65,7 +62,7 @@ export type {
   // Schemas - Zod validation schemas
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/ai-chat/schemas.ts',
+    path: '${paths.lib}/ai-chat/schemas.ts',
     template: 'templates/schemas.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -73,11 +70,11 @@ export type {
     }
   });
   
-  // Service - Cohesive Services (wraps backend with TanStack Query)
+  // Hooks - Direct TanStack Query hooks (best practice pattern)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/ai-chat/AIChatService.ts',
-    template: 'templates/AIChatService.ts.tpl',
+    path: '${paths.lib}/ai-chat/hooks.ts',
+    template: 'templates/hooks.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
       priority: 1
@@ -87,7 +84,7 @@ export type {
   // Stores - Zustand state management
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/ai-chat/stores.ts',
+    path: '${paths.lib}/ai-chat/stores.ts',
     template: 'templates/stores.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -99,29 +96,11 @@ export type {
   // UTILITY FILES
   // ============================================================================
   
-  // Index file for easy imports
+  // Index file for easy imports (from template)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/ai-chat/index.ts',
-    content: `/**
- * AI Chat Feature - Tech Stack Layer
- * 
- * This module provides the client-side abstraction layer for AI chat.
- * Import the AIChatService to access all AI chat operations.
- */
-
-// Re-export types from contract
-export * from './types';
-
-// Re-export schemas for validation
-export * from './schemas';
-
-// Re-export Zustand stores
-export * from './stores';
-
-// Export the main Cohesive Service
-export { AIChatService } from './AIChatService';
-`,
+    path: '${paths.lib}/ai-chat/index.ts',
+    template: 'templates/index.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
       priority: 1

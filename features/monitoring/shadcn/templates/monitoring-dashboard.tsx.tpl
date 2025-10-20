@@ -32,23 +32,28 @@ import { Switch } from '@/components/ui/switch';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Label } from '@/components/ui/label';
-import { MetricsCard } from '@/components/monitoring/MetricsCard';
-import { AlertCard } from '@/components/monitoring/AlertCard';
-import { SystemStatus } from '@/components/monitoring/SystemStatus';
-import { PerformanceChart } from '@/components/monitoring/PerformanceChart';
-import { RealTimeMetrics } from '@/components/monitoring/RealTimeMetrics';
-import { useMonitoring } from '@/lib/hooks/use-monitoring';
-import { useAlerts } from '@/lib/hooks/use-alerts';
-import { useMetrics } from '@/lib/hooks/use-metrics';
+import MetricsCard from '@/components/monitoring/MetricsCard';
+import AlertCard from '@/components/monitoring/AlertCard';
+import SystemStatus from '@/components/monitoring/SystemStatus';
+import PerformanceChart from '@/components/monitoring/PerformanceChart';
+import RealTimeMetrics from '@/components/monitoring/RealTimeMetrics';
+import { useMonitoringDashboard, useSystemStatus, useMonitoringMetrics, useMonitoringAlerts } from '@/hooks/monitoring/use-monitoring';
 
 export default function MonitoringDashboard() {
   const [timeRange, setTimeRange] = useState('1h');
   const [autoRefresh, setAutoRefresh] = useState(true);
   const [refreshInterval, setRefreshInterval] = useState(30);
   
-  const { data: systemHealth, isLoading: healthLoading } = useMonitoring();
-  const { data: alerts, isLoading: alertsLoading } = useAlerts();
-  const { data: metrics, isLoading: metricsLoading } = useMetrics();
+  const {
+    metrics,
+    alerts,
+    systemStatus: systemHealth,
+    isLoading,
+  } = useMonitoringDashboard();
+  
+  const healthLoading = isLoading;
+  const alertsLoading = isLoading;
+  const metricsLoading = isLoading;
 
   // Mock data for demonstration
   const mockData = {

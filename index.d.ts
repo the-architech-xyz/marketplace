@@ -1,5 +1,7 @@
 /**
  * The Architech Marketplace Type Definitions
+ * 
+ * Runtime Functions
  */
 
 /**
@@ -101,4 +103,13 @@ export interface GenomeMetadata {
 
 // Re-export types from types package
 export * from '@thearchitech.xyz/types';
+
+// Module Artifacts (from types package)
+import { ModuleArtifacts as ModuleArtifactsType } from '@thearchitech.xyz/types';
+
+export declare const ModuleArtifacts: {
+  [key: string]: () => Promise<ModuleArtifactsType>;
+};
+
+export type ModuleId = keyof typeof ModuleArtifacts;
 

@@ -1,0 +1,43 @@
+{
+  "id": "connectors/infrastructure/tanstack-query-nextjs",
+  "name": "TanStack Query NextJS Connector",
+  "description": "TanStack Query setup and configuration for NextJS applications",
+  "type": "connector",
+  "version": "1.0.0",
+  "connects": ["tanstack-query", "nextjs"],
+  "provides": [
+    "query-client",
+    "query-provider",
+    "ssr-support",
+    "hydration",
+    "error-boundary",
+    "devtools"
+  ],
+  "requires": ["framework/nextjs", "data-fetching/tanstack-query"],
+  "parameters": {
+    "ssr": {
+      "name": "Server-Side Rendering",
+      "description": "SSR support for TanStack Query",
+      "type": "boolean",
+      "default": true
+    },
+    "hydration": {
+      "name": "Hydration",
+      "description": "Client-side hydration support",
+      "type": "boolean",
+      "default": true
+    },
+    "errorBoundary": {
+      "name": "Error Boundary",
+      "description": "Error boundary for query errors",
+      "type": "boolean",
+      "default": true
+    },
+    "devtools": {
+      "name": "DevTools",
+      "description": "TanStack Query DevTools integration",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

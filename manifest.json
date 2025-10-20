@@ -1,13 +1,13 @@
 {
   "version": "2.0.0",
-  "generatedAt": "2025-10-18T13:01:28.954Z",
+  "generatedAt": "2025-10-18T14:07:44.858Z",
   "stats": {
     "totalModules": 57,
     "adapters": 27,
     "connectors": 11,
     "features": 19,
     "genomes": 11,
-    "lastUpdated": "2025-10-18T13:01:28.956Z"
+    "lastUpdated": "2025-10-18T14:07:44.859Z"
   },
   "modules": {
     "adapters": [
@@ -56,52 +56,6 @@
             "default": true,
             "description": "Enable dark mode support",
             "required": false
-          }
-        },
-        "complexity": "simple"
-      },
-      {
-        "id": "state/zustand",
-        "name": "Zustand State Management",
-        "description": "Golden Core state management with Zustand - powerful, performant, and minimal boilerplate",
-        "category": "state",
-        "type": "adapter",
-        "version": "4.4.0",
-        "blueprint": "adapters/state/zustand/blueprint.ts",
-        "jsonFile": "adapters/state/zustand/adapter.json",
-        "parameters": {
-          "persistence": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable state persistence",
-            "required": false
-          },
-          "devtools": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable Redux DevTools",
-            "required": false
-          },
-          "immer": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable Immer for immutable updates",
-            "required": false
-          },
-          "middleware": {
-            "type": "array",
-            "default": [
-              "persist",
-              "devtools"
-            ],
-            "description": "Middleware to use",
-            "required": false,
-            "options": [
-              "persist",
-              "devtools",
-              "subscribeWithSelector",
-              "immer"
-            ]
           }
         },
         "complexity": "simple"
@@ -225,6 +179,117 @@
         "complexity": "simple"
       },
       {
+        "id": "testing/vitest",
+        "name": "Vitest",
+        "description": "Fast unit test framework powered by Vite",
+        "category": "testing",
+        "type": "adapter",
+        "version": "1.0.0",
+        "blueprint": "adapters/testing/vitest/blueprint.ts",
+        "jsonFile": "adapters/testing/vitest/adapter.json",
+        "provides": [
+          "testing-core",
+          "{{#if features.coverage}}testing-coverage{{/if}}",
+          "{{#if features.ui}}testing-ui{{/if}}",
+          "{{#if features.e2e}}testing-e2e{{/if}}"
+        ],
+        "dependencies": [
+          "framework/nextjs"
+        ],
+        "parameters": {
+          "environment": {
+            "type": "string",
+            "default": "jsdom",
+            "description": "Test environment",
+            "required": false,
+            "options": [
+              "jsdom",
+              "node",
+              "happy-dom"
+            ]
+          },
+          "features": {
+            "core": {
+              "type": "boolean",
+              "default": true,
+              "description": "Basic testing setup (config, setup, utils)"
+            },
+            "unitTests": {
+              "type": "boolean",
+              "default": true,
+              "description": "Unit testing capabilities"
+            },
+            "coverage": {
+              "type": "boolean",
+              "default": true,
+              "description": "Code coverage reporting"
+            },
+            "ui": {
+              "type": "boolean",
+              "default": false,
+              "description": "Interactive test runner UI"
+            },
+            "e2e": {
+              "type": "boolean",
+              "default": false,
+              "description": "End-to-end testing support"
+            },
+            "integrationTests": {
+              "type": "boolean",
+              "default": false,
+              "description": "Integration testing support"
+            }
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "state/zustand",
+        "name": "Zustand State Management",
+        "description": "Golden Core state management with Zustand - powerful, performant, and minimal boilerplate",
+        "category": "state",
+        "type": "adapter",
+        "version": "4.4.0",
+        "blueprint": "adapters/state/zustand/blueprint.ts",
+        "jsonFile": "adapters/state/zustand/adapter.json",
+        "parameters": {
+          "persistence": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable state persistence",
+            "required": false
+          },
+          "devtools": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable Redux DevTools",
+            "required": false
+          },
+          "immer": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable Immer for immutable updates",
+            "required": false
+          },
+          "middleware": {
+            "type": "array",
+            "default": [
+              "persist",
+              "devtools"
+            ],
+            "description": "Middleware to use",
+            "required": false,
+            "options": [
+              "persist",
+              "devtools",
+              "subscribeWithSelector",
+              "immer"
+            ]
+          }
+        },
+        "complexity": "simple"
+      },
+      {
         "id": "services/github-api",
         "name": "GitHub API",
         "description": "GitHub API client for repository management and operations",
@@ -254,6 +319,67 @@
           }
         },
         "complexity": "simple"
+      },
+      {
+        "id": "quality/eslint",
+        "name": "ESLint",
+        "description": "Golden Core code linting with ESLint for JavaScript and TypeScript",
+        "category": "quality",
+        "type": "adapter",
+        "version": "8.0.0",
+        "blueprint": "adapters/quality/eslint/blueprint.ts",
+        "jsonFile": "adapters/quality/eslint/adapter.json",
+        "parameters": {
+          "typescript": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable TypeScript support",
+            "required": false
+          },
+          "react": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable React support",
+            "required": false
+          },
+          "nextjs": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable Next.js specific rules",
+            "required": false
+          },
+          "nodejs": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable Node.js specific rules",
+            "required": false
+          },
+          "accessibility": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable accessibility rules",
+            "required": false
+          },
+          "imports": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable import/export rules",
+            "required": false
+          },
+          "strict": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable strict mode rules",
+            "required": false
+          },
+          "format": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable formatting rules",
+            "required": false
+          }
+        },
+        "complexity": "intermediate"
       },
       {
         "id": "quality/prettier",
@@ -363,127 +489,51 @@
         "complexity": "advanced"
       },
       {
-        "id": "quality/eslint",
-        "name": "ESLint",
-        "description": "Golden Core code linting with ESLint for JavaScript and TypeScript",
-        "category": "quality",
-        "type": "adapter",
-        "version": "8.0.0",
-        "blueprint": "adapters/quality/eslint/blueprint.ts",
-        "jsonFile": "adapters/quality/eslint/adapter.json",
-        "parameters": {
-          "typescript": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable TypeScript support",
-            "required": false
-          },
-          "react": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable React support",
-            "required": false
-          },
-          "nextjs": {
-            "type": "boolean",
-            "default": false,
-            "description": "Enable Next.js specific rules",
-            "required": false
-          },
-          "nodejs": {
-            "type": "boolean",
-            "default": false,
-            "description": "Enable Node.js specific rules",
-            "required": false
-          },
-          "accessibility": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable accessibility rules",
-            "required": false
-          },
-          "imports": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable import/export rules",
-            "required": false
-          },
-          "strict": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable strict mode rules",
-            "required": false
-          },
-          "format": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable formatting rules",
-            "required": false
-          }
-        },
-        "complexity": "intermediate"
-      },
-      {
-        "id": "testing/vitest",
-        "name": "Vitest",
-        "description": "Fast unit test framework powered by Vite",
-        "category": "testing",
+        "id": "payment/stripe",
+        "name": "Stripe Payment Processing",
+        "description": "Complete payment processing with Stripe including subscriptions and one-time payments",
+        "category": "payment",
         "type": "adapter",
         "version": "1.0.0",
-        "blueprint": "adapters/testing/vitest/blueprint.ts",
-        "jsonFile": "adapters/testing/vitest/adapter.json",
-        "provides": [
-          "testing-core",
-          "{{#if features.coverage}}testing-coverage{{/if}}",
-          "{{#if features.ui}}testing-ui{{/if}}",
-          "{{#if features.e2e}}testing-e2e{{/if}}"
-        ],
-        "dependencies": [
-          "framework/nextjs"
-        ],
+        "blueprint": "adapters/payment/stripe/blueprint.ts",
+        "jsonFile": "adapters/payment/stripe/adapter.json",
+        "dependencies": [],
         "parameters": {
-          "environment": {
-            "type": "string",
-            "default": "jsdom",
-            "description": "Test environment",
+          "currency": {
+            "type": "select",
+            "choices": [
+              "usd",
+              "eur",
+              "gbp",
+              "cad",
+              "aud",
+              "jpy"
+            ],
             "required": false,
-            "options": [
-              "jsdom",
-              "node",
-              "happy-dom"
-            ]
+            "default": "usd",
+            "description": "Default currency for payments"
           },
-          "features": {
-            "core": {
-              "type": "boolean",
-              "default": true,
-              "description": "Basic testing setup (config, setup, utils)"
-            },
-            "unitTests": {
-              "type": "boolean",
-              "default": true,
-              "description": "Unit testing capabilities"
-            },
-            "coverage": {
-              "type": "boolean",
-              "default": true,
-              "description": "Code coverage reporting"
-            },
-            "ui": {
-              "type": "boolean",
-              "default": false,
-              "description": "Interactive test runner UI"
-            },
-            "e2e": {
-              "type": "boolean",
-              "default": false,
-              "description": "End-to-end testing support"
-            },
-            "integrationTests": {
-              "type": "boolean",
-              "default": false,
-              "description": "Integration testing support"
-            }
+          "mode": {
+            "type": "select",
+            "choices": [
+              "test",
+              "live"
+            ],
+            "required": false,
+            "default": "test",
+            "description": "Stripe mode (test or live)"
+          },
+          "webhooks": {
+            "type": "boolean",
+            "required": false,
+            "default": true,
+            "description": "Enable webhook handling"
+          },
+          "dashboard": {
+            "type": "boolean",
+            "required": false,
+            "default": true,
+            "description": "Enable Stripe Dashboard integration"
           }
         },
         "complexity": "simple"
@@ -508,8 +558,8 @@
           "dsn": {
             "type": "string",
             "default": "",
-            "description": "Sentry DSN",
-            "required": true
+            "description": "Sentry DSN (or set SENTRY_DSN env var)",
+            "required": false
           },
           "environment": {
             "type": "string",
@@ -743,6 +793,61 @@
         "complexity": "intermediate"
       },
       {
+        "id": "framework/react",
+        "name": "React",
+        "description": "A JavaScript library for building user interfaces",
+        "category": "framework",
+        "type": "adapter",
+        "version": "18.2.0",
+        "blueprint": "adapters/framework/react/blueprint.ts",
+        "jsonFile": "adapters/framework/react/adapter.json",
+        "provides": [
+          {
+            "name": "react",
+            "version": "18.2.0",
+            "description": "React library for building user interfaces"
+          },
+          {
+            "name": "react-dom",
+            "version": "18.2.0",
+            "description": "React DOM rendering"
+          },
+          {
+            "name": "typescript",
+            "version": "5.0.0",
+            "description": "TypeScript language support"
+          }
+        ],
+        "dependencies": [],
+        "parameters": {
+          "typescript": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable TypeScript support",
+            "required": false
+          },
+          "srcDir": {
+            "type": "boolean",
+            "default": true,
+            "description": "Use src/ directory",
+            "required": false
+          },
+          "importAlias": {
+            "type": "string",
+            "default": "@/*",
+            "description": "Import alias for absolute imports",
+            "required": false
+          },
+          "reactVersion": {
+            "type": "string",
+            "default": "18.2.0",
+            "description": "React version to use",
+            "required": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
         "id": "framework/expo",
         "name": "React Native with Expo",
         "description": "A framework for building native apps using React Native and Expo",
@@ -848,14 +953,14 @@
           "apiKey": {
             "type": "string",
             "default": "",
-            "description": "Resend API key",
-            "required": true
+            "description": "Resend API key (or set RESEND_API_KEY env var)",
+            "required": false
           },
           "fromEmail": {
             "type": "string",
             "default": "noreply@example.com",
-            "description": "Default from email address",
-            "required": true
+            "description": "Default from email address (or set FROM_EMAIL env var)",
+            "required": false
           },
           "features": {
             "core": {
@@ -879,225 +984,50 @@
         "complexity": "simple"
       },
       {
-        "id": "framework/react",
-        "name": "React",
-        "description": "A JavaScript library for building user interfaces",
-        "category": "framework",
-        "type": "adapter",
-        "version": "18.2.0",
-        "blueprint": "adapters/framework/react/blueprint.ts",
-        "jsonFile": "adapters/framework/react/adapter.json",
-        "provides": [
-          {
-            "name": "react",
-            "version": "18.2.0",
-            "description": "React library for building user interfaces"
-          },
-          {
-            "name": "react-dom",
-            "version": "18.2.0",
-            "description": "React DOM rendering"
-          },
-          {
-            "name": "typescript",
-            "version": "5.0.0",
-            "description": "TypeScript language support"
-          }
-        ],
-        "dependencies": [],
-        "parameters": {
-          "typescript": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable TypeScript support",
-            "required": false
-          },
-          "srcDir": {
-            "type": "boolean",
-            "default": true,
-            "description": "Use src/ directory",
-            "required": false
-          },
-          "importAlias": {
-            "type": "string",
-            "default": "@/*",
-            "description": "Import alias for absolute imports",
-            "required": false
-          },
-          "reactVersion": {
-            "type": "string",
-            "default": "18.2.0",
-            "description": "React version to use",
-            "required": false
-          }
-        },
-        "complexity": "simple"
-      },
-      {
-        "id": "payment/stripe",
-        "name": "Stripe Payment Processing",
-        "description": "Complete payment processing with Stripe including subscriptions and one-time payments",
-        "category": "payment",
+        "id": "deployment/docker",
+        "name": "Docker Deployment",
+        "description": "Containerization and deployment setup with Docker",
+        "category": "deployment",
         "type": "adapter",
         "version": "1.0.0",
-        "blueprint": "adapters/payment/stripe/blueprint.ts",
-        "jsonFile": "adapters/payment/stripe/adapter.json",
+        "blueprint": "adapters/deployment/docker/blueprint.ts",
+        "jsonFile": "adapters/deployment/docker/adapter.json",
         "dependencies": [],
         "parameters": {
-          "currency": {
-            "type": "select",
-            "choices": [
-              "usd",
-              "eur",
-              "gbp",
-              "cad",
-              "aud",
-              "jpy"
-            ],
-            "required": false,
-            "default": "usd",
-            "description": "Default currency for payments"
-          },
-          "mode": {
-            "type": "select",
-            "choices": [
-              "test",
-              "live"
-            ],
-            "required": false,
-            "default": "test",
-            "description": "Stripe mode (test or live)"
-          },
-          "webhooks": {
-            "type": "boolean",
-            "required": false,
-            "default": true,
-            "description": "Enable webhook handling"
-          },
-          "dashboard": {
-            "type": "boolean",
-            "required": false,
-            "default": true,
-            "description": "Enable Stripe Dashboard integration"
-          }
-        },
-        "complexity": "simple"
-      },
-      {
-        "id": "database/sequelize",
-        "name": "Sequelize ORM",
-        "description": "Promise-based Node.js ORM for PostgreSQL, MySQL, MariaDB, SQLite and Microsoft SQL Server",
-        "category": "database",
-        "type": "adapter",
-        "version": "6.0.0",
-        "blueprint": "adapters/database/sequelize/blueprint.ts",
-        "jsonFile": "adapters/database/sequelize/adapter.json",
-        "dependencies": [],
-        "parameters": {
-          "host": {
+          "nodeVersion": {
             "type": "string",
-            "default": "localhost",
-            "description": "Database host",
+            "default": "18-alpine",
+            "description": "Node.js version for Docker image",
             "required": false
           },
-          "port": {
-            "type": "number",
-            "default": 5432,
-            "description": "Database port",
-            "required": false
-          },
-          "username": {
-            "type": "string",
-            "default": "postgres",
-            "description": "Database username",
-            "required": false
-          },
-          "password": {
-            "type": "string",
-            "default": "",
-            "description": "Database password",
-            "required": false
-          },
-          "databaseName": {
-            "type": "string",
-            "default": "myapp",
-            "description": "Database name",
-            "required": true
-          },
-          "logging": {
-            "type": "boolean",
-            "default": false,
-            "description": "Enable SQL logging",
-            "required": false
-          },
-          "pool": {
+          "optimization": {
             "type": "boolean",
             "default": true,
-            "description": "Enable connection pooling",
+            "description": "Enable production optimizations",
             "required": false
           },
-          "databaseType": {
-            "type": "string",
-            "default": "postgresql",
-            "description": "Database type",
-            "required": true,
-            "options": [
-              "postgresql",
-              "mysql",
-              "sqlite",
-              "mariadb",
-              "mssql"
-            ]
-          }
-        },
-        "complexity": "intermediate"
-      },
-      {
-        "id": "database/prisma",
-        "name": "Prisma ORM",
-        "description": "Next-generation ORM for Node.js and TypeScript",
-        "category": "database",
-        "type": "adapter",
-        "version": "5.0.0",
-        "blueprint": "adapters/database/prisma/blueprint.ts",
-        "jsonFile": "adapters/database/prisma/adapter.json",
-        "dependencies": [],
-        "parameters": {
-          "provider": {
-            "type": "string",
-            "default": "postgresql",
-            "description": "Database provider",
-            "required": true,
-            "options": [
-              "postgresql",
-              "mysql",
-              "sqlite",
-              "mongodb"
-            ]
-          },
-          "studio": {
+          "healthCheck": {
             "type": "boolean",
             "default": true,
-            "description": "Enable Prisma Studio",
+            "description": "Enable health check endpoint",
             "required": false
           },
-          "migrations": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable database migrations",
-            "required": false
-          },
-          "databaseType": {
-            "type": "string",
-            "default": "postgresql",
-            "description": "Database type",
-            "required": true,
-            "options": [
-              "postgresql",
-              "mysql",
-              "sqlite",
-              "mongodb"
-            ]
+          "features": {
+            "development": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable development environment"
+            },
+            "production": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable production environment"
+            },
+            "compose": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable docker-compose setup"
+            }
           }
         },
         "complexity": "simple"
@@ -1193,135 +1123,224 @@
         "complexity": "intermediate"
       },
       {
-        "id": "deployment/docker",
-        "name": "Docker Deployment",
-        "description": "Containerization and deployment setup with Docker",
-        "category": "deployment",
+        "id": "database/typeorm",
+        "name": "TypeORM",
+        "description": "TypeScript ORM for Node.js with decorators and migrations",
+        "category": "database",
         "type": "adapter",
-        "version": "1.0.0",
-        "blueprint": "adapters/deployment/docker/blueprint.ts",
-        "jsonFile": "adapters/deployment/docker/adapter.json",
+        "version": "0.3.0",
+        "blueprint": "adapters/database/typeorm/blueprint.ts",
+        "jsonFile": "adapters/database/typeorm/adapter.json",
         "dependencies": [],
         "parameters": {
-          "nodeVersion": {
+          "synchronize": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable schema synchronization",
+            "required": false
+          },
+          "logging": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable query logging",
+            "required": false
+          },
+          "databaseType": {
             "type": "string",
-            "default": "18-alpine",
-            "description": "Node.js version for Docker image",
+            "default": "postgresql",
+            "description": "Database type",
+            "required": true,
+            "options": [
+              "postgresql",
+              "mysql",
+              "sqlite",
+              "mongodb"
+            ]
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "database/sequelize",
+        "name": "Sequelize ORM",
+        "description": "Promise-based Node.js ORM for PostgreSQL, MySQL, MariaDB, SQLite and Microsoft SQL Server",
+        "category": "database",
+        "type": "adapter",
+        "version": "6.0.0",
+        "blueprint": "adapters/database/sequelize/blueprint.ts",
+        "jsonFile": "adapters/database/sequelize/adapter.json",
+        "dependencies": [],
+        "parameters": {
+          "host": {
+            "type": "string",
+            "default": "localhost",
+            "description": "Database host",
             "required": false
           },
-          "optimization": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable production optimizations",
+          "port": {
+            "type": "number",
+            "default": 5432,
+            "description": "Database port",
             "required": false
           },
-          "healthCheck": {
+          "username": {
+            "type": "string",
+            "default": "postgres",
+            "description": "Database username",
+            "required": false
+          },
+          "password": {
+            "type": "string",
+            "default": "",
+            "description": "Database password",
+            "required": false
+          },
+          "databaseName": {
+            "type": "string",
+            "default": "myapp",
+            "description": "Database name",
+            "required": true
+          },
+          "logging": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable SQL logging",
+            "required": false
+          },
+          "pool": {
             "type": "boolean",
             "default": true,
-            "description": "Enable health check endpoint",
+            "description": "Enable connection pooling",
             "required": false
+          },
+          "databaseType": {
+            "type": "string",
+            "default": "postgresql",
+            "description": "Database type",
+            "required": true,
+            "options": [
+              "postgresql",
+              "mysql",
+              "sqlite",
+              "mariadb",
+              "mssql"
+            ]
+          }
+        },
+        "complexity": "intermediate"
+      },
+      {
+        "id": "database/drizzle",
+        "name": "Drizzle ORM",
+        "description": "TypeScript ORM with excellent developer experience",
+        "category": "database",
+        "type": "adapter",
+        "version": "0.29.0",
+        "blueprint": "adapters/database/drizzle/blueprint.ts",
+        "jsonFile": "adapters/database/drizzle/adapter.json",
+        "provides": [
+          "database-core",
+          "{{#if features.migrations}}database-migrations{{/if}}",
+          "{{#if features.studio}}database-studio{{/if}}",
+          "{{#if features.relations}}database-relations{{/if}}",
+          "{{#if features.seeding}}database-seeding{{/if}}"
+        ],
+        "dependencies": [],
+        "parameters": {
+          "provider": {
+            "type": "string",
+            "default": "neon",
+            "description": "Database provider",
+            "required": false,
+            "options": [
+              "neon",
+              "planetscale",
+              "supabase",
+              "local"
+            ]
+          },
+          "databaseType": {
+            "type": "string",
+            "default": "postgresql",
+            "description": "Database type to use",
+            "required": true,
+            "options": [
+              "postgresql",
+              "mysql",
+              "sqlite"
+            ]
           },
           "features": {
-            "development": {
-              "type": "boolean",
-              "default": true,
-              "description": "Enable development environment"
+            "core": {
+              "description": "Essential database functionality (schema, queries, types)",
+              "default": true
             },
-            "production": {
-              "type": "boolean",
-              "default": true,
-              "description": "Enable production environment"
+            "migrations": {
+              "description": "Database schema migrations and versioning",
+              "default": true
             },
-            "compose": {
-              "type": "boolean",
-              "default": true,
-              "description": "Enable docker-compose setup"
+            "studio": {
+              "description": "Visual database browser and query interface",
+              "default": false
+            },
+            "relations": {
+              "description": "Advanced relationship management and queries",
+              "default": false
+            },
+            "seeding": {
+              "description": "Data seeding and fixtures management",
+              "default": false
             }
           }
         },
         "complexity": "simple"
       },
       {
-        "id": "core/forms",
-        "name": "Forms",
-        "description": "Golden Core form handling with validation using React Hook Form and Zod",
-        "category": "core",
+        "id": "database/prisma",
+        "name": "Prisma ORM",
+        "description": "Next-generation ORM for Node.js and TypeScript",
+        "category": "database",
         "type": "adapter",
-        "version": "2.0.0",
-        "blueprint": "adapters/core/forms/blueprint.ts",
-        "jsonFile": "adapters/core/forms/adapter.json",
-        "parameters": {
-          "zod": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable Zod for schema validation",
-            "required": false
-          },
-          "reactHookForm": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable React Hook Form for form handling",
-            "required": false
-          },
-          "resolvers": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable @hookform/resolvers for Zod integration",
-            "required": false
-          },
-          "accessibility": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable accessibility features",
-            "required": false
-          },
-          "devtools": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable React Hook Form DevTools",
-            "required": false
-          },
-          "advancedValidation": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable advanced validation features",
-            "required": false
-          }
-        },
-        "complexity": "intermediate"
-      },
-      {
-        "id": "core/git",
-        "name": "Git Version Control",
-        "description": "Local git repository management and operations",
-        "category": "core",
-        "type": "adapter",
-        "version": "1.0.0",
-        "blueprint": "adapters/core/git/blueprint.ts",
-        "jsonFile": "adapters/core/git/adapter.json",
+        "version": "5.0.0",
+        "blueprint": "adapters/database/prisma/blueprint.ts",
+        "jsonFile": "adapters/database/prisma/adapter.json",
         "dependencies": [],
         "parameters": {
-          "userName": {
+          "provider": {
             "type": "string",
-            "description": "Git user name for commits",
-            "required": false
+            "default": "postgresql",
+            "description": "Database provider",
+            "required": true,
+            "options": [
+              "postgresql",
+              "mysql",
+              "sqlite",
+              "mongodb"
+            ]
           },
-          "userEmail": {
-            "type": "string",
-            "description": "Git user email for commits",
-            "required": false
-          },
-          "defaultBranch": {
-            "type": "string",
-            "default": "main",
-            "description": "Default branch name for new repositories",
-            "required": false
-          },
-          "autoInit": {
+          "studio": {
             "type": "boolean",
             "default": true,
-            "description": "Automatically initialize git repository after project creation",
+            "description": "Enable Prisma Studio",
             "required": false
+          },
+          "migrations": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable database migrations",
+            "required": false
+          },
+          "databaseType": {
+            "type": "string",
+            "default": "postgresql",
+            "description": "Database type",
+            "required": true,
+            "options": [
+              "postgresql",
+              "mysql",
+              "sqlite",
+              "mongodb"
+            ]
           }
         },
         "complexity": "simple"
@@ -1394,95 +1413,89 @@
         "complexity": "simple"
       },
       {
-        "id": "blockchain/web3",
-        "name": "Viem Ethereum Integration",
-        "description": "Modern, type-safe Web3 integration using viem for Ethereum blockchain interactions",
-        "category": "blockchain",
+        "id": "core/git",
+        "name": "Git Version Control",
+        "description": "Local git repository management and operations",
+        "category": "core",
         "type": "adapter",
-        "version": "2.0.0",
-        "blueprint": "adapters/blockchain/web3/blueprint.ts",
-        "jsonFile": "adapters/blockchain/web3/adapter.json",
-        "provides": [
-          {
-            "name": "viem",
-            "version": "2.0.0",
-            "description": "Modern, type-safe Ethereum library"
-          },
-          {
-            "name": "web3-core",
-            "version": "2.0.0",
-            "description": "Core Web3 utilities and configuration"
-          },
-          {
-            "name": "react-query",
-            "version": "5.0.0",
-            "description": "Data fetching and caching for Web3"
-          }
-        ],
+        "version": "1.0.0",
+        "blueprint": "adapters/core/git/blueprint.ts",
+        "jsonFile": "adapters/core/git/adapter.json",
         "dependencies": [],
         "parameters": {
-          "networks": {
-            "type": "array",
-            "default": [
-              "mainnet",
-              "polygon",
-              "arbitrum"
-            ],
-            "description": "Supported blockchain networks",
-            "required": true,
-            "options": [
-              "mainnet",
-              "sepolia",
-              "polygon",
-              "arbitrum"
-            ]
+          "userName": {
+            "type": "string",
+            "description": "Git user name for commits",
+            "required": false
           },
-          "walletConnect": {
+          "userEmail": {
+            "type": "string",
+            "description": "Git user email for commits",
+            "required": false
+          },
+          "defaultBranch": {
+            "type": "string",
+            "default": "main",
+            "description": "Default branch name for new repositories",
+            "required": false
+          },
+          "autoInit": {
             "type": "boolean",
             "default": true,
-            "description": "Enable WalletConnect support",
+            "description": "Automatically initialize git repository after project creation",
             "required": false
-          },
-          "contracts": {
-            "type": "array",
-            "default": [],
-            "description": "Smart contract addresses",
-            "required": false
-          },
-          "features": {
-            "walletConnect": {
-              "type": "boolean",
-              "default": true,
-              "description": "Enable wallet connection"
-            },
-            "smartContracts": {
-              "type": "boolean",
-              "default": true,
-              "description": "Enable smart contract interactions"
-            },
-            "transactions": {
-              "type": "boolean",
-              "default": true,
-              "description": "Enable transaction management"
-            },
-            "events": {
-              "type": "boolean",
-              "default": true,
-              "description": "Enable blockchain event listening"
-            },
-            "ens": {
-              "type": "boolean",
-              "default": false,
-              "description": "Enable ENS name resolution"
-            },
-            "nft": {
-              "type": "boolean",
-              "default": false,
-              "description": "Enable NFT functionality"
-            }
           }
         },
         "complexity": "simple"
+      },
+      {
+        "id": "core/forms",
+        "name": "Forms",
+        "description": "Golden Core form handling with validation using React Hook Form and Zod",
+        "category": "core",
+        "type": "adapter",
+        "version": "2.0.0",
+        "blueprint": "adapters/core/forms/blueprint.ts",
+        "jsonFile": "adapters/core/forms/adapter.json",
+        "parameters": {
+          "zod": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable Zod for schema validation",
+            "required": false
+          },
+          "reactHookForm": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable React Hook Form for form handling",
+            "required": false
+          },
+          "resolvers": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable @hookform/resolvers for Zod integration",
+            "required": false
+          },
+          "accessibility": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable accessibility features",
+            "required": false
+          },
+          "devtools": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable React Hook Form DevTools",
+            "required": false
+          },
+          "advancedValidation": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable advanced validation features",
+            "required": false
+          }
+        },
+        "complexity": "intermediate"
       },
       {
         "id": "content/next-intl",
@@ -1539,6 +1552,144 @@
               "type": "boolean",
               "default": false,
               "description": "Enable number formatting features"
+            }
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "auth/better-auth",
+        "name": "Better Auth",
+        "description": "Modern authentication library for TypeScript",
+        "category": "auth",
+        "type": "adapter",
+        "version": "0.18.0",
+        "blueprint": "adapters/auth/better-auth/blueprint.ts",
+        "jsonFile": "adapters/auth/better-auth/adapter.json",
+        "dependencies": [],
+        "parameters": {
+          "providers": {
+            "type": "array",
+            "required": false,
+            "default": [
+              "email"
+            ],
+            "description": "Authentication providers to enable"
+          },
+          "session": {
+            "type": "select",
+            "choices": [
+              "jwt",
+              "database"
+            ],
+            "required": false,
+            "default": "jwt",
+            "description": "Session management strategy"
+          },
+          "csrf": {
+            "type": "boolean",
+            "required": false,
+            "default": true,
+            "description": "Enable CSRF protection"
+          },
+          "rateLimit": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable rate limiting",
+            "required": false
+          }
+        },
+        "complexity": "simple"
+      },
+      {
+        "id": "blockchain/web3",
+        "name": "Viem Ethereum Integration",
+        "description": "Modern, type-safe Web3 integration using viem for Ethereum blockchain interactions",
+        "category": "blockchain",
+        "type": "adapter",
+        "version": "2.0.0",
+        "blueprint": "adapters/blockchain/web3/blueprint.ts",
+        "jsonFile": "adapters/blockchain/web3/adapter.json",
+        "provides": [
+          {
+            "name": "viem",
+            "version": "2.0.0",
+            "description": "Modern, type-safe Ethereum library"
+          },
+          {
+            "name": "web3-core",
+            "version": "2.0.0",
+            "description": "Core Web3 utilities and configuration"
+          },
+          {
+            "name": "react-query",
+            "version": "5.0.0",
+            "description": "Data fetching and caching for Web3"
+          }
+        ],
+        "dependencies": [],
+        "parameters": {
+          "networks": {
+            "type": "array",
+            "default": [
+              "mainnet",
+              "polygon",
+              "arbitrum"
+            ],
+            "description": "Supported blockchain networks",
+            "required": true,
+            "options": [
+              "mainnet",
+              "sepolia",
+              "polygon",
+              "arbitrum",
+              "optimism",
+              "base",
+              "ethereum"
+            ]
+          },
+          "walletConnect": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable WalletConnect support",
+            "required": false
+          },
+          "contracts": {
+            "type": "array",
+            "default": [],
+            "description": "Smart contract addresses",
+            "required": false
+          },
+          "features": {
+            "walletConnect": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable wallet connection"
+            },
+            "smartContracts": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable smart contract interactions"
+            },
+            "transactions": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable transaction management"
+            },
+            "events": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable blockchain event listening"
+            },
+            "ens": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable ENS name resolution"
+            },
+            "nft": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable NFT functionality"
             }
           }
         },
@@ -1653,157 +1804,54 @@
           }
         },
         "complexity": "simple"
-      },
-      {
-        "id": "auth/better-auth",
-        "name": "Better Auth",
-        "description": "Modern authentication library for TypeScript",
-        "category": "auth",
-        "type": "adapter",
-        "version": "0.18.0",
-        "blueprint": "adapters/auth/better-auth/blueprint.ts",
-        "jsonFile": "adapters/auth/better-auth/adapter.json",
-        "dependencies": [],
-        "parameters": {
-          "providers": {
-            "type": "array",
-            "required": false,
-            "default": [
-              "email"
-            ],
-            "description": "Authentication providers to enable"
-          },
-          "session": {
-            "type": "select",
-            "choices": [
-              "jwt",
-              "database"
-            ],
-            "required": false,
-            "default": "jwt",
-            "description": "Session management strategy"
-          },
-          "csrf": {
-            "type": "boolean",
-            "required": false,
-            "default": true,
-            "description": "Enable CSRF protection"
-          },
-          "rateLimit": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable rate limiting",
-            "required": false
-          }
-        },
-        "complexity": "simple"
-      },
-      {
-        "id": "database/typeorm",
-        "name": "TypeORM",
-        "description": "TypeScript ORM for Node.js with decorators and migrations",
-        "category": "database",
-        "type": "adapter",
-        "version": "0.3.0",
-        "blueprint": "adapters/database/typeorm/blueprint.ts",
-        "jsonFile": "adapters/database/typeorm/adapter.json",
-        "dependencies": [],
-        "parameters": {
-          "synchronize": {
-            "type": "boolean",
-            "default": false,
-            "description": "Enable schema synchronization",
-            "required": false
-          },
-          "logging": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable query logging",
-            "required": false
-          },
-          "databaseType": {
-            "type": "string",
-            "default": "postgresql",
-            "description": "Database type",
-            "required": true,
-            "options": [
-              "postgresql",
-              "mysql",
-              "sqlite",
-              "mongodb"
-            ]
-          }
-        },
-        "complexity": "simple"
-      },
-      {
-        "id": "database/drizzle",
-        "name": "Drizzle ORM",
-        "description": "TypeScript ORM with excellent developer experience",
-        "category": "database",
-        "type": "adapter",
-        "version": "0.29.0",
-        "blueprint": "adapters/database/drizzle/blueprint.ts",
-        "jsonFile": "adapters/database/drizzle/adapter.json",
-        "provides": [
-          "database-core",
-          "{{#if features.migrations}}database-migrations{{/if}}",
-          "{{#if features.studio}}database-studio{{/if}}",
-          "{{#if features.relations}}database-relations{{/if}}",
-          "{{#if features.seeding}}database-seeding{{/if}}"
-        ],
-        "dependencies": [],
-        "parameters": {
-          "provider": {
-            "type": "string",
-            "default": "neon",
-            "description": "Database provider",
-            "required": false,
-            "options": [
-              "neon",
-              "planetscale",
-              "supabase",
-              "local"
-            ]
-          },
-          "databaseType": {
-            "type": "string",
-            "default": "postgresql",
-            "description": "Database type to use",
-            "required": true,
-            "options": [
-              "postgresql",
-              "mysql",
-              "sqlite"
-            ]
-          },
-          "features": {
-            "core": {
-              "description": "Essential database functionality (schema, queries, types)",
-              "default": true
-            },
-            "migrations": {
-              "description": "Database schema migrations and versioning",
-              "default": true
-            },
-            "studio": {
-              "description": "Visual database browser and query interface",
-              "default": false
-            },
-            "relations": {
-              "description": "Advanced relationship management and queries",
-              "default": false
-            },
-            "seeding": {
-              "description": "Data seeding and fixtures management",
-              "default": false
-            }
-          }
-        },
-        "complexity": "simple"
       }
     ],
     "connectors": [
+      {
+        "id": "connectors/zustand-nextjs",
+        "name": "Zustand NextJS Connector",
+        "description": "Zustand state management setup and configuration for NextJS applications",
+        "category": "zustand-nextjs",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/zustand-nextjs/blueprint.ts",
+        "jsonFile": "connectors/zustand-nextjs/connector.json",
+        "requires": [
+          "framework/nextjs",
+          "state/zustand"
+        ],
+        "provides": [
+          "state-management",
+          "persistence",
+          "devtools",
+          "ssr-support"
+        ],
+        "connects": [
+          "zustand",
+          "nextjs"
+        ],
+        "parameters": {
+          "persistence": {
+            "name": "Persistence",
+            "description": "State persistence support",
+            "type": "boolean",
+            "default": true
+          },
+          "devtools": {
+            "name": "DevTools",
+            "description": "Zustand DevTools integration",
+            "type": "boolean",
+            "default": false
+          },
+          "ssr": {
+            "name": "SSR Support",
+            "description": "Server-side rendering support",
+            "type": "boolean",
+            "default": true
+          }
+        },
+        "complexity": "simple"
+      },
       {
         "id": "connectors/vitest-nextjs",
         "name": "Vitest Next.js Connector",
@@ -2049,6 +2097,49 @@
         "complexity": "simple"
       },
       {
+        "id": "connectors/docker-drizzle",
+        "name": "Docker Drizzle Connector",
+        "description": "Complete Docker containerization for Drizzle ORM with database services, migrations, and production-ready configuration",
+        "category": "docker-drizzle",
+        "type": "connector",
+        "version": "1.0.0",
+        "blueprint": "connectors/docker-drizzle/blueprint.ts",
+        "jsonFile": "connectors/docker-drizzle/connector.json",
+        "provides": {
+          "files": [
+            "docker-compose.database.yml",
+            "docker-compose.migration.yml",
+            "docker-compose.backup.yml",
+            "database/Dockerfile.postgres",
+            "database/Dockerfile.migration",
+            "database/init.sql",
+            "database/seed.sql",
+            "database/migrations/001_initial.sql",
+            "database/migrations/002_add_indexes.sql",
+            "database/migrations/003_add_constraints.sql",
+            "scripts/db-setup.sh",
+            "scripts/db-migrate.sh",
+            "scripts/db-seed.sh",
+            "scripts/db-backup.sh",
+            "scripts/db-restore.sh",
+            "scripts/db-reset.sh",
+            "scripts/db-health.sh",
+            "scripts/db-shell.sh",
+            "scripts/db-logs.sh",
+            "monitoring/database/prometheus.yml",
+            "monitoring/database/grafana/dashboards/postgres.json",
+            "monitoring/database/grafana/provisioning/dashboards/dashboard.yml",
+            "monitoring/database/grafana/provisioning/datasources/postgres.yml",
+            "backup/backup.sh",
+            "backup/restore.sh",
+            "backup/cleanup.sh"
+          ],
+          "components": [],
+          "pages": []
+        },
+        "complexity": "simple"
+      },
+      {
         "id": "connectors/better-auth-github",
         "name": "Better Auth + GitHub Connector",
         "description": "OAuth integration between Better Auth and GitHub for Application Authorization",
@@ -2110,94 +2201,6 @@
             "type": "string",
             "description": "Encryption key for storing tokens securely",
             "required": true
-          }
-        },
-        "complexity": "simple"
-      },
-      {
-        "id": "connectors/docker-drizzle",
-        "name": "Docker Drizzle Connector",
-        "description": "Complete Docker containerization for Drizzle ORM with database services, migrations, and production-ready configuration",
-        "category": "docker-drizzle",
-        "type": "connector",
-        "version": "1.0.0",
-        "blueprint": "connectors/docker-drizzle/blueprint.ts",
-        "jsonFile": "connectors/docker-drizzle/connector.json",
-        "provides": {
-          "files": [
-            "docker-compose.database.yml",
-            "docker-compose.migration.yml",
-            "docker-compose.backup.yml",
-            "database/Dockerfile.postgres",
-            "database/Dockerfile.migration",
-            "database/init.sql",
-            "database/seed.sql",
-            "database/migrations/001_initial.sql",
-            "database/migrations/002_add_indexes.sql",
-            "database/migrations/003_add_constraints.sql",
-            "scripts/db-setup.sh",
-            "scripts/db-migrate.sh",
-            "scripts/db-seed.sh",
-            "scripts/db-backup.sh",
-            "scripts/db-restore.sh",
-            "scripts/db-reset.sh",
-            "scripts/db-health.sh",
-            "scripts/db-shell.sh",
-            "scripts/db-logs.sh",
-            "monitoring/database/prometheus.yml",
-            "monitoring/database/grafana/dashboards/postgres.json",
-            "monitoring/database/grafana/provisioning/dashboards/dashboard.yml",
-            "monitoring/database/grafana/provisioning/datasources/postgres.yml",
-            "backup/backup.sh",
-            "backup/restore.sh",
-            "backup/cleanup.sh"
-          ],
-          "components": [],
-          "pages": []
-        },
-        "complexity": "simple"
-      },
-      {
-        "id": "connectors/zustand-nextjs",
-        "name": "Zustand NextJS Connector",
-        "description": "Zustand state management setup and configuration for NextJS applications",
-        "category": "zustand-nextjs",
-        "type": "connector",
-        "version": "1.0.0",
-        "blueprint": "connectors/zustand-nextjs/blueprint.ts",
-        "jsonFile": "connectors/zustand-nextjs/connector.json",
-        "requires": [
-          "framework/nextjs",
-          "state/zustand"
-        ],
-        "provides": [
-          "state-management",
-          "persistence",
-          "devtools",
-          "ssr-support"
-        ],
-        "connects": [
-          "zustand",
-          "nextjs"
-        ],
-        "parameters": {
-          "persistence": {
-            "name": "Persistence",
-            "description": "State persistence support",
-            "type": "boolean",
-            "default": true
-          },
-          "devtools": {
-            "name": "DevTools",
-            "description": "Zustand DevTools integration",
-            "type": "boolean",
-            "default": false
-          },
-          "ssr": {
-            "name": "SSR Support",
-            "description": "Server-side rendering support",
-            "type": "boolean",
-            "default": true
           }
         },
         "complexity": "simple"
@@ -2821,7 +2824,7 @@
             "type": "select",
             "default": "sentry-nextjs",
             "description": "Backend implementation for monitoring services",
-            "required": true,
+            "required": false,
             "options": [
               "sentry-nextjs",
               "sentry-express",
@@ -2832,7 +2835,7 @@
             "type": "select",
             "default": "shadcn",
             "description": "Frontend implementation for monitoring UI",
-            "required": true,
+            "required": false,
             "options": [
               "shadcn",
               "mui",
@@ -3635,6 +3638,147 @@
   },
   "genomes": [
     {
+      "id": "valid-architecture",
+      "name": "VALID ARCHITECTURE GENOME",
+      "description": "VALID ARCHITECTURE GENOME",
+      "path": "genomes/test/valid-architecture.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "drizzle",
+        "auth",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "database/drizzle",
+          "auth/better-auth"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 3,
+      "aliases": [
+        "valid-architecture",
+        "validarchitecture"
+      ]
+    },
+    {
+      "id": "type-error",
+      "name": "Type Error Test Genome",
+      "description": "Type Error Test Genome",
+      "path": "genomes/test/type-error.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "shadcn-ui",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "ui/shadcn-ui"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 2,
+      "aliases": [
+        "type-error",
+        "typeerror"
+      ]
+    },
+    {
+      "id": "min-test",
+      "name": "Minimal Test Genome",
+      "description": "Minimal Test Genome",
+      "path": "genomes/test/min-test.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "shadcn-ui",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "ui/shadcn-ui"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 2,
+      "aliases": [
+        "min-test",
+        "mintest"
+      ]
+    },
+    {
+      "id": "invalid-test",
+      "name": "Invalid Test Genome",
+      "description": "Invalid Test Genome",
+      "path": "genomes/test/invalid-test.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "shadcn-ui",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "ui/shadcn-ui"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 2,
+      "aliases": [
+        "invalid-test",
+        "invalidtest"
+      ]
+    },
+    {
+      "id": "broken-architecture",
+      "name": "BROKEN ARCHITECTURE GENOME",
+      "description": "BROKEN ARCHITECTURE GENOME",
+      "path": "genomes/test/broken-architecture.genome.ts",
+      "complexity": "simple",
+      "estimatedTime": "5 minutes",
+      "tags": [
+        "nextjs",
+        "drizzle",
+        "prisma",
+        "auth",
+        "tailwind",
+        "typescript"
+      ],
+      "modules": {
+        "adapters": [
+          "framework/nextjs",
+          "database/drizzle",
+          "database/prisma",
+          "drizzle-nextjs-integration"
+        ],
+        "connectors": [],
+        "features": []
+      },
+      "moduleCount": 4,
+      "aliases": [
+        "broken-architecture",
+        "brokenarchitecture"
+      ]
+    },
+    {
       "id": "ultimate-showcase",
       "name": "ULTIMATE SHOWCASE / KITCHEN SINK",
       "description": "ULTIMATE SHOWCASE / KITCHEN SINK",
@@ -3846,147 +3990,6 @@
         "helloworld",
         "01"
       ]
-    },
-    {
-      "id": "valid-architecture",
-      "name": "VALID ARCHITECTURE GENOME",
-      "description": "VALID ARCHITECTURE GENOME",
-      "path": "genomes/test/valid-architecture.genome.ts",
-      "complexity": "simple",
-      "estimatedTime": "5 minutes",
-      "tags": [
-        "nextjs",
-        "drizzle",
-        "auth",
-        "tailwind",
-        "typescript"
-      ],
-      "modules": {
-        "adapters": [
-          "framework/nextjs",
-          "database/drizzle",
-          "auth/better-auth"
-        ],
-        "connectors": [],
-        "features": []
-      },
-      "moduleCount": 3,
-      "aliases": [
-        "valid-architecture",
-        "validarchitecture"
-      ]
-    },
-    {
-      "id": "type-error",
-      "name": "Type Error Test Genome",
-      "description": "Type Error Test Genome",
-      "path": "genomes/test/type-error.genome.ts",
-      "complexity": "simple",
-      "estimatedTime": "5 minutes",
-      "tags": [
-        "nextjs",
-        "shadcn-ui",
-        "tailwind",
-        "typescript"
-      ],
-      "modules": {
-        "adapters": [
-          "framework/nextjs",
-          "ui/shadcn-ui"
-        ],
-        "connectors": [],
-        "features": []
-      },
-      "moduleCount": 2,
-      "aliases": [
-        "type-error",
-        "typeerror"
-      ]
-    },
-    {
-      "id": "min-test",
-      "name": "Minimal Test Genome",
-      "description": "Minimal Test Genome",
-      "path": "genomes/test/min-test.genome.ts",
-      "complexity": "simple",
-      "estimatedTime": "5 minutes",
-      "tags": [
-        "nextjs",
-        "shadcn-ui",
-        "tailwind",
-        "typescript"
-      ],
-      "modules": {
-        "adapters": [
-          "framework/nextjs",
-          "ui/shadcn-ui"
-        ],
-        "connectors": [],
-        "features": []
-      },
-      "moduleCount": 2,
-      "aliases": [
-        "min-test",
-        "mintest"
-      ]
-    },
-    {
-      "id": "invalid-test",
-      "name": "Invalid Test Genome",
-      "description": "Invalid Test Genome",
-      "path": "genomes/test/invalid-test.genome.ts",
-      "complexity": "simple",
-      "estimatedTime": "5 minutes",
-      "tags": [
-        "nextjs",
-        "shadcn-ui",
-        "tailwind",
-        "typescript"
-      ],
-      "modules": {
-        "adapters": [
-          "framework/nextjs",
-          "ui/shadcn-ui"
-        ],
-        "connectors": [],
-        "features": []
-      },
-      "moduleCount": 2,
-      "aliases": [
-        "invalid-test",
-        "invalidtest"
-      ]
-    },
-    {
-      "id": "broken-architecture",
-      "name": "BROKEN ARCHITECTURE GENOME",
-      "description": "BROKEN ARCHITECTURE GENOME",
-      "path": "genomes/test/broken-architecture.genome.ts",
-      "complexity": "simple",
-      "estimatedTime": "5 minutes",
-      "tags": [
-        "nextjs",
-        "drizzle",
-        "prisma",
-        "auth",
-        "tailwind",
-        "typescript"
-      ],
-      "modules": {
-        "adapters": [
-          "framework/nextjs",
-          "database/drizzle",
-          "database/prisma",
-          "drizzle-nextjs-integration"
-        ],
-        "connectors": [],
-        "features": []
-      },
-      "moduleCount": 4,
-      "aliases": [
-        "broken-architecture",
-        "brokenarchitecture"
-      ]
     }
   ],
   "categories": [
@@ -4100,6 +4103,16 @@
       ]
     },
     {
+      "id": "testing",
+      "name": "Testing",
+      "description": "Testing frameworks and tools",
+      "icon": "🧪",
+      "moduleCount": 1,
+      "modules": [
+        "testing/vitest"
+      ]
+    },
+    {
       "id": "state",
       "name": "State Management",
       "description": "Client-side state management",
@@ -4120,13 +4133,13 @@
       ]
     },
     {
-      "id": "testing",
-      "name": "Testing",
-      "description": "Testing frameworks and tools",
-      "icon": "🧪",
+      "id": "payment",
+      "name": "Payments",
+      "description": "Payment processing integrations",
+      "icon": "💳",
       "moduleCount": 1,
       "modules": [
-        "testing/vitest"
+        "payment/stripe"
       ]
     },
     {
@@ -4150,16 +4163,6 @@
       ]
     },
     {
-      "id": "payment",
-      "name": "Payments",
-      "description": "Payment processing integrations",
-      "icon": "💳",
-      "moduleCount": 1,
-      "modules": [
-        "payment/stripe"
-      ]
-    },
-    {
       "id": "data-fetching",
       "name": "Data Fetching",
       "description": "Data fetching and caching",
@@ -4167,16 +4170,6 @@
       "moduleCount": 1,
       "modules": [
         "data-fetching/tanstack-query"
-      ]
-    },
-    {
-      "id": "blockchain",
-      "name": "Web3 & Blockchain",
-      "description": "Blockchain and Web3 integrations",
-      "icon": "⛓️",
-      "moduleCount": 1,
-      "modules": [
-        "blockchain/web3"
       ]
     },
     {
@@ -4190,6 +4183,26 @@
       ]
     },
     {
+      "id": "auth",
+      "name": "Authentication",
+      "description": "Authentication and authorization",
+      "icon": "🔐",
+      "moduleCount": 1,
+      "modules": [
+        "auth/better-auth"
+      ]
+    },
+    {
+      "id": "blockchain",
+      "name": "Web3 & Blockchain",
+      "description": "Blockchain and Web3 integrations",
+      "icon": "⛓️",
+      "moduleCount": 1,
+      "modules": [
+        "blockchain/web3"
+      ]
+    },
+    {
       "id": "ai",
       "name": "AI & ML",
       "description": "Artificial intelligence and machine learning",
@@ -4200,13 +4213,13 @@
       ]
     },
     {
-      "id": "auth",
-      "name": "Authentication",
-      "description": "Authentication and authorization",
-      "icon": "🔐",
+      "id": "zustand-nextjs",
+      "name": "Zustand-nextjs",
+      "description": "zustand-nextjs modules",
+      "icon": "📦",
       "moduleCount": 1,
       "modules": [
-        "auth/better-auth"
+        "connectors/zustand-nextjs"
       ]
     },
     {
@@ -4260,16 +4273,6 @@
       ]
     },
     {
-      "id": "better-auth-github",
-      "name": "Better-auth-github",
-      "description": "better-auth-github modules",
-      "icon": "📦",
-      "moduleCount": 1,
-      "modules": [
-        "connectors/better-auth-github"
-      ]
-    },
-    {
       "id": "docker-drizzle",
       "name": "Docker-drizzle",
       "description": "docker-drizzle modules",
@@ -4280,13 +4283,13 @@
       ]
     },
     {
-      "id": "zustand-nextjs",
-      "name": "Zustand-nextjs",
-      "description": "zustand-nextjs modules",
+      "id": "better-auth-github",
+      "name": "Better-auth-github",
+      "description": "better-auth-github modules",
       "icon": "📦",
       "moduleCount": 1,
       "modules": [
-        "connectors/zustand-nextjs"
+        "connectors/better-auth-github"
       ]
     },
     {

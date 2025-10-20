@@ -1,5 +1,7 @@
+'use client';
+
 import { ReactNode } from 'react';
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from './use-auth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { LogOut, User, Settings } from 'lucide-react';

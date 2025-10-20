@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useTeamMembers, useInviteMember, useUpdateMemberRole, useRemoveMember } from '@/lib/teams/hooks';
+import { useTeamMembersList, useTeamInvitationsInvite, useTeamMembersUpdate, useTeamMembersRemove } from '@/lib/teams-management';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -29,8 +29,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { format } from 'date-fns';
-import { ROLE_CONFIG } from '@/lib/teams/types';
-import type { Team, TeamMember, TeamRole } from '@/lib/teams/types';
+import type { Team, TeamMember, TeamRole } from '@/lib/teams-management';
 
 const inviteMemberSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -49,7 +48,7 @@ export function MemberManagement({ team, className }: MemberManagementProps) {
   const [isInviteDialogOpen, setIsInviteDialogOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
 
-  const { members, isLoading, error, refetch } = useTeamMembers(team.id);
+  const { data: members, isLoading, error, refetch } = useTeamMembersList(team.id);
   const inviteMember = useInviteMember();
   const updateMemberRole = useUpdateMemberRole();
   const removeMember = useRemoveMember();

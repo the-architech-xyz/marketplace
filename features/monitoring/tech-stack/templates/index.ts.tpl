@@ -1,9 +1,9 @@
 /**
  * Monitoring Feature - Centralized Exports
  * 
- * This file provides centralized exports for the Monitoring feature's
- * technology-agnostic stack layer. Import from this file for consistent
- * access to types, schemas, hooks, and stores.
+ * ⚠️ ARCHITECTURE:
+ * - TanStack Query Hooks → Server data (errors, metrics, logs)
+ * - Zustand Store → UI state only (filters, view preferences)
  */
 
 // ============================================================================
@@ -142,66 +142,15 @@ export {
 // HOOK EXPORTS
 // ============================================================================
 
-export {
-  // Query keys
-  monitoringKeys,
-  
-  // Error tracking hooks
-  useErrors,
-  useError,
-  useErrorTrends,
-  useResolveError,
-  useIgnoreError,
-  useUpdateErrorStatus,
-  
-  // Performance monitoring hooks
-  usePerformanceMetrics,
-  usePerformanceTrends,
-  
-  // User feedback hooks
-  useUserFeedback,
-  useSubmitFeedback,
-  
-  // Configuration hooks
-  useSentryConfig,
-  useUpdateSentryConfig,
-  
-  // Dashboard hooks
-  useMonitoringDashboard,
-  
-  // Alert hooks
-  useAlerts,
-  useAlertSettings,
-  useUpdateAlertSettings,
-  
-  // Analytics hooks
-  useMonitoringAnalytics,
-  
-  // Health check hooks
-  useHealthChecks,
-  useHealthCheckResults
-} from './hooks';
+// NOTE: Monitoring hooks are currently in frontend layer (shadcn/templates/)
+// TODO: Move hooks to tech-stack for proper 3-layer architecture
+// For now, frontend components import hooks directly from their templates
 
 // ============================================================================
-// STORE EXPORTS
+// ZUSTAND STORE EXPORTS (UI State Only)
 // ============================================================================
 
-export {
-  // Monitoring store
-  useMonitoringStore,
-  
-  // Error details store
-  useErrorDetailsStore,
-  
-  // Performance store
-  usePerformanceStore,
-  
-  // Feedback store
-  useFeedbackStore,
-  
-  // Alert store
-  useAlertStore
-} from './stores';
+export { useMonitoringUIStore } from './stores';
 
 // ============================================================================
 // CONTRACT EXPORTS

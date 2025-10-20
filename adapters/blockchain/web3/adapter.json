@@ -79,7 +79,10 @@
         "mainnet",
         "sepolia",
         "polygon",
-        "arbitrum"
+        "arbitrum",
+        "optimism",
+        "base",
+        "ethereum"
       ]
     },
     "walletConnect": {

@@ -19,8 +19,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useAuthService } from '@/hooks/useAuthService';
-import type { MagicLinkData } from '@/features/auth/contract';
+import { authClient, useSession } from '@/lib/auth/client';  // Better Auth native
+import type { MagicLinkData } from '@/lib/auth/types';  // From tech-stack
 
 const magicLinkSchema = z.object({
   email: z.string().email('Please enter a valid email address'),

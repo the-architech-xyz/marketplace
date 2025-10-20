@@ -46,22 +46,10 @@ export default function generateBlueprint(
 
 function generateCoreActions(): BlueprintAction[] {
   return [
-    // Create pure email API layer (server-side only - NO TanStack Query)
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}emailing/backend/resend-nextjs/email-api.ts',
-      template: 'templates/email-api.ts.tpl',
-      context: { features: ['core'] },
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-
     // Create basic email API route
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/email/send/route.ts',
+      path: '${paths.app_root}api/email/send/route.ts',
       template: 'templates/api-send-email-route.ts.tpl',
       context: { features: ['core'] },
       conflictResolution: {
@@ -80,7 +68,7 @@ function generateTemplatesActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/email/templates/route.ts',
+      path: '${paths.app_root}api/email/templates/route.ts',
       template: 'templates/api-email-templates-route.ts.tpl',
       context: { 
         features: ['templates'],
@@ -102,7 +90,7 @@ function generateAnalyticsActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/email/analytics/route.ts',
+      path: '${paths.app_root}api/email/analytics/route.ts',
       template: 'templates/api-email-analytics-route.ts.tpl',
       context: { 
         features: ['analytics'],
@@ -124,7 +112,7 @@ function generateBulkEmailActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/email/campaigns/route.ts',
+      path: '${paths.app_root}api/email/campaigns/route.ts',
       template: 'templates/api-email-campaigns-route.ts.tpl',
       context: { 
         features: ['bulkEmail'],
@@ -146,7 +134,7 @@ function generateWebhooksActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}api/email/webhooks/route.ts',
+      path: '${paths.app_root}api/email/webhooks/route.ts',
       template: 'templates/api-email-webhooks-route.ts.tpl',
       context: { 
         features: ['webhooks'],
@@ -166,19 +154,8 @@ function generateWebhooksActions(): BlueprintAction[] {
 
 function generateOrganizationsActions(): BlueprintAction[] {
   return [
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}email/permissions.ts',
-      template: 'templates/permissions.ts.tpl',
-      context: { 
-        features: ['organizations'],
-        hasOrganizations: true 
-      },
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    }
+    // Organization-specific email features would go here
+    // Currently no additional files needed - permissions handled by auth
   ];
 }
 
@@ -188,18 +165,7 @@ function generateOrganizationsActions(): BlueprintAction[] {
 
 function generateTeamsActions(): BlueprintAction[] {
   return [
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}email/team-permissions.ts',
-      template: 'templates/team-permissions.ts.tpl',
-      context: { 
-        features: ['teams'],
-        hasTeams: true 
-      },
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    }
+    // Team-specific email features would go here
+    // Currently no additional files needed - permissions handled by auth
   ];
 }

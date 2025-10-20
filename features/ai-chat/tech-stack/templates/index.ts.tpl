@@ -1,8 +1,9 @@
 /**
  * AI Chat Feature - Technology Stack Layer
  * 
- * Centralized exports for all AI Chat technology-agnostic components.
- * This ensures consistent imports across all implementations.
+ * ⚠️ ARCHITECTURE:
+ * - TanStack Query Hooks → Server data (conversations, messages)
+ * - Zustand Store → UI state only (sidebar, input, streaming)
  */
 
 // Types
@@ -58,14 +59,5 @@ export {
   useChatAnalytics,
 } from './hooks';
 
-// Re-export commonly used stores
-export {
-  useConversationStore,
-  useMessageStore,
-  useChatSettingsStore,
-  useAnalyticsStore,
-  useConversationSelectors,
-  useMessageSelectors,
-  useChatSettingsSelectors,
-  useAnalyticsSelectors,
-} from './stores';
+// Re-export UI store
+export { useAIChatUIStore } from './stores';

@@ -17,7 +17,7 @@ import { useToast } from '@/components/ui/use-toast';
 
 export function TeamSettingsPage({ teamId }: { teamId: string }) {
   const { data: team, isLoading } = useTeam(teamId);
-  const updateTeam = useUpdateTeam();
+  const updateTeam = useTeamsUpdate();
   const { toast } = useToast();
   
   const [name, setName] = useState(team?.name || '');

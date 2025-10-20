@@ -21,10 +21,13 @@ export interface AiVercelAiSdkParameters {
 }
 
 export interface AuthBetterAuthParameters {
-  providers?: string[];
-  session?: any;
-  csrf?: boolean;
-  rateLimit?: boolean;
+  emailPassword: boolean;
+  emailVerification: boolean;
+  oauthProviders: string[];
+  twoFactor: boolean;
+  organizations: boolean;
+  teams: boolean;
+  sessionExpiry: number;
 }
 
 export interface BlockchainWeb3Parameters {
@@ -67,6 +70,13 @@ export interface CoreGitParameters {
   userEmail?: string;
   defaultBranch?: string;
   autoInit?: boolean;
+}
+
+export interface CoreGoldenStackParameters {
+  zustand: any;
+  vitest: any;
+  eslint: any;
+  prettier: any;
 }
 
 export interface DataFetchingTanstackQueryParameters {
@@ -147,8 +157,8 @@ export interface EmailResendParameters {
     analytics: boolean;
     campaigns: boolean;
   };
-  apiKey: string;
-  fromEmail: string;
+  apiKey?: string;
+  fromEmail?: string;
 }
 
 export interface FrameworkNextjsParameters {
@@ -178,7 +188,7 @@ export interface ObservabilitySentryParameters {
     enterprise: boolean;
     replay: boolean;
   };
-  dsn: string;
+  dsn?: string;
   environment?: string;
   release?: string;
 }
@@ -190,55 +200,10 @@ export interface PaymentStripeParameters {
   dashboard?: boolean;
 }
 
-export interface QualityEslintParameters {
-  typescript?: boolean;
-  react?: boolean;
-  nextjs?: boolean;
-  nodejs?: boolean;
-  accessibility?: boolean;
-  imports?: boolean;
-  strict?: boolean;
-  format?: boolean;
-}
-
-export interface QualityPrettierParameters {
-  semi?: boolean;
-  singleQuote?: boolean;
-  tabWidth?: number;
-  useTabs?: boolean;
-  trailingComma?: 'none' | 'es5' | 'all';
-  printWidth?: number;
-  bracketSpacing?: boolean;
-  arrowParens?: 'avoid' | 'always';
-  endOfLine?: 'lf' | 'crlf' | 'cr' | 'auto';
-  plugins?: string[];
-  tailwind?: boolean;
-  organizeImports?: boolean;
-}
-
 export interface ServicesGithubApiParameters {
   token: string;
   baseUrl?: string;
   userAgent?: string;
-}
-
-export interface StateZustandParameters {
-  persistence?: boolean;
-  devtools?: boolean;
-  immer?: boolean;
-  middleware?: string[];
-}
-
-export interface TestingVitestParameters {
-  features: {
-    core: boolean;
-    unitTests: boolean;
-    coverage: boolean;
-    ui: boolean;
-    e2e: boolean;
-    integrationTests: boolean;
-  };
-  environment?: 'jsdom' | 'node' | 'happy-dom';
 }
 
 export interface UiShadcnUiParameters {
@@ -253,7 +218,73 @@ export interface UiTailwindParameters {
   darkMode?: boolean;
 }
 
-export interface ConnectorsBetterAuthGithubParameters {
+export interface ConnectorsAiVercelAiNextjsParameters {
+  providers: string[];
+  streaming: boolean;
+}
+
+export interface ConnectorsAuthBetterAuthNextjsParameters {
+  emailVerification: boolean;
+  oauthProviders: string[];
+  twoFactor: boolean;
+  organizations: boolean;
+  teams: boolean;
+}
+
+export interface ConnectorsDatabaseDrizzlePostgresDockerParameters {
+  postgresService: boolean;
+  migrationService: boolean;
+  backupService: boolean;
+  monitoringService: boolean;
+  seedData: boolean;
+  sslSupport: boolean;
+  replication: boolean;
+  clustering: boolean;
+  performanceTuning: boolean;
+  securityHardening: boolean;
+  volumeManagement: boolean;
+  networking: boolean;
+}
+
+export interface ConnectorsDeploymentDockerNextjsParameters {
+  multiStageBuild: boolean;
+  developmentMode: boolean;
+  productionMode: boolean;
+  nginxReverseProxy: boolean;
+  sslSupport: boolean;
+  healthChecks: boolean;
+  environmentConfig: boolean;
+  volumeManagement: boolean;
+  networking: boolean;
+  monitoring: boolean;
+  backupRestore: boolean;
+  securityHardening: boolean;
+}
+
+export interface ConnectorsEmailResendNextjsParameters {
+  apiKey: string;
+}
+
+export interface ConnectorsInfrastructureRhfZodShadcnParameters {
+  validation: boolean;
+  accessibility: boolean;
+  devtools: boolean;
+}
+
+export interface ConnectorsInfrastructureTanstackQueryNextjsParameters {
+  ssr: boolean;
+  hydration: boolean;
+  errorBoundary: boolean;
+  devtools: boolean;
+}
+
+export interface ConnectorsInfrastructureZustandNextjsParameters {
+  persistence: boolean;
+  devtools: boolean;
+  ssr: boolean;
+}
+
+export interface ConnectorsIntegrationsBetterAuthGithubParameters {
   clientId: string;
   clientSecret: string;
   redirectUri: string;
@@ -261,36 +292,30 @@ export interface ConnectorsBetterAuthGithubParameters {
   encryptionKey: string;
 }
 
-export interface ConnectorsRhfZodShadcnParameters {
-  validation: boolean;
-  accessibility: boolean;
-  devtools: boolean;
+export interface ConnectorsMonitoringSentryNextjsParameters {
+  errorTracking: boolean;
+  performanceMonitoring: boolean;
+  userFeedback: boolean;
+  middleware: boolean;
+  profiling: boolean;
+  alerts: boolean;
+  releaseTracking: boolean;
+  sessionReplay: boolean;
+  customMetrics: boolean;
+  errorGrouping: boolean;
+  crashReporting: boolean;
+  breadcrumbs: boolean;
+  sourceMaps: boolean;
+  integrations: boolean;
+  customTags: boolean;
+  sampling: boolean;
+  privacy: boolean;
+  webhooks: boolean;
+  analytics: boolean;
+  testing: boolean;
 }
 
-export interface ConnectorsSentryNextjsParameters {
-  features: {
-    core: boolean;
-    performance: boolean;
-    alerts: boolean;
-    enterprise: boolean;
-  };
-  dsn: string;
-  environment?: string;
-  release?: string;
-}
-
-export interface ConnectorsSentryReactParameters {
-  features: {
-    core: boolean;
-    performance: boolean;
-    'error-boundary': boolean;
-  };
-  dsn: string;
-  environment?: string;
-  release?: string;
-}
-
-export interface ConnectorsStripeNextjsDrizzleParameters {
+export interface ConnectorsPaymentStripeNextjsDrizzleParameters {
   features: {
     organizationBilling: boolean;
     seats: boolean;
@@ -301,20 +326,20 @@ export interface ConnectorsStripeNextjsDrizzleParameters {
   };
 }
 
-export interface ConnectorsTanstackQueryNextjsParameters {
-  ssr: boolean;
-  hydration: boolean;
-  errorBoundary: boolean;
-  devtools: boolean;
+export interface ConnectorsTestingVitestNextjsParameters {
+  unitTesting: boolean;
+  integrationTesting: boolean;
+  e2eTesting: boolean;
+  coverageReporting: boolean;
+  watchMode: boolean;
+  uiMode: boolean;
+  mocking: boolean;
+  snapshots: boolean;
+  parallelTesting: boolean;
+  typescriptSupport: boolean;
 }
 
-export interface ConnectorsZustandNextjsParameters {
-  persistence: boolean;
-  devtools: boolean;
-  ssr: boolean;
-}
-
-export interface FeaturesAiChatBackendVercelAiNextjsParameters {
+export interface FeaturesAiChatBackendNextjsParameters {
   streaming: boolean;
   fileUpload: boolean;
   voiceInput: boolean;
@@ -361,23 +386,6 @@ export interface FeaturesArchitechWelcomeShadcnParameters {
   showArchitechBranding: boolean;
 }
 
-export interface FeaturesAuthBackendBetterAuthNextjsParameters {
-  features: {
-    emailPassword: boolean;
-    emailVerification: boolean;
-    passwordReset: boolean;
-    sessions: boolean;
-    organizations: boolean;
-    twoFactor: boolean;
-  };
-  apiRoutes: boolean;
-  middleware: boolean;
-  adminPanel: boolean;
-  emailVerification: boolean;
-  mfa: boolean;
-  passwordReset: boolean;
-}
-
 export interface FeaturesAuthFrontendShadcnParameters {
   features: {
     signIn: boolean;
@@ -392,6 +400,17 @@ export interface FeaturesAuthFrontendShadcnParameters {
     organizationManagement: boolean;
   };
   theme?: 'default' | 'dark' | 'light' | 'minimal';
+}
+
+export interface FeaturesAuthTechStackParameters {
+  featureName: string;
+  featurePath: string;
+  hasTypes: boolean;
+  hasSchemas: boolean;
+  hasHooks: boolean;
+  hasStores: boolean;
+  hasApiRoutes: boolean;
+  hasValidation: boolean;
 }
 
 export interface FeaturesEmailingBackendResendNextjsParameters {
@@ -424,20 +443,9 @@ export interface FeaturesMonitoringShadcnParameters {
     feedback: boolean;
     analytics: boolean;
   };
-  backend: any;
-  frontend: any;
+  backend?: any;
+  frontend?: any;
   environments?: string[];
-}
-
-export interface FeaturesPaymentsBackendStripeNextjsParameters {
-  webhooks: boolean;
-  checkout: boolean;
-  subscriptions: boolean;
-  invoices: boolean;
-  refunds: boolean;
-  paymentMethods: boolean;
-  analytics: boolean;
-  organizationBilling: boolean;
 }
 
 export interface FeaturesPaymentsFrontendShadcnParameters {
@@ -455,7 +463,7 @@ export interface FeaturesPaymentsFrontendShadcnParameters {
   theme?: 'default' | 'dark' | 'light' | 'minimal';
 }
 
-export interface FeaturesTeamsManagementBackendBetterAuthNextjsParameters {
+export interface FeaturesTeamsManagementBackendNextjsParameters {
   features: {
     teams: boolean;
     invitations: boolean;

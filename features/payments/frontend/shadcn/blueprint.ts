@@ -57,7 +57,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Core payment components (only existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}payments/PaymentForm.tsx',
+      path: '${paths.components}payments/PaymentForm.tsx',
       template: 'templates/PaymentForm.tsx.tpl',
       context: { 
         features: ['core'],
@@ -71,7 +71,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}payments/CheckoutForm.tsx',
+      path: '${paths.components}payments/CheckoutForm.tsx',
       template: 'templates/CheckoutForm.tsx.tpl',
       context: { 
         features: ['core'],
@@ -85,7 +85,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}payments/PaymentStatus.tsx',
+      path: '${paths.components}payments/PaymentStatus.tsx',
       template: 'templates/PaymentStatus.tsx.tpl',
       context: { 
         features: ['core'],
@@ -99,7 +99,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}payments/PaymentMethodSelector.tsx',
+      path: '${paths.components}payments/PaymentMethodSelector.tsx',
       template: 'templates/PaymentMethodSelector.tsx.tpl',
       context: { 
         features: ['core'],
@@ -113,7 +113,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}payments/PricingCard.tsx',
+      path: '${paths.components}payments/PricingCard.tsx',
       template: 'templates/PricingCard.tsx.tpl',
       context: { 
         features: ['core'],
@@ -127,7 +127,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}payments/RefundDialog.tsx',
+      path: '${paths.components}payments/RefundDialog.tsx',
       template: 'templates/RefundDialog.tsx.tpl',
       context: { 
         features: ['core'],
@@ -142,7 +142,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Payment pages
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}payments/page.tsx',
+      path: '${paths.app_root}payments/page.tsx',
       template: 'templates/payments-dashboard.tsx.tpl',
       context: { 
         features: ['core'],
@@ -156,7 +156,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}checkout/page.tsx',
+      path: '${paths.app_root}checkout/page.tsx',
       template: 'templates/checkout-page.tsx.tpl',
       context: { 
         features: ['core'],
@@ -171,7 +171,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.lib}}payments/payment-utils.ts',
+      path: '${paths.lib}payments/payment-utils.ts',
       template: 'templates/payment-utils.ts.tpl',
       context: { 
         features: ['core'],
@@ -186,7 +186,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Payment hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}payments/use-payments.ts',
+      path: '${paths.hooks}payments/use-payments.ts',
       template: 'templates/use-payments.ts.tpl',
       context: { 
         features: ['core'],
@@ -205,7 +205,7 @@ function generateSubscriptionsActions(): BlueprintAction[] {
     // Subscription components (existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}payments/SubscriptionCard.tsx',
+      path: '${paths.components}payments/SubscriptionCard.tsx',
       template: 'templates/SubscriptionCard.tsx.tpl',
       context: { 
         features: ['subscriptions'],
@@ -220,7 +220,7 @@ function generateSubscriptionsActions(): BlueprintAction[] {
     // Subscription pages
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}subscriptions/page.tsx',
+      path: '${paths.app_root}subscriptions/page.tsx',
       template: 'templates/subscriptions-page.tsx.tpl',
       context: { 
         features: ['subscriptions'],
@@ -235,7 +235,7 @@ function generateSubscriptionsActions(): BlueprintAction[] {
     // Subscription hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}payments/use-subscriptions.ts',
+      path: '${paths.hooks}payments/use-subscriptions.ts',
       template: 'templates/use-subscriptions.ts.tpl',
       context: { 
         features: ['subscriptions'],
@@ -254,7 +254,7 @@ function generateInvoicingActions(): BlueprintAction[] {
     // Invoice components (existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}payments/InvoiceCard.tsx',
+      path: '${paths.components}payments/InvoiceCard.tsx',
       template: 'templates/InvoiceCard.tsx.tpl',
       context: { 
         features: ['invoicing'],
@@ -269,7 +269,7 @@ function generateInvoicingActions(): BlueprintAction[] {
     // Invoice pages
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}invoices/page.tsx',
+      path: '${paths.app_root}invoices/page.tsx',
       template: 'templates/invoices-page.tsx.tpl',
       context: { 
         features: ['invoicing'],
@@ -284,7 +284,7 @@ function generateInvoicingActions(): BlueprintAction[] {
     // Invoice hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}payments/use-invoices.ts',
+      path: '${paths.hooks}payments/use-invoices.ts',
       template: 'templates/use-invoices.ts.tpl',
       context: { 
         features: ['invoicing'],
@@ -305,7 +305,7 @@ function generateWebhooksActions(): BlueprintAction[] {
     /*
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}payments/WebhookHandler.tsx',
+      path: '${paths.components}payments/WebhookHandler.tsx',
       template: 'templates/WebhookHandler.tsx.tpl',
       context: { 
         features: ['webhooks'],
@@ -325,7 +325,7 @@ function generateAnalyticsActions(): BlueprintAction[] {
     // Analytics components (existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}payments/PaymentAnalytics.tsx',
+      path: '${paths.components}payments/PaymentAnalytics.tsx',
       template: 'templates/PaymentAnalytics.tsx.tpl',
       context: { 
         features: ['analytics'],
@@ -340,7 +340,7 @@ function generateAnalyticsActions(): BlueprintAction[] {
     // Transaction table
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}payments/TransactionTable.tsx',
+      path: '${paths.components}payments/TransactionTable.tsx',
       template: 'templates/TransactionTable.tsx.tpl',
       context: { 
         features: ['analytics'],
@@ -355,7 +355,7 @@ function generateAnalyticsActions(): BlueprintAction[] {
     // Transaction pages
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}transactions/page.tsx',
+      path: '${paths.app_root}transactions/page.tsx',
       template: 'templates/transactions-page.tsx.tpl',
       context: { 
         features: ['analytics'],

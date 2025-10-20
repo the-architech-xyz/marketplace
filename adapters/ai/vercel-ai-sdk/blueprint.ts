@@ -57,7 +57,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Core AI configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}ai/config.ts',
+      path: '${paths.shared_library}ai/config.ts',
       template: 'templates/ai-config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -66,7 +66,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}ai/types.ts',
+      path: '${paths.shared_library}ai/types.ts',
       template: 'templates/ai-types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -75,7 +75,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-chat.ts',
+      path: '${paths.hooks}use-chat.ts',
       template: 'templates/use-chat.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -84,7 +84,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.api_routes}}chat/route.ts',
+      path: '${paths.api_routes}chat/route.ts',
       template: 'templates/chat-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -94,7 +94,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Optional examples file with advanced usage patterns
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}ai/examples.ts',
+      path: '${paths.shared_library}ai/examples.ts',
       template: 'templates/ai-examples.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -108,7 +108,7 @@ function generateStreamingActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-streaming.ts',
+      path: '${paths.hooks}use-streaming.ts',
       template: 'templates/use-streaming.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -130,7 +130,7 @@ function generateAdvancedActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-completion.ts',
+      path: '${paths.hooks}use-completion.ts',
       template: 'templates/use-completion.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -139,7 +139,7 @@ function generateAdvancedActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.api_routes}}completion/route.ts',
+      path: '${paths.api_routes}completion/route.ts',
       template: 'templates/completion-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -153,7 +153,7 @@ function generateEnterpriseActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}ai/providers.ts',
+      path: '${paths.shared_library}ai/providers.ts',
       template: 'templates/ai-providers.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -162,7 +162,7 @@ function generateEnterpriseActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}ai/utils.ts',
+      path: '${paths.shared_library}ai/utils.ts',
       template: 'templates/ai-utils.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -171,7 +171,7 @@ function generateEnterpriseActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}AIProvider.tsx',
+      path: '${paths.components}AIProvider.tsx',
       template: 'templates/AIProvider.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,

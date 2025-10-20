@@ -69,7 +69,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Create Query Client Configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}query-client.ts',
+      path: '${paths.shared_library}query-client.ts',
       template: 'templates/query-client.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -79,7 +79,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Create Standard Query Hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-query.ts',
+      path: '${paths.hooks}use-query.ts',
       template: 'templates/use-query.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -89,7 +89,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Create Standard Mutation Hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-mutation.ts',
+      path: '${paths.hooks}use-mutation.ts',
       template: 'templates/use-mutation.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -99,7 +99,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Create Query Keys Factory
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}query-keys.ts',
+      path: '${paths.shared_library}query-keys.ts',
       template: 'templates/query-keys.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -109,7 +109,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Create Error Boundary for Queries
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}QueryErrorBoundary.tsx',
+      path: '${paths.components}QueryErrorBoundary.tsx',
       template: 'templates/QueryErrorBoundary.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -119,7 +119,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Create Loading States
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}QueryLoading.tsx',
+      path: '${paths.components}QueryLoading.tsx',
       template: 'templates/QueryLoading.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -129,7 +129,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Add TypeScript Types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.types}}query.ts',
+      path: '${paths.types}query.ts',
       template: 'templates/query-types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -139,7 +139,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Create Query Invalidation Utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-query-invalidation.ts',
+      path: '${paths.hooks}use-query-invalidation.ts',
       template: 'templates/query-invalidation.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -171,7 +171,7 @@ function generateInfiniteActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}use-infinite-query.ts',
+      path: '${paths.hooks}use-infinite-query.ts',
       template: 'templates/use-infinite-query.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -189,7 +189,7 @@ function generateOptimisticActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}optimistic-updates.ts',
+      path: '${paths.shared_library}optimistic-updates.ts',
       template: 'templates/optimistic-updates.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -207,7 +207,7 @@ function generateOfflineActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}offline-support.ts',
+      path: '${paths.shared_library}offline-support.ts',
       template: 'templates/offline-support.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,

@@ -1,3 +1,5 @@
+'use client';
+
 // Profile Manager Component
 
 "use client";

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { format } from 'date-fns';
-import { useEmails, useEmailAnalytics } from '@/lib/emailing/hooks';
+import { useEmails, useEmailAnalytics } from '@/lib/emailing';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -25,7 +25,7 @@ import {
   Loader2,
   RefreshCw
 } from 'lucide-react';
-import type { EmailListFilters, EmailStatus } from '@/lib/emailing/types';
+import type { EmailListFilters, EmailStatus } from '@/lib/emailing';
 
 const statusConfig: Record<EmailStatus, { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }> = {
   draft: { label: 'Draft', variant: 'outline' },

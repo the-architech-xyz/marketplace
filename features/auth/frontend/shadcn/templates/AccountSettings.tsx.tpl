@@ -1,3 +1,5 @@
+'use client';
+
 // Account Settings Component
 
 "use client";

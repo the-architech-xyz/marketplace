@@ -65,7 +65,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Core database files
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}db/index.ts',
+      path: '${paths.shared_library}db/index.ts',
       template: 'templates/db-index.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -74,7 +74,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}db/schema.ts',
+      path: '${paths.shared_library}db/schema.ts',
       template: 'templates/schema.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -116,7 +116,7 @@ function generateMigrationsActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}db/migrate.ts',
+      path: '${paths.shared_library}db/migrate.ts',
       template: 'templates/migrate.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -144,7 +144,7 @@ function generateStudioActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}db/studio.ts',
+      path: '${paths.shared_library}db/studio.ts',
       template: 'templates/studio.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -167,7 +167,7 @@ function generateRelationsActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}db/relations.ts',
+      path: '${paths.shared_library}db/relations.ts',
       template: 'templates/relations.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -190,7 +190,7 @@ function generateSeedingActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}db/seed.ts',
+      path: '${paths.shared_library}db/seed.ts',
       template: 'templates/seed.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -200,7 +200,7 @@ function generateSeedingActions(): BlueprintAction[] {
     {
       type: BlueprintActionType.ADD_SCRIPT,
       name: 'db:seed',
-      command: 'tsx {{paths.shared_library}}db/seed.ts'
+      command: 'tsx ${paths.shared_library}db/seed.ts'
     }
   ];
 }

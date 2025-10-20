@@ -112,7 +112,15 @@
         "scroll-area",
         "slider",
         "toggle",
-        "toggle-group"
+        "toggle-group",
+        "select",
+        "skeleton",
+        "label",
+        "alert",
+        "switch",
+        "textarea",
+        "separator",
+        "pagination"
       ],
       "description": "Components to install (comprehensive set by default)",
       "required": false,

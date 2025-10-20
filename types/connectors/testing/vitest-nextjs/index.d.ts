@@ -1,0 +1,52 @@
+/**
+ * Vitest Next.js Connector
+ * 
+ * Complete Vitest testing setup for Next.js applications with unit tests, integration tests, and coverage reporting
+ */
+
+export interface ConnectorsTestingVitestNextjsParams {
+
+  /** Unit tests for components, hooks, and utilities */
+  unitTesting?: boolean;
+
+  /** Integration tests for pages and API routes */
+  integrationTesting?: boolean;
+
+  /** End-to-end tests with Playwright */
+  e2eTesting?: boolean;
+
+  /** Code coverage reporting with HTML and LCOV reports */
+  coverageReporting?: boolean;
+
+  /** Watch mode for development testing */
+  watchMode?: boolean;
+
+  /** Vitest UI for interactive testing */
+  uiMode?: boolean;
+
+  /** Mock utilities for Next.js, APIs, and external services */
+  mocking?: boolean;
+
+  /** Snapshot testing for components */
+  snapshots?: boolean;
+
+  /** Parallel test execution for faster runs */
+  parallelTesting?: boolean;
+
+  /** Full TypeScript support for tests */
+  typescriptSupport?: boolean;
+}
+
+export interface ConnectorsTestingVitestNextjsFeatures {}
+
+// 🚀 Auto-discovered artifacts with ownership info
+export declare const ConnectorsTestingVitestNextjsArtifacts: {
+  creates: [],
+  enhances: [],
+  installs: [],
+  envVars: []
+};
+
+// Type-safe artifact access
+export type ConnectorsTestingVitestNextjsCreates = typeof ConnectorsTestingVitestNextjsArtifacts.creates[number];
+export type ConnectorsTestingVitestNextjsEnhances = typeof ConnectorsTestingVitestNextjsArtifacts.enhances[number];

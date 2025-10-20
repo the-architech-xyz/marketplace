@@ -19,7 +19,7 @@ export default function generateBlueprint(
     // Create email composer component (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}emailing/EmailComposer.tsx',
+      path: '${paths.components}emailing/EmailComposer.tsx',
       template: 'templates/EmailComposer.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -30,7 +30,7 @@ export default function generateBlueprint(
     // Create email list component (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}emailing/EmailList.tsx',
+      path: '${paths.components}emailing/EmailList.tsx',
       template: 'templates/EmailList.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -41,7 +41,7 @@ export default function generateBlueprint(
     // Create template manager component (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}emailing/TemplateManager.tsx',
+      path: '${paths.components}emailing/TemplateManager.tsx',
       template: 'templates/TemplateManager.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -52,7 +52,7 @@ export default function generateBlueprint(
     // Create emailing dashboard page (using template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}emailing/page.tsx',
+      path: '${paths.app_root}emailing/page.tsx',
       template: 'templates/emailing-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

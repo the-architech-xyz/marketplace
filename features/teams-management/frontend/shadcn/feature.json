@@ -8,6 +8,15 @@
     "capabilities": ["teams-management-backend-better-auth-nextjs"],
     "adapters": ["ui/shadcn-ui"]
   },
+  "requires": {
+    "components": {
+      "ui/shadcn-ui": [
+        "form", "input", "button", "card", "label",
+        "table", "badge", "tabs", "dialog", "dropdown-menu",
+        "avatar", "separator", "checkbox", "select", "alert"
+      ]
+    }
+  },
   "provides": [
     "teams-core",
     "{{#if features.advanced}}teams-advanced{{/if}}",

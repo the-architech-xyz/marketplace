@@ -4,8 +4,8 @@
  * Provides user context for email operations by integrating with auth
  */
 
-import { useAuthService } from '@/features/auth/hooks/useAuthService';
-import { UserContext } from '@/features/emailing/backend/resend-nextjs/permissions';
+import { useSession } from '@/lib/auth/client';  // Better Auth native
+import { UserContext } from '@/lib/emailing';  // ✅ Import from tech-stack, not backend!
 
 export function useEmailContext(): {
   userContext: UserContext | null;
@@ -19,18 +19,17 @@ export function useEmailContext(): {
   canSendBulkEmails: boolean;
   canManageOrgSettings: boolean;
 } {
-  const auth = useAuthService();
-  const { session, isLoading, error } = auth.session.useSession();
+  const { data: session, isPending: isLoading, error } = useSession();  // Better Auth native
 
   // Build user context from auth session
   const userContext: UserContext | null = session ? {
     userId: session.user.id,
     <% if (module.parameters.hasOrganizations) { %>
-    organizationId: session.activeOrganizationId,
+    organizationId: session.user.organizationId as string | undefined,
     role: session.user.role as 'owner' | 'admin' | 'member' | undefined,
     <% } %>
     <% if (module.parameters.hasTeams) { %>
-    teamId: session.activeTeamId,
+    teamId: session.user.teamId as string | undefined,
     teamRole: session.user.teamRole as 'owner' | 'admin' | 'member' | undefined
     <% } %>
   } : null;

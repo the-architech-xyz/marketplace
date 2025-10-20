@@ -25,7 +25,7 @@ import {
   TrendingUp,
   Users
 } from 'lucide-react';
-import { useSubscriptions } from '@/hooks/payments/use-subscriptions';
+import { useSubscriptionsList as useSubscriptions } from '@/lib/payments';
 import { SubscriptionCard } from '@/components/payments/SubscriptionCard';
 
 interface SubscriptionsPageProps {

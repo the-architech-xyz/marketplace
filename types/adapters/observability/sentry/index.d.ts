@@ -6,7 +6,7 @@
 
 export interface ObservabilitySentryParams {
 
-  /** Sentry DSN */
+  /** Sentry DSN (or set SENTRY_DSN env var) */
   dsn?: string;
 
   /** Environment name */

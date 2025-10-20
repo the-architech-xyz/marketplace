@@ -1,3 +1,5 @@
+'use client';
+
 // Reset Password Form Component
 
 "use client";

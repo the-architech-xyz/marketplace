@@ -1,7 +1,7 @@
 /**
- * emailing-tech-stack
+ * features/emailing/tech-stack
  * 
- * Technology-agnostic stack layer for Emailing feature
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
 export interface FeaturesEmailingTechStackParams {}

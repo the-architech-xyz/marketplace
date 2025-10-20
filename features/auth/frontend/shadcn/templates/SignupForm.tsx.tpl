@@ -1,3 +1,5 @@
+'use client';
+
 // Signup Form Component
 
 "use client";

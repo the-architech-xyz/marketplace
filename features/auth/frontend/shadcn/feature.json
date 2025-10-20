@@ -8,6 +8,15 @@
     "capabilities": ["auth-backend-better-auth-nextjs"],
     "adapters": ["ui/shadcn-ui"]
   },
+  "requires": {
+    "components": {
+      "ui/shadcn-ui": [
+        "form", "input", "button", "card", "label",
+        "tabs", "dialog", "alert", "checkbox", "badge",
+        "avatar", "dropdown-menu", "separator", "switch"
+      ]
+    }
+  },
   "provides": [
     "auth-ui-core",
     "{{#if features.passwordReset}}auth-ui-password-reset{{/if}}",

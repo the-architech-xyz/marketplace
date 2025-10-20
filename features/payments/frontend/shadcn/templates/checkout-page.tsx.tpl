@@ -13,8 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, CreditCard, Lock, Shield, Check } from 'lucide-react';
-import { usePayments } from '@/hooks/payments/use-payments';
-import { useCart } from '@/hooks/payments/use-cart';
+import { useCart, usePaymentsCreate } from '@/lib/payments';  // ✅ Import from tech-stack
 import { PaymentMethodSelector } from '@/components/payments/PaymentMethodSelector';
 import { CheckoutForm } from '@/components/payments/CheckoutForm';
 
@@ -28,7 +27,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
   onError,
 }) => {
   const router = useRouter();
-  const { createPaymentIntent, processPayment, isLoading, error } = usePayments();
+  const createPayment = usePaymentsCreate();
   const { items, total, clearCart } = useCart();
   
   const [paymentMethod, setPaymentMethod] = useState<string>('card');
@@ -59,10 +58,11 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
     try {
       setIsProcessing(true);
 
-      // Create payment intent
-      const paymentIntent = await createPaymentIntent({
-        amount: total,
+      // Create payment
+      const result = await createPayment.mutateAsync({
+        amount: total * 100, // Convert to cents
         currency: 'usd',
+        payment_method: paymentMethod,
         items: items.map(item => ({
           id: item.id,
           name: item.name,
@@ -82,13 +82,6 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
         },
       });
 
-      // Process payment
-      const result = await processPayment({
-        paymentIntentId: paymentIntent.id,
-        paymentMethod,
-        billingInfo,
-      });
-
       // Clear cart and redirect
       clearCart();
       onSuccess?.(result);
@@ -96,7 +89,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
       // Redirect to success page
       router.push(`/payments/success?payment_intent=${result.id}`);
     } catch (err: any) {
-      onError?.(err.message);
+      onError?.(err.message || 'Payment failed');
     } finally {
       setIsProcessing(false);
     }

@@ -38,31 +38,21 @@ export default function generateBlueprint(
   // TECHNOLOGY STACK LAYER FILES
   // ============================================================================
   
-  // Types - Re-exported from contract (single source of truth)
+  // Types - Comprehensive type definitions (single source of truth)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/emailing/types.ts',
-    content: `/**
- * Emailing Types
- * Re-exported from contract for convenience
- */
-export type { 
-  Email, EmailTemplate, EmailCampaign, EmailAnalytics,
-  SendEmailData, SendBulkEmailData, CreateTemplateData, CreateCampaignData,
-  EmailStatus, CampaignStatus,
-  IEmailingService
-} from '@/features/emailing/contract';
-`,
+    path: '${paths.lib}/emailing/types.ts',
+    template: 'templates/types.ts.tpl',
     conflictResolution: {
-      strategy: ConflictResolutionStrategy.SKIP,
-      priority: 0
+      strategy: ConflictResolutionStrategy.REPLACE,
+      priority: 1
     }
   });
   
   // Schemas - Zod validation schemas
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/emailing/schemas.ts',
+    path: '${paths.lib}/emailing/schemas.ts',
     template: 'templates/schemas.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -70,11 +60,11 @@ export type {
     }
   });
   
-  // Service - Cohesive Services (wraps backend with TanStack Query)
+  // Hooks - Direct TanStack Query hooks (best practice pattern)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/emailing/EmailingService.ts',
-    template: 'templates/EmailingService.ts.tpl',
+    path: '${paths.lib}/emailing/hooks.ts',
+    template: 'templates/hooks.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
       priority: 1
@@ -84,7 +74,7 @@ export type {
   // Stores - Zustand state management
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/emailing/stores.ts',
+    path: '${paths.lib}/emailing/stores.ts',
     template: 'templates/stores.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -96,29 +86,11 @@ export type {
   // UTILITY FILES
   // ============================================================================
       
-  // Index file for easy imports
+  // Index file for easy imports (from template)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/emailing/index.ts',
-    content: `/**
- * Emailing Feature - Tech Stack Layer
- * 
- * This module provides the client-side abstraction layer for emailing.
- * Import the EmailingService to access all email-related operations.
- */
-
-// Re-export types from contract
-export * from './types';
-
-// Re-export schemas for validation
-export * from './schemas';
-
-// Re-export Zustand stores
-export * from './stores';
-
-// Export the main Cohesive Service
-export { EmailingService } from './EmailingService';
-`,
+    path: '${paths.lib}/emailing/index.ts',
+    template: 'templates/index.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
       priority: 1
@@ -132,7 +104,7 @@ export { EmailingService } from './EmailingService';
   // README for the tech stack layer
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/emailing/README.md',
+    path: '${paths.lib}/emailing/README.md',
     content: `# Emailing Feature - Technology Stack Layer
 
 This directory contains the technology-agnostic stack layer for the Emailing feature. These files provide consistent types, validation, data fetching, and state management across all implementations.

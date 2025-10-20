@@ -80,7 +80,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Create base CSS file
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}globals.css',
+      path: '${paths.app_root}globals.css',
       template: 'templates/globals.css.tpl',
       conflictResolution: { strategy: ConflictResolutionStrategy.REPLACE }
     }

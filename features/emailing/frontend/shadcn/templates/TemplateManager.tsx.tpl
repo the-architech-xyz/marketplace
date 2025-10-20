@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useTemplates, useCreateTemplate, useUpdateTemplate, useDeleteTemplate } from '@/lib/emailing/hooks';
+import { useTemplates, useCreateTemplate, useUpdateTemplate, useDeleteTemplate } from '@/lib/emailing';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -30,7 +30,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { format } from 'date-fns';
-import type { EmailTemplate, TemplateFormData } from '@/lib/emailing/types';
+import type { EmailTemplate, TemplateFormData } from '@/lib/emailing';
 
 const templateFormSchema = z.object({
   name: z.string().min(1, 'Template name is required'),

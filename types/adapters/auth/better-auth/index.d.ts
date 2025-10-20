@@ -1,22 +1,31 @@
 /**
  * Better Auth
  * 
- * Modern authentication library for TypeScript
+ * Full-stack authentication SDK with session management, OAuth, 2FA, and organization support
  */
 
 export interface AuthBetterAuthParams {
 
-  /** Authentication providers to enable */
-  providers?: string[];
+  /** Enable email/password authentication */
+  emailPassword?: boolean;
 
-  /** Session management strategy */
-  session?: any;
+  /** Enable email verification */
+  emailVerification?: boolean;
 
-  /** Enable CSRF protection */
-  csrf?: boolean;
+  /** Enabled OAuth providers */
+  oauthProviders?: string[];
 
-  /** Enable rate limiting */
-  rateLimit?: boolean;
+  /** Enable two-factor authentication */
+  twoFactor?: boolean;
+
+  /** Enable organization support */
+  organizations?: boolean;
+
+  /** Enable team support within organizations */
+  teams?: boolean;
+
+  /** Session expiry time in seconds (default: 7 days) */
+  sessionExpiry?: number;
 }
 
 export interface AuthBetterAuthFeatures {}

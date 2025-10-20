@@ -41,7 +41,7 @@ export default function generateBlueprint(
   // Types - Re-exported from contract (single source of truth)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/payments/types.ts',
+    path: '${paths.lib}/payments/types.ts',
     content: `/**
  * Payments Types
  * Re-exported from contract for convenience
@@ -63,7 +63,7 @@ export type {
   // Schemas - Zod validation schemas
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/payments/schemas.ts',
+    path: '${paths.lib}/payments/schemas.ts',
     template: 'templates/schemas.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -71,21 +71,43 @@ export type {
     }
   });
   
-  // Service - Cohesive Services (wraps backend with TanStack Query)
+  // Hooks - Direct TanStack Query hooks (best practice pattern)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/payments/PaymentService.ts',
-    template: 'templates/PaymentService.ts.tpl',
+    path: '${paths.lib}/payments/hooks.ts',
+    template: 'templates/hooks.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
       priority: 1
     }
   });
+
+  // Convenience hook wrappers for common use cases
+  actions.push(
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.lib}/payments/use-subscriptions.ts',
+      template: 'templates/use-subscriptions.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.lib}/payments/use-invoices.ts',
+      template: 'templates/use-invoices.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    }
+  );
   
   // Stores - Zustand state management
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/payments/stores.ts',
+    path: '${paths.lib}/payments/stores.ts',
     template: 'templates/stores.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -97,29 +119,11 @@ export type {
   // UTILITY FILES
   // ============================================================================
       
-  // Index file for easy imports
+  // Index file for easy imports (from template)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/payments/index.ts',
-    content: `/**
- * Payments Feature - Tech Stack Layer
- * 
- * This module provides the client-side abstraction layer for payments.
- * Import the PaymentService to access all payment-related operations.
- */
-
-// Re-export types from contract
-export * from './types';
-
-// Re-export schemas for validation
-export * from './schemas';
-
-// Re-export Zustand stores
-export * from './stores';
-
-// Export the main Cohesive Service
-export { PaymentService } from './PaymentService';
-`,
+    path: '${paths.lib}/payments/index.ts',
+    template: 'templates/index.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
       priority: 1
@@ -133,7 +137,7 @@ export { PaymentService } from './PaymentService';
   // README for the tech stack layer
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '{{paths.lib}}/payments/README.md',
+    path: '${paths.lib}/payments/README.md',
     content: `# Payments Feature - Technology Stack Layer
 
 This directory contains the technology-agnostic stack layer for the Payments feature. These files provide consistent types, validation, data fetching, and state management across all implementations.

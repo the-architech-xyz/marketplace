@@ -19,6 +19,7 @@ const shadcnUiBlueprint: Blueprint = {
         "tailwindcss@next",
         "@tailwindcss/postcss@next",
         "tailwindcss-animate",
+        "autoprefixer",
       ],
     },
     // Create PostCSS configuration for Tailwind CSS v4
@@ -35,7 +36,7 @@ export default config;`,
     // Create Tailwind CSS v4 globals.css
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: "{{paths.app_root}}globals.css",
+      path: "${paths.app_root}globals.css",
       conflictResolution: { strategy: ConflictResolutionStrategy.REPLACE },
       content: `
 @import "tailwindcss";
@@ -116,15 +117,44 @@ export default config;`,
 }`,
     },
     // Install core Shadcn/ui dependencies
-    // Note: Shadcn will automatically install Radix UI dependencies for each component
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
-        "@radix-ui/react-slot@^1.0.2",
         "class-variance-authority@^0.7.0",
         "clsx@^2.0.0",
         "tailwind-merge@^2.0.0",
         "lucide-react@^0.294.0",
+      ],
+    },
+    // Install ALL Radix UI packages (shadcn CLI doesn't auto-install peer dependencies)
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: [
+        "@radix-ui/react-slot@^1.0.2",
+        "@radix-ui/react-accordion@^1.1.0",
+        "@radix-ui/react-alert-dialog@^1.0.0",
+        "@radix-ui/react-avatar@^1.0.0",
+        "@radix-ui/react-checkbox@^1.0.0",
+        "@radix-ui/react-collapsible@^1.0.0",
+        "@radix-ui/react-context-menu@^2.1.0",
+        "@radix-ui/react-dialog@^1.0.0",
+        "@radix-ui/react-dropdown-menu@^2.0.0",
+        "@radix-ui/react-hover-card@^1.0.0",
+        "@radix-ui/react-label@^2.0.0",
+        "@radix-ui/react-menubar@^1.0.0",
+        "@radix-ui/react-navigation-menu@^1.1.0",
+        "@radix-ui/react-popover@^1.0.0",
+        "@radix-ui/react-progress@^1.0.0",
+        "@radix-ui/react-radio-group@^1.0.0",
+        "@radix-ui/react-scroll-area@^1.0.0",
+        "@radix-ui/react-select@^2.0.0",
+        "@radix-ui/react-separator@^1.0.0",
+        "@radix-ui/react-slider@^1.1.0",
+        "@radix-ui/react-switch@^1.0.0",
+        "@radix-ui/react-tabs@^1.0.0",
+        "@radix-ui/react-toggle@^1.0.0",
+        "@radix-ui/react-toggle-group@^1.0.0",
+        "@radix-ui/react-tooltip@^1.0.0",
       ],
     },
     // Install additional utilities
@@ -141,19 +171,15 @@ export default config;`,
       ],
     },
     // Initialize Shadcn/ui (non-interactive, Tailwind v4 compatible)
-    // Note: Removed --silent to see any errors during initialization
-    // Using --pm npm to ensure npm is used (not yarn/pnpm)
     {
       type: BlueprintActionType.RUN_COMMAND,
       command:
         "npx shadcn@latest init --yes --defaults --force --src-dir --css-variables --base-color slate",
     },
     // Install components from genome parameters - DYNAMIC LOOP
-    // Shadcn CLI automatically installs the required Radix UI dependencies for each component
     {
       type: BlueprintActionType.RUN_COMMAND,
-      command:
-        "npx shadcn@latest add {{item}} --yes --overwrite",
+      command: "npx shadcn@latest add {{item}} --yes --overwrite",
       forEach: "module.parameters.components",
       workingDir: ".",
     },

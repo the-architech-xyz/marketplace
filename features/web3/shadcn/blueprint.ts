@@ -59,7 +59,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Core Web3 components (only existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}web3/WalletConnection.tsx',
+      path: '${paths.components}web3/WalletConnection.tsx',
       template: 'templates/WalletConnection.tsx.tpl',
       context: { 
         features: ['core'],
@@ -73,7 +73,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}web3/WalletConnect.tsx',
+      path: '${paths.components}web3/WalletConnect.tsx',
       template: 'templates/WalletConnect.tsx.tpl',
       context: { 
         features: ['core'],

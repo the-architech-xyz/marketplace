@@ -1,3 +1,5 @@
+'use client';
+
 // Login Page Component
 
 "use client";
@@ -22,8 +24,8 @@ import {
   Chrome,
   AlertCircle
 } from 'lucide-react';
-import { useSession } from '@/hooks/use-session';
-import { useSocialAuth } from '@/hooks/use-social-auth';
+import { authClient, useSession } from '@/lib/auth/client';  // Better Auth native
+import { SignInSchema } from '@/lib/auth';  // Generic schema from tech-stack
 
 interface LoginPageProps {
   onSuccess?: () => void;
@@ -37,8 +39,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
   className = '',
 }) => {
   const router = useRouter();
-  const { signIn, isLoading, error } = useSession();
-  const { signInWithProvider, providers, isLoading: isSocialLoading } = useSocialAuth();
+  const { data: session } = useSession();  // Better Auth hook
+  const signInMutation = authClient.signIn.email();  // Better Auth mutation
   
   const [formData, setFormData] = useState({
     email: '',
@@ -90,19 +92,24 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     }
 
     try {
-      await signIn(formData.email, formData.password);
+      await signInMutation.mutateAsync({
+        email: formData.email,
+        password: formData.password,
+        rememberMe: formData.rememberMe,
+      });
       onSuccess?.();
       router.push(redirectTo);
-    } catch (err) {
-      // Error is handled by the useSession hook
+    } catch (err: any) {
+      setFormErrors({ general: err.message || 'Failed to sign in' });
     }
   };
 
-  const handleSocialLogin = async (provider: string) => {
+  const handleSocialLogin = async (provider: 'google' | 'github') => {
     try {
-      await signInWithProvider(provider);
-    } catch (err) {
-      // Error is handled by the useSocialAuth hook
+      // Better Auth native social auth
+      await authClient.signIn.social({ provider, callbackURL: redirectTo });
+    } catch (err: any) {
+      setFormErrors({ general: err.message || `Failed to sign in with ${provider}` });
     }
   };
 
@@ -145,8 +152,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                     key={provider.id}
                     variant="outline"
                     className="w-full"
-                    onClick={() => handleSocialLogin(provider.id)}
-                    disabled={isSocialLoading}
+                    onClick={() => handleSocialLogin(provider.id as 'google' | 'github')}
+                    disabled={signInMutation.isPending}
                   >
                     {provider.id === 'google' && <Chrome className="w-4 h-4 mr-2" />}
                     {provider.id === 'github' && <Github className="w-4 h-4 mr-2" />}
@@ -240,9 +247,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({
               <Button
                 type="submit"
                 className="w-full"
-                disabled={isLoading}
+                disabled={signInMutation.isPending}
               >
-                {isLoading ? (
+                {signInMutation.isPending ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                     Signing in...

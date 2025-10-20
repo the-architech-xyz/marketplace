@@ -14,7 +14,7 @@ import {
   Wifi,
   HardDrive,
   Cpu,
-  Memory
+  MemoryStick
 } from 'lucide-react';
 
 interface SystemComponent {
@@ -69,7 +69,7 @@ export default function SystemStatus({
       case 'network': return <Wifi className="h-4 w-4" />;
       case 'storage': return <HardDrive className="h-4 w-4" />;
       case 'cpu': return <Cpu className="h-4 w-4" />;
-      case 'memory': return <Memory className="h-4 w-4" />;
+      case 'memory': return <MemoryStick className="h-4 w-4" />;
       default: return <Server className="h-4 w-4" />;
     }
   };

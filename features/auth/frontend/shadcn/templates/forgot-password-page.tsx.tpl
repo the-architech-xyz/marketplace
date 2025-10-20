@@ -1,3 +1,5 @@
+'use client';
+
 // Forgot Password Page Component
 
 "use client";
@@ -16,7 +18,8 @@ import {
   CheckCircle,
   ArrowLeft
 } from 'lucide-react';
-import { usePasswordReset } from '@/hooks/use-password-reset';
+import { authClient } from '@/lib/auth/client';  // Better Auth native
+import { ResetPasswordSchema } from '@/lib/auth';  // Generic schema from tech-stack
 
 interface ForgotPasswordPageProps {
   onSuccess?: () => void;
@@ -27,10 +30,12 @@ export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({
   onSuccess,
   className = '',
 }) => {
-  const { requestReset, isLoading, error, isEmailSent } = usePasswordReset();
-  
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [isEmailSent, setIsEmailSent] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const validateEmail = (email: string): boolean => {
     if (!email) {
@@ -55,10 +60,18 @@ export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({
     }
 
     try {
-      await requestReset(email);
+      setIsLoading(true);
+      setError(null);
+      
+      // Better Auth native password reset
+      await authClient.forgetPassword({ email, redirectTo: '/reset-password' });
+      
+      setIsEmailSent(true);
       onSuccess?.();
-    } catch (err) {
-      // Error is handled by the usePasswordReset hook
+    } catch (err: any) {
+      setError(err.message || 'Failed to send reset email');
+    } finally {
+      setIsLoading(false);
     }
   };
 

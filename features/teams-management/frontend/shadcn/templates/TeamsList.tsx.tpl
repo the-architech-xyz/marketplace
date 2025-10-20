@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { format } from 'date-fns';
-import { useTeams } from '@/lib/teams/hooks';
+import { useTeamsList } from '@/lib/teams-management';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -29,7 +29,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import type { Team } from '@/lib/teams/types';
+import type { Team } from '@/lib/teams-management';
 
 interface TeamsListProps {
   className?: string;
@@ -47,7 +47,7 @@ export function TeamsList({
   onDeleteTeam 
 }: TeamsListProps) {
   const [searchTerm, setSearchTerm] = useState('');
-  const { teams, isLoading, error, refetch, hasMore, loadMore } = useTeams({
+  const { data: teams, isLoading, error, refetch } = useTeamsList({
     search: searchTerm || undefined
   });
 

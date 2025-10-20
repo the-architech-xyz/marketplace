@@ -6,7 +6,7 @@
   "tags": ["monitoring", "types", "schemas", "hooks", "stores", "tech-stack"],
   "moduleType": "feature",
   "blueprint": "./blueprint.ts",
-  "schema": {
+  "parameters": {
     "type": "object",
     "properties": {
       "featureName": {

@@ -83,6 +83,9 @@ export class ConstitutionalTypeGenerator {
     // Generate defineGenome function
     await this.generateDefineGenomeFunction();
     
+    // Generate runtime companion files
+    await ConstitutionalTypeGeneratorHelpers.generateRuntimeFiles(this.outputPath);
+    
     console.log('✅ Constitutional Architecture type generation completed successfully!');
   }
 

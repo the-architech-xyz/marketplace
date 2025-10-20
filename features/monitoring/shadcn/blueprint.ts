@@ -50,7 +50,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Core monitoring components (only existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}monitoring/MonitoringDashboard.tsx',
+      path: '${paths.components}monitoring/MonitoringDashboard.tsx',
       template: 'templates/MonitoringDashboard.tsx.tpl',
       context: { 
         features: ['core'],
@@ -64,7 +64,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}monitoring/SystemStatus.tsx',
+      path: '${paths.components}monitoring/SystemStatus.tsx',
       template: 'templates/SystemStatus.tsx.tpl',
       context: { 
         features: ['core'],
@@ -78,7 +78,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}monitoring/HealthCheck.tsx',
+      path: '${paths.components}monitoring/HealthCheck.tsx',
       template: 'templates/HealthCheck.tsx.tpl',
       context: { 
         features: ['core'],
@@ -92,7 +92,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}monitoring/ErrorBoundary.tsx',
+      path: '${paths.components}monitoring/ErrorBoundary.tsx',
       template: 'templates/ErrorBoundary.tsx.tpl',
       context: { 
         features: ['core'],
@@ -106,7 +106,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}monitoring/MetricsCard.tsx',
+      path: '${paths.components}monitoring/MetricsCard.tsx',
       template: 'templates/MetricsCard.tsx.tpl',
       context: { 
         features: ['core'],
@@ -120,7 +120,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}monitoring/AlertCard.tsx',
+      path: '${paths.components}monitoring/AlertCard.tsx',
       template: 'templates/AlertCard.tsx.tpl',
       context: { 
         features: ['core'],
@@ -134,7 +134,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}monitoring/LogViewer.tsx',
+      path: '${paths.components}monitoring/LogViewer.tsx',
       template: 'templates/LogViewer.tsx.tpl',
       context: { 
         features: ['core'],
@@ -149,7 +149,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Monitoring pages
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}monitoring/page.tsx',
+      path: '${paths.app_root}monitoring/page.tsx',
       template: 'templates/monitoring-dashboard.tsx.tpl',
       context: { 
         features: ['core'],
@@ -163,7 +163,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}monitoring/alerts/page.tsx',
+      path: '${paths.app_root}monitoring/alerts/page.tsx',
       template: 'templates/alerts-page.tsx.tpl',
       context: { 
         features: ['core'],
@@ -177,7 +177,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}monitoring/logs/page.tsx',
+      path: '${paths.app_root}monitoring/logs/page.tsx',
       template: 'templates/logs-page.tsx.tpl',
       context: { 
         features: ['core'],
@@ -192,7 +192,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Monitoring utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.lib}}monitoring/monitoring-types.ts',
+      path: '${paths.lib}monitoring/monitoring-types.ts',
       template: 'templates/monitoring-types.ts.tpl',
       context: { 
         features: ['core'],
@@ -206,7 +206,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.lib}}monitoring/monitoring-utils.ts',
+      path: '${paths.lib}monitoring/monitoring-utils.ts',
       template: 'templates/monitoring-utils.ts.tpl',
       context: { 
         features: ['core'],
@@ -221,7 +221,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Monitoring hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}monitoring/use-monitoring.ts',
+      path: '${paths.hooks}monitoring/use-monitoring.ts',
       template: 'templates/use-monitoring.ts.tpl',
       context: { 
         features: ['core'],
@@ -235,7 +235,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}monitoring/use-metrics.ts',
+      path: '${paths.hooks}monitoring/use-metrics.ts',
       template: 'templates/use-metrics.ts.tpl',
       context: { 
         features: ['core'],
@@ -249,7 +249,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}monitoring/use-alerts.ts',
+      path: '${paths.hooks}monitoring/use-alerts.ts',
       template: 'templates/use-alerts.ts.tpl',
       context: { 
         features: ['core'],
@@ -268,7 +268,7 @@ function generatePerformanceActions(): BlueprintAction[] {
     // Performance components (existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}monitoring/PerformanceChart.tsx',
+      path: '${paths.components}monitoring/PerformanceChart.tsx',
       template: 'templates/PerformanceChart.tsx.tpl',
       context: { 
         features: ['performance'],
@@ -282,7 +282,7 @@ function generatePerformanceActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}monitoring/RealTimeMetrics.tsx',
+      path: '${paths.components}monitoring/RealTimeMetrics.tsx',
       template: 'templates/RealTimeMetrics.tsx.tpl',
       context: { 
         features: ['performance'],
@@ -297,7 +297,7 @@ function generatePerformanceActions(): BlueprintAction[] {
     // Performance pages
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}monitoring/performance/page.tsx',
+      path: '${paths.app_root}monitoring/performance/page.tsx',
       template: 'templates/performance-page.tsx.tpl',
       context: { 
         features: ['performance'],
@@ -316,7 +316,7 @@ function generateAnalyticsActions(): BlueprintAction[] {
     // Analytics pages (existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}monitoring/analytics/page.tsx',
+      path: '${paths.app_root}monitoring/analytics/page.tsx',
       template: 'templates/analytics-page.tsx.tpl',
       context: { 
         features: ['analytics'],

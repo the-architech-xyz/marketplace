@@ -8,6 +8,15 @@
     "adapters": ["ui/shadcn-ui"],
     "backend": ["payments/backend/stripe-nextjs"]
   },
+  "requires": {
+    "components": {
+      "ui/shadcn-ui": [
+        "form", "input", "button", "card", "label", "select",
+        "table", "badge", "tabs", "dialog", "dropdown-menu",
+        "separator", "checkbox", "alert", "skeleton"
+      ]
+    }
+  },
   "provides": [
     "payments-core",
     "{{#if features.subscriptions}}payments-subscriptions{{/if}}",

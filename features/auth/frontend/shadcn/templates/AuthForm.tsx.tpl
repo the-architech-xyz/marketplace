@@ -12,8 +12,8 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Separator } from '@/components/ui/separator';
-import { useAuthService } from '@/hooks/useAuthService';
-import type { SignInData, SignUpData } from '@/features/auth/contract';
+import { authClient } from '@/lib/auth/client';  // Better Auth native
+import type { SignInData, SignUpData } from '@/lib/auth/types';  // From tech-stack
 
 const authSchema = z.object({
   email: z.string().email('Please enter a valid email address'),

@@ -8,6 +8,14 @@
     "capabilities": ["ai-chat-backend-vercel-ai-nextjs"],
     "adapters": ["ui/shadcn-ui"]
   },
+  "requires": {
+    "components": {
+      "ui/shadcn-ui": [
+        "input", "button", "card", "badge", "textarea",
+        "dropdown-menu", "separator", "skeleton", "scroll-area"
+      ]
+    }
+  },
   "provides": [
     "ai-chat-core",
     "{{#if features.context}}ai-chat-context{{/if}}",

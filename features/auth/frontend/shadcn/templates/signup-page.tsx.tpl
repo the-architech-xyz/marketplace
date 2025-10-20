@@ -1,6 +1,6 @@
-// Signup Page Component
+'use client';
 
-"use client";
+// Signup Page Component
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -24,8 +24,8 @@ import {
   AlertCircle,
   Check
 } from 'lucide-react';
-import { useSession } from '@/hooks/use-session';
-import { useSocialAuth } from '@/hooks/use-social-auth';
+import { authClient, useSession } from '@/lib/auth/client';  // Better Auth native
+import { SignUpSchema } from '@/lib/auth';  // Generic schema from tech-stack
 
 interface SignupPageProps {
   onSuccess?: () => void;
@@ -39,8 +39,8 @@ export const SignupPage: React.FC<SignupPageProps> = ({
   className = '',
 }) => {
   const router = useRouter();
-  const { signUp, isLoading, error } = useSession();
-  const { signInWithProvider, providers, isLoading: isSocialLoading } = useSocialAuth();
+  const { data: session } = useSession();  // Better Auth hook
+  const signUpMutation = authClient.signUp.email();  // Better Auth mutation
   
   const [formData, setFormData] = useState({
     name: '',
@@ -114,25 +114,24 @@ export const SignupPage: React.FC<SignupPageProps> = ({
     }
 
     try {
-      await signUp({
+      await signUpMutation.mutateAsync({
         name: formData.name,
         email: formData.email,
         password: formData.password,
-        confirmPassword: formData.confirmPassword,
-        agreedToTerms: formData.agreedToTerms,
       });
       onSuccess?.();
       router.push(redirectTo);
-    } catch (err) {
-      // Error is handled by the useSession hook
+    } catch (err: any) {
+      setFormErrors({ general: err.message || 'Failed to sign up' });
     }
   };
 
-  const handleSocialLogin = async (provider: string) => {
+  const handleSocialLogin = async (provider: 'google' | 'github') => {
     try {
-      await signInWithProvider(provider);
-    } catch (err) {
-      // Error is handled by the useSocialAuth hook
+      // Better Auth native social auth
+      await authClient.signIn.social({ provider, callbackURL: redirectTo });
+    } catch (err: any) {
+      setFormErrors({ general: err.message || `Failed to sign up with ${provider}` });
     }
   };
 
@@ -202,7 +201,7 @@ export const SignupPage: React.FC<SignupPageProps> = ({
                     variant="outline"
                     className="w-full"
                     onClick={() => handleSocialLogin(provider.id)}
-                    disabled={isSocialLoading}
+                    disabled={signUpMutation.isPending}
                   >
                     {provider.id === 'google' && <Chrome className="w-4 h-4 mr-2" />}
                     {provider.id === 'github' && <Github className="w-4 h-4 mr-2" />}
@@ -373,9 +372,9 @@ export const SignupPage: React.FC<SignupPageProps> = ({
               <Button
                 type="submit"
                 className="w-full"
-                disabled={isLoading}
+                disabled={signUpMutation.isPending}
               >
-                {isLoading ? (
+                {signUpMutation.isPending ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                     Creating account...

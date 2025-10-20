@@ -1,6 +1,6 @@
-// Verify Email Page Component
+'use client';
 
-"use client";
+// Verify Email Page Component
 
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -16,7 +16,7 @@ import {
   ArrowLeft,
   RefreshCw
 } from 'lucide-react';
-import { useEmailVerification } from '@/hooks/use-email-verification';
+import { useEmailVerification } from './use-email-verification';
 
 interface VerifyEmailPageProps {
   onSuccess?: () => void;

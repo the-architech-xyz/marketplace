@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useCreateTeam } from '@/lib/teams/hooks';
+import { useTeamsCreate } from '@/lib/teams-management';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,7 +13,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Switch } from '@/components/ui/switch';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Plus, Users, Settings } from 'lucide-react';
-import type { CreateTeamFormData } from '@/lib/teams/types';
+import type { CreateTeamFormData } from '@/lib/teams-management';
 
 const createTeamSchema = z.object({
   name: z.string().min(1, 'Team name is required'),
@@ -35,7 +35,7 @@ interface CreateTeamFormProps {
 
 export function CreateTeamForm({ onSuccess, onCancel, className }: CreateTeamFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const createTeam = useCreateTeam();
+  const createTeam = useTeamsCreate();
 
   const {
     register,

@@ -17,14 +17,14 @@
     "apiKey": {
       "type": "string",
       "default": "",
-      "description": "Resend API key",
-      "required": true
+      "description": "Resend API key (or set RESEND_API_KEY env var)",
+      "required": false
     },
     "fromEmail": {
       "type": "string",
       "default": "noreply@example.com",
-      "description": "Default from email address",
-      "required": true
+      "description": "Default from email address (or set FROM_EMAIL env var)",
+      "required": false
     },
     "features": {
       "core": {

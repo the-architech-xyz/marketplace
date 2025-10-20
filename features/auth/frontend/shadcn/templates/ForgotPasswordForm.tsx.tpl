@@ -1,3 +1,5 @@
+'use client';
+
 // Forgot Password Form Component
 
 "use client";

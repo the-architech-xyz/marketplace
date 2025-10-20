@@ -1,0 +1,111 @@
+{
+  "id": "core/golden-stack",
+  "name": "Architech Golden Stack",
+  "description": "Essential technologies for production-ready applications: Zustand (state), Vitest (testing), ESLint (linting), Prettier (formatting), Zod (validation)",
+  "category": "core",
+  "version": "1.0.0",
+  "blueprint": "blueprint.ts",
+  "capabilities": [
+    "state-management",
+    "testing",
+    "code-quality",
+    "code-formatting",
+    "validation",
+    "golden-core",
+    "production-ready",
+    "typescript",
+    "react"
+  ],
+  "limitations": "Requires React 18+ and TypeScript",
+  "parameters": {
+    "zustand": {
+      "persistence": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable Zustand state persistence to localStorage"
+      },
+      "devtools": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable Redux DevTools integration"
+      },
+      "immer": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable Immer middleware for immutable state updates"
+      }
+    },
+    "vitest": {
+      "coverage": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable code coverage reporting"
+      },
+      "ui": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable interactive Vitest UI"
+      },
+      "environment": {
+        "type": "string",
+        "default": "jsdom",
+        "description": "Test environment (jsdom, node, happy-dom)"
+      }
+    },
+    "eslint": {
+      "strict": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable strict ESLint rules"
+      },
+      "typescript": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable TypeScript linting"
+      },
+      "react": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable React linting rules"
+      },
+      "nextjs": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable Next.js specific rules"
+      },
+      "accessibility": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable accessibility linting (jsx-a11y)"
+      }
+    },
+    "prettier": {
+      "semi": {
+        "type": "boolean",
+        "default": true,
+        "description": "Add semicolons at end of statements"
+      },
+      "singleQuote": {
+        "type": "boolean",
+        "default": true,
+        "description": "Use single quotes"
+      },
+      "tabWidth": {
+        "type": "number",
+        "default": 2,
+        "description": "Spaces per indentation level"
+      },
+      "tailwind": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable Tailwind CSS class sorting"
+      }
+    }
+  },
+  "constraints": {
+    "reactVersion": ">=18.0.0",
+    "typescriptVersion": ">=4.5.0",
+    "nodeVersion": ">=18.0.0"
+  }
+}
+

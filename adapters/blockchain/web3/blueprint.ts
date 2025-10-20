@@ -18,7 +18,7 @@ export default function generateBlueprint(
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}web3/core.ts',
+      path: '${paths.shared_library}web3/core.ts',
       template: 'templates/core.ts.tpl',
       
       conflictResolution: {
@@ -27,7 +27,7 @@ export default function generateBlueprint(
       }},
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.hooks}}useWeb3.ts',
+      path: '${paths.hooks}useWeb3.ts',
       template: 'templates/useWeb3.ts.tpl',
 
       conflictResolution: {

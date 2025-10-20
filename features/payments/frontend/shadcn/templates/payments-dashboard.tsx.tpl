@@ -29,9 +29,9 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { PaymentAnalytics } from '@/components/payments/PaymentAnalytics';
 import { TransactionTable } from '@/components/payments/TransactionTable';
 import { PaymentStatus } from '@/components/payments/PaymentStatus';
-import { usePayments } from '@/lib/hooks/use-payments';
-import { useSubscriptions } from '@/lib/hooks/use-subscriptions';
-import { useInvoices } from '@/lib/hooks/use-invoices';
+import { usePaymentsList as usePayments } from '@/lib/payments';
+import { useSubscriptionsList as useSubscriptions } from '@/lib/payments';
+import { useInvoicesList as useInvoices } from '@/lib/payments';
 
 export default function PaymentsDashboard() {
   const [searchTerm, setSearchTerm] = useState('');

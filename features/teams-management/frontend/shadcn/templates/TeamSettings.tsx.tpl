@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useUpdateTeam } from '@/lib/teams/hooks';
+import { useTeamsUpdate } from '@/lib/teams-management';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,7 +13,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Switch } from '@/components/ui/switch';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Settings, Save } from 'lucide-react';
-import type { Team, TeamSettingsFormData } from '@/lib/teams/types';
+import type { Team, TeamSettingsFormData } from '@/lib/teams-management';
 
 const teamSettingsSchema = z.object({
   name: z.string().min(1, 'Team name is required'),
@@ -39,7 +39,7 @@ interface TeamSettingsProps {
 
 export function TeamSettings({ team, onSuccess, className }: TeamSettingsProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const updateTeam = useUpdateTeam();
+  const updateTeam = useTeamsUpdate();
 
   const {
     register,

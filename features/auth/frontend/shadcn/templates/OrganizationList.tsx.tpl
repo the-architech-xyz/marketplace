@@ -36,8 +36,8 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useAuthService } from '@/hooks/useAuthService';
-import type { Organization } from '@/features/auth/contract';
+import { authClient, useSession } from '@/lib/auth/client';  // Better Auth native
+import type { Organization } from '@/lib/auth/types';  // From tech-stack
 
 interface OrganizationListProps {
   onCreateOrganization?: () => void;

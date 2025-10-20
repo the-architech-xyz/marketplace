@@ -20,7 +20,7 @@ export default function generateBlueprint(
     // Core Sentry client configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}monitoring/sentry/client.ts',
+      path: '${paths.shared_library}monitoring/sentry/client.ts',
       template: 'templates/client.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -31,7 +31,7 @@ export default function generateBlueprint(
     // Core Sentry server configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}monitoring/sentry/server.ts',
+      path: '${paths.shared_library}monitoring/sentry/server.ts',
       template: 'templates/server.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -42,7 +42,7 @@ export default function generateBlueprint(
     // Core Sentry configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}monitoring/sentry/config.ts',
+      path: '${paths.shared_library}monitoring/sentry/config.ts',
       template: 'templates/config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -53,7 +53,7 @@ export default function generateBlueprint(
     // Core Sentry analytics
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}monitoring/sentry/analytics.ts',
+      path: '${paths.shared_library}monitoring/sentry/analytics.ts',
       template: 'templates/analytics.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -64,7 +64,7 @@ export default function generateBlueprint(
     // Core Sentry performance
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}monitoring/sentry/performance.ts',
+      path: '${paths.shared_library}monitoring/sentry/performance.ts',
       template: 'templates/performance.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

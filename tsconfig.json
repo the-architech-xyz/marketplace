@@ -22,15 +22,13 @@
     "paths": {
       "@thearchitech.xyz/marketplace": ["./index.js"],
       "@thearchitech.xyz/marketplace/types": ["./types/index.ts"],
-      "@types/*": ["./types/*"],
-      "blueprint-config-types": ["./types/blueprint-config-types.ts"]
+      "@types/*": ["./types/*"]
     }
   },
   "include": [
     "adapters/**/blueprint.ts",
     "connectors/**/blueprint.ts",
     "features/**/blueprint.ts",
-    "genomes/**/*.genome.ts",
     "types/**/*.ts",
     "scripts/**/*.ts"
   ],

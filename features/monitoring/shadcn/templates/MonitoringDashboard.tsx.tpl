@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useErrorTracking, usePerformanceMonitoring } from '@/lib/hooks/use-monitoring';
+import { useErrorTracking, usePerformanceMonitoring } from '@/hooks/monitoring/use-monitoring';
 
 export function MonitoringDashboard() {
   const { errors, clearErrors } = useErrorTracking();

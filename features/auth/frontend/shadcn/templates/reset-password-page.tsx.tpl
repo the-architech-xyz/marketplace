@@ -1,6 +1,6 @@
-// Reset Password Page Component
+'use client';
 
-"use client";
+// Reset Password Page Component
 
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -19,7 +19,8 @@ import {
   CheckCircle,
   ArrowLeft
 } from 'lucide-react';
-import { usePasswordReset } from '@/hooks/use-password-reset';
+import { authClient } from '@/lib/auth/client';  // Better Auth native
+import { ConfirmPasswordResetSchema } from '@/lib/auth';  // Generic schema from tech-stack
 
 interface ResetPasswordPageProps {
   onSuccess?: () => void;

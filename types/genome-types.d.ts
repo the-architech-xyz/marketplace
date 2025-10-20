@@ -15,6 +15,7 @@ export type ModuleId =
   | 'core/dependencies'
   | 'core/forms'
   | 'core/git'
+  | 'core/golden-stack'
   | 'data-fetching/tanstack-query'
   | 'database/drizzle'
   | 'database/prisma'
@@ -26,29 +27,25 @@ export type ModuleId =
   | 'framework/nextjs'
   | 'observability/sentry'
   | 'payment/stripe'
-  | 'quality/eslint'
-  | 'quality/prettier'
   | 'services/github-api'
-  | 'state/zustand'
-  | 'testing/vitest'
   | 'ui/shadcn-ui'
   | 'ui/tailwind'
-  | 'connectors/better-auth-github'
-  | 'connectors/docker-drizzle'
-  | 'connectors/docker-nextjs'
-  | 'connectors/rhf-zod-shadcn'
-  | 'connectors/sentry/nextjs'
-  | 'connectors/sentry/react'
-  | 'connectors/sentry-nextjs'
-  | 'connectors/stripe/nextjs-drizzle'
-  | 'connectors/tanstack-query-nextjs'
-  | 'connectors/vitest-nextjs'
-  | 'connectors/zustand-nextjs'
-  | 'features/ai-chat/backend/vercel-ai-nextjs'
+  | 'connectors/ai/vercel-ai-nextjs'
+  | 'connectors/auth/better-auth-nextjs'
+  | 'connectors/database/drizzle-postgres-docker'
+  | 'connectors/deployment/docker-nextjs'
+  | 'connectors/email/resend-nextjs'
+  | 'connectors/infrastructure/rhf-zod-shadcn'
+  | 'connectors/infrastructure/tanstack-query-nextjs'
+  | 'connectors/infrastructure/zustand-nextjs'
+  | 'connectors/integrations/better-auth-github'
+  | 'connectors/monitoring/sentry-nextjs'
+  | 'connectors/payment/stripe-nextjs-drizzle'
+  | 'connectors/testing/vitest-nextjs'
+  | 'features/ai-chat/backend/nextjs'
   | 'features/ai-chat/frontend/shadcn'
   | 'features/ai-chat/tech-stack'
   | 'features/architech-welcome/shadcn'
-  | 'features/auth/backend/better-auth-nextjs'
   | 'features/auth/frontend/shadcn'
   | 'features/auth/tech-stack'
   | 'features/emailing/backend/resend-nextjs'
@@ -56,10 +53,9 @@ export type ModuleId =
   | 'features/emailing/tech-stack'
   | 'features/monitoring/shadcn'
   | 'features/monitoring/tech-stack'
-  | 'features/payments/backend/stripe-nextjs'
   | 'features/payments/frontend/shadcn'
   | 'features/payments/tech-stack'
-  | 'features/teams-management/backend/better-auth-nextjs'
+  | 'features/teams-management/backend/nextjs'
   | 'features/teams-management/frontend/shadcn'
   | 'features/teams-management/tech-stack'
   | 'features/web3/shadcn';
@@ -102,17 +98,26 @@ export type ModuleParameters = {
   };
   'auth/better-auth': {
 
-  /** Authentication providers to enable */
-  providers?: string[];
+  /** Enable email/password authentication */
+  emailPassword?: boolean;
 
-  /** Session management strategy */
-  session?: any;
+  /** Enable email verification */
+  emailVerification?: boolean;
 
-  /** Enable CSRF protection */
-  csrf?: boolean;
+  /** Enabled OAuth providers */
+  oauthProviders?: string[];
 
-  /** Enable rate limiting */
-  rateLimit?: boolean;
+  /** Enable two-factor authentication */
+  twoFactor?: boolean;
+
+  /** Enable organization support */
+  organizations?: boolean;
+
+  /** Enable team support within organizations */
+  teams?: boolean;
+
+  /** Session expiry time in seconds (default: 7 days) */
+  sessionExpiry?: number;
   };
   'blockchain/web3': {
 
@@ -205,6 +210,16 @@ export type ModuleParameters = {
 
   /** Automatically initialize git repository after project creation */
   autoInit?: boolean;
+  };
+  'core/golden-stack': {
+
+  zustand: any;
+
+  vitest: any;
+
+  eslint: any;
+
+  prettier: any;
   };
   'data-fetching/tanstack-query': {
 
@@ -363,10 +378,10 @@ export type ModuleParameters = {
   };
   'email/resend': {
 
-  /** Resend API key */
+  /** Resend API key (or set RESEND_API_KEY env var) */
   apiKey?: string;
 
-  /** Default from email address */
+  /** Default from email address (or set FROM_EMAIL env var) */
   fromEmail?: string;
   /** Constitutional Architecture features configuration */
   features?: {
@@ -430,7 +445,7 @@ export type ModuleParameters = {
   };
   'observability/sentry': {
 
-  /** Sentry DSN */
+  /** Sentry DSN (or set SENTRY_DSN env var) */
   dsn?: string;
 
   /** Environment name */
@@ -474,70 +489,6 @@ export type ModuleParameters = {
   /** Enable Stripe Dashboard integration */
   dashboard?: boolean;
   };
-  'quality/eslint': {
-
-  /** Enable TypeScript support */
-  typescript?: boolean;
-
-  /** Enable React support */
-  react?: boolean;
-
-  /** Enable Next.js specific rules */
-  nextjs?: boolean;
-
-  /** Enable Node.js specific rules */
-  nodejs?: boolean;
-
-  /** Enable accessibility rules */
-  accessibility?: boolean;
-
-  /** Enable import/export rules */
-  imports?: boolean;
-
-  /** Enable strict mode rules */
-  strict?: boolean;
-
-  /** Enable formatting rules */
-  format?: boolean;
-  };
-  'quality/prettier': {
-
-  /** Add semicolons at the end of statements */
-  semi?: boolean;
-
-  /** Use single quotes instead of double quotes */
-  singleQuote?: boolean;
-
-  /** Number of spaces per indentation level */
-  tabWidth?: number;
-
-  /** Use tabs instead of spaces for indentation */
-  useTabs?: boolean;
-
-  /** Print trailing commas where valid in ES5 */
-  trailingComma?: 'none' | 'es5' | 'all';
-
-  /** Wrap lines that exceed this length */
-  printWidth?: number;
-
-  /** Print spaces between brackets in object literals */
-  bracketSpacing?: boolean;
-
-  /** Include parentheses around a sole arrow function parameter */
-  arrowParens?: 'avoid' | 'always';
-
-  /** Line ending style */
-  endOfLine?: 'lf' | 'crlf' | 'cr' | 'auto';
-
-  /** Prettier plugins to use */
-  plugins?: string[];
-
-  /** Enable Tailwind CSS class sorting plugin */
-  tailwind?: boolean;
-
-  /** Enable import organization */
-  organizeImports?: boolean;
-  };
   'services/github-api': {
 
   /** GitHub Personal Access Token or OAuth access token */
@@ -548,46 +499,6 @@ export type ModuleParameters = {
 
   /** User agent string for API requests */
   userAgent?: string;
-  };
-  'state/zustand': {
-
-  /** Enable state persistence */
-  persistence?: boolean;
-
-  /** Enable Redux DevTools */
-  devtools?: boolean;
-
-  /** Enable Immer for immutable updates */
-  immer?: boolean;
-
-  /** Middleware to use */
-  middleware?: string[];
-  };
-  'testing/vitest': {
-
-  /** Test environment */
-  environment?: 'jsdom' | 'node' | 'happy-dom';
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Basic testing setup (config, setup, utils) */
-    core?: boolean;
-
-    /** Unit testing capabilities */
-    unitTests?: boolean;
-
-    /** Code coverage reporting */
-    coverage?: boolean;
-
-    /** Interactive test runner UI */
-    ui?: boolean;
-
-    /** End-to-end testing support */
-    e2e?: boolean;
-
-    /** Integration testing support */
-    integrationTests?: boolean;
-  };
   };
   'ui/shadcn-ui': {
 
@@ -611,7 +522,149 @@ export type ModuleParameters = {
   /** Enable dark mode support */
   darkMode?: boolean;
   };
-  'connectors/better-auth-github': {
+  'connectors/ai/vercel-ai-nextjs': {
+
+  /** Enabled AI providers */
+  providers?: string[];
+
+  /** Enable streaming responses */
+  streaming?: boolean;
+  };
+  'connectors/auth/better-auth-nextjs': {
+
+  /** Enable email verification */
+  emailVerification?: boolean;
+
+  /** Enabled OAuth providers */
+  oauthProviders?: string[];
+
+  /** Enable two-factor authentication */
+  twoFactor?: boolean;
+
+  /** Enable organization support */
+  organizations?: boolean;
+
+  /** Enable team support */
+  teams?: boolean;
+  };
+  'connectors/database/drizzle-postgres-docker': {
+
+  /** PostgreSQL database service with Docker */
+  postgresService?: boolean;
+
+  /** Drizzle migration service with Docker */
+  migrationService?: boolean;
+
+  /** Database backup and restore service */
+  backupService?: boolean;
+
+  /** Database monitoring with Prometheus and Grafana */
+  monitoringService?: boolean;
+
+  /** Database seeding with sample data */
+  seedData?: boolean;
+
+  /** SSL/TLS encryption for database connections */
+  sslSupport?: boolean;
+
+  /** Database replication setup */
+  replication?: boolean;
+
+  /** Database clustering configuration */
+  clustering?: boolean;
+
+  /** Database performance optimization */
+  performanceTuning?: boolean;
+
+  /** Database security hardening and best practices */
+  securityHardening?: boolean;
+
+  /** Docker volumes for database persistence */
+  volumeManagement?: boolean;
+
+  /** Database networking and service discovery */
+  networking?: boolean;
+  };
+  'connectors/deployment/docker-nextjs': {
+
+  /** Optimized multi-stage Docker builds for production */
+  multiStageBuild?: boolean;
+
+  /** Docker setup for development with hot reloading */
+  developmentMode?: boolean;
+
+  /** Production-ready Docker configuration with optimization */
+  productionMode?: boolean;
+
+  /** Nginx configuration for reverse proxy and static file serving */
+  nginxReverseProxy?: boolean;
+
+  /** SSL/TLS configuration and certificate management */
+  sslSupport?: boolean;
+
+  /** Docker health checks and monitoring endpoints */
+  healthChecks?: boolean;
+
+  /** Environment-specific configuration management */
+  environmentConfig?: boolean;
+
+  /** Docker volumes for persistent data and logs */
+  volumeManagement?: boolean;
+
+  /** Docker networking configuration and service discovery */
+  networking?: boolean;
+
+  /** Docker monitoring with Prometheus and Grafana */
+  monitoring?: boolean;
+
+  /** Backup and restore scripts for data persistence */
+  backupRestore?: boolean;
+
+  /** Security hardening and best practices */
+  securityHardening?: boolean;
+  };
+  'connectors/email/resend-nextjs': {
+
+  /** Resend API key */
+  apiKey: string;
+  };
+  'connectors/infrastructure/rhf-zod-shadcn': {
+
+  /** Zod schema validation */
+  validation?: boolean;
+
+  /** Form accessibility features */
+  accessibility?: boolean;
+
+  /** React Hook Form DevTools */
+  devtools?: boolean;
+  };
+  'connectors/infrastructure/tanstack-query-nextjs': {
+
+  /** SSR support for TanStack Query */
+  ssr?: boolean;
+
+  /** Client-side hydration support */
+  hydration?: boolean;
+
+  /** Error boundary for query errors */
+  errorBoundary?: boolean;
+
+  /** TanStack Query DevTools integration */
+  devtools?: boolean;
+  };
+  'connectors/infrastructure/zustand-nextjs': {
+
+  /** State persistence support */
+  persistence?: boolean;
+
+  /** Zustand DevTools integration */
+  devtools?: boolean;
+
+  /** Server-side rendering support */
+  ssr?: boolean;
+  };
+  'connectors/integrations/better-auth-github': {
 
   /** GitHub OAuth App Client ID */
   clientId: string;
@@ -628,67 +681,69 @@ export type ModuleParameters = {
   /** Encryption key for storing tokens securely */
   encryptionKey: string;
   };
-  'connectors/rhf-zod-shadcn': {
+  'connectors/monitoring/sentry-nextjs': {
 
-  /** Zod schema validation */
-  validation?: boolean;
+  /** Comprehensive error tracking with breadcrumbs and context */
+  errorTracking?: boolean;
 
-  /** Form accessibility features */
-  accessibility?: boolean;
+  /** Web vitals, transactions, and performance tracking */
+  performanceMonitoring?: boolean;
 
-  /** React Hook Form DevTools */
-  devtools?: boolean;
+  /** User feedback collection and error reporting */
+  userFeedback?: boolean;
+
+  /** Sentry middleware for automatic error capture */
+  middleware?: boolean;
+
+  /** Performance profiling and analysis */
+  profiling?: boolean;
+
+  /** Custom alerts and monitoring dashboard */
+  alerts?: boolean;
+
+  /** Release tracking and deployment monitoring */
+  releaseTracking?: boolean;
+
+  /** User session recording and replay for debugging */
+  sessionReplay?: boolean;
+
+  /** Custom business metrics and KPIs tracking */
+  customMetrics?: boolean;
+
+  /** Advanced error grouping and deduplication */
+  errorGrouping?: boolean;
+
+  /** Detailed crash reports with stack traces */
+  crashReporting?: boolean;
+
+  /** User action breadcrumbs for error context */
+  breadcrumbs?: boolean;
+
+  /** Source map support for better error debugging */
+  sourceMaps?: boolean;
+
+  /** Integrations with Slack, Discord, PagerDuty, etc. */
+  integrations?: boolean;
+
+  /** Custom tagging and filtering for errors and performance */
+  customTags?: boolean;
+
+  /** Intelligent sampling for high-volume applications */
+  sampling?: boolean;
+
+  /** Data privacy controls and PII scrubbing */
+  privacy?: boolean;
+
+  /** Webhook notifications for critical errors */
+  webhooks?: boolean;
+
+  /** Advanced analytics and reporting features */
+  analytics?: boolean;
+
+  /** Testing utilities and mock Sentry for development */
+  testing?: boolean;
   };
-  'connectors/sentry/nextjs': {
-
-  /** Sentry DSN */
-  dsn?: string;
-
-  /** Environment name */
-  environment?: string;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Essential Next.js Sentry integration */
-    core?: boolean;
-
-    /** Next.js performance monitoring */
-    performance?: boolean;
-
-    /** Next.js alerts and dashboard */
-    alerts?: boolean;
-
-    /** Next.js enterprise features */
-    enterprise?: boolean;
-  };
-
-  /** Release version */
-  release?: string;
-  };
-  'connectors/sentry/react': {
-
-  /** Sentry DSN */
-  dsn?: string;
-
-  /** Environment name */
-  environment?: string;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Essential React Sentry integration */
-    core?: boolean;
-
-    /** React performance monitoring */
-    performance?: boolean;
-
-    /** React Error Boundary components */
-    'error-boundary'?: boolean;
-  };
-
-  /** Release version */
-  release?: string;
-  };
-  'connectors/stripe/nextjs-drizzle': {
+  'connectors/payment/stripe-nextjs-drizzle': {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -711,32 +766,39 @@ export type ModuleParameters = {
     usageTracking?: boolean;
   };
   };
-  'connectors/tanstack-query-nextjs': {
+  'connectors/testing/vitest-nextjs': {
 
-  /** SSR support for TanStack Query */
-  ssr?: boolean;
+  /** Unit tests for components, hooks, and utilities */
+  unitTesting?: boolean;
 
-  /** Client-side hydration support */
-  hydration?: boolean;
+  /** Integration tests for pages and API routes */
+  integrationTesting?: boolean;
 
-  /** Error boundary for query errors */
-  errorBoundary?: boolean;
+  /** End-to-end tests with Playwright */
+  e2eTesting?: boolean;
 
-  /** TanStack Query DevTools integration */
-  devtools?: boolean;
+  /** Code coverage reporting with HTML and LCOV reports */
+  coverageReporting?: boolean;
+
+  /** Watch mode for development testing */
+  watchMode?: boolean;
+
+  /** Vitest UI for interactive testing */
+  uiMode?: boolean;
+
+  /** Mock utilities for Next.js, APIs, and external services */
+  mocking?: boolean;
+
+  /** Snapshot testing for components */
+  snapshots?: boolean;
+
+  /** Parallel test execution for faster runs */
+  parallelTesting?: boolean;
+
+  /** Full TypeScript support for tests */
+  typescriptSupport?: boolean;
   };
-  'connectors/zustand-nextjs': {
-
-  /** State persistence support */
-  persistence?: boolean;
-
-  /** Zustand DevTools integration */
-  devtools?: boolean;
-
-  /** Server-side rendering support */
-  ssr?: boolean;
-  };
-  'features/ai-chat/backend/vercel-ai-nextjs': {
+  'features/ai-chat/backend/nextjs': {
 
   /** Real-time message streaming */
   streaming?: boolean;
@@ -850,47 +912,6 @@ export type ModuleParameters = {
   /** Show Architech branding and links */
   showArchitechBranding?: boolean;
   };
-  'features/auth/backend/better-auth-nextjs': {
-
-  /** Next.js API routes for authentication endpoints */
-  apiRoutes?: boolean;
-
-  /** Next.js middleware for authentication and route protection */
-  middleware?: boolean;
-
-  /** Admin API routes for user management */
-  adminPanel?: boolean;
-
-  /** Email verification API routes and components */
-  emailVerification?: boolean;
-
-  /** MFA API routes and components */
-  mfa?: boolean;
-
-  /** Password reset API routes and components */
-  passwordReset?: boolean;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable email/password authentication */
-    emailPassword?: boolean;
-
-    /** Enable email verification */
-    emailVerification?: boolean;
-
-    /** Enable password reset functionality */
-    passwordReset?: boolean;
-
-    /** Enable session management */
-    sessions?: boolean;
-
-    /** Enable organization/team management */
-    organizations?: boolean;
-
-    /** Enable two-factor authentication */
-    twoFactor?: boolean;
-  };
-  };
   'features/auth/frontend/shadcn': {
   /** Constitutional Architecture features configuration */
   features?: {
@@ -928,6 +949,32 @@ export type ModuleParameters = {
 
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
+  };
+  'features/auth/tech-stack': {
+
+  /** The name of the feature (e.g., 'auth') */
+  featureName?: string;
+
+  /** The path to the feature (e.g., 'auth') */
+  featurePath?: string;
+
+  /** Whether to generate TypeScript types */
+  hasTypes?: boolean;
+
+  /** Whether to generate Zod schemas */
+  hasSchemas?: boolean;
+
+  /** Whether to generate TanStack Query hooks */
+  hasHooks?: boolean;
+
+  /** Whether to generate Zustand stores */
+  hasStores?: boolean;
+
+  /** Whether to generate API routes */
+  hasApiRoutes?: boolean;
+
+  /** Whether to generate validation layer */
+  hasValidation?: boolean;
   };
   'features/emailing/backend/resend-nextjs': {
 
@@ -1007,32 +1054,6 @@ export type ModuleParameters = {
   /** Environments to monitor */
   environments?: string[];
   };
-  'features/payments/backend/stripe-nextjs': {
-
-  /** Stripe webhook handlers for payment events */
-  webhooks?: boolean;
-
-  /** Stripe Checkout integration for payments */
-  checkout?: boolean;
-
-  /** Subscription management and billing */
-  subscriptions?: boolean;
-
-  /** Invoice generation and management */
-  invoices?: boolean;
-
-  /** Refund processing and management */
-  refunds?: boolean;
-
-  /** Payment methods management */
-  paymentMethods?: boolean;
-
-  /** Payment analytics and reporting */
-  analytics?: boolean;
-
-  /** Organization-level billing features */
-  organizationBilling?: boolean;
-  };
   'features/payments/frontend/shadcn': {
   /** Constitutional Architecture features configuration */
   features?: {
@@ -1068,7 +1089,7 @@ export type ModuleParameters = {
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
   };
-  'features/teams-management/backend/better-auth-nextjs': {
+  'features/teams-management/backend/nextjs': {
 
   /** Team invitation system */
   invites?: boolean;
@@ -1202,17 +1223,26 @@ export type TypedGenomeModule =
   }; }
   | { id: 'auth/better-auth'; parameters?: {
 
-  /** Authentication providers to enable */
-  providers?: string[];
+  /** Enable email/password authentication */
+  emailPassword?: boolean;
 
-  /** Session management strategy */
-  session?: any;
+  /** Enable email verification */
+  emailVerification?: boolean;
 
-  /** Enable CSRF protection */
-  csrf?: boolean;
+  /** Enabled OAuth providers */
+  oauthProviders?: string[];
 
-  /** Enable rate limiting */
-  rateLimit?: boolean;
+  /** Enable two-factor authentication */
+  twoFactor?: boolean;
+
+  /** Enable organization support */
+  organizations?: boolean;
+
+  /** Enable team support within organizations */
+  teams?: boolean;
+
+  /** Session expiry time in seconds (default: 7 days) */
+  sessionExpiry?: number;
   }; }
   | { id: 'blockchain/web3'; parameters?: {
 
@@ -1305,6 +1335,16 @@ export type TypedGenomeModule =
 
   /** Automatically initialize git repository after project creation */
   autoInit?: boolean;
+  }; }
+  | { id: 'core/golden-stack'; parameters?: {
+
+  zustand: any;
+
+  vitest: any;
+
+  eslint: any;
+
+  prettier: any;
   }; }
   | { id: 'data-fetching/tanstack-query'; parameters?: {
 
@@ -1463,10 +1503,10 @@ export type TypedGenomeModule =
   }; }
   | { id: 'email/resend'; parameters?: {
 
-  /** Resend API key */
+  /** Resend API key (or set RESEND_API_KEY env var) */
   apiKey?: string;
 
-  /** Default from email address */
+  /** Default from email address (or set FROM_EMAIL env var) */
   fromEmail?: string;
   /** Constitutional Architecture features configuration */
   features?: {
@@ -1530,7 +1570,7 @@ export type TypedGenomeModule =
   }; }
   | { id: 'observability/sentry'; parameters?: {
 
-  /** Sentry DSN */
+  /** Sentry DSN (or set SENTRY_DSN env var) */
   dsn?: string;
 
   /** Environment name */
@@ -1574,70 +1614,6 @@ export type TypedGenomeModule =
   /** Enable Stripe Dashboard integration */
   dashboard?: boolean;
   }; }
-  | { id: 'quality/eslint'; parameters?: {
-
-  /** Enable TypeScript support */
-  typescript?: boolean;
-
-  /** Enable React support */
-  react?: boolean;
-
-  /** Enable Next.js specific rules */
-  nextjs?: boolean;
-
-  /** Enable Node.js specific rules */
-  nodejs?: boolean;
-
-  /** Enable accessibility rules */
-  accessibility?: boolean;
-
-  /** Enable import/export rules */
-  imports?: boolean;
-
-  /** Enable strict mode rules */
-  strict?: boolean;
-
-  /** Enable formatting rules */
-  format?: boolean;
-  }; }
-  | { id: 'quality/prettier'; parameters?: {
-
-  /** Add semicolons at the end of statements */
-  semi?: boolean;
-
-  /** Use single quotes instead of double quotes */
-  singleQuote?: boolean;
-
-  /** Number of spaces per indentation level */
-  tabWidth?: number;
-
-  /** Use tabs instead of spaces for indentation */
-  useTabs?: boolean;
-
-  /** Print trailing commas where valid in ES5 */
-  trailingComma?: 'none' | 'es5' | 'all';
-
-  /** Wrap lines that exceed this length */
-  printWidth?: number;
-
-  /** Print spaces between brackets in object literals */
-  bracketSpacing?: boolean;
-
-  /** Include parentheses around a sole arrow function parameter */
-  arrowParens?: 'avoid' | 'always';
-
-  /** Line ending style */
-  endOfLine?: 'lf' | 'crlf' | 'cr' | 'auto';
-
-  /** Prettier plugins to use */
-  plugins?: string[];
-
-  /** Enable Tailwind CSS class sorting plugin */
-  tailwind?: boolean;
-
-  /** Enable import organization */
-  organizeImports?: boolean;
-  }; }
   | { id: 'services/github-api'; parameters?: {
 
   /** GitHub Personal Access Token or OAuth access token */
@@ -1648,46 +1624,6 @@ export type TypedGenomeModule =
 
   /** User agent string for API requests */
   userAgent?: string;
-  }; }
-  | { id: 'state/zustand'; parameters?: {
-
-  /** Enable state persistence */
-  persistence?: boolean;
-
-  /** Enable Redux DevTools */
-  devtools?: boolean;
-
-  /** Enable Immer for immutable updates */
-  immer?: boolean;
-
-  /** Middleware to use */
-  middleware?: string[];
-  }; }
-  | { id: 'testing/vitest'; parameters?: {
-
-  /** Test environment */
-  environment?: 'jsdom' | 'node' | 'happy-dom';
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Basic testing setup (config, setup, utils) */
-    core?: boolean;
-
-    /** Unit testing capabilities */
-    unitTests?: boolean;
-
-    /** Code coverage reporting */
-    coverage?: boolean;
-
-    /** Interactive test runner UI */
-    ui?: boolean;
-
-    /** End-to-end testing support */
-    e2e?: boolean;
-
-    /** Integration testing support */
-    integrationTests?: boolean;
-  };
   }; }
   | { id: 'ui/shadcn-ui'; parameters?: {
 
@@ -1711,7 +1647,149 @@ export type TypedGenomeModule =
   /** Enable dark mode support */
   darkMode?: boolean;
   }; }
-  | { id: 'connectors/better-auth-github'; parameters?: {
+  | { id: 'connectors/ai/vercel-ai-nextjs'; parameters?: {
+
+  /** Enabled AI providers */
+  providers?: string[];
+
+  /** Enable streaming responses */
+  streaming?: boolean;
+  }; }
+  | { id: 'connectors/auth/better-auth-nextjs'; parameters?: {
+
+  /** Enable email verification */
+  emailVerification?: boolean;
+
+  /** Enabled OAuth providers */
+  oauthProviders?: string[];
+
+  /** Enable two-factor authentication */
+  twoFactor?: boolean;
+
+  /** Enable organization support */
+  organizations?: boolean;
+
+  /** Enable team support */
+  teams?: boolean;
+  }; }
+  | { id: 'connectors/database/drizzle-postgres-docker'; parameters?: {
+
+  /** PostgreSQL database service with Docker */
+  postgresService?: boolean;
+
+  /** Drizzle migration service with Docker */
+  migrationService?: boolean;
+
+  /** Database backup and restore service */
+  backupService?: boolean;
+
+  /** Database monitoring with Prometheus and Grafana */
+  monitoringService?: boolean;
+
+  /** Database seeding with sample data */
+  seedData?: boolean;
+
+  /** SSL/TLS encryption for database connections */
+  sslSupport?: boolean;
+
+  /** Database replication setup */
+  replication?: boolean;
+
+  /** Database clustering configuration */
+  clustering?: boolean;
+
+  /** Database performance optimization */
+  performanceTuning?: boolean;
+
+  /** Database security hardening and best practices */
+  securityHardening?: boolean;
+
+  /** Docker volumes for database persistence */
+  volumeManagement?: boolean;
+
+  /** Database networking and service discovery */
+  networking?: boolean;
+  }; }
+  | { id: 'connectors/deployment/docker-nextjs'; parameters?: {
+
+  /** Optimized multi-stage Docker builds for production */
+  multiStageBuild?: boolean;
+
+  /** Docker setup for development with hot reloading */
+  developmentMode?: boolean;
+
+  /** Production-ready Docker configuration with optimization */
+  productionMode?: boolean;
+
+  /** Nginx configuration for reverse proxy and static file serving */
+  nginxReverseProxy?: boolean;
+
+  /** SSL/TLS configuration and certificate management */
+  sslSupport?: boolean;
+
+  /** Docker health checks and monitoring endpoints */
+  healthChecks?: boolean;
+
+  /** Environment-specific configuration management */
+  environmentConfig?: boolean;
+
+  /** Docker volumes for persistent data and logs */
+  volumeManagement?: boolean;
+
+  /** Docker networking configuration and service discovery */
+  networking?: boolean;
+
+  /** Docker monitoring with Prometheus and Grafana */
+  monitoring?: boolean;
+
+  /** Backup and restore scripts for data persistence */
+  backupRestore?: boolean;
+
+  /** Security hardening and best practices */
+  securityHardening?: boolean;
+  }; }
+  | { id: 'connectors/email/resend-nextjs'; parameters?: {
+
+  /** Resend API key */
+  apiKey: string;
+  }; }
+  | { id: 'connectors/infrastructure/rhf-zod-shadcn'; parameters?: {
+
+  /** Zod schema validation */
+  validation?: boolean;
+
+  /** Form accessibility features */
+  accessibility?: boolean;
+
+  /** React Hook Form DevTools */
+  devtools?: boolean;
+  }; }
+  | { id: 'connectors/infrastructure/tanstack-query-nextjs'; parameters?: {
+
+  /** SSR support for TanStack Query */
+  ssr?: boolean;
+
+  /** Client-side hydration support */
+  hydration?: boolean;
+
+  /** Error boundary for query errors */
+  errorBoundary?: boolean;
+
+  /** TanStack Query DevTools integration */
+  devtools?: boolean;
+  }; }
+  | { id: 'connectors/infrastructure/zustand-nextjs'; parameters?: {
+
+  /** State persistence support */
+  persistence?: boolean;
+
+  /** Zustand DevTools integration */
+  devtools?: boolean;
+
+  /** Server-side rendering support */
+  ssr?: boolean;
+  }; }
+  | { id: 'connectors/integrations/better-auth-github'; parameters?: {
 
   /** GitHub OAuth App Client ID */
   clientId: string;
@@ -1728,67 +1806,69 @@ export type TypedGenomeModule =
   /** Encryption key for storing tokens securely */
   encryptionKey: string;
   }; }
-  | { id: 'connectors/rhf-zod-shadcn'; parameters?: {
+  | { id: 'connectors/monitoring/sentry-nextjs'; parameters?: {
 
-  /** Zod schema validation */
-  validation?: boolean;
+  /** Comprehensive error tracking with breadcrumbs and context */
+  errorTracking?: boolean;
 
-  /** Form accessibility features */
-  accessibility?: boolean;
+  /** Web vitals, transactions, and performance tracking */
+  performanceMonitoring?: boolean;
 
-  /** React Hook Form DevTools */
-  devtools?: boolean;
+  /** User feedback collection and error reporting */
+  userFeedback?: boolean;
+
+  /** Sentry middleware for automatic error capture */
+  middleware?: boolean;
+
+  /** Performance profiling and analysis */
+  profiling?: boolean;
+
+  /** Custom alerts and monitoring dashboard */
+  alerts?: boolean;
+
+  /** Release tracking and deployment monitoring */
+  releaseTracking?: boolean;
+
+  /** User session recording and replay for debugging */
+  sessionReplay?: boolean;
+
+  /** Custom business metrics and KPIs tracking */
+  customMetrics?: boolean;
+
+  /** Advanced error grouping and deduplication */
+  errorGrouping?: boolean;
+
+  /** Detailed crash reports with stack traces */
+  crashReporting?: boolean;
+
+  /** User action breadcrumbs for error context */
+  breadcrumbs?: boolean;
+
+  /** Source map support for better error debugging */
+  sourceMaps?: boolean;
+
+  /** Integrations with Slack, Discord, PagerDuty, etc. */
+  integrations?: boolean;
+
+  /** Custom tagging and filtering for errors and performance */
+  customTags?: boolean;
+
+  /** Intelligent sampling for high-volume applications */
+  sampling?: boolean;
+
+  /** Data privacy controls and PII scrubbing */
+  privacy?: boolean;
+
+  /** Webhook notifications for critical errors */
+  webhooks?: boolean;
+
+  /** Advanced analytics and reporting features */
+  analytics?: boolean;
+
+  /** Testing utilities and mock Sentry for development */
+  testing?: boolean;
   }; }
-  | { id: 'connectors/sentry/nextjs'; parameters?: {
-
-  /** Sentry DSN */
-  dsn?: string;
-
-  /** Environment name */
-  environment?: string;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Essential Next.js Sentry integration */
-    core?: boolean;
-
-    /** Next.js performance monitoring */
-    performance?: boolean;
-
-    /** Next.js alerts and dashboard */
-    alerts?: boolean;
-
-    /** Next.js enterprise features */
-    enterprise?: boolean;
-  };
-
-  /** Release version */
-  release?: string;
-  }; }
-  | { id: 'connectors/sentry/react'; parameters?: {
-
-  /** Sentry DSN */
-  dsn?: string;
-
-  /** Environment name */
-  environment?: string;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Essential React Sentry integration */
-    core?: boolean;
-
-    /** React performance monitoring */
-    performance?: boolean;
-
-    /** React Error Boundary components */
-    'error-boundary'?: boolean;
-  };
-
-  /** Release version */
-  release?: string;
-  }; }
-  | { id: 'connectors/stripe/nextjs-drizzle'; parameters?: {
+  | { id: 'connectors/payment/stripe-nextjs-drizzle'; parameters?: {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1811,32 +1891,39 @@ export type TypedGenomeModule =
     usageTracking?: boolean;
   };
   }; }
-  | { id: 'connectors/tanstack-query-nextjs'; parameters?: {
+  | { id: 'connectors/testing/vitest-nextjs'; parameters?: {
 
-  /** SSR support for TanStack Query */
-  ssr?: boolean;
+  /** Unit tests for components, hooks, and utilities */
+  unitTesting?: boolean;
 
-  /** Client-side hydration support */
-  hydration?: boolean;
+  /** Integration tests for pages and API routes */
+  integrationTesting?: boolean;
 
-  /** Error boundary for query errors */
-  errorBoundary?: boolean;
+  /** End-to-end tests with Playwright */
+  e2eTesting?: boolean;
 
-  /** TanStack Query DevTools integration */
-  devtools?: boolean;
+  /** Code coverage reporting with HTML and LCOV reports */
+  coverageReporting?: boolean;
+
+  /** Watch mode for development testing */
+  watchMode?: boolean;
+
+  /** Vitest UI for interactive testing */
+  uiMode?: boolean;
+
+  /** Mock utilities for Next.js, APIs, and external services */
+  mocking?: boolean;
+
+  /** Snapshot testing for components */
+  snapshots?: boolean;
+
+  /** Parallel test execution for faster runs */
+  parallelTesting?: boolean;
+
+  /** Full TypeScript support for tests */
+  typescriptSupport?: boolean;
   }; }
-  | { id: 'connectors/zustand-nextjs'; parameters?: {
-
-  /** State persistence support */
-  persistence?: boolean;
-
-  /** Zustand DevTools integration */
-  devtools?: boolean;
-
-  /** Server-side rendering support */
-  ssr?: boolean;
-  }; }
-  | { id: 'features/ai-chat/backend/vercel-ai-nextjs'; parameters?: {
+  | { id: 'features/ai-chat/backend/nextjs'; parameters?: {
 
   /** Real-time message streaming */
   streaming?: boolean;
@@ -1950,47 +2037,6 @@ export type TypedGenomeModule =
   /** Show Architech branding and links */
   showArchitechBranding?: boolean;
   }; }
-  | { id: 'features/auth/backend/better-auth-nextjs'; parameters?: {
-
-  /** Next.js API routes for authentication endpoints */
-  apiRoutes?: boolean;
-
-  /** Next.js middleware for authentication and route protection */
-  middleware?: boolean;
-
-  /** Admin API routes for user management */
-  adminPanel?: boolean;
-
-  /** Email verification API routes and components */
-  emailVerification?: boolean;
-
-  /** MFA API routes and components */
-  mfa?: boolean;
-
-  /** Password reset API routes and components */
-  passwordReset?: boolean;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable email/password authentication */
-    emailPassword?: boolean;
-
-    /** Enable email verification */
-    emailVerification?: boolean;
-
-    /** Enable password reset functionality */
-    passwordReset?: boolean;
-
-    /** Enable session management */
-    sessions?: boolean;
-
-    /** Enable organization/team management */
-    organizations?: boolean;
-
-    /** Enable two-factor authentication */
-    twoFactor?: boolean;
-  };
-  }; }
   | { id: 'features/auth/frontend/shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */
   features?: {
@@ -2028,6 +2074,32 @@ export type TypedGenomeModule =
 
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
+  }; }
+  | { id: 'features/auth/tech-stack'; parameters?: {
+
+  /** The name of the feature (e.g., 'auth') */
+  featureName?: string;
+
+  /** The path to the feature (e.g., 'auth') */
+  featurePath?: string;
+
+  /** Whether to generate TypeScript types */
+  hasTypes?: boolean;
+
+  /** Whether to generate Zod schemas */
+  hasSchemas?: boolean;
+
+  /** Whether to generate TanStack Query hooks */
+  hasHooks?: boolean;
+
+  /** Whether to generate Zustand stores */
+  hasStores?: boolean;
+
+  /** Whether to generate API routes */
+  hasApiRoutes?: boolean;
+
+  /** Whether to generate validation layer */
+  hasValidation?: boolean;
   }; }
   | { id: 'features/emailing/backend/resend-nextjs'; parameters?: {
 
@@ -2107,32 +2179,6 @@ export type TypedGenomeModule =
   /** Environments to monitor */
   environments?: string[];
   }; }
-  | { id: 'features/payments/backend/stripe-nextjs'; parameters?: {
-
-  /** Stripe webhook handlers for payment events */
-  webhooks?: boolean;
-
-  /** Stripe Checkout integration for payments */
-  checkout?: boolean;
-
-  /** Subscription management and billing */
-  subscriptions?: boolean;
-
-  /** Invoice generation and management */
-  invoices?: boolean;
-
-  /** Refund processing and management */
-  refunds?: boolean;
-
-  /** Payment methods management */
-  paymentMethods?: boolean;
-
-  /** Payment analytics and reporting */
-  analytics?: boolean;
-
-  /** Organization-level billing features */
-  organizationBilling?: boolean;
-  }; }
   | { id: 'features/payments/frontend/shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */
   features?: {
@@ -2168,7 +2214,7 @@ export type TypedGenomeModule =
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
   }; }
-  | { id: 'features/teams-management/backend/better-auth-nextjs'; parameters?: {
+  | { id: 'features/teams-management/backend/nextjs'; parameters?: {
 
   /** Team invitation system */
   invites?: boolean;

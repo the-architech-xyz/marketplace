@@ -24,7 +24,7 @@ import {
   XCircle,
   AlertCircle
 } from 'lucide-react';
-import { useInvoices } from '@/hooks/payments/use-invoices';
+import { useInvoicesList as useInvoices } from '@/lib/payments';
 import { InvoiceCard } from '@/components/payments/InvoiceCard';
 
 interface InvoicesPageProps {

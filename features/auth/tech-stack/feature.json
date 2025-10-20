@@ -6,9 +6,7 @@
   "tags": ["auth", "types", "schemas", "hooks", "stores", "tech-stack"],
   "moduleType": "feature",
   "blueprint": "./blueprint.ts",
-  "schema": {
-    "type": "object",
-    "properties": {
+  "parameters": {
       "featureName": {
         "type": "string",
         "description": "The name of the feature (e.g., 'auth')",
@@ -49,8 +47,6 @@
         "description": "Whether to generate validation layer",
         "default": false
       }
-    },
-    "required": ["featureName", "featurePath"]
   },
   "dependencies": [
     "zod",

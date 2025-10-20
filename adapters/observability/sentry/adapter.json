@@ -17,8 +17,8 @@
     "dsn": {
       "type": "string",
       "default": "",
-      "description": "Sentry DSN",
-      "required": true
+      "description": "Sentry DSN (or set SENTRY_DSN env var)",
+      "required": false
     },
     "environment": {
       "type": "string",

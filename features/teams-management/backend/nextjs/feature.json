@@ -1,0 +1,259 @@
+{
+  "id": "teams-management-backend-nextjs",
+  "name": "Teams Capability (Better Auth + NextJS)",
+  "description": "Complete teams management backend with Better Auth and NextJS",
+  "type": "capability",
+  "version": "1.0.0",
+  "contract": {
+    "hooks": {
+      "useTeams": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useMembers": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useInvitations": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useAnalytics": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": false,
+        "isQuery": true
+      },
+      "usePermissions": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": false,
+        "isQuery": true
+      }
+    },
+    "types": {
+      "TeamRole": {
+        "definition": "| 'owner' \n  | 'admin' \n  | 'member' \n  | 'viewer'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "TeamStatus": {
+        "definition": "| 'active' \n  | 'inactive' \n  | 'suspended' \n  | 'archived'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "InvitationStatus": {
+        "definition": "| 'pending' \n  | 'accepted' \n  | 'declined'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "Permission": {
+        "definition": "| 'read' \n  | 'write' \n  | 'delete' \n  | 'admin' \n  | 'invite' \n  | 'billing'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "Team": {
+        "definition": "export interface Team {\n  id: string;\n  name: string;\n  description?: string;\n  status: TeamStatus;\n  ownerId: string;\n  memberCount: number;\n  maxMembers?: number;\n  settings: {\n    allowInvites: boolean;\n    requireApproval: boolean;\n    defaultRole: TeamRole;\n    permissions: Permission[];\n  };\n  metadata?: Record<string, any>;\n  createdAt: string;\n  updatedAt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "TeamMember": {
+        "definition": "export interface TeamMember {\n  id: string;\n  teamId: string;\n  userId: string;\n  role: TeamRole;\n  status: 'active' | 'inactive' | 'pending';\n  joinedAt: string;\n  invitedBy?: string;\n  permissions: Permission[];\n  metadata?: Record<string, any>;\n  user: {\n    id: string;\n    name: string;\n    email: string;\n    image?: string;\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "TeamInvitation": {
+        "definition": "export interface TeamInvitation {\n  id: string;\n  teamId: string;\n  email: string;\n  role: TeamRole;\n  status: InvitationStatus;\n  invitedBy: string;\n  expiresAt: string;\n  acceptedAt?: string;\n  declinedAt?: string;\n  createdAt: string;\n  updatedAt: string;\n  team: {\n    id: string;\n    name: string;\n  };\n  inviter: {\n    id: string;\n    name: string;\n    email: string;\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "TeamActivity": {
+        "definition": "export interface TeamActivity {\n  id: string;\n  teamId: string;\n  userId: string;\n  action: string;\n  description: string;\n  metadata?: Record<string, any>;\n  createdAt: string;\n  user: {\n    id: string;\n    name: string;\n    email: string;\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "TeamAnalytics": {
+        "definition": "export interface TeamAnalytics {\n  teamId: string;\n  memberCount: number;\n  activeMembers: number;\n  pendingInvitations: number;\n  activitiesThisWeek: number;\n  activitiesThisMonth: number;\n  mostActiveMembers: Array<{\n    userId: string;\n    name: string;\n    activityCount: number;\n  }>;\n  recentActivities: TeamActivity[];\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "CreateTeamData": {
+        "definition": "export interface CreateTeamData {\n  name: string;\n  description?: string;\n  settings?: {\n    allowInvites?: boolean;\n    requireApproval?: boolean;\n    defaultRole?: TeamRole;\n    permissions?: Permission[];\n  };\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "UpdateTeamData": {
+        "definition": "export interface UpdateTeamData {\n  name?: string;\n  description?: string;\n  status?: TeamStatus;\n  settings?: {\n    allowInvites?: boolean;\n    requireApproval?: boolean;\n    defaultRole?: TeamRole;\n    permissions?: Permission[];\n  };\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "InviteMemberData": {
+        "definition": "export interface InviteMemberData {\n  email: string;\n  role: TeamRole;\n  message?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "UpdateMemberData": {
+        "definition": "export interface UpdateMemberData {\n  role?: TeamRole;\n  permissions?: Permission[];\n  status?: 'active' | 'inactive';\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "AcceptInvitationData": {
+        "definition": "export interface AcceptInvitationData {\n  invitationId: string;\n  userId: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "DeclineInvitationData": {
+        "definition": "export interface DeclineInvitationData {\n  invitationId: string;\n  reason?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "TeamResult": {
+        "definition": "export interface TeamResult {\n  team: Team;\n  success: boolean;\n  message?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "MemberResult": {
+        "definition": "export interface MemberResult {\n  member: TeamMember;\n  success: boolean;\n  message?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "InvitationResult": {
+        "definition": "export interface InvitationResult {\n  invitation: TeamInvitation;\n  success: boolean;\n  message?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "AcceptInvitationResult": {
+        "definition": "export interface AcceptInvitationResult {\n  member: TeamMember;\n  team: Team;\n  success: boolean;\n  message?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "TeamFilters": {
+        "definition": "export interface TeamFilters {\n  status?: TeamStatus[];\n  ownerId?: string;\n  search?: string;\n  createdAfter?: string;\n  createdBefore?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "MemberFilters": {
+        "definition": "export interface MemberFilters {\n  role?: TeamRole[];\n  status?: ('active' | 'inactive' | 'pending')[];\n  search?: string;\n  joinedAfter?: string;\n  joinedBefore?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "InvitationFilters": {
+        "definition": "export interface InvitationFilters {\n  status?: InvitationStatus[];\n  role?: TeamRole[];\n  search?: string;\n  invitedAfter?: string;\n  invitedBefore?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ActivityFilters": {
+        "definition": "export interface ActivityFilters {\n  userId?: string;\n  action?: string;\n  after?: string;\n  before?: string;\n  limit?: number;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "TeamsManagementError": {
+        "definition": "export interface TeamsManagementError {\n  code: string;\n  message: string;\n  type: 'validation_error' | 'permission_error' | 'not_found_error' | 'conflict_error';\n  field?: string;\n  details?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "TeamsManagementConfig": {
+        "definition": "export interface TeamsManagementConfig {\n  features: {\n    invitations: boolean;\n    analytics: boolean;\n    activityLogging: boolean;\n    roleManagement: boolean;\n    permissionSystem: boolean;\n  };\n  limits: {\n    maxTeamsPerUser: number;\n    maxMembersPerTeam: number;\n    maxInvitationsPerTeam: number;\n    invitationExpiryDays: number;\n  };\n  security: {\n    requireEmailVerification: boolean;\n    allowSelfInvite: boolean;\n    requireApprovalForInvites: boolean;\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ITeamsService": {
+        "definition": "export interface ITeamsService {\n  /**\n   * Team Management Service\n   * Provides all team-related operations in a cohesive interface\n   */\n  useTeams: () => {\n    // Query operations\n    list: any; // UseQueryResult<Team[], Error>\n    get: (id: string) => any; // UseQueryResult<Team, Error>\n    \n    // Mutation operations\n    create: any; // UseMutationResult<TeamResult, Error, CreateTeamData>\n    update: any; // UseMutationResult<TeamResult, Error, { id: string; data: UpdateTeamData }>\n    delete: any; // UseMutationResult<void, Error, string>\n    leave: any; // UseMutationResult<void, Error, string>\n  };\n\n  /**\n   * Member Management Service\n   * Provides all team member-related operations in a cohesive interface\n   */\n  useMembers: () => {\n    // Query operations\n    list: (teamId: string) => any; // UseQueryResult<TeamMember[], Error>\n    get: (teamId: string, userId: string) => any; // UseQueryResult<TeamMember, Error>\n    \n    // Mutation operations\n    update: any; // UseMutationResult<MemberResult, Error, { teamId: string; userId: string; data: UpdateMemberData }>\n    remove: any; // UseMutationResult<void, Error, { teamId: string; userId: string }>\n    bulkRemove: any; // UseMutationResult<void, Error, { teamId: string; userIds: string[] }>\n  };\n\n  /**\n   * Invitation Management Service\n   * Provides all team invitation-related operations in a cohesive interface\n   */\n  useInvitations: () => {\n    // Query operations\n    list: (teamId?: string) => any; // UseQueryResult<TeamInvitation[], Error>\n    get: (id: string) => any; // UseQueryResult<TeamInvitation, Error>\n    \n    // Mutation operations\n    invite: any; // UseMutationResult<InvitationResult, Error, { teamId: string; data: InviteMemberData }>\n    bulkInvite: any; // UseMutationResult<InvitationResult[], Error, { teamId: string; data: InviteMemberData[] }>\n    accept: any; // UseMutationResult<AcceptInvitationResult, Error, AcceptInvitationData>\n    decline: any; // UseMutationResult<void, Error, DeclineInvitationData>\n    cancel: any; // UseMutationResult<void, Error, string>\n    resend: any; // UseMutationResult<InvitationResult, Error, string>\n  };\n\n  /**\n   * Analytics Service\n   * Provides team analytics and reporting\n   */\n  useAnalytics: () => {\n    // Query operations\n    getTeamAnalytics: (teamId: string) => any; // UseQueryResult<TeamAnalytics, Error>\n    getActivities: (teamId: string, filters?: ActivityFilters) => any; // UseQueryResult<TeamActivity[], Error>\n  };\n\n  /**\n   * Permissions Service\n   * Provides permission checking and management\n   */\n  usePermissions: () => {\n    // Query operations\n    getPermissions: (teamId: string, userId: string) => any; // UseQueryResult<Permission[], Error>\n    hasPermission: (teamId: string, userId: string, permission: Permission) => any; // UseQueryResult<boolean, Error>\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      }
+    }
+  },
+  "provides": [
+    "teams"
+  ],
+  "requires": [
+    "framework/nextjs",
+    "auth/better-auth"
+  ],
+  "parameters": {
+    "invites": {
+      "name": "Team Invites",
+      "description": "Team invitation system",
+      "type": "boolean",
+      "default": true
+    },
+    "permissions": {
+      "name": "Role-based Permissions",
+      "description": "Granular role-based permissions",
+      "type": "boolean",
+      "default": true
+    },
+    "analytics": {
+      "name": "Team Analytics",
+      "description": "Team performance analytics",
+      "type": "boolean",
+      "default": false
+    },
+    "billing": {
+      "name": "Team Billing",
+      "description": "Team billing and subscription management",
+      "type": "boolean",
+      "default": false
+    },
+    "features": {
+      "teams": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable team management"
+      },
+      "invitations": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable team invitations"
+      },
+      "roles": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable role-based access control"
+      },
+      "permissions": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable granular permissions"
+      }
+    }
+  }
+}

@@ -1,10 +1,9 @@
 /**
  * Emailing Feature Index - Centralized Exports
  * 
- * This file provides centralized exports for the Emailing feature.
- * Import commonly used types, schemas, hooks, and stores from this file.
- * 
- * Generated from: features/emailing/contract.ts
+ * ⚠️ ARCHITECTURE:
+ * - TanStack Query Hooks → Server data (emails, templates, campaigns)
+ * - Zustand Store → UI state only (composer, filters, modals)
  */
 
 // ============================================================================
@@ -135,67 +134,17 @@ export {
 // HOOKS
 // ============================================================================
 
-export {
-  // Query keys
-  emailingQueryKeys,
-  
-  // Email hooks
-  useEmails,
-  useEmail,
-  useSendEmail,
-  useSendBulkEmail,
-  useDeleteEmail,
-  useBulkDeleteEmails,
-  useResendEmail,
-  
-  // Template hooks
-  useTemplates,
-  useTemplate,
-  useCreateTemplate,
-  useUpdateTemplate,
-  useDeleteTemplate,
-  useDuplicateTemplate,
-  
-  // Campaign hooks
-  useCampaigns,
-  useCampaign,
-  useCreateCampaign,
-  useUpdateCampaign,
-  useDeleteCampaign,
-  useStartCampaign,
-  usePauseCampaign,
-  useCancelCampaign,
-  
-  // Analytics hooks
-  useEmailAnalytics,
-  useTemplateAnalytics,
-  useCampaignAnalytics,
-  
-  // Stats hooks
-  useEmailStats,
-  useTemplateStats,
-  useCampaignStats
-} from './hooks';
-
 // ============================================================================
-// STORES
+// DIRECT HOOKS EXPORTS (Standard React Pattern)
 // ============================================================================
 
-export {
-  // Individual stores
-  useEmailStore,
-  useTemplateStore,
-  useCampaignStore,
-  useStatsStore,
-  useUIStore,
-  
-  // Combined selectors
-  useEmailState,
-  useTemplateState,
-  useCampaignState,
-  useStatsState,
-  useUIState
-} from './stores';
+export * from './hooks';
+
+// ============================================================================
+// ZUSTAND STORE EXPORTS (UI State Only)
+// ============================================================================
+
+export { useEmailingUIStore } from './stores';
 
 // ============================================================================
 // CONVENIENCE EXPORTS

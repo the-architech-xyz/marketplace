@@ -8,6 +8,15 @@
     "capabilities": ["emailing-backend-resend-nextjs"],
     "adapters": ["ui/shadcn-ui"]
   },
+  "requires": {
+    "components": {
+      "ui/shadcn-ui": [
+        "form", "input", "button", "card", "label", "textarea",
+        "table", "badge", "tabs", "dialog", "dropdown-menu",
+        "separator", "checkbox", "select", "skeleton"
+      ]
+    }
+  },
   "provides": ["emailing-ui"],
   "parameters": {
     "features": {

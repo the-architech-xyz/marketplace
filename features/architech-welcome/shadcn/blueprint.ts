@@ -72,7 +72,7 @@ function generateCoreActions(config: TypedMergedConfiguration<'features/architec
     // Create the main welcome page
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}page.tsx',
+      path: '${paths.app_root}page.tsx',
       template: 'templates/welcome-page.tsx.tpl',
       overwrite: true,
       conflictResolution: {
@@ -85,7 +85,7 @@ function generateCoreActions(config: TypedMergedConfiguration<'features/architec
     // Create welcome page layout
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}welcome/welcome-layout.tsx',
+      path: '${paths.components}welcome/welcome-layout.tsx',
       template: 'templates/welcome-layout.tsx.tpl',
     
       conflictResolution: {
@@ -96,7 +96,7 @@ function generateCoreActions(config: TypedMergedConfiguration<'features/architec
     // Create technology stack visualizer
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}welcome/tech-stack-card.tsx',
+      path: '${paths.components}welcome/tech-stack-card.tsx',
       template: 'templates/tech-stack-card.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -107,7 +107,7 @@ function generateCoreActions(config: TypedMergedConfiguration<'features/architec
     // Create component showcase
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}welcome/component-showcase.tsx',
+      path: '${paths.components}welcome/component-showcase.tsx',
       template: 'templates/component-showcase.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -118,7 +118,7 @@ function generateCoreActions(config: TypedMergedConfiguration<'features/architec
     // Create project structure viewer
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}welcome/project-structure.tsx',
+      path: '${paths.components}welcome/project-structure.tsx',
       template: 'templates/project-structure.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -129,7 +129,7 @@ function generateCoreActions(config: TypedMergedConfiguration<'features/architec
     // Create quick start guide
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}welcome/quick-start-guide.tsx',
+      path: '${paths.components}welcome/quick-start-guide.tsx',
       template: 'templates/quick-start-guide.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE, 
@@ -140,7 +140,7 @@ function generateCoreActions(config: TypedMergedConfiguration<'features/architec
     // Create project analyzer utility
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}project-analyzer.ts',
+      path: '${paths.shared_library}project-analyzer.ts',
       content: `/**
  * Project Analyzer
  * 
@@ -316,7 +316,7 @@ export class ProjectAnalyzer {
     // Create welcome page styles
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.styles}}welcome.css',
+      path: '${paths.styles}welcome.css',
       content: `/* Architech Welcome Page Styles */
 
 .welcome-gradient {
@@ -383,7 +383,7 @@ export class ProjectAnalyzer {
       // Update globals.css to include welcome styles (ADDITIVE, not REPLACEMENT)
       {
         type: BlueprintActionType.ENHANCE_FILE,
-        path: '{{paths.app_root}}globals.css',
+        path: '${paths.app_root}globals.css',
         modifier: ModifierType.CSS_ENHANCER,
         params: {
           content: `@import "../styles/welcome.css";`
@@ -394,7 +394,7 @@ export class ProjectAnalyzer {
     // Create Framer Motion type declarations (Industry Standard Fix)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.source_root}}types/framer-motion.d.ts',
+      path: '${paths.source_root}types/framer-motion.d.ts',
       content: `import { MotionProps as OriginalMotionProps } from 'framer-motion';
 
 declare module 'framer-motion' {
@@ -412,7 +412,7 @@ declare module 'framer-motion' {
     // Create README with project information
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.readme}}',
+      path: '${paths.readme}',
       template: 'templates/README.md.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

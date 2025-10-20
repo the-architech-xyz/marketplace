@@ -36,6 +36,14 @@
       "performance-tracking"
     ]
   },
+  "requires": {
+    "components": {
+      "ui/shadcn-ui": [
+        "card", "tabs", "badge", "progress", "alert",
+        "select", "switch", "button", "table", "skeleton"
+      ]
+    }
+  },
   "provides": [
     "monitoring-core",
     "{{#if features.performance}}monitoring-performance{{/if}}",
@@ -47,14 +55,14 @@
       "type": "select",
       "default": "sentry-nextjs",
       "description": "Backend implementation for monitoring services",
-      "required": true,
+      "required": false,
       "options": ["sentry-nextjs", "sentry-express", "sentry-fastify"]
     },
     "frontend": {
       "type": "select",
       "default": "shadcn",
       "description": "Frontend implementation for monitoring UI",
-      "required": true,
+      "required": false,
       "options": ["shadcn", "mui", "chakra"]
     },
     "features": {

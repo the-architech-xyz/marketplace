@@ -29,7 +29,7 @@ const vercelDeploymentBlueprint: Blueprint = {
     // Create environment variables template
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.env}}.example',
+      path: '${paths.env}.example',
       template: 'templates/env.example.tpl',
     
       conflictResolution: {
@@ -39,7 +39,7 @@ const vercelDeploymentBlueprint: Blueprint = {
     // Create Vercel deployment scripts
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.scripts}}deploy.sh',
+      path: '${paths.scripts}deploy.sh',
       template: 'templates/deploy.sh.tpl',
     
       conflictResolution: {

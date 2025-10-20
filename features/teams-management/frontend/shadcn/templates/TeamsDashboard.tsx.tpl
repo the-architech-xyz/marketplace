@@ -1,6 +1,6 @@
 'use client';
 
-import { useTeams, useTeamAnalytics } from '@/lib/teams/hooks';
+import { useTeamsList, useTeamAnalytics } from '@/lib/teams-management';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -18,8 +18,8 @@ interface TeamsDashboardProps {
 }
 
 export function TeamsDashboard({ className }: TeamsDashboardProps) {
-  const { teams, isLoading: teamsLoading, error: teamsError } = useTeams();
-  const { analytics, isLoading: analyticsLoading, error: analyticsError } = useTeamAnalytics('current-team-id');
+  const { data: teams, isLoading: teamsLoading, error: teamsError } = useTeamsList();
+  const { data: analytics, isLoading: analyticsLoading, error: analyticsError } = useTeamAnalytics('current-team-id');
 
   if (teamsError) {
     return (

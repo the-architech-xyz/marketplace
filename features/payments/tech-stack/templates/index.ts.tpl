@@ -1,10 +1,19 @@
 /**
  * Payments Feature Index - Centralized Exports
  * 
- * This file provides centralized exports for the Payments feature.
- * Import commonly used types, schemas, hooks, and stores from this file.
+ * ⚠️ ARCHITECTURE:
+ * - TanStack Query Hooks → Server data (payments, subscriptions, invoices)
+ * - Zustand Store → UI state only (modals, filters, checkout flow)
  * 
- * Generated from: features/payments/contract.ts
+ * USAGE EXAMPLES:
+ * 
+ * // Fetch server data
+ * import { usePayments, useSubscriptions } from '@/lib/payments';
+ * const { data: payments, isLoading } = usePayments();
+ * 
+ * // Manage UI state
+ * import { usePaymentUIStore } from '@/lib/payments';
+ * const { isCheckoutModalOpen, setCheckoutModalOpen } = usePaymentUIStore();
  */
 
 // ============================================================================
@@ -145,96 +154,16 @@ export {
 } from './schemas';
 
 // ============================================================================
-// HOOKS
+// DIRECT HOOKS EXPORTS (Standard React Pattern)
 // ============================================================================
 
-export {
-  // Query keys
-  paymentsQueryKeys,
-  
-  // Payment hooks
-  usePayments,
-  usePayment,
-  useCreatePayment,
-  useUpdatePayment,
-  useDeletePayment,
-  useRefundPayment,
-  
-  // Subscription hooks
-  useSubscriptions,
-  useSubscription,
-  useCreateSubscription,
-  useUpdateSubscription,
-  useCancelSubscription,
-  
-  // Invoice hooks
-  useInvoices,
-  useInvoice,
-  useCreateInvoice,
-  useUpdateInvoice,
-  
-  // Payment method hooks
-  usePaymentMethods,
-  usePaymentMethod,
-  useCreatePaymentMethod,
-  useUpdatePaymentMethod,
-  useDeletePaymentMethod,
-  
-  // Checkout hooks
-  useCreatePaymentSession,
-  useCreatePortalSession,
-  
-  // Analytics hooks
-  usePaymentAnalytics,
-  
-  // Stats hooks
-  usePaymentStats,
-  useSubscriptionStats,
-  useInvoiceStats,
-  
-  // Organization billing hooks
-  useOrganizationSubscription,
-  useCreateOrganizationSubscription,
-  useUpdateOrganizationSubscription,
-  useCancelOrganizationSubscription,
-  useOrganizationSeats,
-  useUpdateOrganizationSeats,
-  useOrganizationUsage,
-  useTrackOrganizationUsage,
-  useOrganizationBilling,
-  useUpdateOrganizationBilling,
-  useOrganizationInvoices,
-  useDownloadOrganizationInvoice,
-  useCreateOrganizationPortalSession,
-  
-  // Team usage hooks
-  useTeamUsage,
-  useTrackTeamUsage
-} from './hooks';
+export * from './hooks';
 
 // ============================================================================
-// STORES
+// ZUSTAND STORE EXPORTS (UI State Only)
 // ============================================================================
 
-export {
-  // Individual stores
-  usePaymentStore,
-  useSubscriptionStore,
-  useInvoiceStore,
-  usePaymentMethodStore,
-  useStatsStore,
-  useOrganizationBillingStore,
-  useUIStore,
-  
-  // Combined selectors
-  usePaymentState,
-  useSubscriptionState,
-  useInvoiceState,
-  usePaymentMethodState,
-  useStatsState,
-  useOrganizationBillingState,
-  useUIState
-} from './stores';
+export { usePaymentUIStore, usePaymentUISelectors } from './stores';
 
 // ============================================================================
 // CONVENIENCE EXPORTS

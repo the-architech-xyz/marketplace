@@ -1,7 +1,7 @@
 /**
- * payments-tech-stack
+ * features/payments/tech-stack
  * 
- * Technology-agnostic stack layer for Payments feature
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
 export interface FeaturesPaymentsTechStackParams {}

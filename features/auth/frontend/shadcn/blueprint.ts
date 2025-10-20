@@ -70,7 +70,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Auth Pages
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(auth)/login/page.tsx',
+      path: '${paths.app_root}(auth)/login/page.tsx',
       template: 'templates/login-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -79,7 +79,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(auth)/signup/page.tsx',
+      path: '${paths.app_root}(auth)/signup/page.tsx',
       template: 'templates/signup-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -88,7 +88,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(auth)/profile/page.tsx',
+      path: '${paths.app_root}(auth)/profile/page.tsx',
       template: 'templates/profile-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -99,7 +99,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Core Auth Components
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/AuthForm.tsx',
+      path: '${paths.components}auth/AuthForm.tsx',
       template: 'templates/AuthForm.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -108,7 +108,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/LoginForm.tsx',
+      path: '${paths.components}auth/LoginForm.tsx',
       template: 'templates/LoginForm.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -117,7 +117,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/SignupForm.tsx',
+      path: '${paths.components}auth/SignupForm.tsx',
       template: 'templates/SignupForm.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -126,7 +126,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/UserProfile.tsx',
+      path: '${paths.components}auth/UserProfile.tsx',
       template: 'templates/UserProfile.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -135,7 +135,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/AuthGuard.tsx',
+      path: '${paths.components}auth/AuthGuard.tsx',
       template: 'templates/AuthGuard.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -146,7 +146,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Auth Layouts
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}layouts/AuthLayout.tsx',
+      path: '${paths.components}layouts/AuthLayout.tsx',
       template: 'templates/AuthLayout.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -155,7 +155,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}layouts/DashboardLayout.tsx',
+      path: '${paths.components}layouts/DashboardLayout.tsx',
       template: 'templates/DashboardLayout.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -166,49 +166,15 @@ function generateCoreActions(): BlueprintAction[] {
     // Auth Utils & Hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}utils/auth-utils.ts',
+      path: '${paths.shared_library}utils/auth-utils.ts',
       template: 'templates/auth-utils.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}hooks/use-session.ts',
-      template: 'templates/use-session.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}hooks/use-social-auth.ts',
-      template: 'templates/use-social-auth.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}hooks/use-email-verification.ts',
-      template: 'templates/use-email-verification.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}hooks/use-auth.ts',
-      template: 'templates/use-auth.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
     }
+    // ℹ️ Auth hooks are provided by Better Auth adapter (native SDK hooks)
+    // No wrapper hooks needed - frontend uses authClient directly
   ];
 }
 
@@ -220,7 +186,7 @@ function generatePasswordResetActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(auth)/forgot-password/page.tsx',
+      path: '${paths.app_root}(auth)/forgot-password/page.tsx',
       template: 'templates/forgot-password-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -229,25 +195,17 @@ function generatePasswordResetActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(auth)/reset-password/page.tsx',
+      path: '${paths.app_root}(auth)/reset-password/page.tsx',
       template: 'templates/reset-password-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
     },
+    // ℹ️ Password reset is handled by Better Auth native API
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}hooks/use-password-reset.ts',
-      template: 'templates/use-password-reset.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/ForgotPasswordForm.tsx',
+      path: '${paths.components}auth/ForgotPasswordForm.tsx',
       template: 'templates/ForgotPasswordForm.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -256,7 +214,7 @@ function generatePasswordResetActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/ResetPasswordForm.tsx',
+      path: '${paths.components}auth/ResetPasswordForm.tsx',
       template: 'templates/ResetPasswordForm.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -274,7 +232,7 @@ function generateMFAActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/TwoFactorSetup.tsx',
+      path: '${paths.components}auth/TwoFactorSetup.tsx',
       template: 'templates/TwoFactorSetup.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -283,22 +241,14 @@ function generateMFAActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/EmailVerification.tsx',
+      path: '${paths.components}auth/EmailVerification.tsx',
       template: 'templates/EmailVerification.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}hooks/use-two-factor.ts',
-      template: 'templates/use-two-factor.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
     }
+    // NOTE: use-two-factor hook is provided by tech-stack layer
   ];
 }
 
@@ -310,7 +260,7 @@ function generateSocialLoginsActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/ConnectedAccounts.tsx',
+      path: '${paths.components}auth/ConnectedAccounts.tsx',
       template: 'templates/ConnectedAccounts.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -328,22 +278,14 @@ function generateProfileManagementActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/ProfileManager.tsx',
+      path: '${paths.components}auth/ProfileManager.tsx',
       template: 'templates/ProfileManager.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.shared_library}}hooks/use-profile.ts',
-      template: 'templates/use-profile.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
     }
+    // NOTE: use-profile hook is provided by tech-stack layer
   ];
 }
 
@@ -355,7 +297,7 @@ function generateAccountSettingsPageActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.app_root}}(auth)/settings/page.tsx',
+      path: '${paths.app_root}(auth)/settings/page.tsx',
       template: 'templates/settings-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -364,7 +306,7 @@ function generateAccountSettingsPageActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/AccountSettings.tsx',
+      path: '${paths.components}auth/AccountSettings.tsx',
       template: 'templates/AccountSettings.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -373,7 +315,7 @@ function generateAccountSettingsPageActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.components}}auth/SecuritySettings.tsx',
+      path: '${paths.components}auth/SecuritySettings.tsx',
       template: 'templates/SecuritySettings.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

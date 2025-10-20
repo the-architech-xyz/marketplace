@@ -785,4 +785,111 @@ ${moduleTypes.join('\n')};`;
     
     return `{\n${properties}\n  }`;
   }
+
+  /**
+   * Generate runtime JavaScript files for type modules
+   * 
+   * This ensures that type modules can be imported at runtime (by tsx/Node.js)
+   * even though they primarily contain type definitions.
+   */
+  static async generateRuntimeFiles(outputPath: string): Promise<void> {
+    console.log('📝 Generating runtime companion files...');
+    
+    // 1. genome-types.js - Runtime companion for genome-types.d.ts
+    const genomeTypesJs = `/**
+ * Genome Types - Runtime Exports
+ * 
+ * This file provides runtime companion for genome-types.d.ts
+ * The types (ModuleId, ModuleParameters, TypedGenomeModule, TypedGenome) are type-only
+ * and don't have runtime values.
+ */
+
+// This file is required for ESM module resolution but exports nothing at runtime
+// All exports in genome-types.d.ts are type-only
+export {};
+`;
+    
+    await fs.promises.writeFile(
+      path.join(outputPath, 'genome-types.js'),
+      genomeTypesJs
+    );
+    
+    // 2. blueprint-config-types.d.ts - Type declarations
+    const blueprintConfigTypesDts = `/**
+ * Blueprint Configuration Types
+ */
+
+import type { ModuleId, ModuleParameters } from './genome-types';
+
+export type TypedMergedConfiguration<T extends ModuleId> = {
+  moduleId: T;
+  parameters: T extends keyof ModuleParameters ? ModuleParameters[T] : never;
+  features?: Record<string, unknown>;
+  framework?: string;
+  paths?: Record<string, string>;
+};
+
+export function extractTypedModuleParameters<T extends ModuleId>(
+  config: TypedMergedConfiguration<T>
+): {
+  params: T extends keyof ModuleParameters ? ModuleParameters[T] : never;
+  features: Record<string, unknown>;
+  framework: string | undefined;
+  paths: Record<string, string>;
+};
+
+export type { ModuleId, ModuleParameters } from './genome-types';
+`;
+    
+    await fs.promises.writeFile(
+      path.join(outputPath, 'blueprint-config-types.d.ts'),
+      blueprintConfigTypesDts
+    );
+    
+    // 3. blueprint-config-types.js - Runtime implementation
+    const blueprintConfigTypesJs = `/**
+ * Blueprint Configuration Types - Runtime Implementation
+ */
+
+export function extractTypedModuleParameters(config) {
+  return {
+    params: config.parameters || {},
+    features: config.features || {},
+    framework: config.framework,
+    paths: config.paths || {},
+  };
+}
+`;
+    
+    await fs.promises.writeFile(
+      path.join(outputPath, 'blueprint-config-types.js'),
+      blueprintConfigTypesJs
+    );
+    
+    // 4. index.ts - Entry point (will compile to index.js)
+    const indexTs = `/**
+ * The Architech Marketplace Types - Runtime Entry Point
+ * 
+ * This file serves as the main entry point for importing marketplace types.
+ * It re-exports from all type modules.
+ */
+
+// Re-export genome types (includes ModuleId, ModuleParameters, Genome, TypedGenomeModule, TypedGenome)
+export * from './genome-types.js';
+
+// Re-export defineGenome function
+export * from './define-genome.js';
+
+// Re-export blueprint configuration utilities
+export type { TypedMergedConfiguration } from './blueprint-config-types.js';
+export { extractTypedModuleParameters } from './blueprint-config-types.js';
+`;
+    
+    await fs.promises.writeFile(
+      path.join(outputPath, 'index.ts'),
+      indexTs
+    );
+    
+    console.log('✅ Generated runtime files: genome-types.js, blueprint-config-types.d.ts, blueprint-config-types.js, index.ts');
+  }
 }

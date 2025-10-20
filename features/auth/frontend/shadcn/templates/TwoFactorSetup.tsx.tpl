@@ -23,8 +23,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { useAuthService } from '@/hooks/useAuthService';
-import type { TwoFactorSetupData, TwoFactorVerifyData } from '@/features/auth/contract';
+import { authClient, useSession } from '@/lib/auth/client';  // Better Auth native
+import type { TwoFactorSetupData, TwoFactorVerifyData } from '@/lib/auth/types';  // From tech-stack
 
 const setupSchema = z.object({
   password: z.string().min(1, 'Password is required'),

@@ -1,6 +1,6 @@
 {
   "name": "@thearchitech.xyz/marketplace",
-  "version": "0.8.2",
+  "version": "0.8.7",
   "description": "The Architech Marketplace - Adapters, Connectors, Capabilities, and Features",
   "type": "module",
   "main": "index.js",
@@ -15,7 +15,7 @@
     "./genomes": "./genomes/manifest.json",
     "./manifest": "./manifest.json"
   },
-  "types": "./types/index.d.ts",
+  "types": "./index.d.ts",
   "files": [
     "adapters/**/*.json",
     "adapters/**/templates/",
@@ -38,6 +38,7 @@
     "genomes/manifest.json",
     "manifest.json",
     "index.js",
+    "index.d.ts",
     "types/"
   ],
   "keywords": [
@@ -82,7 +83,9 @@
     "validate:all": "npm run validate:correctness",
     "validate:legacy": "npm run validate && npm run validate:templates && npm run validate:conflicts && npm run validate:contracts",
     "fix:conflicts": "tsx scripts/utilities/fix-conflict-resolution.ts",
-    "compile": "tsc",
+    "typecheck": "tsc --noEmit",
+    "compile": "tsc && npm run copy:types",
+    "copy:types": "cp types/genome-types.js dist/types/ && cp types/blueprint-config-types.js dist/types/ && cp types/blueprint-config-types.d.ts dist/types/ && cp types/template-context.js dist/types/ && cp types/template-context.d.ts dist/types/",
     "build": "npm run validate:all && npm run generate:feature-manifests && npm run compile",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",

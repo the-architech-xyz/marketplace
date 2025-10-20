@@ -21,12 +21,12 @@ export const sequelizeBlueprint: Blueprint = {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.database_config}}/sequelize.ts',
+      path: '${paths.database_config}/sequelize.ts',
       template: 'templates/sequelize.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '{{paths.database_config}}/index.ts',
+      path: '${paths.database_config}/index.ts',
       template: 'templates/index.ts.tpl',
     },
     {

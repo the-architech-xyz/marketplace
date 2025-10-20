@@ -1,0 +1,74 @@
+{
+  "id": "connectors/payment/stripe-nextjs-drizzle",
+  "name": "Stripe NextJS Drizzle Connector",
+  "description": "Server-side API routes for Stripe payments with NextJS and Drizzle",
+  "type": "connector",
+  "version": "1.0.0",
+  "requires": [
+    "framework/nextjs",
+    "database/drizzle",
+    "payment/stripe"
+  ],
+  "provides": [
+    "stripe-api-routes",
+    "organization-billing-api",
+    "seat-management-api",
+    "usage-tracking-api",
+    "stripe-webhooks"
+  ],
+  "capabilities": {
+    "organization-billing": {
+      "enabled": true,
+      "features": {
+        "subscriptions": true,
+        "seats": true,
+        "usage-tracking": true,
+        "webhooks": true,
+        "permissions": true
+      }
+    },
+    "payment-processing": {
+      "enabled": true,
+      "features": {
+        "payment-intents": true,
+        "checkout-sessions": true,
+        "refunds": true,
+        "payment-methods": true
+      }
+    }
+  },
+  "parameters": {
+    "features": {
+      "organizationBilling": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable organization-level billing features"
+      },
+      "seats": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable seat-based billing"
+      },
+      "usage": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable usage-based billing"
+      },
+      "webhooks": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable Stripe webhook handling"
+      },
+      "seatManagement": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable seat-based billing"
+      },
+      "usageTracking": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable usage-based billing tracking"
+      }
+    }
+  }
+}
