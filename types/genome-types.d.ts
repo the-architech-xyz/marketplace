@@ -1025,6 +1025,14 @@ export type ModuleParameters = {
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
   };
+  'features/emailing/tech-stack': {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
+  };
   'features/monitoring/shadcn': {
 
   /** Backend implementation for monitoring services */
@@ -1053,6 +1061,14 @@ export type ModuleParameters = {
 
   /** Environments to monitor */
   environments?: string[];
+  };
+  'features/monitoring/tech-stack': {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
   };
   'features/payments/frontend/shadcn': {
   /** Constitutional Architecture features configuration */
@@ -1088,6 +1104,14 @@ export type ModuleParameters = {
 
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
+  };
+  'features/payments/tech-stack': {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
   };
   'features/teams-management/backend/nextjs': {
 
@@ -1149,6 +1173,14 @@ export type ModuleParameters = {
 
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
+  };
+  'features/teams-management/tech-stack': {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
   };
   'features/web3/shadcn': {
   /** Constitutional Architecture features configuration */
@@ -2150,6 +2182,14 @@ export type TypedGenomeModule =
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
   }; }
+  | { id: 'features/emailing/tech-stack'; parameters?: {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
+  }; }
   | { id: 'features/monitoring/shadcn'; parameters?: {
 
   /** Backend implementation for monitoring services */
@@ -2178,6 +2218,14 @@ export type TypedGenomeModule =
 
   /** Environments to monitor */
   environments?: string[];
+  }; }
+  | { id: 'features/monitoring/tech-stack'; parameters?: {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
   }; }
   | { id: 'features/payments/frontend/shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */
@@ -2213,6 +2261,14 @@ export type TypedGenomeModule =
 
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
+  }; }
+  | { id: 'features/payments/tech-stack'; parameters?: {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
   }; }
   | { id: 'features/teams-management/backend/nextjs'; parameters?: {
 
@@ -2274,6 +2330,14 @@ export type TypedGenomeModule =
 
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
+  }; }
+  | { id: 'features/teams-management/tech-stack'; parameters?: {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
   }; }
   | { id: 'features/web3/shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */

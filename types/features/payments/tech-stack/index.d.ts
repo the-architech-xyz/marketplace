@@ -1,10 +1,17 @@
 /**
- * features/payments/tech-stack
+ * payments-tech-stack
  * 
- * Auto-generated feature types with Constitutional Architecture support
+ * Technology-agnostic stack layer for Payments feature
  */
 
-export interface FeaturesPaymentsTechStackParams {}
+export interface FeaturesPaymentsTechStackParams {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
+}
 
 export interface FeaturesPaymentsTechStackFeatures {}
 

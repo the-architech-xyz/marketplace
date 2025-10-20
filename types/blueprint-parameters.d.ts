@@ -435,6 +435,11 @@ export interface FeaturesEmailingFrontendShadcnParameters {
   theme?: 'default' | 'dark' | 'light' | 'minimal';
 }
 
+export interface FeaturesEmailingTechStackParameters {
+  properties: any;
+  required: any;
+}
+
 export interface FeaturesMonitoringShadcnParameters {
   features: {
     core: boolean;
@@ -446,6 +451,11 @@ export interface FeaturesMonitoringShadcnParameters {
   backend?: any;
   frontend?: any;
   environments?: string[];
+}
+
+export interface FeaturesMonitoringTechStackParameters {
+  properties: any;
+  required: any;
 }
 
 export interface FeaturesPaymentsFrontendShadcnParameters {
@@ -461,6 +471,11 @@ export interface FeaturesPaymentsFrontendShadcnParameters {
     analytics: boolean;
   };
   theme?: 'default' | 'dark' | 'light' | 'minimal';
+}
+
+export interface FeaturesPaymentsTechStackParameters {
+  properties: any;
+  required: any;
 }
 
 export interface FeaturesTeamsManagementBackendNextjsParameters {
@@ -488,6 +503,11 @@ export interface FeaturesTeamsManagementFrontendShadcnParameters {
     advanced: boolean;
   };
   theme?: 'default' | 'dark' | 'light' | 'minimal';
+}
+
+export interface FeaturesTeamsManagementTechStackParameters {
+  properties: any;
+  required: any;
 }
 
 export interface FeaturesWeb3ShadcnParameters {

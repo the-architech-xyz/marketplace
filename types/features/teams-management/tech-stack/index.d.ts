@@ -1,10 +1,17 @@
 /**
- * features/teams-management/tech-stack
+ * teams-management-tech-stack
  * 
- * Auto-generated feature types with Constitutional Architecture support
+ * Technology-agnostic stack layer for Teams Management feature
  */
 
-export interface FeaturesTeamsManagementTechStackParams {}
+export interface FeaturesTeamsManagementTechStackParams {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
+}
 
 export interface FeaturesTeamsManagementTechStackFeatures {}
 

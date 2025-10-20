@@ -1,10 +1,17 @@
 /**
- * features/monitoring/tech-stack
+ * monitoring-tech-stack
  * 
- * Auto-generated feature types with Constitutional Architecture support
+ * Technology-agnostic stack layer for Monitoring feature
  */
 
-export interface FeaturesMonitoringTechStackParams {}
+export interface FeaturesMonitoringTechStackParams {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
+}
 
 export interface FeaturesMonitoringTechStackFeatures {}
 
