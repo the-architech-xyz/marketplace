@@ -209,6 +209,18 @@
   "provides": [
     "email"
   ],
+  "requiresCapabilities": [
+    {
+      "category": "database",
+      "optional": false,
+      "reason": "Store email history, templates, campaigns, and delivery analytics"
+    },
+    {
+      "category": "auth",
+      "optional": false,
+      "reason": "Get user email addresses and link emails to authenticated users"
+    }
+  ],
   "requires": [
     "framework/nextjs",
     "email/resend"

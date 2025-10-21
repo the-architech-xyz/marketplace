@@ -5,15 +5,14 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getOrgBillingService } from '@/lib/services/org-billing';
+import { getOrganizationInvoices } from '@/lib/services/org-billing';
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { orgId: string } }
 ) {
   try {
-    const billingService = getOrgBillingService();
-    const invoices = await billingService.getInvoices(params.orgId);
+    const invoices = await getOrganizationInvoices(params.orgId);
     
     return NextResponse.json(invoices);
   } catch (error) {

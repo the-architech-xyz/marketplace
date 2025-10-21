@@ -8,6 +8,18 @@
     "adapters": ["ui/shadcn-ui"],
     "backend": ["payments/backend/stripe-nextjs"]
   },
+  "requiresCapabilities": [
+    {
+      "category": "database",
+      "optional": false,
+      "reason": "Frontend payment components need database to query payment data, transactions, and subscription status"
+    },
+    {
+      "category": "auth",
+      "optional": false,
+      "reason": "Payment UI needs authenticated user context to display user-specific payment information"
+    }
+  ],
   "requires": {
     "components": {
       "ui/shadcn-ui": [

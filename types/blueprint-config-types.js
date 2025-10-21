@@ -3,10 +3,14 @@
  */
 
 export function extractTypedModuleParameters(config) {
+  // CRITICAL FIX: Extract from MergedConfiguration.templateContext structure
+  // The config passed to blueprints has parameters nested in templateContext.module.parameters
+  const moduleParams = config.templateContext?.module?.parameters || {};
+  
   return {
-    params: config.parameters || {},
-    features: config.features || {},
-    framework: config.framework,
-    paths: config.paths || {},
+    params: moduleParams,
+    features: moduleParams.features || {},
+    framework: config.framework || config.templateContext?.project?.framework,
+    paths: config.paths || config.templateContext?.paths || {},
   };
 }

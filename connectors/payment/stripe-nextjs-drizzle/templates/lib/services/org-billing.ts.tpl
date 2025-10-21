@@ -5,7 +5,8 @@
  * This service handles Stripe integration for organization-level subscriptions.
  */
 
-import { stripe, stripeConfig } from '../stripe/server';
+import { stripe } from '../stripe/server';
+import { stripeConfig } from '../stripe/config';
 import { 
   OrganizationSubscription, 
   OrganizationCustomer, 

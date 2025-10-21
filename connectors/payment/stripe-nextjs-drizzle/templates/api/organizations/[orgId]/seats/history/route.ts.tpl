@@ -5,15 +5,14 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getSeatService } from '@/lib/services/seats';
+import { getOrganizationSeatHistory } from '@/lib/services/seats';
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { orgId: string } }
 ) {
   try {
-    const seatService = getSeatService();
-    const history = await seatService.getSeatHistory(params.orgId);
+    const history = await getOrganizationSeatHistory(params.orgId);
     
     return NextResponse.json(history);
   } catch (error) {

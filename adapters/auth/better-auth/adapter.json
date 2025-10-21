@@ -6,6 +6,13 @@
   "version": "1.0.0",
   "blueprint": "blueprint.ts",
   "dependencies": [],
+  "requiresCapabilities": [
+    {
+      "category": "database",
+      "optional": false,
+      "reason": "Better Auth requires database to store user accounts, sessions, OAuth tokens, and organization/team data"
+    }
+  ],
   "capabilities": {
     "authentication": {
       "version": "1.0.0",

@@ -9,6 +9,13 @@
     "database/drizzle",
     "payment/stripe"
   ],
+  "requiresCapabilities": [
+    {
+      "category": "auth",
+      "optional": false,
+      "reason": "Link payments, subscriptions, invoices, and billing to authenticated users and organizations"
+    }
+  ],
   "provides": [
     "stripe-api-routes",
     "organization-billing-api",

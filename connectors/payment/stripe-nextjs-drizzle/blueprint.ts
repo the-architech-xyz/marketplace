@@ -16,6 +16,12 @@ export default function generateBlueprint(
 
   const actions: BlueprintAction[] = [];
   
+  // Install required packages
+  actions.push({ // TODO: find out why
+    type: BlueprintActionType.INSTALL_PACKAGES,
+    packages: ['@paralleldrive/cuid2']
+  });
+  
   // Core Stripe setup
   actions.push(...generateCoreActions());
   
@@ -107,17 +113,17 @@ function generateOrganizationBillingActions(): BlueprintAction[] {
     // API routes
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api}/organizations/[orgId]/subscriptions/route.ts',
+      path: '${paths.api_routes}organizations/[orgId]/subscriptions/route.ts',
       template: 'templates/api/organizations/[orgId]/subscriptions/route.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api}/organizations/[orgId]/billing/route.ts',
+      path: '${paths.api_routes}organizations/[orgId]/billing/route.ts',
       template: 'templates/api/organizations/[orgId]/billing/route.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api}/organizations/[orgId]/invoices/route.ts',
+      path: '${paths.api_routes}organizations/[orgId]/invoices/route.ts',
       template: 'templates/api/organizations/[orgId]/invoices/route.ts.tpl',
     },
   ];
@@ -139,12 +145,12 @@ function generateSeatManagementActions(): BlueprintAction[] {
     // API routes
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api}/organizations/[orgId]/seats/route.ts',
+      path: '${paths.api_routes}organizations/[orgId]/seats/route.ts',
       template: 'templates/api/organizations/[orgId]/seats/route.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api}/organizations/[orgId]/seats/history/route.ts',
+      path: '${paths.api_routes}organizations/[orgId]/seats/history/route.ts',
       template: 'templates/api/organizations/[orgId]/seats/history/route.ts.tpl',
     },
   ];
@@ -166,12 +172,12 @@ function generateUsageTrackingActions(): BlueprintAction[] {
     // API routes
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api}/organizations/[orgId]/usage/route.ts',
+      path: '${paths.api_routes}organizations/[orgId]/usage/route.ts',
       template: 'templates/api/organizations/[orgId]/usage/route.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api}/organizations/[orgId]/teams/[teamId]/usage/route.ts',
+      path: '${paths.api_routes}organizations/[orgId]/teams/[teamId]/usage/route.ts',
       template: 'templates/api/organizations/[orgId]/teams/[teamId]/usage/route.ts.tpl',
     },
   ];
@@ -193,7 +199,7 @@ function generateWebhookActions(): BlueprintAction[] {
     // API routes
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api}/webhooks/stripe/route.ts',
+      path: '${paths.api_routes}webhooks/stripe/route.ts',
       template: 'templates/api/webhooks/stripe/route.ts.tpl',
     },
   ];

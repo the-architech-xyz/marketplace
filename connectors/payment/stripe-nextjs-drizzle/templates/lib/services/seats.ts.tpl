@@ -5,7 +5,8 @@
  * This service handles seat-based billing and seat limit enforcement.
  */
 
-import { stripe, stripeConfig } from '../stripe/server';
+import { stripe } from '../stripe/server';
+import { stripeConfig } from '../stripe/config';
 import { 
   SeatInfo, 
   SeatHistory, 

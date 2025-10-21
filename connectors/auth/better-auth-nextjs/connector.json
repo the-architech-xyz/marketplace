@@ -19,6 +19,13 @@
     "framework/nextjs",
     "auth/better-auth"
   ],
+  "requiresCapabilities": [
+    {
+      "category": "database",
+      "optional": false,
+      "reason": "Better Auth connector requires database for user authentication, session management, and organization/team storage"
+    }
+  ],
   "capabilities": {
     "authentication": {
       "enabled": true,

@@ -8,6 +8,10 @@
     "framework": "nextjs",
     "adapters": ["sentry"]
   },
+  "requires": [
+    "framework/nextjs",
+    "observability/sentry"
+  ],
   "prerequisites": {
     "modules": ["sentry", "nextjs"],
     "capabilities": ["error-monitoring", "performance-tracking", "api-routes"]

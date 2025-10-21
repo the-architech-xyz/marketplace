@@ -231,6 +231,18 @@
     "framework/nextjs",
     "ai/vercel-ai-sdk"
   ],
+  "requiresCapabilities": [
+    {
+      "category": "database",
+      "optional": false,
+      "reason": "Store conversation history, messages, chat sessions, and analytics data"
+    },
+    {
+      "category": "auth",
+      "optional": false,
+      "reason": "Link conversations to authenticated users and secure chat endpoints"
+    }
+  ],
   "parameters": {
     "streaming": {
       "name": "Streaming",

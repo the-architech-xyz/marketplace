@@ -100,6 +100,26 @@ function generateCoreActions(): BlueprintAction[] {
         strategy: ConflictResolutionStrategy.SKIP,
         priority: 0
       }
+    },
+    // Completion API route (core functionality, always included)
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.api_routes}completion/route.ts',
+      template: 'templates/completion-route.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
+    },
+    // Completion hook (core functionality, always included)
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.hooks}use-completion.ts',
+      template: 'templates/use-completion.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.SKIP,
+        priority: 0
+      }
     }
   ];
 }
@@ -120,6 +140,7 @@ function generateStreamingActions(): BlueprintAction[] {
 
 function generateAdvancedActions(): BlueprintAction[] {
   return [
+    // Advanced AI providers (Google, Cohere, HuggingFace)
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: [
@@ -127,24 +148,6 @@ function generateAdvancedActions(): BlueprintAction[] {
         '@ai-sdk/cohere',
         '@ai-sdk/huggingface'
       ]
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-completion.ts',
-      template: 'templates/use-completion.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}completion/route.ts',
-      template: 'templates/completion-route.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
     }
   ];
 }

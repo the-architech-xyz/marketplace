@@ -101,6 +101,15 @@ export type {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
+    },
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.hooks}/payments/use-transactions.ts',
+      template: 'templates/use-transactions.ts.tpl',
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
     }
   );
   

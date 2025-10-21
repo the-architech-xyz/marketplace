@@ -208,6 +208,18 @@
     "framework/nextjs",
     "auth/better-auth"
   ],
+  "requiresCapabilities": [
+    {
+      "category": "database",
+      "optional": false,
+      "reason": "Store teams, members, roles, permissions, and invitations"
+    },
+    {
+      "category": "auth",
+      "optional": false,
+      "reason": "Teams management extends auth with organization context"
+    }
+  ],
   "parameters": {
     "invites": {
       "name": "Team Invites",

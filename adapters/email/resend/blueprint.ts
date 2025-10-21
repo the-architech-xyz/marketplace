@@ -16,10 +16,10 @@ export default function generateBlueprint(
   const { params, features } = extractTypedModuleParameters(config);
 
   return [
-    // Install Resend SDK (NO React dependencies)
+    // Install Resend SDK and its peer dependency
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['resend']
+      packages: ['resend', '@react-email/render']
     },
     
     // Core Resend client wrapper
