@@ -4,42 +4,42 @@
   "description": "Enhances Sentry adapter with NextJS-specific optimizations, middleware, and monitoring hooks",
   "type": "connector",
   "version": "1.0.0",
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
   "tech_stack": {
     "framework": "nextjs",
-    "adapters": ["sentry"]
+    "adapters": [
+      "sentry"
+    ]
   },
   "requires": [
     "framework/nextjs",
     "observability/sentry"
   ],
   "prerequisites": {
-    "modules": ["sentry", "nextjs"],
-    "capabilities": ["error-monitoring", "performance-tracking", "api-routes"]
+    "modules": [
+      "sentry",
+      "nextjs"
+    ],
+    "capabilities": [
+      "error-monitoring",
+      "performance-tracking",
+      "api-routes"
+    ]
   },
   "capabilities": {
     "sentry-nextjs-integration": {
       "version": "1.0.0",
       "description": "NextJS-specific Sentry enhancements",
-      "provides": ["sentry-nextjs-config", "sentry-middleware", "sentry-hooks", "sentry-ssr"]
+      "provides": [
+        "sentry-nextjs-config",
+        "sentry-middleware",
+        "sentry-hooks",
+        "sentry-ssr"
+      ]
     }
   },
-  "provides": {
-    "enhancements": [
-      "Enhances sentry-config.ts with NextJS optimizations",
-      "Enhances error-tracking.ts with NextJS-specific features",
-      "Enhances basic-performance.ts with NextJS performance monitoring"
-    ],
-    "files": [
-      "src/app/sentry.client.config.ts",
-      "src/app/sentry.server.config.ts", 
-      "src/app/sentry.edge.config.ts",
-      "src/middleware/sentry.ts",
-      "src/hooks/use-sentry.ts",
-      "src/hooks/use-error-tracking.ts",
-      "src/hooks/use-performance-monitoring.ts",
-      "src/hooks/use-user-feedback.ts"
-    ]
-  },
+  "provides": [],
   "parameters": {
     "errorTracking": {
       "name": "Error Tracking",

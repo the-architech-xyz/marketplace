@@ -4,11 +4,18 @@
   "description": "Complete Web3 wallet connection and blockchain interaction UI using Shadcn components",
   "type": "feature",
   "version": "1.0.0",
+  "role": "frontend-feature",
   "prerequisites": {
-    "capabilities": ["web3"],
-    "adapters": ["ui/shadcn-ui"]
+    "capabilities": [
+      "web3"
+    ],
+    "adapters": [
+      "ui/shadcn-ui"
+    ]
   },
-  "provides": ["web3-ui"],
+  "provides": [
+    "web3-ui"
+  ],
   "parameters": {
     "features": {
       "walletConnect": {

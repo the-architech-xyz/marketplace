@@ -4,6 +4,7 @@
   "description": "Promise-based Node.js ORM for PostgreSQL, MySQL, MariaDB, SQLite and Microsoft SQL Server",
   "category": "database",
   "version": "6.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "dependencies": [],
   "capabilities": [

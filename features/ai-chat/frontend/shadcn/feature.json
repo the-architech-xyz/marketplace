@@ -4,18 +4,16 @@
   "description": "Complete modular AI chat interface using Shadcn components",
   "type": "feature",
   "version": "2.0.0",
+  "role": "frontend-feature",
   "prerequisites": {
-    "capabilities": ["ai-chat-backend-vercel-ai-nextjs"],
-    "adapters": ["ui/shadcn-ui"]
+    "capabilities": [
+      "ai-chat-backend-vercel-ai-nextjs"
+    ],
+    "adapters": [
+      "ui/shadcn-ui"
+    ]
   },
-  "requires": {
-    "components": {
-      "ui/shadcn-ui": [
-        "input", "button", "card", "badge", "textarea",
-        "dropdown-menu", "separator", "skeleton", "scroll-area"
-      ]
-    }
-  },
+  "requires": [],
   "provides": [
     "ai-chat-core",
     "{{#if features.context}}ai-chat-context{{/if}}",
@@ -40,7 +38,7 @@
         "default": true,
         "templates": [
           "ChatInterface.tsx.tpl",
-          "MessageBubble.tsx.tpl", 
+          "MessageBubble.tsx.tpl",
           "ConversationSidebar.tsx.tpl",
           "useAIChatExtended.ts.tpl",
           "chat-page.tsx.tpl"
@@ -172,7 +170,12 @@
       "default": "default",
       "description": "UI theme variant",
       "required": false,
-      "options": ["default", "dark", "light", "minimal"]
+      "options": [
+        "default",
+        "dark",
+        "light",
+        "minimal"
+      ]
     }
   },
   "constraints": {

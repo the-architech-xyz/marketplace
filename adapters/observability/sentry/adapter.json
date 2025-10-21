@@ -4,6 +4,7 @@
   "description": "Tech-agnostic Sentry types and utilities. Framework-specific implementations handled by Connectors.",
   "category": "observability",
   "version": "1.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "dependencies": [],
   "provides": [
@@ -67,7 +68,9 @@
   },
   "internal_structure": {
     "core": {
-      "provides": ["monitoring-core"],
+      "provides": [
+        "monitoring-core"
+      ],
       "templates": [
         "sentry-config.ts",
         "error-tracking.ts",
@@ -75,8 +78,12 @@
       ]
     },
     "performance": {
-      "prerequisites": ["monitoring-core"],
-      "provides": ["monitoring-performance"],
+      "prerequisites": [
+        "monitoring-core"
+      ],
+      "provides": [
+        "monitoring-performance"
+      ],
       "templates": [
         "web-vitals.ts",
         "transactions.ts",
@@ -84,8 +91,12 @@
       ]
     },
     "alerts": {
-      "prerequisites": ["monitoring-core"],
-      "provides": ["monitoring-alerts"],
+      "prerequisites": [
+        "monitoring-core"
+      ],
+      "provides": [
+        "monitoring-alerts"
+      ],
       "templates": [
         "alerts.ts",
         "dashboard.ts",
@@ -93,8 +104,13 @@
       ]
     },
     "enterprise": {
-      "prerequisites": ["monitoring-core", "monitoring-performance"],
-      "provides": ["monitoring-enterprise"],
+      "prerequisites": [
+        "monitoring-core",
+        "monitoring-performance"
+      ],
+      "provides": [
+        "monitoring-enterprise"
+      ],
       "templates": [
         "profiling.ts",
         "custom-metrics.ts",

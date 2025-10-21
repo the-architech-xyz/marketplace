@@ -4,6 +4,7 @@
   "description": "Beautifully designed components built with Radix UI and Tailwind CSS",
   "category": "ui",
   "version": "1.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "provides": [
     {
@@ -44,32 +45,81 @@
   ],
   "capabilities": {
     "installableComponents": [
-      "button", "input", "card", "dialog", "form", "table", "badge", "avatar",
-      "dropdown-menu", "sonner", "sheet", "tabs", "accordion", "carousel",
-      "calendar", "date-picker", "alert-dialog", "alert", "checkbox", "switch",
-      "collapsible", "context-menu", "hover-card", "menubar", "navigation-menu",
-      "popover", "progress", "radio-group", "scroll-area", "slider", "toggle",
-      "toggle-group", "label"
+      "button",
+      "input",
+      "card",
+      "dialog",
+      "form",
+      "table",
+      "badge",
+      "avatar",
+      "dropdown-menu",
+      "sonner",
+      "sheet",
+      "tabs",
+      "accordion",
+      "carousel",
+      "calendar",
+      "date-picker",
+      "alert-dialog",
+      "alert",
+      "checkbox",
+      "switch",
+      "collapsible",
+      "context-menu",
+      "hover-card",
+      "menubar",
+      "navigation-menu",
+      "popover",
+      "progress",
+      "radio-group",
+      "scroll-area",
+      "slider",
+      "toggle",
+      "toggle-group",
+      "label"
     ],
     "ui-components": {
       "version": "1.0.0",
       "description": "Beautifully designed React components",
-      "provides": ["components", "radix-ui", "accessibility", "responsive", "typescript", "production-ready"]
+      "provides": [
+        "components",
+        "radix-ui",
+        "accessibility",
+        "responsive",
+        "typescript",
+        "production-ready"
+      ]
     },
     "styling-system": {
       "version": "1.0.0",
       "description": "Complete styling and theming system",
-      "provides": ["tailwind", "dark-mode", "theming", "theme-switching", "animations", "icons"]
+      "provides": [
+        "tailwind",
+        "dark-mode",
+        "theming",
+        "theme-switching",
+        "animations",
+        "icons"
+      ]
     },
     "form-integration": {
       "version": "1.0.0",
       "description": "Form components and validation integration",
-      "provides": ["form-validation", "form-components", "input-components"]
+      "provides": [
+        "form-validation",
+        "form-components",
+        "input-components"
+      ]
     },
     "utilities": {
       "version": "1.0.0",
       "description": "Comprehensive utility functions and helpers",
-      "provides": ["comprehensive-utils", "class-utilities", "style-utilities"]
+      "provides": [
+        "comprehensive-utils",
+        "class-utilities",
+        "style-utilities"
+      ]
     }
   },
   "limitations": "Requires React framework and Tailwind CSS",
@@ -79,7 +129,12 @@
       "default": "default",
       "description": "UI theme variant",
       "required": false,
-      "options": ["default", "dark", "light", "minimal"]
+      "options": [
+        "default",
+        "dark",
+        "light",
+        "minimal"
+      ]
     },
     "components": {
       "type": "array",

@@ -4,23 +4,37 @@
   "description": "GitHub API client for repository management and operations",
   "category": "services",
   "version": "1.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "dependencies": [],
   "capabilities": {
     "repository-management": {
       "version": "1.0.0",
       "description": "Complete GitHub repository management",
-      "provides": ["repository-management", "file-operations", "branch-management", "commit-operations"]
+      "provides": [
+        "repository-management",
+        "file-operations",
+        "branch-management",
+        "commit-operations"
+      ]
     },
     "collaboration": {
       "version": "1.0.0",
       "description": "Pull requests and collaboration features",
-      "provides": ["pull-requests", "issue-management", "collaborator-management"]
+      "provides": [
+        "pull-requests",
+        "issue-management",
+        "collaborator-management"
+      ]
     },
     "automation": {
       "version": "1.0.0",
       "description": "GitHub Actions and automation",
-      "provides": ["workflow-management", "secrets-management", "webhooks"]
+      "provides": [
+        "workflow-management",
+        "secrets-management",
+        "webhooks"
+      ]
     }
   },
   "limitations": "Requires GitHub Personal Access Token or OAuth access token",

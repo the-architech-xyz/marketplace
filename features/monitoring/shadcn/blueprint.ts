@@ -146,6 +146,35 @@ function generateCoreActions(): BlueprintAction[] {
       }
     },
 
+    // Performance components (always generate - used by dashboard)
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}monitoring/PerformanceChart.tsx',
+      template: 'templates/PerformanceChart.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasMonitoring: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}monitoring/RealTimeMetrics.tsx',
+      template: 'templates/RealTimeMetrics.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasMonitoring: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
     // Monitoring pages
     {
       type: BlueprintActionType.CREATE_FILE,
@@ -265,35 +294,6 @@ function generateCoreActions(): BlueprintAction[] {
 
 function generatePerformanceActions(): BlueprintAction[] {
   return [
-    // Performance components (existing templates)
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}monitoring/PerformanceChart.tsx',
-      template: 'templates/PerformanceChart.tsx.tpl',
-      context: { 
-        features: ['performance'],
-        hasPerformance: true
-      },
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}monitoring/RealTimeMetrics.tsx',
-      template: 'templates/RealTimeMetrics.tsx.tpl',
-      context: { 
-        features: ['performance'],
-        hasPerformance: true
-      },
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-
     // Performance pages
     {
       type: BlueprintActionType.CREATE_FILE,

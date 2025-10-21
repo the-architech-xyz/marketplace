@@ -1,0 +1,1032 @@
+{
+  "version": "1.0.0-ai",
+  "generatedFrom": "2.0.0",
+  "generatedAt": "2025-10-21T16:27:37.241Z",
+  "purpose": "AI-optimized manifest for module selection agents. Includes only decision-critical data.",
+  "stats": {
+    "totalModules": 53,
+    "adapters": 24,
+    "connectors": 12,
+    "features": 17
+  },
+  "modules": {
+    "adapters": [
+      {
+        "id": "ui/tailwind",
+        "name": "Tailwind CSS",
+        "description": "Utility-first CSS framework with plugins and optimizations",
+        "category": "adapter",
+        "provides": [
+          "tailwind",
+          "postcss"
+        ],
+        "tags": [
+          "adapter",
+          "ai",
+          "postcss",
+          "tailwind"
+        ]
+      },
+      {
+        "id": "ui/shadcn-ui",
+        "name": "Shadcn/ui",
+        "description": "Beautifully designed components built with Radix UI and Tailwind CSS",
+        "category": "adapter",
+        "provides": [
+          "shadcn-ui",
+          "radix-ui",
+          "tailwind"
+        ],
+        "tags": [
+          "adapter",
+          "ai",
+          "radix-ui",
+          "shadcn-ui",
+          "tailwind",
+          "ui"
+        ]
+      },
+      {
+        "id": "payment/stripe",
+        "name": "Stripe Payment Processing",
+        "description": "Complete payment processing with Stripe including subscriptions and one-time payments",
+        "category": "adapter",
+        "tags": [
+          "adapter",
+          "payment"
+        ]
+      },
+      {
+        "id": "observability/sentry",
+        "name": "Sentry Core (Tech-Agnostic)",
+        "description": "Tech-agnostic Sentry types and utilities. Framework-specific implementations handled by Connectors.",
+        "category": "adapter",
+        "provides": [
+          "monitoring-core"
+        ],
+        "tags": [
+          "adapter",
+          "monitoring-core"
+        ]
+      },
+      {
+        "id": "framework/react-native",
+        "name": "React Native",
+        "description": "A framework for building native apps using React",
+        "category": "adapter",
+        "provides": [
+          "react",
+          "react-native",
+          "typescript"
+        ],
+        "tags": [
+          "adapter",
+          "react",
+          "react-native",
+          "typescript",
+          "ui"
+        ]
+      },
+      {
+        "id": "framework/react",
+        "name": "React",
+        "description": "A JavaScript library for building user interfaces",
+        "category": "adapter",
+        "provides": [
+          "react",
+          "react-dom",
+          "typescript"
+        ],
+        "tags": [
+          "adapter",
+          "javascript",
+          "react",
+          "react-dom",
+          "typescript",
+          "ui"
+        ]
+      },
+      {
+        "id": "framework/nextjs",
+        "name": "Next.js",
+        "description": "The React Framework for Production",
+        "category": "adapter",
+        "provides": [
+          "react",
+          "nextjs",
+          "typescript",
+          "tailwind",
+          "eslint"
+        ],
+        "tags": [
+          "adapter",
+          "eslint",
+          "nextjs",
+          "react",
+          "tailwind",
+          "typescript"
+        ]
+      },
+      {
+        "id": "email/resend",
+        "name": "Resend Email Service",
+        "description": "Modern email API for transactional emails with Resend",
+        "category": "adapter",
+        "provides": [
+          "email-core"
+        ],
+        "tags": [
+          "adapter",
+          "ai",
+          "api",
+          "email",
+          "email-core"
+        ]
+      },
+      {
+        "id": "framework/expo",
+        "name": "React Native with Expo",
+        "description": "A framework for building native apps using React Native and Expo",
+        "category": "adapter",
+        "provides": [
+          "react",
+          "react-native",
+          "expo",
+          "typescript"
+        ],
+        "tags": [
+          "adapter",
+          "expo",
+          "react",
+          "react-native",
+          "typescript",
+          "ui"
+        ]
+      },
+      {
+        "id": "deployment/vercel",
+        "name": "Vercel Deployment",
+        "description": "Pure Vercel deployment configuration for any framework",
+        "category": "adapter",
+        "tags": [
+          "adapter",
+          "deployment"
+        ]
+      },
+      {
+        "id": "deployment/docker",
+        "name": "Docker Deployment",
+        "description": "Containerization and deployment setup with Docker",
+        "category": "adapter",
+        "tags": [
+          "adapter",
+          "ai",
+          "deployment"
+        ]
+      },
+      {
+        "id": "services/github-api",
+        "name": "GitHub API",
+        "description": "GitHub API client for repository management and operations",
+        "category": "adapter",
+        "tags": [
+          "adapter",
+          "api"
+        ]
+      },
+      {
+        "id": "database/typeorm",
+        "name": "TypeORM",
+        "description": "TypeScript ORM for Node.js with decorators and migrations",
+        "category": "adapter",
+        "tags": [
+          "adapter",
+          "typescript"
+        ]
+      },
+      {
+        "id": "database/prisma",
+        "name": "Prisma ORM",
+        "description": "Next-generation ORM for Node.js and TypeScript",
+        "category": "adapter",
+        "tags": [
+          "adapter",
+          "typescript"
+        ]
+      },
+      {
+        "id": "database/drizzle",
+        "name": "Drizzle ORM",
+        "description": "TypeScript ORM with excellent developer experience",
+        "category": "adapter",
+        "provides": [
+          "database-core"
+        ],
+        "tags": [
+          "adapter",
+          "database-core",
+          "typescript"
+        ]
+      },
+      {
+        "id": "database/sequelize",
+        "name": "Sequelize ORM",
+        "description": "Promise-based Node.js ORM for PostgreSQL, MySQL, MariaDB, SQLite and Microsoft SQL Server",
+        "category": "adapter",
+        "tags": [
+          "adapter"
+        ]
+      },
+      {
+        "id": "core/golden-stack",
+        "name": "Architech Golden Stack",
+        "description": "Essential technologies for production-ready applications: Zustand (state), Vitest (testing), ESLint (linting), Prettier (formatting), Zod (validation)",
+        "category": "adapter",
+        "tags": [
+          "adapter",
+          "state",
+          "testing",
+          "validation"
+        ]
+      },
+      {
+        "id": "core/git",
+        "name": "Git Version Control",
+        "description": "Local git repository management and operations",
+        "category": "adapter",
+        "tags": [
+          "adapter"
+        ]
+      },
+      {
+        "id": "core/forms",
+        "name": "Forms",
+        "description": "Golden Core form handling with validation using React Hook Form and Zod",
+        "category": "adapter",
+        "tags": [
+          "adapter",
+          "forms",
+          "react",
+          "validation"
+        ]
+      },
+      {
+        "id": "content/next-intl",
+        "name": "Next.js Internationalization",
+        "description": "Complete internationalization solution with next-intl including advanced features like pluralization, rich text, and dynamic imports",
+        "category": "adapter",
+        "requires": [
+          "framework/nextjs"
+        ],
+        "tags": [
+          "adapter"
+        ]
+      },
+      {
+        "id": "auth/better-auth",
+        "name": "Better Auth",
+        "description": "Full-stack authentication SDK with session management, OAuth, 2FA, and organization support",
+        "category": "adapter",
+        "requiresCapabilities": [
+          {
+            "category": "database",
+            "optional": false,
+            "reason": "Better Auth requires database to store user accounts, sessions, OAuth tokens, and organization/team data"
+          }
+        ],
+        "tags": [
+          "adapter",
+          "auth",
+          "authentication"
+        ]
+      },
+      {
+        "id": "ai/vercel-ai-sdk",
+        "name": "Vercel AI SDK",
+        "description": "Pure Vercel AI SDK for building AI-powered applications with streaming, chat, and text generation",
+        "category": "adapter",
+        "provides": [
+          "ai-core"
+        ],
+        "tags": [
+          "adapter",
+          "ai",
+          "ai-core",
+          "chat",
+          "ui"
+        ]
+      },
+      {
+        "id": "blockchain/web3",
+        "name": "Viem Ethereum Integration",
+        "description": "Modern, type-safe Web3 integration using viem for Ethereum blockchain interactions",
+        "category": "adapter",
+        "provides": [
+          "viem",
+          "web3-core",
+          "react-query"
+        ],
+        "tags": [
+          "adapter",
+          "ai",
+          "react-query",
+          "viem",
+          "web3-core"
+        ]
+      },
+      {
+        "id": "data-fetching/tanstack-query",
+        "name": "TanStack Query",
+        "description": "Powerful data synchronization for React applications with caching, background updates, and optimistic updates",
+        "category": "adapter",
+        "tags": [
+          "adapter",
+          "react"
+        ]
+      }
+    ],
+    "connectors": [
+      {
+        "id": "connectors/payment/stripe-nextjs-drizzle",
+        "name": "Stripe NextJS Drizzle Connector",
+        "description": "Server-side API routes for Stripe payments with NextJS and Drizzle",
+        "category": "connector",
+        "provides": [
+          "payments-backend-complete",
+          "stripe-api-routes",
+          "organization-billing-api",
+          "seat-management-api",
+          "usage-tracking-api",
+          "stripe-webhooks"
+        ],
+        "requiresCapabilities": [
+          {
+            "category": "auth",
+            "optional": false,
+            "reason": "Link payments, subscriptions, invoices, and billing to authenticated users and organizations"
+          }
+        ],
+        "requires": [
+          "framework/nextjs",
+          "database/drizzle",
+          "payment/stripe"
+        ],
+        "tags": [
+          "api",
+          "connector",
+          "nextjs",
+          "organization-billing-api",
+          "payment",
+          "payments-backend-complete",
+          "seat-management-api",
+          "stripe-api-routes",
+          "stripe-webhooks",
+          "usage-tracking-api"
+        ]
+      },
+      {
+        "id": "connectors/integrations/better-auth-github",
+        "name": "Better Auth + GitHub Connector",
+        "description": "OAuth integration between Better Auth and GitHub for Application Authorization",
+        "category": "connector",
+        "provides": [
+          "oauth-flow",
+          "token-management",
+          "user-repositories",
+          "permission-scoping",
+          "token-refresh",
+          "secure-storage"
+        ],
+        "requires": [
+          {
+            "id": "better-auth",
+            "version": "^1.0.0"
+          },
+          {
+            "id": "github-api",
+            "version": "^1.0.0"
+          }
+        ],
+        "connects": [
+          "better-auth",
+          "github-api"
+        ],
+        "tags": [
+          "auth",
+          "better-auth",
+          "connector",
+          "github-api",
+          "oauth-flow",
+          "permission-scoping",
+          "secure-storage",
+          "token-management",
+          "token-refresh",
+          "user-repositories"
+        ]
+      },
+      {
+        "id": "connectors/auth/better-auth-nextjs",
+        "name": "Better Auth + Next.js Connector",
+        "description": "Complete Better Auth integration for Next.js applications with React hooks",
+        "category": "connector",
+        "provides": [
+          "auth-backend-complete",
+          "auth-sdk-native-hooks",
+          "auth-api-routes",
+          "auth-middleware",
+          "session-management",
+          "oauth-providers",
+          "two-factor-auth"
+        ],
+        "requiresCapabilities": [
+          {
+            "category": "database",
+            "optional": false,
+            "reason": "Better Auth connector requires database for user authentication, session management, and organization/team storage"
+          }
+        ],
+        "requires": [
+          "framework/nextjs",
+          "auth/better-auth"
+        ],
+        "connects": [
+          "better-auth",
+          "nextjs",
+          "react"
+        ],
+        "tags": [
+          "auth",
+          "auth-api-routes",
+          "auth-backend-complete",
+          "auth-middleware",
+          "auth-sdk-native-hooks",
+          "better-auth",
+          "connector",
+          "nextjs",
+          "oauth-providers",
+          "react",
+          "session-management",
+          "two-factor-auth"
+        ]
+      },
+      {
+        "id": "connectors/database/drizzle-postgres-docker",
+        "name": "Docker Drizzle Connector",
+        "description": "Complete Docker containerization for Drizzle ORM with database services, migrations, and production-ready configuration",
+        "category": "connector",
+        "provides": [],
+        "tags": [
+          "ai",
+          "connector",
+          "database"
+        ]
+      },
+      {
+        "id": "connectors/email/resend-nextjs",
+        "name": "Resend + Next.js Connector",
+        "description": "Resend email service integration for Next.js applications",
+        "category": "connector",
+        "provides": [
+          "email-sending",
+          "email-api-routes"
+        ],
+        "requires": [
+          "framework/nextjs",
+          "email/resend"
+        ],
+        "connects": [
+          "resend",
+          "nextjs"
+        ],
+        "tags": [
+          "ai",
+          "connector",
+          "email",
+          "email-api-routes",
+          "email-sending",
+          "nextjs",
+          "resend"
+        ]
+      },
+      {
+        "id": "connectors/infrastructure/zustand-nextjs",
+        "name": "Zustand NextJS Connector",
+        "description": "Zustand state management setup and configuration for NextJS applications",
+        "category": "connector",
+        "provides": [
+          "state-management",
+          "persistence",
+          "devtools",
+          "ssr-support"
+        ],
+        "requires": [
+          "framework/nextjs",
+          "core/golden-stack"
+        ],
+        "connects": [
+          "zustand",
+          "nextjs"
+        ],
+        "tags": [
+          "connector",
+          "devtools",
+          "nextjs",
+          "persistence",
+          "ssr-support",
+          "state",
+          "state-management",
+          "zustand"
+        ]
+      },
+      {
+        "id": "connectors/ai/vercel-ai-nextjs",
+        "name": "Vercel AI SDK + Next.js Connector",
+        "description": "Complete Vercel AI SDK integration for Next.js with streaming support",
+        "category": "connector",
+        "provides": [
+          "ai-chat",
+          "ai-completion",
+          "ai-streaming",
+          "ai-hooks"
+        ],
+        "requires": [
+          "framework/nextjs",
+          "ai/vercel-ai-sdk"
+        ],
+        "connects": [
+          "vercel-ai-sdk",
+          "nextjs",
+          "react"
+        ],
+        "tags": [
+          "ai",
+          "ai-chat",
+          "ai-completion",
+          "ai-hooks",
+          "ai-streaming",
+          "connector",
+          "nextjs",
+          "react",
+          "vercel-ai-sdk"
+        ]
+      },
+      {
+        "id": "connectors/infrastructure/tanstack-query-nextjs",
+        "name": "TanStack Query NextJS Connector",
+        "description": "TanStack Query setup and configuration for NextJS applications",
+        "category": "connector",
+        "provides": [
+          "query-client",
+          "query-provider",
+          "ssr-support",
+          "hydration",
+          "error-boundary",
+          "devtools"
+        ],
+        "requires": [
+          "framework/nextjs",
+          "data-fetching/tanstack-query"
+        ],
+        "connects": [
+          "tanstack-query",
+          "nextjs"
+        ],
+        "tags": [
+          "connector",
+          "devtools",
+          "error-boundary",
+          "hydration",
+          "nextjs",
+          "query-client",
+          "query-provider",
+          "ssr-support",
+          "tanstack-query"
+        ]
+      },
+      {
+        "id": "connectors/infrastructure/rhf-zod-shadcn",
+        "name": "React Hook Form + Zod + Shadcn Connector",
+        "description": "React Hook Form, Zod validation, and Shadcn form components setup for NextJS",
+        "category": "connector",
+        "provides": [
+          "form-validation",
+          "form-components",
+          "accessibility",
+          "devtools"
+        ],
+        "requires": [
+          "framework/nextjs",
+          "ui/shadcn-ui",
+          "core/forms"
+        ],
+        "connects": [
+          "react-hook-form",
+          "zod",
+          "shadcn-ui",
+          "nextjs"
+        ],
+        "tags": [
+          "accessibility",
+          "connector",
+          "devtools",
+          "form-components",
+          "form-validation",
+          "nextjs",
+          "react",
+          "react-hook-form",
+          "shadcn-ui",
+          "validation",
+          "zod"
+        ]
+      },
+      {
+        "id": "connectors/deployment/docker-nextjs",
+        "name": "Docker Next.js Connector",
+        "description": "Complete Docker containerization for Next.js applications with multi-stage builds, optimization, and production-ready configuration",
+        "category": "connector",
+        "provides": [],
+        "requires": [
+          "docker",
+          "nextjs"
+        ],
+        "connects": [
+          "docker",
+          "nextjs"
+        ],
+        "tags": [
+          "ai",
+          "connector",
+          "docker",
+          "nextjs",
+          "ui"
+        ]
+      },
+      {
+        "id": "connectors/monitoring/sentry-nextjs",
+        "name": "Sentry Next.js Connector",
+        "description": "Enhances Sentry adapter with NextJS-specific optimizations, middleware, and monitoring hooks",
+        "category": "connector",
+        "provides": [],
+        "requires": [
+          "framework/nextjs",
+          "observability/sentry"
+        ],
+        "tags": [
+          "connector",
+          "monitoring",
+          "nextjs"
+        ]
+      },
+      {
+        "id": "connectors/testing/vitest-nextjs",
+        "name": "Vitest Next.js Connector",
+        "description": "Complete Vitest testing setup for Next.js applications with unit tests, integration tests, and coverage reporting",
+        "category": "connector",
+        "provides": [],
+        "tags": [
+          "connector",
+          "testing"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "id": "features/web3/shadcn",
+        "name": "Web3 (frontend)",
+        "description": "Web3 Capability",
+        "category": "feature",
+        "provides": [
+          "web3-ui"
+        ],
+        "requires": [
+          "ui/shadcn-ui"
+        ],
+        "tags": [
+          "feature",
+          "frontend",
+          "web3-ui"
+        ]
+      },
+      {
+        "id": "features/teams-management/backend/nextjs",
+        "name": "Teams-management (backend)",
+        "description": "Complete teams-management system",
+        "category": "feature",
+        "provides": [
+          "teams"
+        ],
+        "requires": [
+          "framework/nextjs",
+          "auth/better-auth"
+        ],
+        "tags": [
+          "backend",
+          "feature",
+          "teams"
+        ]
+      },
+      {
+        "id": "features/teams-management/frontend/shadcn",
+        "name": "Teams-management (frontend)",
+        "description": "Complete teams-management system",
+        "category": "feature",
+        "provides": [
+          "teams-core",
+          "features/teams"
+        ],
+        "requires": [
+          "ui/shadcn-ui"
+        ],
+        "tags": [
+          "feature",
+          "features/teams",
+          "frontend",
+          "teams",
+          "teams-core"
+        ]
+      },
+      {
+        "id": "features/teams-management/tech-stack",
+        "name": "Teams-management (frontend)",
+        "description": "Complete teams-management system",
+        "category": "feature",
+        "provides": [
+          "teams-schemas",
+          "teams-stores",
+          "teams-hooks-wrapper",
+          "features/teams"
+        ],
+        "tags": [
+          "feature",
+          "features/teams",
+          "frontend",
+          "teams",
+          "teams-hooks-wrapper",
+          "teams-schemas",
+          "teams-stores"
+        ]
+      },
+      {
+        "id": "features/payments/frontend/shadcn",
+        "name": "Payments (frontend)",
+        "description": "Payments Capability",
+        "category": "feature",
+        "provides": [
+          "payments-core"
+        ],
+        "requires": [
+          "ui/shadcn-ui"
+        ],
+        "tags": [
+          "feature",
+          "frontend",
+          "payment",
+          "payments-core"
+        ]
+      },
+      {
+        "id": "features/payments/tech-stack",
+        "name": "Payments (frontend)",
+        "description": "Payments Capability",
+        "category": "feature",
+        "provides": [
+          "payments-schemas",
+          "payments-stores",
+          "payments-hooks-generic",
+          "features/payments/tech"
+        ],
+        "tags": [
+          "feature",
+          "features/payments/tech",
+          "frontend",
+          "payment",
+          "payments-hooks-generic",
+          "payments-schemas",
+          "payments-stores"
+        ]
+      },
+      {
+        "id": "features/monitoring/shadcn",
+        "name": "Monitoring (frontend)",
+        "description": "Monitoring Capability",
+        "category": "feature",
+        "provides": [
+          "monitoring-core"
+        ],
+        "requires": [
+          "sentry"
+        ],
+        "tags": [
+          "feature",
+          "frontend",
+          "monitoring",
+          "monitoring-core"
+        ]
+      },
+      {
+        "id": "features/monitoring/tech-stack",
+        "name": "Monitoring (frontend)",
+        "description": "Monitoring Capability",
+        "category": "feature",
+        "provides": [
+          "monitoring-schemas",
+          "monitoring-stores",
+          "monitoring-hooks-generic",
+          "features/monitoring/tech"
+        ],
+        "tags": [
+          "feature",
+          "features/monitoring/tech",
+          "frontend",
+          "monitoring",
+          "monitoring-hooks-generic",
+          "monitoring-schemas",
+          "monitoring-stores"
+        ]
+      },
+      {
+        "id": "features/emailing/backend/resend-nextjs",
+        "name": "Emailing (backend)",
+        "description": "Complete emailing system",
+        "category": "feature",
+        "provides": [
+          "email",
+          "emailing"
+        ],
+        "requires": [
+          "framework/nextjs",
+          "email/resend"
+        ],
+        "tags": [
+          "ai",
+          "backend",
+          "email",
+          "emailing",
+          "feature"
+        ]
+      },
+      {
+        "id": "features/emailing/frontend/shadcn",
+        "name": "Emailing (frontend)",
+        "description": "Complete emailing system",
+        "category": "feature",
+        "provides": [
+          "emailing-ui"
+        ],
+        "requires": [
+          "ui/shadcn-ui"
+        ],
+        "tags": [
+          "ai",
+          "email",
+          "emailing-ui",
+          "feature",
+          "frontend"
+        ]
+      },
+      {
+        "id": "features/emailing/tech-stack",
+        "name": "Emailing (frontend)",
+        "description": "Complete emailing system",
+        "category": "feature",
+        "provides": [
+          "emailing-schemas",
+          "emailing-stores",
+          "emailing-hooks-wrapper",
+          "features/emailing/tech"
+        ],
+        "tags": [
+          "ai",
+          "email",
+          "emailing-hooks-wrapper",
+          "emailing-schemas",
+          "emailing-stores",
+          "feature",
+          "features/emailing/tech",
+          "frontend"
+        ]
+      },
+      {
+        "id": "features/auth/frontend/shadcn",
+        "name": "Auth (frontend)",
+        "description": "Authentication Feature",
+        "category": "feature",
+        "provides": [
+          "auth-ui-core",
+          "features/auth"
+        ],
+        "requires": [
+          "ui/shadcn-ui"
+        ],
+        "tags": [
+          "auth",
+          "auth-ui-core",
+          "authentication",
+          "feature",
+          "features/auth",
+          "frontend"
+        ]
+      },
+      {
+        "id": "features/auth/tech-stack",
+        "name": "Auth (frontend)",
+        "description": "Authentication Feature",
+        "category": "feature",
+        "provides": [
+          "auth-schemas",
+          "auth-stores",
+          "auth-hooks-generic",
+          "features/auth/tech"
+        ],
+        "tags": [
+          "auth",
+          "auth-hooks-generic",
+          "auth-schemas",
+          "auth-stores",
+          "authentication",
+          "feature",
+          "features/auth/tech",
+          "frontend"
+        ]
+      },
+      {
+        "id": "features/architech-welcome/shadcn",
+        "name": "Architech-welcome (frontend)",
+        "description": "Complete architech-welcome system",
+        "category": "feature",
+        "provides": [
+          "architech"
+        ],
+        "tags": [
+          "architech",
+          "feature",
+          "frontend"
+        ]
+      },
+      {
+        "id": "features/ai-chat/backend/nextjs",
+        "name": "Ai-chat (backend)",
+        "description": "AI Chat Feature",
+        "category": "feature",
+        "provides": [
+          "ai-chat",
+          "ai"
+        ],
+        "requires": [
+          "framework/nextjs",
+          "ai/vercel-ai-sdk"
+        ],
+        "tags": [
+          "ai",
+          "ai-chat",
+          "backend",
+          "chat",
+          "feature"
+        ]
+      },
+      {
+        "id": "features/ai-chat/frontend/shadcn",
+        "name": "Ai-chat (frontend)",
+        "description": "AI Chat Feature",
+        "category": "feature",
+        "provides": [
+          "ai-chat-core",
+          "features/ai"
+        ],
+        "requires": [
+          "ui/shadcn-ui"
+        ],
+        "tags": [
+          "ai",
+          "ai-chat-core",
+          "chat",
+          "feature",
+          "features/ai",
+          "frontend"
+        ]
+      },
+      {
+        "id": "features/ai-chat/tech-stack",
+        "name": "Ai-chat (frontend)",
+        "description": "AI Chat Feature",
+        "category": "feature",
+        "provides": [
+          "ai-chat-schemas",
+          "ai-chat-stores",
+          "ai-chat-hooks-wrapper",
+          "features/ai"
+        ],
+        "tags": [
+          "ai",
+          "ai-chat-hooks-wrapper",
+          "ai-chat-schemas",
+          "ai-chat-stores",
+          "chat",
+          "feature",
+          "features/ai",
+          "frontend"
+        ]
+      }
+    ]
+  }
+}

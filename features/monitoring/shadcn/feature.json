@@ -3,6 +3,7 @@
   "name": "Monitoring Capability",
   "description": "Complete monitoring capability with error tracking, performance monitoring, and user feedback using Sentry",
   "version": "1.0.0",
+  "role": "frontend-feature",
   "category": "feature",
   "contract": {
     "hooks": {
@@ -19,10 +20,28 @@
       "useSentryConfig": "UseQueryResult<SentryConfig, Error>"
     },
     "api": {
-      "endpoints": ["/api/monitoring/errors", "/api/monitoring/performance", "/api/monitoring/feedback", "/api/monitoring/config"],
-      "methods": ["POST", "GET", "PATCH", "DELETE"]
+      "endpoints": [
+        "/api/monitoring/errors",
+        "/api/monitoring/performance",
+        "/api/monitoring/feedback",
+        "/api/monitoring/config"
+      ],
+      "methods": [
+        "POST",
+        "GET",
+        "PATCH",
+        "DELETE"
+      ]
     },
-    "types": ["ErrorData", "PerformanceMetrics", "UserFeedback", "SentryConfig", "ErrorTrend", "PerformanceTrend", "UserFeedbackData"]
+    "types": [
+      "ErrorData",
+      "PerformanceMetrics",
+      "UserFeedback",
+      "SentryConfig",
+      "ErrorTrend",
+      "PerformanceTrend",
+      "UserFeedbackData"
+    ]
   },
   "prerequisites": {
     "adapters": [
@@ -36,14 +55,7 @@
       "performance-tracking"
     ]
   },
-  "requires": {
-    "components": {
-      "ui/shadcn-ui": [
-        "card", "tabs", "badge", "progress", "alert",
-        "select", "switch", "button", "table", "skeleton"
-      ]
-    }
-  },
+  "requires": [],
   "provides": [
     "monitoring-core",
     "{{#if features.performance}}monitoring-performance{{/if}}",
@@ -56,14 +68,22 @@
       "default": "sentry-nextjs",
       "description": "Backend implementation for monitoring services",
       "required": false,
-      "options": ["sentry-nextjs", "sentry-express", "sentry-fastify"]
+      "options": [
+        "sentry-nextjs",
+        "sentry-express",
+        "sentry-fastify"
+      ]
     },
     "frontend": {
       "type": "select",
       "default": "shadcn",
       "description": "Frontend implementation for monitoring UI",
       "required": false,
-      "options": ["shadcn", "mui", "chakra"]
+      "options": [
+        "shadcn",
+        "mui",
+        "chakra"
+      ]
     },
     "features": {
       "core": {
@@ -94,7 +114,11 @@
     },
     "environments": {
       "type": "array",
-      "default": ["production", "staging", "development"],
+      "default": [
+        "production",
+        "staging",
+        "development"
+      ],
       "description": "Environments to monitor",
       "required": false
     }
@@ -113,7 +137,9 @@
   },
   "internal_structure": {
     "core": {
-      "provides": ["monitoring-core"],
+      "provides": [
+        "monitoring-core"
+      ],
       "templates": [
         "ErrorBoundary.tsx",
         "BasicMetrics.tsx",
@@ -121,8 +147,12 @@
       ]
     },
     "performance": {
-      "prerequisites": ["monitoring-core"],
-      "provides": ["monitoring-performance"],
+      "prerequisites": [
+        "monitoring-core"
+      ],
+      "provides": [
+        "monitoring-performance"
+      ],
       "templates": [
         "PerformanceChart.tsx",
         "WebVitals.tsx",
@@ -130,8 +160,12 @@
       ]
     },
     "feedback": {
-      "prerequisites": ["monitoring-core"],
-      "provides": ["monitoring-feedback"],
+      "prerequisites": [
+        "monitoring-core"
+      ],
+      "provides": [
+        "monitoring-feedback"
+      ],
       "templates": [
         "UserFeedback.tsx",
         "FeedbackForm.tsx",
@@ -139,8 +173,13 @@
       ]
     },
     "analytics": {
-      "prerequisites": ["monitoring-core", "monitoring-performance"],
-      "provides": ["monitoring-analytics"],
+      "prerequisites": [
+        "monitoring-core",
+        "monitoring-performance"
+      ],
+      "provides": [
+        "monitoring-analytics"
+      ],
       "templates": [
         "AnalyticsDashboard.tsx",
         "TrendsChart.tsx",
@@ -151,5 +190,6 @@
   "constraints": {
     "minReactVersion": ">=18.0.0",
     "minNextjsVersion": ">=13.0.0"
-  }
+  },
+  "type": "feature"
 }

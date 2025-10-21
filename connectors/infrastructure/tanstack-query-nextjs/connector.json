@@ -4,7 +4,12 @@
   "description": "TanStack Query setup and configuration for NextJS applications",
   "type": "connector",
   "version": "1.0.0",
-  "connects": ["tanstack-query", "nextjs"],
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "connects": [
+    "tanstack-query",
+    "nextjs"
+  ],
   "provides": [
     "query-client",
     "query-provider",
@@ -13,7 +18,10 @@
     "error-boundary",
     "devtools"
   ],
-  "requires": ["framework/nextjs", "data-fetching/tanstack-query"],
+  "requires": [
+    "framework/nextjs",
+    "data-fetching/tanstack-query"
+  ],
   "parameters": {
     "ssr": {
       "name": "Server-Side Rendering",

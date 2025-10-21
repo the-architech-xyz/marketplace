@@ -4,18 +4,28 @@
   "description": "Containerization and deployment setup with Docker",
   "category": "deployment",
   "version": "1.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "dependencies": [],
   "capabilities": {
     "containerization": {
       "version": "1.0.0",
       "description": "Docker containerization and deployment",
-      "provides": ["containerization", "multi-stage-builds", "optimization", "production-ready"]
+      "provides": [
+        "containerization",
+        "multi-stage-builds",
+        "optimization",
+        "production-ready"
+      ]
     },
     "monitoring": {
       "version": "1.0.0",
       "description": "Health checks and monitoring",
-      "provides": ["health-checks", "environment-config", "logging"]
+      "provides": [
+        "health-checks",
+        "environment-config",
+        "logging"
+      ]
     }
   },
   "limitations": "Requires Docker to be installed",

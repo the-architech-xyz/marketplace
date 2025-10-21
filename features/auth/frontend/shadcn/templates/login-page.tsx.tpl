@@ -1,9 +1,5 @@
 'use client';
 
-// Login Page Component
-
-"use client";
-
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -33,11 +29,11 @@ interface LoginPageProps {
   className?: string;
 }
 
-export const LoginPage: React.FC<LoginPageProps> = ({
+export default function LoginPage({
   onSuccess,
   redirectTo = '/dashboard',
   className = '',
-}) => {
+}: LoginPageProps) {
   const router = useRouter();
   const { data: session } = useSession();  // Better Auth hook
   const signInMutation = authClient.signIn.email();  // Better Auth mutation
@@ -273,4 +269,4 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       </div>
     </div>
   );
-};
+}

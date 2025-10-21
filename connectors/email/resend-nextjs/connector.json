@@ -4,7 +4,12 @@
   "description": "Resend email service integration for Next.js applications",
   "type": "connector",
   "version": "1.0.0",
-  "connects": ["resend", "nextjs"],
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "connects": [
+    "resend",
+    "nextjs"
+  ],
   "provides": [
     "email-sending",
     "email-api-routes"
@@ -32,4 +37,3 @@
     }
   }
 }
-

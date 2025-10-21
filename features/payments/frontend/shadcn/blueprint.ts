@@ -196,6 +196,35 @@ function generateCoreActions(): BlueprintAction[] {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
       }
+    },
+
+    // Analytics components (always generate - used by dashboard)
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/PaymentAnalytics.tsx',
+      template: 'templates/PaymentAnalytics.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/TransactionTable.tsx',
+      template: 'templates/TransactionTable.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
     }
   ];
 }
@@ -322,36 +351,6 @@ function generateWebhooksActions(): BlueprintAction[] {
 
 function generateAnalyticsActions(): BlueprintAction[] {
   return [
-    // Analytics components (existing templates)
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/PaymentAnalytics.tsx',
-      template: 'templates/PaymentAnalytics.tsx.tpl',
-      context: { 
-        features: ['analytics'],
-        hasAnalytics: true
-      },
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-
-    // Transaction table
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/TransactionTable.tsx',
-      template: 'templates/TransactionTable.tsx.tpl',
-      context: { 
-        features: ['analytics'],
-        hasAnalytics: true
-      },
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-
     // Transaction pages
     {
       type: BlueprintActionType.CREATE_FILE,

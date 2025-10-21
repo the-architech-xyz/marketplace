@@ -4,6 +4,7 @@
   "description": "Next-generation ORM for Node.js and TypeScript",
   "category": "database",
   "version": "5.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "dependencies": [],
   "capabilities": [

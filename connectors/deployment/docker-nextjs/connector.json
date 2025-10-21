@@ -4,43 +4,17 @@
   "description": "Complete Docker containerization for Next.js applications with multi-stage builds, optimization, and production-ready configuration",
   "type": "connector",
   "version": "1.0.0",
-  "connects": ["docker", "nextjs"],
-  "requires": ["docker", "nextjs"],
-  "provides": {
-    "files": [
-      "Dockerfile",
-      "Dockerfile.dev",
-      "Dockerfile.prod",
-      ".dockerignore",
-      "docker-compose.yml",
-      "docker-compose.dev.yml",
-      "docker-compose.prod.yml",
-      "docker-compose.override.yml",
-      "scripts/docker-build.sh",
-      "scripts/docker-run.sh",
-      "scripts/docker-dev.sh",
-      "scripts/docker-prod.sh",
-      "scripts/docker-clean.sh",
-      "scripts/docker-logs.sh",
-      "scripts/docker-shell.sh",
-      "scripts/docker-health.sh",
-      "nginx/nginx.conf",
-      "nginx/nextjs.conf",
-      "nginx/ssl.conf",
-      "scripts/entrypoint.sh",
-      "scripts/healthcheck.sh",
-      "scripts/init-db.sh",
-      "scripts/backup.sh",
-      "scripts/restore.sh",
-      "monitoring/docker-compose.monitoring.yml",
-      "monitoring/prometheus.yml",
-      "monitoring/grafana/dashboards/nextjs.json",
-      "monitoring/grafana/provisioning/dashboards/dashboard.yml",
-      "monitoring/grafana/provisioning/datasources/prometheus.yml"
-    ],
-    "components": [],
-    "pages": []
-  },
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "connects": [
+    "docker",
+    "nextjs"
+  ],
+  "requires": [
+    "docker",
+    "nextjs"
+  ],
+  "provides": [],
   "parameters": {
     "multiStageBuild": {
       "name": "Multi-Stage Build",

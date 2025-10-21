@@ -3,7 +3,20 @@
   "version": "1.0.0",
   "description": "Technology-agnostic stack layer for Monitoring feature",
   "category": "tech-stack",
-  "tags": ["monitoring", "types", "schemas", "hooks", "stores", "tech-stack"],
+  "provides": [
+    "monitoring-schemas",
+    "monitoring-stores",
+    "monitoring-hooks-generic"
+  ],
+  "role": "tech-stack-layer",
+  "tags": [
+    "monitoring",
+    "types",
+    "schemas",
+    "hooks",
+    "stores",
+    "tech-stack"
+  ],
   "moduleType": "feature",
   "blueprint": "./blueprint.ts",
   "parameters": {
@@ -50,7 +63,10 @@
         "default": false
       }
     },
-    "required": ["featureName", "featurePath"]
+    "required": [
+      "featureName",
+      "featurePath"
+    ]
   },
   "dependencies": [
     "zod",
@@ -62,5 +78,7 @@
   "devDependencies": [
     "@types/node",
     "typescript"
-  ]
+  ],
+  "id": "features/monitoring/tech-stack",
+  "type": "feature"
 }

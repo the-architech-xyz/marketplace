@@ -4,6 +4,7 @@
   "description": "Modern, type-safe Web3 integration using viem for Ethereum blockchain interactions",
   "category": "blockchain",
   "version": "2.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "provides": [
     {
@@ -41,27 +42,53 @@
     "wallet-connection": {
       "version": "2.0.0",
       "description": "Multi-wallet connection and management",
-      "provides": ["wallet-connection", "wallet-management", "account-management", "network-switching"]
+      "provides": [
+        "wallet-connection",
+        "wallet-management",
+        "account-management",
+        "network-switching"
+      ]
     },
     "contract-interaction": {
       "version": "2.0.0",
       "description": "Type-safe smart contract interactions",
-      "provides": ["contract-interaction", "type-safety", "error-handling", "transaction-management"]
+      "provides": [
+        "contract-interaction",
+        "type-safety",
+        "error-handling",
+        "transaction-management"
+      ]
     },
     "defi-support": {
       "version": "2.0.0",
       "description": "DeFi protocol integrations and utilities",
-      "provides": ["defi-support", "token-swaps", "liquidity-pools", "lending-protocols"]
+      "provides": [
+        "defi-support",
+        "token-swaps",
+        "liquidity-pools",
+        "lending-protocols"
+      ]
     },
     "multi-network": {
       "version": "2.0.0",
       "description": "Multi-blockchain network support",
-      "provides": ["multi-network", "ethereum", "polygon", "arbitrum", "network-switching"]
+      "provides": [
+        "multi-network",
+        "ethereum",
+        "polygon",
+        "arbitrum",
+        "network-switching"
+      ]
     },
     "react-integration": {
       "version": "2.0.0",
       "description": "React hooks and components for Web3",
-      "provides": ["react-hooks", "query-caching", "viem-integration", "modern-architecture"]
+      "provides": [
+        "react-hooks",
+        "query-caching",
+        "viem-integration",
+        "modern-architecture"
+      ]
     }
   },
   "limitations": "Requires Web3 wallet and RPC endpoints. Browser environment required for wallet operations.",

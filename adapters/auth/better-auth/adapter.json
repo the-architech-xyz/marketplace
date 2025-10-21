@@ -4,6 +4,7 @@
   "description": "Full-stack authentication SDK with session management, OAuth, 2FA, and organization support",
   "category": "auth",
   "version": "1.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "dependencies": [],
   "requiresCapabilities": [
@@ -17,7 +18,15 @@
     "authentication": {
       "version": "1.0.0",
       "description": "Complete authentication with Better Auth SDK",
-      "provides": ["email-password", "oauth", "magic-link", "two-factor", "session-management", "organizations", "teams"]
+      "provides": [
+        "email-password",
+        "oauth",
+        "magic-link",
+        "two-factor",
+        "session-management",
+        "organizations",
+        "teams"
+      ]
     }
   },
   "parameters": {
@@ -33,7 +42,10 @@
     },
     "oauthProviders": {
       "type": "array",
-      "default": ["google", "github"],
+      "default": [
+        "google",
+        "github"
+      ],
       "description": "Enabled OAuth providers"
     },
     "twoFactor": {
@@ -58,4 +70,3 @@
     }
   }
 }
-

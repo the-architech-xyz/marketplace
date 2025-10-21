@@ -4,6 +4,13 @@
   "description": "Complete AI chat backend with Vercel AI SDK and NextJS",
   "type": "capability",
   "version": "1.0.0",
+  "provides": [
+    "ai-chat-api",
+    "ai-chat-business-logic",
+    "ai-chat-persistence"
+  ],
+  "role": "backend-feature",
+  "pattern": "custom-logic",
   "contract": {
     "hooks": {
       "useConversations": {

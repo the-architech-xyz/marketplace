@@ -3,11 +3,22 @@
   "name": "Better Auth + GitHub Connector",
   "description": "OAuth integration between Better Auth and GitHub for Application Authorization",
   "version": "1.0.0",
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
   "type": "connector",
-  "connects": ["better-auth", "github-api"],
+  "connects": [
+    "better-auth",
+    "github-api"
+  ],
   "dependencies": [
-    { "id": "better-auth", "version": "^1.0.0" },
-    { "id": "github-api", "version": "^1.0.0" }
+    {
+      "id": "better-auth",
+      "version": "^1.0.0"
+    },
+    {
+      "id": "github-api",
+      "version": "^1.0.0"
+    }
   ],
   "provides": [
     "oauth-flow",
@@ -35,7 +46,12 @@
     },
     "scopes": {
       "type": "array",
-      "default": ["repo", "workflow", "admin:org", "user:email"],
+      "default": [
+        "repo",
+        "workflow",
+        "admin:org",
+        "user:email"
+      ],
       "description": "GitHub OAuth scopes",
       "required": false
     },

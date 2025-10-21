@@ -4,6 +4,7 @@
   "description": "A framework for building native apps using React Native and Expo",
   "category": "framework",
   "version": "50.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "dependencies": [],
   "provides": [
@@ -32,22 +33,48 @@
     "expo-framework": {
       "version": "50.0.0",
       "description": "Complete Expo framework with React Native",
-      "provides": ["react", "react-native", "expo", "typescript", "metro", "hermes"]
+      "provides": [
+        "react",
+        "react-native",
+        "expo",
+        "typescript",
+        "metro",
+        "hermes"
+      ]
     },
     "styling-system": {
       "version": "1.0.0",
       "description": "Styling and CSS framework integration",
-      "provides": ["style-sheet", "styled-components", "emotion", "nativewind"]
+      "provides": [
+        "style-sheet",
+        "styled-components",
+        "emotion",
+        "nativewind"
+      ]
     },
     "development-tools": {
       "version": "1.0.0",
       "description": "Development and build tools",
-      "provides": ["typescript", "eslint", "prettier", "metro", "expo-cli", "eas-cli"]
+      "provides": [
+        "typescript",
+        "eslint",
+        "prettier",
+        "metro",
+        "expo-cli",
+        "eas-cli"
+      ]
     },
     "expo-features": {
       "version": "1.0.0",
       "description": "Expo-specific features and APIs",
-      "provides": ["expo-router", "expo-constants", "expo-font", "expo-asset", "expo-camera", "expo-location"]
+      "provides": [
+        "expo-router",
+        "expo-constants",
+        "expo-font",
+        "expo-asset",
+        "expo-camera",
+        "expo-location"
+      ]
     }
   },
   "limitations": "Requires Node.js 18+, Expo CLI, and Expo Go app for development",
@@ -157,14 +184,27 @@
       }
     },
     "conventions": {
-      "fileExtensions": [".tsx", ".ts", ".jsx", ".js"],
+      "fileExtensions": [
+        ".tsx",
+        ".ts",
+        ".jsx",
+        ".js"
+      ],
       "importStyle": "alias",
       "aliasPrefix": "{{importAlias || '@'}}",
-      "componentExtensions": [".tsx", ".jsx"],
-      "screenExtensions": [".tsx", ".jsx"],
-      "hookExtensions": [".ts", ".js"]
+      "componentExtensions": [
+        ".tsx",
+        ".jsx"
+      ],
+      "screenExtensions": [
+        ".tsx",
+        ".jsx"
+      ],
+      "hookExtensions": [
+        ".ts",
+        ".js"
+      ]
     }
   },
   "constraints": {}
 }
-

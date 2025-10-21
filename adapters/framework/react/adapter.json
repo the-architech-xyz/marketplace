@@ -4,6 +4,7 @@
   "description": "A JavaScript library for building user interfaces",
   "category": "framework",
   "version": "18.2.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "dependencies": [],
   "provides": [
@@ -27,17 +28,30 @@
     "react-framework": {
       "version": "18.2.0",
       "description": "Complete React framework",
-      "provides": ["react", "react-dom", "typescript"]
+      "provides": [
+        "react",
+        "react-dom",
+        "typescript"
+      ]
     },
     "styling-system": {
       "version": "1.0.0",
       "description": "Styling and CSS framework integration",
-      "provides": ["css-modules", "styled-components", "emotion"]
+      "provides": [
+        "css-modules",
+        "styled-components",
+        "emotion"
+      ]
     },
     "development-tools": {
       "version": "1.0.0",
       "description": "Development and build tools",
-      "provides": ["typescript", "eslint", "prettier", "modern-dev-tools"]
+      "provides": [
+        "typescript",
+        "eslint",
+        "prettier",
+        "modern-dev-tools"
+      ]
     }
   },
   "limitations": "Requires Node.js 16+ and npm/yarn/pnpm/bun",
@@ -120,13 +134,23 @@
       }
     },
     "conventions": {
-      "fileExtensions": [".tsx", ".ts", ".jsx", ".js"],
+      "fileExtensions": [
+        ".tsx",
+        ".ts",
+        ".jsx",
+        ".js"
+      ],
       "importStyle": "alias",
       "aliasPrefix": "{{importAlias || '@'}}",
-      "componentExtensions": [".tsx", ".jsx"],
-      "hookExtensions": [".ts", ".js"]
+      "componentExtensions": [
+        ".tsx",
+        ".jsx"
+      ],
+      "hookExtensions": [
+        ".ts",
+        ".js"
+      ]
     }
   },
   "constraints": {}
 }
-

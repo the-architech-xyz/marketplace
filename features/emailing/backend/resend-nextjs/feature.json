@@ -4,6 +4,14 @@
   "description": "Complete email sending backend with Resend and NextJS",
   "type": "capability",
   "version": "1.0.0",
+  "provides": [
+    "emailing-api",
+    "emailing-business-logic",
+    "emailing-templates",
+    "emailing-campaigns"
+  ],
+  "role": "backend-feature",
+  "pattern": "custom-logic",
   "contract": {
     "hooks": {
       "useEmails": {

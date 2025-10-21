@@ -4,6 +4,7 @@
   "description": "TypeScript ORM with excellent developer experience",
   "category": "database",
   "version": "0.29.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "dependencies": [],
   "provides": [
@@ -17,22 +18,43 @@
     "database-orm": {
       "version": "1.0.0",
       "description": "Type-safe SQL ORM with excellent TypeScript support",
-      "provides": ["sql", "postgresql", "mysql", "sqlite", "serverless", "migrations", "schema-validation", "type-safety", "query-builder", "relations"]
+      "provides": [
+        "sql",
+        "postgresql",
+        "mysql",
+        "sqlite",
+        "serverless",
+        "migrations",
+        "schema-validation",
+        "type-safety",
+        "query-builder",
+        "relations"
+      ]
     },
     "database-migrations": {
       "version": "1.0.0",
       "description": "Database schema migration management",
-      "provides": ["migrations", "schema-validation", "rollback"]
+      "provides": [
+        "migrations",
+        "schema-validation",
+        "rollback"
+      ]
     },
     "database-relations": {
       "version": "1.0.0",
       "description": "Advanced relationship management and queries",
-      "provides": ["relations", "joins", "foreign-keys"]
+      "provides": [
+        "relations",
+        "joins",
+        "foreign-keys"
+      ]
     }
   },
   "internal_structure": {
     "core": {
-      "provides": ["database-core"],
+      "provides": [
+        "database-core"
+      ],
       "templates": [
         "schema.ts",
         "db-index.ts",
@@ -40,29 +62,45 @@
       ]
     },
     "migrations": {
-      "prerequisites": ["database-core"],
-      "provides": ["database-migrations"],
+      "prerequisites": [
+        "database-core"
+      ],
+      "provides": [
+        "database-migrations"
+      ],
       "templates": [
         "migrate.ts"
       ]
     },
     "studio": {
-      "prerequisites": ["database-core"],
-      "provides": ["database-studio"],
+      "prerequisites": [
+        "database-core"
+      ],
+      "provides": [
+        "database-studio"
+      ],
       "templates": [
         "studio.ts"
       ]
     },
     "relations": {
-      "prerequisites": ["database-core"],
-      "provides": ["database-relations"],
+      "prerequisites": [
+        "database-core"
+      ],
+      "provides": [
+        "database-relations"
+      ],
       "templates": [
         "relations.ts"
       ]
     },
     "seeding": {
-      "prerequisites": ["database-core"],
-      "provides": ["database-seeding"],
+      "prerequisites": [
+        "database-core"
+      ],
+      "provides": [
+        "database-seeding"
+      ],
       "templates": [
         "seed.ts",
         "seed-scripts.ts"

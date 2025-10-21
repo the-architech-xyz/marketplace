@@ -19,11 +19,16 @@ import { fileURLToPath } from 'url';
 // ============================================================================
 
 interface FeatureImplementation {
-  type: 'backend' | 'frontend';
+  type: 'backend' | 'frontend' | 'tech-stack';
   stack: string[];           // ['better-auth', 'nextjs']
   moduleId: string;          // 'features/auth/backend/better-auth-nextjs'
   capabilities: string[];    // ['authentication', 'session-management']
   dependencies: string[];    // ['ui/shadcn-ui', 'auth/better-auth']
+  requiresCapabilities?: Array<{  // Semantic capability requirements
+    category: string;
+    optional: boolean;
+    reason: string;
+  }>;
   parameters?: Record<string, any>;
   constraints?: Record<string, any>;
 }
@@ -53,6 +58,11 @@ interface FeatureMetadata {
     capabilities?: string[];
     adapters?: string[];
   };
+  requiresCapabilities?: Array<{
+    category: string;
+    optional: boolean;
+    reason: string;
+  }>;
   provides?: string[];
   parameters?: Record<string, any>;
   constraints?: Record<string, any>;
@@ -249,6 +259,7 @@ class FeatureManifestGenerator {
       moduleId,
       capabilities,
       dependencies,
+      requiresCapabilities: metadata.requiresCapabilities,
       parameters: metadata.parameters,
       constraints: metadata.constraints
     };

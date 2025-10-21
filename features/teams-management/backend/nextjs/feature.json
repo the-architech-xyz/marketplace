@@ -4,6 +4,14 @@
   "description": "Complete teams management backend with Better Auth and NextJS",
   "type": "capability",
   "version": "1.0.0",
+  "provides": [
+    "teams-api",
+    "teams-business-logic",
+    "teams-rbac",
+    "teams-invitations"
+  ],
+  "role": "backend-feature",
+  "pattern": "custom-logic",
   "contract": {
     "hooks": {
       "useTeams": {

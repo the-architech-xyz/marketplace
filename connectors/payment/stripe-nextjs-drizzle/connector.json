@@ -17,12 +17,15 @@
     }
   ],
   "provides": [
+    "payments-backend-complete",
     "stripe-api-routes",
     "organization-billing-api",
     "seat-management-api",
     "usage-tracking-api",
     "stripe-webhooks"
   ],
+  "role": "sdk-backend-connector",
+  "pattern": "sdk-driven",
   "capabilities": {
     "organization-billing": {
       "enabled": true,

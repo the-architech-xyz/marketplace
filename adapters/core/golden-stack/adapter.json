@@ -4,6 +4,7 @@
   "description": "Essential technologies for production-ready applications: Zustand (state), Vitest (testing), ESLint (linting), Prettier (formatting), Zod (validation)",
   "category": "core",
   "version": "1.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "capabilities": [
     "state-management",
@@ -108,4 +109,3 @@
     "nodeVersion": ">=18.0.0"
   }
 }
-

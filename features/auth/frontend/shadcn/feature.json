@@ -4,19 +4,16 @@
   "description": "Complete authentication UI using Shadcn components",
   "type": "feature",
   "version": "1.0.0",
+  "role": "frontend-feature",
   "prerequisites": {
-    "capabilities": ["auth-backend-better-auth-nextjs"],
-    "adapters": ["ui/shadcn-ui"]
+    "capabilities": [
+      "auth-backend-better-auth-nextjs"
+    ],
+    "adapters": [
+      "ui/shadcn-ui"
+    ]
   },
-  "requires": {
-    "components": {
-      "ui/shadcn-ui": [
-        "form", "input", "button", "card", "label",
-        "tabs", "dialog", "alert", "checkbox", "badge",
-        "avatar", "dropdown-menu", "separator", "switch"
-      ]
-    }
-  },
+  "requires": [],
   "provides": [
     "auth-ui-core",
     "{{#if features.passwordReset}}auth-ui-password-reset{{/if}}",
@@ -83,15 +80,22 @@
       "default": "default",
       "description": "UI theme variant",
       "required": false,
-      "options": ["default", "dark", "light", "minimal"]
+      "options": [
+        "default",
+        "dark",
+        "light",
+        "minimal"
+      ]
     }
   },
   "internal_structure": {
     "core": {
-      "provides": ["auth-ui-core"],
+      "provides": [
+        "auth-ui-core"
+      ],
       "templates": [
         "AuthForm.tsx",
-        "LoginForm.tsx", 
+        "LoginForm.tsx",
         "SignupForm.tsx",
         "UserProfile.tsx",
         "AuthGuard.tsx",
@@ -103,8 +107,12 @@
       ]
     },
     "passwordReset": {
-      "prerequisites": ["auth-ui-core"],
-      "provides": ["auth-ui-password-reset"],
+      "prerequisites": [
+        "auth-ui-core"
+      ],
+      "provides": [
+        "auth-ui-password-reset"
+      ],
       "templates": [
         "ForgotPasswordForm.tsx",
         "ResetPasswordForm.tsx",
@@ -113,8 +121,12 @@
       ]
     },
     "mfa": {
-      "prerequisites": ["auth-ui-core"],
-      "provides": ["auth-ui-mfa"],
+      "prerequisites": [
+        "auth-ui-core"
+      ],
+      "provides": [
+        "auth-ui-mfa"
+      ],
       "templates": [
         "TwoFactorSetup.tsx",
         "EmailVerification.tsx",
@@ -122,23 +134,38 @@
       ]
     },
     "socialLogins": {
-      "prerequisites": ["auth-ui-core"],
-      "provides": ["auth-ui-social"],
+      "prerequisites": [
+        "auth-ui-core"
+      ],
+      "provides": [
+        "auth-ui-social"
+      ],
       "templates": [
         "ConnectedAccounts.tsx"
       ]
     },
     "profileManagement": {
-      "prerequisites": ["auth-ui-core"],
-      "provides": ["auth-ui-profile"],
+      "prerequisites": [
+        "auth-ui-core"
+      ],
+      "provides": [
+        "auth-ui-profile"
+      ],
       "templates": [
         "ProfileManager.tsx",
         "useProfile.ts"
       ]
     },
     "accountSettingsPage": {
-      "prerequisites": ["auth-ui-core", "auth-ui-password-reset", "auth-ui-mfa", "auth-ui-social"],
-      "provides": ["auth-ui-settings"],
+      "prerequisites": [
+        "auth-ui-core",
+        "auth-ui-password-reset",
+        "auth-ui-mfa",
+        "auth-ui-social"
+      ],
+      "provides": [
+        "auth-ui-settings"
+      ],
       "templates": [
         "AccountSettings.tsx",
         "SecuritySettings.tsx",

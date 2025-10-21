@@ -4,20 +4,19 @@
   "description": "Complete email management UI using Shadcn components",
   "type": "feature",
   "version": "1.0.0",
+  "role": "frontend-feature",
   "prerequisites": {
-    "capabilities": ["emailing-backend-resend-nextjs"],
-    "adapters": ["ui/shadcn-ui"]
+    "capabilities": [
+      "emailing-backend-resend-nextjs"
+    ],
+    "adapters": [
+      "ui/shadcn-ui"
+    ]
   },
-  "requires": {
-    "components": {
-      "ui/shadcn-ui": [
-        "form", "input", "button", "card", "label", "textarea",
-        "table", "badge", "tabs", "dialog", "dropdown-menu",
-        "separator", "checkbox", "select", "skeleton"
-      ]
-    }
-  },
-  "provides": ["emailing-ui"],
+  "requires": [],
+  "provides": [
+    "emailing-ui"
+  ],
   "parameters": {
     "features": {
       "emailComposer": {
@@ -61,7 +60,12 @@
       "default": "default",
       "description": "UI theme variant",
       "required": false,
-      "options": ["default", "dark", "light", "minimal"]
+      "options": [
+        "default",
+        "dark",
+        "light",
+        "minimal"
+      ]
     }
   },
   "constraints": {

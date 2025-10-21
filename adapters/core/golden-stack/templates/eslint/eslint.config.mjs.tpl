@@ -24,22 +24,8 @@ const eslintConfig = [
   },
   {
     rules: {
-      // TypeScript specific rules
-      "@typescript-eslint/no-unused-vars": "error",
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-      "@typescript-eslint/no-inferrable-types": "off",
-      "@typescript-eslint/prefer-const": "error",
-      "@typescript-eslint/no-var-requires": "error",
-      "@typescript-eslint/ban-ts-comment": "warn",
-      "@typescript-eslint/no-non-null-assertion": "warn",
-      "@typescript-eslint/prefer-nullish-coalescing": "error",
-      "@typescript-eslint/prefer-optional-chain": "error",
-      "@typescript-eslint/no-unnecessary-condition": "warn",
-      "@typescript-eslint/no-unnecessary-type-assertion": "warn",
-      "@typescript-eslint/prefer-string-starts-ends-with": "error",
-      "@typescript-eslint/prefer-includes": "error",
+      // Note: TypeScript rules are handled by next/typescript preset
+      // Only override specific rules here if needed
       
       // React specific rules
       "react/react-in-jsx-scope": "off",

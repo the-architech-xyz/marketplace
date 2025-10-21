@@ -4,64 +4,25 @@
   "description": "Complete Vitest testing setup for Next.js applications with unit tests, integration tests, and coverage reporting",
   "type": "connector",
   "version": "1.0.0",
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
   "tech_stack": {
     "framework": "nextjs",
-    "adapters": ["vitest"]
+    "adapters": [
+      "vitest"
+    ]
   },
   "prerequisites": {
-    "modules": ["testing/vitest", "framework/nextjs"],
-    "capabilities": ["testing-framework", "react-framework"]
-  },
-  "provides": {
-    "files": [
-      "vitest.config.ts",
-      "vitest.config.unit.ts",
-      "vitest.config.integration.ts",
-      "vitest.config.e2e.ts",
-      "vitest.setup.ts",
-      "vitest.teardown.ts",
-      "test-utils/test-utils.tsx",
-      "test-utils/mock-next-router.ts",
-      "test-utils/mock-next-auth.ts",
-      "test-utils/mock-fetch.ts",
-      "test-utils/test-db.ts",
-      "test-utils/test-server.ts",
-      "test-utils/test-client.ts",
-      "test-utils/test-helpers.ts",
-      "test-utils/test-fixtures.ts",
-      "test-utils/test-mocks.ts",
-      "test-utils/test-setup.ts",
-      "test-utils/test-teardown.ts",
-      "test-utils/test-constants.ts",
-      "test-utils/test-types.ts",
-      "tests/unit/components/Button.test.tsx",
-      "tests/unit/components/Input.test.tsx",
-      "tests/unit/hooks/useAuth.test.ts",
-      "tests/unit/utils/formatDate.test.ts",
-      "tests/unit/lib/api.test.ts",
-      "tests/integration/pages/home.test.tsx",
-      "tests/integration/pages/about.test.tsx",
-      "tests/integration/api/auth.test.ts",
-      "tests/integration/api/users.test.ts",
-      "tests/e2e/auth.spec.ts",
-      "tests/e2e/navigation.spec.ts",
-      "tests/e2e/forms.spec.ts",
-      "tests/e2e/api.spec.ts",
-      "tests/fixtures/users.json",
-      "tests/fixtures/posts.json",
-      "tests/fixtures/comments.json",
-      "tests/mocks/handlers.ts",
-      "tests/mocks/server.ts",
-      "tests/mocks/responses.ts",
-      "coverage/.gitignore",
-      "coverage/coverage-summary.json",
-      "coverage/coverage-final.json",
-      "coverage/lcov.info",
-      "coverage/index.html"
+    "modules": [
+      "testing/vitest",
+      "framework/nextjs"
     ],
-    "components": [],
-    "pages": []
+    "capabilities": [
+      "testing-framework",
+      "react-framework"
+    ]
   },
+  "provides": [],
   "parameters": {
     "unitTesting": {
       "name": "Unit Testing",

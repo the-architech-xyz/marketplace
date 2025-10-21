@@ -4,7 +4,13 @@
   "description": "Complete Vercel AI SDK integration for Next.js with streaming support",
   "type": "connector",
   "version": "1.0.0",
-  "connects": ["vercel-ai-sdk", "nextjs", "react"],
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "connects": [
+    "vercel-ai-sdk",
+    "nextjs",
+    "react"
+  ],
   "provides": [
     "ai-chat",
     "ai-completion",
@@ -34,7 +40,10 @@
   "parameters": {
     "providers": {
       "type": "array",
-      "default": ["openai", "anthropic"],
+      "default": [
+        "openai",
+        "anthropic"
+      ],
       "description": "Enabled AI providers"
     },
     "streaming": {
@@ -44,4 +53,3 @@
     }
   }
 }
-

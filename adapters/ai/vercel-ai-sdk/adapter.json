@@ -3,23 +3,31 @@
   "name": "Vercel AI SDK",
   "description": "Pure Vercel AI SDK for building AI-powered applications with streaming, chat, and text generation",
   "version": "1.0.0",
+  "role": "adapter",
   "category": "ai",
-  "tags": ["ai", "vercel", "openai", "streaming", "chat", "llm", "generation"],
+  "tags": [
+    "ai",
+    "vercel",
+    "openai",
+    "streaming",
+    "chat",
+    "llm",
+    "generation"
+  ],
   "compatibility": {
-    "frameworks": ["nextjs", "react", "svelte", "vue"],
-    "runtimes": ["nodejs", "edge", "browser"]
-  },
-  "dependencies": {
-    "runtime": [
-      "ai",
-      "@ai-sdk/react",
-      "@ai-sdk/openai",
-      "@ai-sdk/anthropic"
+    "frameworks": [
+      "nextjs",
+      "react",
+      "svelte",
+      "vue"
     ],
-    "dev": [
-      "@types/node"
+    "runtimes": [
+      "nodejs",
+      "edge",
+      "browser"
     ]
   },
+  "dependencies": [],
   "features": {
     "streaming": true,
     "chat": true,
@@ -42,8 +50,17 @@
     "providers": {
       "type": "array",
       "description": "AI providers to include",
-      "default": ["openai", "anthropic"],
-      "enum": ["openai", "anthropic", "google", "cohere", "huggingface"]
+      "default": [
+        "openai",
+        "anthropic"
+      ],
+      "enum": [
+        "openai",
+        "anthropic",
+        "google",
+        "cohere",
+        "huggingface"
+      ]
     },
     "features": {
       "core": {
@@ -81,7 +98,13 @@
       "type": "string",
       "description": "Default AI model",
       "default": "gpt-3.5-turbo",
-      "enum": ["gpt-3.5-turbo", "gpt-4", "gpt-4-turbo", "claude-3-sonnet", "claude-3-opus"]
+      "enum": [
+        "gpt-3.5-turbo",
+        "gpt-4",
+        "gpt-4-turbo",
+        "claude-3-sonnet",
+        "claude-3-opus"
+      ]
     },
     "maxTokens": {
       "type": "number",
@@ -98,7 +121,9 @@
   },
   "internal_structure": {
     "core": {
-      "provides": ["ai-core"],
+      "provides": [
+        "ai-core"
+      ],
       "templates": [
         "ai-config.ts",
         "ai-types.ts",
@@ -107,16 +132,24 @@
       ]
     },
     "streaming": {
-      "prerequisites": ["ai-core"],
-      "provides": ["ai-streaming"],
+      "prerequisites": [
+        "ai-core"
+      ],
+      "provides": [
+        "ai-streaming"
+      ],
       "templates": [
         "use-streaming.ts",
         "streaming-utils.ts"
       ]
     },
     "advanced": {
-      "prerequisites": ["ai-core"],
-      "provides": ["ai-advanced"],
+      "prerequisites": [
+        "ai-core"
+      ],
+      "provides": [
+        "ai-advanced"
+      ],
       "templates": [
         "image-generation.ts",
         "embeddings.ts",
@@ -125,8 +158,13 @@
       ]
     },
     "enterprise": {
-      "prerequisites": ["ai-core", "ai-streaming"],
-      "provides": ["ai-enterprise"],
+      "prerequisites": [
+        "ai-core",
+        "ai-streaming"
+      ],
+      "provides": [
+        "ai-enterprise"
+      ],
       "templates": [
         "caching.ts",
         "edge-runtime.ts",

@@ -4,6 +4,7 @@
   "description": "Complete internationalization solution with next-intl including advanced features like pluralization, rich text, and dynamic imports",
   "category": "content",
   "version": "1.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "dependencies": [
     "framework/nextjs"

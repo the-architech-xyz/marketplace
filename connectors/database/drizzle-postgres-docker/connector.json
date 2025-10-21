@@ -4,46 +4,26 @@
   "description": "Complete Docker containerization for Drizzle ORM with database services, migrations, and production-ready configuration",
   "type": "connector",
   "version": "1.0.0",
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
   "tech_stack": {
     "framework": "agnostic",
-    "adapters": ["docker", "drizzle"]
+    "adapters": [
+      "docker",
+      "drizzle"
+    ]
   },
   "prerequisites": {
-    "modules": ["deployment/docker", "database/drizzle"],
-    "capabilities": ["containerization", "database-orm"]
-  },
-  "provides": {
-    "files": [
-      "docker-compose.database.yml",
-      "docker-compose.migration.yml",
-      "docker-compose.backup.yml",
-      "database/Dockerfile.postgres",
-      "database/Dockerfile.migration",
-      "database/init.sql",
-      "database/seed.sql",
-      "database/migrations/001_initial.sql",
-      "database/migrations/002_add_indexes.sql",
-      "database/migrations/003_add_constraints.sql",
-      "scripts/db-setup.sh",
-      "scripts/db-migrate.sh",
-      "scripts/db-seed.sh",
-      "scripts/db-backup.sh",
-      "scripts/db-restore.sh",
-      "scripts/db-reset.sh",
-      "scripts/db-health.sh",
-      "scripts/db-shell.sh",
-      "scripts/db-logs.sh",
-      "monitoring/database/prometheus.yml",
-      "monitoring/database/grafana/dashboards/postgres.json",
-      "monitoring/database/grafana/provisioning/dashboards/dashboard.yml",
-      "monitoring/database/grafana/provisioning/datasources/postgres.yml",
-      "backup/backup.sh",
-      "backup/restore.sh",
-      "backup/cleanup.sh"
+    "modules": [
+      "deployment/docker",
+      "database/drizzle"
     ],
-    "components": [],
-    "pages": []
+    "capabilities": [
+      "containerization",
+      "database-orm"
+    ]
   },
+  "provides": [],
   "parameters": {
     "postgresService": {
       "name": "PostgreSQL Service",

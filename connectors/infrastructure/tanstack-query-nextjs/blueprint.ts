@@ -1,4 +1,4 @@
-import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy, ModifierType, EnhanceFileFallbackStrategy } from '@thearchitech.xyz/types';
 import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
 export default function generateBlueprint(
@@ -60,6 +60,28 @@ export default function generateBlueprint(
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 1
+      }
+    },
+
+    // Wrap app layout with QueryProvider
+    {
+      type: BlueprintActionType.ENHANCE_FILE,
+      path: '${paths.source_root}app/layout.tsx',
+      modifier: ModifierType.JSX_CHILDREN_WRAPPER,
+      params: {
+        providers: [
+          {
+            component: 'QueryProvider',
+            import: {
+              name: 'QueryProvider',
+              from: '@/lib/query/QueryProvider'
+            },
+            props: {
+              enableDevtools: 'process.env.NODE_ENV === \'development\''
+            }
+          }
+        ],
+        targetElement: 'body'
       }
     }
   ];

@@ -4,6 +4,7 @@
   "description": "Utility-first CSS framework with plugins and optimizations",
   "category": "ui",
   "version": "1.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "provides": [
     {

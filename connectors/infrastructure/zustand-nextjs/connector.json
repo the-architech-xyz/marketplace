@@ -4,14 +4,22 @@
   "description": "Zustand state management setup and configuration for NextJS applications",
   "type": "connector",
   "version": "1.0.0",
-  "connects": ["zustand", "nextjs"],
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "connects": [
+    "zustand",
+    "nextjs"
+  ],
   "provides": [
     "state-management",
     "persistence",
     "devtools",
     "ssr-support"
   ],
-  "requires": ["framework/nextjs", "core/golden-stack"],
+  "requires": [
+    "framework/nextjs",
+    "core/golden-stack"
+  ],
   "parameters": {
     "persistence": {
       "name": "Persistence",

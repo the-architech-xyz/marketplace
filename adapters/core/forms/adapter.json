@@ -4,9 +4,13 @@
   "description": "Golden Core form handling with validation using React Hook Form and Zod",
   "category": "core",
   "version": "2.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "requirements": {
-    "capabilities": ["react-framework", "typescript"]
+    "capabilities": [
+      "react-framework",
+      "typescript"
+    ]
   },
   "capabilities": [
     "form-validation",

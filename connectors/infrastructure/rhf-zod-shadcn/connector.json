@@ -4,14 +4,25 @@
   "description": "React Hook Form, Zod validation, and Shadcn form components setup for NextJS",
   "type": "connector",
   "version": "1.0.0",
-  "connects": ["react-hook-form", "zod", "shadcn-ui", "nextjs"],
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "connects": [
+    "react-hook-form",
+    "zod",
+    "shadcn-ui",
+    "nextjs"
+  ],
   "provides": [
     "form-validation",
     "form-components",
     "accessibility",
     "devtools"
   ],
-  "requires": ["framework/nextjs", "ui/shadcn-ui", "core/forms"],
+  "requires": [
+    "framework/nextjs",
+    "ui/shadcn-ui",
+    "core/forms"
+  ],
   "parameters": {
     "validation": {
       "name": "Zod Validation",

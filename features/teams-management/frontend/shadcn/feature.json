@@ -4,19 +4,16 @@
   "description": "Complete team management UI using Shadcn components",
   "type": "feature",
   "version": "1.0.0",
+  "role": "frontend-feature",
   "prerequisites": {
-    "capabilities": ["teams-management-backend-better-auth-nextjs"],
-    "adapters": ["ui/shadcn-ui"]
+    "capabilities": [
+      "teams-management-backend-better-auth-nextjs"
+    ],
+    "adapters": [
+      "ui/shadcn-ui"
+    ]
   },
-  "requires": {
-    "components": {
-      "ui/shadcn-ui": [
-        "form", "input", "button", "card", "label",
-        "table", "badge", "tabs", "dialog", "dropdown-menu",
-        "avatar", "separator", "checkbox", "select", "alert"
-      ]
-    }
-  },
+  "requires": [],
   "provides": [
     "teams-core",
     "{{#if features.advanced}}teams-advanced{{/if}}",
@@ -71,12 +68,19 @@
       "default": "default",
       "description": "UI theme variant",
       "required": false,
-      "options": ["default", "dark", "light", "minimal"]
+      "options": [
+        "default",
+        "dark",
+        "light",
+        "minimal"
+      ]
     }
   },
   "internal_structure": {
     "core": {
-      "provides": ["teams-core"],
+      "provides": [
+        "teams-core"
+      ],
       "templates": [
         "TeamList.tsx",
         "TeamCreation.tsx",
@@ -86,8 +90,12 @@
       ]
     },
     "advanced": {
-      "prerequisites": ["teams-core"],
-      "provides": ["teams-advanced"],
+      "prerequisites": [
+        "teams-core"
+      ],
+      "provides": [
+        "teams-advanced"
+      ],
       "templates": [
         "TeamSettings.tsx",
         "Permissions.tsx",
@@ -97,8 +105,12 @@
       ]
     },
     "analytics": {
-      "prerequisites": ["teams-core"],
-      "provides": ["teams-analytics"],
+      "prerequisites": [
+        "teams-core"
+      ],
+      "provides": [
+        "teams-analytics"
+      ],
       "templates": [
         "TeamMetrics.tsx",
         "UsageCharts.tsx",
@@ -108,7 +120,10 @@
       ]
     },
     "billing": {
-      "prerequisites": ["teams-core", "teams-advanced"],
+      "prerequisites": [
+        "teams-core",
+        "teams-advanced"
+      ],
       "requires_capabilities": [
         "payments-core",
         "payments-subscriptions"
@@ -116,7 +131,9 @@
       "requires_features": [
         "payments/frontend/shadcn"
       ],
-      "provides": ["teams-billing"],
+      "provides": [
+        "teams-billing"
+      ],
       "templates": [
         "BillingDashboard.tsx",
         "UsageTracking.tsx",

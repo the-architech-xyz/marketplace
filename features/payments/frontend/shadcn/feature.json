@@ -4,11 +4,16 @@
   "description": "Payment processing UI using Shadcn components",
   "type": "feature",
   "version": "1.0.0",
+  "role": "frontend-feature",
   "prerequisites": {
-    "adapters": ["ui/shadcn-ui"],
-    "backend": ["payments/backend/stripe-nextjs"]
+    "adapters": [
+      "ui/shadcn-ui"
+    ],
+    "backend": [
+      "payments/backend/stripe-nextjs"
+    ]
   },
-  "requiresCapabilities": [
+  "clear": [
     {
       "category": "database",
       "optional": false,
@@ -20,15 +25,7 @@
       "reason": "Payment UI needs authenticated user context to display user-specific payment information"
     }
   ],
-  "requires": {
-    "components": {
-      "ui/shadcn-ui": [
-        "form", "input", "button", "card", "label", "select",
-        "table", "badge", "tabs", "dialog", "dropdown-menu",
-        "separator", "checkbox", "alert", "skeleton"
-      ]
-    }
-  },
+  "requires": [],
   "provides": [
     "payments-core",
     "{{#if features.subscriptions}}payments-subscriptions{{/if}}",
@@ -89,12 +86,19 @@
       "default": "default",
       "description": "UI theme variant",
       "required": false,
-      "options": ["default", "dark", "light", "minimal"]
+      "options": [
+        "default",
+        "dark",
+        "light",
+        "minimal"
+      ]
     }
   },
   "internal_structure": {
     "core": {
-      "provides": ["payments-core"],
+      "provides": [
+        "payments-core"
+      ],
       "templates": [
         "PaymentForm.tsx",
         "Checkout.tsx",
@@ -104,8 +108,12 @@
       ]
     },
     "subscriptions": {
-      "prerequisites": ["payments-core"],
-      "provides": ["payments-subscriptions"],
+      "prerequisites": [
+        "payments-core"
+      ],
+      "provides": [
+        "payments-subscriptions"
+      ],
       "templates": [
         "SubscriptionManager.tsx",
         "BillingDashboard.tsx",
@@ -115,8 +123,12 @@
       ]
     },
     "invoicing": {
-      "prerequisites": ["payments-core"],
-      "provides": ["payments-invoicing"],
+      "prerequisites": [
+        "payments-core"
+      ],
+      "provides": [
+        "payments-invoicing"
+      ],
       "templates": [
         "InvoiceGenerator.tsx",
         "InvoiceList.tsx",
@@ -126,8 +138,12 @@
       ]
     },
     "webhooks": {
-      "prerequisites": ["payments-core"],
-      "provides": ["payments-webhooks"],
+      "prerequisites": [
+        "payments-core"
+      ],
+      "provides": [
+        "payments-webhooks"
+      ],
       "templates": [
         "WebhookHandler.ts",
         "WebhookVerification.ts",
@@ -135,8 +151,13 @@
       ]
     },
     "analytics": {
-      "prerequisites": ["payments-core", "payments-subscriptions"],
-      "provides": ["payments-analytics"],
+      "prerequisites": [
+        "payments-core",
+        "payments-subscriptions"
+      ],
+      "provides": [
+        "payments-analytics"
+      ],
       "templates": [
         "RevenueChart.tsx",
         "PaymentMetrics.tsx",

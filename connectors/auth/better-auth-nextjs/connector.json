@@ -6,15 +6,16 @@
   "version": "1.0.0",
   "connects": ["better-auth", "nextjs", "react"],
   "provides": [
-    "auth-config",
-    "auth-client",
-    "auth-hooks",
+    "auth-backend-complete",
+    "auth-sdk-native-hooks",
     "auth-api-routes",
     "auth-middleware",
     "session-management",
     "oauth-providers",
     "two-factor-auth"
   ],
+  "role": "sdk-backend-connector",
+  "pattern": "sdk-driven",
   "requires": [
     "framework/nextjs",
     "auth/better-auth"

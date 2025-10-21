@@ -4,6 +4,7 @@
   "description": "Modern email API for transactional emails with Resend",
   "category": "email",
   "version": "1.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "dependencies": [],
   "provides": [
@@ -47,7 +48,9 @@
   },
   "internal_structure": {
     "core": {
-      "provides": ["email-core"],
+      "provides": [
+        "email-core"
+      ],
       "templates": [
         "resend-client.ts",
         "email-types.ts",
@@ -55,8 +58,12 @@
       ]
     },
     "templates": {
-      "prerequisites": ["email-core"],
-      "provides": ["email-templates"],
+      "prerequisites": [
+        "email-core"
+      ],
+      "provides": [
+        "email-templates"
+      ],
       "templates": [
         "template-engine.ts",
         "react-email.ts",
@@ -64,8 +71,12 @@
       ]
     },
     "analytics": {
-      "prerequisites": ["email-core"],
-      "provides": ["email-analytics"],
+      "prerequisites": [
+        "email-core"
+      ],
+      "provides": [
+        "email-analytics"
+      ],
       "templates": [
         "analytics.ts",
         "tracking.ts",
@@ -73,8 +84,13 @@
       ]
     },
     "campaigns": {
-      "prerequisites": ["email-core", "email-templates"],
-      "provides": ["email-campaigns"],
+      "prerequisites": [
+        "email-core",
+        "email-templates"
+      ],
+      "provides": [
+        "email-campaigns"
+      ],
       "templates": [
         "batch-sending.ts",
         "list-management.ts",

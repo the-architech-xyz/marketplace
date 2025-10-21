@@ -3,7 +3,20 @@
   "version": "1.0.0",
   "description": "Technology-agnostic stack layer for AI Chat feature",
   "category": "tech-stack",
-  "tags": ["ai-chat", "types", "schemas", "hooks", "stores", "tech-stack"],
+  "provides": [
+    "ai-chat-schemas",
+    "ai-chat-stores",
+    "ai-chat-hooks-wrapper"
+  ],
+  "role": "tech-stack-layer",
+  "tags": [
+    "ai-chat",
+    "types",
+    "schemas",
+    "hooks",
+    "stores",
+    "tech-stack"
+  ],
   "author": "The Architech Team",
   "license": "MIT",
   "homepage": "https://github.com/thearchitech/architech",
@@ -27,13 +40,7 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "dependencies": {
-    "zod": "latest",
-    "@tanstack/react-query": "latest",
-    "zustand": "latest",
-    "immer": "latest",
-    "sonner": "latest"
-  },
+  "dependencies": [],
   "devDependencies": {
     "@types/node": "latest",
     "typescript": "latest"
@@ -140,5 +147,7 @@
     "api": "docs/api.md",
     "examples": "docs/examples.md",
     "migration": "docs/migration.md"
-  }
+  },
+  "id": "features/ai-chat/tech-stack",
+  "type": "feature"
 }

@@ -53,10 +53,17 @@ interface ModuleEntry {
   provides?: string[];
   connects?: string[];
     dependencies?: string[];
+  requiresCapabilities?: Array<{
+    category: string;
+    optional: boolean;
+    reason: string;
+  }>;
   
   // Metadata
     tags?: string[];
   complexity?: 'simple' | 'intermediate' | 'advanced';
+  role?: string;           // NEW: Architectural role
+  pattern?: string;        // NEW: Architectural pattern
   
   // Parameters
   parameters?: Record<string, any>;
@@ -419,6 +426,7 @@ async function processModuleFile(
     if (data.provides) moduleEntry.provides = data.provides;
     if (data.connects) moduleEntry.connects = data.connects;
     if (data.dependencies) moduleEntry.dependencies = data.dependencies;
+    if (data.requiresCapabilities) moduleEntry.requiresCapabilities = data.requiresCapabilities;
     if (data.tags) moduleEntry.tags = data.tags;
     if (data.parameters) moduleEntry.parameters = data.parameters;
     

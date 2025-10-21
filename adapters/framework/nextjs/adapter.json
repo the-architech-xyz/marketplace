@@ -4,6 +4,7 @@
   "description": "The React Framework for Production",
   "category": "framework",
   "version": "15.0.0",
+  "role": "adapter",
   "blueprint": "blueprint.ts",
   "dependencies": [],
   "provides": [
@@ -37,32 +38,61 @@
     "react-framework": {
       "version": "15.0.0",
       "description": "Complete React framework with Next.js",
-      "provides": ["react", "nextjs", "app-router", "pages-router", "typescript"]
+      "provides": [
+        "react",
+        "nextjs",
+        "app-router",
+        "pages-router",
+        "typescript"
+      ]
     },
     "rendering-modes": {
       "version": "1.0.0",
       "description": "Server-side and static rendering capabilities",
-      "provides": ["ssr", "ssg", "api-routes"]
+      "provides": [
+        "ssr",
+        "ssg",
+        "api-routes"
+      ]
     },
     "styling-system": {
       "version": "1.0.0",
       "description": "Styling and CSS framework integration",
-      "provides": ["tailwind", "css-modules", "styled-components"]
+      "provides": [
+        "tailwind",
+        "css-modules",
+        "styled-components"
+      ]
     },
     "development-tools": {
       "version": "1.0.0",
       "description": "Development and build tools",
-      "provides": ["eslint", "typescript", "src-dir", "import-alias", "modern-dev-tools"]
+      "provides": [
+        "eslint",
+        "typescript",
+        "src-dir",
+        "import-alias",
+        "modern-dev-tools"
+      ]
     },
     "performance-optimization": {
       "version": "1.0.0",
       "description": "Performance and optimization features",
-      "provides": ["performance-optimization", "bundle-analysis", "image-optimization", "seo-optimization"]
+      "provides": [
+        "performance-optimization",
+        "bundle-analysis",
+        "image-optimization",
+        "seo-optimization"
+      ]
     },
     "security": {
       "version": "1.0.0",
       "description": "Security headers and features",
-      "provides": ["security-headers", "csp", "cors"]
+      "provides": [
+        "security-headers",
+        "csp",
+        "cors"
+      ]
     }
   },
   "limitations": "Requires Node.js 18+ and npm/yarn/pnpm/bun",
@@ -367,11 +397,26 @@
       }
     },
     "conventions": {
-      "fileExtensions": [".tsx", ".ts", ".jsx", ".js"],
+      "fileExtensions": [
+        ".tsx",
+        ".ts",
+        ".jsx",
+        ".js"
+      ],
       "importStyle": "alias",
       "aliasPrefix": "{{importAlias || '@'}}",
-      "pageExtensions": [".page.tsx", ".page.ts", ".page.jsx", ".page.js"],
-      "apiExtensions": [".route.ts", ".route.js", ".api.ts", ".api.js"]
+      "pageExtensions": [
+        ".page.tsx",
+        ".page.ts",
+        ".page.jsx",
+        ".page.js"
+      ],
+      "apiExtensions": [
+        ".route.ts",
+        ".route.js",
+        ".api.ts",
+        ".api.js"
+      ]
     }
   },
   "constraints": {}

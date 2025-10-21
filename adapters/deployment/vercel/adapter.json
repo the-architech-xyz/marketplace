@@ -3,16 +3,28 @@
   "name": "Vercel Deployment",
   "description": "Pure Vercel deployment configuration for any framework",
   "version": "1.0.0",
+  "role": "adapter",
   "category": "deployment",
-  "tags": ["vercel", "deployment", "hosting", "serverless"],
+  "tags": [
+    "vercel",
+    "deployment",
+    "hosting",
+    "serverless"
+  ],
   "compatibility": {
-    "frameworks": ["nextjs", "react", "vue", "svelte", "angular"],
-    "runtimes": ["nodejs", "edge"]
+    "frameworks": [
+      "nextjs",
+      "react",
+      "vue",
+      "svelte",
+      "angular"
+    ],
+    "runtimes": [
+      "nodejs",
+      "edge"
+    ]
   },
-  "dependencies": {
-    "runtime": [],
-    "dev": ["vercel"]
-  },
+  "dependencies": [],
   "features": {
     "serverless": true,
     "edgeFunctions": true,
@@ -27,10 +39,16 @@
       "type": "string",
       "description": "Target framework",
       "default": "nextjs",
-      "enum": ["nextjs", "react", "vue", "svelte", "angular"]
+      "enum": [
+        "nextjs",
+        "react",
+        "vue",
+        "svelte",
+        "angular"
+      ]
     },
     "buildCommand": {
-      "type": "string", 
+      "type": "string",
       "description": "Build command to run",
       "default": "npm run build"
     },
@@ -60,7 +78,9 @@
       "properties": {
         "regions": {
           "type": "array",
-          "default": ["iad1"]
+          "default": [
+            "iad1"
+          ]
         },
         "maxDuration": {
           "type": "number",
