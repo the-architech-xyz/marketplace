@@ -95,7 +95,7 @@ function generateCoreActions(): BlueprintAction[] {
     {
       type: BlueprintActionType.ADD_ENV_VAR,
       key: 'DATABASE_URL',
-      value: 'postgresql://username:password@localhost:5432/{{project.name}}',
+      value: 'postgresql://username:password@localhost:5432/${project.name}',
       description: 'Database connection string'
     },
 

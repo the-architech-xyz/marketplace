@@ -83,7 +83,7 @@ export const betterAuthGitHubConnectorBlueprint: Blueprint = {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'GITHUB_CLIENT_ID',
-      value: '{{context..clientId}}',
+      value: '${context..clientId}',
       description: 'GitHub OAuth App Client ID'
     },
     
@@ -91,7 +91,7 @@ export const betterAuthGitHubConnectorBlueprint: Blueprint = {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'GITHUB_CLIENT_SECRET',
-      value: '{{context..clientSecret}}',
+      value: '${context..clientSecret}',
       description: 'GitHub OAuth App Client Secret'
     },
     
@@ -99,7 +99,7 @@ export const betterAuthGitHubConnectorBlueprint: Blueprint = {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'GITHUB_REDIRECT_URI',
-      value: '{{context..redirectUri}}',
+      value: '${context..redirectUri}',
       description: 'GitHub OAuth redirect URI'
     },
     
@@ -107,7 +107,7 @@ export const betterAuthGitHubConnectorBlueprint: Blueprint = {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'GITHUB_OAUTH_SCOPES',
-      value: '{{context..scopes}}',
+      value: '${context..scopes}',
       description: 'GitHub OAuth scopes (comma-separated)'
     },
     
@@ -115,7 +115,7 @@ export const betterAuthGitHubConnectorBlueprint: Blueprint = {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'GITHUB_TOKEN_ENCRYPTION_KEY',
-      value: '{{context..encryptionKey}}',
+      value: '${context..encryptionKey}',
       description: 'Encryption key for storing GitHub tokens securely'
     }
   ]

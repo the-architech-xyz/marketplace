@@ -532,7 +532,7 @@ export function LoadingIndicator({
           fullscreen && 'bg-background',
           className
         )}
-        style={{ zIndex }}
+        style=${ zIndex }
       >
         {defaultContent}
       </div>

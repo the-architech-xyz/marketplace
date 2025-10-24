@@ -58,9 +58,9 @@
   "requires": [],
   "provides": [
     "monitoring-core",
-    "{{#if features.performance}}monitoring-performance{{/if}}",
-    "{{#if features.feedback}}monitoring-feedback{{/if}}",
-    "{{#if features.analytics}}monitoring-analytics{{/if}}"
+    "monitoring-performance}",
+    "monitoring-feedback}",
+    "monitoring-analytics}"
   ],
   "parameters": {
     "backend": {

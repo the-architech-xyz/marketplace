@@ -250,7 +250,7 @@ export const processTemplate = (template: ChatTemplate, variables: Record<string
   template.variables.forEach(variable => {
     const value = variables[variable.name] ?? variable.defaultValue;
     if (value !== undefined) {
-      const placeholder = `{{${variable.name}}}`;
+      const placeholder = `${${variable.name}}`;
       content = content.replace(new RegExp(placeholder, 'g'), String(value));
     }
   });

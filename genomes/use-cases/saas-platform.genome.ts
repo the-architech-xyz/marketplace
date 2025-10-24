@@ -12,14 +12,14 @@
 import { defineGenome } from '@thearchitech.xyz/marketplace/types';
 
 export default defineGenome({
-  version: '1.0.0',
+  version: "1.0.0",
   project: {
-    name: 'saas-platform',
-    framework: 'nextjs',
-    path: './saas-app',
-    description: 'Complete SaaS platform with teams, billing, and monitoring',
+    name: "saas-platform",
+    framework: "nextjs",
+    path: "./saas-app",
+    description: "Complete SaaS platform with teams, billing, and monitoring",
   },
-  
+
   modules: [
     // ============================================================================
     // FOUNDATION LAYER
@@ -27,14 +27,15 @@ export default defineGenome({
 
     // Core Framework
     {
-      id: 'framework/nextjs',
+      id: "framework/nextjs",
       parameters: {
         typescript: true,
         tailwind: true,
         eslint: true,
         appRouter: true,
         srcDir: true,
-        importAlias: '@',
+        importAlias: "@",
+        reactVersion: "18", // Use React 18 for Radix UI compatibility
         features: {
           seo: true,
           imageOptimization: true,
@@ -45,22 +46,22 @@ export default defineGenome({
 
     // Database
     {
-      id: 'database/drizzle',
+      id: "database/drizzle",
       parameters: {
-        provider: 'neon',        // Database service provider
-        databaseType: 'postgresql',  // Database type
+        provider: "neon", // Database service provider
+        databaseType: "postgresql", // Database type
         features: {
           migrations: true,
           relations: true,
           seeding: true,
-          studio: true,           // Drizzle Studio for admin
+          studio: true, // Drizzle Studio for admin
         },
       },
     },
 
     // Data Fetching
     {
-      id: 'data-fetching/tanstack-query',
+      id: "data-fetching/tanstack-query",
       parameters: {
         devtools: true,
         suspense: true,
@@ -69,10 +70,10 @@ export default defineGenome({
 
     // Golden Core: Essential tech stack
     {
-      id: 'core/golden-stack',
+      id: "core/golden-stack",
       parameters: {
         zustand: {
-          persistence: true,      // Persist user preferences
+          persistence: true, // Persist user preferences
           devtools: true,
           immer: true,
         },
@@ -93,13 +94,28 @@ export default defineGenome({
 
     // UI Foundation
     {
-      id: 'ui/shadcn-ui',
+      id: "ui/shadcn-ui",
       parameters: {
-        theme: 'default',
+        theme: "default",
         components: [
-          'button', 'input', 'card', 'label', 'alert', 'switch', 'textarea', 
-          'separator', 'pagination', 'dialog', 'dropdown-menu', 'form', 
-          'tabs', 'table', 'badge', 'avatar', 'calendar', 'checkbox'
+          "button",
+          "input",
+          "card",
+          "label",
+          "alert",
+          "switch",
+          "textarea",
+          "separator",
+          "pagination",
+          "dialog",
+          "dropdown-menu",
+          "form",
+          "tabs",
+          "table",
+          "badge",
+          "avatar",
+          "calendar",
+          "checkbox",
         ],
       },
     },
@@ -110,7 +126,7 @@ export default defineGenome({
 
     // Authentication
     {
-      id: 'auth/better-auth',
+      id: "auth/better-auth",
       parameters: {
         emailPassword: true,
         twoFactor: true,
@@ -119,17 +135,17 @@ export default defineGenome({
     },
 
     {
-      id: 'connectors/auth/better-auth-nextjs',
+      id: "connectors/auth/better-auth-nextjs",
       parameters: {},
     },
 
     {
-      id: 'features/auth/tech-stack',
+      id: "features/auth/tech-stack",
       parameters: {},
     },
 
     {
-      id: 'features/auth/frontend/shadcn',
+      id: "features/auth/frontend/shadcn",
       parameters: {
         features: {
           signIn: true,
@@ -144,17 +160,17 @@ export default defineGenome({
 
     // Payments & Billing
     {
-      id: 'payment/stripe',
+      id: "payment/stripe",
       parameters: {
-        currency: 'usd',
-        mode: 'test',
+        currency: "usd",
+        mode: "test",
         webhooks: true,
         dashboard: true,
       },
     },
 
     {
-      id: 'connectors/payment/stripe-nextjs-drizzle',
+      id: "connectors/payment/stripe-nextjs-drizzle",
       parameters: {
         features: {
           organizationBilling: true,
@@ -166,12 +182,7 @@ export default defineGenome({
     },
 
     {
-      id: 'features/payments/tech-stack',
-      parameters: {},
-    },
-
-    {
-      id: 'features/payments/frontend/shadcn',
+      id: "features/payments/frontend/shadcn",
       parameters: {
         features: {
           checkout: true,
@@ -185,7 +196,7 @@ export default defineGenome({
 
     // Team Management
     {
-      id: 'features/teams-management/backend/nextjs',
+      id: "features/teams-management/backend/nextjs",
       parameters: {
         features: {
           teams: true,
@@ -197,14 +208,14 @@ export default defineGenome({
     },
 
     {
-      id: 'features/teams-management/frontend/shadcn',
+      id: "features/teams-management/frontend/shadcn",
       parameters: {
         features: {
           teams: true,
           members: true,
           invitations: true,
           roles: true,
-          billing: true,           // Requires payments
+          billing: true, // Requires payments
           analytics: true,
         },
       },
@@ -212,7 +223,7 @@ export default defineGenome({
 
     // Email Communications
     {
-      id: 'email/resend',
+      id: "email/resend",
       parameters: {
         features: {
           templates: true,
@@ -222,11 +233,11 @@ export default defineGenome({
     },
 
     {
-      id: 'features/emailing/backend/resend-nextjs',
+      id: "features/emailing/backend/resend-nextjs",
     },
 
     {
-      id: 'features/emailing/frontend/shadcn',
+      id: "features/emailing/frontend/shadcn",
       parameters: {
         features: {
           templates: true,
@@ -242,23 +253,23 @@ export default defineGenome({
 
     // Monitoring & Observability
     {
-      id: 'observability/sentry',
+      id: "observability/sentry",
       parameters: {
         features: {
           errorTracking: true,
           performance: true,
-          replay: true,            // Session replay for debugging
+          replay: true, // Session replay for debugging
         },
       },
     },
 
     {
-      id: 'features/monitoring/shadcn',
+      id: "features/monitoring/shadcn",
       parameters: {
         features: {
           performance: true,
           errors: true,
-          feedback: true,          // User feedback widget
+          feedback: true, // User feedback widget
         },
       },
     },
@@ -267,17 +278,17 @@ export default defineGenome({
 
     // Deployment
     {
-      id: 'deployment/vercel',
+      id: "deployment/vercel",
       parameters: {
-        framework: 'nextjs',
-        buildCommand: 'npm run build',
-        outputDirectory: '.next',
-        installCommand: 'npm install',
-        devCommand: 'npm run dev',
+        framework: "nextjs",
+        buildCommand: "npm run build",
+        outputDirectory: ".next",
+        installCommand: "npm install",
+        devCommand: "npm run dev",
         functions: {
-          regions: ['iad1'],
+          regions: ["iad1"],
           memory: 1024,
-          maxDuration: 30
+          maxDuration: 30,
         },
       },
     },
@@ -287,12 +298,12 @@ export default defineGenome({
     // ============================================================================
 
     {
-      id: 'deployment/docker',
+      id: "deployment/docker",
       parameters: {
         features: {
           development: true,
           production: true,
-          compose: true,          // docker-compose with postgres
+          compose: true, // docker-compose with postgres
         },
       },
     },

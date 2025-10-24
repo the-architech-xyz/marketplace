@@ -108,11 +108,11 @@
     "pathResolution": {
       "basePaths": {
         "app_root": "./",
-        "components": "{{srcDir ? 'src/' : ''}}components",
-        "shared_library": "{{srcDir ? 'src/' : ''}}lib",
-        "styles": "{{srcDir ? 'src/' : ''}}styles",
-        "scripts": "{{srcDir ? 'src/' : ''}}scripts",
-        "hooks": "{{srcDir ? 'src/' : ''}}hooks",
+        "components": "''components",
+        "shared_library": "''lib",
+        "styles": "''styles",
+        "scripts": "''scripts",
+        "hooks": "''hooks",
         "public": "./public",
         "assets": "./public",
         "static": "./public",
@@ -130,7 +130,7 @@
       },
       "frameworkSpecific": {
         "REACT_APP_URL": "http://localhost:3000",
-        "REACT_APP_TYPESCRIPT": "{{typescript ? 'true' : 'false'}}"
+        "REACT_APP_TYPESCRIPT": "'false'"
       }
     },
     "conventions": {

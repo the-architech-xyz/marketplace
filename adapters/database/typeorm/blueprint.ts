@@ -13,7 +13,7 @@ export const typeormBlueprint: Blueprint = {
   actions: [
     {
       type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['typeorm', 'reflect-metadata', '{{context..databaseType}}']
+      packages: ['typeorm', 'reflect-metadata', '${context..databaseType}']
     },
     {
       type: BlueprintActionType.CREATE_FILE,

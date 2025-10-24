@@ -127,11 +127,11 @@
     "pathResolution": {
       "basePaths": {
         "app_root": "./",
-        "components": "{{srcDir ? 'src/' : ''}}components",
-        "shared_library": "{{srcDir ? 'src/' : ''}}lib",
-        "screens": "{{srcDir ? 'src/' : ''}}screens",
-        "navigation": "{{srcDir ? 'src/' : ''}}navigation",
-        "hooks": "{{srcDir ? 'src/' : ''}}hooks",
+        "components": "''components",
+        "shared_library": "''lib",
+        "screens": "''screens",
+        "navigation": "''navigation",
+        "hooks": "''hooks",
         "assets": "./assets",
         "images": "./assets/images",
         "fonts": "./assets/fonts",
@@ -151,7 +151,7 @@
       },
       "frameworkSpecific": {
         "REACT_NATIVE_APP_URL": "http://localhost:3000",
-        "REACT_NATIVE_APP_TYPESCRIPT": "{{typescript ? 'true' : 'false'}}"
+        "REACT_NATIVE_APP_TYPESCRIPT": "'false'"
       }
     },
     "conventions": {

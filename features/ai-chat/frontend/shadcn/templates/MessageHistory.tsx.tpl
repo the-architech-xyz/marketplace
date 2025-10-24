@@ -316,7 +316,7 @@ export function MessageHistory({
       )}
 
       {/* Messages */}
-      <ScrollArea className="flex-1" style={{ maxHeight }}>
+      <ScrollArea className="flex-1" style=${ maxHeight }>
         <div className="p-4 space-y-6">
           {Object.keys(filteredGroupedMessages).length === 0 ? (
             <div className="flex flex-col items-center justify-center h-64 text-center">

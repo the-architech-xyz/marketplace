@@ -179,7 +179,7 @@ export default config;`,
     // Install components from genome parameters - DYNAMIC LOOP
     {
       type: BlueprintActionType.RUN_COMMAND,
-      command: "npx shadcn@latest add {{item}} --yes --overwrite",
+      command: "npx shadcn@latest add ${item} --yes --overwrite",
       forEach: "module.parameters.components",
       workingDir: ".",
     },

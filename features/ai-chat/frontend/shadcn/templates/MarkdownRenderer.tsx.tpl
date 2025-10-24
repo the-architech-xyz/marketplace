@@ -81,9 +81,9 @@ function CodeBlock({ language, code, allowCopy = true }: CodeBlockProps) {
             <pre
               ref={codeRef}
               className="p-4 text-sm overflow-x-auto"
-              style={{
+              style=${
                 fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
-              }}
+              }
             >
               <code>{code}</code>
             </pre>

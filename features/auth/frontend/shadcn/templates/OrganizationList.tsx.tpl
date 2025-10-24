@@ -245,10 +245,10 @@ export function OrganizationList({
             {organizations.map((org) => (
               <motion.div
                 key={org.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
+                initial=${ opacity: 0, y: 20 }
+                animate=${ opacity: 1, y: 0 }
+                exit=${ opacity: 0, y: -20 }
+                transition=${ duration: 0.2 }
               >
                 <Card className="hover:shadow-md transition-shadow">
                   <CardContent className="p-4">

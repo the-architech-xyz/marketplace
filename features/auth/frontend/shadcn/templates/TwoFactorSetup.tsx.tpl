@@ -142,9 +142,9 @@ export function TwoFactorSetup({ onSuccess, onCancel, className }: TwoFactorSetu
       <Card>
         <CardHeader className="text-center">
           <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            initial=${ scale: 0.8 }
+            animate=${ scale: 1 }
+            transition=${ delay: 0.2, type: "spring", stiffness: 200 }
             className="mx-auto w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4"
           >
             <Shield className="w-8 h-8 text-white" />
@@ -160,9 +160,9 @@ export function TwoFactorSetup({ onSuccess, onCancel, className }: TwoFactorSetu
             {step === 'setup' && (
               <motion.div
                 key="setup"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                initial=${ opacity: 0, x: 20 }
+                animate=${ opacity: 1, x: 0 }
+                exit=${ opacity: 0, x: -20 }
                 className="space-y-6"
               >
                 <div className="text-center space-y-2">
@@ -227,9 +227,9 @@ export function TwoFactorSetup({ onSuccess, onCancel, className }: TwoFactorSetu
             {step === 'verify' && (
               <motion.div
                 key="verify"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                initial=${ opacity: 0, x: 20 }
+                animate=${ opacity: 1, x: 0 }
+                exit=${ opacity: 0, x: -20 }
                 className="space-y-6"
               >
                 <div className="text-center space-y-2">
@@ -347,9 +347,9 @@ export function TwoFactorSetup({ onSuccess, onCancel, className }: TwoFactorSetu
             {step === 'recovery' && (
               <motion.div
                 key="recovery"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                initial=${ opacity: 0, x: 20 }
+                animate=${ opacity: 1, x: 0 }
+                exit=${ opacity: 0, x: -20 }
                 className="space-y-6"
               >
                 <div className="text-center space-y-2">
@@ -446,9 +446,9 @@ export function TwoFactorSetup({ onSuccess, onCancel, className }: TwoFactorSetu
             {step === 'complete' && (
               <motion.div
                 key="complete"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
+                initial=${ opacity: 0, scale: 0.8 }
+                animate=${ opacity: 1, scale: 1 }
+                exit=${ opacity: 0, scale: 0.8 }
                 className="text-center py-8"
               >
                 <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">

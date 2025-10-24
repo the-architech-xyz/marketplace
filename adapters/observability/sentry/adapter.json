@@ -9,9 +9,9 @@
   "dependencies": [],
   "provides": [
     "monitoring-core",
-    "{{#if features.performance}}monitoring-performance{{/if}}",
-    "{{#if features.alerts}}monitoring-alerts{{/if}}",
-    "{{#if features.enterprise}}monitoring-enterprise{{/if}}"
+    "monitoring-performance",
+    "monitoring-alerts",
+    "monitoring-enterprise"
   ],
   "limitations": "Tech-agnostic core only. Requires Connector for framework-specific implementation.",
   "parameters": {

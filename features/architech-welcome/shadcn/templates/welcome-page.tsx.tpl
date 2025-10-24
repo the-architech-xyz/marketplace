@@ -37,16 +37,16 @@ export default function WelcomePage() {
     <WelcomeLayout>
       {/* Hero Section */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        initial=${ opacity: 0, y: 20 }
+        animate=${ opacity: 1, y: 0 }
+        transition=${ duration: 0.6 }
         className="text-center space-y-6 py-12"
       >
         <div className="space-y-4">
           <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            initial=${ scale: 0.8 }
+            animate=${ scale: 1 }
+            transition=${ duration: 0.5, delay: 0.2 }
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium"
           >
             <Sparkles className="w-4 h-4" />
@@ -63,9 +63,9 @@ export default function WelcomePage() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          initial=${ opacity: 0, y: 20 }
+          animate=${ opacity: 1, y: 0 }
+          transition=${ duration: 0.6, delay: 0.4 }
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
@@ -81,9 +81,9 @@ export default function WelcomePage() {
       {/* Technology Stack */}
       <% if (module.parameters.showTechStack) { %>
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.6 }}
+        initial=${ opacity: 0, y: 20 }
+        animate=${ opacity: 1, y: 0 }
+        transition=${ duration: 0.6, delay: 0.6 }
         className="py-12"
       >
         <div className="text-center space-y-4 mb-8">
@@ -95,9 +95,9 @@ export default function WelcomePage() {
           {capabilities.map((capability, index) => (
             <motion.div
               key={capability.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
+              initial=${ opacity: 0, y: 20 }
+              animate=${ opacity: 1, y: 0 }
+              transition=${ duration: 0.6, delay: 0.8 + index * 0.1 }
             >
               <TechStackCard capability={capability} />
             </motion.div>
@@ -109,9 +109,9 @@ export default function WelcomePage() {
       {/* Component Showcase */}
       <% if (module.parameters.showComponents) { %>
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1.0 }}
+        initial=${ opacity: 0, y: 20 }
+        animate=${ opacity: 1, y: 0 }
+        transition=${ duration: 0.6, delay: 1.0 }
         className="py-12"
       >
         <div className="text-center space-y-4 mb-8">
@@ -126,9 +126,9 @@ export default function WelcomePage() {
       {/* Project Structure */}
       <% if (module.parameters.showProjectStructure) { %>
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1.2 }}
+        initial=${ opacity: 0, y: 20 }
+        animate=${ opacity: 1, y: 0 }
+        transition=${ duration: 0.6, delay: 1.2 }
         className="py-12"
       >
         <div className="text-center space-y-4 mb-8">
@@ -142,9 +142,9 @@ export default function WelcomePage() {
 
       {/* Footer */}
       <motion.footer
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1.6 }}
+        initial=${ opacity: 0 }
+        animate=${ opacity: 1 }
+        transition=${ duration: 0.6, delay: 1.6 }
         className="py-8 border-t border-gray-200"
       >
         <div className="text-center space-y-4">

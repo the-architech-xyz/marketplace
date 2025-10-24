@@ -114,17 +114,17 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial=${ opacity: 0, y: 20 }
+      animate=${ opacity: 1, y: 0 }
+      transition=${ duration: 0.5 }
       className={`w-full max-w-md mx-auto ${className}`}
     >
       <Card className="border-0 shadow-2xl bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
         <CardHeader className="space-y-2 text-center pb-8">
           <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            initial=${ scale: 0.8 }
+            animate=${ scale: 1 }
+            transition=${ delay: 0.2, type: "spring", stiffness: 200 }
             className="mx-auto w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4"
           >
             <Lock className="w-6 h-6 text-white" />
@@ -145,9 +145,9 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
             {success ? (
               <motion.div
                 key="success"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
+                initial=${ opacity: 0, scale: 0.8 }
+                animate=${ opacity: 1, scale: 1 }
+                exit=${ opacity: 0, scale: 0.8 }
                 className="text-center py-8"
               >
                 <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
@@ -161,9 +161,9 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
             ) : (
               <motion.div
                 key="form"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial=${ opacity: 0 }
+                animate=${ opacity: 1 }
+                exit=${ opacity: 0 }
                 className="space-y-6"
               >
                 {showSocialAuth && (
@@ -209,9 +209,9 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                   {mode === 'signup' && (
                     <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
+                      initial=${ opacity: 0, height: 0 }
+                      animate=${ opacity: 1, height: 'auto' }
+                      exit=${ opacity: 0, height: 0 }
                       className="space-y-2"
                     >
                       <Label htmlFor="name" className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -230,9 +230,9 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                       <AnimatePresence>
                         {form.formState.errors.name && (
                           <motion.p
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
+                            initial=${ opacity: 0, y: -10 }
+                            animate=${ opacity: 1, y: 0 }
+                            exit=${ opacity: 0, y: -10 }
                             className="text-sm text-red-500 flex items-center gap-1"
                           >
                             <AlertCircle className="w-3 h-3" />
@@ -261,9 +261,9 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                     <AnimatePresence>
                       {form.formState.errors.email && (
                         <motion.p
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
+                          initial=${ opacity: 0, y: -10 }
+                          animate=${ opacity: 1, y: 0 }
+                          exit=${ opacity: 0, y: -10 }
                           className="text-sm text-red-500 flex items-center gap-1"
                         >
                           <AlertCircle className="w-3 h-3" />
@@ -299,9 +299,9 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                     <AnimatePresence>
                       {form.formState.errors.password && (
                         <motion.p
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
+                          initial=${ opacity: 0, y: -10 }
+                          animate=${ opacity: 1, y: 0 }
+                          exit=${ opacity: 0, y: -10 }
                           className="text-sm text-red-500 flex items-center gap-1"
                         >
                           <AlertCircle className="w-3 h-3" />
@@ -314,9 +314,9 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                   <AnimatePresence>
                     {error && (
                       <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
+                        initial=${ opacity: 0, y: -10 }
+                        animate=${ opacity: 1, y: 0 }
+                        exit=${ opacity: 0, y: -10 }
                       >
                         <Alert variant="destructive" className="border-red-200 bg-red-50 dark:bg-red-900/20">
                           <AlertCircle className="h-4 w-4" />
@@ -329,8 +329,8 @@ export function AuthForm({ mode, onSuccess, showSocialAuth = true, className }: 
                   </AnimatePresence>
                   
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover=${ scale: 1.02 }
+                    whileTap=${ scale: 0.98 }
                   >
                     <Button 
                       type="submit" 

@@ -16,11 +16,11 @@
   "requires": [],
   "provides": [
     "auth-ui-core",
-    "{{#if features.passwordReset}}auth-ui-password-reset{{/if}}",
-    "{{#if features.mfa}}auth-ui-mfa{{/if}}",
-    "{{#if features.socialLogins}}auth-ui-social{{/if}}",
-    "{{#if features.accountSettingsPage}}auth-ui-settings{{/if}}",
-    "{{#if features.profileManagement}}auth-ui-profile{{/if}}"
+    "auth-ui-password-reset}",
+    "auth-ui-mfa}",
+    "auth-ui-social}",
+    "auth-ui-settings}",
+    "auth-ui-profile}"
   ],
   "parameters": {
     "features": {

@@ -42,23 +42,23 @@ export class TemplatePathResolver {
   resolvePath(templatePath: string, parameters: Record<string, any> = {}): string {
     let resolved = templatePath;
     
-    // Replace {{paths.*}} variables
+    // Replace ${paths.*} variables
     resolved = resolved.replace(/\{\{paths\.(\w+)\}\}/g, (match, pathKey) => {
       return this.frameworkPaths.get(pathKey) || match;
     });
     
-    // Replace {{project.*}} variables
+    // Replace ${project.*} variables
     resolved = resolved.replace(/\{\{project\.(\w+)\}\}/g, (match, projectKey) => {
       return parameters[projectKey] || this.projectPaths.get(projectKey) || match;
     });
     
-    // Replace {{integration.features.*}} variables
+    // Replace ${integration.features.*} variables
     resolved = resolved.replace(/\{\{integration\.features\.(\w+)\}\}/g, (match, featureKey) => {
       const featureValue = parameters.features?.[featureKey];
       return featureValue ? 'true' : 'false';
     });
     
-    // Replace {{env.*}} variables
+    // Replace ${env.*} variables
     resolved = resolved.replace(/\{\{env\.(\w+)\}\}/g, (match, envKey) => {
       return process.env[envKey] || match;
     });

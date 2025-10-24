@@ -139,7 +139,6 @@ export default defineGenome({
         features: {
           core: true,
           media: true,          // File attachments
-          advanced: true,       // Custom prompts, export/import
           voice: false,         // Defer to v2
         },
         theme: 'default',
@@ -200,11 +199,6 @@ export default defineGenome({
           webhooks: true,
         },
       },
-    },
-
-    {
-      id: 'features/payments/tech-stack',
-      parameters: {},
     },
 
     {

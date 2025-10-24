@@ -127,9 +127,9 @@ export function MagicLinkLogin({ onSuccess, onBack, className }: MagicLinkLoginP
       <Card>
         <CardHeader className="text-center">
           <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            initial=${ scale: 0.8 }
+            animate=${ scale: 1 }
+            transition=${ delay: 0.2, type: "spring", stiffness: 200 }
             className="mx-auto w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4"
           >
             <Mail className="w-6 h-6 text-white" />
@@ -150,9 +150,9 @@ export function MagicLinkLogin({ onSuccess, onBack, className }: MagicLinkLoginP
             {!isSent ? (
               <motion.div
                 key="form"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                initial=${ opacity: 0, x: 20 }
+                animate=${ opacity: 1, x: 0 }
+                exit=${ opacity: 0, x: -20 }
                 className="space-y-6"
               >
                 <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
@@ -227,9 +227,9 @@ export function MagicLinkLogin({ onSuccess, onBack, className }: MagicLinkLoginP
             ) : (
               <motion.div
                 key="success"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
+                initial=${ opacity: 0, scale: 0.8 }
+                animate=${ opacity: 1, scale: 1 }
+                exit=${ opacity: 0, scale: 0.8 }
                 className="space-y-6"
               >
                 <div className="text-center space-y-4">

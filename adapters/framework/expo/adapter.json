@@ -157,11 +157,11 @@
     "pathResolution": {
       "basePaths": {
         "app_root": "./",
-        "components": "{{srcDir ? 'src/' : ''}}components",
-        "shared_library": "{{srcDir ? 'src/' : ''}}lib",
-        "screens": "{{srcDir ? 'src/' : ''}}screens",
-        "navigation": "{{srcDir ? 'src/' : ''}}navigation",
-        "hooks": "{{srcDir ? 'src/' : ''}}hooks",
+        "components": "''components",
+        "shared_library": "''lib",
+        "screens": "''screens",
+        "navigation": "''navigation",
+        "hooks": "''hooks",
         "assets": "./assets",
         "images": "./assets/images",
         "fonts": "./assets/fonts",
@@ -180,7 +180,7 @@
       },
       "frameworkSpecific": {
         "EXPO_PUBLIC_APP_URL": "http://localhost:3000",
-        "EXPO_PUBLIC_TYPESCRIPT": "{{typescript ? 'true' : 'false'}}"
+        "EXPO_PUBLIC_TYPESCRIPT": "'false'"
       }
     },
     "conventions": {

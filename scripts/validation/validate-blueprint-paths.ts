@@ -3,7 +3,7 @@
 /**
  * Blueprint Path Validation Script
  * 
- * Validates that all blueprint files use valid {{paths.*}} variables
+ * Validates that all blueprint files use valid ${paths.*} variables
  * that exist in the framework adapter configuration.
  */
 

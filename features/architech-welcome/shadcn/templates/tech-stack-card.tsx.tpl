@@ -54,8 +54,8 @@ export function TechStackCard({ capability }: TechStackCardProps) {
 
   return (
     <motion.div
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover=${ scale: 1.02 }
+      whileTap=${ scale: 0.98 }
       className="h-full"
     >
       <Card className="h-full tech-card border-0 shadow-lg hover:shadow-xl transition-all duration-300">
@@ -88,8 +88,8 @@ export function TechStackCard({ capability }: TechStackCardProps) {
             </Badge>
             
             <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.5 }}
+              whileHover=${ rotate: 360 }
+              transition=${ duration: 0.5 }
               className="text-gray-400"
             >
               <Zap className="w-4 h-4" />

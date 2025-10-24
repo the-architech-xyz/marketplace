@@ -16,37 +16,37 @@ function convertInlineHandlebarsToEJS(content: string): { converted: string; rep
   let converted = content;
   let replacementCount = 0;
 
-  // STEP 1: Convert {{#if condition}} to <% if (condition) { %>
+  // STEP 1: Convert ${condition ? "..." : ""} to <% if (condition) { %>
   converted = converted.replace(/\{\{#if\s+(.+?)\}\}/g, (match, condition) => {
     replacementCount++;
     return `<% if (${condition.trim()}) { %>`;
   });
   
-  // STEP 2: Convert {{else}} to <% } else { %>
+  // STEP 2: Convert : "" to <% } else { %>
   converted = converted.replace(/\{\{else\}\}/g, () => {
     replacementCount++;
     return '<% } else { %>';
   });
   
-  // STEP 3: Convert {{/if}} to <% } %>
+  // STEP 3: Convert } to <% } %>
   converted = converted.replace(/\{\{\/if\}\}/g, () => {
     replacementCount++;
     return '<% } %>';
   });
 
-  // STEP 4: Convert {{#each array}} to <% array.forEach((item, index) => { %>
+  // STEP 4: Convert ${#each array} to <% array.forEach((item, index) => { %>
   converted = converted.replace(/\{\{#each\s+(\w+)\}\}/g, (match, arrayName) => {
     replacementCount++;
     return `<% ${arrayName}.forEach((item, index) => { %>`;
   });
   
-  // STEP 5: Convert {{this.property}} to <%= item.property %>
+  // STEP 5: Convert ${this.property} to <%= item.property %>
   converted = converted.replace(/\{\{this\.(\w+)\}\}/g, (match, prop) => {
     replacementCount++;
     return `<%= item.${prop} %>`;
   });
   
-  // STEP 6: Convert {{@index}}, {{@first}}, {{@last}}
+  // STEP 6: Convert ${@index}, ${@first}, ${@last}
   converted = converted.replace(/\{\{@index\}\}/g, () => {
     replacementCount++;
     return '<%= index %>';
@@ -62,7 +62,7 @@ function convertInlineHandlebarsToEJS(content: string): { converted: string; rep
     return '<%= index === array.length - 1 %>';
   });
   
-  // STEP 7: Convert {{#unless condition}} to <% if (!(condition)) { %>
+  // STEP 7: Convert ${#unless condition} to <% if (!(condition)) { %>
   converted = converted.replace(/\{\{#unless\s+(.+?)\}\}/g, (match, condition) => {
     replacementCount++;
     return `<% if (!(${condition.trim()})) { %>`;
@@ -73,16 +73,16 @@ function convertInlineHandlebarsToEJS(content: string): { converted: string; rep
     return '<% } %>';
   });
   
-  // STEP 8: Convert {{/each}} to <% }); %>
+  // STEP 8: Convert ${/each} to <% }); %>
   converted = converted.replace(/\{\{\/each\}\}/g, () => {
     replacementCount++;
     return '<% }); %>';
   });
 
-  // STEP 9: Convert simple variable substitution {{variable}}
-  // BUT: Be careful not to convert JSX {{ }} objects
-  // Strategy: Only convert {{ that appear in string context (between quotes)
-  // Match patterns like: "...{{variable}}..." or '...{{variable}}...' or `...{{variable}}...`
+  // STEP 9: Convert simple variable substitution ${variable}
+  // BUT: Be careful not to convert JSX ${ } objects
+  // Strategy: Only convert ${ that appear in string context (between quotes)
+  // Match patterns like: "...{{variable}..." or '...${variable}...' or `...${variable}...`
   const stringContextPattern = /(["'`])([^"'`]*?)\{\{([^{#/}][^}]*?)\}\}([^"'`]*?)\1/g;
   
   let lastConverted = '';

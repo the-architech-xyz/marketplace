@@ -6,7 +6,7 @@
   "main": "index.js",
   "exports": {
     ".": "./index.js",
-    "./types": "./types/index.js",
+    "./types": "./dist/types/index.js",
     "./adapters/*": "./adapters/*/adapter.json",
     "./connectors/*": "./connectors/*/connector.json",
     "./capabilities/*": "./capabilities/*/capability.json",
@@ -51,7 +51,7 @@
     "blueprints"
   ],
   "author": "The Architech Team",
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "repository": {
     "type": "git",
     "url": "https://github.com/thearchitech-xyz/marketplace.git"

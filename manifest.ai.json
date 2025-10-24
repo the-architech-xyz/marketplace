@@ -1,7 +1,7 @@
 {
   "version": "1.0.0-ai",
   "generatedFrom": "2.0.0",
-  "generatedAt": "2025-10-21T16:27:37.241Z",
+  "generatedAt": "2025-10-23T13:32:32.679Z",
   "purpose": "AI-optimized manifest for module selection agents. Includes only decision-critical data.",
   "stats": {
     "totalModules": 53,
@@ -62,11 +62,17 @@
         "description": "Tech-agnostic Sentry types and utilities. Framework-specific implementations handled by Connectors.",
         "category": "adapter",
         "provides": [
-          "monitoring-core"
+          "monitoring-core",
+          "monitoring-performance}",
+          "monitoring-alerts}",
+          "monitoring-enterprise}"
         ],
         "tags": [
           "adapter",
-          "monitoring-core"
+          "monitoring-alerts}",
+          "monitoring-core",
+          "monitoring-enterprise}",
+          "monitoring-performance}"
         ]
       },
       {
@@ -133,14 +139,20 @@
         "description": "Modern email API for transactional emails with Resend",
         "category": "adapter",
         "provides": [
-          "email-core"
+          "email-core",
+          "email-templates}",
+          "email-analytics}",
+          "email-campaigns}"
         ],
         "tags": [
           "adapter",
           "ai",
           "api",
           "email",
-          "email-core"
+          "email-analytics}",
+          "email-campaigns}",
+          "email-core",
+          "email-templates}"
         ]
       },
       {
@@ -220,11 +232,19 @@
         "description": "TypeScript ORM with excellent developer experience",
         "category": "adapter",
         "provides": [
-          "database-core"
+          "database-core",
+          "database-migrations}",
+          "database-studio}",
+          "database-relations}",
+          "database-seeding}"
         ],
         "tags": [
           "adapter",
           "database-core",
+          "database-migrations}",
+          "database-relations}",
+          "database-seeding}",
+          "database-studio}",
           "typescript"
         ]
       },
@@ -306,12 +326,18 @@
         "description": "Pure Vercel AI SDK for building AI-powered applications with streaming, chat, and text generation",
         "category": "adapter",
         "provides": [
-          "ai-core"
+          "ai-core",
+          "ai-streaming}",
+          "ai-advanced}",
+          "ai-enterprise}"
         ],
         "tags": [
           "adapter",
           "ai",
+          "ai-advanced}",
           "ai-core",
+          "ai-enterprise}",
+          "ai-streaming}",
           "chat",
           "ui"
         ]
@@ -732,6 +758,9 @@
         "category": "feature",
         "provides": [
           "teams-core",
+          "teams-advanced}",
+          "teams-analytics}",
+          "teams-billing}",
           "features/teams"
         ],
         "requires": [
@@ -742,6 +771,9 @@
           "features/teams",
           "frontend",
           "teams",
+          "teams-advanced}",
+          "teams-analytics}",
+          "teams-billing}",
           "teams-core"
         ]
       },
@@ -772,7 +804,11 @@
         "description": "Payments Capability",
         "category": "feature",
         "provides": [
-          "payments-core"
+          "payments-core",
+          "payments-subscriptions}",
+          "payments-invoicing}",
+          "payments-webhooks}",
+          "payments-analytics}"
         ],
         "requires": [
           "ui/shadcn-ui"
@@ -781,7 +817,11 @@
           "feature",
           "frontend",
           "payment",
-          "payments-core"
+          "payments-analytics}",
+          "payments-core",
+          "payments-invoicing}",
+          "payments-subscriptions}",
+          "payments-webhooks}"
         ]
       },
       {
@@ -811,7 +851,10 @@
         "description": "Monitoring Capability",
         "category": "feature",
         "provides": [
-          "monitoring-core"
+          "monitoring-core",
+          "monitoring-performance}",
+          "monitoring-feedback}",
+          "monitoring-analytics}"
         ],
         "requires": [
           "sentry"
@@ -820,7 +863,10 @@
           "feature",
           "frontend",
           "monitoring",
-          "monitoring-core"
+          "monitoring-analytics}",
+          "monitoring-core",
+          "monitoring-feedback}",
+          "monitoring-performance}"
         ]
       },
       {
@@ -913,6 +959,11 @@
         "category": "feature",
         "provides": [
           "auth-ui-core",
+          "auth-ui-password-reset}",
+          "auth-ui-mfa}",
+          "auth-ui-social}",
+          "auth-ui-settings}",
+          "auth-ui-profile}",
           "features/auth"
         ],
         "requires": [
@@ -921,6 +972,11 @@
         "tags": [
           "auth",
           "auth-ui-core",
+          "auth-ui-mfa}",
+          "auth-ui-password-reset}",
+          "auth-ui-profile}",
+          "auth-ui-settings}",
+          "auth-ui-social}",
           "authentication",
           "feature",
           "features/auth",
@@ -991,6 +1047,20 @@
         "category": "feature",
         "provides": [
           "ai-chat-core",
+          "ai-chat-context}",
+          "ai-chat-media}",
+          "ai-chat-voice}",
+          "ai-chat-history}",
+          "ai-chat-input}",
+          "ai-chat-toolbar}",
+          "ai-chat-settings}",
+          "ai-chat-prompts}",
+          "ai-chat-export}",
+          "ai-chat-analytics}",
+          "ai-chat-projects}",
+          "ai-chat-middleware}",
+          "ai-chat-services}",
+          "ai-chat-completion}",
           "features/ai"
         ],
         "requires": [
@@ -998,7 +1068,21 @@
         ],
         "tags": [
           "ai",
+          "ai-chat-analytics}",
+          "ai-chat-completion}",
+          "ai-chat-context}",
           "ai-chat-core",
+          "ai-chat-export}",
+          "ai-chat-history}",
+          "ai-chat-input}",
+          "ai-chat-media}",
+          "ai-chat-middleware}",
+          "ai-chat-projects}",
+          "ai-chat-prompts}",
+          "ai-chat-services}",
+          "ai-chat-settings}",
+          "ai-chat-toolbar}",
+          "ai-chat-voice}",
           "chat",
           "feature",
           "features/ai",

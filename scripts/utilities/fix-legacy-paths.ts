@@ -1,7 +1,7 @@
 /**
  * Fix Legacy Path Syntax
  * 
- * Replaces old {{paths.X}} syntax with new ${paths.X} syntax
+ * Replaces old ${paths.X} syntax with new ${paths.X} syntax
  * across all templates and blueprints
  */
 
@@ -29,7 +29,7 @@ async function fixLegacyPaths() {
     const fullPath = path.join(__dirname, '../../', file);
     let content = fs.readFileSync(fullPath, 'utf8');
     
-    // Replace {{paths.X}} with ${paths.X}
+    // Replace ${paths.X} with ${paths.X}
     const updated = content.replace(/\{\{paths\.([a-zA-Z_]+)\}\}/g, '${paths.$1}');
     
     if (updated !== content) {

@@ -74,9 +74,9 @@ function StructureItem({
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.3 }}
+      initial=${ opacity: 0, x: -20 }
+      animate=${ opacity: 1, x: 0 }
+      transition=${ duration: 0.3 }
       className="select-none"
     >
       <div
@@ -114,10 +114,10 @@ function StructureItem({
       
       {isDirectory && hasChildren && expanded && (
         <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.2 }}
+          initial=${ opacity: 0, height: 0 }
+          animate=${ opacity: 1, height: 'auto' }
+          exit=${ opacity: 0, height: 0 }
+          transition=${ duration: 0.2 }
           className="overflow-hidden"
         >
           {item.children?.map((child, index) => (

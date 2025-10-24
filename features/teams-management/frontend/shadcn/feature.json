@@ -16,9 +16,9 @@
   "requires": [],
   "provides": [
     "teams-core",
-    "{{#if features.advanced}}teams-advanced{{/if}}",
-    "{{#if features.analytics}}teams-analytics{{/if}}",
-    "{{#if features.billing}}teams-billing{{/if}}"
+    "teams-advanced}",
+    "teams-analytics}",
+    "teams-billing}"
   ],
   "parameters": {
     "features": {

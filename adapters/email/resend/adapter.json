@@ -9,9 +9,9 @@
   "dependencies": [],
   "provides": [
     "email-core",
-    "{{#if features.templates}}email-templates{{/if}}",
-    "{{#if features.analytics}}email-analytics{{/if}}",
-    "{{#if features.campaigns}}email-campaigns{{/if}}"
+    "email-templates}",
+    "email-analytics}",
+    "email-campaigns}"
   ],
   "limitations": "Requires Resend API key",
   "parameters": {

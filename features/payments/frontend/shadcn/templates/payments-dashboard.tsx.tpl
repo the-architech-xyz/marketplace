@@ -133,9 +133,9 @@ export default function PaymentsDashboard() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          initial=${ opacity: 0, y: 20 }
+          animate=${ opacity: 1, y: 0 }
+          transition=${ delay: 0.1 }
         >
           <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -153,9 +153,9 @@ export default function PaymentsDashboard() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          initial=${ opacity: 0, y: 20 }
+          animate=${ opacity: 1, y: 0 }
+          transition=${ delay: 0.2 }
         >
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -173,9 +173,9 @@ export default function PaymentsDashboard() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          initial=${ opacity: 0, y: 20 }
+          animate=${ opacity: 1, y: 0 }
+          transition=${ delay: 0.3 }
         >
           <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-500 to-purple-600 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -193,9 +193,9 @@ export default function PaymentsDashboard() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          initial=${ opacity: 0, y: 20 }
+          animate=${ opacity: 1, y: 0 }
+          transition=${ delay: 0.4 }
         >
           <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-500 to-orange-600 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -225,9 +225,9 @@ export default function PaymentsDashboard() {
         <TabsContent value="overview" className="space-y-6">
           {/* Analytics Chart */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            initial=${ opacity: 0, y: 20 }
+            animate=${ opacity: 1, y: 0 }
+            transition=${ delay: 0.5 }
           >
             <Card className="border-0 shadow-lg">
               <CardHeader>
@@ -244,9 +244,9 @@ export default function PaymentsDashboard() {
 
           {/* Recent Transactions */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
+            initial=${ opacity: 0, y: 20 }
+            animate=${ opacity: 1, y: 0 }
+            transition=${ delay: 0.6 }
           >
             <Card className="border-0 shadow-lg">
               <CardHeader>
@@ -267,9 +267,9 @@ export default function PaymentsDashboard() {
                   {recentTransactions.map((transaction, index) => (
                     <motion.div
                       key={transaction.id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.7 + index * 0.1 }}
+                      initial=${ opacity: 0, x: -20 }
+                      animate=${ opacity: 1, x: 0 }
+                      transition=${ delay: 0.7 + index * 0.1 }
                       className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                     >
                       <div className="flex items-center space-x-4">
@@ -327,9 +327,9 @@ export default function PaymentsDashboard() {
 
         <TabsContent value="transactions" className="space-y-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            initial=${ opacity: 0, y: 20 }
+            animate=${ opacity: 1, y: 0 }
+            transition=${ delay: 0.5 }
           >
             <Card className="border-0 shadow-lg">
               <CardHeader>
@@ -380,9 +380,9 @@ export default function PaymentsDashboard() {
 
         <TabsContent value="subscriptions" className="space-y-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            initial=${ opacity: 0, y: 20 }
+            animate=${ opacity: 1, y: 0 }
+            transition=${ delay: 0.5 }
           >
             <Card className="border-0 shadow-lg">
               <CardHeader>
@@ -410,9 +410,9 @@ export default function PaymentsDashboard() {
 
         <TabsContent value="invoices" className="space-y-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            initial=${ opacity: 0, y: 20 }
+            animate=${ opacity: 1, y: 0 }
+            transition=${ delay: 0.5 }
           >
             <Card className="border-0 shadow-lg">
               <CardHeader>
@@ -434,9 +434,9 @@ export default function PaymentsDashboard() {
                   {recentInvoices.map((invoice, index) => (
                     <motion.div
                       key={invoice.id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.6 + index * 0.1 }}
+                      initial=${ opacity: 0, x: -20 }
+                      animate=${ opacity: 1, x: 0 }
+                      transition=${ delay: 0.6 + index * 0.1 }
                       className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                     >
                       <div className="flex items-center space-x-4">

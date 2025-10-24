@@ -28,10 +28,10 @@
   "requires": [],
   "provides": [
     "payments-core",
-    "{{#if features.subscriptions}}payments-subscriptions{{/if}}",
-    "{{#if features.invoicing}}payments-invoicing{{/if}}",
-    "{{#if features.webhooks}}payments-webhooks{{/if}}",
-    "{{#if features.analytics}}payments-analytics{{/if}}"
+    "payments-subscriptions}",
+    "payments-invoicing}",
+    "payments-webhooks}",
+    "payments-analytics}"
   ],
   "parameters": {
     "features": {

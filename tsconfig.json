@@ -30,7 +30,8 @@
     "connectors/**/blueprint.ts",
     "features/**/blueprint.ts",
     "types/**/*.ts",
-    "scripts/**/*.ts"
+    "scripts/**/*.ts",
+    "genomes/**/*.ts"
   ],
   "exclude": [
     "node_modules",

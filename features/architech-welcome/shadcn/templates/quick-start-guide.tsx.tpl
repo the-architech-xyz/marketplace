@@ -96,9 +96,9 @@ export function QuickStartGuide() {
         {steps.map((step, index) => (
           <motion.div
             key={step.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
+            initial=${ opacity: 0, y: 20 }
+            animate=${ opacity: 1, y: 0 }
+            transition=${ duration: 0.6, delay: index * 0.1 }
             className="relative"
           >
             <Card 
@@ -149,9 +149,9 @@ export function QuickStartGuide() {
                   
                   {activeStep === index && (
                     <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
+                      initial=${ opacity: 0, height: 0 }
+                      animate=${ opacity: 1, height: 'auto' }
+                      exit=${ opacity: 0, height: 0 }
                       className="text-sm text-gray-600 bg-blue-50 p-3 rounded"
                     >
                       {step.details}

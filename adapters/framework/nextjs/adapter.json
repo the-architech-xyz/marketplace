@@ -365,14 +365,14 @@
     "pathResolution": {
       "basePaths": {
         "app_root": "./",
-        "components": "{{srcDir ? 'src/' : ''}}components",
-        "lib": "{{srcDir ? 'src/' : ''}}lib/",
-        "shared_library": "{{srcDir ? 'src/' : ''}}lib/",
-        "styles": "{{srcDir ? 'src/' : ''}}styles",
-        "scripts": "{{srcDir ? 'src/' : ''}}scripts",
-        "hooks": "{{srcDir ? 'src/' : ''}}hooks",
-        "pages": "{{srcDir ? 'src/' : ''}}{{appRouter ? 'app' : 'pages'}}",
-        "api": "{{srcDir ? 'src/' : ''}}{{appRouter ? 'app/api' : 'pages/api'}}",
+        "components": "''components",
+        "lib": "''lib/",
+        "shared_library": "''lib/",
+        "styles": "''styles",
+        "scripts": "''scripts",
+        "hooks": "''hooks",
+        "pages": "'''pages'",
+        "api": "'''pages/api'",
         "public": "./public",
         "assets": "./public",
         "static": "./public",
@@ -393,7 +393,7 @@
       },
       "frameworkSpecific": {
         "NEXT_PUBLIC_APP_URL": "http://localhost:3000",
-        "NEXT_PUBLIC_TYPESCRIPT": "{{typescript ? 'true' : 'false'}}"
+        "NEXT_PUBLIC_TYPESCRIPT": "'false'"
       }
     },
     "conventions": {

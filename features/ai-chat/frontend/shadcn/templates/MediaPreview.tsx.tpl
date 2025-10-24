@@ -423,7 +423,7 @@ export function MediaPreview({
     <div className={cn('space-y-4', className)}>
       {/* Thumbnails */}
       {showThumbnails && (
-        <ScrollArea style={{ maxHeight }}>
+        <ScrollArea style=${ maxHeight }>
           <div className="space-y-4">
             {/* Images */}
             {groupedAttachments.images.length > 0 && (

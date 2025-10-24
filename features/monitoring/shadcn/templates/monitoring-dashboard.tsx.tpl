@@ -167,8 +167,8 @@ export default function MonitoringDashboard() {
       {/* Critical Alerts Banner */}
       {criticalAlerts.length > 0 && (
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial=${ opacity: 0, y: -20 }
+          animate=${ opacity: 1, y: 0 }
           className="mb-6"
         >
           <Alert className="border-red-200 bg-red-50 dark:bg-red-900/20">
@@ -184,9 +184,9 @@ export default function MonitoringDashboard() {
       {/* System Status Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          initial=${ opacity: 0, y: 20 }
+          animate=${ opacity: 1, y: 0 }
+          transition=${ delay: 0.1 }
         >
           <Card className={`border-0 shadow-lg ${
             data.status === 'healthy' ? 'bg-gradient-to-br from-green-500 to-green-600 text-white' :
@@ -209,9 +209,9 @@ export default function MonitoringDashboard() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          initial=${ opacity: 0, y: 20 }
+          animate=${ opacity: 1, y: 0 }
+          transition=${ delay: 0.2 }
         >
           <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -228,9 +228,9 @@ export default function MonitoringDashboard() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          initial=${ opacity: 0, y: 20 }
+          animate=${ opacity: 1, y: 0 }
+          transition=${ delay: 0.3 }
         >
           <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-500 to-purple-600 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -247,9 +247,9 @@ export default function MonitoringDashboard() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          initial=${ opacity: 0, y: 20 }
+          animate=${ opacity: 1, y: 0 }
+          transition=${ delay: 0.4 }
         >
           <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-500 to-orange-600 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -279,9 +279,9 @@ export default function MonitoringDashboard() {
         <TabsContent value="overview" className="space-y-6">
           {/* System Health */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            initial=${ opacity: 0, y: 20 }
+            animate=${ opacity: 1, y: 0 }
+            transition=${ delay: 0.5 }
           >
             <SystemStatus health={data} />
           </motion.div>
@@ -289,9 +289,9 @@ export default function MonitoringDashboard() {
           {/* Performance Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
+              initial=${ opacity: 0, y: 20 }
+              animate=${ opacity: 1, y: 0 }
+              transition=${ delay: 0.6 }
             >
               <Card className="border-0 shadow-lg">
                 <CardHeader>
@@ -310,9 +310,9 @@ export default function MonitoringDashboard() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
+              initial=${ opacity: 0, y: 20 }
+              animate=${ opacity: 1, y: 0 }
+              transition=${ delay: 0.7 }
             >
               <Card className="border-0 shadow-lg">
                 <CardHeader>
@@ -334,9 +334,9 @@ export default function MonitoringDashboard() {
 
         <TabsContent value="alerts" className="space-y-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            initial=${ opacity: 0, y: 20 }
+            animate=${ opacity: 1, y: 0 }
+            transition=${ delay: 0.5 }
           >
             <Card className="border-0 shadow-lg">
               <CardHeader>
@@ -364,9 +364,9 @@ export default function MonitoringDashboard() {
                   {alertData.map((alert, index) => (
                     <motion.div
                       key={alert.id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.6 + index * 0.1 }}
+                      initial=${ opacity: 0, x: -20 }
+                      animate=${ opacity: 1, x: 0 }
+                      transition=${ delay: 0.6 + index * 0.1 }
                     >
                       <AlertCard alert={alert} />
                     </motion.div>
@@ -379,9 +379,9 @@ export default function MonitoringDashboard() {
 
         <TabsContent value="metrics" className="space-y-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            initial=${ opacity: 0, y: 20 }
+            animate=${ opacity: 1, y: 0 }
+            transition=${ delay: 0.5 }
           >
             <Card className="border-0 shadow-lg">
               <CardHeader>
@@ -428,9 +428,9 @@ export default function MonitoringDashboard() {
 
         <TabsContent value="logs" className="space-y-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            initial=${ opacity: 0, y: 20 }
+            animate=${ opacity: 1, y: 0 }
+            transition=${ delay: 0.5 }
           >
             <Card className="border-0 shadow-lg">
               <CardHeader>
@@ -450,9 +450,9 @@ export default function MonitoringDashboard() {
 
         <TabsContent value="performance" className="space-y-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            initial=${ opacity: 0, y: 20 }
+            animate=${ opacity: 1, y: 0 }
+            transition=${ delay: 0.5 }
           >
             <Card className="border-0 shadow-lg">
               <CardHeader>

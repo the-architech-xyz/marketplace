@@ -42,9 +42,9 @@
   },
   "provides": [
     "ai-core",
-    "{{#if features.streaming}}ai-streaming{{/if}}",
-    "{{#if features.advanced}}ai-advanced{{/if}}",
-    "{{#if features.enterprise}}ai-enterprise{{/if}}"
+    "ai-streaming}",
+    "ai-advanced}",
+    "ai-enterprise}"
   ],
   "parameters": {
     "providers": {

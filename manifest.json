@@ -247,9 +247,9 @@
         "jsonFile": "adapters/observability/sentry/adapter.json",
         "provides": [
           "monitoring-core",
-          "{{#if features.performance}}monitoring-performance{{/if}}",
-          "{{#if features.alerts}}monitoring-alerts{{/if}}",
-          "{{#if features.enterprise}}monitoring-enterprise{{/if}}"
+          "monitoring-performance}",
+          "monitoring-alerts}",
+          "monitoring-enterprise}"
         ],
         "dependencies": [],
         "parameters": {
@@ -556,9 +556,9 @@
         "jsonFile": "adapters/email/resend/adapter.json",
         "provides": [
           "email-core",
-          "{{#if features.templates}}email-templates{{/if}}",
-          "{{#if features.analytics}}email-analytics{{/if}}",
-          "{{#if features.campaigns}}email-campaigns{{/if}}"
+          "email-templates}",
+          "email-analytics}",
+          "email-campaigns}"
         ],
         "dependencies": [],
         "parameters": {
@@ -945,10 +945,10 @@
         "jsonFile": "adapters/database/drizzle/adapter.json",
         "provides": [
           "database-core",
-          "{{#if features.migrations}}database-migrations{{/if}}",
-          "{{#if features.studio}}database-studio{{/if}}",
-          "{{#if features.relations}}database-relations{{/if}}",
-          "{{#if features.seeding}}database-seeding{{/if}}"
+          "database-migrations}",
+          "database-studio}",
+          "database-relations}",
+          "database-seeding}"
         ],
         "dependencies": [],
         "parameters": {
@@ -1380,9 +1380,9 @@
         "jsonFile": "adapters/ai/vercel-ai-sdk/adapter.json",
         "provides": [
           "ai-core",
-          "{{#if features.streaming}}ai-streaming{{/if}}",
-          "{{#if features.advanced}}ai-advanced{{/if}}",
-          "{{#if features.enterprise}}ai-enterprise{{/if}}"
+          "ai-streaming}",
+          "ai-advanced}",
+          "ai-enterprise}"
         ],
         "dependencies": [],
         "tags": [
@@ -2661,9 +2661,9 @@
         "jsonFile": "dist/features/teams-management.manifest.json",
         "provides": [
           "teams-core",
-          "{{#if features.advanced}}teams-advanced{{/if}}",
-          "{{#if features.analytics}}teams-analytics{{/if}}",
-          "{{#if features.billing}}teams-billing{{/if}}",
+          "teams-advanced}",
+          "teams-analytics}",
+          "teams-billing}",
           "features/teams"
         ],
         "complexity": "intermediate"
@@ -2820,10 +2820,10 @@
         "jsonFile": "dist/features/payments.manifest.json",
         "provides": [
           "payments-core",
-          "{{#if features.subscriptions}}payments-subscriptions{{/if}}",
-          "{{#if features.invoicing}}payments-invoicing{{/if}}",
-          "{{#if features.webhooks}}payments-webhooks{{/if}}",
-          "{{#if features.analytics}}payments-analytics{{/if}}"
+          "payments-subscriptions}",
+          "payments-invoicing}",
+          "payments-webhooks}",
+          "payments-analytics}"
         ],
         "complexity": "intermediate"
       },
@@ -2978,9 +2978,9 @@
         "jsonFile": "dist/features/monitoring.manifest.json",
         "provides": [
           "monitoring-core",
-          "{{#if features.performance}}monitoring-performance{{/if}}",
-          "{{#if features.feedback}}monitoring-feedback{{/if}}",
-          "{{#if features.analytics}}monitoring-analytics{{/if}}"
+          "monitoring-performance}",
+          "monitoring-feedback}",
+          "monitoring-analytics}"
         ],
         "complexity": "intermediate"
       },
@@ -3354,11 +3354,11 @@
         "jsonFile": "dist/features/auth.manifest.json",
         "provides": [
           "auth-ui-core",
-          "{{#if features.passwordReset}}auth-ui-password-reset{{/if}}",
-          "{{#if features.mfa}}auth-ui-mfa{{/if}}",
-          "{{#if features.socialLogins}}auth-ui-social{{/if}}",
-          "{{#if features.accountSettingsPage}}auth-ui-settings{{/if}}",
-          "{{#if features.profileManagement}}auth-ui-profile{{/if}}",
+          "auth-ui-password-reset}",
+          "auth-ui-mfa}",
+          "auth-ui-social}",
+          "auth-ui-settings}",
+          "auth-ui-profile}",
           "features/auth"
         ],
         "complexity": "intermediate"
@@ -3741,20 +3741,20 @@
         "jsonFile": "dist/features/ai-chat.manifest.json",
         "provides": [
           "ai-chat-core",
-          "{{#if features.context}}ai-chat-context{{/if}}",
-          "{{#if features.media}}ai-chat-media{{/if}}",
-          "{{#if features.voice}}ai-chat-voice{{/if}}",
-          "{{#if features.history}}ai-chat-history{{/if}}",
-          "{{#if features.input}}ai-chat-input{{/if}}",
-          "{{#if features.toolbar}}ai-chat-toolbar{{/if}}",
-          "{{#if features.settings}}ai-chat-settings{{/if}}",
-          "{{#if features.prompts}}ai-chat-prompts{{/if}}",
-          "{{#if features.export}}ai-chat-export{{/if}}",
-          "{{#if features.analytics}}ai-chat-analytics{{/if}}",
-          "{{#if features.projects}}ai-chat-projects{{/if}}",
-          "{{#if features.middleware}}ai-chat-middleware{{/if}}",
-          "{{#if features.services}}ai-chat-services{{/if}}",
-          "{{#if features.completion}}ai-chat-completion{{/if}}",
+          "ai-chat-context}",
+          "ai-chat-media}",
+          "ai-chat-voice}",
+          "ai-chat-history}",
+          "ai-chat-input}",
+          "ai-chat-toolbar}",
+          "ai-chat-settings}",
+          "ai-chat-prompts}",
+          "ai-chat-export}",
+          "ai-chat-analytics}",
+          "ai-chat-projects}",
+          "ai-chat-middleware}",
+          "ai-chat-services}",
+          "ai-chat-completion}",
           "features/ai"
         ],
         "complexity": "intermediate"

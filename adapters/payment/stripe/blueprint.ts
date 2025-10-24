@@ -47,7 +47,7 @@ function generateCoreActions(): BlueprintAction[] {
     {
       type: BlueprintActionType.ADD_SCRIPT,
       name: 'stripe:listen',
-      command: 'stripe listen --forward-to {{env.APP_URL}}/api/payment/webhook'
+      command: 'stripe listen --forward-to ${env.APP_URL}/api/payment/webhook'
     },
     {
       type: BlueprintActionType.ADD_SCRIPT,
@@ -109,7 +109,7 @@ function generateCoreActions(): BlueprintAction[] {
       type: BlueprintActionType.ADD_ENV_VAR,
 
       key: 'APP_URL',
-      value: '{{env.APP_URL}}',
+      value: '${env.APP_URL}',
       description: 'Application URL for Stripe redirects'
     },
     {

@@ -9,10 +9,10 @@
   "dependencies": [],
   "provides": [
     "database-core",
-    "{{#if features.migrations}}database-migrations{{/if}}",
-    "{{#if features.studio}}database-studio{{/if}}",
-    "{{#if features.relations}}database-relations{{/if}}",
-    "{{#if features.seeding}}database-seeding{{/if}}"
+    "database-migrations}",
+    "database-studio}",
+    "database-relations}",
+    "database-seeding}"
   ],
   "capabilities": {
     "database-orm": {

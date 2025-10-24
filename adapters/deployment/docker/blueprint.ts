@@ -34,13 +34,13 @@ export default function generateBlueprint(
       type: BlueprintActionType.ADD_SCRIPT,
 
       name: 'docker:build',
-      command: 'docker build -t {{project.name}}:latest .'
+      command: 'docker build -t ${project.name}:latest .'
     },
     {
       type: BlueprintActionType.ADD_SCRIPT,
 
       name: 'docker:run',
-      command: 'docker run -p 3000:3000 --env-file .env.local {{project.name}}:latest'
+      command: 'docker run -p 3000:3000 --env-file .env.local ${project.name}:latest'
     }
   ]
 };
