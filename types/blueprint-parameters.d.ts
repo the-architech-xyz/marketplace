@@ -315,17 +315,6 @@ export interface ConnectorsMonitoringSentryNextjsParameters {
   testing: boolean;
 }
 
-export interface ConnectorsPaymentStripeNextjsDrizzleParameters {
-  features: {
-    organizationBilling: boolean;
-    seats: boolean;
-    usage: boolean;
-    webhooks: boolean;
-    seatManagement: boolean;
-    usageTracking: boolean;
-  };
-}
-
 export interface ConnectorsTestingVitestNextjsParameters {
   unitTesting: boolean;
   integrationTesting: boolean;
@@ -345,6 +334,14 @@ export interface FeaturesAiChatBackendNextjsParameters {
   voiceInput: boolean;
   voiceOutput: boolean;
   exportImport: boolean;
+}
+
+export interface FeaturesAiChatDatabaseDrizzleParameters {
+  features: {
+    promptLibrary: boolean;
+    usageTracking: boolean;
+    conversationSharing: boolean;
+  };
 }
 
 export interface FeaturesAiChatFrontendShadcnParameters {
@@ -458,6 +455,21 @@ export interface FeaturesMonitoringTechStackParameters {
   required: any;
 }
 
+export interface FeaturesPaymentsBackendStripeNextjsParameters {
+  features: {
+    organizationBilling: boolean;
+    seats: boolean;
+    usage: boolean;
+    webhooks: boolean;
+    seatManagement: boolean;
+    usageTracking: boolean;
+  };
+}
+
+export interface FeaturesPaymentsDatabaseDrizzleParameters {
+
+}
+
 export interface FeaturesPaymentsFrontendShadcnParameters {
   features: {
     core: boolean;
@@ -489,6 +501,12 @@ export interface FeaturesTeamsManagementBackendNextjsParameters {
   permissions: boolean;
   analytics: boolean;
   billing: boolean;
+}
+
+export interface FeaturesTeamsManagementDatabaseDrizzleParameters {
+  features: {
+    activityTracking: boolean;
+  };
 }
 
 export interface FeaturesTeamsManagementFrontendShadcnParameters {

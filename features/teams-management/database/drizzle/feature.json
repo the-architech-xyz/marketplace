@@ -1,0 +1,27 @@
+{
+  "id": "features/teams-management/database/drizzle",
+  "name": "Teams Management Database Layer (Drizzle)",
+  "description": "Database-agnostic schema for teams management feature using Drizzle ORM. Supports teams, members, invitations, and activity tracking.",
+  "type": "feature",
+  "version": "1.0.0",
+  "requires": [
+    "database/drizzle"
+  ],
+  "provides": [
+    "teams-database-schema",
+    "teams-migrations"
+  ],
+  "role": "tech-stack-layer",
+  "pattern": "custom-logic",
+  "parameters": {
+    "features": {
+      "activityTracking": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable activity tracking and audit trail"
+      }
+    }
+  }
+}
+
+

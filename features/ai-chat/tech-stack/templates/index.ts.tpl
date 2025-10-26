@@ -1,63 +1,104 @@
 /**
- * AI Chat Feature - Technology Stack Layer
+ * AI Chat Tech-Stack - Centralized Exports
  * 
- * ⚠️ ARCHITECTURE:
- * - TanStack Query Hooks → Server data (conversations, messages)
- * - Zustand Store → UI state only (sidebar, input, streaming)
+ * Import everything you need from one place.
  */
 
-// Types
-export * from './types';
+// ============================================================================
+// HOOKS
+// ============================================================================
 
-// Schemas
-export * from './schemas';
-
-// Hooks
-export * from './hooks';
-
-// Stores
-export * from './stores';
-
-// Re-export commonly used types for convenience
-export type {
-  Message,
-  Chat,
-  Conversation,
-  SendMessageData,
-  CreateChatData,
-  UpdateChatData,
-  ChatSettings,
-  ChatAnalytics,
-  AIChatError,
-} from './types';
-
-// Re-export commonly used schemas for validation
 export {
-  MessageSchema,
-  ChatSchema,
-  ConversationSchema,
-  SendMessageDataSchema,
-  CreateChatDataSchema,
-  UpdateChatDataSchema,
-  ChatSettingsSchema,
-  AIChatErrorSchema,
-} from './schemas';
-
-// Re-export commonly used hooks
-export {
+  // Conversation hooks
   useConversations,
   useConversation,
   useCreateConversation,
   useUpdateConversation,
   useDeleteConversation,
+  
+  // Message hooks
   useMessages,
-  useSendMessage,
-  useUpdateMessage,
   useDeleteMessage,
-  useChatSettings,
-  useUpdateChatSettings,
-  useChatAnalytics,
+  
+  // Chat hooks
+  useChatWithHistory,
+  useSimpleChat,
+  
+  // Analytics hooks
+  useAnalytics,
+  
+  // Utility hooks
+  useArchiveConversation,
+  useRestoreConversation,
+  useRenameConversation,
+  
+  // Re-exported Vercel AI SDK hooks
+  useChat,
+  useCompletion,
 } from './hooks';
 
-// Re-export UI store
-export { useAIChatUIStore } from './stores';
+// ============================================================================
+// TYPES
+// ============================================================================
+
+export type {
+  AIConversation,
+  AIMessage,
+  CreateConversationData,
+  UpdateConversationData,
+  SendMessageData,
+} from './hooks';
+
+// ============================================================================
+// SCHEMAS
+// ============================================================================
+
+export {
+  // Schemas
+  AIMessageSchema,
+  AIConversationSchema,
+  CreateConversationSchema,
+  UpdateConversationSchema,
+  SendMessageSchema,
+  AIUsageSchema,
+  AIPromptSchema,
+  CreatePromptSchema,
+  ChatAnalyticsSchema,
+  AIChatErrorSchema,
+  
+  // Enums
+  MessageRoleSchema,
+  ConversationStatusSchema,
+  AIProviderSchema,
+  PromptVisibilitySchema,
+} from './schemas';
+
+export type {
+  AIMessage as AIMessageType,
+  AIConversation as AIConversationType,
+  CreateConversationData as CreateConversationDataType,
+  UpdateConversationData as UpdateConversationDataType,
+  SendMessageData as SendMessageDataType,
+  AIUsage,
+  AIPrompt,
+  CreatePromptData,
+  ChatAnalytics,
+  AIChatError,
+} from './schemas';
+
+// ============================================================================
+// STORES
+// ============================================================================
+
+export {
+  // Stores
+  useChatUIStore,
+  useChatSettingsStore,
+  useDraftMessagesStore,
+  useSelectionStore,
+  
+  // Utility hooks
+  useActiveConversation,
+  useChatSettings,
+  useIsSidebarOpen,
+} from './stores';

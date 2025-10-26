@@ -236,7 +236,8 @@
   ],
   "requires": [
     "framework/nextjs",
-    "ai/vercel-ai-sdk"
+    "adapters/ai/vercel-ai-sdk",
+    "features/ai-chat/database/drizzle"
   ],
   "requiresCapabilities": [
     {

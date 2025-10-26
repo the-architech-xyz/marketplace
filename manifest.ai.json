@@ -1,7 +1,7 @@
 {
   "version": "1.0.0-ai",
   "generatedFrom": "2.0.0",
-  "generatedAt": "2025-10-23T13:32:32.679Z",
+  "generatedAt": "2025-10-26T15:16:28.191Z",
   "purpose": "AI-optimized manifest for module selection agents. Includes only decision-critical data.",
   "stats": {
     "totalModules": 53,

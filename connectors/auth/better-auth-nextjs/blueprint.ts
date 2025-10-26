@@ -1,16 +1,16 @@
 /**
  * Better Auth + Next.js Connector Blueprint
  * 
- * This connector provides COMPLETE Better Auth integration for Next.js:
- * - Server: Better Auth config, API routes, middleware
- * - Client: Better Auth React hooks, client instance
- * - Framework: Next.js specific wiring
+ * This connector provides Next.js-SPECIFIC Better Auth integration:
+ * - Server: Next.js config with nextCookies plugin
+ * - API Routes: Next.js API route handler
+ * - Middleware: Next.js middleware for auth
+ * - Provider: React provider for client-side
  * 
- * This is a CONNECTOR (not adapter or backend feature) because it:
- * - Integrates external SDK (Better Auth)
- * - Wires it into specific framework (Next.js)
- * - Provides complete ready-to-use integration
- * - No custom business logic
+ * ARCHITECTURE NOTE:
+ * - Hooks and client are in tech-stack/overrides/better-auth (framework agnostic)
+ * - This connector only handles Next.js-specific wiring
+ * - Easy to add better-auth-remix, better-auth-expo, etc.
  */
 
 import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
@@ -22,72 +22,50 @@ export default function generateBlueprint(
   const { params, features } = extractTypedModuleParameters(config);
 
   return [
-    // NOTE: No package installation needed - adapter handles 'better-auth' package
-    // We only add Next.js specific integration (API routes, middleware, providers)
+    // NOTE: Better Auth package installed by tech-stack override
+    // We only add Next.js specific integration
     
-    // Server-side Better Auth config
+    // Server-side Next.js config (nextCookies plugin)
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '${paths.lib}/auth/config.ts',
       template: 'templates/config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
+        priority: 3  // Higher than tech-stack override (priority: 2)
       }
     },
     
-    // Client-side Better Auth client
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/auth/client.ts',
-      template: 'templates/client.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
-      }
-    },
-    
-    // Better Auth native hooks (OVERWRITES tech-stack fallback)
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/auth/hooks.ts',
-      template: 'templates/hooks.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2  // Higher than tech-stack (priority: 1)
-      }
-    },
-    
-    // Next.js API route
+    // Next.js API route handler
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '${paths.app_root}api/auth/[...all]/route.ts',
       template: 'templates/auth-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
+        priority: 3
       }
     },
     
-    // Next.js middleware
+    // Next.js middleware for auth
     {
       type: BlueprintActionType.CREATE_FILE,
       path: 'src/middleware.ts',
       template: 'templates/middleware.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
+        priority: 3
       }
     },
     
-    // React Auth Provider
+    // React Auth Provider (client-side)
     {
       type: BlueprintActionType.CREATE_FILE,
       path: '${paths.components}providers/AuthProvider.tsx',
       template: 'templates/AuthProvider.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2
+        priority: 3
       }
     }
   ];

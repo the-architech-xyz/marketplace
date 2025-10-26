@@ -1,116 +1,123 @@
-import { openai } from '@ai-sdk/openai';
-import { anthropic } from '@ai-sdk/anthropic';
+/**
+ * Vercel AI SDK Configuration
+ * 
+ * Central configuration for AI providers and models.
+ * This file ONLY contains configuration - no business logic.
+ */
 
 /**
  * AI Configuration
- * Centralized configuration for all AI providers and models
  */
-
 export const AI_CONFIG = {
-  // Default model settings
-  defaultModel: '<%= module.parameters.defaultModel || "gpt-3.5-turbo" %>',
-  maxTokens: <%= module.parameters.maxTokens || 1000 %>,
-  temperature: <%= module.parameters.temperature || 0.7 %>,
+  // Default provider
+  defaultProvider: '<%= params.providers?.[0] || 'openai' %>' as const,
   
-  // Available models
-  models: {
-    openai: {
-      'gpt-3.5-turbo': {
-        provider: openai,
-        model: 'gpt-3.5-turbo',
-        maxTokens: 4096,
-        cost: 0.0015, // per 1K tokens
-      },
-      'gpt-4': {
-        provider: openai,
-        model: 'gpt-4',
-        maxTokens: 8192,
-        cost: 0.03, // per 1K tokens
-      },
-      'gpt-4-turbo': {
-        provider: openai,
-        model: 'gpt-4-turbo-preview',
-        maxTokens: 128000,
-        cost: 0.01, // per 1K tokens
-      },
-    },
-    anthropic: {
-      'claude-3-sonnet': {
-        provider: anthropic,
-        model: 'claude-3-sonnet-20240229',
-        maxTokens: 200000,
-        cost: 0.003, // per 1K tokens
-      },
-      'claude-3-opus': {
-        provider: anthropic,
-        model: 'claude-3-opus-20240229',
-        maxTokens: 200000,
-        cost: 0.015, // per 1K tokens
-      },
-    },
-  },
+  // Default model
+  defaultModel: '<%= params.defaultModel || 'gpt-3.5-turbo' %>' as const,
+  
+  // Default parameters
+  maxTokens: <%= params.maxTokens || 1000 %>,
+  temperature: <%= params.temperature || 0.7 %>,
   
   // Feature flags
   features: {
-    streaming: <%= module.parameters.hasStreaming ?? true %>,
-    chat: <%= module.parameters.hasChat ?? true %>,
-    textGeneration: <%= module.parameters.hasTextGeneration ?? true %>,
-    imageGeneration: <%= module.parameters.hasImageGeneration ?? false %>,
-    embeddings: <%= module.parameters.hasEmbeddings ?? false %>,
-    functionCalling: <%= module.parameters.hasFunctionCalling ?? false %>,
+    streaming: <%= params.features?.streaming !== false %>,
+    functionCalling: <%= params.features?.tools || false %>,
+    embeddings: <%= params.features?.embeddings || false %>,
+  },
+} as const;
+
+/**
+ * Provider Configuration
+ * 
+ * API keys should be stored in environment variables:
+ * - OPENAI_API_KEY
+ * - ANTHROPIC_API_KEY
+ * - GOOGLE_API_KEY
+ * - etc.
+ */
+export const PROVIDER_CONFIG = {
+  openai: {
+    apiKey: process.env.OPENAI_API_KEY,
+    baseURL: process.env.OPENAI_BASE_URL,
+  },
+  anthropic: {
+    apiKey: process.env.ANTHROPIC_API_KEY,
+    baseURL: process.env.ANTHROPIC_BASE_URL,
+  },
+  <% if (params.providers?.includes('google')) { %>
+  google: {
+    apiKey: process.env.GOOGLE_API_KEY,
+  },
+  <% } %>
+  <% if (params.providers?.includes('cohere')) { %>
+  cohere: {
+    apiKey: process.env.COHERE_API_KEY,
+  },
+  <% } %>
+  <% if (params.providers?.includes('huggingface')) { %>
+  huggingface: {
+    apiKey: process.env.HUGGINGFACE_API_KEY,
+  },
+  <% } %>
+} as const;
+
+/**
+ * Model Configuration
+ * 
+ * Defines available models and their capabilities.
+ */
+export const MODEL_CONFIG = {
+  // OpenAI models
+  'gpt-3.5-turbo': {
+    provider: 'openai',
+    maxTokens: 4096,
+    supportsStreaming: true,
+    supportsFunctionCalling: true,
+  },
+  'gpt-4': {
+    provider: 'openai',
+    maxTokens: 8192,
+    supportsStreaming: true,
+    supportsFunctionCalling: true,
+  },
+  'gpt-4-turbo': {
+    provider: 'openai',
+    maxTokens: 128000,
+    supportsStreaming: true,
+    supportsFunctionCalling: true,
   },
   
-  // Rate limiting
-  rateLimit: {
-    requestsPerMinute: 60,
-    tokensPerMinute: 150000,
+  // Anthropic models
+  'claude-3-haiku': {
+    provider: 'anthropic',
+    maxTokens: 4096,
+    supportsStreaming: true,
+    supportsFunctionCalling: true,
   },
-  
-  // Caching
-  cache: {
-    enabled: true,
-    ttl: 300, // 5 minutes
-    maxSize: 1000, // max cached responses
+  'claude-3-sonnet': {
+    provider: 'anthropic',
+    maxTokens: 4096,
+    supportsStreaming: true,
+    supportsFunctionCalling: true,
   },
-};
-
-// Get model configuration
-export function getModelConfig(provider: string, model: string) {
-  const providerConfig = AI_CONFIG.models[provider as keyof typeof AI_CONFIG.models];
-  if (!providerConfig) {
-    throw new Error(`Provider ${provider} not supported`);
-  }
+  'claude-3-opus': {
+    provider: 'anthropic',
+    maxTokens: 4096,
+    supportsStreaming: true,
+    supportsFunctionCalling: true,
+  },
+  <% if (params.providers?.includes('google')) { %>
   
-  const modelConfig = providerConfig[model as keyof typeof providerConfig];
-  if (!modelConfig) {
-    throw new Error(`Model ${model} not supported for provider ${provider}`);
-  }
-  
-  return modelConfig;
-}
+  // Google models
+  'gemini-pro': {
+    provider: 'google',
+    maxTokens: 32768,
+    supportsStreaming: true,
+    supportsFunctionCalling: false,
+  },
+  <% } %>
+} as const;
 
-// Get default model configuration
-export function getDefaultModelConfig() {
-  const [provider, model] = AI_CONFIG.defaultModel.split(':');
-  return getModelConfig(provider, model);
-}
-
-// Check if feature is enabled
-export function isFeatureEnabled(feature: keyof typeof AI_CONFIG.features): boolean {
-  return AI_CONFIG.features[feature];
-}
-
-// Get available models for a provider
-export function getAvailableModels(provider: string) {
-  const providerConfig = AI_CONFIG.models[provider as keyof typeof AI_CONFIG.models];
-  if (!providerConfig) {
-    return [];
-  }
-  
-  return Object.keys(providerConfig);
-}
-
-// Get all available providers
-export function getAvailableProviders() {
-  return Object.keys(AI_CONFIG.models);
-}
+export type ModelId = keyof typeof MODEL_CONFIG;
+export type ProviderId = keyof typeof PROVIDER_CONFIG;

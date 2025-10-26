@@ -40,22 +40,26 @@ export type ModuleId =
   | 'connectors/infrastructure/zustand-nextjs'
   | 'connectors/integrations/better-auth-github'
   | 'connectors/monitoring/sentry-nextjs'
-  | 'connectors/payment/stripe-nextjs-drizzle'
   | 'connectors/testing/vitest-nextjs'
   | 'features/ai-chat/backend/nextjs'
+  | 'features/ai-chat/database/drizzle'
   | 'features/ai-chat/frontend/shadcn'
   | 'features/ai-chat/tech-stack'
   | 'features/architech-welcome/shadcn'
   | 'features/auth/frontend/shadcn'
   | 'features/auth/tech-stack'
+  | 'features/auth/tech-stack/overrides/better-auth'
   | 'features/emailing/backend/resend-nextjs'
   | 'features/emailing/frontend/shadcn'
   | 'features/emailing/tech-stack'
   | 'features/monitoring/shadcn'
   | 'features/monitoring/tech-stack'
+  | 'features/payments/backend/stripe-nextjs'
+  | 'features/payments/database/drizzle'
   | 'features/payments/frontend/shadcn'
   | 'features/payments/tech-stack'
   | 'features/teams-management/backend/nextjs'
+  | 'features/teams-management/database/drizzle'
   | 'features/teams-management/frontend/shadcn'
   | 'features/teams-management/tech-stack'
   | 'features/web3/shadcn';
@@ -743,29 +747,6 @@ export type ModuleParameters = {
   /** Testing utilities and mock Sentry for development */
   testing?: boolean;
   };
-  'connectors/payment/stripe-nextjs-drizzle': {
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable organization-level billing features */
-    organizationBilling?: boolean;
-
-    /** Enable seat-based billing */
-    seats?: boolean;
-
-    /** Enable usage-based billing */
-    usage?: boolean;
-
-    /** Enable Stripe webhook handling */
-    webhooks?: boolean;
-
-    /** Enable seat-based billing */
-    seatManagement?: boolean;
-
-    /** Enable usage-based billing tracking */
-    usageTracking?: boolean;
-  };
-  };
   'connectors/testing/vitest-nextjs': {
 
   /** Unit tests for components, hooks, and utilities */
@@ -814,6 +795,20 @@ export type ModuleParameters = {
 
   /** Chat export and import capabilities */
   exportImport?: boolean;
+  };
+  'features/ai-chat/database/drizzle': {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable custom prompt library */
+    promptLibrary?: boolean;
+
+    /** Enable usage tracking and analytics */
+    usageTracking?: boolean;
+
+    /** Enable conversation sharing via links */
+    conversationSharing?: boolean;
+  };
   };
   'features/ai-chat/frontend/shadcn': {
   /** Constitutional Architecture features configuration */
@@ -1070,6 +1065,30 @@ export type ModuleParameters = {
 
   required: any;
   };
+  'features/payments/backend/stripe-nextjs': {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable organization-level billing features */
+    organizationBilling?: boolean;
+
+    /** Enable seat-based billing */
+    seats?: boolean;
+
+    /** Enable usage-based billing */
+    usage?: boolean;
+
+    /** Enable Stripe webhook handling */
+    webhooks?: boolean;
+
+    /** Enable seat-based billing */
+    seatManagement?: boolean;
+
+    /** Enable usage-based billing tracking */
+    usageTracking?: boolean;
+  };
+  };
+  'features/payments/database/drizzle': {};
   'features/payments/frontend/shadcn': {
   /** Constitutional Architecture features configuration */
   features?: {
@@ -1140,6 +1159,14 @@ export type ModuleParameters = {
 
     /** Enable granular permissions */
     permissions?: boolean;
+  };
+  };
+  'features/teams-management/database/drizzle': {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable activity tracking and audit trail */
+    activityTracking?: boolean;
   };
   };
   'features/teams-management/frontend/shadcn': {
@@ -1900,29 +1927,6 @@ export type TypedGenomeModule =
   /** Testing utilities and mock Sentry for development */
   testing?: boolean;
   }; }
-  | { id: 'connectors/payment/stripe-nextjs-drizzle'; parameters?: {
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable organization-level billing features */
-    organizationBilling?: boolean;
-
-    /** Enable seat-based billing */
-    seats?: boolean;
-
-    /** Enable usage-based billing */
-    usage?: boolean;
-
-    /** Enable Stripe webhook handling */
-    webhooks?: boolean;
-
-    /** Enable seat-based billing */
-    seatManagement?: boolean;
-
-    /** Enable usage-based billing tracking */
-    usageTracking?: boolean;
-  };
-  }; }
   | { id: 'connectors/testing/vitest-nextjs'; parameters?: {
 
   /** Unit tests for components, hooks, and utilities */
@@ -1971,6 +1975,20 @@ export type TypedGenomeModule =
 
   /** Chat export and import capabilities */
   exportImport?: boolean;
+  }; }
+  | { id: 'features/ai-chat/database/drizzle'; parameters?: {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable custom prompt library */
+    promptLibrary?: boolean;
+
+    /** Enable usage tracking and analytics */
+    usageTracking?: boolean;
+
+    /** Enable conversation sharing via links */
+    conversationSharing?: boolean;
+  };
   }; }
   | { id: 'features/ai-chat/frontend/shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */
@@ -2227,6 +2245,30 @@ export type TypedGenomeModule =
 
   required: any;
   }; }
+  | { id: 'features/payments/backend/stripe-nextjs'; parameters?: {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable organization-level billing features */
+    organizationBilling?: boolean;
+
+    /** Enable seat-based billing */
+    seats?: boolean;
+
+    /** Enable usage-based billing */
+    usage?: boolean;
+
+    /** Enable Stripe webhook handling */
+    webhooks?: boolean;
+
+    /** Enable seat-based billing */
+    seatManagement?: boolean;
+
+    /** Enable usage-based billing tracking */
+    usageTracking?: boolean;
+  };
+  }; }
+  | { id: 'features/payments/database/drizzle'; parameters?: {}; }
   | { id: 'features/payments/frontend/shadcn'; parameters?: {
   /** Constitutional Architecture features configuration */
   features?: {
@@ -2297,6 +2339,14 @@ export type TypedGenomeModule =
 
     /** Enable granular permissions */
     permissions?: boolean;
+  };
+  }; }
+  | { id: 'features/teams-management/database/drizzle'; parameters?: {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable activity tracking and audit trail */
+    activityTracking?: boolean;
   };
   }; }
   | { id: 'features/teams-management/frontend/shadcn'; parameters?: {

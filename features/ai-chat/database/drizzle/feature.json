@@ -1,0 +1,37 @@
+{
+  "id": "features/ai-chat/database/drizzle",
+  "name": "AI Chat Database Layer (Drizzle)",
+  "description": "Database schema for AI chat feature using Drizzle ORM. Stores conversations, messages, custom prompts, and usage analytics. Works with any AI provider.",
+  "type": "feature",
+  "version": "1.0.0",
+  "requires": [
+    "database/drizzle"
+  ],
+  "provides": [
+    "ai-chat-database-schema",
+    "ai-chat-migrations"
+  ],
+  "role": "tech-stack-layer",
+  "pattern": "custom-logic",
+  "parameters": {
+    "features": {
+      "promptLibrary": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable custom prompt library"
+      },
+      "usageTracking": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable usage tracking and analytics"
+      },
+      "conversationSharing": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable conversation sharing via links"
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,20 @@
+{
+  "id": "features/payments/database/drizzle",
+  "name": "Payments Database Layer (Drizzle)",
+  "description": "Provider-agnostic database schema for payments feature using Drizzle ORM. Works with Stripe, Paddle, or any payment provider.",
+  "type": "feature",
+  "version": "1.0.0",
+  "requires": [
+    "database/drizzle"
+  ],
+  "provides": [
+    "payments-database-schema",
+    "payments-repository",
+    "payments-migrations"
+  ],
+  "role": "tech-stack-layer",
+  "pattern": "custom-logic",
+  "parameters": {}
+}
+
+

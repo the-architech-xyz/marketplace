@@ -1,8 +1,8 @@
 {
   "id": "ai/vercel-ai-sdk",
-  "name": "Vercel AI SDK",
-  "description": "Pure Vercel AI SDK for building AI-powered applications with streaming, chat, and text generation",
-  "version": "1.0.0",
+  "name": "Vercel AI SDK Adapter",
+  "description": "Minimal Vercel AI SDK adapter - SDK initialization and configuration only. Streaming and hooks handled by Vercel AI SDK directly.",
+  "version": "2.0.0",
   "role": "adapter",
   "category": "ai",
   "tags": [

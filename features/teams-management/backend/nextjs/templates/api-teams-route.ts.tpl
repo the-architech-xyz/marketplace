@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
+import { db } from '@/lib/db';
+import { eq, and, isNull } from 'drizzle-orm';
+import { teams, teamMembers } from '@/lib/db/schema/teams';
 import { CreateTeamDataSchema as CreateTeamSchema } from '@/lib/teams-management';
 
 export async function GET(request: NextRequest) {
@@ -8,7 +11,7 @@ export async function GET(request: NextRequest) {
       headers: request.headers
     });
 
-    if (!session) {
+    if (!session || !session.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -16,10 +19,39 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get('status');
     const search = searchParams.get('search');
 
-    // Get teams for the current user
-    const teams = [];
+    // Get teams where user is a member
+    const userTeams = await db
+      .select({
+        team: teams,
+        membership: teamMembers,
+      })
+      .from(teamMembers)
+      .innerJoin(teams, eq(teams.id, teamMembers.teamId))
+      .where(
+        and(
+          eq(teamMembers.userId, session.user.id),
+          isNull(teamMembers.leftAt) // Only active memberships
+        )
+      );
 
-    return NextResponse.json(teams);
+    // Format response
+    const formattedTeams = userTeams.map(({ team, membership }) => ({
+      id: team.id,
+      name: team.name,
+      slug: team.slug,
+      description: team.description,
+      avatar: team.avatar,
+      ownerId: team.ownerId,
+      settings: team.settings,
+      role: membership.role, // User's role in this team
+      joinedAt: membership.joinedAt,
+      createdAt: team.createdAt,
+      updatedAt: team.updatedAt,
+      // TODO: Add memberCount via aggregation
+      memberCount: 1,
+    }));
+
+    return NextResponse.json(formattedTeams);
   } catch (error) {
     console.error('Error fetching teams:', error);
     return NextResponse.json(
@@ -35,7 +67,7 @@ export async function POST(request: NextRequest) {
       headers: request.headers
     });
 
-    if (!session) {
+    if (!session || !session.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -45,23 +77,43 @@ export async function POST(request: NextRequest) {
     const validatedData = CreateTeamSchema.parse(body);
     
     // Create new team
-    const newTeam = {
-      id: 'team-' + Date.now(),
-      ...validatedData,
-      status: 'active',
+    const [newTeam] = await db.insert(teams).values({
+      name: validatedData.name,
+      slug: validatedData.slug || validatedData.name.toLowerCase().replace(/\s+/g, '-'),
+      description: validatedData.description,
+      avatar: validatedData.avatar,
       ownerId: session.user.id,
-      memberCount: 1,
       settings: {
         allowInvites: true,
         requireApproval: false,
         defaultRole: 'member',
-        permissions: ['read', 'write']
+        permissions: ['read', 'write'],
       },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+    }).returning();
+
+    // Add owner as a member with 'owner' role
+    await db.insert(teamMembers).values({
+      teamId: newTeam.id,
+      userId: session.user.id,
+      role: 'owner',
+    });
+
+    // Return created team
+    const response = {
+      id: newTeam.id,
+      name: newTeam.name,
+      slug: newTeam.slug,
+      description: newTeam.description,
+      avatar: newTeam.avatar,
+      ownerId: newTeam.ownerId,
+      settings: newTeam.settings,
+      role: 'owner' as const,
+      memberCount: 1,
+      createdAt: newTeam.createdAt.toISOString(),
+      updatedAt: newTeam.updatedAt.toISOString(),
     };
 
-    return NextResponse.json(newTeam, { status: 201 });
+    return NextResponse.json(response, { status: 201 });
   } catch (error) {
     // Handle Zod validation errors
     if (error instanceof Error && error.name === 'ZodError') {

@@ -170,7 +170,7 @@ export default defineGenome({
     },
 
     {
-      id: "connectors/payment/stripe-nextjs-drizzle",
+      id: "features/payments/backend/stripe-nextjs",
       parameters: {
         features: {
           organizationBilling: true,

@@ -1,7 +1,7 @@
 /**
- * Vercel AI SDK
+ * Vercel AI SDK Adapter
  * 
- * Pure Vercel AI SDK for building AI-powered applications with streaming, chat, and text generation
+ * Minimal Vercel AI SDK adapter - SDK initialization and configuration only. Streaming and hooks handled by Vercel AI SDK directly.
  */
 
 export interface AiVercelAiSdkParams {

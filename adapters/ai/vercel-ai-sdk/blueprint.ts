@@ -2,184 +2,90 @@ import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from
 import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
 
 /**
- * Dynamic AI/Vercel-AI-SDK Adapter Blueprint
+ * Minimal Vercel AI SDK Adapter Blueprint
  * 
- * Generates AI capabilities based on Constitutional Architecture configuration.
- * Core features are always included, optional features are conditionally generated.
+ * ARCHITECTURE NOTE:
+ * This adapter ONLY provides SDK initialization and configuration.
+ * 
+ * It does NOT provide:
+ * - API routes (those go in features/ai-chat/backend/)
+ * - React hooks (Vercel AI SDK provides these directly via 'ai/react')
+ * - Database persistence (that goes in features/ai-chat/database/)
+ * 
+ * This is a TRUE adapter - just SDK wiring, nothing more.
  */
 export default function generateBlueprint(
   config: TypedMergedConfiguration<'ai/vercel-ai-sdk'>
 ): BlueprintAction[] {
   const actions: BlueprintAction[] = [];
   
-  // Extract module parameters for cleaner access
-  const { params, features } = extractTypedModuleParameters(config);
+  // Extract module parameters
+  const { params } = extractTypedModuleParameters(config);
   
-  // Core is always generated
-  actions.push(...generateCoreActions());
+  // Install Vercel AI SDK packages
+  actions.push({
+    type: BlueprintActionType.INSTALL_PACKAGES,
+    packages: [
+      'ai',                    // Core Vercel AI SDK
+      '@ai-sdk/openai',       // OpenAI provider
+      '@ai-sdk/anthropic',    // Anthropic provider
+    ]
+  });
   
-  // Optional features based on schema parameters
-  if (features.streaming) {
-    actions.push(...generateStreamingActions());
+  // Install additional providers if specified
+  if (params.providers) {
+    const additionalPackages: string[] = [];
+    
+    if (params.providers.includes('google')) {
+      additionalPackages.push('@ai-sdk/google');
+    }
+    if (params.providers.includes('cohere')) {
+      additionalPackages.push('@ai-sdk/cohere');
+    }
+    if (params.providers.includes('huggingface')) {
+      additionalPackages.push('@ai-sdk/huggingface');
+    }
+    
+    if (additionalPackages.length > 0) {
+      actions.push({
+        type: BlueprintActionType.INSTALL_PACKAGES,
+        packages: additionalPackages
+      });
+    }
   }
   
-  if (features.advanced) {
-    actions.push(...generateAdvancedActions());
-  }
+  // SDK Configuration (ONLY)
+  actions.push({
+    type: BlueprintActionType.CREATE_FILE,
+    path: '${paths.lib}/ai/config.ts',
+    template: 'templates/ai-config.ts.tpl',
+    conflictResolution: {
+      strategy: ConflictResolutionStrategy.SKIP,
+      priority: 0
+    }
+  });
   
-  if (features.enterprise) {
-    actions.push(...generateEnterpriseActions());
-  }
+  // SDK Client Instances (ONLY)
+  actions.push({
+    type: BlueprintActionType.CREATE_FILE,
+    path: '${paths.lib}/ai/client.ts',
+    template: 'templates/ai-client.ts.tpl',
+    conflictResolution: {
+      strategy: ConflictResolutionStrategy.SKIP,
+      priority: 0
+    }
+  });
+  
+  // Types (ONLY)
+  actions.push({
+    type: BlueprintActionType.CREATE_FILE,
+    path: '${paths.lib}/ai/types.ts',
+    template: 'templates/ai-types.ts.tpl',
+    conflictResolution: {
+      strategy: ConflictResolutionStrategy.SKIP,
+      priority: 0
+    }
+  });
   
   return actions;
-}
-
-// Helper functions for each capability
-function generateCoreActions(): BlueprintAction[] {
-  return [
-    // Install core AI SDK packages
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: [
-        'ai',
-        '@ai-sdk/react',
-        '@ai-sdk/openai',
-        '@ai-sdk/anthropic'
-      ]
-    },
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: [
-        '@types/node'
-      ],
-      isDev: true
-    },
-    // Core AI configuration
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}ai/config.ts',
-      template: 'templates/ai-config.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}ai/types.ts',
-      template: 'templates/ai-types.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-chat.ts',
-      template: 'templates/use-chat.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}chat/route.ts',
-      template: 'templates/chat-route.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    // Optional examples file with advanced usage patterns
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}ai/examples.ts',
-      template: 'templates/ai-examples.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    // Completion API route (core functionality, always included)
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}completion/route.ts',
-      template: 'templates/completion-route.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    // Completion hook (core functionality, always included)
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-completion.ts',
-      template: 'templates/use-completion.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    }
-  ];
-}
-
-function generateStreamingActions(): BlueprintAction[] {
-  return [
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-streaming.ts',
-      template: 'templates/use-streaming.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    }
-  ];
-}
-
-function generateAdvancedActions(): BlueprintAction[] {
-  return [
-    // Advanced AI providers (Google, Cohere, HuggingFace)
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: [
-        '@ai-sdk/google',
-        '@ai-sdk/cohere',
-        '@ai-sdk/huggingface'
-      ]
-    }
-  ];
-}
-
-function generateEnterpriseActions(): BlueprintAction[] {
-  return [
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}ai/providers.ts',
-      template: 'templates/ai-providers.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}ai/utils.ts',
-      template: 'templates/ai-utils.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}AIProvider.tsx',
-      template: 'templates/AIProvider.tsx.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    }
-  ];
 }
