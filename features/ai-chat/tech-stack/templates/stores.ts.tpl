@@ -100,7 +100,7 @@ interface ChatSettingsState extends ChatSettings {
 const DEFAULT_SETTINGS: ChatSettings = {
   model: 'gpt-3.5-turbo',
   provider: 'openai',
-  temperature: 0.7,
+              temperature: 0.7,
   maxTokens: 1000,
   systemPrompt: '',
   streaming: true,
@@ -167,7 +167,7 @@ export const useDraftMessagesStore = create<DraftMessagesState>()(
         return draft?.content || null;
       },
       clearDraft: (conversationId) =>
-        set((state) => {
+          set((state) => {
           const { [conversationId]: _, ...rest } = state.drafts;
           return { drafts: rest };
         }),

@@ -1,0 +1,52 @@
+{
+  "id": "content/i18n-expo",
+  "name": "Expo/React Native Internationalization",
+  "description": "Complete internationalization solution for Expo and React Native using expo-localization with react-i18next",
+  "category": "content",
+  "version": "1.0.0",
+  "role": "adapter",
+  "blueprint": "blueprint.ts",
+  "dependencies": [
+    "framework/expo"
+  ],
+  "capabilities": [
+    "internationalization",
+    "localization",
+    "pluralization",
+    "native-formatting",
+    "device-locale",
+    "locale-detection"
+  ],
+  "limitations": "Requires Expo or React Native framework",
+  "parameters": {
+    "locales": {
+      "type": "array",
+      "default": ["en", "fr", "es"],
+      "description": "Supported locales",
+      "required": true
+    },
+    "defaultLocale": {
+      "type": "string",
+      "default": "en",
+      "description": "Default locale",
+      "required": true
+    },
+    "features": {
+      "deviceLocale": {
+        "type": "boolean",
+        "default": true,
+        "description": "Auto-detect device locale"
+      },
+      "nativeFormatting": {
+        "type": "boolean",
+        "default": true,
+        "description": "Use native date/number formatting"
+      },
+      "pluralization": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable pluralization support"
+      }
+    }
+  }
+}

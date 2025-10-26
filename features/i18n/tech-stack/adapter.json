@@ -1,0 +1,54 @@
+{
+  "id": "features/i18n/tech-stack",
+  "name": "Internationalization Tech-Stack",
+  "description": "Universal i18n hooks and utilities that work across all frameworks. Provides standardized translation, locale management, and formatting capabilities.",
+  "type": "feature",
+  "version": "1.0.0",
+  "role": "tech-stack-layer",
+  "pattern": "custom-logic",
+  "requires": [],
+  "requiresCapabilities": [
+    {
+      "category": "content",
+      "optional": false,
+      "reason": "Requires i18n adapter for framework-specific implementation"
+    }
+  ],
+  "provides": [
+    "i18n-hooks",
+    "i18n-formatting",
+    "i18n-locale-management",
+    "i18n-types"
+  ],
+  "parameters": {
+    "locales": {
+      "type": "array",
+      "default": ["en", "fr", "es"],
+      "description": "Supported locales",
+      "required": true
+    },
+    "defaultLocale": {
+      "type": "string",
+      "default": "en",
+      "description": "Default locale",
+      "required": true
+    },
+    "features": {
+      "formatting": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable date/number/currency formatting"
+      },
+      "pluralization": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable pluralization support"
+      },
+      "rich-text": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable rich text support"
+      }
+    }
+  }
+}
