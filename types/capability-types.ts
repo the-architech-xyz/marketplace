@@ -10,8 +10,8 @@ import { Genome } from '@thearchitech.xyz/types';
 // Capability ID union type (for strict typing)
 export type CapabilityId = 
   | 'teams-management'
-  | 'monitoring'
   | 'payments'
+  | 'monitoring'
   | 'emailing'
   | 'auth'
   | 'ai-chat';
@@ -86,18 +86,6 @@ export interface CapabilitySchema {
   hasValidation?: boolean;
   };
   };
-  monitoring: {
-    techStack?: {
-  featureName?: string;
-  featurePath?: string;
-  hasTypes?: boolean;
-  hasSchemas?: boolean;
-  hasHooks?: boolean;
-  hasStores?: boolean;
-  hasApiRoutes?: boolean;
-  hasValidation?: boolean;
-  };
-  };
   payments: {
     provider: 'stripe' | 'custom';
     adapter: {
@@ -119,6 +107,18 @@ export interface CapabilitySchema {
     analytics?: boolean;
   };
     };
+    techStack?: {
+  featureName?: string;
+  featurePath?: string;
+  hasTypes?: boolean;
+  hasSchemas?: boolean;
+  hasHooks?: boolean;
+  hasStores?: boolean;
+  hasApiRoutes?: boolean;
+  hasValidation?: boolean;
+  };
+  };
+  monitoring: {
     techStack?: {
   featureName?: string;
   featurePath?: string;
@@ -243,10 +243,10 @@ export interface Auth_betterAuthAdapterParams {
 export type CapabilityAdapterUnion = {
   'teams-management':
   | { provider: 'custom'; adapter: Record<string, unknown> };
-  'monitoring':
-  | { provider: 'custom'; adapter: Record<string, unknown> };
   'payments':
   | { provider: 'stripe'; adapter: Payments_stripeAdapterParams }
+  | { provider: 'custom'; adapter: Record<string, unknown> };
+  'monitoring':
   | { provider: 'custom'; adapter: Record<string, unknown> };
   'emailing':
   | { provider: 'resend'; adapter: Emailing_resendAdapterParams }
