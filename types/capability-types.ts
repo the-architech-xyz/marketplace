@@ -43,7 +43,7 @@ export interface ReactFrameworkParams {
   reactVersion?: string;
 }
 
-export interface React-nativeFrameworkParams {
+export interface ReactNativeFrameworkParams {
   typescript?: boolean;
   srcDir?: boolean;
   importAlias?: string;
@@ -58,7 +58,7 @@ export type FrameworkApp =
   | { id: string; type: 'web' | 'mobile' | 'api' | 'desktop' | 'worker'; framework: 'expo'; package?: string; router?: 'app' | 'pages'; alias?: string; parameters?: ExpoFrameworkParams; }
   | { id: string; type: 'web' | 'mobile' | 'api' | 'desktop' | 'worker'; framework: 'nextjs'; package?: string; router?: 'app' | 'pages'; alias?: string; parameters?: NextjsFrameworkParams; }
   | { id: string; type: 'web' | 'mobile' | 'api' | 'desktop' | 'worker'; framework: 'react'; package?: string; router?: 'app' | 'pages'; alias?: string; parameters?: ReactFrameworkParams; }
-  | { id: string; type: 'web' | 'mobile' | 'api' | 'desktop' | 'worker'; framework: 'react-native'; package?: string; router?: 'app' | 'pages'; alias?: string; parameters?: React-nativeFrameworkParams; };
+  | { id: string; type: 'web' | 'mobile' | 'api' | 'desktop' | 'worker'; framework: 'react-native'; package?: string; router?: 'app' | 'pages'; alias?: string; parameters?: ReactNativeFrameworkParams; };
 
 // Generated capability schema
 export interface CapabilitySchema {

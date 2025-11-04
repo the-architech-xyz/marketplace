@@ -548,7 +548,12 @@ export declare function defineGenome<T extends TypedGenome>(genome: T): T;
         const schema = ConstitutionalTypeGeneratorHelpers.loadConstitutionalSchema(adapterJsonPath);
         const params = (schema && schema.parameters) ? schema.parameters : {};
 
-        const ifaceName = `${frameworkId.charAt(0).toUpperCase()}${frameworkId.slice(1)}FrameworkParams`;
+        // Convert framework ID to PascalCase (e.g., 'react-native' -> 'ReactNative')
+        const pascalCaseFrameworkId = frameworkId
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join('');
+        const ifaceName = `${pascalCaseFrameworkId}FrameworkParams`;
         const propLines: string[] = [];
         for (const [paramName, paramConfig] of Object.entries(params)) {
           if (paramName === 'features') continue; // framework adapters rarely expose features; skip
