@@ -1,0 +1,23 @@
+{
+  "id": "features/payments/tech-stack/overrides/revenuecat",
+  "name": "RevenueCat SDK Override",
+  "description": "RevenueCat SDK hooks for cross-platform subscriptions (replaces standard TanStack Query hooks)",
+  "type": "feature",
+  "version": "1.0.0",
+  "role": "tech-stack-override",
+  "pattern": "override",
+  "requires": ["payment/revenuecat"],
+  "provides": ["payments-hooks-revenuecat"],
+  "parameters": {
+    "apiKey": {
+      "type": "string",
+      "description": "RevenueCat API key",
+      "required": true
+    },
+    "platforms": {
+      "type": "array",
+      "description": "Supported platforms",
+      "default": ["ios", "android", "web"]
+    }
+  }
+}

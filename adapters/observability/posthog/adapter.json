@@ -1,0 +1,155 @@
+{
+  "id": "technologies/observability/posthog-core",
+  "name": "PostHog Core (Tech-Agnostic)",
+  "description": "Tech-agnostic PostHog analytics SDK configuration. Framework-specific implementations handled by Connectors.",
+  "category": "observability",
+  "version": "1.0.0",
+  "role": "adapter",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "provides": [
+    "analytics-core",
+    "analytics-events",
+    "analytics-users",
+    "analytics-session-replay",
+    "analytics-feature-flags",
+    "analytics-experiments"
+  ],
+  "limitations": "Tech-agnostic core only. Requires Connector for framework-specific implementation.",
+  "parameters": {
+    "apiKey": {
+      "type": "string",
+      "default": "",
+      "description": "PostHog API key (or set POSTHOG_API_KEY env var)",
+      "required": false
+    },
+    "apiHost": {
+      "type": "string",
+      "default": "https://app.posthog.com",
+      "description": "PostHog API host URL",
+      "required": false
+    },
+    "environment": {
+      "type": "string",
+      "default": "development",
+      "description": "Environment name",
+      "required": false
+    },
+    "features": {
+      "core": {
+        "type": "boolean",
+        "default": true,
+        "description": "Essential analytics (event tracking, user identification)"
+      },
+      "eventTracking": {
+        "type": "boolean",
+        "default": true,
+        "description": "Event tracking and analytics"
+      },
+      "sessionReplay": {
+        "type": "boolean",
+        "default": false,
+        "description": "Session replay recording"
+      },
+      "featureFlags": {
+        "type": "boolean",
+        "default": false,
+        "description": "Feature flags management"
+      },
+      "experiments": {
+        "type": "boolean",
+        "default": false,
+        "description": "A/B testing and experiments"
+      },
+      "autocapture": {
+        "type": "boolean",
+        "default": true,
+        "description": "Auto-capture user interactions"
+      },
+      "surveys": {
+        "type": "boolean",
+        "default": false,
+        "description": "Surveys and feedback collection"
+      }
+    },
+    "personProfiles": {
+      "type": "string",
+      "default": "identified_only",
+      "enum": ["identified_only", "always", "never"],
+      "description": "Person profiles creation mode",
+      "required": false
+    }
+  },
+  "internal_structure": {
+    "core": {
+      "provides": [
+        "analytics-core"
+      ],
+      "templates": [
+        "posthog-config.ts",
+        "client.ts",
+        "server.ts",
+        "analytics.ts"
+      ]
+    },
+    "events": {
+      "prerequisites": [
+        "analytics-core"
+      ],
+      "provides": [
+        "analytics-events"
+      ],
+      "templates": [
+        "event-tracking.ts"
+      ]
+    },
+    "users": {
+      "prerequisites": [
+        "analytics-core"
+      ],
+      "provides": [
+        "analytics-users"
+      ],
+      "templates": [
+        "user-tracking.ts"
+      ]
+    },
+    "sessionReplay": {
+      "prerequisites": [
+        "analytics-core"
+      ],
+      "provides": [
+        "analytics-session-replay"
+      ],
+      "templates": [
+        "session-replay.ts"
+      ]
+    },
+    "featureFlags": {
+      "prerequisites": [
+        "analytics-core"
+      ],
+      "provides": [
+        "analytics-feature-flags"
+      ],
+      "templates": [
+        "feature-flags.ts"
+      ]
+    },
+    "experiments": {
+      "prerequisites": [
+        "analytics-core",
+        "analytics-feature-flags"
+      ],
+      "provides": [
+        "analytics-experiments"
+      ],
+      "templates": [
+        "experiments.ts"
+      ]
+    }
+  },
+  "constraints": {}
+}
+
+

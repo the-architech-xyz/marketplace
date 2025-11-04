@@ -1,0 +1,96 @@
+{
+  "id": "technologies/analytics/seo-core",
+  "name": "SEO Core (Tech-Agnostic)",
+  "description": "Tech-agnostic SEO utilities, structured data schemas, and metadata types. Framework-specific implementations handled by Connectors.",
+  "category": "analytics",
+  "version": "1.0.0",
+  "role": "adapter",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "provides": [
+    "seo-core",
+    "seo-structured-data",
+    "seo-metadata-types",
+    "seo-utilities"
+  ],
+  "limitations": "Tech-agnostic core only. Requires Connector for framework-specific implementation.",
+  "parameters": {
+    "siteUrl": {
+      "type": "string",
+      "default": "",
+      "description": "Base URL of the site (or set NEXT_PUBLIC_SITE_URL env var)",
+      "required": false
+    },
+    "siteName": {
+      "type": "string",
+      "default": "",
+      "description": "Site name for Open Graph and structured data",
+      "required": false
+    },
+    "defaultLocale": {
+      "type": "string",
+      "default": "en",
+      "description": "Default locale for the site",
+      "required": false
+    },
+    "features": {
+      "core": {
+        "type": "boolean",
+        "default": true,
+        "description": "Essential SEO utilities and types"
+      },
+      "structuredData": {
+        "type": "boolean",
+        "default": true,
+        "description": "Structured data (JSON-LD) schemas"
+      },
+      "metadataHelpers": {
+        "type": "boolean",
+        "default": true,
+        "description": "Metadata generation helpers"
+      },
+      "sitemap": {
+        "type": "boolean",
+        "default": false,
+        "description": "Sitemap generation utilities"
+      }
+    }
+  },
+  "internal_structure": {
+    "core": {
+      "provides": [
+        "seo-core"
+      ],
+      "templates": [
+        "config.ts",
+        "types.ts",
+        "utils.ts"
+      ]
+    },
+    "structuredData": {
+      "prerequisites": [
+        "seo-core"
+      ],
+      "provides": [
+        "seo-structured-data"
+      ],
+      "templates": [
+        "structured-data.ts"
+      ]
+    },
+    "metadataHelpers": {
+      "prerequisites": [
+        "seo-core"
+      ],
+      "provides": [
+        "seo-metadata-types"
+      ],
+      "templates": [
+        "metadata-helpers.ts"
+      ]
+    }
+  },
+  "constraints": {}
+}
+
+

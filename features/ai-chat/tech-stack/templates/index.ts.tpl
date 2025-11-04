@@ -1,104 +1,63 @@
 /**
- * AI Chat Tech-Stack - Centralized Exports
+ * AI Chat Feature - Technology Stack Layer
  * 
- * Import everything you need from one place.
+ * ⚠️ ARCHITECTURE:
+ * - TanStack Query Hooks → Server data (conversations, messages)
+ * - Zustand Store → UI state only (sidebar, input, streaming)
  */
 
-// ============================================================================
-// HOOKS
-// ============================================================================
+// Types
+export * from './types';
 
+// Schemas
+export * from './schemas';
+
+// Hooks
+export * from './hooks';
+
+// Stores
+export * from './stores';
+
+// Re-export commonly used types for convenience
+export type {
+  Message,
+  Chat,
+  Conversation,
+  SendMessageData,
+  CreateChatData,
+  UpdateChatData,
+  ChatSettings,
+  ChatAnalytics,
+  AIChatError,
+} from './types';
+
+// Re-export commonly used schemas for validation
 export {
-  // Conversation hooks
+  MessageSchema,
+  ChatSchema,
+  ConversationSchema,
+  SendMessageDataSchema,
+  CreateChatDataSchema,
+  UpdateChatDataSchema,
+  ChatSettingsSchema,
+  AIChatErrorSchema,
+} from './schemas';
+
+// Re-export commonly used hooks
+export {
   useConversations,
   useConversation,
   useCreateConversation,
   useUpdateConversation,
   useDeleteConversation,
-  
-  // Message hooks
   useMessages,
+  useSendMessage,
+  useUpdateMessage,
   useDeleteMessage,
-  
-  // Chat hooks
-  useChatWithHistory,
-  useSimpleChat,
-  
-  // Analytics hooks
-  useAnalytics,
-  
-  // Utility hooks
-  useArchiveConversation,
-  useRestoreConversation,
-  useRenameConversation,
-  
-  // Re-exported Vercel AI SDK hooks
-  useChat,
-  useCompletion,
-} from './hooks';
-
-// ============================================================================
-// TYPES
-// ============================================================================
-
-export type {
-  AIConversation,
-  AIMessage,
-  CreateConversationData,
-  UpdateConversationData,
-  SendMessageData,
-} from './hooks';
-
-// ============================================================================
-// SCHEMAS
-// ============================================================================
-
-export {
-  // Schemas
-  AIMessageSchema,
-  AIConversationSchema,
-  CreateConversationSchema,
-  UpdateConversationSchema,
-  SendMessageSchema,
-  AIUsageSchema,
-  AIPromptSchema,
-  CreatePromptSchema,
-  ChatAnalyticsSchema,
-  AIChatErrorSchema,
-  
-  // Enums
-  MessageRoleSchema,
-  ConversationStatusSchema,
-  AIProviderSchema,
-  PromptVisibilitySchema,
-} from './schemas';
-
-export type {
-  AIMessage as AIMessageType,
-  AIConversation as AIConversationType,
-  CreateConversationData as CreateConversationDataType,
-  UpdateConversationData as UpdateConversationDataType,
-  SendMessageData as SendMessageDataType,
-  AIUsage,
-  AIPrompt,
-  CreatePromptData,
-  ChatAnalytics,
-  AIChatError,
-} from './schemas';
-
-// ============================================================================
-// STORES
-// ============================================================================
-
-export {
-  // Stores
-  useChatUIStore,
-  useChatSettingsStore,
-  useDraftMessagesStore,
-  useSelectionStore,
-  
-  // Utility hooks
-  useActiveConversation,
   useChatSettings,
-  useIsSidebarOpen,
-} from './stores';
+  useUpdateChatSettings,
+  useChatAnalytics,
+} from './hooks';
+
+// Re-export UI store
+export { useAIChatUIStore } from './stores';

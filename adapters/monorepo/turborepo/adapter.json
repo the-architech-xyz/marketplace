@@ -1,0 +1,45 @@
+{
+  "id": "monorepo/turborepo",
+  "name": "Turborepo",
+  "description": "High-performance build system for JavaScript/TypeScript monorepos with intelligent caching and task orchestration",
+  "category": "monorepo",
+  "version": "2.0.0",
+  "role": "adapter",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "provides": [
+    {
+      "name": "turborepo",
+      "version": "2.0.0",
+      "description": "Turborepo monorepo build system"
+    }
+  ],
+  "capabilities": {
+    "monorepo-management": {
+      "version": "2.0.0",
+      "description": "Monorepo workspace management with intelligent caching",
+      "provides": ["workspace", "caching", "pipelines", "remote-caching"]
+    },
+    "build-optimization": {
+      "version": "2.0.0",
+      "description": "Build performance optimization",
+      "provides": ["parallel-execution", "incremental-builds", "task-dependencies"]
+    }
+  },
+  "limitations": "Requires Node.js 18+ and a supported package manager (npm, yarn, pnpm, bun)",
+  "parameters": {
+    "packageManager": {
+      "type": "string",
+      "default": "pnpm",
+      "description": "Package manager (npm, yarn, pnpm, bun)",
+      "required": false
+    },
+    "remoteCaching": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable remote caching with Vercel",
+      "required": false
+    }
+  }
+}
+

@@ -1,0 +1,19 @@
+{
+  "id": "connectors/nextjs-trpc-router",
+  "name": "Next.js tRPC Router Connector",
+  "description": "Generates tRPC router and API route for Next.js (supports both single-app and monorepo)",
+  "type": "connector",
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "version": "1.0.0",
+  "requires": ["data-fetching/trpc"],
+  "provides": ["trpc-router", "trpc-api-route"],
+  "parameters": {
+    "templateContext": {
+      "type": "object",
+      "description": "Template context with project structure information",
+      "required": false
+    }
+  }
+}
+

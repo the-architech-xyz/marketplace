@@ -1,0 +1,20 @@
+{
+  "id": "connectors/revenuecat-webhook",
+  "name": "RevenueCat Webhook Handler",
+  "description": "Next.js API route for handling RevenueCat webhook events with HMAC verification",
+  "category": "connectors",
+  "role": "framework-wiring-connector",
+  "version": "1.0.0",
+  "dependencies": [],
+  "capabilities": {
+    "webhook-handling": {
+      "version": "1.0.0",
+      "provides": [
+        "webhook-verification",
+        "event-processing",
+        "status-sync"
+      ]
+    }
+  }
+}
+

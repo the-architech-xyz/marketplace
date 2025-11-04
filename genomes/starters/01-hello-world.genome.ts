@@ -48,13 +48,15 @@ export default defineGenome({
 
     // Welcome Screen
     {
-      id: 'features/architech-welcome/shadcn',
+      id: 'features/architech-welcome',
       parameters: {
-        showTechStack: true,
-        showComponents: true,
-        showProjectStructure: true,
-        showQuickStart: true,
-        showArchitechBranding: true,
+        features: {
+          techStack: true,
+          componentShowcase: true,
+          projectStructure: true,
+          quickStart: true,
+          architechBranding: true,
+        },
       },
     },
   ],

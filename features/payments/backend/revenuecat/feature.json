@@ -1,0 +1,54 @@
+{
+  "id": "features/payments/backend/revenuecat",
+  "name": "RevenueCat Backend Integration",
+  "description": "Backend webhook handler for RevenueCat subscription management",
+  "type": "feature",
+  "category": "payments",
+  "version": "1.0.0",
+  "role": "backend-feature",
+  "pattern": "custom-logic",
+  "contract": {
+    "hooks": {
+      "useWebhookProcessor": {
+        "parameters": ["event"],
+        "returnType": "Promise<{ success: boolean }>",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": false
+      }
+    },
+    "types": {
+      "WebhookEvent": {
+        "definition": "export interface WebhookEvent {\n  id: string;\n  type: string;\n  app_user_id: string;\n  product_id?: string;\n  expiration_at_ms?: number;\n  purchased_at_ms?: number;\n  is_trial_period?: boolean;\n  period_type?: 'NORMAL' | 'TRIAL' | 'INTRO';\n  store?: 'APP_STORE' | 'PLAY_STORE' | 'STRIPE';\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      }
+    }
+  },
+  "blueprint": "blueprint.ts",
+  "capabilities": [
+    "webhook-processing",
+    "database-sync",
+    "auth-integration",
+    "email-triggers"
+  ],
+  "prerequisites": {
+    "modules": ["database/drizzle", "features/auth/frontend"],
+    "capabilities": ["database", "auth"]
+  },
+  "provides": [
+    "subscription-management",
+    "webhook-processing",
+    "webhook-route.ts",
+    "webhook-processor.ts",
+    "user-mapper.ts"
+  ],
+  "parameters": {
+    "webhookSecret": {
+      "type": "string",
+      "description": "RevenueCat webhook secret for HMAC verification",
+      "required": true
+    }
+  }
+}

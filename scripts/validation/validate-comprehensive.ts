@@ -16,7 +16,13 @@ import { execSync } from 'child_process';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join, relative } from 'path';
 import { glob } from 'glob';
-import { DeadTemplateDetector } from './dead-template-detector.js';
+import { DeadTemplateDetector } from './dead-template-detector';
+import {
+  discoverUIMarketplaces,
+  findUITemplateInMarketplaces,
+  isUITemplate,
+  extractUIRelativePath
+} from '../utilities/ui-marketplace-discovery.js';
 
 interface ValidationResult {
   name: string;
@@ -120,10 +126,19 @@ class ComprehensiveValidator {
     console.log('----------------------------------');
 
     try {
+      // Discover UI marketplaces
+      const uiMarketplaces = await discoverUIMarketplaces(this.marketplaceRoot);
+      
+      if (uiMarketplaces.length > 0) {
+        console.log(`📦 Discovered ${uiMarketplaces.length} UI marketplace(s): ${uiMarketplaces.map(m => m.name).join(', ')}`);
+      }
+
       // Find all blueprint files
       const blueprintFiles = await glob('**/blueprint.ts', { cwd: this.marketplaceRoot });
-      let missingTemplates = 0;
-      let totalTemplates = 0;
+      let missingCoreTemplates = 0;
+      let missingUITemplates = 0;
+      let totalCoreTemplates = 0;
+      let totalUITemplates = 0;
 
       for (const blueprintFile of blueprintFiles) {
         const blueprintPath = join(this.marketplaceRoot, blueprintFile);
@@ -135,22 +150,50 @@ class ComprehensiveValidator {
           for (const match of templateMatches) {
             const templatePath = match.match(/['"`]([^'"`]+)['"`]/)?.[1];
             if (templatePath) {
-              totalTemplates++;
-              const fullTemplatePath = join(this.marketplaceRoot, dirname(blueprintFile), templatePath);
-              if (!existsSync(fullTemplatePath)) {
-                missingTemplates++;
-                console.log(`❌ Missing template: ${templatePath}`);
+              if (isUITemplate(templatePath)) {
+                // UI marketplace template
+                totalUITemplates++;
+                const relativePath = extractUIRelativePath(templatePath);
+                const foundPath = findUITemplateInMarketplaces(relativePath, uiMarketplaces);
+                
+                if (!foundPath) {
+                  missingUITemplates++;
+                  console.log(`⚠️  UI template not found in any marketplace: ${templatePath}`);
+                }
+              } else {
+                // Core marketplace template
+                totalCoreTemplates++;
+                const fullTemplatePath = join(this.marketplaceRoot, dirname(blueprintFile), templatePath);
+                if (!existsSync(fullTemplatePath)) {
+                  missingCoreTemplates++;
+                  console.log(`❌ Missing template: ${templatePath}`);
+                }
               }
             }
           }
         }
       }
 
+      const totalTemplates = totalCoreTemplates + totalUITemplates;
+      const missingTemplates = missingCoreTemplates + missingUITemplates;
+      const validTemplates = totalTemplates - missingTemplates;
+
+      // Core templates are critical (fail), UI templates are warnings
+      const status = missingCoreTemplates > 0 ? 'failed' : 
+                    missingUITemplates > 0 ? 'warning' : 'passed';
+
       this.results.push({
         name: 'Template Existence',
-        status: missingTemplates === 0 ? 'passed' : 'failed',
-        message: `${totalTemplates - missingTemplates}/${totalTemplates} templates exist`,
-        details: { missingTemplates, totalTemplates }
+        status,
+        message: `${validTemplates}/${totalTemplates} templates exist (${totalCoreTemplates - missingCoreTemplates}/${totalCoreTemplates} core, ${totalUITemplates - missingUITemplates}/${totalUITemplates} UI)`,
+        details: { 
+          missingCoreTemplates, 
+          missingUITemplates,
+          totalCoreTemplates,
+          totalUITemplates,
+          totalTemplates: totalTemplates,
+          validTemplates: validTemplates
+        }
       });
     } catch (error) {
       this.results.push({
@@ -539,6 +582,7 @@ class ComprehensiveValidator {
 
   public shouldBlockCommit(): boolean {
     // Block commit if there are critical failures or compliance regressions
+    // Note: Warnings (like missing UI templates) don't block commits
     const criticalFailures = this.results.filter(r => r.status === 'failed');
     const hasRegressions = this.complianceRegressions.some(c => c.regression);
     

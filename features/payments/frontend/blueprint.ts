@@ -1,0 +1,333 @@
+/**
+ * Payments Frontend Implementation: Shadcn/ui
+ * 
+ * Complete payment management system with Stripe integration, subscriptions, and billing
+ * Uses UI marketplace templates via convention-based loading (`ui/...` prefix)
+ */
+
+import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types.js';
+
+export default function generateBlueprint(
+  config: TypedMergedConfiguration<'features/payments/frontend/shadcn'>
+): BlueprintAction[] {
+  // Extract module parameters for cleaner access
+  const { params, features } = extractTypedModuleParameters(config);
+
+  const actions: BlueprintAction[] = [];
+  
+  // Core is always generated
+  actions.push(...generateCoreActions());
+  
+  // Optional features based on configuration
+  if (features.subscriptions) {
+    actions.push(...generateSubscriptionsActions());
+  }
+  
+  if (features.invoicing) {
+    actions.push(...generateInvoicingActions());
+  }
+  
+  if (features.webhooks) {
+    actions.push(...generateWebhooksActions());
+  }
+  
+  if (features.analytics) {
+    actions.push(...generateAnalyticsActions());
+  }
+  
+  return actions;
+}
+
+function generateCoreActions(): BlueprintAction[] {
+  return [
+    {
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: [
+        '@stripe/stripe-js',
+        '@stripe/react-stripe-js',
+        'react-hook-form',
+        '@hookform/resolvers',
+        'lucide-react',
+        'date-fns',
+        'framer-motion'
+      ]
+    },
+
+    // Core payment components (only existing templates)
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/PaymentForm.tsx',
+      template: 'ui/payments/PaymentForm.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/CheckoutForm.tsx',
+      template: 'ui/payments/CheckoutForm.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/PaymentStatus.tsx',
+      template: 'ui/payments/PaymentStatus.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/PaymentMethodSelector.tsx',
+      template: 'ui/payments/PaymentMethodSelector.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/PricingCard.tsx',
+      template: 'ui/payments/PricingCard.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/RefundDialog.tsx',
+      template: 'ui/payments/RefundDialog.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    // Payment pages
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.app_root}payments/page.tsx',
+      template: 'ui/payments/payments-dashboard.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.app_root}checkout/page.tsx',
+      template: 'ui/payments/checkout-page.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.lib}payments/payment-utils.ts',
+      template: 'ui/payments/payment-utils.ts.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    // Payment hooks are now generated by tech-stack layer
+    // Removed duplicate hook generation to avoid conflicts
+
+    // Analytics components (always generate - used by dashboard)
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/PaymentAnalytics.tsx',
+      template: 'ui/payments/PaymentAnalytics.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/TransactionTable.tsx',
+      template: 'ui/payments/TransactionTable.tsx.tpl',
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    }
+  ];
+}
+
+function generateSubscriptionsActions(): BlueprintAction[] {
+  return [
+    // Subscription components (existing templates)
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/SubscriptionCard.tsx',
+      template: 'ui/payments/SubscriptionCard.tsx.tpl',
+      context: { 
+        features: ['subscriptions'],
+        hasSubscriptions: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    // Subscription pages
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.app_root}subscriptions/page.tsx',
+      template: 'ui/payments/subscriptions-page.tsx.tpl',
+      context: { 
+        features: ['subscriptions'],
+        hasSubscriptions: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    // Subscription hooks are now generated by tech-stack layer
+    // Removed duplicate hook generation to avoid conflicts
+  ];
+}
+
+function generateInvoicingActions(): BlueprintAction[] {
+  return [
+    // Invoice components (existing templates)
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/InvoiceCard.tsx',
+      template: 'ui/payments/InvoiceCard.tsx.tpl',
+      context: { 
+        features: ['invoicing'],
+        hasInvoicing: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    // Invoice pages
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.app_root}invoices/page.tsx',
+      template: 'ui/payments/invoices-page.tsx.tpl',
+      context: { 
+        features: ['invoicing'],
+        hasInvoicing: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+
+    // Invoice hooks are now generated by tech-stack layer
+    // Removed duplicate hook generation to avoid conflicts
+  ];
+}
+
+function generateWebhooksActions(): BlueprintAction[] {
+  return [
+    // Note: These templates don't exist yet, so we'll comment them out
+    // TODO: Create these templates when webhooks feature is implemented
+    /*
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.components}payments/WebhookHandler.tsx',
+      template: 'ui/payments/WebhookHandler.tsx.tpl',
+      context: { 
+        features: ['webhooks'],
+        hasWebhooks: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    }
+    */
+  ];
+}
+
+function generateAnalyticsActions(): BlueprintAction[] {
+  return [
+    // Transaction pages
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.app_root}transactions/page.tsx',
+      template: 'ui/payments/transactions-page.tsx.tpl',
+      context: { 
+        features: ['analytics'],
+        hasAnalytics: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    }
+  ];
+}

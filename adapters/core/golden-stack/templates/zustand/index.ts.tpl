@@ -7,17 +7,14 @@
 // Store hooks
 export { useAppStore } from './use-app-store';
 export { useUIStore } from './use-ui-store';
-export { useAuthStore } from './use-auth-store';
 
 // Store selectors
 export { appSelectors } from './use-app-store';
 export { uiSelectors } from './use-ui-store';
-export { authSelectors } from './use-auth-store';
 
 // Store actions
 export { appActions } from './use-app-store';
 export { uiActions } from './use-ui-store';
-export { authActions } from './use-auth-store';
 
 // Store utilities
 export { useStore, useStoreSelector, useStoreWithEquality } from './use-store';
@@ -28,13 +25,12 @@ export { useStoreWithValidation } from './use-store';
 
 // Store provider
 export { StoreProvider } from './StoreProvider';
-export { useStoreContext, useAppStoreContext, useUIStoreContext, useAuthStoreContext } from './StoreProvider';
+export { useStoreContext, useAppStoreContext, useUIStoreContext } from './StoreProvider';
 export { useStoreInitialization, useStoreReset, useStoreDebug as useStoreProviderDebug } from './StoreProvider';
 
 // Store types
 export type { AppState } from './use-app-store';
 export type { UIState } from './use-ui-store';
-export type { AuthState, User } from './use-auth-store';
 
 // Store creation utilities
 export { createStore, createSlice, createSelector, createAction } from './create-store';

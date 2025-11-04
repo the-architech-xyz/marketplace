@@ -1,0 +1,46 @@
+{
+  "id": "connectors/revenuecat-react-native",
+  "name": "RevenueCat React Native Connector",
+  "description": "Configure RevenueCat SDK for React Native to enable cross-platform subscriptions with standardized backend integration",
+  "category": "connectors",
+  "role": "framework-wiring-connector",
+  "version": "7.0.0",
+  "blueprint": "blueprint.ts",
+  "dependencies": [
+    {
+      "name": "react-native-purchases",
+      "version": "7.0.0",
+      "description": "RevenueCat React Native SDK"
+    }
+  ],
+  "requires": [
+    "react-native",
+    "payments/backend/revenuecat"
+  ],
+  "requiresCapabilities": [
+    {
+      "category": "auth",
+      "optional": false,
+      "reason": "Link RevenueCat app_user_id to your authenticated users"
+    }
+  ],
+  "provides": [
+    {
+      "name": "revenuecat-native",
+      "version": "7.0.0",
+      "description": "RevenueCat configuration for React Native"
+    }
+  ],
+  "parameters": {
+    "apiKey": {
+      "type": "string",
+      "description": "RevenueCat API key",
+      "required": true
+    },
+    "userId": {
+      "type": "string",
+      "description": "Set app_user_id when configuring (optional, will use auth user ID if not provided)"
+    }
+  }
+}
+

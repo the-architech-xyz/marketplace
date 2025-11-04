@@ -9,14 +9,18 @@ import { Genome } from '@thearchitech.xyz/types';
 // Generated ModuleId union type
 export type ModuleId = 
   | 'ai/vercel-ai-sdk'
+  | 'analytics/ab-testing-core'
+  | 'analytics/seo-core'
   | 'auth/better-auth'
   | 'blockchain/web3'
-  | 'content/next-intl'
+  | 'content/i18n-expo'
+  | 'content/i18n-nextjs'
   | 'core/dependencies'
   | 'core/forms'
   | 'core/git'
   | 'core/golden-stack'
   | 'data-fetching/tanstack-query'
+  | 'data-fetching/trpc'
   | 'database/drizzle'
   | 'database/prisma'
   | 'database/sequelize'
@@ -24,14 +28,22 @@ export type ModuleId =
   | 'deployment/docker'
   | 'deployment/vercel'
   | 'email/resend'
+  | 'framework/expo'
   | 'framework/nextjs'
+  | 'framework/react-native'
+  | 'monorepo/nx'
+  | 'monorepo/turborepo'
+  | 'observability/posthog'
   | 'observability/sentry'
   | 'payment/stripe'
   | 'services/github-api'
   | 'ui/shadcn-ui'
   | 'ui/tailwind'
   | 'connectors/ai/vercel-ai-nextjs'
+  | 'connectors/analytics/ab-vercel-nextjs'
+  | 'connectors/analytics/posthog-nextjs'
   | 'connectors/auth/better-auth-nextjs'
+  | 'connectors/cms/payload-nextjs'
   | 'connectors/database/drizzle-postgres-docker'
   | 'connectors/deployment/docker-nextjs'
   | 'connectors/email/resend-nextjs'
@@ -40,28 +52,40 @@ export type ModuleId =
   | 'connectors/infrastructure/zustand-nextjs'
   | 'connectors/integrations/better-auth-github'
   | 'connectors/monitoring/sentry-nextjs'
+  | 'connectors/nextjs-trpc-router'
+  | 'connectors/revenuecat-expo'
+  | 'connectors/revenuecat-react-native'
+  | 'connectors/revenuecat-web'
+  | 'connectors/revenuecat-webhook'
+  | 'connectors/seo/seo-nextjs'
   | 'connectors/testing/vitest-nextjs'
+  | 'features/_shared/tech-stack/overrides/trpc'
   | 'features/ai-chat/backend/nextjs'
   | 'features/ai-chat/database/drizzle'
-  | 'features/ai-chat/frontend/shadcn'
+  | 'features/ai-chat/frontend'
   | 'features/ai-chat/tech-stack'
-  | 'features/architech-welcome/shadcn'
-  | 'features/auth/frontend/shadcn'
+  | 'features/architech-welcome'
+  | 'features/auth/frontend'
   | 'features/auth/tech-stack'
   | 'features/auth/tech-stack/overrides/better-auth'
   | 'features/emailing/backend/resend-nextjs'
-  | 'features/emailing/frontend/shadcn'
+  | 'features/emailing/frontend'
   | 'features/emailing/tech-stack'
   | 'features/monitoring/shadcn'
   | 'features/monitoring/tech-stack'
+  | 'features/payments/backend/revenuecat'
   | 'features/payments/backend/stripe-nextjs'
   | 'features/payments/database/drizzle'
-  | 'features/payments/frontend/shadcn'
+  | 'features/payments/frontend'
   | 'features/payments/tech-stack'
+  | 'features/payments/tech-stack/overrides/revenuecat'
   | 'features/teams-management/backend/nextjs'
   | 'features/teams-management/database/drizzle'
-  | 'features/teams-management/frontend/shadcn'
+  | 'features/teams-management/frontend'
   | 'features/teams-management/tech-stack'
+  | 'features/waitlist/backend/nextjs'
+  | 'features/waitlist/database/drizzle'
+  | 'features/waitlist/tech-stack'
   | 'features/web3/shadcn';
 
 export type ModuleParameters = {
@@ -99,6 +123,49 @@ export type ModuleParameters = {
 
   /** Temperature for generation */
   temperature?: number;
+  };
+  'analytics/ab-testing-core': {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Essential A/B testing utilities and types */
+    core?: boolean;
+
+    /** Experiment configuration and management */
+    experimentManagement?: boolean;
+
+    /** Variant assignment logic */
+    variantAssignment?: boolean;
+
+    /** Analytics integration for tracking experiment results */
+    analytics?: boolean;
+  };
+  };
+  'analytics/seo-core': {
+
+  /** Base URL of the site (or set NEXT_PUBLIC_SITE_URL env var) */
+  siteUrl?: string;
+
+  /** Site name for Open Graph and structured data */
+  siteName?: string;
+
+  /** Default locale for the site */
+  defaultLocale?: string;
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Essential SEO utilities and types */
+    core?: boolean;
+
+    /** Structured data (JSON-LD) schemas */
+    structuredData?: boolean;
+
+    /** Metadata generation helpers */
+    metadataHelpers?: boolean;
+
+    /** Sitemap generation utilities */
+    sitemap?: boolean;
+  };
   };
   'auth/better-auth': {
 
@@ -155,7 +222,27 @@ export type ModuleParameters = {
     nft?: boolean;
   };
   };
-  'content/next-intl': {
+  'content/i18n-expo': {
+
+  /** Supported locales */
+  locales?: string[];
+
+  /** Default locale */
+  defaultLocale?: string;
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Auto-detect device locale */
+    deviceLocale?: boolean;
+
+    /** Use native date/number formatting */
+    nativeFormatting?: boolean;
+
+    /** Enable pluralization support */
+    pluralization?: boolean;
+  };
+  };
+  'content/i18n-nextjs': {
 
   /** Supported locales */
   locales?: string[];
@@ -250,6 +337,17 @@ export type ModuleParameters = {
     /** Offline-first data synchronization */
     offline?: boolean;
   };
+  };
+  'data-fetching/trpc': {
+
+  /** Data transformer for complex types (Date, Map, Set) */
+  transformer?: 'superjson' | 'devalue' | 'none';
+
+  /** Abort requests on component unmount */
+  abortOnUnmount?: boolean;
+
+  /** Enable request batching for better performance */
+  batchingEnabled?: boolean;
   };
   'database/drizzle': {
 
@@ -403,6 +501,25 @@ export type ModuleParameters = {
     campaigns?: boolean;
   };
   };
+  'framework/expo': {
+
+  /** Enable TypeScript support */
+  typescript?: boolean;
+
+  /** Use src/ directory */
+  srcDir?: boolean;
+
+  /** Import alias for absolute imports */
+  importAlias?: string;
+
+  /** React version to use */
+  reactVersion?: string;
+
+  /** Use Expo Router for navigation */
+  expoRouter?: boolean;
+
+  platforms: any;
+  };
   'framework/nextjs': {
 
   /** Enable TypeScript support */
@@ -446,6 +563,76 @@ export type ModuleParameters = {
     /** Enable internationalization features */
     i18n?: boolean;
   };
+  };
+  'framework/react-native': {
+
+  /** Enable TypeScript support */
+  typescript?: boolean;
+
+  /** Use src/ directory */
+  srcDir?: boolean;
+
+  /** Import alias for absolute imports */
+  importAlias?: string;
+
+  /** React version to use */
+  reactVersion?: string;
+
+  platforms: any;
+  };
+  'monorepo/nx': {
+
+  /** Package manager (npm, yarn, pnpm) */
+  packageManager?: string;
+
+  /** Enable Nx Cloud for distributed caching */
+  nxCloud?: boolean;
+  };
+  'monorepo/turborepo': {
+
+  /** Package manager (npm, yarn, pnpm, bun) */
+  packageManager?: string;
+
+  /** Enable remote caching with Vercel */
+  remoteCaching?: boolean;
+  };
+  'observability/posthog': {
+
+  /** PostHog API key (or set POSTHOG_API_KEY env var) */
+  apiKey?: string;
+
+  /** PostHog API host URL */
+  apiHost?: string;
+
+  /** Environment name */
+  environment?: string;
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Essential analytics (event tracking, user identification) */
+    core?: boolean;
+
+    /** Event tracking and analytics */
+    eventTracking?: boolean;
+
+    /** Session replay recording */
+    sessionReplay?: boolean;
+
+    /** Feature flags management */
+    featureFlags?: boolean;
+
+    /** A/B testing and experiments */
+    experiments?: boolean;
+
+    /** Auto-capture user interactions */
+    autocapture?: boolean;
+
+    /** Surveys and feedback collection */
+    surveys?: boolean;
+  };
+
+  /** Person profiles creation mode */
+  personProfiles?: 'identified_only' | 'always' | 'never';
   };
   'observability/sentry': {
 
@@ -534,6 +721,49 @@ export type ModuleParameters = {
   /** Enable streaming responses */
   streaming?: boolean;
   };
+  'connectors/analytics/ab-vercel-nextjs': {
+
+  /** Add A/B testing middleware for variant assignment */
+  middleware?: boolean;
+
+  /** Generate Experiment and Variant components */
+  components?: boolean;
+
+  /** Generate React hooks for accessing variants */
+  hooks?: boolean;
+
+  /** Configure Vercel Edge Config for experiments */
+  edgeConfig?: boolean;
+
+  /** Track experiment views and conversions */
+  analytics?: boolean;
+  };
+  'connectors/analytics/posthog-nextjs': {
+
+  /** Add PostHogProvider to app root */
+  provider?: boolean;
+
+  /** Automatically capture page views on route changes */
+  capturePageviews?: boolean;
+
+  /** Automatically capture button clicks and interactions */
+  captureClicks?: boolean;
+
+  /** Add Next.js middleware for pageview tracking */
+  middleware?: boolean;
+
+  /** Enable event tracking hooks and utilities */
+  eventTracking?: boolean;
+
+  /** Enable feature flags hooks */
+  featureFlags?: boolean;
+
+  /** Enable A/B testing and experiments hooks */
+  experiments?: boolean;
+
+  /** Enable session replay recording */
+  sessionReplay?: boolean;
+  };
   'connectors/auth/better-auth-nextjs': {
 
   /** Enable email verification */
@@ -550,6 +780,29 @@ export type ModuleParameters = {
 
   /** Enable team support */
   teams?: boolean;
+  };
+  'connectors/cms/payload-nextjs': {
+
+  /** Generate default collections (Pages, Posts, Media) */
+  collections?: boolean;
+
+  /** Enable media/upload collection */
+  media?: boolean;
+
+  /** Enable Payload authentication */
+  auth?: boolean;
+
+  /** Enable Payload admin panel */
+  adminPanel?: boolean;
+
+  /** Configure local API for server components */
+  localApi?: boolean;
+
+  /** Enable draft preview functionality */
+  draftPreview?: boolean;
+
+  /** Enable live preview (beta) */
+  livePreview?: boolean;
   };
   'connectors/database/drizzle-postgres-docker': {
 
@@ -747,6 +1000,34 @@ export type ModuleParameters = {
   /** Testing utilities and mock Sentry for development */
   testing?: boolean;
   };
+  'connectors/nextjs-trpc-router': {
+
+  /** Template context with project structure information */
+  templateContext?: Record<string, any>;
+  };
+  'connectors/seo/seo-nextjs': {
+
+  /** Generate sitemap.xml automatically */
+  sitemap?: boolean;
+
+  /** Generate robots.txt automatically */
+  robots?: boolean;
+
+  /** Enable JSON-LD structured data helpers */
+  structuredData?: boolean;
+
+  /** Add default metadata to root layout */
+  defaultMetadata?: boolean;
+
+  /** Generate dynamic metadata helpers */
+  dynamicMetadata?: boolean;
+
+  /** Generate Open Graph metadata */
+  openGraph?: boolean;
+
+  /** Generate Twitter Card metadata */
+  twitter?: boolean;
+  };
   'connectors/testing/vitest-nextjs': {
 
   /** Unit tests for components, hooks, and utilities */
@@ -810,7 +1091,7 @@ export type ModuleParameters = {
     conversationSharing?: boolean;
   };
   };
-  'features/ai-chat/frontend/shadcn': {
+  'features/ai-chat/frontend': {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -863,7 +1144,7 @@ export type ModuleParameters = {
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
   };
-  'features/architech-welcome/shadcn': {
+  'features/architech-welcome': {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -891,23 +1172,8 @@ export type ModuleParameters = {
 
   /** Primary color theme for the welcome page */
   primaryColor?: string;
-
-  /** Show technology stack visualization */
-  showTechStack?: boolean;
-
-  /** Show interactive component library showcase */
-  showComponents?: boolean;
-
-  /** Show project structure and architecture */
-  showProjectStructure?: boolean;
-
-  /** Show quick start guide */
-  showQuickStart?: boolean;
-
-  /** Show Architech branding and links */
-  showArchitechBranding?: boolean;
   };
-  'features/auth/frontend/shadcn': {
+  'features/auth/frontend': {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -991,7 +1257,7 @@ export type ModuleParameters = {
   /** Enable team-scoped email management */
   teams?: boolean;
   };
-  'features/emailing/frontend/shadcn': {
+  'features/emailing/frontend': {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1065,6 +1331,11 @@ export type ModuleParameters = {
 
   required: any;
   };
+  'features/payments/backend/revenuecat': {
+
+  /** RevenueCat webhook secret for HMAC verification */
+  webhookSecret: string;
+  };
   'features/payments/backend/stripe-nextjs': {
   /** Constitutional Architecture features configuration */
   features?: {
@@ -1089,7 +1360,7 @@ export type ModuleParameters = {
   };
   };
   'features/payments/database/drizzle': {};
-  'features/payments/frontend/shadcn': {
+  'features/payments/frontend': {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1169,7 +1440,7 @@ export type ModuleParameters = {
     activityTracking?: boolean;
   };
   };
-  'features/teams-management/frontend/shadcn': {
+  'features/teams-management/frontend': {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -1202,6 +1473,57 @@ export type ModuleParameters = {
   theme?: 'default' | 'dark' | 'light' | 'minimal';
   };
   'features/teams-management/tech-stack': {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
+  };
+  'features/waitlist/backend/nextjs': {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable viral referral system */
+    viralReferral?: boolean;
+
+    /** Enable position tracking in waitlist */
+    positionTracking?: boolean;
+
+    /** Enable referral bonus system */
+    bonusSystem?: boolean;
+
+    /** Send welcome email with referral code */
+    welcomeEmail?: boolean;
+
+    /** Enable analytics tracking */
+    analytics?: boolean;
+  };
+
+  /** Position boost per referral */
+  referralBonus?: number;
+
+  /** Maximum total bonus per user */
+  maxBonusPerUser?: number;
+  };
+  'features/waitlist/database/drizzle': {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable viral referral system */
+    viralReferral?: boolean;
+
+    /** Enable position tracking in waitlist */
+    positionTracking?: boolean;
+
+    /** Enable referral bonus system */
+    bonusSystem?: boolean;
+
+    /** Enable analytics tracking */
+    analytics?: boolean;
+  };
+  };
+  'features/waitlist/tech-stack': {
 
   type: any;
 
@@ -1280,6 +1602,49 @@ export type TypedGenomeModule =
   /** Temperature for generation */
   temperature?: number;
   }; }
+  | { id: 'analytics/ab-testing-core'; parameters?: {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Essential A/B testing utilities and types */
+    core?: boolean;
+
+    /** Experiment configuration and management */
+    experimentManagement?: boolean;
+
+    /** Variant assignment logic */
+    variantAssignment?: boolean;
+
+    /** Analytics integration for tracking experiment results */
+    analytics?: boolean;
+  };
+  }; }
+  | { id: 'analytics/seo-core'; parameters?: {
+
+  /** Base URL of the site (or set NEXT_PUBLIC_SITE_URL env var) */
+  siteUrl?: string;
+
+  /** Site name for Open Graph and structured data */
+  siteName?: string;
+
+  /** Default locale for the site */
+  defaultLocale?: string;
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Essential SEO utilities and types */
+    core?: boolean;
+
+    /** Structured data (JSON-LD) schemas */
+    structuredData?: boolean;
+
+    /** Metadata generation helpers */
+    metadataHelpers?: boolean;
+
+    /** Sitemap generation utilities */
+    sitemap?: boolean;
+  };
+  }; }
   | { id: 'auth/better-auth'; parameters?: {
 
   /** Enable email/password authentication */
@@ -1335,7 +1700,27 @@ export type TypedGenomeModule =
     nft?: boolean;
   };
   }; }
-  | { id: 'content/next-intl'; parameters?: {
+  | { id: 'content/i18n-expo'; parameters?: {
+
+  /** Supported locales */
+  locales?: string[];
+
+  /** Default locale */
+  defaultLocale?: string;
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Auto-detect device locale */
+    deviceLocale?: boolean;
+
+    /** Use native date/number formatting */
+    nativeFormatting?: boolean;
+
+    /** Enable pluralization support */
+    pluralization?: boolean;
+  };
+  }; }
+  | { id: 'content/i18n-nextjs'; parameters?: {
 
   /** Supported locales */
   locales?: string[];
@@ -1430,6 +1815,17 @@ export type TypedGenomeModule =
     /** Offline-first data synchronization */
     offline?: boolean;
   };
+  }; }
+  | { id: 'data-fetching/trpc'; parameters?: {
+
+  /** Data transformer for complex types (Date, Map, Set) */
+  transformer?: 'superjson' | 'devalue' | 'none';
+
+  /** Abort requests on component unmount */
+  abortOnUnmount?: boolean;
+
+  /** Enable request batching for better performance */
+  batchingEnabled?: boolean;
   }; }
   | { id: 'database/drizzle'; parameters?: {
 
@@ -1583,6 +1979,25 @@ export type TypedGenomeModule =
     campaigns?: boolean;
   };
   }; }
+  | { id: 'framework/expo'; parameters?: {
+
+  /** Enable TypeScript support */
+  typescript?: boolean;
+
+  /** Use src/ directory */
+  srcDir?: boolean;
+
+  /** Import alias for absolute imports */
+  importAlias?: string;
+
+  /** React version to use */
+  reactVersion?: string;
+
+  /** Use Expo Router for navigation */
+  expoRouter?: boolean;
+
+  platforms: any;
+  }; }
   | { id: 'framework/nextjs'; parameters?: {
 
   /** Enable TypeScript support */
@@ -1626,6 +2041,76 @@ export type TypedGenomeModule =
     /** Enable internationalization features */
     i18n?: boolean;
   };
+  }; }
+  | { id: 'framework/react-native'; parameters?: {
+
+  /** Enable TypeScript support */
+  typescript?: boolean;
+
+  /** Use src/ directory */
+  srcDir?: boolean;
+
+  /** Import alias for absolute imports */
+  importAlias?: string;
+
+  /** React version to use */
+  reactVersion?: string;
+
+  platforms: any;
+  }; }
+  | { id: 'monorepo/nx'; parameters?: {
+
+  /** Package manager (npm, yarn, pnpm) */
+  packageManager?: string;
+
+  /** Enable Nx Cloud for distributed caching */
+  nxCloud?: boolean;
+  }; }
+  | { id: 'monorepo/turborepo'; parameters?: {
+
+  /** Package manager (npm, yarn, pnpm, bun) */
+  packageManager?: string;
+
+  /** Enable remote caching with Vercel */
+  remoteCaching?: boolean;
+  }; }
+  | { id: 'observability/posthog'; parameters?: {
+
+  /** PostHog API key (or set POSTHOG_API_KEY env var) */
+  apiKey?: string;
+
+  /** PostHog API host URL */
+  apiHost?: string;
+
+  /** Environment name */
+  environment?: string;
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Essential analytics (event tracking, user identification) */
+    core?: boolean;
+
+    /** Event tracking and analytics */
+    eventTracking?: boolean;
+
+    /** Session replay recording */
+    sessionReplay?: boolean;
+
+    /** Feature flags management */
+    featureFlags?: boolean;
+
+    /** A/B testing and experiments */
+    experiments?: boolean;
+
+    /** Auto-capture user interactions */
+    autocapture?: boolean;
+
+    /** Surveys and feedback collection */
+    surveys?: boolean;
+  };
+
+  /** Person profiles creation mode */
+  personProfiles?: 'identified_only' | 'always' | 'never';
   }; }
   | { id: 'observability/sentry'; parameters?: {
 
@@ -1714,6 +2199,49 @@ export type TypedGenomeModule =
   /** Enable streaming responses */
   streaming?: boolean;
   }; }
+  | { id: 'connectors/analytics/ab-vercel-nextjs'; parameters?: {
+
+  /** Add A/B testing middleware for variant assignment */
+  middleware?: boolean;
+
+  /** Generate Experiment and Variant components */
+  components?: boolean;
+
+  /** Generate React hooks for accessing variants */
+  hooks?: boolean;
+
+  /** Configure Vercel Edge Config for experiments */
+  edgeConfig?: boolean;
+
+  /** Track experiment views and conversions */
+  analytics?: boolean;
+  }; }
+  | { id: 'connectors/analytics/posthog-nextjs'; parameters?: {
+
+  /** Add PostHogProvider to app root */
+  provider?: boolean;
+
+  /** Automatically capture page views on route changes */
+  capturePageviews?: boolean;
+
+  /** Automatically capture button clicks and interactions */
+  captureClicks?: boolean;
+
+  /** Add Next.js middleware for pageview tracking */
+  middleware?: boolean;
+
+  /** Enable event tracking hooks and utilities */
+  eventTracking?: boolean;
+
+  /** Enable feature flags hooks */
+  featureFlags?: boolean;
+
+  /** Enable A/B testing and experiments hooks */
+  experiments?: boolean;
+
+  /** Enable session replay recording */
+  sessionReplay?: boolean;
+  }; }
   | { id: 'connectors/auth/better-auth-nextjs'; parameters?: {
 
   /** Enable email verification */
@@ -1730,6 +2258,29 @@ export type TypedGenomeModule =
 
   /** Enable team support */
   teams?: boolean;
+  }; }
+  | { id: 'connectors/cms/payload-nextjs'; parameters?: {
+
+  /** Generate default collections (Pages, Posts, Media) */
+  collections?: boolean;
+
+  /** Enable media/upload collection */
+  media?: boolean;
+
+  /** Enable Payload authentication */
+  auth?: boolean;
+
+  /** Enable Payload admin panel */
+  adminPanel?: boolean;
+
+  /** Configure local API for server components */
+  localApi?: boolean;
+
+  /** Enable draft preview functionality */
+  draftPreview?: boolean;
+
+  /** Enable live preview (beta) */
+  livePreview?: boolean;
   }; }
   | { id: 'connectors/database/drizzle-postgres-docker'; parameters?: {
 
@@ -1927,6 +2478,34 @@ export type TypedGenomeModule =
   /** Testing utilities and mock Sentry for development */
   testing?: boolean;
   }; }
+  | { id: 'connectors/nextjs-trpc-router'; parameters?: {
+
+  /** Template context with project structure information */
+  templateContext?: Record<string, any>;
+  }; }
+  | { id: 'connectors/seo/seo-nextjs'; parameters?: {
+
+  /** Generate sitemap.xml automatically */
+  sitemap?: boolean;
+
+  /** Generate robots.txt automatically */
+  robots?: boolean;
+
+  /** Enable JSON-LD structured data helpers */
+  structuredData?: boolean;
+
+  /** Add default metadata to root layout */
+  defaultMetadata?: boolean;
+
+  /** Generate dynamic metadata helpers */
+  dynamicMetadata?: boolean;
+
+  /** Generate Open Graph metadata */
+  openGraph?: boolean;
+
+  /** Generate Twitter Card metadata */
+  twitter?: boolean;
+  }; }
   | { id: 'connectors/testing/vitest-nextjs'; parameters?: {
 
   /** Unit tests for components, hooks, and utilities */
@@ -1990,7 +2569,7 @@ export type TypedGenomeModule =
     conversationSharing?: boolean;
   };
   }; }
-  | { id: 'features/ai-chat/frontend/shadcn'; parameters?: {
+  | { id: 'features/ai-chat/frontend'; parameters?: {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -2043,7 +2622,7 @@ export type TypedGenomeModule =
   /** UI theme variant */
   theme?: 'default' | 'dark' | 'light' | 'minimal';
   }; }
-  | { id: 'features/architech-welcome/shadcn'; parameters?: {
+  | { id: 'features/architech-welcome'; parameters?: {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -2071,23 +2650,8 @@ export type TypedGenomeModule =
 
   /** Primary color theme for the welcome page */
   primaryColor?: string;
-
-  /** Show technology stack visualization */
-  showTechStack?: boolean;
-
-  /** Show interactive component library showcase */
-  showComponents?: boolean;
-
-  /** Show project structure and architecture */
-  showProjectStructure?: boolean;
-
-  /** Show quick start guide */
-  showQuickStart?: boolean;
-
-  /** Show Architech branding and links */
-  showArchitechBranding?: boolean;
   }; }
-  | { id: 'features/auth/frontend/shadcn'; parameters?: {
+  | { id: 'features/auth/frontend'; parameters?: {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -2171,7 +2735,7 @@ export type TypedGenomeModule =
   /** Enable team-scoped email management */
   teams?: boolean;
   }; }
-  | { id: 'features/emailing/frontend/shadcn'; parameters?: {
+  | { id: 'features/emailing/frontend'; parameters?: {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -2245,6 +2809,11 @@ export type TypedGenomeModule =
 
   required: any;
   }; }
+  | { id: 'features/payments/backend/revenuecat'; parameters?: {
+
+  /** RevenueCat webhook secret for HMAC verification */
+  webhookSecret: string;
+  }; }
   | { id: 'features/payments/backend/stripe-nextjs'; parameters?: {
   /** Constitutional Architecture features configuration */
   features?: {
@@ -2269,7 +2838,7 @@ export type TypedGenomeModule =
   };
   }; }
   | { id: 'features/payments/database/drizzle'; parameters?: {}; }
-  | { id: 'features/payments/frontend/shadcn'; parameters?: {
+  | { id: 'features/payments/frontend'; parameters?: {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -2349,7 +2918,7 @@ export type TypedGenomeModule =
     activityTracking?: boolean;
   };
   }; }
-  | { id: 'features/teams-management/frontend/shadcn'; parameters?: {
+  | { id: 'features/teams-management/frontend'; parameters?: {
   /** Constitutional Architecture features configuration */
   features?: {
 
@@ -2382,6 +2951,57 @@ export type TypedGenomeModule =
   theme?: 'default' | 'dark' | 'light' | 'minimal';
   }; }
   | { id: 'features/teams-management/tech-stack'; parameters?: {
+
+  type: any;
+
+  properties: any;
+
+  required: any;
+  }; }
+  | { id: 'features/waitlist/backend/nextjs'; parameters?: {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable viral referral system */
+    viralReferral?: boolean;
+
+    /** Enable position tracking in waitlist */
+    positionTracking?: boolean;
+
+    /** Enable referral bonus system */
+    bonusSystem?: boolean;
+
+    /** Send welcome email with referral code */
+    welcomeEmail?: boolean;
+
+    /** Enable analytics tracking */
+    analytics?: boolean;
+  };
+
+  /** Position boost per referral */
+  referralBonus?: number;
+
+  /** Maximum total bonus per user */
+  maxBonusPerUser?: number;
+  }; }
+  | { id: 'features/waitlist/database/drizzle'; parameters?: {
+  /** Constitutional Architecture features configuration */
+  features?: {
+
+    /** Enable viral referral system */
+    viralReferral?: boolean;
+
+    /** Enable position tracking in waitlist */
+    positionTracking?: boolean;
+
+    /** Enable referral bonus system */
+    bonusSystem?: boolean;
+
+    /** Enable analytics tracking */
+    analytics?: boolean;
+  };
+  }; }
+  | { id: 'features/waitlist/tech-stack'; parameters?: {
 
   type: any;
 
@@ -2432,6 +3052,17 @@ export interface TypedGenome {
     version?: string;
     author?: string;
     license?: string;
+    structure?: 'monorepo' | 'single-app';
+    monorepo?: {
+      tool: 'turborepo' | 'nx' | 'pnpm' | 'yarn';
+      packages: {
+        api?: string;
+        web?: string;
+        mobile?: string;
+        shared?: string;
+        [key: string]: string | undefined;
+      };
+    };
   };
   modules: TypedGenomeModule[];
   options?: Record<string, any>;

@@ -72,6 +72,8 @@ export type {
   });
   
   // Hooks - Direct TanStack Query hooks (best practice pattern)
+  // UI components use individual hooks directly (e.g., useSubscriptionsList, useInvoicesList)
+  // with aliases for cleaner names (e.g., useSubscriptionsList as useSubscriptions)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
     path: '${paths.lib}/payments/hooks.ts',
@@ -81,37 +83,6 @@ export type {
       priority: 1
     }
   });
-
-  // Convenience hook wrappers for common use cases
-  actions.push(
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/payments/use-subscriptions.ts',
-      template: 'templates/use-subscriptions.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/payments/use-invoices.ts',
-      template: 'templates/use-invoices.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}/payments/use-transactions.ts',
-      template: 'templates/use-transactions.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    }
-  );
   
   // Stores - Zustand state management
   actions.push({

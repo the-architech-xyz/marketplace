@@ -1,47 +1,45 @@
 /**
- * Better Auth Tech-Stack Override Blueprint
+ * Better Auth SDK Override Blueprint
  * 
- * This overrides the standard tech-stack hooks with Better Auth SDK hooks.
- * These hooks are FRAMEWORK AGNOSTIC - they work with Next.js, Remix, Expo, etc.
- * 
- * Priority: 2 (overwrites standard tech-stack priority: 1)
+ * Replaces standard TanStack Query hooks with Better Auth SDK hooks
+ * Same interface, Better Auth implementation
  */
 
 import { BlueprintAction, BlueprintActionType, ConflictResolutionStrategy } from '@thearchitech.xyz/types';
-import { TypedMergedConfiguration } from '../../../../types/blueprint-config-types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '@thearchitech.xyz/marketplace/types';
 
 export default function generateBlueprint(
   config: TypedMergedConfiguration<'features/auth/tech-stack/overrides/better-auth'>
 ): BlueprintAction[] {
-  return [
-    // Install Better Auth React package
-    {
-      type: BlueprintActionType.INSTALL_PACKAGES,
-      packages: ['better-auth']
-    },
-    
-    // Better Auth Client (framework agnostic)
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/auth/client.ts',
-      template: 'templates/client.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2  // Overwrites standard (priority: 1)
-      }
-    },
-    
-    // Better Auth Hooks (framework agnostic)
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/auth/hooks.ts',
-      template: 'templates/hooks.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 2  // Overwrites standard tech-stack hooks (priority: 1)
-      }
+  const actions: BlueprintAction[] = [];
+
+  // Install Better Auth dependencies
+  actions.push({
+    type: BlueprintActionType.INSTALL_PACKAGES,
+    packages: ['better-auth']
+  });
+
+  // Override hooks with Better Auth SDK
+  actions.push({
+    type: BlueprintActionType.CREATE_FILE,
+    path: '${paths.lib}/auth/hooks.ts',
+    template: 'templates/hooks.ts.tpl',
+    conflictResolution: {
+      strategy: ConflictResolutionStrategy.REPLACE,
+      priority: 2 // Higher than tech-stack default (priority: 1)
     }
-  ];
+  });
+
+  // Better Auth client
+  actions.push({
+    type: BlueprintActionType.CREATE_FILE,
+    path: '${paths.lib}/auth/better-auth-client.ts',
+    template: 'templates/client.ts.tpl',
+    conflictResolution: {
+      strategy: ConflictResolutionStrategy.REPLACE,
+      priority: 2
+    }
+  });
+
+  return actions;
 }
-
-

@@ -1,114 +1,173 @@
 /**
- * Better Auth Hooks
+ * Better Auth SDK Hooks
  * 
- * Framework-agnostic Better Auth React hooks.
- * Works with Next.js, Remix, Expo, etc.
+ * ARCHITECTURE NOTE:
+ * These hooks use Better Auth SDK instead of TanStack Query
+ * Same interface as standard hooks, Better Auth implementation
  */
 
-import { useSession, useSignIn, useSignOut, useSignUp } from 'better-auth/react';
-import { authClient } from './client';
+import { 
+  useSession as useBetterAuthSession,
+  useSignIn as useBetterAuthSignIn,
+  useSignOut as useBetterAuthSignOut,
+  useSignUp as useBetterAuthSignUp,
+  useUpdateUser as useBetterAuthUpdateUser,
+  useChangePassword as useBetterAuthChangePassword
+} from 'better-auth/react';
 
-/**
- * Use Better Auth session
- */
-export function useAuth() {
-  const { data: session, isPending, error } = useSession();
-  
-  return {
-    user: session?.user || null,
-    isLoading: isPending,
-    error,
-    isAuthenticated: !!session?.user,
-  };
-}
+// ============================================================================
+// SESSION HOOKS
+// ============================================================================
 
 /**
- * Use Better Auth sign in
+ * Get current session (Better Auth SDK)
  */
-export function useSignInMutation() {
-  const { signIn, isPending, error } = useSignIn();
+export const useSession = (options?: any) => {
+  const { data: session, isLoading, error } = useBetterAuthSession();
   
   return {
-    signIn: async (email: string, password: string) => {
-      return signIn.email({
-        email,
-        password,
-      });
-    },
-    isLoading: isPending,
+    data: session,
+    isLoading,
     error,
+    isAuthenticated: !!session?.user
   };
-}
+};
+
+// ============================================================================
+// AUTHENTICATION HOOKS
+// ============================================================================
 
 /**
- * Use Better Auth sign up
+ * Sign in with email/password (Better Auth SDK)
  */
-export function useSignUpMutation() {
-  const { signUp, isPending, error } = useSignUp();
+export const useSignIn = (options?: any) => {
+  const { signIn, isLoading, error } = useBetterAuthSignIn();
   
-  return {
-    signUp: async (email: string, password: string, name?: string) => {
-      return signUp.email({
-        email,
-        password,
-        name,
-      });
-    },
-    isLoading: isPending,
-    error,
+  const mutate = async (credentials: { email: string; password: string }) => {
+    return signIn({
+      email: credentials.email,
+      password: credentials.password,
+      provider: 'credentials'
+    });
   };
-}
+
+  return {
+    mutate,
+    isLoading,
+    error
+  };
+};
 
 /**
- * Use Better Auth sign out
+ * Sign up with email/password (Better Auth SDK)
  */
-export function useSignOutMutation() {
-  const { signOut, isPending, error } = useSignOut();
+export const useSignUp = (options?: any) => {
+  const { signUp, isLoading, error } = useBetterAuthSignUp();
   
-  return {
-    signOut: async () => {
-      return signOut();
-    },
-    isLoading: isPending,
-    error,
+  const mutate = async (data: { email: string; password: string; name: string }) => {
+    return signUp({
+      email: data.email,
+      password: data.password,
+      name: data.name
+    });
   };
-}
+
+  return {
+    mutate,
+    isLoading,
+    error
+  };
+};
 
 /**
- * Use Better Auth OAuth sign in
+ * Sign out (Better Auth SDK)
  */
-export function useOAuthSignIn() {
-  const { signIn, isPending, error } = useSignIn();
+export const useSignOut = (options?: any) => {
+  const { signOut, isLoading, error } = useBetterAuthSignOut();
   
-  return {
-    signInWithGoogle: async () => {
-      return signIn.social({
-        provider: 'google',
-      });
-    },
-    signInWithGitHub: async () => {
-      return signIn.social({
-        provider: 'github',
-      });
-    },
-    isLoading: isPending,
-    error,
+  const mutate = async () => {
+    return signOut();
   };
-}
+
+  return {
+    mutate,
+    isLoading,
+    error
+  };
+};
+
+// ============================================================================
+// SOCIAL AUTHENTICATION HOOKS
+// ============================================================================
 
 /**
- * Use Better Auth magic link
+ * Sign in with GitHub (Better Auth SDK)
  */
-export function useMagicLinkSignIn() {
-  const { signIn, isPending, error } = useSignIn();
+export const useSignInWithGitHub = (options?: any) => {
+  const { signIn, isLoading, error } = useBetterAuthSignIn();
   
-  return {
-    signInWithMagicLink: async (email: string) => {
-      return signIn.magicLink({
-        email,
-      });
-    },
-    isLoading: isPending,
-    error,
+  const mutate = async () => {
+    return signIn({ provider: 'github' });
   };
-}
+
+  return {
+    mutate,
+    isLoading,
+    error
+  };
+};
+
+/**
+ * Sign in with Google (Better Auth SDK)
+ */
+export const useSignInWithGoogle = (options?: any) => {
+  const { signIn, isLoading, error } = useBetterAuthSignIn();
+  
+  const mutate = async () => {
+    return signIn({ provider: 'google' });
+  };
+
+  return {
+    mutate,
+    isLoading,
+    error
+  };
+};
+
+// ============================================================================
+// USER MANAGEMENT HOOKS
+// ============================================================================
+
+/**
+ * Update user profile (Better Auth SDK)
+ */
+export const useUpdateProfile = (options?: any) => {
+  const { updateUser, isLoading, error } = useBetterAuthUpdateUser();
+  
+  const mutate = async (data: { name?: string; email?: string }) => {
+    return updateUser(data);
+  };
+
+  return {
+    mutate,
+    isLoading,
+    error
+  };
+};
+
+/**
+ * Change password (Better Auth SDK)
+ */
+export const useChangePassword = (options?: any) => {
+  const { changePassword, isLoading, error } = useBetterAuthChangePassword();
+  
+  const mutate = async (data: { currentPassword: string; newPassword: string }) => {
+    return changePassword(data);
+  };
+
+  return {
+    mutate,
+    isLoading,
+    error
+  };
+};

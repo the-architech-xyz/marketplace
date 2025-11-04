@@ -11,6 +11,9 @@ export * from './genome-types.js';
 // Re-export defineGenome function
 export * from './define-genome.js';
 
+// Re-export capability types
+export * from './capability-types.js';
+
 // Re-export blueprint configuration utilities
 export type { TypedMergedConfiguration } from './blueprint-config-types.js';
 export { extractTypedModuleParameters } from './blueprint-config-types.js';

@@ -81,7 +81,12 @@ const FeatureSchema = z.object({
   description: z.string().min(10, 'Description must be meaningful'),
   type: z.enum(['feature', 'capability']),
   provides: z.array(z.string()).optional(),  // Some features don't provide anything explicitly
-  requires: z.array(z.string()).optional(),
+  requires: z.union([
+    z.array(z.string()),  // Legacy format: array of module IDs
+    z.object({
+      components: z.record(z.string(), z.array(z.string())).optional()  // New format: component requirements per UI technology
+    })
+  ]).optional(),
   prerequisites: z.object({
     capabilities: z.array(z.string()).optional(),
     adapters: z.array(z.string()).optional(),

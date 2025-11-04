@@ -234,14 +234,22 @@ class ContractCorrectnessValidator {
     try {
       const schema = JSON.parse(readFileSync(schemaPath, 'utf8'));
       
+      // Contract is optional for backend-connector role (data sync services)
+      // Contract is required for backend-feature role (full backend implementations)
       if (!schema.contract) {
-        violations.push({
-          type: 'import_violation',
-          severity: 'error',
-          message: 'Feature missing contract definition',
-          file: schemaPath
-        });
-        return;
+        if (schema.role === 'backend-connector') {
+          // backend-connector is just a data sync service, doesn't need frontend contract
+          console.log(`⚠️  Backend connector ${backendPath} has no contract (optional for data sync services)`);
+          return;
+        } else {
+          violations.push({
+            type: 'import_violation',
+            severity: 'error',
+            message: 'Backend feature missing contract definition',
+            file: schemaPath
+          });
+          return;
+        }
       }
 
       // Validate that backend implements contract hooks

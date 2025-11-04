@@ -38,6 +38,7 @@
     "dist",
     "**/*.test.ts",
     "**/*.spec.ts",
-    "genomes/test/**"
+    "genomes/test/**",
+    "genomes/use-cases/**"
   ]
 }

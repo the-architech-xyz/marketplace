@@ -1,389 +1,344 @@
 /**
- * AI Chat Tech-Stack Hooks
+ * AI Chat - Direct TanStack Query Hooks
  * 
- * Generic, database-agnostic hooks for AI chat functionality.
- * Uses TanStack Query for data fetching and caching.
- * Uses Vercel AI SDK's useChat directly for streaming.
+ * ARCHITECTURE: Direct Hooks Pattern (Best Practice)
+ * - Each hook is a standalone TanStack Query hook
+ * - Clear naming: useConversationsList, useMessageSend, etc.
+ * - No abstraction layers, direct usage
+ * - Includes streaming functionality as a hook
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useChat as useVercelChat } from 'ai/react';
-import { useCallback } from 'react';
-
-// ============================================================================
-// TYPES
-// ============================================================================
-
-export interface AIConversation {
-  id: string;
-  userId: string;
-  title: string;
-  status: 'active' | 'archived' | 'deleted';
-  model: string;
-  provider: string;
-  temperature?: number;
-  maxTokens?: number;
-  systemPrompt?: string;
-  totalMessages: number;
-  totalTokens: number;
-  estimatedCost: number;
-  lastMessageAt?: Date;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface AIMessage {
-  id: string;
-  conversationId: string;
-  role: 'user' | 'assistant' | 'system' | 'function';
-  content: string;
-  tokens?: number;
-  model?: string;
-  cost?: number;
-  error?: string;
-  createdAt: Date;
-}
-
-export interface CreateConversationData {
-  title?: string;
-  model?: string;
-  provider?: string;
-  temperature?: number;
-  maxTokens?: number;
-  systemPrompt?: string;
-}
-
-export interface UpdateConversationData {
-  title?: string;
-  status?: 'active' | 'archived' | 'deleted';
-  systemPrompt?: string;
-  temperature?: number;
-  maxTokens?: number;
-}
-
-export interface SendMessageData {
-  content: string;
-  conversationId?: string;
-  model?: string;
-  provider?: string;
-  temperature?: number;
-  maxTokens?: number;
-  systemPrompt?: string;
-}
-
-// ============================================================================
-// API CLIENT (Internal)
-// ============================================================================
-
-const apiClient = {
-  async get<T>(url: string): Promise<T> {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`API error: ${response.statusText}`);
-    }
-    return response.json();
-  },
-
-  async post<T>(url: string, data?: any): Promise<T> {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: data ? JSON.stringify(data) : undefined,
-    });
-    if (!response.ok) {
-      throw new Error(`API error: ${response.statusText}`);
-    }
-    return response.json();
-  },
-
-  async patch<T>(url: string, data: any): Promise<T> {
-    const response = await fetch(url, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) {
-      throw new Error(`API error: ${response.statusText}`);
-    }
-    return response.json();
-  },
-
-  async delete(url: string): Promise<void> {
-    const response = await fetch(url, { method: 'DELETE' });
-    if (!response.ok) {
-      throw new Error(`API error: ${response.statusText}`);
-    }
-  },
-};
+import { useQuery, useMutation, useQueryClient, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 
 // ============================================================================
 // CONVERSATION HOOKS
 // ============================================================================
 
-/**
- * Get all conversations
- */
-export function useConversations(options?: {
-  status?: 'active' | 'archived' | 'deleted';
-  limit?: number;
-  offset?: number;
-}) {
-  const params = new URLSearchParams();
-  if (options?.status) params.set('status', options.status);
-  if (options?.limit) params.set('limit', String(options.limit));
-  if (options?.offset) params.set('offset', String(options.offset));
-
-  return useQuery<{ conversations: AIConversation[] }>({
-    queryKey: ['conversations', options],
-    queryFn: () => apiClient.get(`/api/conversations?${params}`),
+export const useConversationsList = (options?: Omit<UseQueryOptions<any>, 'queryKey' | 'queryFn'>) => {
+  return useQuery({
+    queryKey: ['ai-conversations'],
+    queryFn: async () => {
+      const response = await fetch('/api/chat/conversations');
+      if (!response.ok) throw new Error('Failed to fetch conversations');
+      return response.json();
+    },
+    staleTime: 2 * 60 * 1000,
+    ...options
   });
-}
+};
 
-/**
- * Get a specific conversation with messages
- */
-export function useConversation(id: string | undefined) {
-  return useQuery<{ conversation: AIConversation; messages: AIMessage[] }>({
-    queryKey: ['conversation', id],
-    queryFn: () => apiClient.get(`/api/conversations/${id}`),
+export const useConversation = (id: string, options?: Omit<UseQueryOptions<any>, 'queryKey' | 'queryFn'>) => {
+  return useQuery({
+    queryKey: ['ai-conversation', id],
+    queryFn: async () => {
+      const response = await fetch(`/api/chat/conversations/${id}`);
+      if (!response.ok) throw new Error('Failed to fetch conversation');
+      return response.json();
+    },
     enabled: !!id,
+    staleTime: 2 * 60 * 1000,
+    ...options
   });
-}
+};
 
-/**
- * Create a new conversation
- */
-export function useCreateConversation() {
+export const useConversationsCreate = (options?: UseMutationOptions<any, any, { title?: string; model?: string }>) => {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: (data: CreateConversationData) =>
-      apiClient.post<AIConversation>('/api/conversations', data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['conversations'] });
+    mutationFn: async (data: { title?: string; model?: string }) => {
+      const response = await fetch('/api/chat/conversations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (!response.ok) throw new Error('Failed to create conversation');
+      return response.json();
     },
+    onSuccess: (...args) => {
+      queryClient.invalidateQueries({ queryKey: ['ai-conversations'] });
+      options?.onSuccess?.(...args);
+    },
+    ...options
   });
-}
+};
 
-/**
- * Update a conversation
- */
-export function useUpdateConversation() {
+export const useConversationsUpdate = (options?: UseMutationOptions<any, any, { id: string; data: any }>) => {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: UpdateConversationData }) =>
-      apiClient.patch<AIConversation>(`/api/conversations/${id}`, data),
-    onSuccess: (_, { id }) => {
-      queryClient.invalidateQueries({ queryKey: ['conversation', id] });
-      queryClient.invalidateQueries({ queryKey: ['conversations'] });
+    mutationFn: async ({ id, data }: { id: string; data: any }) => {
+      const response = await fetch(`/api/chat/conversations/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (!response.ok) throw new Error('Failed to update conversation');
+      return response.json();
     },
+    onSuccess: (data, variables, ...rest) => {
+      queryClient.invalidateQueries({ queryKey: ['ai-conversation', variables.id] });
+      queryClient.invalidateQueries({ queryKey: ['ai-conversations'] });
+      options?.onSuccess?.(data, variables, ...rest);
+    },
+    ...options
   });
-}
+};
 
-/**
- * Delete a conversation (soft delete)
- */
-export function useDeleteConversation() {
+export const useConversationsDelete = (options?: UseMutationOptions<any, any, string>) => {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: (id: string) => apiClient.delete(`/api/conversations/${id}`),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['conversations'] });
+    mutationFn: async (id: string) => {
+      const response = await fetch(`/api/chat/conversations/${id}`, {
+        method: 'DELETE'
+      });
+      if (!response.ok) throw new Error('Failed to delete conversation');
+      return response.json();
     },
+    onSuccess: (data, id, ...rest) => {
+      queryClient.removeQueries({ queryKey: ['ai-conversation', id] });
+      queryClient.invalidateQueries({ queryKey: ['ai-conversations'] });
+      options?.onSuccess?.(data, id, ...rest);
+    },
+    ...options
   });
-}
+};
 
 // ============================================================================
 // MESSAGE HOOKS
 // ============================================================================
 
-/**
- * Get messages for a conversation
- */
-export function useMessages(conversationId: string | undefined) {
-  return useQuery<{ messages: AIMessage[] }>({
-    queryKey: ['messages', conversationId],
-    queryFn: () => apiClient.get(`/api/conversations/${conversationId}/messages`),
-    enabled: !!conversationId,
-  });
-}
-
-/**
- * Delete a message
- */
-export function useDeleteMessage() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: (messageId: string) => apiClient.delete(`/api/messages/${messageId}`),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['messages'] });
-      queryClient.invalidateQueries({ queryKey: ['conversation'] });
-    },
-  });
-}
-
-// ============================================================================
-// CHAT HOOK (with Vercel AI SDK + Database Persistence)
-// ============================================================================
-
-/**
- * Enhanced useChat hook
- * 
- * Combines Vercel AI SDK's streaming with our database persistence.
- * 
- * Usage:
- * ```tsx
- * const { messages, input, handleInputChange, handleSubmit, isLoading } = 
- *   useChatWithHistory({ conversationId: '123' });
- * ```
- */
-export function useChatWithHistory(options?: {
-  conversationId?: string;
-  model?: string;
-  provider?: string;
-  temperature?: number;
-  maxTokens?: number;
-  systemPrompt?: string;
-  onConversationCreated?: (conversationId: string) => void;
-}) {
-  const queryClient = useQueryClient();
-  const { conversationId, onConversationCreated, ...chatOptions } = options || {};
-
-  // Load existing messages if conversationId provided
-  const { data: messagesData } = useMessages(conversationId);
-
-  // Use Vercel AI SDK's useChat for streaming
-  const chat = useVercelChat({
-    api: '/api/chat',
-    body: {
-      conversationId,
-      ...chatOptions,
-    },
-    initialMessages: messagesData?.messages?.map(m => ({
-      id: m.id,
-      role: m.role as any,
-      content: m.content,
-    })),
-    onFinish: (message, { finishReason }) => {
-      // Invalidate queries to refetch updated data
-      queryClient.invalidateQueries({ queryKey: ['conversation', conversationId] });
-      queryClient.invalidateQueries({ queryKey: ['conversations'] });
-      queryClient.invalidateQueries({ queryKey: ['messages', conversationId] });
-
-      // If no conversationId, extract it from response headers
-      if (!conversationId && onConversationCreated) {
-        // Note: You'd need to get this from the response somehow
-        // This is a simplified example
-        console.log('New conversation created');
-      }
-    },
-    onError: (error) => {
-      console.error('Chat error:', error);
-    },
-  });
-
-  return {
-    ...chat,
-    conversationId,
-  };
-}
-
-/**
- * Simple useChat without persistence
- * 
- * Just uses Vercel AI SDK directly for ephemeral chats.
- */
-export function useSimpleChat(options?: {
-  model?: string;
-  provider?: string;
-  temperature?: number;
-  maxTokens?: number;
-}) {
-  return useVercelChat({
-    api: '/api/chat',
-    body: options,
-  });
-}
-
-// ============================================================================
-// ANALYTICS HOOKS (Optional)
-// ============================================================================
-
-/**
- * Get usage analytics
- */
-export function useAnalytics(userId?: string) {
+export const useMessagesList = (conversationId: string, options?: Omit<UseQueryOptions<any>, 'queryKey' | 'queryFn'>) => {
   return useQuery({
-    queryKey: ['analytics', userId],
-    queryFn: () => apiClient.get(`/api/analytics${userId ? `?userId=${userId}` : ''}`),
-    enabled: !!userId,
+    queryKey: ['ai-messages', conversationId],
+    queryFn: async () => {
+      const response = await fetch(`/api/chat/conversations/${conversationId}/messages`);
+      if (!response.ok) throw new Error('Failed to fetch messages');
+      return response.json();
+    },
+    enabled: !!conversationId,
+    staleTime: 1 * 60 * 1000,
+    ...options
   });
-}
+};
+
+export const useMessage = (conversationId: string, messageId: string, options?: Omit<UseQueryOptions<any>, 'queryKey' | 'queryFn'>) => {
+  return useQuery({
+    queryKey: ['ai-message', conversationId, messageId],
+    queryFn: async () => {
+      const response = await fetch(`/api/chat/conversations/${conversationId}/messages/${messageId}`);
+      if (!response.ok) throw new Error('Failed to fetch message');
+      return response.json();
+    },
+    enabled: !!conversationId && !!messageId,
+    staleTime: 5 * 60 * 1000,
+    ...options
+  });
+};
+
+export const useMessageSend = (options?: UseMutationOptions<any, any, { conversationId: string; content: string; model?: string }>) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ conversationId, content, model }: { conversationId: string; content: string; model?: string }) => {
+      const response = await fetch(`/api/chat/conversations/${conversationId}/messages`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content, model })
+      });
+      if (!response.ok) throw new Error('Failed to send message');
+      return response.json();
+    },
+    onSuccess: (data, variables, ...rest) => {
+      queryClient.invalidateQueries({ queryKey: ['ai-messages', variables.conversationId] });
+      queryClient.invalidateQueries({ queryKey: ['ai-conversation', variables.conversationId] });
+      options?.onSuccess?.(data, variables, ...rest);
+    },
+    ...options
+  });
+};
+
+export const useMessageRegenerate = (options?: UseMutationOptions<any, any, { conversationId: string; messageId: string }>) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ conversationId, messageId }: { conversationId: string; messageId: string }) => {
+      const response = await fetch(`/api/chat/conversations/${conversationId}/messages/${messageId}/regenerate`, {
+        method: 'POST'
+      });
+      if (!response.ok) throw new Error('Failed to regenerate message');
+      return response.json();
+    },
+    onSuccess: (data, variables, ...rest) => {
+      queryClient.invalidateQueries({ queryKey: ['ai-messages', variables.conversationId] });
+      queryClient.invalidateQueries({ queryKey: ['ai-message', variables.conversationId, variables.messageId] });
+      options?.onSuccess?.(data, variables, ...rest);
+    },
+    ...options
+  });
+};
+
+export const useMessageDelete = (options?: UseMutationOptions<any, any, { conversationId: string; messageId: string }>) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ conversationId, messageId }: { conversationId: string; messageId: string }) => {
+      const response = await fetch(`/api/chat/conversations/${conversationId}/messages/${messageId}`, {
+        method: 'DELETE'
+      });
+      if (!response.ok) throw new Error('Failed to delete message');
+      return response.json();
+    },
+    onSuccess: (data, variables, ...rest) => {
+      queryClient.removeQueries({ queryKey: ['ai-message', variables.conversationId, variables.messageId] });
+      queryClient.invalidateQueries({ queryKey: ['ai-messages', variables.conversationId] });
+      options?.onSuccess?.(data, variables, ...rest);
+    },
+    ...options
+  });
+};
 
 // ============================================================================
-// UTILITY HOOKS
+// STREAMING HOOK
 // ============================================================================
 
 /**
- * Archive a conversation
+ * Hook for streaming messages with real-time AI responses
+ * Returns a function to initiate streaming
  */
-export function useArchiveConversation() {
-  const updateConversation = useUpdateConversation();
+export const useMessageStream = () => {
+  const queryClient = useQueryClient();
 
-  return useCallback(
-    (id: string) => {
-      return updateConversation.mutateAsync({
-        id,
-        data: { status: 'archived' },
+  const streamMessage = async (
+    conversationId: string,
+    content: string,
+    onChunk: (chunk: string) => void,
+    onComplete?: (fullResponse: string) => void,
+    onError?: (error: Error) => void
+  ) => {
+    try {
+      const response = await fetch('/api/chat/stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ conversationId, content })
       });
-    },
-    [updateConversation]
-  );
-}
 
-/**
- * Restore an archived conversation
- */
-export function useRestoreConversation() {
-  const updateConversation = useUpdateConversation();
+      if (!response.ok || !response.body) {
+        throw new Error('Failed to start stream');
+      }
 
-  return useCallback(
-    (id: string) => {
-      return updateConversation.mutateAsync({
-        id,
-        data: { status: 'active' },
-      });
-    },
-    [updateConversation]
-  );
-}
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let fullResponse = '';
 
-/**
- * Rename a conversation
- */
-export function useRenameConversation() {
-  const updateConversation = useUpdateConversation();
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
 
-  return useCallback(
-    (id: string, title: string) => {
-      return updateConversation.mutateAsync({
-        id,
-        data: { title },
-      });
-    },
-    [updateConversation]
-  );
-}
+        const chunk = decoder.decode(value);
+        fullResponse += chunk;
+        onChunk(chunk);
+      }
+
+      // Invalidate queries after streaming completes
+      queryClient.invalidateQueries({ queryKey: ['ai-messages', conversationId] });
+      queryClient.invalidateQueries({ queryKey: ['ai-conversation', conversationId] });
+
+      onComplete?.(fullResponse);
+    } catch (error) {
+      onError?.(error as Error);
+    }
+  };
+
+  return { streamMessage };
+};
 
 // ============================================================================
-// EXPORTS
+// MODEL HOOKS
 // ============================================================================
 
-export {
-  // Re-export Vercel AI SDK hooks for direct use
-  useChat,
-  useCompletion,
-} from 'ai/react';
+export const useModelsList = (options?: Omit<UseQueryOptions<any>, 'queryKey' | 'queryFn'>) => {
+  return useQuery({
+    queryKey: ['ai-models'],
+    queryFn: async () => {
+      const response = await fetch('/api/chat/models');
+      if (!response.ok) throw new Error('Failed to fetch models');
+      return response.json();
+    },
+    staleTime: 60 * 60 * 1000, // 1 hour
+    ...options
+  });
+};
+
+export const useModel = (id: string, options?: Omit<UseQueryOptions<any>, 'queryKey' | 'queryFn'>) => {
+  return useQuery({
+    queryKey: ['ai-model', id],
+    queryFn: async () => {
+      const response = await fetch(`/api/chat/models/${id}`);
+      if (!response.ok) throw new Error('Failed to fetch model');
+      return response.json();
+    },
+    enabled: !!id,
+    staleTime: 60 * 60 * 1000,
+    ...options
+  });
+};
+
+// ============================================================================
+// FILE UPLOAD HOOKS
+// ============================================================================
+
+export const useFilesList = (conversationId?: string, options?: Omit<UseQueryOptions<any>, 'queryKey' | 'queryFn'>) => {
+  return useQuery({
+    queryKey: ['ai-files', conversationId],
+    queryFn: async () => {
+      const url = conversationId 
+        ? `/api/chat/files?conversationId=${conversationId}`
+        : '/api/chat/files';
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Failed to fetch files');
+      return response.json();
+    },
+    staleTime: 5 * 60 * 1000,
+    ...options
+  });
+};
+
+export const useFileUpload = (options?: UseMutationOptions<any, any, { conversationId: string; file: File }>) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ conversationId, file }: { conversationId: string; file: File }) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('conversationId', conversationId);
+
+      const response = await fetch('/api/chat/files', {
+        method: 'POST',
+        body: formData
+      });
+      if (!response.ok) throw new Error('Failed to upload file');
+      return response.json();
+    },
+    onSuccess: (data, variables, ...rest) => {
+      queryClient.invalidateQueries({ queryKey: ['ai-files', variables.conversationId] });
+      options?.onSuccess?.(data, variables, ...rest);
+    },
+    ...options
+  });
+};
+
+export const useFileDelete = (options?: UseMutationOptions<any, any, string>) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (fileId: string) => {
+      const response = await fetch(`/api/chat/files/${fileId}`, {
+        method: 'DELETE'
+      });
+      if (!response.ok) throw new Error('Failed to delete file');
+      return response.json();
+    },
+    onSuccess: (...args) => {
+      queryClient.invalidateQueries({ queryKey: ['ai-files'] });
+      options?.onSuccess?.(...args);
+    },
+    ...options
+  });
+};
+
+
+
+

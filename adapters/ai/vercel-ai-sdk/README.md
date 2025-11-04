@@ -241,3 +241,4 @@ Many AI integrations mix concerns:
 **Updated:** Simplified to minimal adapter role
 
 
+

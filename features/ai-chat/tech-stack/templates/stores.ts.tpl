@@ -1,250 +1,127 @@
 /**
- * AI Chat Zustand Stores
+ * AI Chat UI Store - Zustand State Management
  * 
- * Client-side state management for AI chat.
+ * ⚠️ ARCHITECTURE NOTE:
+ * This store manages UI STATE ONLY - not server data!
+ * 
+ * SERVER DATA (conversations, messages) → Use TanStack Query hooks
+ * UI STATE (sidebar, input state, streaming) → Use this Zustand store
  */
 
 import { create } from 'zustand';
+import { immer } from 'zustand/middleware/immer';
 import { persist } from 'zustand/middleware';
 
-// ============================================================================
-// CHAT UI STORE
-// ============================================================================
-
-interface ChatUIState {
-  // Active conversation
-  activeConversationId: string | null;
-  setActiveConversationId: (id: string | null) => void;
-
-  // Sidebar
+interface AIChatUIState {
+  // Selection State
+  selectedConversationId: string | null;
+  selectedMessageId: string | null;
+  
+  // UI State
   isSidebarOpen: boolean;
-  toggleSidebar: () => void;
-  setSidebarOpen: (open: boolean) => void;
-
-  // Settings
   isSettingsOpen: boolean;
-  toggleSettings: () => void;
-  setSettingsOpen: (open: boolean) => void;
-
-  // Input
-  inputValue: string;
-  setInputValue: (value: string) => void;
+  isChatLoading: boolean;
+  isStreaming: boolean;
+  
+  // Input State
+  inputMessage: string;
+  inputFiles: File[];
+  
+  // View State
+  viewMode: 'chat' | 'history' | 'settings';
+  fontSize: 'small' | 'medium' | 'large';
+  theme: 'light' | 'dark' | 'auto';
+  
+  // Streaming State
+  streamingMessageId: string | null;
+  streamingContent: string;
+  
+  // Actions
+  setSelectedConversationId: (id: string | null) => void;
+  setSelectedMessageId: (id: string | null) => void;
+  setSidebarOpen: (isOpen: boolean) => void;
+  setSettingsOpen: (isOpen: boolean) => void;
+  setChatLoading: (isLoading: boolean) => void;
+  setStreaming: (isStreaming: boolean) => void;
+  setInputMessage: (message: string) => void;
+  setInputFiles: (files: File[]) => void;
+  addInputFile: (file: File) => void;
+  removeInputFile: (index: number) => void;
   clearInput: () => void;
-
-  // Search
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
-  clearSearch: () => void;
+  setViewMode: (mode: 'chat' | 'history' | 'settings') => void;
+  setFontSize: (size: 'small' | 'medium' | 'large') => void;
+  setTheme: (theme: 'light' | 'dark' | 'auto') => void;
+  setStreamingMessageId: (id: string | null) => void;
+  setStreamingContent: (content: string) => void;
+  appendStreamingContent: (chunk: string) => void;
+  clearStreaming: () => void;
+  resetUIState: () => void;
 }
 
-/**
- * Chat UI Store
- * 
- * Manages UI state for the chat interface.
- */
-export const useChatUIStore = create<ChatUIState>()(
+export const useAIChatUIStore = create<AIChatUIState>()(
   persist(
-    (set) => ({
-      // Active conversation
-      activeConversationId: null,
-      setActiveConversationId: (id) => set({ activeConversationId: id }),
-
-      // Sidebar
+    immer((set) => ({
+      // Initial state
+      selectedConversationId: null,
+      selectedMessageId: null,
       isSidebarOpen: true,
-      toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
-      setSidebarOpen: (open) => set({ isSidebarOpen: open }),
-
-      // Settings
       isSettingsOpen: false,
-      toggleSettings: () => set((state) => ({ isSettingsOpen: !state.isSettingsOpen })),
-      setSettingsOpen: (open) => set({ isSettingsOpen: open }),
+      isChatLoading: false,
+        isStreaming: false,
+      inputMessage: '',
+      inputFiles: [],
+      viewMode: 'chat',
+      fontSize: 'medium',
+      theme: 'auto',
+        streamingMessageId: null,
+        streamingContent: '',
 
-      // Input
-      inputValue: '',
-      setInputValue: (value) => set({ inputValue: value }),
-      clearInput: () => set({ inputValue: '' }),
-
-      // Search
-      searchQuery: '',
-      setSearchQuery: (query) => set({ searchQuery: query }),
-      clearSearch: () => set({ searchQuery: '' }),
-    }),
-    {
-      name: 'chat-ui-storage',
-      partialize: (state) => ({
-        activeConversationId: state.activeConversationId,
-        isSidebarOpen: state.isSidebarOpen,
+      // Actions
+      setSelectedConversationId: (id) => set((state) => { state.selectedConversationId = id; }),
+      setSelectedMessageId: (id) => set((state) => { state.selectedMessageId = id; }),
+      setSidebarOpen: (isOpen) => set((state) => { state.isSidebarOpen = isOpen; }),
+      setSettingsOpen: (isOpen) => set((state) => { state.isSettingsOpen = isOpen; }),
+      setChatLoading: (isLoading) => set((state) => { state.isChatLoading = isLoading; }),
+      setStreaming: (isStreaming) => set((state) => { state.isStreaming = isStreaming; }),
+      setInputMessage: (message) => set((state) => { state.inputMessage = message; }),
+      setInputFiles: (files) => set((state) => { state.inputFiles = files; }),
+      addInputFile: (file) => set((state) => { state.inputFiles.push(file); }),
+      removeInputFile: (index) => set((state) => { state.inputFiles.splice(index, 1); }),
+      clearInput: () => set((state) => {
+        state.inputMessage = '';
+        state.inputFiles = [];
       }),
-    }
-  )
-);
-
-// ============================================================================
-// CHAT SETTINGS STORE
-// ============================================================================
-
-interface ChatSettings {
-  model: string;
-  provider: 'openai' | 'anthropic' | 'google' | 'cohere' | 'huggingface';
-  temperature: number;
-  maxTokens: number;
-  systemPrompt: string;
-  streaming: boolean;
-}
-
-interface ChatSettingsState extends ChatSettings {
-  updateSettings: (settings: Partial<ChatSettings>) => void;
-  resetSettings: () => void;
-}
-
-const DEFAULT_SETTINGS: ChatSettings = {
-  model: 'gpt-3.5-turbo',
-  provider: 'openai',
-              temperature: 0.7,
-  maxTokens: 1000,
-  systemPrompt: '',
-  streaming: true,
-};
-
-/**
- * Chat Settings Store
- * 
- * Manages chat configuration and preferences.
- */
-export const useChatSettingsStore = create<ChatSettingsState>()(
-  persist(
-    (set) => ({
-      ...DEFAULT_SETTINGS,
-      updateSettings: (settings) => set((state) => ({ ...state, ...settings })),
-      resetSettings: () => set(DEFAULT_SETTINGS),
-    }),
+      setViewMode: (mode) => set((state) => { state.viewMode = mode; }),
+      setFontSize: (size) => set((state) => { state.fontSize = size; }),
+      setTheme: (theme) => set((state) => { state.theme = theme; }),
+      setStreamingMessageId: (id) => set((state) => { state.streamingMessageId = id; }),
+      setStreamingContent: (content) => set((state) => { state.streamingContent = content; }),
+      appendStreamingContent: (chunk) => set((state) => { state.streamingContent += chunk; }),
+      clearStreaming: () => set((state) => {
+            state.streamingMessageId = null;
+            state.streamingContent = '';
+            state.isStreaming = false;
+      }),
+      resetUIState: () => set((state) => {
+        state.selectedConversationId = null;
+            state.selectedMessageId = null;
+        state.isSettingsOpen = false;
+        state.isChatLoading = false;
+        state.isStreaming = false;
+        state.inputMessage = '';
+        state.inputFiles = [];
+            state.streamingMessageId = null;
+            state.streamingContent = '';
+        state.viewMode = 'chat';
+      })
+    })),
     {
-      name: 'chat-settings-storage',
+      name: 'ai-chat-ui-storage',
+      partialize: (state) => ({
+        isSidebarOpen: state.isSidebarOpen,
+        fontSize: state.fontSize,
+        theme: state.theme
+      })
     }
   )
 );
-
-// ============================================================================
-// DRAFT MESSAGES STORE
-// ============================================================================
-
-interface DraftMessage {
-  conversationId: string;
-  content: string;
-  timestamp: number;
-}
-
-interface DraftMessagesState {
-  drafts: Record<string, DraftMessage>;
-  saveDraft: (conversationId: string, content: string) => void;
-  getDraft: (conversationId: string) => string | null;
-  clearDraft: (conversationId: string) => void;
-  clearAllDrafts: () => void;
-}
-
-/**
- * Draft Messages Store
- * 
- * Saves unsent message drafts per conversation.
- */
-export const useDraftMessagesStore = create<DraftMessagesState>()(
-  persist(
-    (set, get) => ({
-      drafts: {},
-      saveDraft: (conversationId, content) =>
-        set((state) => ({
-          drafts: {
-            ...state.drafts,
-            [conversationId]: {
-              conversationId,
-              content,
-              timestamp: Date.now(),
-            },
-          },
-        })),
-      getDraft: (conversationId) => {
-        const draft = get().drafts[conversationId];
-        return draft?.content || null;
-      },
-      clearDraft: (conversationId) =>
-          set((state) => {
-          const { [conversationId]: _, ...rest } = state.drafts;
-          return { drafts: rest };
-        }),
-      clearAllDrafts: () => set({ drafts: {} }),
-    }),
-    {
-      name: 'chat-drafts-storage',
-    }
-  )
-);
-
-// ============================================================================
-// SELECTION STORE (for bulk operations)
-// ============================================================================
-
-interface SelectionState {
-  selectedConversations: Set<string>;
-  isSelectionMode: boolean;
-  toggleSelection: (id: string) => void;
-  selectAll: (ids: string[]) => void;
-  clearSelection: () => void;
-  enterSelectionMode: () => void;
-  exitSelectionMode: () => void;
-}
-
-/**
- * Selection Store
- * 
- * Manages selection state for bulk operations.
- */
-export const useSelectionStore = create<SelectionState>((set, get) => ({
-  selectedConversations: new Set(),
-  isSelectionMode: false,
-  toggleSelection: (id) =>
-    set((state) => {
-      const newSelection = new Set(state.selectedConversations);
-      if (newSelection.has(id)) {
-        newSelection.delete(id);
-      } else {
-        newSelection.add(id);
-      }
-      return { selectedConversations: newSelection };
-    }),
-  selectAll: (ids) =>
-    set({ selectedConversations: new Set(ids), isSelectionMode: true }),
-  clearSelection: () =>
-    set({ selectedConversations: new Set(), isSelectionMode: false }),
-  enterSelectionMode: () => set({ isSelectionMode: true }),
-  exitSelectionMode: () =>
-    set({ selectedConversations: new Set(), isSelectionMode: false }),
-}));
-
-// ============================================================================
-// UTILITY HOOKS
-// ============================================================================
-
-/**
- * Get the current active conversation ID
- */
-export const useActiveConversation = () => 
-  useChatUIStore((state) => state.activeConversationId);
-
-/**
- * Get current chat settings
- */
-export const useChatSettings = () => 
-  useChatSettingsStore((state) => ({
-    model: state.model,
-    provider: state.provider,
-    temperature: state.temperature,
-    maxTokens: state.maxTokens,
-    systemPrompt: state.systemPrompt,
-    streaming: state.streaming,
-  }));
-
-/**
- * Check if sidebar is open
- */
-export const useIsSidebarOpen = () => 
-  useChatUIStore((state) => state.isSidebarOpen);

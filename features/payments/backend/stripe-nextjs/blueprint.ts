@@ -6,7 +6,7 @@
  */
 
 import { BlueprintAction, BlueprintActionType } from '@thearchitech.xyz/types';
-import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../types/blueprint-config-types';
+import { TypedMergedConfiguration, extractTypedModuleParameters } from '../../../../types/blueprint-config-types.js';
 
 export default function generateBlueprint(
   config: TypedMergedConfiguration<'connectors/payment/stripe-nextjs-drizzle'>

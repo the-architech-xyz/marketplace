@@ -1,0 +1,90 @@
+{
+  "id": "features/architech-welcome",
+  "name": "Architech Welcome Tech-Stack",
+  "description": "Framework-agnostic welcome page logic and data extraction",
+  "version": "1.0.0",
+  "role": "tech-stack-layer",
+  "pattern": "custom-logic",
+  "type": "feature",
+  "tags": [
+    "welcome",
+    "showcase",
+    "documentation"
+  ],
+  "compatibility": {
+    "frameworks": [
+      "nextjs",
+      "expo",
+      "react"
+    ]
+  },
+  "dependencies": [],
+  "requires": {
+    "components": {
+      "ui/shadcn-ui": ["badge", "checkbox", "switch", "tabs", "alert"]
+    }
+  },
+  "provides": [
+    "welcome-page-data",
+    "project-analyzer",
+    "tech-stack-extractor"
+  ],
+  "requiresUI": [
+    "welcome-page",
+    "welcome-layout"
+  ],
+  "parameters": {
+    "features": {
+      "techStack": {
+        "type": "boolean",
+        "default": true,
+        "description": "Show technology stack visualization"
+      },
+      "componentShowcase": {
+        "type": "boolean",
+        "default": true,
+        "description": "Show interactive component library showcase"
+      },
+      "projectStructure": {
+        "type": "boolean",
+        "default": true,
+        "description": "Show project structure and architecture"
+      },
+      "quickStart": {
+        "type": "boolean",
+        "default": true,
+        "description": "Show quick start guide"
+      },
+      "architechBranding": {
+        "type": "boolean",
+        "default": true,
+        "description": "Show Architech branding and links"
+      }
+    },
+    "customTitle": {
+      "type": "string",
+      "default": "Welcome to Your New App",
+      "description": "Custom welcome page title"
+    },
+    "customDescription": {
+      "type": "string",
+      "default": "Your modern application is ready! Explore the features and technologies that power your project.",
+      "description": "Custom welcome page description"
+    },
+    "primaryColor": {
+      "type": "string",
+      "default": "blue",
+      "choices": [
+        "blue",
+        "green",
+        "purple",
+        "red",
+        "orange",
+        "pink"
+      ],
+      "description": "Primary color theme for the welcome page"
+    }
+  },
+  "blueprint": "blueprint.ts"
+}
+

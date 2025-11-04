@@ -1,0 +1,42 @@
+{
+  "id": "features/waitlist/database/drizzle",
+  "name": "Waitlist Database Layer (Drizzle)",
+  "description": "Database schema for waitlist feature with viral referral system using Drizzle ORM. Stores users, referrals, and analytics.",
+  "type": "feature",
+  "version": "1.0.0",
+  "requires": [
+    "database/drizzle"
+  ],
+  "provides": [
+    "waitlist-database-schema",
+    "waitlist-migrations",
+    "waitlist-referral-tracking"
+  ],
+  "role": "tech-stack-layer",
+  "pattern": "custom-logic",
+  "parameters": {
+    "features": {
+      "viralReferral": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable viral referral system"
+      },
+      "positionTracking": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable position tracking in waitlist"
+      },
+      "bonusSystem": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable referral bonus system"
+      },
+      "analytics": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable analytics tracking"
+      }
+    }
+  }
+}
+

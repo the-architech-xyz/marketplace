@@ -138,10 +138,24 @@ class FeatureManifestGenerator {
     }
 
     // Discover implementations
-    const implementations = await this.discoverImplementations(featureId, featurePath);
+    let implementations = await this.discoverImplementations(featureId, featurePath);
     
+    // If no implementations found, check if this is a legacy root-level feature
     if (implementations.length === 0) {
-      throw new Error(`No implementations found for feature: ${featureId}`);
+      const featureJsonPath = path.join(featurePath, 'feature.json');
+      if (await this.fileExists(featureJsonPath)) {
+        console.log(`📋 Treating ${featureId} as root-level legacy feature`);
+        // Create an implementation entry using the root feature.json
+        implementations.push({
+          type: 'frontend',
+          stack: ['unknown'],
+          moduleId: `features/${featureId}`,
+          capabilities: ['legacy-feature'],
+          dependencies: []
+        });
+      } else {
+        throw new Error(`No implementations found for feature: ${featureId}`);
+      }
     }
 
     // Analyze default stack
@@ -218,6 +232,8 @@ class FeatureManifestGenerator {
     for (const entry of entries) {
       if (!entry.isDirectory()) continue;
       if (entry.name === 'backend' || entry.name === 'frontend') continue;
+      // Skip templates directory - it's not an implementation
+      if (entry.name === 'templates') continue;
 
       const implPath = path.join(featurePath, entry.name);
       const moduleId = `features/${featureId}/${entry.name}`;

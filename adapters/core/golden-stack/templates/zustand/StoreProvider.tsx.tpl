@@ -5,15 +5,13 @@
  */
 
 import React, { createContext, useContext, ReactNode } from 'react';
-import { useAppStore } from './use-app-store';
-import { useUIStore } from './use-ui-store';
-import { useAuthStore } from './use-auth-store';
+import { useAppStore } from '@/stores/use-app-store';
+import { useUIStore } from '@/stores/use-ui-store';
 
 // Store context interface
 interface StoreContextValue {
   appStore: ReturnType<typeof useAppStore>;
   uiStore: ReturnType<typeof useUIStore>;
-  authStore: ReturnType<typeof useAuthStore>;
 }
 
 // Create store context
@@ -28,12 +26,10 @@ interface StoreProviderProps {
 export function StoreProvider({ children }: StoreProviderProps) {
   const appStore = useAppStore();
   const uiStore = useUIStore();
-  const authStore = useAuthStore();
 
   const value: StoreContextValue = {
     appStore,
     uiStore,
-    authStore,
   };
 
   return (
@@ -65,56 +61,38 @@ export function useUIStoreContext() {
   return uiStore;
 }
 
-export function useAuthStoreContext() {
-  const { authStore } = useStoreContext();
-  return authStore;
-}
-
 // Store initialization hook
 export function useStoreInitialization() {
-  const { appStore, authStore } = useStoreContext();
+  const { appStore } = useStoreContext();
 
   React.useEffect(() => {
     // Initialize app store
     appStore.initialize();
-    
-    // Check for existing auth session
-    if (authStore.session.token && authStore.session.expiresAt) {
-      const isExpired = Date.now() >= authStore.session.expiresAt;
-      if (!isExpired) {
-        authStore.setUser(authStore.user);
-        authStore.setSession(authStore.session);
-      } else {
-        authStore.clearSession();
-      }
-    }
-  }, [appStore, authStore]);
+  }, [appStore]);
 }
 
 // Store reset hook
 export function useStoreReset() {
-  const { appStore, uiStore, authStore } = useStoreContext();
+  const { appStore, uiStore } = useStoreContext();
 
   const resetAllStores = React.useCallback(() => {
     appStore.reset();
     uiStore.reset();
-    authStore.reset();
-  }, [appStore, uiStore, authStore]);
+  }, [appStore, uiStore]);
 
   return { resetAllStores };
 }
 
 // Store debug hook
 export function useStoreDebug() {
-  const { appStore, uiStore, authStore } = useStoreContext();
+  const { appStore, uiStore } = useStoreContext();
 
   React.useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
       console.log('App Store:', appStore);
       console.log('UI Store:', uiStore);
-      console.log('Auth Store:', authStore);
     }
-  }, [appStore, uiStore, authStore]);
+  }, [appStore, uiStore]);
 }
 
 export default StoreProvider;

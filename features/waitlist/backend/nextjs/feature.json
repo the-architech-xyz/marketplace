@@ -1,0 +1,162 @@
+{
+  "id": "features/waitlist/backend/nextjs",
+  "name": "Waitlist Backend (Next.js)",
+  "description": "Complete waitlist backend with viral referral system for Next.js",
+  "type": "feature",
+  "version": "1.0.0",
+  "requires": [
+    "framework/nextjs",
+    "features/waitlist/database/drizzle",
+    "features/waitlist/tech-stack",
+    "email/resend"
+  ],
+  "requiresCapabilities": [
+    {
+      "category": "database",
+      "optional": false,
+      "reason": "Store waitlist users, referrals, and analytics"
+    },
+    {
+      "category": "email",
+      "optional": false,
+      "reason": "Send welcome emails with magic links and referral codes"
+    }
+  ],
+  "provides": [
+    "waitlist-backend-api",
+    "waitlist-business-logic",
+    "waitlist-referral-tracking",
+    "waitlist-analytics"
+  ],
+  "role": "backend-feature",
+  "pattern": "custom-logic",
+  "contract": {
+    "hooks": {
+      "useJoinWaitlist": {
+        "parameters": ["data"],
+        "returnType": "Promise<JoinWaitlistResult>",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": false
+      },
+      "useWaitlistUser": {
+        "parameters": ["userId"],
+        "returnType": "Promise<GetWaitlistUserResult>",
+        "isAsync": true,
+        "isMutation": false,
+        "isQuery": true
+      },
+      "useWaitlistLeaderboard": {
+        "parameters": ["limit"],
+        "returnType": "Promise<Array<WaitlistUser>>",
+        "isAsync": true,
+        "isMutation": false,
+        "isQuery": true
+      },
+      "useWaitlistStats": {
+        "parameters": [],
+        "returnType": "Promise<WaitlistStats>",
+        "isAsync": true,
+        "isMutation": false,
+        "isQuery": true
+      }
+    },
+    "types": {
+      "WaitlistStatus": {
+        "definition": "| 'pending' | 'joined' | 'invited' | 'declined' | 'removed'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "ReferralSource": {
+        "definition": "| 'direct' | 'referral' | 'social'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "WaitlistUser": {
+        "definition": "export interface WaitlistUser {\n  id: string;\n  email: string;\n  firstName?: string;\n  lastName?: string;\n  status: WaitlistStatus;\n  position: number;\n  referralCode: string;\n  referredByCode?: string;\n  referralCount: number;\n  referralBonus: number;\n  source: ReferralSource;\n  metadata?: Record<string, any>;\n  joinedAt: string;\n  invitedAt?: string;\n  updatedAt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "WaitlistReferral": {
+        "definition": "export interface WaitlistReferral {\n  id: string;\n  referrerId: string;\n  refereeId: string;\n  referrerCode: string;\n  status: 'pending' | 'completed';\n  bonusAwarded: number;\n  createdAt: string;\n  completedAt?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "WaitlistStats": {
+        "definition": "export interface WaitlistStats {\n  totalUsers: number;\n  pendingUsers: number;\n  invitedUsers: number;\n  totalReferrals: number;\n  avgReferralsPerUser: number;\n  topReferrers: Array<{\n    userId: string;\n    email: string;\n    referralCount: number;\n    bonusAwarded: number;\n  }>;\n  growthRate: number;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "JoinWaitlistData": {
+        "definition": "export interface JoinWaitlistData {\n  email: string;\n  firstName?: string;\n  lastName?: string;\n  referredByCode?: string;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "JoinWaitlistResult": {
+        "definition": "export interface JoinWaitlistResult {\n  user: WaitlistUser;\n  success: boolean;\n  message?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "GetWaitlistUserResult": {
+        "definition": "export interface GetWaitlistUserResult {\n  user: WaitlistUser;\n  stats: WaitlistStats;\n  success: boolean;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "IWaitlistService": {
+        "definition": "export interface IWaitlistService {\n  joinWaitlist: (data: JoinWaitlistData) => Promise<JoinWaitlistResult>;\n  getWaitlistUser: (userId: string) => Promise<GetWaitlistUserResult>;\n  getLeaderboard: (limit?: number) => Promise<Array<WaitlistUser>>;\n  getStats: () => Promise<WaitlistStats>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      }
+    }
+  },
+  "parameters": {
+    "features": {
+      "viralReferral": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable viral referral system"
+      },
+      "positionTracking": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable position tracking in waitlist"
+      },
+      "bonusSystem": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable referral bonus system"
+      },
+      "welcomeEmail": {
+        "type": "boolean",
+        "default": true,
+        "description": "Send welcome email with referral code"
+      },
+      "analytics": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable analytics tracking"
+      }
+    },
+    "referralBonus": {
+      "type": "number",
+      "default": 3,
+      "description": "Position boost per referral"
+    },
+    "maxBonusPerUser": {
+      "type": "number",
+      "default": 20,
+      "description": "Maximum total bonus per user"
+    }
+  }
+}
+
+

@@ -1,0 +1,427 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2025-10-29T02:20:08.896Z",
+  "stats": {
+    "totalCapabilities": 5,
+    "capabilityGenomes": 20,
+    "lastUpdated": "2025-10-29T02:20:08.898Z"
+  },
+  "capabilities": [
+    {
+      "id": "auth",
+      "name": "Authentication",
+      "description": "User authentication and authorization",
+      "category": "auth",
+      "providers": [],
+      "layers": [],
+      "parameters": {},
+      "genomes": [
+        "test-capability-driven",
+        "saas-platform-capability"
+      ],
+      "tags": [
+        "auth",
+        "payments",
+        "emailing",
+        "intermediate",
+        "auth",
+        "payments",
+        "teamsManagement",
+        "emailing",
+        "monitoring",
+        "intermediate"
+      ]
+    },
+    {
+      "id": "payments",
+      "name": "Payments",
+      "description": "Payment processing and billing",
+      "category": "payments",
+      "providers": [],
+      "layers": [],
+      "parameters": {},
+      "genomes": [
+        "test-capability-driven",
+        "saas-platform-capability"
+      ],
+      "tags": [
+        "auth",
+        "payments",
+        "emailing",
+        "intermediate",
+        "auth",
+        "payments",
+        "teamsManagement",
+        "emailing",
+        "monitoring",
+        "intermediate"
+      ]
+    },
+    {
+      "id": "emailing",
+      "name": "Email Services",
+      "description": "Email sending and management",
+      "category": "emailing",
+      "providers": [],
+      "layers": [],
+      "parameters": {},
+      "genomes": [
+        "test-capability-driven",
+        "saas-platform-capability"
+      ],
+      "tags": [
+        "auth",
+        "payments",
+        "emailing",
+        "intermediate",
+        "auth",
+        "payments",
+        "teamsManagement",
+        "emailing",
+        "monitoring",
+        "intermediate"
+      ]
+    },
+    {
+      "id": "teamsManagement",
+      "name": "teamsManagement",
+      "description": "Capability: teamsManagement",
+      "category": "teamsManagement",
+      "providers": [],
+      "layers": [],
+      "parameters": {},
+      "genomes": [
+        "saas-platform-capability"
+      ],
+      "tags": [
+        "auth",
+        "payments",
+        "teamsManagement",
+        "emailing",
+        "monitoring",
+        "intermediate"
+      ]
+    },
+    {
+      "id": "monitoring",
+      "name": "Monitoring",
+      "description": "Application monitoring and observability",
+      "category": "monitoring",
+      "providers": [],
+      "layers": [],
+      "parameters": {},
+      "genomes": [
+        "saas-platform-capability"
+      ],
+      "tags": [
+        "auth",
+        "payments",
+        "teamsManagement",
+        "emailing",
+        "monitoring",
+        "intermediate"
+      ]
+    }
+  ],
+  "genomes": [
+    {
+      "id": "test-capability-driven",
+      "name": "Test Capability-Driven Genome",
+      "description": "Test Capability-Driven Genome",
+      "capabilities": [
+        "auth",
+        "payments",
+        "emailing"
+      ],
+      "complexity": "intermediate",
+      "tags": [
+        "auth",
+        "payments",
+        "emailing",
+        "intermediate"
+      ],
+      "filePath": "genomes/test-capability-driven.genome.ts"
+    },
+    {
+      "id": "web3-dapp",
+      "name": "WEB3 / DAPP STARTER",
+      "description": "WEB3 / DAPP STARTER",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/use-cases/web3-dapp.genome.ts"
+    },
+    {
+      "id": "tamagui-monorepo",
+      "name": "TAMAGUI MONOREPO",
+      "description": "TAMAGUI MONOREPO",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/use-cases/tamagui-monorepo.genome.ts"
+    },
+    {
+      "id": "saas-platform",
+      "name": "FULL SAAS PLATFORM STARTER",
+      "description": "FULL SAAS PLATFORM STARTER",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/use-cases/saas-platform.genome.ts"
+    },
+    {
+      "id": "react-monorepo",
+      "name": "REACT MONOREPO",
+      "description": "REACT MONOREPO",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/use-cases/react-monorepo.genome.ts"
+    },
+    {
+      "id": "expo-monorepo",
+      "name": "EXPO MONOREPO",
+      "description": "EXPO MONOREPO",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/use-cases/expo-monorepo.genome.ts"
+    },
+    {
+      "id": "blog",
+      "name": "MODERN BLOG / CMS STARTER",
+      "description": "MODERN BLOG / CMS STARTER",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/use-cases/blog.genome.ts"
+    },
+    {
+      "id": "ai-app",
+      "name": "AI-POWERED APPLICATION STARTER",
+      "description": "AI-POWERED APPLICATION STARTER",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/use-cases/ai-app.genome.ts"
+    },
+    {
+      "id": "valid-architecture",
+      "name": "VALID ARCHITECTURE GENOME",
+      "description": "VALID ARCHITECTURE GENOME",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/test/valid-architecture.genome.ts"
+    },
+    {
+      "id": "type-error",
+      "name": "Type Error Test Genome",
+      "description": "Type Error Test Genome",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/test/type-error.genome.ts"
+    },
+    {
+      "id": "min-test",
+      "name": "Minimal Test Genome",
+      "description": "Minimal Test Genome",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/test/min-test.genome.ts"
+    },
+    {
+      "id": "invalid-test",
+      "name": "Invalid Test Genome",
+      "description": "Invalid Test Genome",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/test/invalid-test.genome.ts"
+    },
+    {
+      "id": "broken-architecture",
+      "name": "BROKEN ARCHITECTURE GENOME",
+      "description": "BROKEN ARCHITECTURE GENOME",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/test/broken-architecture.genome.ts"
+    },
+    {
+      "id": "saas-platform-capability",
+      "name": "FULL SAAS PLATFORM STARTER - Capability-Driven Version",
+      "description": "FULL SAAS PLATFORM STARTER - Capability-Driven Version",
+      "capabilities": [
+        "auth",
+        "payments",
+        "teamsManagement",
+        "emailing",
+        "monitoring"
+      ],
+      "complexity": "intermediate",
+      "tags": [
+        "auth",
+        "payments",
+        "teamsManagement",
+        "emailing",
+        "monitoring",
+        "intermediate"
+      ],
+      "filePath": "genomes/starters/saas-platform-capability.genome.ts"
+    },
+    {
+      "id": "full-stack-app",
+      "name": "FULL STACK APP STARTER",
+      "description": "FULL STACK APP STARTER",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/starters/04-full-stack-app.genome.ts"
+    },
+    {
+      "id": "standard-app",
+      "name": "STANDARD APP STARTER ⭐ RECOMMENDED",
+      "description": "STANDARD APP STARTER ⭐ RECOMMENDED",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/starters/03-standard-app.genome.ts"
+    },
+    {
+      "id": "simple-app",
+      "name": "SIMPLE APP STARTER",
+      "description": "SIMPLE APP STARTER",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/starters/02-simple-app.genome.ts"
+    },
+    {
+      "id": "hello-world",
+      "name": "HELLO WORLD STARTER",
+      "description": "HELLO WORLD STARTER",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/starters/01-hello-world.genome.ts"
+    },
+    {
+      "id": "hello-world-capability",
+      "name": "HELLO WORLD STARTER - Capability-Driven Version",
+      "description": "HELLO WORLD STARTER - Capability-Driven Version",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/starters/01-hello-world-capability.genome.ts"
+    },
+    {
+      "id": "ultimate-showcase",
+      "name": "ULTIMATE SHOWCASE / KITCHEN SINK",
+      "description": "ULTIMATE SHOWCASE / KITCHEN SINK",
+      "capabilities": [],
+      "complexity": "simple",
+      "tags": [
+        "simple"
+      ],
+      "filePath": "genomes/reference/ultimate-showcase.genome.ts"
+    }
+  ],
+  "categories": [
+    {
+      "id": "auth",
+      "name": "Authentication",
+      "description": "User authentication and authorization",
+      "icon": "🔐",
+      "moduleCount": 1,
+      "modules": [
+        "auth"
+      ]
+    },
+    {
+      "id": "payments",
+      "name": "Payments",
+      "description": "Payment processing and billing",
+      "icon": "💳",
+      "moduleCount": 1,
+      "modules": [
+        "payments"
+      ]
+    },
+    {
+      "id": "emailing",
+      "name": "Email Services",
+      "description": "Email sending and management",
+      "icon": "📧",
+      "moduleCount": 1,
+      "modules": [
+        "emailing"
+      ]
+    },
+    {
+      "id": "teamsManagement",
+      "name": "teamsManagement",
+      "description": "Category: teamsManagement",
+      "icon": "📦",
+      "moduleCount": 1,
+      "modules": [
+        "teamsManagement"
+      ]
+    },
+    {
+      "id": "monitoring",
+      "name": "Monitoring",
+      "description": "Application monitoring and observability",
+      "icon": "📊",
+      "moduleCount": 1,
+      "modules": [
+        "monitoring"
+      ]
+    }
+  ],
+  "tags": [
+    "auth",
+    "emailing",
+    "intermediate",
+    "monitoring",
+    "payments",
+    "simple",
+    "teamsManagement"
+  ]
+}

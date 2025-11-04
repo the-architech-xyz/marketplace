@@ -1,0 +1,85 @@
+{
+  "id": "connectors/analytics/ab-vercel-nextjs",
+  "name": "A/B Testing Vercel Next.js Connector",
+  "description": "A/B testing implementation for Next.js with Vercel Edge Config, middleware-based variant assignment, and React components",
+  "type": "connector",
+  "version": "1.0.0",
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "tech_stack": {
+    "framework": "nextjs",
+    "adapters": [
+      "ab-testing"
+    ]
+  },
+  "requires": [
+    "framework/nextjs",
+    "analytics/ab-testing-core"
+  ],
+  "prerequisites": {
+    "modules": [
+      "ab-testing-core",
+      "nextjs"
+    ],
+    "capabilities": [
+      "ab-testing-core",
+      "middleware"
+    ]
+  },
+  "capabilities": {
+    "ab-testing-nextjs-integration": {
+      "version": "1.0.0",
+      "description": "Next.js-specific A/B testing enhancements",
+      "provides": [
+        "ab-middleware",
+        "ab-components",
+        "ab-hooks",
+        "ab-edge-config"
+      ]
+    }
+  },
+  "provides": [],
+  "parameters": {
+    "middleware": {
+      "name": "Middleware",
+      "description": "Add A/B testing middleware for variant assignment",
+      "type": "boolean",
+      "default": true
+    },
+    "components": {
+      "name": "Components",
+      "description": "Generate Experiment and Variant components",
+      "type": "boolean",
+      "default": true
+    },
+    "hooks": {
+      "name": "React Hooks",
+      "description": "Generate React hooks for accessing variants",
+      "type": "boolean",
+      "default": true
+    },
+    "edgeConfig": {
+      "name": "Edge Config",
+      "description": "Configure Vercel Edge Config for experiments",
+      "type": "boolean",
+      "default": true
+    },
+    "analytics": {
+      "name": "Analytics Integration",
+      "description": "Track experiment views and conversions",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "blueprint": {
+    "id": "ab-testing-nextjs-integration",
+    "name": "A/B Testing Next.js Integration",
+    "description": "Complete A/B testing suite for Next.js with Vercel",
+    "version": "1.0.0",
+    "actions": []
+  }
+}
+
+
+
+

@@ -1,0 +1,97 @@
+{
+  "id": "connectors/cms/payload-nextjs",
+  "name": "Payload CMS Next.js Connector",
+  "description": "Complete Payload CMS 3.0 integration for Next.js with local API, collections, and admin panel",
+  "type": "connector",
+  "version": "1.0.0",
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "tech_stack": {
+    "framework": "nextjs",
+    "adapters": []
+  },
+  "requires": [
+    "framework/nextjs",
+    "database/drizzle"
+  ],
+  "prerequisites": {
+    "modules": [
+      "nextjs",
+      "drizzle"
+    ],
+    "capabilities": [
+      "app-router",
+      "database"
+    ]
+  },
+  "capabilities": {
+    "payload-nextjs-integration": {
+      "version": "1.0.0",
+      "description": "Next.js-native Payload CMS integration",
+      "provides": [
+        "payload-config",
+        "payload-local-api",
+        "payload-admin-panel",
+        "payload-collections",
+        "payload-media",
+        "payload-auth"
+      ]
+    }
+  },
+  "provides": [],
+  "parameters": {
+    "collections": {
+      "name": "Default Collections",
+      "description": "Generate default collections (Pages, Posts, Media)",
+      "type": "boolean",
+      "default": true
+    },
+    "media": {
+      "name": "Media Management",
+      "description": "Enable media/upload collection",
+      "type": "boolean",
+      "default": true
+    },
+    "auth": {
+      "name": "Authentication",
+      "description": "Enable Payload authentication",
+      "type": "boolean",
+      "default": true
+    },
+    "adminPanel": {
+      "name": "Admin Panel",
+      "description": "Enable Payload admin panel",
+      "type": "boolean",
+      "default": true
+    },
+    "localApi": {
+      "name": "Local API",
+      "description": "Configure local API for server components",
+      "type": "boolean",
+      "default": true
+    },
+    "draftPreview": {
+      "name": "Draft Preview",
+      "description": "Enable draft preview functionality",
+      "type": "boolean",
+      "default": true
+    },
+    "livePreview": {
+      "name": "Live Preview",
+      "description": "Enable live preview (beta)",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "blueprint": {
+    "id": "payload-nextjs-integration",
+    "name": "Payload CMS Next.js Integration",
+    "description": "Complete CMS for Next.js",
+    "version": "1.0.0",
+    "actions": []
+  }
+}
+
+
+
+

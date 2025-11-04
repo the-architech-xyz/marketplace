@@ -1,0 +1,45 @@
+{
+  "id": "monorepo/nx",
+  "name": "Nx",
+  "description": "Smart, extensible build framework for monorepos with powerful dev tools and code generation",
+  "category": "monorepo",
+  "version": "18.0.0",
+  "role": "adapter",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "provides": [
+    {
+      "name": "nx",
+      "version": "18.0.0",
+      "description": "Nx monorepo build framework"
+    }
+  ],
+  "capabilities": {
+    "monorepo-management": {
+      "version": "18.0.0",
+      "description": "Monorepo workspace management with advanced features",
+      "provides": ["workspace", "caching", "affected", "generators", "graph"]
+    },
+    "dev-tools": {
+      "version": "18.0.0",
+      "description": "Advanced development tools",
+      "provides": ["code-generators", "dependency-graph", "affected-commands"]
+    }
+  },
+  "limitations": "Requires Node.js 18+ and npm/yarn/pnpm",
+  "parameters": {
+    "packageManager": {
+      "type": "string",
+      "default": "pnpm",
+      "description": "Package manager (npm, yarn, pnpm)",
+      "required": false
+    },
+    "nxCloud": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable Nx Cloud for distributed caching",
+      "required": false
+    }
+  }
+}
+

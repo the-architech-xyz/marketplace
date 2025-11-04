@@ -76,8 +76,11 @@ export { Module, ProjectConfig } from '@thearchitech.xyz/types';
 // Re-export Genome type from shared types package
 export { Genome } from '@thearchitech.xyz/types';
 
-// Re-export defineGenome function
+// Re-export defineGenome function (module-focused)
 export * from './define-genome';
+
+// Re-export capability types (capability-focused)
+export * from './capability-types';
 `;
 
     const outputFile = path.join(outputPath, 'index.d.ts');
@@ -866,7 +869,26 @@ export function extractTypedModuleParameters(config) {
       blueprintConfigTypesJs
     );
     
-    // 4. index.ts - Entry point (will compile to index.js)
+    // 4. capability-types.js - Runtime companion for capability-types.ts
+    // TypeScript will use .d.ts for types, Node.js will use .js for runtime
+    const capabilityTypesJs = `/**
+ * Capability Types - Runtime Exports
+ * 
+ * This file provides runtime companion for capability-types.ts
+ * The defineCapabilityGenome function is exported here for runtime use.
+ */
+
+export function defineCapabilityGenome(genome) {
+  return genome;
+}
+`;
+    
+    await fs.promises.writeFile(
+      path.join(outputPath, 'capability-types.js'),
+      capabilityTypesJs
+    );
+    
+    // 5. index.ts - Entry point (will compile to index.js)
     const indexTs = `/**
  * The Architech Marketplace Types - Runtime Entry Point
  * 
@@ -880,6 +902,9 @@ export * from './genome-types.js';
 // Re-export defineGenome function
 export * from './define-genome.js';
 
+// Re-export capability types
+export * from './capability-types.js';
+
 // Re-export blueprint configuration utilities
 export type { TypedMergedConfiguration } from './blueprint-config-types.js';
 export { extractTypedModuleParameters } from './blueprint-config-types.js';
@@ -890,6 +915,6 @@ export { extractTypedModuleParameters } from './blueprint-config-types.js';
       indexTs
     );
     
-    console.log('✅ Generated runtime files: genome-types.js, blueprint-config-types.d.ts, blueprint-config-types.js, index.ts');
+    console.log('✅ Generated runtime files: genome-types.js, blueprint-config-types.d.ts, blueprint-config-types.js, capability-types.js, index.ts');
   }
 }

@@ -1,0 +1,6 @@
+
+# RevenueCat Configuration
+REVENUECAT_SECRET_KEY=sk_your_secret_key_here
+REVENUECAT_WEBHOOK_SECRET=your_webhook_secret_here
+REVENUECAT_API_KEY=your_api_key_here
+

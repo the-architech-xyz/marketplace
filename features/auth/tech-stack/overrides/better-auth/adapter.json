@@ -1,0 +1,25 @@
+{
+  "id": "features/auth/tech-stack/overrides/better-auth",
+  "name": "Better Auth SDK Override",
+  "description": "Better Auth SDK hooks for authentication (replaces standard TanStack Query hooks)",
+  "type": "feature",
+  "version": "1.0.0",
+  "role": "tech-stack-override",
+  "pattern": "override",
+  "requires": ["auth/better-auth"],
+  "provides": ["auth-hooks-better-auth"],
+  "parameters": {
+    "emailVerification": {
+      "type": "boolean",
+      "description": "Enable email verification",
+      "default": true
+    },
+    "socialProviders": {
+      "type": "array",
+      "description": "Social providers to enable",
+      "default": ["github", "google"]
+    }
+  }
+}
+
+
