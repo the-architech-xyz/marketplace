@@ -16,7 +16,7 @@ import { execSync } from 'child_process';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join, relative } from 'path';
 import { glob } from 'glob';
-import { DeadTemplateDetector } from './dead-template-detector';
+import { DeadTemplateDetector } from './dead-template-detector.js';
 import {
   discoverUIMarketplaces,
   findUITemplateInMarketplaces,
