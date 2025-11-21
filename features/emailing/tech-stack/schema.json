@@ -1,0 +1,86 @@
+{
+  "name": "emailing-tech-stack",
+  "version": "1.0.0",
+  "description": "Technology-agnostic stack layer for Emailing feature",
+  "category": "tech-stack",
+  "provides": [
+    "emailing-schemas",
+    "emailing-stores",
+    "emailing-hooks-wrapper"
+  ],
+  "role": "tech-stack-layer",
+  "tags": [
+    "emailing",
+    "types",
+    "schemas",
+    "hooks",
+    "stores",
+    "tech-stack"
+  ],
+  "moduleType": "feature",
+  "blueprint": "./blueprint.ts",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "featureName": {
+        "type": "string",
+        "description": "The name of the feature (e.g., 'emailing')",
+        "default": "emailing"
+      },
+      "featurePath": {
+        "type": "string",
+        "description": "The path to the feature (e.g., 'emailing')",
+        "default": "emailing"
+      },
+      "hasTypes": {
+        "type": "boolean",
+        "description": "Whether to generate TypeScript types",
+        "default": true
+      },
+      "hasSchemas": {
+        "type": "boolean",
+        "description": "Whether to generate Zod schemas",
+        "default": true
+      },
+      "hasHooks": {
+        "type": "boolean",
+        "description": "Whether to generate TanStack Query hooks",
+        "default": true
+      },
+      "hasStores": {
+        "type": "boolean",
+        "description": "Whether to generate Zustand stores",
+        "default": true
+      },
+      "hasApiRoutes": {
+        "type": "boolean",
+        "description": "Whether to generate API routes",
+        "default": false
+      },
+      "hasValidation": {
+        "type": "boolean",
+        "description": "Whether to generate validation layer",
+        "default": false
+      }
+    },
+    "required": [
+      "featureName",
+      "featurePath"
+    ]
+  },
+  "dependencies": {
+    "direct": [
+      "zod",
+      "@tanstack/react-query",
+      "zustand",
+      "immer",
+      "sonner"
+    ]
+  },
+  "devDependencies": [
+    "@types/node",
+    "typescript"
+  ],
+  "id": "features/emailing/tech-stack",
+  "type": "feature"
+}

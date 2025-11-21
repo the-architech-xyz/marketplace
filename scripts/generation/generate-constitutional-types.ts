@@ -90,8 +90,8 @@ export class ConstitutionalTypeGenerator {
     // Generate capability types with new structure
     await this.generateCapabilityTypes(capabilityAnalysis);
     
-    // Generate defineGenome function
-    await this.generateDefineGenomeFunction();
+    // Generate genome authoring type definitions
+    await this.generateGenomeTypeDefinitions();
     
     // Generate runtime companion files
     await ConstitutionalTypeGeneratorHelpers.generateRuntimeFiles(this.outputPath);
@@ -332,106 +332,54 @@ export type { Genome } from '@thearchitech.xyz/types';
     console.log(`✅ Capability types written to: ${capabilityTypesPath}`);
     console.log(`✅ Capability types declarations written to: ${capabilityTypesDtsPath}`);
   }
-  private async generateDefineGenomeFunction(): Promise<void> {
+  private async generateGenomeTypeDefinitions(): Promise<void> {
     // Generate ModuleParameters type from all schema files
     const analysisResults = this.parser.parseAllBlueprints(this.marketplacePath) as ExtendedBlueprintAnalysisResult[];
     const moduleParametersType = await ConstitutionalTypeGeneratorHelpers.generateModuleParametersType(analysisResults, this.marketplacePath);
     const discriminatedUnionType = await ConstitutionalTypeGeneratorHelpers.generateDiscriminatedUnionTypes(analysisResults, this.marketplacePath);
-    
-    const defineGenomeContent = `/**
- * Define Genome with Full Type Safety
- * 
- * This function provides complete type safety for genome definitions,
- * including autocompletion for module IDs and parameter validation.
- */
 
-import { Genome } from '@thearchitech.xyz/types';
-
-// Generated ModuleId union type
-export type ModuleId = 
-${this.moduleIds.map(id => `  | '${id}'`).join('\n')};
-
-${moduleParametersType}
-
-// Discriminated union for better IDE support
-${discriminatedUnionType}
-
-export interface TypedGenome {
-  version: string;
-  project: {
-    name: string;
-    description?: string;
-    path?: string;
-    version?: string;
-    author?: string;
-    license?: string;
-    structure?: 'monorepo' | 'single-app';
-    apps: Array<{
-      id: string;
-      type: 'web' | 'mobile' | 'api' | 'desktop' | 'worker';
-      framework: 'nextjs' | 'expo' | 'react-native' | string;
-      package?: string;
-      router?: 'app' | 'pages';
-      alias?: string;
-      options?: Record<string, unknown>;
-    }>;
-    monorepo?: {
-      tool: 'turborepo' | 'nx' | 'pnpm' | 'yarn';
-      packages?: {
-        api?: string;
-        web?: string;
-        mobile?: string;
-        shared?: string;
-        ui?: string;
-        [key: string]: string | undefined;
-      };
-    };
-  };
-  modules: TypedGenomeModule[];
-  options?: Record<string, any>;
+    const moduleMetadataTypes = `
+export interface ModuleSourceInfo {
+  root: string;
+  marketplace?: string;
 }
 
-/**
- * Define a genome with full type safety
- * 
- * @param genome - The genome configuration with type safety
- * @returns The genome with validated types
- * 
- * @example
- * \`\`\`typescript
- * import { defineGenome } from '@thearchitech.xyz/marketplace-types';
- * 
- * const genome = defineGenome({
- *   version: '1.0',
- *   project: {
- *     name: 'my-app',
- *     framework: 'nextjs'
- *   },
- *   modules: [
- *     {
- *       id: 'framework/nextjs', // ✅ Autocompletion works
- *       parameters: {
- *         appRouter: true, // ✅ Type-safe parameters
- *         srcDir: true,    // ✅ Only boolean allowed
- *         importAlias: '@/'
- *       }
- *     },
- *     {
- *       id: 'ui/shadcn-ui', // ✅ Autocompletion works
- *       parameters: {
- *         components: ['button', 'input'], // ✅ Only valid components allowed
- *       }
- *     }
- *   ]
- * });
- * \`\`\`
- */
-export declare function defineGenome<T extends TypedGenome>(genome: T): T;
+export interface ModuleManifestInfo {
+  file: string;
+}
 
-// Re-export for convenience
-export { Genome } from '@thearchitech.xyz/types';
+export interface ModuleBlueprintInfo {
+  file: string;
+  runtime: 'source' | 'compiled';
+}
+
+export interface ModuleTemplateInfo {
+  file: string;
+  target?: string;
+}
+
+export interface ModuleMarketplaceInfo {
+  name: string;
+  root?: string;
+}
+
+export interface ModuleResolvedPathsInfo {
+  root: string;
+  manifest: string;
+  blueprint: string;
+  templates: string[];
+}
+
+export interface ModuleMetadata {
+  source?: ModuleSourceInfo;
+  manifest?: ModuleManifestInfo;
+  blueprint?: ModuleBlueprintInfo;
+  templates?: ModuleTemplateInfo[];
+  marketplace?: ModuleMarketplaceInfo;
+  resolved?: ModuleResolvedPathsInfo;
+}
 `;
-
+    
     // Write TYPE DEFINITIONS to genome-types.d.ts
     const genomeTypesContent = `/**
  * Marketplace-Generated Genome Types
@@ -446,6 +394,8 @@ export type ModuleId =
 ${this.moduleIds.map(id => `  | '${id}'`).join('\n')};
 
 ${moduleParametersType}
+
+${moduleMetadataTypes}
 
 // Discriminated union for better IDE support
 ${discriminatedUnionType}
@@ -479,52 +429,10 @@ export interface TypedGenome {
 // Re-export for convenience
 export { Genome } from '@thearchitech.xyz/types';
 `;
-
-    // Write IMPLEMENTATION to define-genome.ts (with strict constraint)
-    const defineGenomeImplContent = `/**
- * Define Genome with Full Type Safety - Implementation
- */
-
-import type { TypedGenome } from './genome-types.js';
-
-/**
- * Define a genome with full type safety
- * 
- * @param genome - The genome configuration with type safety
- * @returns The genome with validated types
- */
-export function defineGenome<T extends TypedGenome>(genome: T): T {
-  return genome;
-}
-`;
-
     const genomeTypesFile = path.join(this.outputPath, 'genome-types.d.ts');
-    const defineGenomeFile = path.join(this.outputPath, 'define-genome.ts');
-    const defineGenomeDtsFile = path.join(this.outputPath, 'define-genome.d.ts');
-    
-    // Generate .d.ts declaration file for define-genome
-    const defineGenomeDtsContent = `/**
- * Define Genome with Full Type Safety - Type Declarations
- */
-
-import type { TypedGenome } from './genome-types.js';
-
-/**
- * Define a genome with full type safety
- * 
- * @param genome - The genome configuration with type safety
- * @returns The genome with validated types
- */
-export declare function defineGenome<T extends TypedGenome>(genome: T): T;
-`;
-    
     await fs.promises.writeFile(genomeTypesFile, genomeTypesContent);
-    await fs.promises.writeFile(defineGenomeFile, defineGenomeImplContent);
-    await fs.promises.writeFile(defineGenomeDtsFile, defineGenomeDtsContent);
     
     console.log('📝 Generated genome-types.d.ts with all type definitions');
-    console.log('📝 Generated define-genome.ts with strict type constraint');
-    console.log('📝 Generated define-genome.d.ts with type declarations');
   }
 
   /**

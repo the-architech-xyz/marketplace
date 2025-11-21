@@ -1,75 +1,87 @@
 /**
- * AI CHAT STARTER - Capability-Driven
+ * AI CHAT STARTER - V2 Format
  * 
  * Next.js + Shadcn UI based AI chat starter using Vercel AI SDK (optional auth)
  */
 
-import { defineCapabilityGenome } from '@thearchitech.xyz/marketplace/types';
+import { defineV2Genome } from '@thearchitech.xyz/types';
 
-export default defineCapabilityGenome({
-  version: '1.0.0',
-  project: {
+export default defineV2Genome({
+  workspace: {
     name: 'ai-chat-starter',
-    description: 'AI chat starter with optional auth and monitoring',
-    path: './ai-chat',
-    structure: 'single-app',
-    apps: [
-      {
-        id: 'web',
-        type: 'web',
-        framework: 'nextjs',
-        package: '.',
-        router: 'app',
-        alias: '@/',
-        parameters: {
-          typescript: true,
-          tailwind: true,
-          eslint: true,
-          srcDir: true,
-          importAlias: '@/'
-        }
-      }
-    ]
+    description: 'AI chat starter with optional auth and monitoring'
   },
 
-  capabilities: {
+  marketplaces: {
+    official: {
+      type: 'local',
+      path: '../marketplace'
+    }
+  },
+
+  packages: {
+    // AI Chat capability
     'ai-chat': {
+      from: 'official',
       provider: 'custom',
-      adapter: {},
-      frontend: {
-        features: {
-          chat: true,
-          services: true,
-          completion: true
+      parameters: {
+        frontend: {
+          features: {
+            chat: true,
+            services: true,
+            completion: true
+          }
+        },
+        techStack: {
+          hasTypes: true,
+          hasHooks: true,
+          hasStores: true
         }
-      },
-      techStack: {
-        hasTypes: true,
-        hasHooks: true,
-        hasStores: true
       }
     },
 
-    // Optional auth (comment out to disable)
+    // Optional auth capability
     auth: {
+      from: 'official',
       provider: 'better-auth',
-      adapter: {
-        emailPassword: true
-      },
-      frontend: {
-        features: {
-          signIn: true,
-          signUp: true
+      parameters: {
+        emailPassword: true,
+        emailVerification: false,
+        oauthProviders: [],
+        twoFactor: false,
+        organizations: false,
+        teams: false,
+        frontend: {
+          features: {
+            signIn: true,
+            signUp: true
+          }
+        },
+        techStack: {
+          hasTypes: true,
+          hasSchemas: true,
+          hasHooks: true,
+          hasStores: true
         }
-      },
-      techStack: {
-        hasTypes: true,
-        hasSchemas: true,
-        hasHooks: true,
-        hasStores: true
+      }
+    }
+  },
+
+  apps: {
+    web: {
+      type: 'web',
+      framework: 'nextjs',
+      package: 'apps/web',
+      dependencies: ['ai-chat', 'auth'],
+      parameters: {
+        typescript: true,
+        tailwind: true,
+        eslint: true,
+        srcDir: true,
+        importAlias: '@/',
+        reactVersion: '18',
+        router: 'app'
       }
     }
   }
 });
-
-

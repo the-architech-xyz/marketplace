@@ -12,7 +12,7 @@ export default function generateBlueprint(): BlueprintAction[] {
     // Database schema
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/db/schema/payments.ts',
+      path: '${paths.packages.database.src}db/schema/payments.ts',
       template: 'templates/schema.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -23,7 +23,7 @@ export default function generateBlueprint(): BlueprintAction[] {
     // Database migrations
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/db/migrations/001_payments.sql',
+      path: '${paths.packages.database.src}db/migrations/001_payments.sql',
       template: 'templates/migration.sql.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,

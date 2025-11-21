@@ -17,7 +17,7 @@ export default function generateBlueprint(
     // Enhance core forms with Shadcn-specific components
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}forms/ShadcnForm.tsx',
+      path: '${paths.apps.web.components}forms/ShadcnForm.tsx',
       template: 'templates/ShadcnForm.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -28,7 +28,7 @@ export default function generateBlueprint(
     // Create Shadcn-specific form field components
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}forms/ShadcnFormField.tsx',
+      path: '${paths.apps.web.components}forms/ShadcnFormField.tsx',
       template: 'templates/form-field.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -39,7 +39,7 @@ export default function generateBlueprint(
     // Create Shadcn form input components
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}forms/ShadcnFormInput.tsx',
+      path: '${paths.apps.web.components}forms/ShadcnFormInput.tsx',
       template: 'templates/ShadcnFormInput.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -50,7 +50,7 @@ export default function generateBlueprint(
     // Create Shadcn form textarea component
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}forms/ShadcnFormTextarea.tsx',
+      path: '${paths.apps.web.components}forms/ShadcnFormTextarea.tsx',
       template: 'templates/ShadcnFormTextarea.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -61,7 +61,7 @@ export default function generateBlueprint(
     // Create Shadcn form select component
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}forms/ShadcnFormSelect.tsx',
+      path: '${paths.apps.web.components}forms/ShadcnFormSelect.tsx',
       template: 'templates/ShadcnFormSelect.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -72,7 +72,7 @@ export default function generateBlueprint(
     // Create Shadcn form checkbox component
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}forms/ShadcnFormCheckbox.tsx',
+      path: '${paths.apps.web.components}forms/ShadcnFormCheckbox.tsx',
       template: 'templates/ShadcnFormCheckbox.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -83,7 +83,7 @@ export default function generateBlueprint(
     // Create Shadcn form radio component
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}forms/ShadcnFormRadio.tsx',
+      path: '${paths.apps.web.components}forms/ShadcnFormRadio.tsx',
       template: 'templates/ShadcnFormRadio.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -94,7 +94,7 @@ export default function generateBlueprint(
     // Enhance core forms index with Shadcn exports
     {
       type: BlueprintActionType.ENHANCE_FILE,
-      path: '${paths.shared_library}forms/index.ts',
+      path: '${paths.packages.shared.src}forms/index.ts',
       modifier: ModifierType.TS_MODULE_ENHANCER,
       fallback: EnhanceFileFallbackStrategy.SKIP,
       params: {

@@ -1,71 +1,12 @@
 /**
- * PostHog Core (Tech-Agnostic)
+ * observability/posthog
  * 
- * Tech-agnostic PostHog analytics SDK configuration. Framework-specific implementations handled by Connectors.
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface ObservabilityPosthogParams {
+export interface ObservabilityPosthogParams {}
 
-  /** PostHog API key (or set POSTHOG_API_KEY env var) */
-  apiKey?: string;
-
-  /** PostHog API host URL */
-  apiHost?: string;
-
-  /** Environment name */
-  environment?: string;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Essential analytics (event tracking, user identification) */
-    core?: boolean;
-
-    /** Event tracking and analytics */
-    eventTracking?: boolean;
-
-    /** Session replay recording */
-    sessionReplay?: boolean;
-
-    /** Feature flags management */
-    featureFlags?: boolean;
-
-    /** A/B testing and experiments */
-    experiments?: boolean;
-
-    /** Auto-capture user interactions */
-    autocapture?: boolean;
-
-    /** Surveys and feedback collection */
-    surveys?: boolean;
-  };
-
-  /** Person profiles creation mode */
-  personProfiles?: 'identified_only' | 'always' | 'never';
-}
-
-export interface ObservabilityPosthogFeatures {
-
-  /** Essential analytics (event tracking, user identification) */
-  core: boolean;
-
-  /** Event tracking and analytics */
-  eventTracking: boolean;
-
-  /** Session replay recording */
-  sessionReplay: boolean;
-
-  /** Feature flags management */
-  featureFlags: boolean;
-
-  /** A/B testing and experiments */
-  experiments: boolean;
-
-  /** Auto-capture user interactions */
-  autocapture: boolean;
-
-  /** Surveys and feedback collection */
-  surveys: boolean;
-}
+export interface ObservabilityPosthogFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const ObservabilityPosthogArtifacts: {

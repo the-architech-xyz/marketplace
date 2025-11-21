@@ -1,7 +1,7 @@
 /**
- * Payments Database Layer (Drizzle)
+ * features/payments/database/drizzle
  * 
- * Provider-agnostic database schema for payments feature using Drizzle ORM. Works with Stripe, Paddle, or any payment provider.
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
 export interface FeaturesPaymentsDatabaseDrizzleParams {}

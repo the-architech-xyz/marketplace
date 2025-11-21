@@ -1,41 +1,12 @@
 /**
- * A/B Testing Core (Tech-Agnostic)
+ * analytics/ab-testing-core
  * 
- * Tech-agnostic A/B testing types, utilities, and experiment management. Framework-specific implementations handled by Connectors.
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface AnalyticsAbTestingCoreParams {
-  /** Constitutional Architecture features configuration */
-  features?: {
+export interface AnalyticsAbTestingCoreParams {}
 
-    /** Essential A/B testing utilities and types */
-    core?: boolean;
-
-    /** Experiment configuration and management */
-    experimentManagement?: boolean;
-
-    /** Variant assignment logic */
-    variantAssignment?: boolean;
-
-    /** Analytics integration for tracking experiment results */
-    analytics?: boolean;
-  };
-}
-
-export interface AnalyticsAbTestingCoreFeatures {
-
-  /** Essential A/B testing utilities and types */
-  core: boolean;
-
-  /** Experiment configuration and management */
-  experimentManagement: boolean;
-
-  /** Variant assignment logic */
-  variantAssignment: boolean;
-
-  /** Analytics integration for tracking experiment results */
-  analytics: boolean;
-}
+export interface AnalyticsAbTestingCoreFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const AnalyticsAbTestingCoreArtifacts: {

@@ -1,0 +1,44 @@
+{
+  "id": "inngest",
+  "name": "Inngest Jobs",
+  "description": "Background jobs and async functions with Inngest",
+  "category": "jobs",
+  "version": "1.0.0",
+  "role": "adapter",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "provides": [
+    "jobs-core",
+    "jobs-async",
+    "jobs-events"
+  ],
+  "capabilities": {
+    "jobs": {
+      "version": "1.0.0",
+      "description": "Background job processing and async functions",
+      "provides": [
+        "async-functions",
+        "event-driven",
+        "scheduling",
+        "retries"
+      ]
+    }
+  },
+  "parameters": {
+    "framework": {
+      "type": "string",
+      "default": "hono",
+      "description": "Framework for webhook endpoint",
+      "required": false,
+      "options": [
+        "hono",
+        "nextjs",
+        "express"
+      ]
+    }
+  },
+  "constraints": {}
+}
+
+
+

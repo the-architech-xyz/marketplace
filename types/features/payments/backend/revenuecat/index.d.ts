@@ -1,14 +1,10 @@
 /**
- * RevenueCat Backend Integration
+ * features/payments/backend/revenuecat
  * 
- * Backend webhook handler for RevenueCat subscription management
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
-export interface FeaturesPaymentsBackendRevenuecatParams {
-
-  /** RevenueCat webhook secret for HMAC verification */
-  webhookSecret: string;
-}
+export interface FeaturesPaymentsBackendRevenuecatParams {}
 
 export interface FeaturesPaymentsBackendRevenuecatFeatures {}
 

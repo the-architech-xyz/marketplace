@@ -1,0 +1,161 @@
+{
+  "name": "ai-chat-tech-stack",
+  "version": "1.0.0",
+  "description": "Technology-agnostic stack layer for AI Chat feature",
+  "category": "tech-stack",
+  "provides": [
+    "ai-chat-schemas",
+    "ai-chat-stores",
+    "ai-chat-hooks-wrapper"
+  ],
+  "role": "tech-stack-layer",
+  "tags": [
+    "ai-chat",
+    "types",
+    "schemas",
+    "hooks",
+    "stores",
+    "tech-stack"
+  ],
+  "author": "The Architech Team",
+  "license": "MIT",
+  "homepage": "https://github.com/thearchitech/architech",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thearchitech/architech.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thearchitech/architech/issues"
+  },
+  "keywords": [
+    "ai-chat",
+    "typescript",
+    "types",
+    "schemas",
+    "hooks",
+    "stores",
+    "tech-stack",
+    "contract-driven"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "direct": [
+      "zod",
+      "@tanstack/react-query",
+      "zustand",
+      "immer",
+      "sonner"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "latest"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "files": [
+    "templates/",
+    "blueprint.ts",
+    "feature.json"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "jest",
+    "validate": "node scripts/validate-contract.js"
+  },
+  "config": {
+    "type": "tech-stack",
+    "feature": "ai-chat",
+    "autoInclude": true,
+    "priority": 0,
+    "conflictResolution": "skip"
+  },
+  "contract": {
+    "source": "contract.ts",
+    "version": "1.0.0",
+    "compliance": "strict"
+  },
+  "generatedFiles": [
+    {
+      "path": "{{paths.lib}}/ai-chat/types.ts",
+      "template": "features/ai-chat/templates/types.ts.tpl",
+      "description": "TypeScript type definitions"
+    },
+    {
+      "path": "{{paths.lib}}/ai-chat/schemas.ts",
+      "template": "features/ai-chat/templates/schemas.ts.tpl",
+      "description": "Zod validation schemas"
+    },
+    {
+      "path": "{{paths.lib}}/ai-chat/hooks.ts",
+      "template": "features/ai-chat/templates/hooks.ts.tpl",
+      "description": "TanStack Query hooks"
+    },
+    {
+      "path": "{{paths.lib}}/ai-chat/stores.ts",
+      "template": "features/ai-chat/templates/stores.ts.tpl",
+      "description": "Zustand state management stores"
+    },
+    {
+      "path": "{{paths.lib}}/ai-chat/index.ts",
+      "template": "features/ai-chat/templates/index.ts.tpl",
+      "description": "Centralized exports"
+    }
+  ],
+  "validation": {
+    "contractCompliance": true,
+    "typeSafety": true,
+    "schemaValidation": true,
+    "hookConsistency": true,
+    "storeConsistency": true
+  },
+  "integration": {
+    "frontend": {
+      "react": true,
+      "vue": false,
+      "svelte": false
+    },
+    "backend": {
+      "nodejs": true,
+      "python": false,
+      "go": false
+    },
+    "stateManagement": {
+      "zustand": true,
+      "redux": false,
+      "pinia": false
+    },
+    "dataFetching": {
+      "tanstack-query": true,
+      "swr": false,
+      "apollo": false
+    },
+    "validation": {
+      "zod": true,
+      "yup": false,
+      "joi": false
+    }
+  },
+  "examples": {
+    "usage": {
+      "typescript": "import type { Message, Chat } from '@/lib/ai-chat';",
+      "validation": "import { MessageSchema } from '@/lib/ai-chat';",
+      "hooks": "import { useMessages, useSendMessage } from '@/lib/ai-chat';",
+      "stores": "import { useMessageStore } from '@/lib/ai-chat';"
+    }
+  },
+  "documentation": {
+    "readme": "README.md",
+    "api": "docs/api.md",
+    "examples": "docs/examples.md",
+    "migration": "docs/migration.md"
+  },
+  "id": "features/ai-chat/tech-stack",
+  "type": "feature"
+}

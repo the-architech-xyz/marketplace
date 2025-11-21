@@ -6,28 +6,42 @@
 
 export class TemplatePathResolver {
   private frameworkPaths: Map<string, string> = new Map([
-    ['auth_config', 'src/lib/auth'],
-    ['payment_config', 'src/lib/payment'],
-    ['db_config', 'src/lib/db'],
-    ['ui_config', 'src/components/ui'],
-    ['state_config', 'src/lib/state'],
-    ['observability_config', 'src/lib/observability'],
-    ['blockchain_config', 'src/lib/blockchain'],
-    ['deployment_config', 'deployment'],
-    ['email_config', 'src/lib/email'],
-    // Framework adapter paths
-    ['source_root', 'src/'],
-    ['app_root', 'src/app/'],
-    ['pages_root', 'src/pages/'],
-    ['shared_library', 'src/lib/'],
-    ['utils', 'src/lib/utils/'],
-    ['types', 'src/types/'],
-    ['hooks', 'src/hooks/'],
-    ['stores', 'src/stores/'],
-    ['components', 'src/components/'],
-    ['ui_components', 'src/components/ui/'],
-    ['styles', 'src/styles/'],
-    ['scripts', 'scripts/']
+    ['workspace.root', './'],
+    ['workspace.scripts', 'scripts/'],
+    ['workspace.docs', 'docs/'],
+    ['workspace.env', '.env'],
+    ['workspace.config', 'config/'],
+
+    ['apps.web.root', 'apps/web/'],
+    ['apps.web.src', 'apps/web/src/'],
+    ['apps.web.app', 'apps/web/src/app/'],
+    ['apps.web.components', 'apps/web/src/components/'],
+    ['apps.web.public', 'apps/web/public/'],
+    ['apps.web.middleware', 'apps/web/src/middleware/'],
+    ['apps.web.server', 'apps/web/src/server/'],
+    ['apps.web.collections', 'apps/web/src/collections/'],
+
+    ['apps.api.root', 'apps/api/'],
+    ['apps.api.src', 'apps/api/src/'],
+    ['apps.api.routes', 'apps/api/src/routes/'],
+
+    ['packages.shared.root', 'packages/shared/'],
+    ['packages.shared.src', 'packages/shared/src/'],
+    ['packages.shared.src.components', 'packages/shared/src/components/'],
+    ['packages.shared.src.hooks', 'packages/shared/src/hooks/'],
+    ['packages.shared.src.providers', 'packages/shared/src/providers/'],
+    ['packages.shared.src.stores', 'packages/shared/src/stores/'],
+    ['packages.shared.src.types', 'packages/shared/src/types/'],
+    ['packages.shared.src.utils', 'packages/shared/src/utils/'],
+    ['packages.shared.src.scripts', 'packages/shared/src/scripts/'],
+    ['packages.shared.src.routes', 'packages/shared/src/routes/'],
+    ['packages.shared.src.jobs', 'packages/shared/src/jobs/'],
+
+    ['packages.database.root', 'packages/database/'],
+    ['packages.database.src', 'packages/database/src/'],
+
+    ['packages.ui.root', 'packages/ui/'],
+    ['packages.ui.src', 'packages/ui/src/']
   ]);
 
   private projectPaths: Map<string, string> = new Map([
@@ -42,8 +56,8 @@ export class TemplatePathResolver {
   resolvePath(templatePath: string, parameters: Record<string, any> = {}): string {
     let resolved = templatePath;
     
-    // Replace ${paths.*} variables
-    resolved = resolved.replace(/\{\{paths\.(\w+)\}\}/g, (match, pathKey) => {
+    // Replace path tokens (e.g. paths.someKey)
+    resolved = resolved.replace(/\{\{paths\.([^}]+)\}\}/g, (match, pathKey) => {
       return this.frameworkPaths.get(pathKey) || match;
     });
     

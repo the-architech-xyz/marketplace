@@ -41,7 +41,7 @@ export default function generateBlueprint(
   // Types - Comprehensive type definitions (single source of truth)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/emailing/types.ts',
+    path: '${paths.packages.shared.src}emailing/types.ts',
     template: 'templates/types.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -52,7 +52,7 @@ export default function generateBlueprint(
   // Schemas - Zod validation schemas
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/emailing/schemas.ts',
+    path: '${paths.packages.shared.src}emailing/schemas.ts',
     template: 'templates/schemas.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -63,7 +63,7 @@ export default function generateBlueprint(
   // Hooks - Direct TanStack Query hooks (best practice pattern)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/emailing/hooks.ts',
+    path: '${paths.packages.shared.src}emailing/hooks.ts',
     template: 'templates/hooks.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -74,7 +74,7 @@ export default function generateBlueprint(
   // Stores - Zustand state management
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/emailing/stores.ts',
+    path: '${paths.packages.shared.src}emailing/stores.ts',
     template: 'templates/stores.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -89,7 +89,7 @@ export default function generateBlueprint(
   // Index file for easy imports (from template)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/emailing/index.ts',
+    path: '${paths.packages.shared.src}emailing/index.ts',
     template: 'templates/index.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -104,7 +104,7 @@ export default function generateBlueprint(
   // README for the tech stack layer
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/emailing/README.md',
+    path: '${paths.packages.shared.src}emailing/README.md',
     content: `# Emailing Feature - Technology Stack Layer
 
 This directory contains the technology-agnostic stack layer for the Emailing feature. These files provide consistent types, validation, data fetching, and state management across all implementations.

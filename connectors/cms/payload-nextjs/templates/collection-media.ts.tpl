@@ -31,3 +31,29 @@ export const Media: CollectionConfig = {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

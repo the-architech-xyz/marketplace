@@ -17,7 +17,7 @@ export default function generateBlueprint(
     // Database schema
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/db/schema/teams.ts',
+      path: '${paths.packages.database.src}db/schema/teams.ts',
       template: 'templates/schema.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -28,7 +28,7 @@ export default function generateBlueprint(
     // Database migrations
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/db/migrations/001_teams.sql',
+      path: '${paths.packages.database.src}db/migrations/001_teams.sql',
       template: 'templates/migration.sql.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,

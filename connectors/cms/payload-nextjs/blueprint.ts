@@ -39,7 +39,7 @@ export default function generateBlueprint(
     // Create Payload configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.config}payload.config.ts',
+      path: '${paths.workspace.config}payload.config.ts',
       template: 'templates/payload.config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -50,7 +50,7 @@ export default function generateBlueprint(
     // Create Payload initialization
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}payload/index.ts',
+      path: '${paths.packages.shared.src}payload/index.ts',
       template: 'templates/payload-init.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -58,10 +58,10 @@ export default function generateBlueprint(
       }
     },
 
-    // Create API route
+    // Create API route - BACKEND API (resolves to apps.api.routes or apps.web.app/api)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/payload/[[...segments]]/route.ts',
+      path: '${paths.apps.backend.api}payload/[[...segments]]/route.ts',
       template: 'templates/api-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -74,7 +74,7 @@ export default function generateBlueprint(
   if (params?.adminPanel !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}admin/[[...segments]]/page.tsx',
+      path: '${paths.apps.web.app}admin/[[...segments]]/page.tsx',
       template: 'templates/admin-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -88,7 +88,7 @@ export default function generateBlueprint(
     actions.push(
       {
         type: BlueprintActionType.CREATE_FILE,
-        path: '${paths.collections}Pages.ts',
+        path: '${paths.apps.web.collections}Pages.ts',
         template: 'templates/collection-pages.ts.tpl',
         conflictResolution: {
           strategy: ConflictResolutionStrategy.SKIP,
@@ -97,7 +97,7 @@ export default function generateBlueprint(
       },
       {
         type: BlueprintActionType.CREATE_FILE,
-        path: '${paths.collections}Posts.ts',
+        path: '${paths.apps.web.collections}Posts.ts',
         template: 'templates/collection-posts.ts.tpl',
         conflictResolution: {
           strategy: ConflictResolutionStrategy.SKIP,
@@ -111,7 +111,7 @@ export default function generateBlueprint(
   if (params?.media !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.collections}Media.ts',
+      path: '${paths.apps.web.collections}Media.ts',
       template: 'templates/collection-media.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -120,11 +120,11 @@ export default function generateBlueprint(
     });
   }
 
-  // Add draft preview if enabled
+  // Add draft preview if enabled - BACKEND API
   if (params?.draftPreview !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/draft/route.ts',
+      path: '${paths.apps.backend.api}draft/route.ts',
       template: 'templates/draft-preview-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -136,7 +136,7 @@ export default function generateBlueprint(
   // Add setup documentation
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.docs}payload-setup.md',
+    path: '${paths.workspace.docs}payload-setup.md',
     template: 'templates/setup-guide.md.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -146,4 +146,6 @@ export default function generateBlueprint(
 
   return actions;
 }
+
+
 

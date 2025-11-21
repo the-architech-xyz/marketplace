@@ -20,9 +20,10 @@ export default function generateBlueprint(
   });
 
   // Override hooks with Better Auth SDK
+  // Use packages.auth.src (from recipe book targetPackage: "auth")
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/auth/hooks.ts',
+    path: '${paths.packages.auth.src}hooks.ts',
     template: 'templates/hooks.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -30,16 +31,8 @@ export default function generateBlueprint(
     }
   });
 
-  // Better Auth client
-  actions.push({
-    type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/auth/better-auth-client.ts',
-    template: 'templates/client.ts.tpl',
-    conflictResolution: {
-      strategy: ConflictResolutionStrategy.REPLACE,
-      priority: 2
-    }
-  });
+  // Better Auth client (already created by adapter as client.ts, skip here)
+  // The adapter creates server.ts and client.ts with generic naming
 
   return actions;
 }

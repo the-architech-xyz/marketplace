@@ -1,28 +1,10 @@
 /**
- * React Native with Expo
+ * framework/expo
  * 
- * A framework for building native apps using React Native and Expo
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface FrameworkExpoParams {
-
-  /** Enable TypeScript support */
-  typescript?: boolean;
-
-  /** Use src/ directory */
-  srcDir?: boolean;
-
-  /** Import alias for absolute imports */
-  importAlias?: string;
-
-  /** React version to use */
-  reactVersion?: string;
-
-  /** Use Expo Router for navigation */
-  expoRouter?: boolean;
-
-  platforms: any;
-}
+export interface FrameworkExpoParams {}
 
 export interface FrameworkExpoFeatures {}
 

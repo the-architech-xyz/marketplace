@@ -1,19 +1,10 @@
 /**
- * Architech Golden Stack
+ * core/golden-stack
  * 
- * Essential technologies for production-ready applications: Zustand (state), Vitest (testing), ESLint (linting), Prettier (formatting), Zod (validation)
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface CoreGoldenStackParams {
-
-  zustand: any;
-
-  vitest: any;
-
-  eslint: any;
-
-  prettier: any;
-}
+export interface CoreGoldenStackParams {}
 
 export interface CoreGoldenStackFeatures {}
 

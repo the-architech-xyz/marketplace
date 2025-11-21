@@ -1,23 +1,12 @@
 /**
- * Teams Management Database Layer (Drizzle)
+ * features/teams-management/database/drizzle
  * 
- * Database-agnostic schema for teams management feature using Drizzle ORM. Supports teams, members, invitations, and activity tracking.
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
-export interface FeaturesTeamsManagementDatabaseDrizzleParams {
-  /** Constitutional Architecture features configuration */
-  features?: {
+export interface FeaturesTeamsManagementDatabaseDrizzleParams {}
 
-    /** Enable activity tracking and audit trail */
-    activityTracking?: boolean;
-  };
-}
-
-export interface FeaturesTeamsManagementDatabaseDrizzleFeatures {
-
-  /** Enable activity tracking and audit trail */
-  activityTracking: boolean;
-}
+export interface FeaturesTeamsManagementDatabaseDrizzleFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesTeamsManagementDatabaseDrizzleArtifacts: {

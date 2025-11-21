@@ -51,7 +51,7 @@ APP_URL=${env.APP_URL}
 ### Framework Integration
 1. **Create Stripe client** in your app:
 ```typescript
-// <%= paths.payment_config %>/stripe.ts
+// <%= paths.packages.shared.src.payment.config %>/stripe.ts
 import Stripe from 'stripe';
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -61,7 +61,7 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 ```
 
 2. **Integration with your framework**:
-   - Use the Stripe client utilities provided in `<%= paths.payment_config %>/client.ts`
+   - Use the Stripe client utilities provided in `<%= paths.packages.shared.src.payment.config %>/client.ts`
    - Implement API routes using your framework's HTTP handling
    - Set up webhook endpoints using your framework's webhook handling
    - For framework integration, use the appropriate `stripe-{framework}-integration` adapter

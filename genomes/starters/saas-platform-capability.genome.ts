@@ -1,5 +1,5 @@
 /**
- * FULL SAAS PLATFORM STARTER - Capability-Driven Version
+ * FULL SAAS PLATFORM STARTER - V2 Format
  * 
  * The complete, production-ready SaaS application template.
  * Everything you need to launch: auth, payments, teams, monitoring, and more.
@@ -9,140 +9,179 @@
  * Use Case: B2B SaaS, productivity tools, collaboration platforms
  */
 
-import { defineCapabilityGenome } from '@thearchitech.xyz/marketplace/types';
+import { defineV2Genome } from '@thearchitech.xyz/types';
 
-export default defineCapabilityGenome({
-  version: "1.0.0",
-  project: {
-    name: "saas-platform",
-    path: "./saas-app",
-    description: "Complete SaaS platform with teams, billing, and monitoring",
-    structure: 'single-app',
-    apps: [
-      {
-        id: 'web',
-        type: 'web',
-        framework: 'nextjs',
-        package: '.',
-        router: 'app',
-        alias: '@/',
-        parameters: {
-          typescript: true,
-          tailwind: true,
-          eslint: true,
-          srcDir: true,
-          importAlias: '@/'
-        }
-      }
-    ]
+export default defineV2Genome({
+  workspace: {
+    name: 'saas-platform',
+    description: 'Complete SaaS platform with teams, billing, and monitoring'
   },
 
-  // Capability-driven approach - much cleaner and more declarative!
-  capabilities: {
+  marketplaces: {
+    official: {
+      type: 'local',
+      path: '../marketplace'
+    }
+  },
+
+  packages: {
+    // Auth capability
     auth: {
+      from: 'official',
       provider: 'better-auth',
-      adapter: {
+      parameters: {
         emailPassword: true,
+        emailVerification: true,
+        oauthProviders: [],
         twoFactor: true,
         organizations: true,
-        emailVerification: true,
-      },
-      frontend: {
-        features: {
-          signIn: true,
-          signUp: true,
-          passwordReset: true,
-          twoFactor: true,
-          profile: true,
-          organizationManagement: true,
+        teams: false,
+        frontend: {
+          features: {
+            signIn: true,
+            signUp: true,
+            passwordReset: true,
+            twoFactor: true,
+            profile: true,
+            organizationManagement: true
+          }
         },
-      },
-      techStack: {
-        hasTypes: true,
-        hasSchemas: true,
-        hasHooks: true,
-        hasStores: true,
-      },
+        techStack: {
+          hasTypes: true,
+          hasSchemas: true,
+          hasHooks: true,
+          hasStores: true
+        }
+      }
     },
-    
+
+    // Payments capability
     payments: {
+      from: 'official',
       provider: 'stripe',
-      adapter: {
-        currency: "usd",
-        mode: "test",
+      parameters: {
+        currency: 'usd',
+        mode: 'test',
         webhooks: true,
         dashboard: true,
-      },
-      frontend: {
-        features: {
-          checkout: true,
-          subscriptions: true,
-          invoices: true,
-          paymentMethods: true,
-          billingPortal: true,
+        frontend: {
+          features: {
+            checkout: true,
+            subscriptions: true,
+            invoices: true,
+            paymentMethods: true,
+            billingPortal: true
+          }
         },
-      },
-      techStack: {
-        hasTypes: true,
-        hasSchemas: true,
-        hasHooks: true,
-        hasStores: true,
-      },
+        techStack: {
+          hasTypes: true,
+          hasSchemas: true,
+          hasHooks: true,
+          hasStores: true
+        }
+      }
     },
 
+    // Teams Management capability
     'teams-management': {
+      from: 'official',
       provider: 'custom',
-      adapter: {},
-      frontend: {
-        features: {
-          teams: true,
-          invitations: true,
-          roles: true,
-          members: true,
-          billing: true,
-          analytics: true,
+      parameters: {
+        frontend: {
+          features: {
+            teams: true,
+            invitations: true,
+            roles: true,
+            members: true,
+            billing: true,
+            analytics: true
+          }
         },
-      },
-      techStack: {
-        hasTypes: true,
-        hasSchemas: true,
-        hasHooks: true,
-        hasStores: true,
-      },
+        techStack: {
+          hasTypes: true,
+          hasSchemas: true,
+          hasHooks: true,
+          hasStores: true
+        }
+      }
     },
 
+    // Emailing capability
     emailing: {
+      from: 'official',
       provider: 'resend',
-      adapter: {
+      parameters: {
         apiKey: '',
         fromEmail: '',
-      },
-      frontend: {
-        features: {
-          templates: true,
-          analytics: true,
-          campaigns: true,
+        frontend: {
+          features: {
+            templates: true,
+            analytics: true,
+            campaigns: true
+          }
         },
-      },
-      techStack: {
-        hasTypes: true,
-        hasSchemas: true,
-        hasHooks: true,
-      },
+        techStack: {
+          hasTypes: true,
+          hasSchemas: true,
+          hasHooks: true
+        }
+      }
     },
-    
 
+    // Monitoring capability
     monitoring: {
+      from: 'official',
       provider: 'custom',
-      adapter: {},
-      techStack: {
-        hasTypes: true,
-        hasSchemas: true,
-      },
+      parameters: {
+        techStack: {
+          hasTypes: true,
+          hasSchemas: true
+        }
+      }
     },
+
+    // Database
+    database: {
+      from: 'official',
+      provider: 'drizzle',
+      parameters: {
+        provider: 'neon',
+        databaseType: 'postgresql',
+        features: {
+          core: true,
+          migrations: true,
+          relations: true,
+          studio: false,
+          seeding: false
+        }
+      }
+    },
+
+    // Data Fetching
+    'data-fetching': {
+      from: 'official',
+      provider: 'tanstack-query',
+      parameters: {
+        devtools: true
+      }
+    }
   },
-  // Infrastructure modules (framework, UI, database, connectors) are automatically
-  // added via marketplace defaults and auto-inclusion system based on project.framework
+
+  apps: {
+    web: {
+      type: 'web',
+      framework: 'nextjs',
+      package: 'apps/web',
+      dependencies: ['auth', 'payments', 'teams-management', 'emailing', 'monitoring', 'database', 'data-fetching'],
+      parameters: {
+        typescript: true,
+        tailwind: true,
+        eslint: true,
+        srcDir: true,
+        importAlias: '@/',
+        reactVersion: '18',
+        router: 'app'
+      }
+    }
+  }
 });
-
-

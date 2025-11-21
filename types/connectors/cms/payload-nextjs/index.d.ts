@@ -1,32 +1,10 @@
 /**
- * Payload CMS Next.js Connector
+ * connectors/cms/payload-nextjs
  * 
- * Complete Payload CMS 3.0 integration for Next.js with local API, collections, and admin panel
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
-export interface ConnectorsCmsPayloadNextjsParams {
-
-  /** Generate default collections (Pages, Posts, Media) */
-  collections?: boolean;
-
-  /** Enable media/upload collection */
-  media?: boolean;
-
-  /** Enable Payload authentication */
-  auth?: boolean;
-
-  /** Enable Payload admin panel */
-  adminPanel?: boolean;
-
-  /** Configure local API for server components */
-  localApi?: boolean;
-
-  /** Enable draft preview functionality */
-  draftPreview?: boolean;
-
-  /** Enable live preview (beta) */
-  livePreview?: boolean;
-}
+export interface ConnectorsCmsPayloadNextjsParams {}
 
 export interface ConnectorsCmsPayloadNextjsFeatures {}
 

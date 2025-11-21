@@ -1,0 +1,88 @@
+{
+  "id": "connectors/seo/seo-nextjs",
+  "name": "SEO Next.js Connector",
+  "description": "Complete SEO implementation for Next.js App Router with Metadata API, sitemap generation, robots.txt, and structured data",
+  "type": "connector",
+  "version": "1.0.0",
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "tech_stack": {
+    "framework": "nextjs",
+    "adapters": [
+      "seo"
+    ]
+  },
+  "requires": [
+    "framework/nextjs",
+    "analytics/seo-core"
+  ],
+  "prerequisites": [
+    "adapters/framework/nextjs",
+    "analytics/seo-core"
+  ],
+  "capabilities": {
+    "seo-nextjs-integration": {
+      "version": "1.0.0",
+      "description": "Next.js-specific SEO enhancements",
+      "provides": [
+        "seo-metadata-api",
+        "seo-sitemap",
+        "seo-robots",
+        "seo-structured-data",
+        "seo-layout-helpers"
+      ]
+    }
+  },
+  "provides": [],
+  "parameters": {
+    "sitemap": {
+      "name": "Sitemap Generation",
+      "description": "Generate sitemap.xml automatically",
+      "type": "boolean",
+      "default": true
+    },
+    "robots": {
+      "name": "Robots.txt",
+      "description": "Generate robots.txt automatically",
+      "type": "boolean",
+      "default": true
+    },
+    "structuredData": {
+      "name": "Structured Data",
+      "description": "Enable JSON-LD structured data helpers",
+      "type": "boolean",
+      "default": true
+    },
+    "defaultMetadata": {
+      "name": "Default Metadata",
+      "description": "Add default metadata to root layout",
+      "type": "boolean",
+      "default": true
+    },
+    "dynamicMetadata": {
+      "name": "Dynamic Metadata",
+      "description": "Generate dynamic metadata helpers",
+      "type": "boolean",
+      "default": true
+    },
+    "openGraph": {
+      "name": "Open Graph",
+      "description": "Generate Open Graph metadata",
+      "type": "boolean",
+      "default": true
+    },
+    "twitter": {
+      "name": "Twitter Cards",
+      "description": "Generate Twitter Card metadata",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "blueprint": {
+    "id": "seo-nextjs-integration",
+    "name": "SEO Next.js Integration",
+    "description": "Complete SEO suite for Next.js",
+    "version": "1.0.0",
+    "actions": []
+  }
+}

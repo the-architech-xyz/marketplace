@@ -25,7 +25,7 @@ export default function generateBlueprint(
     // Core Resend client wrapper
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}email/resend-client.ts',
+      path: '${paths.packages.shared.src}email/resend-client.ts',
       template: 'templates/resend-client.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -36,7 +36,7 @@ export default function generateBlueprint(
     // Email configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}email/email-config.ts',
+      path: '${paths.packages.shared.src}email/email-config.ts',
       template: 'templates/email-config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -47,7 +47,7 @@ export default function generateBlueprint(
     // Email types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}email/email-types.ts',
+      path: '${paths.packages.shared.src}email/email-types.ts',
       template: 'templates/email-types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -58,7 +58,7 @@ export default function generateBlueprint(
     // Email sender
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}email/email-sender.ts',
+      path: '${paths.packages.shared.src}email/email-sender.ts',
       template: 'templates/email-sender.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -69,7 +69,7 @@ export default function generateBlueprint(
     // Sender utility
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}email/sender.ts',
+      path: '${paths.packages.shared.src}email/sender.ts',
       template: 'templates/sender.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -80,7 +80,7 @@ export default function generateBlueprint(
     // Config utility
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}email/config.ts',
+      path: '${paths.packages.shared.src}email/config.ts',
       template: 'templates/config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

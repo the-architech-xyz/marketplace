@@ -46,10 +46,10 @@ export default function generateBlueprint(
 
 function generateCoreActions(): BlueprintAction[] {
   return [
-    // Create basic email API route
+    // Create basic email API route - BACKEND API (resolves to apps.api.routes or apps.web.app/api)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/email/send/route.ts',
+      path: '${paths.apps.backend.api}email/send/route.ts',
       template: 'templates/api-send-email-route.ts.tpl',
       context: { features: ['core'] },
       conflictResolution: {
@@ -68,7 +68,7 @@ function generateTemplatesActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/email/templates/route.ts',
+      path: '${paths.apps.backend.api}email/templates/route.ts', // BACKEND API
       template: 'templates/api-email-templates-route.ts.tpl',
       context: { 
         features: ['templates'],
@@ -90,7 +90,7 @@ function generateAnalyticsActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/email/analytics/route.ts',
+      path: '${paths.apps.backend.api}email/analytics/route.ts', // BACKEND API
       template: 'templates/api-email-analytics-route.ts.tpl',
       context: { 
         features: ['analytics'],
@@ -112,7 +112,7 @@ function generateBulkEmailActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/email/campaigns/route.ts',
+      path: '${paths.apps.backend.api}email/campaigns/route.ts', // BACKEND API
       template: 'templates/api-email-campaigns-route.ts.tpl',
       context: { 
         features: ['bulkEmail'],
@@ -134,7 +134,7 @@ function generateWebhooksActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/email/webhooks/route.ts',
+      path: '${paths.apps.backend.api}email/webhooks/route.ts', // BACKEND API
       template: 'templates/api-email-webhooks-route.ts.tpl',
       context: { 
         features: ['webhooks'],

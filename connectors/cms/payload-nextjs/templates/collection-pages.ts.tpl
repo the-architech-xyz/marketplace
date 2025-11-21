@@ -67,3 +67,29 @@ export const Pages: CollectionConfig = {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

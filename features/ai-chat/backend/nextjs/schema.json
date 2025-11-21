@@ -1,0 +1,285 @@
+{
+  "id": "ai-chat-backend-vercel-ai-nextjs",
+  "name": "AI Capability (Vercel AI SDK + NextJS)",
+  "description": "Complete AI chat backend with Vercel AI SDK and NextJS",
+  "type": "capability",
+  "version": "1.0.0",
+  "provides": [
+    "ai-chat"
+  ],
+  "role": "backend-feature",
+  "pattern": "custom-logic",
+  "contract": {
+    "hooks": {
+      "useConversations": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useMessages": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useSettings": {
+        "parameters": [],
+        "returnType": "{\n    // Query operations\n    getSettings: any; // UseQueryResult<ChatSettings, Error>\n    \n    // Mutation operations\n    updateSettings: any; // UseMutationResult<ChatSettings, Error, ChatSettings>\n    resetSettings: any; // UseMutationResult<ChatSettings, Error, void>\n  }",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useAnalytics": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": false,
+        "isQuery": true
+      }
+    },
+    "types": {
+      "MessageRole": {
+        "definition": "'user' | 'assistant' | 'system'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "MessageStatus": {
+        "definition": "'sending' | 'sent' | 'failed' | 'streaming'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "ChatStatus": {
+        "definition": "'idle' | 'loading' | 'streaming' | 'error'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "ModelProvider": {
+        "definition": "'openai' | 'anthropic' | 'google' | 'azure' | 'custom'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "Message": {
+        "definition": "export interface Message {\n  id: string;\n  role: MessageRole;\n  content: string;\n  status: MessageStatus;\n  timestamp: string;\n  metadata?: {\n    model?: string;\n    tokens?: number;\n    cost?: number;\n    duration?: number;\n    error?: string;\n  };\n  attachments?: MessageAttachment[];\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "MessageAttachment": {
+        "definition": "export interface MessageAttachment {\n  id: string;\n  type: 'image' | 'file' | 'code' | 'url';\n  name: string;\n  url: string;\n  size?: number;\n  mimeType?: string;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "Chat": {
+        "definition": "export interface Chat {\n  id: string;\n  title: string;\n  description?: string;\n  messages: Message[];\n  status: ChatStatus;\n  model: string;\n  provider: ModelProvider;\n  createdAt: string;\n  updatedAt: string;\n  userId: string;\n  metadata?: {\n    totalTokens?: number;\n    totalCost?: number;\n    messageCount?: number;\n    lastActivity?: string;\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ChatSession": {
+        "definition": "export interface ChatSession {\n  id: string;\n  chatId: string;\n  userId: string;\n  status: 'active' | 'paused' | 'ended';\n  startedAt: string;\n  endedAt?: string;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "AIModel": {
+        "definition": "export interface AIModel {\n  id: string;\n  name: string;\n  provider: ModelProvider;\n  description?: string;\n  maxTokens: number;\n  costPerToken: number;\n  capabilities: string[];\n  isAvailable: boolean;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "SendMessageData": {
+        "definition": "export interface SendMessageData {\n  content: string;\n  chatId?: string;\n  model?: string;\n  attachments?: MessageAttachment[];\n  systemPrompt?: string;\n  temperature?: number;\n  maxTokens?: number;\n  stream?: boolean;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "CreateChatData": {
+        "definition": "export interface CreateChatData {\n  title: string;\n  description?: string;\n  model: string;\n  systemPrompt?: string;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "UpdateChatData": {
+        "definition": "export interface UpdateChatData {\n  title?: string;\n  description?: string;\n  model?: string;\n  systemPrompt?: string;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "UploadFileData": {
+        "definition": "export interface UploadFileData {\n  file: File;\n  chatId?: string;\n  type?: 'image' | 'document' | 'code';\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ExportChatData": {
+        "definition": "export interface ExportChatData {\n  chatId: string;\n  format: 'json' | 'markdown' | 'pdf' | 'txt';\n  includeMetadata?: boolean;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ImportChatData": {
+        "definition": "export interface ImportChatData {\n  file: File;\n  format: 'json' | 'markdown' | 'txt';\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "SendMessageResult": {
+        "definition": "export interface SendMessageResult {\n  message: Message;\n  chat: Chat;\n  streamId?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "StreamMessageResult": {
+        "definition": "export interface StreamMessageResult {\n  messageId: string;\n  content: string;\n  isComplete: boolean;\n  metadata?: {\n    tokens?: number;\n    cost?: number;\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "UploadFileResult": {
+        "definition": "export interface UploadFileResult {\n  attachment: MessageAttachment;\n  message?: Message;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ExportChatResult": {
+        "definition": "export interface ExportChatResult {\n  url: string;\n  filename: string;\n  size: number;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ImportChatResult": {
+        "definition": "export interface ImportChatResult {\n  chat: Chat;\n  messageCount: number;\n  importedAt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ChatAnalytics": {
+        "definition": "export interface ChatAnalytics {\n  totalChats: number;\n  totalMessages: number;\n  totalTokens: number;\n  totalCost: number;\n  averageMessagesPerChat: number;\n  averageTokensPerMessage: number;\n  mostUsedModel: string;\n  chatGrowth: Array<{ date: string; count: number }>;\n  tokenUsage: Array<{ date: string; tokens: number }>;\n  costTrend: Array<{ date: string; cost: number }>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "UsageStats": {
+        "definition": "export interface UsageStats {\n  daily: {\n    chats: number;\n    messages: number;\n    tokens: number;\n    cost: number;\n  };\n  weekly: {\n    chats: number;\n    messages: number;\n    tokens: number;\n    cost: number;\n  };\n  monthly: {\n    chats: number;\n    messages: number;\n    tokens: number;\n    cost: number;\n  };\n  limits: {\n    dailyChats: number;\n    dailyMessages: number;\n    dailyTokens: number;\n    dailyCost: number;\n  };\n  usage: {\n    dailyChats: number;\n    dailyMessages: number;\n    dailyTokens: number;\n    dailyCost: number;\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "AIChatConfig": {
+        "definition": "export interface AIChatConfig {\n  models: {\n    default: string;\n    available: string[];\n    maxTokens: number;\n    temperature: number;\n  };\n  features: {\n    streaming: boolean;\n    fileUpload: boolean;\n    voiceInput: boolean;\n    voiceOutput: boolean;\n    codeHighlighting: boolean;\n    markdownSupport: boolean;\n    exportImport: boolean;\n    customPrompts: boolean;\n  };\n  limits: {\n    maxMessagesPerChat: number;\n    maxFileSize: number;\n    maxFilesPerMessage: number;\n    maxChatsPerUser: number;\n  };\n  ui: {\n    theme: 'default' | 'dark' | 'light' | 'minimal';\n    showTokenCount: boolean;\n    showCost: boolean;\n    showTimestamps: boolean;\n    enableAnimations: boolean;\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "AIChatError": {
+        "definition": "export interface AIChatError {\n  code: string;\n  message: string;\n  type: 'model_error' | 'rate_limit_error' | 'quota_error' | 'network_error' | 'validation_error';\n  details?: {\n    model?: string;\n    tokens?: number;\n    retryAfter?: number;\n    quota?: {\n      limit: number;\n      used: number;\n      remaining: number;\n    };\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "Conversation": {
+        "definition": "export interface Conversation {\n  id: string;\n  title: string;\n  userId: string;\n  status: 'active' | 'archived';\n  settings: {\n    model: string;\n    temperature: number;\n    maxTokens: number;\n    systemPrompt?: string;\n  };\n  messageCount: number;\n  createdAt: string;\n  updatedAt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "CreateConversationData": {
+        "definition": "export interface CreateConversationData {\n  title?: string;\n  settings?: Partial<Conversation['settings']>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "UpdateConversationData": {
+        "definition": "export interface UpdateConversationData {\n  title?: string;\n  settings?: Partial<Conversation['settings']>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "UpdateMessageData": {
+        "definition": "export interface UpdateMessageData {\n  content?: string;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ChatSettings": {
+        "definition": "export interface ChatSettings {\n  model: string;\n  temperature: number;\n  maxTokens: number;\n  systemPrompt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ConversationAnalytics": {
+        "definition": "export interface ConversationAnalytics {\n  conversationId: string;\n  messageCount: number;\n  averageResponseTime: number;\n  userSatisfaction: number;\n  topics: string[];\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "IAIChatService": {
+        "definition": "export interface IAIChatService {\n  /**\n   * Conversation Management Service\n   * Provides all conversation-related operations in a cohesive interface\n   */\n  useConversations: () => {\n    // Query operations\n    list: any; // UseQueryResult<Conversation[], Error>\n    get: (id: string) => any; // UseQueryResult<Conversation, Error>\n    \n    // Mutation operations\n    create: any; // UseMutationResult<Conversation, Error, CreateConversationData>\n    update: any; // UseMutationResult<Conversation, Error, { id: string; data: UpdateConversationData }>\n    delete: any; // UseMutationResult<void, Error, string>\n    clear: any; // UseMutationResult<void, Error, string>\n  };\n\n  /**\n   * Message Management Service\n   * Provides all message-related operations in a cohesive interface\n   */\n  useMessages: () => {\n    // Query operations\n    list: (conversationId: string) => any; // UseQueryResult<Message[], Error>\n    get: (id: string) => any; // UseQueryResult<Message, Error>\n    \n    // Mutation operations\n    send: any; // UseMutationResult<Message, Error, SendMessageData>\n    update: any; // UseMutationResult<Message, Error, { id: string; data: UpdateMessageData }>\n    delete: any; // UseMutationResult<void, Error, string>\n    regenerate: any; // UseMutationResult<Message, Error, string>\n  };\n\n  /**\n   * Chat Settings Service\n   * Provides chat configuration and settings management\n   */\n  useSettings: () => {\n    // Query operations\n    getSettings: any; // UseQueryResult<ChatSettings, Error>\n    \n    // Mutation operations\n    updateSettings: any; // UseMutationResult<ChatSettings, Error, ChatSettings>\n    resetSettings: any; // UseMutationResult<ChatSettings, Error, void>\n  };\n\n  /**\n   * Analytics Service\n   * Provides chat analytics and reporting\n   */\n  useAnalytics: () => {\n    // Query operations\n    getChatAnalytics: any; // UseQueryResult<ChatAnalytics, Error>\n    getConversationAnalytics: (conversationId: string) => any; // UseQueryResult<ConversationAnalytics, Error>\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      }
+    }
+  },
+  "requires": [
+    "framework/nextjs",
+    "adapters/ai/vercel-ai-sdk",
+    "features/ai-chat/database/drizzle"
+  ],
+  "requiresCapabilities": [
+    {
+      "category": "database",
+      "optional": false,
+      "reason": "Store conversation history, messages, chat sessions, and analytics data"
+    },
+    {
+      "category": "auth",
+      "optional": false,
+      "reason": "Link conversations to authenticated users and secure chat endpoints"
+    }
+  ],
+  "parameters": {
+    "streaming": {
+      "name": "Streaming",
+      "description": "Real-time message streaming",
+      "type": "boolean",
+      "default": true
+    },
+    "fileUpload": {
+      "name": "File Upload",
+      "description": "File upload capabilities",
+      "type": "boolean",
+      "default": true
+    },
+    "voiceInput": {
+      "name": "Voice Input",
+      "description": "Voice input capabilities",
+      "type": "boolean",
+      "default": false
+    },
+    "voiceOutput": {
+      "name": "Voice Output",
+      "description": "Voice output capabilities",
+      "type": "boolean",
+      "default": false
+    },
+    "exportImport": {
+      "name": "Export/Import",
+      "description": "Chat export and import capabilities",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "prerequisites": [
+    "adapters/auth/better-auth",
+    "adapters/database/drizzle"
+  ]
+}

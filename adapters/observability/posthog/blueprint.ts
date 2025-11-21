@@ -30,7 +30,7 @@ export default function generateBlueprint(
     // Core PostHog client configuration (browser)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}analytics/posthog/client.ts',
+      path: '${paths.packages.shared.src}analytics/posthog/client.ts',
       template: 'templates/client.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -41,7 +41,7 @@ export default function generateBlueprint(
     // Core PostHog server configuration (Node.js)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}analytics/posthog/server.ts',
+      path: '${paths.packages.shared.src}analytics/posthog/server.ts',
       template: 'templates/server.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -52,7 +52,7 @@ export default function generateBlueprint(
     // Core PostHog configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}analytics/posthog/config.ts',
+      path: '${paths.packages.shared.src}analytics/posthog/config.ts',
       template: 'templates/config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -63,7 +63,7 @@ export default function generateBlueprint(
     // Core PostHog analytics API
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}analytics/posthog/analytics.ts',
+      path: '${paths.packages.shared.src}analytics/posthog/analytics.ts',
       template: 'templates/analytics.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -76,7 +76,7 @@ export default function generateBlueprint(
   if (features?.eventTracking !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}analytics/posthog/event-tracking.ts',
+      path: '${paths.packages.shared.src}analytics/posthog/event-tracking.ts',
       template: 'templates/event-tracking.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -89,7 +89,7 @@ export default function generateBlueprint(
   if (features?.core !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}analytics/posthog/user-tracking.ts',
+      path: '${paths.packages.shared.src}analytics/posthog/user-tracking.ts',
       template: 'templates/user-tracking.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -102,7 +102,7 @@ export default function generateBlueprint(
   if (features?.sessionReplay === true) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}analytics/posthog/session-replay.ts',
+      path: '${paths.packages.shared.src}analytics/posthog/session-replay.ts',
       template: 'templates/session-replay.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -115,7 +115,7 @@ export default function generateBlueprint(
   if (features?.featureFlags === true) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}analytics/posthog/feature-flags.ts',
+      path: '${paths.packages.shared.src}analytics/posthog/feature-flags.ts',
       template: 'templates/feature-flags.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -128,7 +128,7 @@ export default function generateBlueprint(
   if (features?.experiments === true) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}analytics/posthog/experiments.ts',
+      path: '${paths.packages.shared.src}analytics/posthog/experiments.ts',
       template: 'templates/experiments.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

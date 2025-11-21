@@ -1,74 +1,12 @@
 /**
- * Payments Frontend (Shadcn)
+ * features/payments/frontend
  * 
- * Payment processing UI using Shadcn components
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
-export interface FeaturesPaymentsFrontendParams {
-  /** Constitutional Architecture features configuration */
-  features?: {
+export interface FeaturesPaymentsFrontendParams {}
 
-    /** Essential payment functionality (forms, checkout, transactions) */
-    core?: boolean;
-
-    /** Enable checkout UI components */
-    checkout?: boolean;
-
-    /** Subscription management and billing */
-    subscriptions?: boolean;
-
-    /** Invoice generation and management */
-    invoices?: boolean;
-
-    /** Payment methods management UI */
-    paymentMethods?: boolean;
-
-    /** Billing portal UI */
-    billingPortal?: boolean;
-
-    /** Invoice generation and management */
-    invoicing?: boolean;
-
-    /** Payment webhook handling */
-    webhooks?: boolean;
-
-    /** Payment analytics and reporting */
-    analytics?: boolean;
-  };
-
-  /** UI theme variant */
-  theme?: 'default' | 'dark' | 'light' | 'minimal';
-}
-
-export interface FeaturesPaymentsFrontendFeatures {
-
-  /** Essential payment functionality (forms, checkout, transactions) */
-  core: boolean;
-
-  /** Enable checkout UI components */
-  checkout: boolean;
-
-  /** Subscription management and billing */
-  subscriptions: boolean;
-
-  /** Invoice generation and management */
-  invoices: boolean;
-
-  /** Payment methods management UI */
-  paymentMethods: boolean;
-
-  /** Billing portal UI */
-  billingPortal: boolean;
-
-  /** Invoice generation and management */
-  invoicing: boolean;
-
-  /** Payment webhook handling */
-  webhooks: boolean;
-
-  /** Payment analytics and reporting */
-  analytics: boolean;
-}
+export interface FeaturesPaymentsFrontendFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesPaymentsFrontendArtifacts: {

@@ -32,7 +32,7 @@ export default function generateBlueprint(
     // Re-export adapter's useChat hook for convenience
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/ai/hooks.ts',
+      path: '${paths.packages.shared.src}ai/hooks.ts',
       content: `/**
  * AI Hooks - Next.js Connector
  * 
@@ -48,10 +48,10 @@ export { useChat, useCompletion } from 'ai/react';
       }
     },
     
-    // Chat API route (streaming)
+    // Chat API route (streaming) - BACKEND API (resolves to apps.api.routes or apps.web.app/api)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/chat/route.ts',
+      path: '${paths.apps.backend.api}chat/route.ts',
       template: 'templates/chat-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -59,10 +59,10 @@ export { useChat, useCompletion } from 'ai/react';
       }
     },
     
-    // Completion API route (if advanced features enabled)
+    // Completion API route (if advanced features enabled) - BACKEND API
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/completion/route.ts',
+      path: '${paths.apps.backend.api}completion/route.ts',
       template: 'templates/completion-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -73,7 +73,7 @@ export { useChat, useCompletion } from 'ai/react';
     // AI Provider component
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}providers/AIProvider.tsx',
+      path: '${paths.apps.web.components}providers/AIProvider.tsx',
       template: 'templates/AIProvider.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

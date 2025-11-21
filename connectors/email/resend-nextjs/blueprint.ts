@@ -28,7 +28,7 @@ export default function generateBlueprint(
     // Resend configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/email/config.ts',
+      path: '${paths.packages.shared.src}email/config.ts',
       template: 'templates/config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -39,7 +39,7 @@ export default function generateBlueprint(
     // Email sender utility
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/email/sender.ts',
+      path: '${paths.packages.shared.src}email/sender.ts',
       template: 'templates/email-sender.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -47,10 +47,10 @@ export default function generateBlueprint(
       }
     },
     
-    // Basic send email API route
+    // Basic send email API route - BACKEND API (resolves to apps.api.routes or apps.web.app/api)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/email/send/route.ts',
+      path: '${paths.apps.backend.api}email/send/route.ts',
       template: 'templates/send-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

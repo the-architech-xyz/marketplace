@@ -22,7 +22,7 @@ export default function generateBlueprint(
   // Override hooks with RevenueCat SDK
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/payments/hooks.ts',
+    path: '${paths.packages.shared.src}payments/hooks.ts',
     template: 'templates/hooks.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -33,7 +33,7 @@ export default function generateBlueprint(
   // RevenueCat client
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/payments/revenuecat-client.ts',
+    path: '${paths.packages.shared.src}payments/revenuecat-client.ts',
     template: 'templates/client.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,

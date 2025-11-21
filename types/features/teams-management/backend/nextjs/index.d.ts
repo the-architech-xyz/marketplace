@@ -1,53 +1,12 @@
 /**
- * Teams Capability (Better Auth + NextJS)
+ * features/teams-management/backend/nextjs
  * 
- * Complete teams management backend with Better Auth and NextJS
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
-export interface FeaturesTeamsManagementBackendNextjsParams {
+export interface FeaturesTeamsManagementBackendNextjsParams {}
 
-  /** Team invitation system */
-  invites?: boolean;
-
-  /** Granular role-based permissions */
-  permissions?: boolean;
-
-  /** Team performance analytics */
-  analytics?: boolean;
-
-  /** Team billing and subscription management */
-  billing?: boolean;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable team management */
-    teams?: boolean;
-
-    /** Enable team invitations */
-    invitations?: boolean;
-
-    /** Enable role-based access control */
-    roles?: boolean;
-
-    /** Enable granular permissions */
-    permissions?: boolean;
-  };
-}
-
-export interface FeaturesTeamsManagementBackendNextjsFeatures {
-
-  /** Enable team management */
-  teams: boolean;
-
-  /** Enable team invitations */
-  invitations: boolean;
-
-  /** Enable role-based access control */
-  roles: boolean;
-
-  /** Enable granular permissions */
-  permissions: boolean;
-}
+export interface FeaturesTeamsManagementBackendNextjsFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesTeamsManagementBackendNextjsArtifacts: {

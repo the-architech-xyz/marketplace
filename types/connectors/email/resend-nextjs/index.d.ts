@@ -1,14 +1,10 @@
 /**
- * Resend + Next.js Connector
+ * connectors/email/resend-nextjs
  * 
- * Resend email service integration for Next.js applications
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
-export interface ConnectorsEmailResendNextjsParams {
-
-  /** Resend API key */
-  apiKey: string;
-}
+export interface ConnectorsEmailResendNextjsParams {}
 
 export interface ConnectorsEmailResendNextjsFeatures {}
 

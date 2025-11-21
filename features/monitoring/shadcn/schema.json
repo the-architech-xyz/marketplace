@@ -1,0 +1,186 @@
+{
+  "id": "features/monitoring/shadcn",
+  "name": "Monitoring Capability",
+  "description": "Complete monitoring capability with error tracking, performance monitoring, and user feedback using Sentry",
+  "version": "1.0.0",
+  "role": "frontend-feature",
+  "category": "feature",
+  "contract": {
+    "hooks": {
+      "useErrorTracking": "UseQueryResult<ErrorData[], Error>",
+      "useErrorDetails": "UseQueryResult<ErrorData, Error>",
+      "useErrorTrends": "UseQueryResult<ErrorTrend[], Error>",
+      "useResolveError": "UseMutationResult<{ success: boolean }, Error, string>",
+      "useIgnoreError": "UseMutationResult<{ success: boolean }, Error, string>",
+      "useUpdateErrorStatus": "UseMutationResult<{ success: boolean }, Error, { errorId: string; status: 'resolved' | 'ignored' | 'unresolved' }>",
+      "usePerformanceMetrics": "UseQueryResult<PerformanceMetrics, Error>",
+      "usePerformanceTrends": "UseQueryResult<PerformanceTrend[], Error>",
+      "useUserFeedback": "UseQueryResult<UserFeedback[], Error>",
+      "useSubmitFeedback": "UseMutationResult<{ success: boolean; feedbackId: string }, Error, UserFeedbackData>",
+      "useSentryConfig": "UseQueryResult<SentryConfig, Error>"
+    },
+    "api": {
+      "endpoints": [
+        "/api/monitoring/errors",
+        "/api/monitoring/performance",
+        "/api/monitoring/feedback",
+        "/api/monitoring/config"
+      ],
+      "methods": [
+        "POST",
+        "GET",
+        "PATCH",
+        "DELETE"
+      ]
+    },
+    "types": [
+      "ErrorData",
+      "PerformanceMetrics",
+      "UserFeedback",
+      "SentryConfig",
+      "ErrorTrend",
+      "PerformanceTrend",
+      "UserFeedbackData"
+    ]
+  },
+  "prerequisites": [
+    "observability/sentry"
+  ],
+  "requires": [],
+  "provides": [
+    "monitoring-core",
+    "monitoring-performance}",
+    "monitoring-feedback}",
+    "monitoring-analytics}"
+  ],
+  "parameters": {
+    "backend": {
+      "type": "select",
+      "default": "sentry-nextjs",
+      "description": "Backend implementation for monitoring services",
+      "required": false,
+      "options": [
+        "sentry-nextjs",
+        "sentry-express",
+        "sentry-fastify"
+      ]
+    },
+    "frontend": {
+      "type": "select",
+      "default": "shadcn",
+      "description": "Frontend implementation for monitoring UI",
+      "required": false,
+      "options": [
+        "shadcn",
+        "mui",
+        "chakra"
+      ]
+    },
+    "features": {
+      "core": {
+        "type": "boolean",
+        "default": true,
+        "description": "Essential monitoring (error tracking, basic performance)"
+      },
+      "performance": {
+        "type": "boolean",
+        "default": false,
+        "description": "Advanced performance monitoring"
+      },
+      "errors": {
+        "type": "boolean",
+        "default": true,
+        "description": "Error tracking and reporting"
+      },
+      "feedback": {
+        "type": "boolean",
+        "default": false,
+        "description": "User feedback collection"
+      },
+      "analytics": {
+        "type": "boolean",
+        "default": false,
+        "description": "Monitoring analytics and reporting"
+      }
+    },
+    "environments": {
+      "type": "array",
+      "default": [
+        "production",
+        "staging",
+        "development"
+      ],
+      "description": "Environments to monitor",
+      "required": false
+    }
+  },
+  "implementations": {
+    "backend": [
+      "sentry-nextjs",
+      "sentry-express",
+      "sentry-fastify"
+    ],
+    "frontend": [
+      "shadcn",
+      "mui",
+      "chakra"
+    ]
+  },
+  "internal_structure": {
+    "core": {
+      "provides": [
+        "monitoring-core"
+      ],
+      "templates": [
+        "ErrorBoundary.tsx",
+        "BasicMetrics.tsx",
+        "useErrorTracking.ts"
+      ]
+    },
+    "performance": {
+      "prerequisites": [
+        "monitoring-core"
+      ],
+      "provides": [
+        "monitoring-performance"
+      ],
+      "templates": [
+        "PerformanceChart.tsx",
+        "WebVitals.tsx",
+        "usePerformance.ts"
+      ]
+    },
+    "feedback": {
+      "prerequisites": [
+        "monitoring-core"
+      ],
+      "provides": [
+        "monitoring-feedback"
+      ],
+      "templates": [
+        "UserFeedback.tsx",
+        "FeedbackForm.tsx",
+        "useFeedback.ts"
+      ]
+    },
+    "analytics": {
+      "prerequisites": [
+        "monitoring-core",
+        "monitoring-performance"
+      ],
+      "provides": [
+        "monitoring-analytics"
+      ],
+      "templates": [
+        "AnalyticsDashboard.tsx",
+        "TrendsChart.tsx",
+        "useAnalytics.ts"
+      ]
+    }
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  },
+  "type": "feature"
+}

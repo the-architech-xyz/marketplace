@@ -11,6 +11,7 @@ export * from './adapters/ai/vercel-ai-sdk';
 export * from './adapters/analytics/ab-testing-core';
 export * from './adapters/analytics/seo-core';
 export * from './adapters/auth/better-auth';
+export * from './adapters/backend/api-hono';
 export * from './adapters/blockchain/web3';
 export * from './adapters/content/i18n-expo';
 export * from './adapters/content/i18n-nextjs';
@@ -28,16 +29,21 @@ export * from './adapters/deployment/docker';
 export * from './adapters/deployment/vercel';
 export * from './adapters/email/resend';
 export * from './adapters/framework/expo';
+export * from './adapters/framework/hono';
 export * from './adapters/framework/nextjs';
 export * from './adapters/framework/react-native';
+export * from './adapters/jobs/bullmq';
+export * from './adapters/jobs/inngest';
 export * from './adapters/monorepo/nx';
 export * from './adapters/monorepo/turborepo';
 export * from './adapters/observability/posthog';
 export * from './adapters/observability/sentry';
 export * from './adapters/payment/stripe';
 export * from './adapters/services/github-api';
+export * from './adapters/storage/s3-compatible';
 export * from './adapters/ui/shadcn-ui';
 export * from './adapters/ui/tailwind';
+export * from './adapters/ui/tamagui';
 export * from './connectors/ai/vercel-ai-nextjs';
 export * from './connectors/analytics/ab-vercel-nextjs';
 export * from './connectors/analytics/posthog-nextjs';
@@ -58,6 +64,9 @@ export * from './connectors/revenuecat-web';
 export * from './connectors/revenuecat-webhook';
 export * from './connectors/seo/seo-nextjs';
 export * from './connectors/testing/vitest-nextjs';
+export * from './connectors/trpc-hono';
+export * from './connectors/ui/tamagui-expo';
+export * from './connectors/ui/tamagui-nextjs';
 export * from './features/_shared/tech-stack/overrides/trpc';
 export * from './features/ai-chat/backend/nextjs';
 export * from './features/ai-chat/database/drizzle';
@@ -78,6 +87,18 @@ export * from './features/payments/database/drizzle';
 export * from './features/payments/frontend';
 export * from './features/payments/tech-stack';
 export * from './features/payments/tech-stack/overrides/revenuecat';
+export * from './features/projects/backend/nextjs';
+export * from './features/projects/database/drizzle';
+export * from './features/projects/frontend';
+export * from './features/projects/tech-stack';
+export * from './features/semantic-search/pgvector/backend/hono';
+export * from './features/semantic-search/pgvector/database/drizzle';
+export * from './features/semantic-search/pgvector/jobs/inngest';
+export * from './features/semantic-search/pgvector/tech-stack';
+export * from './features/synap/capture/backend/hono';
+export * from './features/synap/capture/frontend/tamagui';
+export * from './features/synap/capture/jobs/inngest';
+export * from './features/synap/capture/tech-stack';
 export * from './features/teams-management/backend/nextjs';
 export * from './features/teams-management/database/drizzle';
 export * from './features/teams-management/frontend';
@@ -86,6 +107,7 @@ export * from './features/waitlist/backend/nextjs';
 export * from './features/waitlist/database/drizzle';
 export * from './features/waitlist/tech-stack';
 export * from './features/web3/shadcn';
+export * from './scripts/lib';
 
 // 🎯 Cohesive Contract Exports
 export * from './contracts/ai-chat';
@@ -93,6 +115,7 @@ export * from './contracts/auth';
 export * from './contracts/emailing';
 export * from './contracts/monitoring';
 export * from './contracts/payments';
+export * from './contracts/projects';
 export * from './contracts/teams-management';
 export * from './contracts/waitlist';
 
@@ -106,11 +129,8 @@ export type ModuleId = keyof typeof ModuleArtifacts;
 // Re-export base types for convenience
 export { Module, ProjectConfig } from '@thearchitech.xyz/types';
 
-// Re-export Genome type from shared types package
-export { Genome } from '@thearchitech.xyz/types';
-
-// Re-export defineGenome function (module-focused)
-export * from './define-genome';
+// Re-export Genome type and defineGenome helper from shared types package
+export { Genome, defineGenome } from '@thearchitech.xyz/types';
 
 // Re-export capability types (capability-focused)
 export * from './capability-types';

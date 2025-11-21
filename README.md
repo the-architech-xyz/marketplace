@@ -7,12 +7,16 @@ This marketplace provides a complete set of React-focused modules including adap
 ## 🚀 Quick Start
 
 ```bash
-# Use with CLI
-architech new my-app.genome.ts --marketplace @thearchitech/react
-
-# Or specify in genome
+# Use with CLI (V2 format)
 architech new my-app.genome.ts
+
+# In your genome.ts, specify marketplace:
+# marketplaces: {
+#   official: { type: 'local', path: '../marketplace' }
+# }
 ```
+
+**V2 Note:** This marketplace now uses recipe books for package-to-module mapping. See [V2 Migration Guide](../docs/V2_MIGRATION_GUIDE.md) for details.
 
 ## 📚 Documentation
 

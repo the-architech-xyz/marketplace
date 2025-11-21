@@ -1,35 +1,10 @@
 /**
- * Sequelize ORM
+ * database/sequelize
  * 
- * Promise-based Node.js ORM for PostgreSQL, MySQL, MariaDB, SQLite and Microsoft SQL Server
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface DatabaseSequelizeParams {
-
-  /** Database host */
-  host?: string;
-
-  /** Database port */
-  port?: number;
-
-  /** Database username */
-  username?: string;
-
-  /** Database password */
-  password?: string;
-
-  /** Database name */
-  databaseName?: string;
-
-  /** Enable SQL logging */
-  logging?: boolean;
-
-  /** Enable connection pooling */
-  pool?: boolean;
-
-  /** Database type */
-  databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mariadb' | 'mssql';
-}
+export interface DatabaseSequelizeParams {}
 
 export interface DatabaseSequelizeFeatures {}
 

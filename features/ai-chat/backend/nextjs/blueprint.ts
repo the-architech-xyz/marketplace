@@ -8,10 +8,10 @@ export default function generateBlueprint(
   const { params, features } = extractTypedModuleParameters(config);
 
   return [
-    // Create AI chat API routes
+    // Create AI chat API routes - BACKEND API (resolves to apps.api.routes or apps.web.app/api)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/chat/route.ts',
+      path: '${paths.apps.backend.api}chat/route.ts',
       template: 'templates/api-chat-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -20,7 +20,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/chat/conversations/route.ts',
+      path: '${paths.apps.backend.api}chat/conversations/route.ts',
       template: 'templates/api-conversations-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -29,7 +29,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/chat/messages/route.ts',
+      path: '${paths.apps.backend.api}chat/messages/route.ts',
       template: 'templates/api-messages-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -38,7 +38,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/chat/analytics/route.ts',
+      path: '${paths.apps.backend.api}chat/analytics/route.ts',
       template: 'templates/api-analytics-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

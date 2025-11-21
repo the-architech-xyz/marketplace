@@ -1,0 +1,21 @@
+{
+  "id": "features/semantic-search/pgvector/backend/hono",
+  "name": "Semantic Search Backend (Hono)",
+  "description": "Backend API endpoint for semantic search",
+  "type": "feature",
+  "version": "1.0.0",
+  "provides": [
+    "semantic-search-api"
+  ],
+  "role": "backend-feature",
+  "pattern": "custom-logic",
+  "blueprint": "./blueprint.ts",
+  "dependencies": [
+    "database/drizzle",
+    "ai/vercel-ai-sdk"
+  ],
+  "prerequisites": [
+    "adapters/framework/hono",
+    "features/semantic-search/tech-stack"
+  ]
+}

@@ -1,17 +1,10 @@
 /**
- * Nx
+ * monorepo/nx
  * 
- * Smart, extensible build framework for monorepos with powerful dev tools and code generation
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface MonorepoNxParams {
-
-  /** Package manager (npm, yarn, pnpm) */
-  packageManager?: string;
-
-  /** Enable Nx Cloud for distributed caching */
-  nxCloud?: boolean;
-}
+export interface MonorepoNxParams {}
 
 export interface MonorepoNxFeatures {}
 

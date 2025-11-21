@@ -1,38 +1,10 @@
 /**
- * Vercel Deployment
+ * deployment/vercel
  * 
- * Pure Vercel deployment configuration for any framework
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface DeploymentVercelParams {
-
-  /** Target framework */
-  framework?: 'nextjs' | 'react' | 'vue' | 'svelte' | 'angular';
-
-  /** Build command to run */
-  buildCommand?: string;
-
-  /** Output directory for build */
-  outputDirectory?: string;
-
-  /** Install command */
-  installCommand?: string;
-
-  /** Development command */
-  devCommand?: string;
-
-  /** Environment variables to configure */
-  envVars?: string[];
-
-  /** Serverless function configuration */
-  functions: Record<string, any>;
-
-  /** Enable Vercel Analytics */
-  analytics?: boolean;
-
-  /** Enable Vercel Speed Insights */
-  speedInsights?: boolean;
-}
+export interface DeploymentVercelParams {}
 
 export interface DeploymentVercelFeatures {}
 

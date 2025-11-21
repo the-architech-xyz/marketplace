@@ -17,10 +17,12 @@
 
 import { promises as fs } from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 import { glob } from 'glob';
 import { CapabilityAnalyzer } from './capability-analyzer.js';
 import { loadModuleSchema } from '../utilities/schema-loader.js';
 import { extractModuleId } from '../utilities/module-id-extractor.js';
+import { collectTemplatesForModule, resolveBlueprintForModule, toPosixPath } from '../lib/manifest.js';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -79,8 +81,22 @@ interface ModuleEntry {
   category: string;
   type: 'adapter' | 'connector' | 'feature';
   version: string;
-  blueprint: string;
-  jsonFile: string;
+
+  marketplace: {
+    name: string;
+  };
+  source: {
+    root: string;
+    marketplace: string;
+  };
+  manifest: {
+    file: string;
+  };
+  blueprint: {
+    file: string;
+    runtime: 'source' | 'compiled';
+  };
+  templates: string[];
   parameters?: Record<string, any>;
   dependencies?: string[];
   requires?: string[];
@@ -247,8 +263,8 @@ async function buildModuleManifest(marketplacePath: string): Promise<{
     features: [] as ModuleEntry[]
   };
   
-  // Process adapters
-  const adapterFiles = await glob('adapters/**/adapter.json', { cwd: marketplacePath });
+  // Process adapters (all modules use schema.json)
+  const adapterFiles = await glob('adapters/**/schema.json', { cwd: marketplacePath });
   for (const file of adapterFiles) {
     const moduleEntry = await processModuleFile(file, 'adapter', marketplacePath);
     if (moduleEntry) {
@@ -257,7 +273,7 @@ async function buildModuleManifest(marketplacePath: string): Promise<{
   }
   
   // Process connectors
-  const connectorFiles = await glob('connectors/**/connector.json', { cwd: marketplacePath });
+  const connectorFiles = await glob('connectors/**/schema.json', { cwd: marketplacePath });
   for (const file of connectorFiles) {
     const moduleEntry = await processModuleFile(file, 'connector', marketplacePath);
     if (moduleEntry) {
@@ -272,8 +288,8 @@ async function buildModuleManifest(marketplacePath: string): Promise<{
     modules.features.push(...featureModules);
   }
   
-  // Also process direct feature.json files for completeness
-  const featureFiles = await glob('features/**/feature.json', { cwd: marketplacePath });
+  // Also process direct schema.json files for completeness
+  const featureFiles = await glob('features/**/schema.json', { cwd: marketplacePath });
   for (const file of featureFiles) {
     const moduleEntry = await processModuleFile(file, 'feature', marketplacePath);
     if (moduleEntry && !modules.features.some(m => m.id === moduleEntry.id)) {
@@ -293,42 +309,48 @@ async function processModuleFile(
   marketplacePath: string
 ): Promise<ModuleEntry | null> {
   try {
-    const fullPath = path.join(marketplacePath, filePath);
+    const posixFilePath = toPosixPath(filePath);
+    const fullPath = path.join(marketplacePath, posixFilePath);
     const content = await fs.readFile(fullPath, 'utf-8');
     const data = JSON.parse(content);
-    
-    // Extract module ID using utility
-    const moduleId = extractModuleId(filePath, type);
+
+    const moduleId = extractModuleId(posixFilePath, type);
     if (!moduleId) return null;
-    
-    // Extract category from path
-    const pathParts = filePath.split('/');
+
+    const pathParts = posixFilePath.split('/');
     const categoryIndex = type === 'adapter' ? 1 : type === 'connector' ? 1 : 1;
-    const category = pathParts[categoryIndex] || 'uncategorized';
-    
-    // Build blueprint path (assume blueprint.ts in same directory)
-    const blueprintPath = filePath.replace(/(adapter|connector|feature)\.json$/, 'blueprint.ts');
-    
+    const category = data.category || pathParts[categoryIndex] || 'uncategorized';
+
+    const moduleDir = path.posix.dirname(posixFilePath);
+    const blueprintInfo = await resolveBlueprintForModule(moduleDir, marketplacePath);
+    const templates = await collectTemplatesForModule(moduleDir, marketplacePath);
+
     const moduleEntry: ModuleEntry = {
       id: moduleId,
       name: data.name || moduleId,
       description: data.description || '',
-      category: data.category || category,
+      category,
       type,
       version: data.version || '1.0.0',
-      blueprint: blueprintPath,
-      jsonFile: filePath
+      marketplace: { name: 'core' },
+      source: {
+        root: moduleDir,
+        marketplace: 'core'
+      },
+      manifest: {
+        file: posixFilePath
+      },
+      blueprint: blueprintInfo,
+      templates
     };
-    
-    // Add optional fields
+
     if (data.requires) moduleEntry.requires = data.requires;
     if (data.provides) moduleEntry.provides = data.provides;
     if (data.connects) moduleEntry.connects = data.connects;
     if (data.dependencies) moduleEntry.dependencies = data.dependencies;
     if (data.tags) moduleEntry.tags = data.tags;
     if (data.parameters) moduleEntry.parameters = data.parameters;
-    
-    // Infer complexity
+
     if (data.complexity) {
       moduleEntry.complexity = data.complexity;
     } else if (moduleEntry.parameters && Object.keys(moduleEntry.parameters).length > 10) {
@@ -338,7 +360,7 @@ async function processModuleFile(
     } else {
       moduleEntry.complexity = 'simple';
     }
-    
+
     return moduleEntry;
   } catch (error) {
     console.warn(`   ⚠️  Failed to process ${filePath}:`, error);
@@ -362,18 +384,30 @@ async function processFeatureManifest(
     
     // Process each implementation as a separate module entry
     for (const impl of featureManifest.implementations || []) {
+      const moduleDir = toPosixPath(impl.moduleId);
+      const blueprintInfo = await resolveBlueprintForModule(moduleDir, marketplacePath);
+      const templates = await collectTemplatesForModule(moduleDir, marketplacePath);
+
       const entry: ModuleEntry = {
-        id: impl.moduleId,
+        id: moduleDir,
         name: `${featureManifest.name} (${impl.type})`,
         description: featureManifest.description || `${featureManifest.name} ${impl.type} implementation`,
         category: 'features',
         type: 'feature',
         version: featureManifest.version || '1.0.0',
+        marketplace: { name: 'core' },
+        source: {
+          root: moduleDir,
+          marketplace: 'core'
+        },
+        manifest: {
+          file: path.posix.join(moduleDir, 'schema.json')
+        },
+        blueprint: blueprintInfo,
+        templates,
         dependencies: impl.dependencies || [],
         tags: [featureManifest.id, impl.type, ...(impl.stack || [])],
-        parameters: impl.parameters || {},
-        blueprint: `features/${featureManifest.id}/${impl.type}/${impl.moduleId.split('/').pop()}/blueprint.ts`,
-        jsonFile: manifestPath
+        parameters: impl.parameters || {}
       };
       
       if (impl.capabilities) entry.provides = impl.capabilities;
@@ -426,17 +460,21 @@ function capitalize(str: string): string {
 // ============================================================================
 
 // ES module entry point check
-if (import.meta.url === `file://${process.argv[1]}`) {
-  const marketplacePath = process.argv[2] || process.cwd();
-  const outputPath = process.argv[3] || path.join(process.cwd(), 'dist');
+if (process.argv[1]) {
+  const executedFromCli =
+    path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+  if (executedFromCli) {
+    const marketplacePath = process.argv[2] || process.cwd();
+    const outputPath = process.argv[3] || path.join(process.cwd(), 'dist');
   
-  generateCapabilityFirstManifest(marketplacePath, outputPath)
-    .then(() => {
-      console.log('\n✅ Capability-First Manifest generation complete!');
-      process.exit(0);
-    })
-    .catch((error) => {
-      console.error('\n❌ Failed to generate capability-first manifest:', error);
-      process.exit(1);
-    });
+    generateCapabilityFirstManifest(marketplacePath, outputPath)
+      .then(() => {
+        console.log('\n✅ Capability-First Manifest generation complete!');
+        process.exit(0);
+      })
+      .catch((error) => {
+        console.error('\n❌ Failed to generate capability-first manifest:', error);
+        process.exit(1);
+      });
+  }
 }

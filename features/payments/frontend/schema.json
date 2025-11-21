@@ -1,0 +1,174 @@
+{
+  "id": "payments/frontend/shadcn",
+  "name": "Payments Frontend (Shadcn)",
+  "description": "Payment processing UI using Shadcn components",
+  "type": "feature",
+  "version": "1.0.0",
+  "role": "frontend-feature",
+  "prerequisites": {
+    "adapters": [
+      "ui/shadcn-ui"
+    ],
+    "backend": [
+      "payments/backend/stripe-nextjs"
+    ]
+  },
+  "clear": [
+    {
+      "category": "database",
+      "optional": false,
+      "reason": "Frontend payment components need database to query payment data, transactions, and subscription status"
+    },
+    {
+      "category": "auth",
+      "optional": false,
+      "reason": "Payment UI needs authenticated user context to display user-specific payment information"
+    }
+  ],
+  "requires": [],
+  "dependencies": {
+    "required": ["database", "auth"],
+    "direct": [
+      "@stripe/stripe-js",
+      "@stripe/react-stripe-js",
+      "react-hook-form",
+      "@hookform/resolvers",
+      "lucide-react",
+      "date-fns",
+      "framer-motion"
+    ]
+  },
+  "provides": [
+    "payments-core",
+    "payments-subscriptions}",
+    "payments-invoicing}",
+    "payments-webhooks}",
+    "payments-analytics}"
+  ],
+  "parameters": {
+    "features": {
+      "core": {
+        "type": "boolean",
+        "default": true,
+        "description": "Essential payment functionality (forms, checkout, transactions)"
+      },
+      "checkout": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable checkout UI components"
+      },
+      "subscriptions": {
+        "type": "boolean",
+        "default": false,
+        "description": "Subscription management and billing"
+      },
+      "invoices": {
+        "type": "boolean",
+        "default": false,
+        "description": "Invoice generation and management"
+      },
+      "paymentMethods": {
+        "type": "boolean",
+        "default": true,
+        "description": "Payment methods management UI"
+      },
+      "billingPortal": {
+        "type": "boolean",
+        "default": false,
+        "description": "Billing portal UI"
+      },
+      "invoicing": {
+        "type": "boolean",
+        "default": false,
+        "description": "Invoice generation and management"
+      },
+      "webhooks": {
+        "type": "boolean",
+        "default": false,
+        "description": "Payment webhook handling"
+      },
+      "analytics": {
+        "type": "boolean",
+        "default": false,
+        "description": "Payment analytics and reporting"
+      }
+    }
+  },
+  "internal_structure": {
+    "core": {
+      "provides": [
+        "payments-core"
+      ],
+      "templates": [
+        "PaymentForm.tsx",
+        "Checkout.tsx",
+        "TransactionList.tsx",
+        "PaymentTypes.tsx",
+        "usePayments.ts"
+      ]
+    },
+    "subscriptions": {
+      "prerequisites": [
+        "payments-core"
+      ],
+      "provides": [
+        "payments-subscriptions"
+      ],
+      "templates": [
+        "SubscriptionManager.tsx",
+        "BillingDashboard.tsx",
+        "PlanSelector.tsx",
+        "SubscriptionTypes.tsx",
+        "useSubscriptions.ts"
+      ]
+    },
+    "invoicing": {
+      "prerequisites": [
+        "payments-core"
+      ],
+      "provides": [
+        "payments-invoicing"
+      ],
+      "templates": [
+        "InvoiceGenerator.tsx",
+        "InvoiceList.tsx",
+        "InvoicePDF.tsx",
+        "InvoiceTypes.tsx",
+        "useInvoices.ts"
+      ]
+    },
+    "webhooks": {
+      "prerequisites": [
+        "payments-core"
+      ],
+      "provides": [
+        "payments-webhooks"
+      ],
+      "templates": [
+        "WebhookHandler.ts",
+        "WebhookVerification.ts",
+        "WebhookTypes.ts"
+      ]
+    },
+    "analytics": {
+      "prerequisites": [
+        "payments-core",
+        "payments-subscriptions"
+      ],
+      "provides": [
+        "payments-analytics"
+      ],
+      "templates": [
+        "RevenueChart.tsx",
+        "PaymentMetrics.tsx",
+        "AnalyticsDashboard.tsx",
+        "AnalyticsTypes.tsx",
+        "useAnalytics.ts"
+      ]
+    }
+  },
+  "constraints": {
+    "minReactVersion": ">=18.0.0",
+    "minNextjsVersion": ">=13.0.0"
+  }
+}

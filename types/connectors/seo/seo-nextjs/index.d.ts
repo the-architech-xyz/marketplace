@@ -1,32 +1,10 @@
 /**
- * SEO Next.js Connector
+ * connectors/seo/seo-nextjs
  * 
- * Complete SEO implementation for Next.js App Router with Metadata API, sitemap generation, robots.txt, and structured data
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
-export interface ConnectorsSeoSeoNextjsParams {
-
-  /** Generate sitemap.xml automatically */
-  sitemap?: boolean;
-
-  /** Generate robots.txt automatically */
-  robots?: boolean;
-
-  /** Enable JSON-LD structured data helpers */
-  structuredData?: boolean;
-
-  /** Add default metadata to root layout */
-  defaultMetadata?: boolean;
-
-  /** Generate dynamic metadata helpers */
-  dynamicMetadata?: boolean;
-
-  /** Generate Open Graph metadata */
-  openGraph?: boolean;
-
-  /** Generate Twitter Card metadata */
-  twitter?: boolean;
-}
+export interface ConnectorsSeoSeoNextjsParams {}
 
 export interface ConnectorsSeoSeoNextjsFeatures {}
 

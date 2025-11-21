@@ -1,17 +1,10 @@
 /**
- * Vercel AI SDK + Next.js Connector
+ * connectors/ai/vercel-ai-nextjs
  * 
- * Complete Vercel AI SDK integration for Next.js with streaming support
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
-export interface ConnectorsAiVercelAiNextjsParams {
-
-  /** Enabled AI providers */
-  providers?: string[];
-
-  /** Enable streaming responses */
-  streaming?: boolean;
-}
+export interface ConnectorsAiVercelAiNextjsParams {}
 
 export interface ConnectorsAiVercelAiNextjsFeatures {}
 

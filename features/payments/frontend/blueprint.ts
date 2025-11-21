@@ -57,7 +57,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Core payment components (only existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/PaymentForm.tsx',
+      path: '${paths.apps.web.components}payments/PaymentForm.tsx',
       template: 'ui/payments/PaymentForm.tsx.tpl',
       context: { 
         features: ['core'],
@@ -71,7 +71,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/CheckoutForm.tsx',
+      path: '${paths.apps.web.components}payments/CheckoutForm.tsx',
       template: 'ui/payments/CheckoutForm.tsx.tpl',
       context: { 
         features: ['core'],
@@ -85,7 +85,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/PaymentStatus.tsx',
+      path: '${paths.apps.web.components}payments/PaymentStatus.tsx',
       template: 'ui/payments/PaymentStatus.tsx.tpl',
       context: { 
         features: ['core'],
@@ -99,7 +99,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/PaymentMethodSelector.tsx',
+      path: '${paths.apps.web.components}payments/PaymentMethodSelector.tsx',
       template: 'ui/payments/PaymentMethodSelector.tsx.tpl',
       context: { 
         features: ['core'],
@@ -113,7 +113,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/PricingCard.tsx',
+      path: '${paths.apps.web.components}payments/PricingCard.tsx',
       template: 'ui/payments/PricingCard.tsx.tpl',
       context: { 
         features: ['core'],
@@ -127,7 +127,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/RefundDialog.tsx',
+      path: '${paths.apps.web.components}payments/RefundDialog.tsx',
       template: 'ui/payments/RefundDialog.tsx.tpl',
       context: { 
         features: ['core'],
@@ -139,11 +139,40 @@ function generateCoreActions(): BlueprintAction[] {
       }
     },
 
-    // Payment pages
+    // Payment pages - Shared Routes (auto-generates wrappers for web + mobile)
+    // NOTE: PaymentsPage.tsx.tpl doesn't exist yet in UI marketplaces
+    // TODO: Create PaymentsPage.tsx.tpl in marketplace-tamagui and marketplace-shadcn
+    // Temporarily commented out until template is created
+    /*
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}payments/page.tsx',
-      template: 'ui/payments/payments-dashboard.tsx.tpl',
+      path: '${paths.packages.shared.src}routes/payments/PaymentsPage.tsx',
+      template: 'ui/payments/PaymentsPage.tsx.tpl',
+      sharedRoutes: {
+        enabled: true,
+        routePath: 'payments',
+        componentName: 'PaymentsPage'
+      },
+      context: { 
+        features: ['core'],
+        hasPaymentForms: true
+      },
+      conflictResolution: {
+        strategy: ConflictResolutionStrategy.REPLACE,
+        priority: 1
+      }
+    },
+    */
+
+    {
+      type: BlueprintActionType.CREATE_FILE,
+      path: '${paths.packages.shared.src}routes/payments/CheckoutPage.tsx',
+      template: 'ui/payments/CheckoutPage.tsx.tpl',
+      sharedRoutes: {
+        enabled: true,
+        routePath: 'checkout',
+        componentName: 'CheckoutPage'
+      },
       context: { 
         features: ['core'],
         hasPaymentForms: true
@@ -154,25 +183,12 @@ function generateCoreActions(): BlueprintAction[] {
       }
     },
 
+
+    // Payment Utils - Using core marketplace template (not UI-specific) - utilities are framework-agnostic
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}checkout/page.tsx',
-      template: 'ui/payments/checkout-page.tsx.tpl',
-      context: { 
-        features: ['core'],
-        hasPaymentForms: true
-      },
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 1
-      }
-    },
-
-
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}payments/payment-utils.ts',
-      template: 'ui/payments/payment-utils.ts.tpl',
+      path: '${paths.packages.shared.src}payments/payment-utils.ts',
+      template: 'templates/payment-utils.ts.tpl',
       context: { 
         features: ['core'],
         hasPaymentForms: true
@@ -189,7 +205,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Analytics components (always generate - used by dashboard)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/PaymentAnalytics.tsx',
+      path: '${paths.apps.web.components}payments/PaymentAnalytics.tsx',
       template: 'ui/payments/PaymentAnalytics.tsx.tpl',
       context: { 
         features: ['core'],
@@ -203,7 +219,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/TransactionTable.tsx',
+      path: '${paths.apps.web.components}payments/TransactionTable.tsx',
       template: 'ui/payments/TransactionTable.tsx.tpl',
       context: { 
         features: ['core'],
@@ -222,7 +238,7 @@ function generateSubscriptionsActions(): BlueprintAction[] {
     // Subscription components (existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/SubscriptionCard.tsx',
+      path: '${paths.apps.web.components}payments/SubscriptionCard.tsx',
       template: 'ui/payments/SubscriptionCard.tsx.tpl',
       context: { 
         features: ['subscriptions'],
@@ -234,11 +250,16 @@ function generateSubscriptionsActions(): BlueprintAction[] {
       }
     },
 
-    // Subscription pages
+    // Subscription pages - Shared Routes (auto-generates wrappers for web + mobile)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}subscriptions/page.tsx',
-      template: 'ui/payments/subscriptions-page.tsx.tpl',
+      path: '${paths.packages.shared.src}routes/payments/SubscriptionsPage.tsx',
+      template: 'ui/payments/SubscriptionsPage.tsx.tpl',
+      sharedRoutes: {
+        enabled: true,
+        routePath: 'subscriptions',
+        componentName: 'SubscriptionsPage'
+      },
       context: { 
         features: ['subscriptions'],
         hasSubscriptions: true
@@ -259,7 +280,7 @@ function generateInvoicingActions(): BlueprintAction[] {
     // Invoice components (existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/InvoiceCard.tsx',
+      path: '${paths.apps.web.components}payments/InvoiceCard.tsx',
       template: 'ui/payments/InvoiceCard.tsx.tpl',
       context: { 
         features: ['invoicing'],
@@ -271,11 +292,16 @@ function generateInvoicingActions(): BlueprintAction[] {
       }
     },
 
-    // Invoice pages
+    // Invoice pages - Shared Routes (auto-generates wrappers for web + mobile)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}invoices/page.tsx',
-      template: 'ui/payments/invoices-page.tsx.tpl',
+      path: '${paths.packages.shared.src}routes/payments/InvoicesPage.tsx',
+      template: 'ui/payments/InvoicesPage.tsx.tpl',
+      sharedRoutes: {
+        enabled: true,
+        routePath: 'invoices',
+        componentName: 'InvoicesPage'
+      },
       context: { 
         features: ['invoicing'],
         hasInvoicing: true
@@ -298,7 +324,7 @@ function generateWebhooksActions(): BlueprintAction[] {
     /*
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}payments/WebhookHandler.tsx',
+      path: '${paths.apps.web.components}payments/WebhookHandler.tsx',
       template: 'ui/payments/WebhookHandler.tsx.tpl',
       context: { 
         features: ['webhooks'],
@@ -315,11 +341,16 @@ function generateWebhooksActions(): BlueprintAction[] {
 
 function generateAnalyticsActions(): BlueprintAction[] {
   return [
-    // Transaction pages
+    // Transaction pages - Shared Routes (auto-generates wrappers for web + mobile)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}transactions/page.tsx',
-      template: 'ui/payments/transactions-page.tsx.tpl',
+      path: '${paths.packages.shared.src}routes/payments/TransactionsPage.tsx',
+      template: 'ui/payments/TransactionsPage.tsx.tpl',
+      sharedRoutes: {
+        enabled: true,
+        routePath: 'transactions',
+        componentName: 'TransactionsPage'
+      },
       context: { 
         features: ['analytics'],
         hasAnalytics: true

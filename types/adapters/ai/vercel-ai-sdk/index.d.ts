@@ -1,65 +1,12 @@
 /**
- * Vercel AI SDK Adapter
+ * ai/vercel-ai-sdk
  * 
- * Minimal Vercel AI SDK adapter - SDK initialization and configuration only. Streaming and hooks handled by Vercel AI SDK directly.
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface AiVercelAiSdkParams {
+export interface AiVercelAiSdkParams {}
 
-  /** AI providers to include */
-  providers?: string[];
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Essential AI functionality (chat, text generation) */
-    core?: boolean;
-
-    /** Real-time streaming responses */
-    streaming?: boolean;
-
-    /** Function calling and tool use */
-    tools?: boolean;
-
-    /** Text embeddings functionality */
-    embeddings?: boolean;
-
-    /** Advanced AI features (image generation, embeddings, function calling) */
-    advanced?: boolean;
-
-    /** Enterprise features (caching, edge runtime, tool use) */
-    enterprise?: boolean;
-  };
-
-  /** Default AI model */
-  defaultModel?: 'gpt-3.5-turbo' | 'gpt-4' | 'gpt-4-turbo' | 'claude-3-sonnet' | 'claude-3-opus';
-
-  /** Maximum tokens for generation */
-  maxTokens?: number;
-
-  /** Temperature for generation */
-  temperature?: number;
-}
-
-export interface AiVercelAiSdkFeatures {
-
-  /** Essential AI functionality (chat, text generation) */
-  core: boolean;
-
-  /** Real-time streaming responses */
-  streaming: boolean;
-
-  /** Function calling and tool use */
-  tools: boolean;
-
-  /** Text embeddings functionality */
-  embeddings: boolean;
-
-  /** Advanced AI features (image generation, embeddings, function calling) */
-  advanced: boolean;
-
-  /** Enterprise features (caching, edge runtime, tool use) */
-  enterprise: boolean;
-}
+export interface AiVercelAiSdkFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const AiVercelAiSdkArtifacts: {

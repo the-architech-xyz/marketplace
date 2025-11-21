@@ -41,7 +41,7 @@ export default function generateBlueprint(
   // Types - Re-exported from contract (single source of truth)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/teams-management/types.ts',
+    path: '${paths.packages.shared.src}teams-management/types.ts',
     content: `/**
  * Teams Management Types
  * Re-exported from contract for convenience
@@ -64,7 +64,7 @@ export type {
   // Schemas - Zod validation schemas
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/teams-management/schemas.ts',
+    path: '${paths.packages.shared.src}teams-management/schemas.ts',
     template: 'templates/schemas.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -75,7 +75,7 @@ export type {
   // Hooks - Direct TanStack Query hooks (best practice pattern)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/teams-management/hooks.ts',
+    path: '${paths.packages.shared.src}teams-management/hooks.ts',
     template: 'templates/hooks.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -86,7 +86,7 @@ export type {
   // Stores - Zustand state management
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/teams-management/stores.ts',
+    path: '${paths.packages.shared.src}teams-management/stores.ts',
     template: 'templates/stores.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -101,7 +101,7 @@ export type {
   // Index file for easy imports (from template for Option C pattern)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/teams-management/index.ts',
+    path: '${paths.packages.shared.src}teams-management/index.ts',
     template: 'templates/index.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -116,7 +116,7 @@ export type {
   // README for the tech stack layer
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/teams-management/README.md',
+    path: '${paths.packages.shared.src}teams-management/README.md',
     content: `# Teams Management Feature - Technology Stack Layer
 
 This directory contains the technology-agnostic stack layer for the Teams Management feature. These files provide consistent types, validation, data fetching, and state management across all implementations.

@@ -1,0 +1,59 @@
+{
+  "id": "connectors/ai/vercel-ai-nextjs",
+  "name": "Vercel AI SDK + Next.js Connector",
+  "description": "Complete Vercel AI SDK integration for Next.js with streaming support",
+  "type": "connector",
+  "version": "1.0.0",
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "connects": [
+    "vercel-ai-sdk",
+    "nextjs",
+    "react"
+  ],
+  "provides": [
+    "ai-chat",
+    "ai-completion",
+    "ai-streaming",
+    "ai-hooks"
+  ],
+  "requires": [
+    "framework/nextjs",
+    "ai/vercel-ai-sdk"
+  ],
+  "capabilities": {
+    "chat": {
+      "enabled": true,
+      "features": {
+        "streaming": true,
+        "history": false,
+        "persistence": false
+      }
+    },
+    "completion": {
+      "enabled": true,
+      "features": {
+        "streaming": true
+      }
+    }
+  },
+  "parameters": {
+    "providers": {
+      "type": "array",
+      "default": [
+        "openai",
+        "anthropic"
+      ],
+      "description": "Enabled AI providers"
+    },
+    "streaming": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable streaming responses"
+    }
+  },
+  "prerequisites": [
+    "adapters/framework/nextjs",
+    "ai/vercel-ai-sdk"
+  ]
+}

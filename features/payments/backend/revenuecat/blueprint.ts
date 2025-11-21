@@ -17,7 +17,7 @@ export default function generateBlueprint(
   // Generate webhook route handler
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.api}/revenuecat/webhook/route.ts',
+    path: '${paths.apps.api.root}/revenuecat/webhook/route.ts',
     template: 'templates/webhook-route.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -28,7 +28,7 @@ export default function generateBlueprint(
   // Generate webhook processor (syncs to database)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/revenuecat/webhook-processor.ts',
+    path: '${paths.packages.shared.src}revenuecat/webhook-processor.ts',
     template: 'templates/webhook-processor.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -39,7 +39,7 @@ export default function generateBlueprint(
   // Generate user mapping utility
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/revenuecat/user-mapper.ts',
+    path: '${paths.packages.shared.src}revenuecat/user-mapper.ts',
     template: 'templates/user-mapper.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,

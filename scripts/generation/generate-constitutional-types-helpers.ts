@@ -73,11 +73,8 @@ export type ModuleId = keyof typeof ModuleArtifacts;
 // Re-export base types for convenience
 export { Module, ProjectConfig } from '@thearchitech.xyz/types';
 
-// Re-export Genome type from shared types package
-export { Genome } from '@thearchitech.xyz/types';
-
-// Re-export defineGenome function (module-focused)
-export * from './define-genome';
+// Re-export Genome type and defineGenome helper from shared types package
+export { Genome, defineGenome } from '@thearchitech.xyz/types';
 
 // Re-export capability types (capability-focused)
 export * from './capability-types';
@@ -751,7 +748,7 @@ ${moduleParameters.join('\n')}
         const schema = this.loadConstitutionalSchema(schemaPath);
         if (schema && schema.parameters) {
           const parameterType = this.generateModuleParameterType(moduleId, schema.parameters);
-          moduleTypes.push(`  | { id: '${moduleId}'; parameters?: ${parameterType}; }`);
+          moduleTypes.push(`  | ({ id: '${moduleId}'; parameters?: ${parameterType}; } & ModuleMetadata)`);
         }
       } catch (error) {
         console.warn(`⚠️ Could not load schema for ${moduleId}:`, error);
@@ -896,11 +893,11 @@ export function defineCapabilityGenome(genome) {
  * It re-exports from all type modules.
  */
 
-// Re-export genome types (includes ModuleId, ModuleParameters, Genome, TypedGenomeModule, TypedGenome)
-export * from './genome-types.js';
+// Re-export shared helpers (defineGenome, Module, etc.)
+export { defineGenome } from '@thearchitech.xyz/types';
 
-// Re-export defineGenome function
-export * from './define-genome.js';
+// Re-export genome-specific marketplace types (ModuleId, ModuleParameters, etc.)
+export * from './genome-types.js';
 
 // Re-export capability types
 export * from './capability-types.js';

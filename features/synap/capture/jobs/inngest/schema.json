@@ -1,0 +1,21 @@
+{
+  "id": "features/synap/capture/jobs/inngest",
+  "name": "Synap Capture Jobs (Inngest)",
+  "description": "Inngest functions for Synap Capture feature",
+  "type": "feature",
+  "version": "1.0.0",
+  "provides": [
+    "synap-capture-jobs",
+    "analyze-thought-job"
+  ],
+  "role": "backend-feature",
+  "pattern": "custom-logic",
+  "blueprint": "./blueprint.ts",
+  "dependencies": [
+    "jobs/inngest",
+    "ai/vercel-ai-sdk"
+  ]
+}
+
+
+

@@ -30,7 +30,7 @@ export default function generateBlueprint(
   if (params?.middleware !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.middleware}ab-testing.ts',
+      path: '${paths.apps.web.middleware}ab-testing.ts',
       template: 'templates/middleware.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -43,7 +43,7 @@ export default function generateBlueprint(
   if (params?.edgeConfig !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}ab-testing/edge-config.ts',
+      path: '${paths.packages.shared.src}ab-testing/edge-config.ts',
       template: 'templates/edge-config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -57,7 +57,7 @@ export default function generateBlueprint(
     actions.push(
       {
         type: BlueprintActionType.CREATE_FILE,
-        path: '${paths.hooks}use-experiment.ts',
+        path: '${paths.packages.shared.src.hooks}use-experiment.ts',
         template: 'templates/use-experiment.ts.tpl',
         conflictResolution: {
           strategy: ConflictResolutionStrategy.SKIP,
@@ -66,7 +66,7 @@ export default function generateBlueprint(
       },
       {
         type: BlueprintActionType.CREATE_FILE,
-        path: '${paths.hooks}use-variant.ts',
+        path: '${paths.packages.shared.src.hooks}use-variant.ts',
         template: 'templates/use-variant.ts.tpl',
         conflictResolution: {
           strategy: ConflictResolutionStrategy.SKIP,
@@ -81,7 +81,7 @@ export default function generateBlueprint(
     actions.push(
       {
         type: BlueprintActionType.CREATE_FILE,
-        path: '${paths.components}ab-testing/Experiment.tsx',
+        path: '${paths.apps.web.components}ab-testing/Experiment.tsx',
         template: 'templates/experiment-component.tsx.tpl',
         conflictResolution: {
           strategy: ConflictResolutionStrategy.SKIP,
@@ -90,7 +90,7 @@ export default function generateBlueprint(
       },
       {
         type: BlueprintActionType.CREATE_FILE,
-        path: '${paths.components}ab-testing/Variant.tsx',
+        path: '${paths.apps.web.components}ab-testing/Variant.tsx',
         template: 'templates/variant-component.tsx.tpl',
         conflictResolution: {
           strategy: ConflictResolutionStrategy.SKIP,
@@ -103,7 +103,7 @@ export default function generateBlueprint(
   // Create setup documentation
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.docs}ab-testing-setup.md',
+    path: '${paths.workspace.docs}ab-testing-setup.md',
     template: 'templates/setup-guide.md.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,

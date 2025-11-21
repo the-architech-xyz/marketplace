@@ -1,0 +1,25 @@
+{
+  "id": "connectors/trpc-hono",
+  "name": "tRPC Hono Connector",
+  "description": "Integrates tRPC with Hono backend for end-to-end type-safe APIs",
+  "type": "connector",
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "version": "1.0.0",
+  "requires": ["data-fetching/trpc", "backend/api-hono"],
+  "provides": ["trpc-router", "trpc-hono-handler"],
+  "parameters": {
+    "transformer": {
+      "type": "string",
+      "enum": ["superjson", "devalue", "none"],
+      "default": "superjson",
+      "description": "Data transformer for complex types (Date, Map, Set)"
+    },
+    "path": {
+      "type": "string",
+      "default": "/trpc",
+      "description": "Base path for tRPC endpoints"
+    }
+  }
+}
+

@@ -1,20 +1,10 @@
 /**
- * TypeORM
+ * database/typeorm
  * 
- * TypeScript ORM for Node.js with decorators and migrations
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface DatabaseTypeormParams {
-
-  /** Enable schema synchronization */
-  synchronize?: boolean;
-
-  /** Enable query logging */
-  logging?: boolean;
-
-  /** Database type */
-  databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
-}
+export interface DatabaseTypeormParams {}
 
 export interface DatabaseTypeormFeatures {}
 

@@ -1,7 +1,7 @@
 /**
- * ai-chat-tech-stack
+ * features/ai-chat/tech-stack
  * 
- * Technology-agnostic stack layer for AI Chat feature
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
 export interface FeaturesAiChatTechStackParams {}

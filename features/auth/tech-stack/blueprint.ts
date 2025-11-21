@@ -41,7 +41,7 @@ export default function generateBlueprint(
   // Types - Re-exported from contract (single source of truth)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/auth/types.ts',
+    path: '${paths.packages.auth.src}types.ts',
     content: `/**
  * Auth Types
  * Re-exported from contract for convenience
@@ -62,7 +62,7 @@ export type {
   // Schemas - Zod validation (client-side form validation)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/auth/schemas.ts',
+    path: '${paths.packages.auth.src}schemas.ts',
     template: 'templates/schemas.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -73,7 +73,7 @@ export type {
   // Generic fallback hooks (can be overwritten by backend if SDK provides native hooks)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/auth/hooks.ts',
+    path: '${paths.packages.auth.src}hooks.ts',
     template: 'templates/hooks.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,  // Backend can overwrite
@@ -84,7 +84,7 @@ export type {
   // Stores - Zustand state management (tech-agnostic UI state)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/auth/stores.ts',
+    path: '${paths.packages.auth.src}stores.ts',
     template: 'templates/stores.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -99,7 +99,7 @@ export type {
   // Index file for easy imports
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/auth/index.ts',
+    path: '${paths.packages.auth.src}index.ts',
     content: `/**
  * Auth Feature - Tech Stack Layer
  * 
@@ -132,9 +132,10 @@ export * from './stores';
 // Hooks (generic fallback OR overwritten by backend)
 export * from './hooks';
 
-// Server-side auth instance and client (re-exported from connector if available)
-// Connectors like better-auth-nextjs create config.ts and client.ts
-export { auth } from './config';
+// Server-side auth instance and client (re-exported from adapter/connector)
+// Adapter creates server.ts and client.ts (generic naming)
+// Connector may create config.ts for framework-specific setup
+export { auth } from './server';
 export { authClient } from './client';
 `,
     conflictResolution: {

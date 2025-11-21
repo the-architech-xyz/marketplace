@@ -1,0 +1,47 @@
+{
+  "name": "semantic-search-tech-stack",
+  "version": "1.0.0",
+  "description": "Technology-agnostic stack layer for Semantic Search feature",
+  "category": "tech-stack",
+  "provides": [
+    "semantic-search-schemas",
+    "semantic-search-hooks"
+  ],
+  "role": "tech-stack-layer",
+  "tags": [
+    "semantic-search",
+    "pgvector",
+    "embeddings",
+    "search",
+    "tech-stack"
+  ],
+  "moduleType": "feature",
+  "blueprint": "./blueprint.ts",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "tableName": {
+        "type": "string",
+        "description": "Table name for semantic search",
+        "required": true
+      },
+      "embeddingModel": {
+        "type": "string",
+        "default": "text-embedding-3-small",
+        "description": "OpenAI embedding model"
+      }
+    },
+    "required": [
+      "tableName"
+    ]
+  },
+  "dependencies": [
+    "zod",
+    "@tanstack/react-query"
+  ],
+  "id": "features/semantic-search/pgvector/tech-stack",
+  "type": "feature"
+}
+
+
+

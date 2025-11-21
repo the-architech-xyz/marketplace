@@ -1,0 +1,87 @@
+{
+  "id": "auth/better-auth",
+  "name": "Better Auth",
+  "description": "Full-stack authentication SDK with session management, OAuth, 2FA, and organization support",
+  "category": "auth",
+  "version": "1.0.0",
+  "role": "adapter",
+  "blueprint": "blueprint.ts",
+  "dependencies": {
+    "required": ["database"],
+    "direct": ["better-auth"]
+  },
+  "requiresCapabilities": [
+    {
+      "category": "database",
+      "optional": false,
+      "reason": "Better Auth requires database to store user accounts, sessions, OAuth tokens, and organization/team data"
+    }
+  ],
+  "capabilities": {
+    "authentication": {
+      "version": "1.0.0",
+      "description": "Complete authentication with Better Auth SDK",
+      "provides": [
+        "email-password",
+        "oauth",
+        "magic-link",
+        "two-factor",
+        "session-management",
+        "organizations",
+        "teams"
+      ]
+    }
+  },
+  "parameters": {
+    "emailPassword": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable email/password authentication"
+    },
+    "emailVerification": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable email verification"
+    },
+    "oauthProviders": {
+      "type": "array",
+      "default": [
+        "google",
+        "github"
+      ],
+      "description": "Enabled OAuth providers"
+    },
+    "twoFactor": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable two-factor authentication"
+    },
+    "organizations": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable organization support"
+    },
+    "teams": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable team support within organizations"
+    },
+    "sessionExpiry": {
+      "type": "number",
+      "default": 604800,
+      "description": "Session expiry time in seconds (default: 7 days)"
+    }
+  },
+  "prerequisites": [
+    "adapters/database/drizzle"
+  ],
+  "provides": [
+    "email-password",
+    "oauth",
+    "magic-link",
+    "two-factor",
+    "session-management",
+    "organizations",
+    "teams"
+  ]
+}

@@ -17,7 +17,7 @@ export default function generateBlueprint(
     // Database schema
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/db/schema/ai-chat.ts',
+      path: '${paths.packages.database.src}db/schema/ai-chat.ts',
       template: 'templates/schema.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -28,7 +28,7 @@ export default function generateBlueprint(
     // Database migrations
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/db/migrations/001_ai_chat.sql',
+      path: '${paths.packages.database.src}db/migrations/001_ai_chat.sql',
       template: 'templates/migration.sql.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,

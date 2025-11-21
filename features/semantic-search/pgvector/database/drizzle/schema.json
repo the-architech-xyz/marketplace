@@ -1,0 +1,20 @@
+{
+  "id": "features/semantic-search/pgvector/database/drizzle",
+  "name": "Semantic Search Database (pgvector)",
+  "description": "Database migration and helpers for pgvector semantic search",
+  "type": "feature",
+  "version": "1.0.0",
+  "provides": [
+    "pgvector-extension",
+    "vector-column-helper"
+  ],
+  "role": "tech-stack-layer",
+  "pattern": "custom-logic",
+  "blueprint": "./blueprint.ts",
+  "dependencies": [
+    "database/drizzle"
+  ]
+}
+
+
+

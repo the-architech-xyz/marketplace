@@ -17,7 +17,7 @@ export const prismaBlueprint: Blueprint = {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.database_config}/prisma.ts',
+      path: '${paths.packages.database.src}config/prisma.ts',
       template: 'templates/prisma.ts.tpl',
     },
     {

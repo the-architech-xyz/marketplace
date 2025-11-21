@@ -109,7 +109,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Core AI chat components
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/ChatInterface.tsx',
+      path: '${paths.apps.web.components}ai-chat/ChatInterface.tsx',
       template: 'ui/ai-chat/ChatInterface.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -118,7 +118,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/MessageBubble.tsx',
+      path: '${paths.apps.web.components}ai-chat/MessageBubble.tsx',
       template: 'ui/ai-chat/MessageBubble.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -127,7 +127,7 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/ConversationSidebar.tsx',
+      path: '${paths.apps.web.components}ai-chat/ConversationSidebar.tsx',
       template: 'ui/ai-chat/ConversationSidebar.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -137,7 +137,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Core AI chat hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}useAIChatExtended.ts',
+      path: '${paths.packages.shared.src.hooks}useAIChatExtended.ts',
       template: 'ui/ai-chat/useAIChatExtended.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -147,7 +147,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Core chat page
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}chat/page.tsx',
+      path: '${paths.apps.web.app}chat/page.tsx',
       template: 'ui/ai-chat/chat-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -164,7 +164,7 @@ function generateContextActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/ChatContext.tsx',
+      path: '${paths.apps.web.components}ai-chat/ChatContext.tsx',
       template: 'ui/ai-chat/ChatContext.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -173,7 +173,7 @@ function generateContextActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/ChatProvider.tsx',
+      path: '${paths.apps.web.components}ai-chat/ChatProvider.tsx',
       template: 'ui/ai-chat/ChatProvider.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -182,7 +182,7 @@ function generateContextActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/AIProvider.tsx',
+      path: '${paths.apps.web.components}ai-chat/AIProvider.tsx',
       template: 'ui/ai-chat/AIProvider.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -207,7 +207,7 @@ function generateMediaActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/FileUpload.tsx',
+      path: '${paths.apps.web.components}ai-chat/FileUpload.tsx',
       template: 'ui/ai-chat/FileUpload.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -216,7 +216,7 @@ function generateMediaActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/MediaPreview.tsx',
+      path: '${paths.apps.web.components}ai-chat/MediaPreview.tsx',
       template: 'ui/ai-chat/MediaPreview.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -225,7 +225,7 @@ function generateMediaActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}useFileUpload.ts',
+      path: '${paths.packages.shared.src.hooks}useFileUpload.ts',
       template: 'ui/ai-chat/useFileUpload.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -249,7 +249,7 @@ function generateVoiceActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/VoiceInput.tsx',
+      path: '${paths.apps.web.components}ai-chat/VoiceInput.tsx',
       template: 'ui/ai-chat/VoiceInput.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -258,7 +258,7 @@ function generateVoiceActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/VoiceOutput.tsx',
+      path: '${paths.apps.web.components}ai-chat/VoiceOutput.tsx',
       template: 'ui/ai-chat/VoiceOutput.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -267,7 +267,7 @@ function generateVoiceActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}useVoice.ts',
+      path: '${paths.packages.shared.src.hooks}useVoice.ts',
       template: 'ui/ai-chat/useVoice.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -284,7 +284,7 @@ function generateHistoryActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/ChatHistory.tsx',
+      path: '${paths.apps.web.components}ai-chat/ChatHistory.tsx',
       template: 'ui/ai-chat/ChatHistory.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -293,7 +293,7 @@ function generateHistoryActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/MessageHistory.tsx',
+      path: '${paths.apps.web.components}ai-chat/MessageHistory.tsx',
       template: 'ui/ai-chat/MessageHistory.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -302,7 +302,7 @@ function generateHistoryActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/MessageList.tsx',
+      path: '${paths.apps.web.components}ai-chat/MessageList.tsx',
       template: 'ui/ai-chat/MessageList.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -311,7 +311,7 @@ function generateHistoryActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}chat/[id]/page.tsx',
+      path: '${paths.apps.web.app}chat/[id]/page.tsx',
       template: 'ui/ai-chat/chat-detail-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -328,7 +328,7 @@ function generateInputActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/MessageInput.tsx',
+      path: '${paths.apps.web.components}ai-chat/MessageInput.tsx',
       template: 'ui/ai-chat/MessageInput.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -337,7 +337,7 @@ function generateInputActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/MarkdownRenderer.tsx',
+      path: '${paths.apps.web.components}ai-chat/MarkdownRenderer.tsx',
       template: 'ui/ai-chat/MarkdownRenderer.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -346,7 +346,7 @@ function generateInputActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/CodeBlock.tsx',
+      path: '${paths.apps.web.components}ai-chat/CodeBlock.tsx',
       template: 'ui/ai-chat/CodeBlock.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -363,7 +363,7 @@ function generateToolbarActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/ChatToolbar.tsx',
+      path: '${paths.apps.web.components}ai-chat/ChatToolbar.tsx',
       template: 'ui/ai-chat/ChatToolbar.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -372,7 +372,7 @@ function generateToolbarActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/LoadingIndicator.tsx',
+      path: '${paths.apps.web.components}ai-chat/LoadingIndicator.tsx',
       template: 'ui/ai-chat/LoadingIndicator.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -381,7 +381,7 @@ function generateToolbarActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/ErrorDisplay.tsx',
+      path: '${paths.apps.web.components}ai-chat/ErrorDisplay.tsx',
       template: 'ui/ai-chat/ErrorDisplay.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -398,7 +398,7 @@ function generateSettingsActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/ChatSettings.tsx',
+      path: '${paths.apps.web.components}ai-chat/ChatSettings.tsx',
       template: 'ui/ai-chat/ChatSettings.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -407,7 +407,7 @@ function generateSettingsActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/SettingsPanel.tsx',
+      path: '${paths.apps.web.components}ai-chat/SettingsPanel.tsx',
       template: 'ui/ai-chat/SettingsPanel.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -416,7 +416,7 @@ function generateSettingsActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}ai-chat/ai-config.ts',
+      path: '${paths.packages.shared.src}ai-chat/ai-config.ts',
       template: 'ui/ai-chat/ai-config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -433,7 +433,7 @@ function generatePromptsActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/CustomPrompts.tsx',
+      path: '${paths.apps.web.components}ai-chat/CustomPrompts.tsx',
       template: 'ui/ai-chat/CustomPrompts.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -450,7 +450,7 @@ function generateExportActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/ChatExport.tsx',
+      path: '${paths.apps.web.components}ai-chat/ChatExport.tsx',
       template: 'ui/ai-chat/ChatExport.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -459,7 +459,7 @@ function generateExportActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/ChatImport.tsx',
+      path: '${paths.apps.web.components}ai-chat/ChatImport.tsx',
       template: 'ui/ai-chat/ChatImport.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -468,7 +468,7 @@ function generateExportActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/ExportImport.tsx',
+      path: '${paths.apps.web.components}ai-chat/ExportImport.tsx',
       template: 'ui/ai-chat/ExportImport.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -485,7 +485,7 @@ function generateAnalyticsActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}ai-chat/ChatAnalytics.tsx',
+      path: '${paths.apps.web.components}ai-chat/ChatAnalytics.tsx',
       template: 'ui/ai-chat/ChatAnalytics.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -502,7 +502,7 @@ function generateProjectsActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}projects/page.tsx',
+      path: '${paths.apps.web.app}projects/page.tsx',
       template: 'ui/ai-chat/projects-page.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -519,7 +519,7 @@ function generateMiddlewareActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.middleware}chat-middleware.ts',
+      path: '${paths.apps.web.middleware}chat-middleware.ts',
       template: 'ui/ai-chat/chat-middleware.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -536,7 +536,7 @@ function generateServicesActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}ai-chat/ai-chat-services.ts',
+      path: '${paths.packages.shared.src}ai-chat/ai-chat-services.ts',
       template: 'ui/ai-chat/ai-chat-services.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -545,7 +545,7 @@ function generateServicesActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}ai-chat/ai-chat-utils.ts',
+      path: '${paths.packages.shared.src}ai-chat/ai-chat-utils.ts',
       template: 'ui/ai-chat/ai-chat-utils.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -554,7 +554,7 @@ function generateServicesActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}ai-chat/ai-providers.ts',
+      path: '${paths.packages.shared.src}ai-chat/ai-providers.ts',
       template: 'ui/ai-chat/ai-providers.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -563,7 +563,7 @@ function generateServicesActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}ai-chat/ai-types.ts',
+      path: '${paths.packages.shared.src}ai-chat/ai-types.ts',
       template: 'ui/ai-chat/ai-types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -580,7 +580,7 @@ function generateCompletionActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-chat.ts',
+      path: '${paths.packages.shared.src.hooks}use-chat.ts',
       template: 'ui/ai-chat/use-chat.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -589,7 +589,7 @@ function generateCompletionActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-completion.ts',
+      path: '${paths.packages.shared.src.hooks}use-completion.ts',
       template: 'ui/ai-chat/use-completion.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -598,7 +598,7 @@ function generateCompletionActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/completion/route.ts',
+      path: '${paths.apps.backend.api}completion/route.ts', // BACKEND API (resolves to apps.api.routes or apps.web.app/api)
       template: 'ui/ai-chat/completion-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,

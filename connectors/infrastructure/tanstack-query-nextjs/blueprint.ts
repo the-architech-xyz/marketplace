@@ -11,7 +11,7 @@ export default function generateBlueprint(
     // Create QueryClient configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}query/client.ts',
+      path: '${paths.packages.shared.src}query/client.ts',
       template: 'templates/query-client.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -22,7 +22,7 @@ export default function generateBlueprint(
     // Create QueryProvider component
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}query/QueryProvider.tsx',
+      path: '${paths.packages.shared.src}query/QueryProvider.tsx',
       template: 'templates/query-provider.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -33,7 +33,7 @@ export default function generateBlueprint(
     // Create SSR utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}query/ssr.ts',
+      path: '${paths.packages.shared.src}query/ssr.ts',
       template: 'templates/query-ssr.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -44,7 +44,7 @@ export default function generateBlueprint(
     // Create error boundary
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}query/ErrorBoundary.tsx',
+      path: '${paths.packages.shared.src}query/ErrorBoundary.tsx',
       template: 'templates/query-error-boundary.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -55,7 +55,7 @@ export default function generateBlueprint(
     // Create query keys utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}query/keys.ts',
+      path: '${paths.packages.shared.src}query/keys.ts',
       template: 'templates/query-keys.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -66,7 +66,7 @@ export default function generateBlueprint(
     // Wrap app layout with QueryProvider
     {
       type: BlueprintActionType.ENHANCE_FILE,
-      path: '${paths.source_root}app/layout.tsx',
+      path: '${paths.apps.web.src}app/layout.tsx',
       modifier: ModifierType.JSX_CHILDREN_WRAPPER,
       params: {
         providers: [

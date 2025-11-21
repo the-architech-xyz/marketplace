@@ -41,7 +41,7 @@ export default function generateBlueprint(
   // Types - Re-exported from contract (single source of truth)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/payments/types.ts',
+    path: '${paths.packages.shared.src}payments/types.ts',
     content: `/**
  * Payments Types
  * Re-exported from contract for convenience
@@ -63,7 +63,7 @@ export type {
   // Schemas - Zod validation schemas
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/payments/schemas.ts',
+    path: '${paths.packages.shared.src}payments/schemas.ts',
     template: 'templates/schemas.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -76,7 +76,7 @@ export type {
   // with aliases for cleaner names (e.g., useSubscriptionsList as useSubscriptions)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/payments/hooks.ts',
+    path: '${paths.packages.shared.src}payments/hooks.ts',
     template: 'templates/hooks.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -87,7 +87,7 @@ export type {
   // Stores - Zustand state management
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/payments/stores.ts',
+    path: '${paths.packages.shared.src}payments/stores.ts',
     template: 'templates/stores.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -102,7 +102,7 @@ export type {
   // Index file for easy imports (from template)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/payments/index.ts',
+    path: '${paths.packages.shared.src}payments/index.ts',
     template: 'templates/index.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -117,7 +117,7 @@ export type {
   // README for the tech stack layer
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/payments/README.md',
+    path: '${paths.packages.shared.src}payments/README.md',
     content: `# Payments Feature - Technology Stack Layer
 
 This directory contains the technology-agnostic stack layer for the Payments feature. These files provide consistent types, validation, data fetching, and state management across all implementations.

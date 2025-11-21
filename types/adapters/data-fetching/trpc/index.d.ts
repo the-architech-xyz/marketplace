@@ -1,20 +1,10 @@
 /**
- * tRPC Client
+ * data-fetching/trpc
  * 
- * End-to-end typesafe APIs with tRPC (wraps TanStack Query)
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface DataFetchingTrpcParams {
-
-  /** Data transformer for complex types (Date, Map, Set) */
-  transformer?: 'superjson' | 'devalue' | 'none';
-
-  /** Abort requests on component unmount */
-  abortOnUnmount?: boolean;
-
-  /** Enable request batching for better performance */
-  batchingEnabled?: boolean;
-}
+export interface DataFetchingTrpcParams {}
 
 export interface DataFetchingTrpcFeatures {}
 

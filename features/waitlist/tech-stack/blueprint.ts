@@ -41,7 +41,7 @@ export default function generateBlueprint(
   // Types - Re-exported from contract (single source of truth)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/waitlist/types.ts',
+    path: '${paths.packages.shared.src}waitlist/types.ts',
     content: `/**
  * Waitlist Types
  * Re-exported from contract for convenience
@@ -64,7 +64,7 @@ export type {
   // Schemas - Zod validation schemas
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/waitlist/schemas.ts',
+    path: '${paths.packages.shared.src}waitlist/schemas.ts',
     template: 'templates/schemas.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -75,7 +75,7 @@ export type {
   // Hooks - Direct TanStack Query hooks (best practice pattern)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/waitlist/hooks.ts',
+    path: '${paths.packages.shared.src}waitlist/hooks.ts',
     template: 'templates/hooks.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -86,7 +86,7 @@ export type {
   // Stores - Zustand state management
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/waitlist/stores.ts',
+    path: '${paths.packages.shared.src}waitlist/stores.ts',
     template: 'templates/stores.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -101,7 +101,7 @@ export type {
   // Index file for easy imports (from template)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/waitlist/index.ts',
+    path: '${paths.packages.shared.src}waitlist/index.ts',
     template: 'templates/index.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,

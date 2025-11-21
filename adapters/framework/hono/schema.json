@@ -1,0 +1,139 @@
+{
+  "id": "hono",
+  "name": "Hono",
+  "description": "Fast, lightweight web framework built on Web Standards",
+  "category": "framework",
+  "version": "4.0.0",
+  "role": "adapter",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "provides": [
+    {
+      "name": "hono",
+      "version": "4.0.0",
+      "description": "Hono web framework"
+    },
+    {
+      "name": "typescript",
+      "version": "5.0.0",
+      "description": "TypeScript language support"
+    }
+  ],
+  "capabilities": {
+    "api-framework": {
+      "version": "4.0.0",
+      "description": "Complete API framework with Hono",
+      "provides": [
+        "hono",
+        "typescript",
+        "api-routes",
+        "middleware",
+        "standalone-server",
+        "edge-runtime"
+      ]
+    },
+    "rendering-modes": {
+      "version": "1.0.0",
+      "description": "API and edge runtime capabilities",
+      "provides": [
+        "api-routes",
+        "edge-functions"
+      ]
+    }
+  },
+  "limitations": "Requires Node.js 18+ or Bun runtime",
+  "paths": {
+    "source_root": "src/",
+    "api": "src/",
+    "routes": "src/routes/",
+    "middleware": "src/middleware/",
+    "lib": "src/lib/",
+    "shared_library": "src/lib/",
+    "utils": "src/lib/utils/",
+    "types": "src/types/",
+    "config": "src/config/",
+    "env": ".env",
+    "scripts": "scripts/",
+    "database_config": "src/lib/db/",
+    "auth_config": "src/lib/auth/",
+    "payment_config": "src/lib/payment/",
+    "email_config": "src/lib/email/",
+    "observability_config": "src/lib/observability/",
+    "state_config": "src/lib/state/",
+    "testing_config": "src/lib/testing/",
+    "deployment_config": "src/lib/deployment/",
+    "content_config": "src/lib/content/",
+    "blockchain_config": "src/lib/blockchain/",
+    "build": "dist/",
+    "dist": "dist/",
+    "docs": "docs/",
+    "readme": "README.md"
+  },
+  "parameters": {
+    "typescript": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable TypeScript support",
+      "required": false
+    },
+    "srcDir": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use src/ directory",
+      "required": false
+    },
+    "port": {
+      "type": "number",
+      "default": 3001,
+      "description": "Port for standalone server",
+      "required": false
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["standalone", "edge", "both"],
+      "default": "standalone",
+      "description": "Runtime mode",
+      "required": false
+    }
+  },
+  "context": {
+    "pathResolution": {
+      "basePaths": {
+        "api": "''",
+        "routes": "''routes/",
+        "middleware": "''middleware/",
+        "lib": "''lib/",
+        "shared_library": "''lib/",
+        "scripts": "''scripts",
+        "build": "./dist",
+        "dist": "./dist"
+      },
+      "parameterBased": {
+        "srcDir": "srcDir ? 'src/' : ''"
+      }
+    },
+    "environment": {
+      "default": {
+        "API_URL": "http://localhost:3001",
+        "NODE_ENV": "development",
+        "API_PORT": "3001"
+      },
+      "frameworkSpecific": {
+        "API_PORT": "{{port || 3001}}"
+      }
+    },
+    "conventions": {
+      "fileExtensions": [
+        ".ts",
+        ".js"
+      ],
+      "importStyle": "relative",
+      "apiExtensions": [
+        ".ts",
+        ".js"
+      ]
+    }
+  },
+  "constraints": {}
+}
+

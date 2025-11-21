@@ -19,56 +19,56 @@ export const gitBlueprint: Blueprint = {
     // Create Git client configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/git/config.ts',
+      path: '${paths.packages.shared.src}/git/config.ts',
       template: 'templates/git-config.ts.tpl',
     },
     
     // Create main Git client
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/git/client.ts',
+      path: '${paths.packages.shared.src}/git/client.ts',
       template: 'templates/git-client.ts.tpl',
     },
     
     // Create repository operations
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/git/repository.ts',
+      path: '${paths.packages.shared.src}/git/repository.ts',
       template: 'templates/git-repository.ts.tpl',
     },
     
     // Create commit operations
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/git/commits.ts',
+      path: '${paths.packages.shared.src}/git/commits.ts',
       template: 'templates/git-commits.ts.tpl',
     },
     
     // Create branch operations
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/git/branches.ts',
+      path: '${paths.packages.shared.src}/git/branches.ts',
       template: 'templates/git-branches.ts.tpl',
     },
     
     // Create remote operations
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/git/remotes.ts',
+      path: '${paths.packages.shared.src}/git/remotes.ts',
       template: 'templates/git-remotes.ts.tpl',
     },
     
     // Create types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/git/types.ts',
+      path: '${paths.packages.shared.src}/git/types.ts',
       template: 'templates/git-types.ts.tpl',
     },
     
     // Create main index file
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/git/index.ts',
+      path: '${paths.packages.shared.src}/git/index.ts',
       template: 'templates/git-index.ts.tpl',
     },
     

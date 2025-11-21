@@ -1,0 +1,159 @@
+{
+  "id": "features/payments/backend/stripe-nextjs",
+  "name": "Payments Backend (Stripe + Next.js)",
+  "description": "Complete payments backend with Stripe integration for Next.js, including organization billing, subscriptions, and usage tracking",
+  "type": "feature",
+  "version": "1.0.0",
+  "requires": [
+    "framework/nextjs",
+    "adapters/payment/stripe",
+    "features/payments/tech-stack"
+  ],
+  "requiresCapabilities": [
+    {
+      "category": "auth",
+      "optional": false,
+      "reason": "Link payments, subscriptions, invoices, and billing to authenticated users and organizations"
+    },
+    {
+      "category": "database",
+      "optional": false,
+      "reason": "Store payment data, subscriptions, invoices, and usage tracking"
+    }
+  ],
+  "provides": [
+    "payments-backend-stripe",
+    "payments-api-routes",
+    "organization-billing",
+    "seat-management",
+    "usage-tracking",
+    "payment-webhooks"
+  ],
+  "role": "backend-feature",
+  "pattern": "custom-logic",
+  "contract": {
+    "hooks": {
+      "usePayments": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useSubscriptions": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useBilling": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useWebhooks": {
+        "parameters": [],
+        "returnType": "unknown",
+        "isAsync": true,
+        "isMutation": false,
+        "isQuery": true
+      }
+    },
+    "types": {
+      "PaymentStatus": {
+        "definition": "| 'pending' | 'processing' | 'succeeded' | 'failed' | 'canceled' | 'refunded'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "SubscriptionStatus": {
+        "definition": "| 'active' | 'canceled' | 'incomplete' | 'incomplete_expired' | 'past_due' | 'trialing' | 'unpaid'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "PaymentIntent": {
+        "definition": "export interface PaymentIntent {\n  id: string;\n  amount: number;\n  currency: string;\n  status: PaymentStatus;\n  clientSecret: string;\n  metadata?: Record<string, any>;\n  createdAt: string;\n  updatedAt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "Subscription": {
+        "definition": "export interface Subscription {\n  id: string;\n  organizationId: string;\n  status: SubscriptionStatus;\n  currentPeriodStart: string;\n  currentPeriodEnd: string;\n  cancelAtPeriodEnd: boolean;\n  canceledAt?: string;\n  metadata?: Record<string, any>;\n  createdAt: string;\n  updatedAt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "OrganizationBilling": {
+        "definition": "export interface OrganizationBilling {\n  id: string;\n  organizationId: string;\n  customerId: string;\n  subscriptionId?: string;\n  seats: number;\n  usedSeats: number;\n  billingCycle: 'monthly' | 'yearly';\n  status: 'active' | 'inactive' | 'past_due';\n  metadata?: Record<string, any>;\n  createdAt: string;\n  updatedAt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      }
+    }
+  },
+  "capabilities": {
+    "organization-billing": {
+      "enabled": true,
+      "features": {
+        "subscriptions": true,
+        "seats": true,
+        "usage-tracking": true,
+        "webhooks": true,
+        "permissions": true
+      }
+    },
+    "payment-processing": {
+      "enabled": true,
+      "features": {
+        "payment-intents": true,
+        "checkout-sessions": true,
+        "refunds": true,
+        "payment-methods": true
+      }
+    }
+  },
+  "parameters": {
+    "features": {
+      "organizationBilling": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable organization-level billing features"
+      },
+      "seats": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable seat-based billing"
+      },
+      "usage": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable usage-based billing"
+      },
+      "webhooks": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable Stripe webhook handling"
+      },
+      "seatManagement": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable seat-based billing"
+      },
+      "usageTracking": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable usage-based billing tracking"
+      }
+    }
+  },
+  "prerequisites": [
+    "adapters/auth/better-auth",
+    "adapters/database/drizzle",
+    "features/payments/tech-stack",
+    "framework/nextjs"
+  ]
+}

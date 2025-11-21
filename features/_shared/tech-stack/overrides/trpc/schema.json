@@ -1,0 +1,18 @@
+{
+  "id": "features/_shared/tech-stack/overrides/trpc",
+  "name": "Shared tRPC Override",
+  "description": "Shared tRPC override for all features that support it",
+  "type": "feature",
+  "version": "1.0.0",
+  "role": "tech-stack-override",
+  "pattern": "override",
+  "requires": ["data-fetching/trpc"],
+  "provides": ["trpc-hooks-shared"],
+  "parameters": {
+    "routerPath": {
+      "type": "string",
+      "description": "Path to tRPC router",
+      "default": "${paths.packages.shared.src}/trpc/router.ts"
+    }
+  }
+}

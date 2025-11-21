@@ -17,7 +17,7 @@ export default function generateBlueprint(
     // Core SEO configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}seo/config.ts',
+      path: '${paths.packages.shared.src}seo/config.ts',
       template: 'templates/config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -28,7 +28,7 @@ export default function generateBlueprint(
     // SEO types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}seo/types.ts',
+      path: '${paths.packages.shared.src}seo/types.ts',
       template: 'templates/types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -39,7 +39,7 @@ export default function generateBlueprint(
     // SEO utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}seo/utils.ts',
+      path: '${paths.packages.shared.src}seo/utils.ts',
       template: 'templates/utils.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -52,7 +52,7 @@ export default function generateBlueprint(
   if (features?.structuredData !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}seo/structured-data.ts',
+      path: '${paths.packages.shared.src}seo/structured-data.ts',
       template: 'templates/structured-data.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -65,7 +65,7 @@ export default function generateBlueprint(
   if (features?.metadataHelpers !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}seo/metadata-helpers.ts',
+      path: '${paths.packages.shared.src}seo/metadata-helpers.ts',
       template: 'templates/metadata-helpers.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -76,6 +76,32 @@ export default function generateBlueprint(
 
   return actions;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,20 +1,10 @@
 /**
- * Zustand NextJS Connector
+ * connectors/infrastructure/zustand-nextjs
  * 
- * Zustand state management setup and configuration for NextJS applications
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
-export interface ConnectorsInfrastructureZustandNextjsParams {
-
-  /** State persistence support */
-  persistence?: boolean;
-
-  /** Zustand DevTools integration */
-  devtools?: boolean;
-
-  /** Server-side rendering support */
-  ssr?: boolean;
-}
+export interface ConnectorsInfrastructureZustandNextjsParams {}
 
 export interface ConnectorsInfrastructureZustandNextjsFeatures {}
 

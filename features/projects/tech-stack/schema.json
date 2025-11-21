@@ -1,0 +1,68 @@
+{
+  "id": "features/projects/tech-stack",
+  "name": "Projects Tech Stack Layer",
+  "description": "Technology-agnostic stack layer for Projects feature",
+  "type": "feature",
+  "version": "1.0.0",
+  "category": "tech-stack",
+  "provides": [
+    "projects-schemas",
+    "projects-stores",
+    "projects-hooks"
+  ],
+  "role": "tech-stack-layer",
+  "pattern": "custom-logic",
+  "blueprint": "./blueprint.ts",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "featureName": {
+        "type": "string",
+        "description": "The name of the feature",
+        "default": "projects"
+      },
+      "featurePath": {
+        "type": "string",
+        "description": "The path to the feature",
+        "default": "projects"
+      },
+      "hasTypes": {
+        "type": "boolean",
+        "description": "Whether to generate TypeScript types",
+        "default": true
+      },
+      "hasSchemas": {
+        "type": "boolean",
+        "description": "Whether to generate Zod schemas",
+        "default": true
+      },
+      "hasHooks": {
+        "type": "boolean",
+        "description": "Whether to generate TanStack Query hooks",
+        "default": true
+      },
+      "hasStores": {
+        "type": "boolean",
+        "description": "Whether to generate Zustand stores",
+        "default": true
+      }
+    },
+    "required": [
+      "featureName",
+      "featurePath"
+    ]
+  },
+  "dependencies": {
+    "direct": [
+      "zod",
+      "@tanstack/react-query",
+      "zustand",
+      "immer"
+    ]
+  },
+  "devDependencies": [
+    "@types/node",
+    "typescript"
+  ]
+}
+

@@ -34,28 +34,28 @@ const blueprint: Blueprint = {
     // Create data extractor utility
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}welcome/data-extractor.ts',
+      path: '${paths.packages.shared.src}welcome/data-extractor.ts',
       template: 'templates/data-extractor.ts.tpl'
     },
 
     // Create TypeScript types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}welcome/types.ts',
+      path: '${paths.packages.shared.src}welcome/types.ts',
       template: 'templates/types.ts.tpl'
     },
 
     // Create index export
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}welcome/index.ts',
+      path: '${paths.packages.shared.src}welcome/index.ts',
       template: 'templates/index.ts.tpl'
     },
 
     // Create project analyzer (alias for data-extractor for UI compatibility)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}project-analyzer.ts',
+      path: '${paths.packages.shared.src}project-analyzer.ts',
       template: 'templates/project-analyzer.ts.tpl'
     },
 
@@ -67,7 +67,7 @@ const blueprint: Blueprint = {
     // Main welcome page - replaces default route page
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}page.tsx',
+      path: '${paths.apps.web.app}page.tsx',
       template: 'ui/architech-welcome/welcome-page.tsx.tpl',
       overwrite: true
     },
@@ -75,35 +75,35 @@ const blueprint: Blueprint = {
     // Welcome layout component
     {
       type: BlueprintActionType.CREATE_FILE,  
-      path: '${paths.components}welcome/welcome-layout.tsx',
+      path: '${paths.apps.web.components}welcome/welcome-layout.tsx',
       template: 'ui/architech-welcome/welcome-layout.tsx.tpl'
     },
 
     // Component showcase
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}welcome/component-showcase.tsx',  
+      path: '${paths.apps.web.components}welcome/component-showcase.tsx',  
       template: 'ui/architech-welcome/component-showcase.tsx.tpl'
     },
 
     // Tech stack card
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}welcome/tech-stack-card.tsx',
+      path: '${paths.apps.web.components}welcome/tech-stack-card.tsx',
       template: 'ui/architech-welcome/tech-stack-card.tsx.tpl'
     },
 
     // Project structure component
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}welcome/project-structure.tsx',
+      path: '${paths.apps.web.components}welcome/project-structure.tsx',
       template: 'ui/architech-welcome/project-structure.tsx.tpl'
     },
 
     // Quick start guide
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}welcome/quick-start-guide.tsx',
+      path: '${paths.apps.web.components}welcome/quick-start-guide.tsx',
       template: 'ui/architech-welcome/quick-start-guide.tsx.tpl'
     }
   ]

@@ -17,10 +17,10 @@ export default function generateBlueprint(
     // Note: posthog-js is already installed by the adapter
     // React bindings are included in posthog-js
     
-    // Create PostHogProvider component
+    // Create PostHogProvider component - ALL FRONTEND (PostHog works on React Native)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}analytics/PostHogProvider.tsx',
+      path: '${paths.apps.frontend.components}analytics/PostHogProvider.tsx',
       template: 'templates/provider.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -31,7 +31,7 @@ export default function generateBlueprint(
     // Create main PostHog hook
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-posthog.ts',
+      path: '${paths.packages.shared.src.hooks}use-posthog.ts',
       template: 'templates/use-posthog.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -44,7 +44,7 @@ export default function generateBlueprint(
   if (params?.eventTracking !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-analytics.ts',
+      path: '${paths.packages.shared.src.hooks}use-analytics.ts',
       template: 'templates/use-analytics.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -56,7 +56,7 @@ export default function generateBlueprint(
     if (params?.capturePageviews !== false) {
       actions.push({
         type: BlueprintActionType.CREATE_FILE,
-        path: '${paths.hooks}use-pageview.ts',
+        path: '${paths.packages.shared.src.hooks}use-pageview.ts',
         template: 'templates/use-pageview.ts.tpl',
         conflictResolution: {
           strategy: ConflictResolutionStrategy.SKIP,
@@ -70,7 +70,7 @@ export default function generateBlueprint(
   if (params?.featureFlags === true) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-feature-flags.ts',
+      path: '${paths.packages.shared.src.hooks}use-feature-flags.ts',
       template: 'templates/use-feature-flags.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -83,7 +83,7 @@ export default function generateBlueprint(
   if (params?.experiments === true) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-experiments.ts',
+      path: '${paths.packages.shared.src.hooks}use-experiments.ts',
       template: 'templates/use-experiments.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -96,7 +96,7 @@ export default function generateBlueprint(
   if (params?.middleware === true) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.middleware}posthog.ts',
+      path: '${paths.apps.web.middleware}posthog.ts',
       template: 'templates/middleware.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -109,7 +109,7 @@ export default function generateBlueprint(
   if (params?.provider !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.docs}posthog-integration.md',
+      path: '${paths.workspace.docs}posthog-integration.md',
       template: 'templates/layout-integration.md.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,

@@ -14,36 +14,23 @@ import { TypedMergedConfiguration } from '../../types/blueprint-config-types.js'
 export default function generateBlueprint(
   config: TypedMergedConfiguration<'connectors/nextjs-trpc-router'>
 ): BlueprintAction[] {
-  // For now, assume single app structure
-  // TODO: Add monorepo detection logic
-  const isMonorepo = false;
-  
   const actions: BlueprintAction[] = [];
 
-  // Determine router location
-  const routerPath = isMonorepo
-    ? '${paths.api}/src/router.ts'
-    : '${paths.server}/trpc/router.ts';
-
-  // Generate tRPC router
+  // Generate tRPC router - BACKEND SERVER (resolves to apps.api.src or apps.web.server)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: routerPath,
-    template: isMonorepo ? 'templates/monorepo-router.ts.tpl' : 'templates/router.ts.tpl',
+    path: '${paths.apps.backend.server}trpc/router.ts',
+    template: 'templates/router.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
       priority: 0
     }
   });
 
-  // Generate Next.js API route handler
-  const apiRoutePath = isMonorepo
-    ? '${paths.web}/app/api/trpc/[trpc]/route.ts'
-    : '${paths.app}/api/trpc/[trpc]/route.ts';
-
+  // Generate Next.js API route handler - BACKEND API (resolves to apps.api.routes or apps.web.app/api)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: apiRoutePath,
+    path: '${paths.apps.backend.api}trpc/[trpc]/route.ts',
     template: 'templates/api-route.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,

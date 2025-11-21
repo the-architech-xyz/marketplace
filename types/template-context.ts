@@ -82,5 +82,49 @@ export interface ProjectContext extends BaseProjectContext {
       [framework: string]: string;
     };
   };
+
+  // PathResolver removed - paths are now stored in correct format
+  // Use pathHandler.resolveTemplate() directly
+  
+  /**
+   * Frontend apps information for multi-app routing
+   * Used for auto-generating route wrappers in monorepo setups
+   */
+  frontendApps?: Array<{
+    type: 'web' | 'mobile';
+    package: string;
+    framework: string;
+  }>;
+  
+  /**
+   * Helper flags for multi-app detection
+   */
+  hasMultipleFrontendApps?: boolean;
+  hasWebApp?: boolean;
+  hasMobileApp?: boolean;
+  
+  /**
+   * Package path for monorepo (e.g., 'packages/shared')
+   * Added during context enrichment in OrchestratorAgent
+   */
+  targetPackage?: string;
+  
+  /**
+   * Module parameters (alias for module.parameters)
+   * Always present after enrichment
+   */
+  params: Record<string, unknown>;
+  
+  /**
+   * Platform flags for UI adapters
+   * Always present after enrichment
+   */
+  platforms: { web: boolean; mobile: boolean };
+  
+  /**
+   * UI theme variant
+   * Conditionally added if module has theme parameter
+   */
+  theme?: string;
 }
 

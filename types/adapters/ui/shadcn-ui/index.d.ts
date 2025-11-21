@@ -1,17 +1,10 @@
 /**
- * Shadcn/ui
+ * ui/shadcn-ui
  * 
- * Beautifully designed components built with Radix UI and Tailwind CSS
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface UiShadcnUiParams {
-
-  /** UI theme variant */
-  theme?: 'default' | 'dark' | 'light' | 'minimal';
-
-  /** Components to install (comprehensive set by default) */
-  components?: Array<'alert' | 'alert-dialog' | 'accordion' | 'avatar' | 'badge' | 'button' | 'calendar' | 'card' | 'carousel' | 'checkbox' | 'collapsible' | 'context-menu' | 'dialog' | 'dropdown-menu' | 'form' | 'hover-card' | 'input' | 'label' | 'menubar' | 'navigation-menu' | 'pagination' | 'popover' | 'progress' | 'radio-group' | 'scroll-area' | 'separator' | 'sheet' | 'slider' | 'sonner' | 'switch' | 'table' | 'tabs' | 'textarea' | 'toggle' | 'toggle-group'>;
-}
+export interface UiShadcnUiParams {}
 
 export interface UiShadcnUiFeatures {}
 

@@ -1,0 +1,52 @@
+{
+  "id": "payments/backend/revenuecat",
+  "name": "RevenueCat Webhook Integration",
+  "description": "Minimal webhook handler for syncing RevenueCat subscription data to your standardized database. Enables seamless integration with auth, emailing, and analytics capabilities.",
+  "type": "feature",
+  "category": "payments",
+  "role": "backend-feature",
+  "pattern": "custom-logic",
+  "version": "7.0.0",
+  "dependencies": [],
+  "requiresCapabilities": [
+    {
+      "category": "database",
+      "optional": false,
+      "reason": "Sync subscription data to payment_subscriptions table"
+    },
+    {
+      "category": "auth",
+      "optional": false,
+      "reason": "Map RevenueCat users to your auth system"
+    }
+  ],
+  "provides": [
+    "revenuecat-webhook",
+    "user-mapping"
+  ],
+  "capabilities": {
+    "payment-sync": {
+      "version": "7.0.0",
+      "description": "Sync RevenueCat subscriptions to unified database",
+      "provides": [
+        "webhook-processing",
+        "database-sync",
+        "auth-integration",
+        "email-triggers"
+      ]
+    }
+  },
+  "parameters": {
+    "webhookSecret": {
+      "type": "string",
+      "description": "RevenueCat webhook secret for HMAC verification",
+      "required": true,
+      "sensitive": true
+    }
+  },
+  "contract": {
+    "hooks": [],
+    "types": []
+  }
+}
+

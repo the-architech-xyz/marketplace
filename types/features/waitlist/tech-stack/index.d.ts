@@ -1,17 +1,10 @@
 /**
- * waitlist-tech-stack
+ * features/waitlist/tech-stack
  * 
- * Technology-agnostic stack layer for Waitlist feature
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
-export interface FeaturesWaitlistTechStackParams {
-
-  type: any;
-
-  properties: any;
-
-  required: any;
-}
+export interface FeaturesWaitlistTechStackParams {}
 
 export interface FeaturesWaitlistTechStackFeatures {}
 

@@ -4,6 +4,21 @@ This directory contains all the scripts for the Architech marketplace, organized
 
 ## 📁 Directory Structure
 
+### `cli.ts` - Unified Entry Point
+Single entry point for marketplace operations:
+- `tsx scripts/cli.ts validate [--templates --contracts --all]`
+- `tsx scripts/cli.ts generate [--types --manifest --all]`
+- `tsx scripts/cli.ts build [--check|--build|--all]`
+- `tsx scripts/cli.ts utilities <target>`
+
+### `/lib/` - Shared Helpers
+Reusable building blocks shared across scripts:
+
+- **`manifest.ts`** - Common functions for blueprint/template discovery used by manifest generators.
+- **`cli-utils.ts`** - Lightweight argument parsing helpers for the CLI wrapper.
+- **`run-script.ts`** - Utility to execute existing scripts with consistent logging.
+- **`blueprint.ts`** - Blueprint discovery and parsing helpers.
+
 ### `/validation/` - Validation Scripts
 Scripts that validate the marketplace integrity and compliance:
 
@@ -11,7 +26,6 @@ Scripts that validate the marketplace integrity and compliance:
 - **`validate-templates.ts`** - Template existence and syntax validation
 - **`validate-conflict-resolution.ts`** - Conflict resolution validation
 - **`validate-contract-correctness.ts`** - Contract compliance validation
-- **`validate-comprehensive.ts`** - Runs all validation checks
 - **`validate-blueprint-actions.ts`** - Blueprint actions validation
 - **`validate-blueprint-issues.ts`** - Common blueprint issues detection
 - **`validate-blueprint-paths.ts`** - Blueprint path variables validation
@@ -23,18 +37,20 @@ Scripts that generate types, manifests, and other artifacts:
 - **`generate-constitutional-types-cli.ts`** - CLI for type generation
 - **`generate-constitutional-types.ts`** - Core type generation logic
 - **`generate-constitutional-types-helpers.ts`** - Type generation utilities
-- **`generate-capability-types.ts`** - Capability type generation
 - **`generate-feature-manifests.ts`** - Feature manifest generation
 - **`generate-marketplace-manifest.ts`** - Marketplace manifest generation
-- **`generate-schemas-from-contracts.ts`** - Schema generation from contracts
+- **`generate-capability-first-manifest.ts`** - Capability-first manifest generator
 
 ### `/utilities/` - Utility Scripts
 Helper scripts and utilities:
 
+- **`analyze-template-blueprint-consistency.ts`** - Cross-check template usage
 - **`blueprint-parser.ts`** - Blueprint file parsing and analysis
-- **`fix-conflict-resolution.ts`** - Automatic conflict resolution fixing
-- **`smart-architecture-validator.ts`** - Architecture validation utilities
+- **`module-id-extractor.ts`** - Derive module IDs from file paths
+- **`schema-loader.ts`** - Shared JSON schema loader
 - **`template-path-resolver.ts`** - Template path resolution utilities
+- **`ui-marketplace-discovery.ts`** - Locate UI marketplace overlays
+- **`ui-param-filter.ts`** - Filter UI parameters for capability genomes
 
 ## 🚀 Usage
 
@@ -47,7 +63,8 @@ npm run validate:all
 npm run validate:blueprints
 npm run validate:templates
 npm run validate:contracts
-npm run validate:comprehensive
+# Run comprehensive pass (alias for --all)
+npm run validate -- --comprehensive
 ```
 
 ### Generation
@@ -72,18 +89,18 @@ npm run fix:conflicts
 ## 📋 Script Categories
 
 ### Core Validation
-- **Blueprint Structure**: Validates blueprint syntax and structure
+- **Blueprint Structure**: Validates blueprint syntax and structure (`cli validate --blueprints`)
 - **Template Integrity**: Ensures all templates exist and are valid
 - **Contract Compliance**: Validates feature contracts against implementations
 - **Conflict Resolution**: Checks for proper conflict handling
 
 ### Type Generation
-- **Constitutional Types**: Generates TypeScript types for the Constitutional Architecture
+- **Constitutional Types**: Generates TypeScript types for the Constitutional Architecture (`cli generate --types`)
 - **Module Parameters**: Creates type-safe parameter interfaces
 - **Genome Types**: Generates genome definition types with autocompletion
 
 ### Manifest Generation
-- **Marketplace Manifest**: Creates the main marketplace index
+- **Marketplace Manifest**: Creates the main marketplace index (`cli generate --manifest`)
 - **Feature Manifests**: Generates individual feature manifests
 - **Capability Types**: Creates capability type definitions
 

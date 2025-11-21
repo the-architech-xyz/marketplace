@@ -1,20 +1,10 @@
 /**
- * GitHub API
+ * services/github-api
  * 
- * GitHub API client for repository management and operations
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface ServicesGithubApiParams {
-
-  /** GitHub Personal Access Token or OAuth access token */
-  token: string;
-
-  /** GitHub API base URL (for GitHub Enterprise) */
-  baseUrl?: string;
-
-  /** User agent string for API requests */
-  userAgent?: string;
-}
+export interface ServicesGithubApiParams {}
 
 export interface ServicesGithubApiFeatures {}
 

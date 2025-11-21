@@ -41,7 +41,7 @@ export default function generateBlueprint(
   // Types - Re-exported from contract (single source of truth)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/ai-chat/types.ts',
+    path: '${paths.packages.shared.src}ai-chat/types.ts',
     content: `/**
  * AI Chat Types
  * Re-exported from contract for convenience
@@ -62,7 +62,7 @@ export type {
   // Schemas - Zod validation schemas
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/ai-chat/schemas.ts',
+    path: '${paths.packages.shared.src}ai-chat/schemas.ts',
     template: 'templates/schemas.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -73,7 +73,7 @@ export type {
   // Hooks - Direct TanStack Query hooks (best practice pattern)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/ai-chat/hooks.ts',
+    path: '${paths.packages.shared.src}ai-chat/hooks.ts',
     template: 'templates/hooks.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -84,7 +84,7 @@ export type {
   // Stores - Zustand state management
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/ai-chat/stores.ts',
+    path: '${paths.packages.shared.src}ai-chat/stores.ts',
     template: 'templates/stores.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -99,7 +99,7 @@ export type {
   // Index file for easy imports (from template)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/ai-chat/index.ts',
+    path: '${paths.packages.shared.src}ai-chat/index.ts',
     template: 'templates/index.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,

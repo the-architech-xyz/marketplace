@@ -1,41 +1,12 @@
 /**
- * Waitlist Database Layer (Drizzle)
+ * features/waitlist/database/drizzle
  * 
- * Database schema for waitlist feature with viral referral system using Drizzle ORM. Stores users, referrals, and analytics.
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
-export interface FeaturesWaitlistDatabaseDrizzleParams {
-  /** Constitutional Architecture features configuration */
-  features?: {
+export interface FeaturesWaitlistDatabaseDrizzleParams {}
 
-    /** Enable viral referral system */
-    viralReferral?: boolean;
-
-    /** Enable position tracking in waitlist */
-    positionTracking?: boolean;
-
-    /** Enable referral bonus system */
-    bonusSystem?: boolean;
-
-    /** Enable analytics tracking */
-    analytics?: boolean;
-  };
-}
-
-export interface FeaturesWaitlistDatabaseDrizzleFeatures {
-
-  /** Enable viral referral system */
-  viralReferral: boolean;
-
-  /** Enable position tracking in waitlist */
-  positionTracking: boolean;
-
-  /** Enable referral bonus system */
-  bonusSystem: boolean;
-
-  /** Enable analytics tracking */
-  analytics: boolean;
-}
+export interface FeaturesWaitlistDatabaseDrizzleFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesWaitlistDatabaseDrizzleArtifacts: {

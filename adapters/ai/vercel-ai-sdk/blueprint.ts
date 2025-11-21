@@ -57,7 +57,7 @@ export default function generateBlueprint(
   // SDK Configuration (ONLY)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/ai/config.ts',
+    path: '${paths.packages.shared.src}ai/config.ts',
     template: 'templates/ai-config.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -68,7 +68,7 @@ export default function generateBlueprint(
   // SDK Client Instances (ONLY)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/ai/client.ts',
+    path: '${paths.packages.shared.src}ai/client.ts',
     template: 'templates/ai-client.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -79,7 +79,7 @@ export default function generateBlueprint(
   // Types (ONLY)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/ai/types.ts',
+    path: '${paths.packages.shared.src}ai/types.ts',
     template: 'templates/ai-types.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,

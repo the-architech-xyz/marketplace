@@ -1,44 +1,12 @@
 /**
- * Docker Deployment
+ * deployment/docker
  * 
- * Containerization and deployment setup with Docker
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface DeploymentDockerParams {
+export interface DeploymentDockerParams {}
 
-  /** Node.js version for Docker image */
-  nodeVersion?: string;
-
-  /** Enable production optimizations */
-  optimization?: boolean;
-
-  /** Enable health check endpoint */
-  healthCheck?: boolean;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable development environment */
-    development?: boolean;
-
-    /** Enable production environment */
-    production?: boolean;
-
-    /** Enable docker-compose setup */
-    compose?: boolean;
-  };
-}
-
-export interface DeploymentDockerFeatures {
-
-  /** Enable development environment */
-  development: boolean;
-
-  /** Enable production environment */
-  production: boolean;
-
-  /** Enable docker-compose setup */
-  compose: boolean;
-}
+export interface DeploymentDockerFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const DeploymentDockerArtifacts: {

@@ -72,9 +72,11 @@ export default function generateBlueprint(
   }
 
   // Better Auth server configuration
+  // Use packages.auth.src (from recipe book targetPackage: "auth")
+  // Renamed to server.ts for generic naming (matches exports)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.auth_config}/better-auth.ts',
+    path: '${paths.packages.auth.src}server.ts',
     template: 'templates/better-auth-config.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -83,9 +85,10 @@ export default function generateBlueprint(
   });
 
   // Better Auth client (React)
+  // Renamed to client.ts for generic naming (matches exports)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.auth_config}/better-auth-client.ts',
+    path: '${paths.packages.auth.src}client.ts',
     template: 'templates/better-auth-client.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,
@@ -96,7 +99,7 @@ export default function generateBlueprint(
   // Type definitions
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.auth_config}/types.ts',
+    path: '${paths.packages.auth.src}types.ts',
     template: 'templates/types.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.REPLACE,

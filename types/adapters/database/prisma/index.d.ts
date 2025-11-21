@@ -1,23 +1,10 @@
 /**
- * Prisma ORM
+ * database/prisma
  * 
- * Next-generation ORM for Node.js and TypeScript
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface DatabasePrismaParams {
-
-  /** Database provider */
-  provider?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
-
-  /** Enable Prisma Studio */
-  studio?: boolean;
-
-  /** Enable database migrations */
-  migrations?: boolean;
-
-  /** Database type */
-  databaseType?: 'postgresql' | 'mysql' | 'sqlite' | 'mongodb';
-}
+export interface DatabasePrismaParams {}
 
 export interface DatabasePrismaFeatures {}
 

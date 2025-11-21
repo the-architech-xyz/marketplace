@@ -1,17 +1,10 @@
 /**
- * Turborepo
+ * monorepo/turborepo
  * 
- * High-performance build system for JavaScript/TypeScript monorepos with intelligent caching and task orchestration
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface MonorepoTurborepoParams {
-
-  /** Package manager (npm, yarn, pnpm, bun) */
-  packageManager?: string;
-
-  /** Enable remote caching with Vercel */
-  remoteCaching?: boolean;
-}
+export interface MonorepoTurborepoParams {}
 
 export interface MonorepoTurborepoFeatures {}
 

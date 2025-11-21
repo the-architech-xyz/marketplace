@@ -1,0 +1,102 @@
+{
+  "id": "tamagui",
+  "name": "Tamagui UI Library",
+  "description": "Universal React component library for web and mobile with design tokens and theming",
+  "category": "ui",
+  "version": "1.0.0",
+  "role": "adapter",
+  "blueprint": "blueprint.ts",
+  "provides": [
+    {
+      "name": "tamagui",
+      "version": "latest",
+      "description": "Tamagui universal component library"
+    },
+    {
+      "name": "@tamagui/core",
+      "version": "^1.0.0",
+      "description": "Tamagui core styling engine"
+    },
+    {
+      "name": "@tamagui/config",
+      "version": "^1.0.0",
+      "description": "Tamagui configuration and design tokens"
+    }
+  ],
+  "prerequisites": {
+    "capabilities": [
+      {
+        "name": "react",
+        "version": ">=18.0.0",
+        "description": "React library required"
+      },
+      {
+        "name": "typescript",
+        "version": ">=4.0.0",
+        "description": "TypeScript support required"
+      }
+    ]
+  },
+  "capabilities": {
+    "ui-components": {
+      "version": "1.0.0",
+      "description": "Universal React components for web and mobile",
+      "provides": [
+        "components",
+        "cross-platform",
+        "design-tokens",
+        "theming",
+        "typescript",
+        "production-ready"
+      ]
+    },
+    "styling-system": {
+      "version": "1.0.0",
+      "description": "Complete styling and theming system",
+      "provides": [
+        "design-tokens",
+        "theming",
+        "theme-switching",
+        "animations",
+        "responsive"
+      ]
+    },
+    "platform-support": {
+      "version": "1.0.0",
+      "description": "Multi-platform support",
+      "provides": [
+        "web",
+        "mobile",
+        "react-native"
+      ]
+    }
+  },
+  "limitations": "Requires React framework. For Next.js, use connector tamagui-nextjs. For Expo, use connector tamagui-expo.",
+  "parameters": {
+    "theme": {
+      "type": "string",
+      "default": "default",
+      "description": "UI theme variant",
+      "required": false,
+      "options": [
+        "default",
+        "dark",
+        "light"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable web platform support"
+      },
+      "mobile": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable mobile/React Native platform support"
+      }
+    }
+  },
+  "constraints": {}
+}
+

@@ -1,68 +1,12 @@
 /**
- * Teams Management Feature (Shadcn)
+ * features/teams-management/frontend
  * 
- * Complete team management UI using Shadcn components
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
-export interface FeaturesTeamsManagementFrontendParams {
-  /** Constitutional Architecture features configuration */
-  features?: {
+export interface FeaturesTeamsManagementFrontendParams {}
 
-    /** Basic team management (list, creation, member management) */
-    core?: boolean;
-
-    /** Enable team management UI */
-    teams?: boolean;
-
-    /** Enable member management UI */
-    members?: boolean;
-
-    /** Enable team invitations UI */
-    invitations?: boolean;
-
-    /** Enable role management UI */
-    roles?: boolean;
-
-    /** Team billing and usage tracking */
-    billing?: boolean;
-
-    /** Team analytics and reporting */
-    analytics?: boolean;
-
-    /** Advanced team features (settings, permissions, dashboard) */
-    advanced?: boolean;
-  };
-
-  /** UI theme variant */
-  theme?: 'default' | 'dark' | 'light' | 'minimal';
-}
-
-export interface FeaturesTeamsManagementFrontendFeatures {
-
-  /** Basic team management (list, creation, member management) */
-  core: boolean;
-
-  /** Enable team management UI */
-  teams: boolean;
-
-  /** Enable member management UI */
-  members: boolean;
-
-  /** Enable team invitations UI */
-  invitations: boolean;
-
-  /** Enable role management UI */
-  roles: boolean;
-
-  /** Team billing and usage tracking */
-  billing: boolean;
-
-  /** Team analytics and reporting */
-  analytics: boolean;
-
-  /** Advanced team features (settings, permissions, dashboard) */
-  advanced: boolean;
-}
+export interface FeaturesTeamsManagementFrontendFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesTeamsManagementFrontendArtifacts: {

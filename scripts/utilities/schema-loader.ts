@@ -1,7 +1,8 @@
 /**
  * Schema Loader Utility
  * 
- * Centralized utility for loading JSON schema files (adapter.json, feature.json, connector.json).
+ * Centralized utility for loading JSON schema files (schema.json).
+ * All modules use schema.json regardless of type (adapter, connector, feature).
  * Single source of truth for schema loading across all marketplace scripts.
  * 
  * Reused from: ConstitutionalTypeGeneratorHelpers.loadConstitutionalSchema()
@@ -13,14 +14,14 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 /**
- * Load JSON schema file (adapter.json, feature.json, connector.json)
+ * Load JSON schema file (schema.json)
  * 
  * @param filePath - Full path to the JSON schema file
  * @returns Parsed JSON object or empty object if file doesn't exist or is invalid
  * 
  * @example
  * ```typescript
- * const adapterSchema = loadSchema('/path/to/adapters/auth/better-auth/adapter.json');
+ * const schema = loadSchema('/path/to/adapters/auth/better-auth/schema.json');
  * ```
  */
 export function loadSchema(filePath: string): any {
@@ -58,17 +59,18 @@ export function loadModuleSchema(
 ): any {
   let schemaPath: string;
   
+  // All modules use schema.json (standardized naming)
   if (moduleType === 'adapter') {
-    // adapters/auth/better-auth -> adapters/auth/better-auth/adapter.json
-    schemaPath = path.join(marketplacePath, 'adapters', moduleId, 'adapter.json');
+    // adapters/auth/better-auth -> adapters/auth/better-auth/schema.json
+    schemaPath = path.join(marketplacePath, 'adapters', moduleId, 'schema.json');
   } else if (moduleType === 'connector') {
-    // connectors/auth/better-auth-nextjs -> connectors/auth/better-auth-nextjs/connector.json
+    // connectors/auth/better-auth-nextjs -> connectors/auth/better-auth-nextjs/schema.json
     const connectorPath = moduleId.replace(/^connectors\//, '');
-    schemaPath = path.join(marketplacePath, 'connectors', connectorPath, 'connector.json');
+    schemaPath = path.join(marketplacePath, 'connectors', connectorPath, 'schema.json');
   } else if (moduleType === 'feature') {
-    // features/auth/frontend -> features/auth/frontend/feature.json
+    // features/auth/frontend -> features/auth/frontend/schema.json
     const featurePath = moduleId.replace(/^features\//, '');
-    schemaPath = path.join(marketplacePath, 'features', featurePath, 'feature.json');
+    schemaPath = path.join(marketplacePath, 'features', featurePath, 'schema.json');
   } else {
     return {};
   }
@@ -79,7 +81,7 @@ export function loadModuleSchema(
 /**
  * Extract parameters from a schema object
  * 
- * @param schema - Schema object (from adapter.json, feature.json, etc.)
+ * @param schema - Schema object (from schema.json)
  * @returns Parameters object or empty object
  */
 export function extractParameters(schema: any): Record<string, any> {

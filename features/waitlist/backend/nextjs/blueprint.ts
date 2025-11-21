@@ -20,7 +20,7 @@ export default function generateBlueprint(
 
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.app}/api/waitlist/join/route.ts',
+    path: '${paths.apps.backend.api}waitlist/join/route.ts', // BACKEND API (resolves to apps.api.routes or apps.web.app/api)
     template: 'templates/api-join-route.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -34,7 +34,7 @@ export default function generateBlueprint(
 
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.app}/api/waitlist/user/[userId]/route.ts',
+    path: '${paths.apps.backend.api}waitlist/user/[userId]/route.ts', // BACKEND API
     template: 'templates/api-user-route.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -48,7 +48,7 @@ export default function generateBlueprint(
 
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.app}/api/waitlist/leaderboard/route.ts',
+    path: '${paths.apps.backend.api}waitlist/leaderboard/route.ts', // BACKEND API
     template: 'templates/api-leaderboard-route.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -62,7 +62,7 @@ export default function generateBlueprint(
 
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.app}/api/waitlist/stats/route.ts',
+    path: '${paths.apps.backend.api}waitlist/stats/route.ts', // BACKEND API
     template: 'templates/api-stats-route.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -77,7 +77,7 @@ export default function generateBlueprint(
   if (features.viralReferral) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app}/api/waitlist/referral-link/[userId]/route.ts',
+      path: '${paths.apps.backend.api}waitlist/referral-link/[userId]/route.ts', // BACKEND API
       template: 'templates/api-referral-link-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -87,7 +87,7 @@ export default function generateBlueprint(
 
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app}/api/waitlist/check-code/[code]/route.ts',
+      path: '${paths.apps.backend.api}waitlist/check-code/[code]/route.ts', // BACKEND API
       template: 'templates/api-check-code-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,

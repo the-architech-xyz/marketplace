@@ -12,10 +12,10 @@ export default function generateBlueprint(
 ): BlueprintAction[] {
   const actions: BlueprintAction[] = [];
 
-  // Generate webhook API route
+  // Generate webhook API route - BACKEND API (resolves to apps.api.routes or apps.web.app/api)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.app}/api/revenuecat/webhook/route.ts',
+    path: '${paths.apps.backend.api}revenuecat/webhook/route.ts',
     template: 'templates/webhook-route.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,

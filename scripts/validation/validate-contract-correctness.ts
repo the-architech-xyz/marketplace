@@ -218,14 +218,14 @@ class ContractCorrectnessValidator {
   }
 
   private async validateBackendImplementation(backendPath: string, violations: CorrectnessViolation[]): Promise<void> {
-    // Check if feature.json exists and has contract
-    const schemaPath = join(this.marketplaceRoot, backendPath, 'feature.json');
+    // Check if schema.json exists and has contract
+    const schemaPath = join(this.marketplaceRoot, backendPath, 'schema.json');
     
     if (!existsSync(schemaPath)) {
       violations.push({
         type: 'import_violation',
         severity: 'error',
-        message: 'Missing feature.json file',
+        message: 'Missing schema.json file',
         file: schemaPath
       });
       return;
@@ -259,7 +259,7 @@ class ContractCorrectnessValidator {
       violations.push({
         type: 'import_violation',
         severity: 'error',
-        message: `Invalid feature.json: ${error}`,
+        message: `Invalid schema.json: ${error}`,
         file: schemaPath
       });
     }

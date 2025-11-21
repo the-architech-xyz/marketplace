@@ -24,13 +24,15 @@ const ModuleRoleSchema = z.enum([
   'framework-wiring-connector',
   'backend-feature',
   'tech-stack-layer',
-  'frontend-feature'
+  'frontend-feature',
+  'tech-stack-override'  // Tech-stack overrides (e.g., better-auth hooks)
 ]);
 
 const ArchitecturalPatternSchema = z.enum([
   'sdk-driven',      // Connector acts as backend
   'custom-logic',    // Dedicated backend feature
-  'infrastructure'   // Just framework wiring
+  'infrastructure',  // Just framework wiring
+  'override'         // Tech-stack override pattern
 ]);
 
 const RequiresCapabilitySchema = z.object({
@@ -49,6 +51,17 @@ const ProvidesSchema = z.union([
   }))
 ]);
 
+// New dependency format (object with required/direct/framework/dev)
+const DependencySchema = z.union([
+  z.array(z.string()),  // Legacy format: array of package names
+  z.object({
+    required: z.array(z.string()).optional(),  // Abstract capabilities (e.g., 'database', 'auth')
+    direct: z.array(z.string()).optional(),     // Direct npm packages
+    framework: z.record(z.string(), z.array(z.string())).optional(),  // Framework-specific packages
+    dev: z.array(z.string()).optional()        // Dev dependencies
+  })
+]);
+
 const AdapterSchema = z.object({
   id: z.string(),
   name: z.string(),
@@ -56,7 +69,7 @@ const AdapterSchema = z.object({
   category: z.string(),
   provides: ProvidesSchema.optional(),
   requires: z.array(z.string()).optional(),
-  dependencies: z.array(z.string()).optional(),
+  dependencies: DependencySchema.optional(),  // Accept both array and object formats
   requiresCapabilities: z.array(RequiresCapabilitySchema).optional(),
   role: ModuleRoleSchema.optional().default('adapter'),
   // Adapters don't need pattern
@@ -87,14 +100,19 @@ const FeatureSchema = z.object({
       components: z.record(z.string(), z.array(z.string())).optional()  // New format: component requirements per UI technology
     })
   ]).optional(),
-  prerequisites: z.object({
-    capabilities: z.array(z.string()).optional(),
-    adapters: z.array(z.string()).optional(),
-    modules: z.array(z.string()).optional()
-  }).optional(),
+  // Accept prerequisites as array (legacy) OR object (new format)
+  prerequisites: z.union([
+    z.array(z.string()),  // Legacy format: array of module IDs
+    z.object({
+      capabilities: z.array(z.string()).optional(),
+      adapters: z.array(z.string()).optional(),
+      modules: z.array(z.string()).optional()
+    })
+  ]).optional(),
   requiresCapabilities: z.array(RequiresCapabilitySchema).optional(),
-  role: z.enum(['backend-feature', 'tech-stack-layer', 'frontend-feature']).optional(),
+  role: z.enum(['backend-feature', 'tech-stack-layer', 'frontend-feature', 'tech-stack-override']).optional(),
   pattern: ArchitecturalPatternSchema.optional(),
+  dependencies: DependencySchema.optional(),  // Features can also have dependencies
 });
 
 // ============================================================================
@@ -217,6 +235,17 @@ function validateArchitecturalConsistency(data: any, type: string, result: Valid
     if (!data.pattern) {
       result.issues.push('Connector must declare pattern (sdk-driven, custom-logic, or infrastructure)');
     }
+    // Connectors must have type: 'connector'
+    if (data.type !== 'connector') {
+      result.issues.push(`type: Invalid input: expected "connector"`);
+    }
+  }
+  
+  // RULE: Tech-stack-override must have override pattern
+  if (data.role === 'tech-stack-override') {
+    if (data.pattern !== 'override') {
+      result.warnings.push('Tech-stack-override should use pattern: override');
+    }
   }
 
   // RULE: SDK-backend-connector must use sdk-driven pattern
@@ -296,7 +325,7 @@ async function validateAllModules(): Promise<ValidationSummary> {
 
   // Validate Adapters
   console.log('📦 Validating adapters...');
-  const adapterFiles = await glob('adapters/**/adapter.json', { cwd: process.cwd() });
+  const adapterFiles = await glob('adapters/**/schema.json', { cwd: process.cwd() });
   for (const file of adapterFiles) {
     const result = await validateModuleFile(file, 'adapter');
     summary.results.push(result);
@@ -312,7 +341,7 @@ async function validateAllModules(): Promise<ValidationSummary> {
 
   // Validate Connectors
   console.log('🔗 Validating connectors...');
-  const connectorFiles = await glob('connectors/**/connector.json', { cwd: process.cwd() });
+  const connectorFiles = await glob('connectors/**/schema.json', { cwd: process.cwd() });
   for (const file of connectorFiles) {
     const result = await validateModuleFile(file, 'connector');
     summary.results.push(result);
@@ -328,7 +357,7 @@ async function validateAllModules(): Promise<ValidationSummary> {
 
   // Validate Features
   console.log('✨ Validating features...');
-  const featureFiles = await glob('features/**/feature.json', { cwd: process.cwd() });
+  const featureFiles = await glob('features/**/schema.json', { cwd: process.cwd() });
   for (const file of featureFiles) {
     const result = await validateModuleFile(file, 'feature');
     summary.results.push(result);

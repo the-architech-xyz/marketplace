@@ -45,7 +45,7 @@ export default function generateBlueprint(
   actions.push(
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}forms/core.ts',
+      path: '${paths.packages.shared.src}forms/core.ts',
       template: 'templates/core.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -54,7 +54,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}forms/validation.ts',
+      path: '${paths.packages.shared.src}forms/validation.ts',
       template: 'templates/validation.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -63,7 +63,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}forms/hooks.ts',
+      path: '${paths.packages.shared.src}forms/hooks.ts',
       template: 'templates/hooks.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -76,7 +76,7 @@ export default function generateBlueprint(
   if (params.accessibility) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}forms/accessibility.ts',
+      path: '${paths.packages.shared.src}forms/accessibility.ts',
       template: 'templates/accessibility.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -90,7 +90,7 @@ export default function generateBlueprint(
   // Form types
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.types}forms.ts',
+    path: '${paths.packages.shared.src.types}forms.ts',
     template: 'templates/types.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -101,7 +101,7 @@ export default function generateBlueprint(
   // Configurable validation schemas with context
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.shared_library}forms/validation-schemas.ts',
+    path: '${paths.packages.shared.src}forms/validation-schemas.ts',
     template: 'templates/validation-schemas.ts.tpl',
     context: {
       params: params,
@@ -116,7 +116,7 @@ export default function generateBlueprint(
   // Validation examples
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.shared_library}forms/validation-examples.ts',
+    path: '${paths.packages.shared.src}forms/validation-examples.ts',
     template: 'templates/validation-examples.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -127,7 +127,7 @@ export default function generateBlueprint(
   // Form index
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.shared_library}forms/index.ts',
+    path: '${paths.packages.shared.src}forms/index.ts',
     template: 'templates/index.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,

@@ -59,36 +59,36 @@ function generateCoreActions(): BlueprintAction[] {
     
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/stripe/server.ts',
+      path: '${paths.packages.shared.src}stripe/server.ts',
       template: 'templates/lib/stripe/server.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/stripe/config.ts',
+      path: '${paths.packages.shared.src}stripe/config.ts',
       template: 'templates/lib/stripe/config.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/stripe/types.ts',
+      path: '${paths.packages.shared.src}stripe/types.ts',
       template: 'templates/lib/stripe/types.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/stripe/errors.ts',
+      path: '${paths.packages.shared.src}stripe/errors.ts',
       template: 'templates/lib/stripe/errors.ts.tpl',
     },
     
     // PHASE 1 ENHANCEMENT: Idempotency key helpers
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/stripe/idempotency.ts',
+      path: '${paths.packages.shared.src}stripe/idempotency.ts',
       template: 'templates/lib/stripe/idempotency.ts.tpl',
     },
     
     // Main service object (required for contract validation)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/modules/index.ts',
+      path: '${paths.packages.shared.src}modules/index.ts',
       template: 'templates/lib/modules/index.ts.tpl',
     },
   ];
@@ -106,36 +106,36 @@ function generateOrganizationBillingActions(): BlueprintAction[] {
     // Server-side modules
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/modules/org-billing.ts',
+      path: '${paths.packages.shared.src}modules/org-billing.ts',
       template: 'templates/lib/modules/org-billing.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/modules/permissions.ts',
+      path: '${paths.packages.shared.src}modules/permissions.ts',
       template: 'templates/lib/modules/permissions.ts.tpl',
     },
     
-    // API routes
+    // API routes - BACKEND API (resolves to apps.api.routes or apps.web.app/api)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}organizations/[orgId]/subscriptions/route.ts',
+      path: '${paths.apps.backend.api}organizations/[orgId]/subscriptions/route.ts',
       template: 'templates/api/organizations/[orgId]/subscriptions/route.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}organizations/[orgId]/billing/route.ts',
+      path: '${paths.apps.backend.api}organizations/[orgId]/billing/route.ts',
       template: 'templates/api/organizations/[orgId]/billing/route.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}organizations/[orgId]/invoices/route.ts',
+      path: '${paths.apps.backend.api}organizations/[orgId]/invoices/route.ts',
       template: 'templates/api/organizations/[orgId]/invoices/route.ts.tpl',
     },
     
-    // PHASE 1 ENHANCEMENT: Billing Portal API route
+    // PHASE 1 ENHANCEMENT: Billing Portal API route - BACKEND API
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}organizations/[orgId]/billing/portal/route.ts',
+      path: '${paths.apps.backend.api}organizations/[orgId]/billing/portal/route.ts',
       template: 'templates/api/organizations/[orgId]/billing/portal/route.ts.tpl',
     },
   ];
@@ -150,19 +150,19 @@ function generateSeatManagementActions(): BlueprintAction[] {
     // Server-side modules
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/modules/seats.ts',
+      path: '${paths.packages.shared.src}modules/seats.ts',
       template: 'templates/lib/modules/seats.ts.tpl',
     },
     
     // API routes
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}organizations/[orgId]/seats/route.ts',
+      path: '${paths.apps.api.routes}organizations/[orgId]/seats/route.ts',
       template: 'templates/api/organizations/[orgId]/seats/route.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}organizations/[orgId]/seats/history/route.ts',
+      path: '${paths.apps.api.routes}organizations/[orgId]/seats/history/route.ts',
       template: 'templates/api/organizations/[orgId]/seats/history/route.ts.tpl',
     },
   ];
@@ -177,19 +177,19 @@ function generateUsageTrackingActions(): BlueprintAction[] {
     // Server-side modules
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/modules/usage.ts',
+      path: '${paths.packages.shared.src}modules/usage.ts',
       template: 'templates/lib/modules/usage.ts.tpl',
     },
     
     // API routes
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}organizations/[orgId]/usage/route.ts',
+      path: '${paths.apps.api.routes}organizations/[orgId]/usage/route.ts',
       template: 'templates/api/organizations/[orgId]/usage/route.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}organizations/[orgId]/teams/[teamId]/usage/route.ts',
+      path: '${paths.apps.api.routes}organizations/[orgId]/teams/[teamId]/usage/route.ts',
       template: 'templates/api/organizations/[orgId]/teams/[teamId]/usage/route.ts.tpl',
     },
   ];
@@ -204,14 +204,14 @@ function generateWebhookActions(): BlueprintAction[] {
     // Webhook handling
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/stripe/webhooks.ts',
+      path: '${paths.packages.shared.src}stripe/webhooks.ts',
       template: 'templates/lib/stripe/webhooks.ts.tpl',
     },
     
     // API routes
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}webhooks/stripe/route.ts',
+      path: '${paths.apps.api.routes}webhooks/stripe/route.ts',
       template: 'templates/api/webhooks/stripe/route.ts.tpl',
     },
   ];

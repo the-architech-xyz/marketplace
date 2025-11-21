@@ -1,53 +1,12 @@
 /**
- * Payments Backend (Stripe + Next.js)
+ * features/payments/backend/stripe-nextjs
  * 
- * Complete payments backend with Stripe integration for Next.js, including organization billing, subscriptions, and usage tracking
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
-export interface FeaturesPaymentsBackendStripeNextjsParams {
-  /** Constitutional Architecture features configuration */
-  features?: {
+export interface FeaturesPaymentsBackendStripeNextjsParams {}
 
-    /** Enable organization-level billing features */
-    organizationBilling?: boolean;
-
-    /** Enable seat-based billing */
-    seats?: boolean;
-
-    /** Enable usage-based billing */
-    usage?: boolean;
-
-    /** Enable Stripe webhook handling */
-    webhooks?: boolean;
-
-    /** Enable seat-based billing */
-    seatManagement?: boolean;
-
-    /** Enable usage-based billing tracking */
-    usageTracking?: boolean;
-  };
-}
-
-export interface FeaturesPaymentsBackendStripeNextjsFeatures {
-
-  /** Enable organization-level billing features */
-  organizationBilling: boolean;
-
-  /** Enable seat-based billing */
-  seats: boolean;
-
-  /** Enable usage-based billing */
-  usage: boolean;
-
-  /** Enable Stripe webhook handling */
-  webhooks: boolean;
-
-  /** Enable seat-based billing */
-  seatManagement: boolean;
-
-  /** Enable usage-based billing tracking */
-  usageTracking: boolean;
-}
+export interface FeaturesPaymentsBackendStripeNextjsFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesPaymentsBackendStripeNextjsArtifacts: {

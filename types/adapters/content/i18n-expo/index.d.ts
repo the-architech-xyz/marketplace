@@ -1,41 +1,12 @@
 /**
- * Expo/React Native Internationalization
+ * content/i18n-expo
  * 
- * Complete internationalization solution for Expo and React Native using expo-localization with react-i18next
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface ContentI18nExpoParams {
+export interface ContentI18nExpoParams {}
 
-  /** Supported locales */
-  locales?: string[];
-
-  /** Default locale */
-  defaultLocale?: string;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Auto-detect device locale */
-    deviceLocale?: boolean;
-
-    /** Use native date/number formatting */
-    nativeFormatting?: boolean;
-
-    /** Enable pluralization support */
-    pluralization?: boolean;
-  };
-}
-
-export interface ContentI18nExpoFeatures {
-
-  /** Auto-detect device locale */
-  deviceLocale: boolean;
-
-  /** Use native date/number formatting */
-  nativeFormatting: boolean;
-
-  /** Enable pluralization support */
-  pluralization: boolean;
-}
+export interface ContentI18nExpoFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const ContentI18nExpoArtifacts: {

@@ -1,29 +1,10 @@
 /**
- * Email Capability (Resend + NextJS)
+ * features/emailing/backend/resend-nextjs
  * 
- * Complete email sending backend with Resend and NextJS
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
-export interface FeaturesEmailingBackendResendNextjsParams {
-
-  /** Bulk email sending capabilities */
-  bulkEmail?: boolean;
-
-  /** Email template management */
-  templates?: boolean;
-
-  /** Email delivery and engagement analytics */
-  analytics?: boolean;
-
-  /** Email event webhooks */
-  webhooks?: boolean;
-
-  /** Enable organization-scoped email management */
-  organizations?: boolean;
-
-  /** Enable team-scoped email management */
-  teams?: boolean;
-}
+export interface FeaturesEmailingBackendResendNextjsParams {}
 
 export interface FeaturesEmailingBackendResendNextjsFeatures {}
 

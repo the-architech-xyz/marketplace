@@ -1,26 +1,10 @@
 /**
- * AI Capability (Vercel AI SDK + NextJS)
+ * features/ai-chat/backend/nextjs
  * 
- * Complete AI chat backend with Vercel AI SDK and NextJS
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
-export interface FeaturesAiChatBackendNextjsParams {
-
-  /** Real-time message streaming */
-  streaming?: boolean;
-
-  /** File upload capabilities */
-  fileUpload?: boolean;
-
-  /** Voice input capabilities */
-  voiceInput?: boolean;
-
-  /** Voice output capabilities */
-  voiceOutput?: boolean;
-
-  /** Chat export and import capabilities */
-  exportImport?: boolean;
-}
+export interface FeaturesAiChatBackendNextjsParams {}
 
 export interface FeaturesAiChatBackendNextjsFeatures {}
 

@@ -1,0 +1,488 @@
+{
+  "version": "1.0.0",
+  "packages": {
+    "auth": {
+      "defaultProvider": "better-auth",
+      "packageStructure": {
+        "name": "auth",
+        "directory": "packages/auth",
+        "dependencies": {
+          "better-auth": "latest",
+          "@{projectName}/db": "workspace:*"
+        },
+        "devDependencies": {
+          "typescript": "^5.0.0",
+          "@types/node": "^20.0.0"
+        },
+        "exports": {
+          "./client": "./src/client.ts",
+          "./server": "./src/server.ts",
+          "./types": "./src/types.ts"
+        }
+      },
+      "providers": {
+        "better-auth": {
+          "modules": [
+            {
+              "id": "adapters/auth/better-auth",
+              "version": "1.0.0",
+              "targetPackage": "auth"
+            },
+            {
+              "id": "connectors/auth/better-auth-nextjs",
+              "version": "1.0.0",
+              "targetPackage": null,
+              "targetApps": ["web", "api"],
+              "requiredFramework": "nextjs"
+            },
+            {
+              "id": "features/auth/frontend",
+              "version": "1.0.0",
+              "targetPackage": null,
+              "targetApps": ["web", "mobile"]
+            },
+            {
+              "id": "features/auth/tech-stack",
+              "version": "1.0.0",
+              "targetPackage": "auth"
+            }
+          ],
+          "dependencies": {
+            "packages": [
+              "ui",
+              "database"
+            ]
+          }
+        }
+      }
+    },
+    "ui": {
+      "defaultProvider": "tamagui",
+      "packageStructure": {
+        "name": "ui",
+        "directory": "packages/ui",
+        "dependencies": {
+          "@tamagui/core": "latest",
+          "@tamagui/config": "latest",
+          "react-native-web": "latest"
+        },
+        "devDependencies": {
+          "typescript": "^5.0.0",
+          "@types/node": "^20.0.0",
+          "@types/react": "^18.0.0",
+          "@types/react-native": "^0.73.0"
+        },
+        "exports": {
+          "./components": "./src/components/index.ts",
+          "./themes": "./src/themes/index.ts",
+          "./utils": "./src/utils/index.ts"
+        }
+      },
+      "providers": {
+        "tamagui": {
+          "modules": [
+            {
+              "id": "adapters/ui/tamagui",
+              "version": "1.0.0",
+              "targetPackage": "ui"
+            },
+            {
+              "id": "connectors/ui/tamagui-nextjs",
+              "version": "1.0.0",
+              "targetPackage": null,
+              "targetApps": ["web"],
+              "requiredFramework": "nextjs",
+              "requiredAppTypes": ["web"]
+            },
+            {
+              "id": "connectors/ui/tamagui-expo",
+              "version": "1.0.0",
+              "targetPackage": null,
+              "targetApps": ["mobile"],
+              "requiredFramework": "expo",
+              "requiredAppTypes": ["mobile"]
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        },
+        "shadcn": {
+          "modules": [
+            {
+              "id": "adapters/ui/shadcn-ui",
+              "version": "1.0.0",
+              "targetPackage": "ui"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "database": {
+      "defaultProvider": "drizzle",
+      "packageStructure": {
+        "name": "db",
+        "directory": "packages/db",
+        "dependencies": {
+          "drizzle-orm": "latest",
+          "postgres": "latest"
+        },
+        "devDependencies": {
+          "typescript": "^5.0.0",
+          "@types/node": "^20.0.0",
+          "drizzle-kit": "latest"
+        },
+        "exports": {
+          "./schema": "./src/schema/index.ts",
+          "./client": "./src/client.ts",
+          "./migrations": "./src/migrations/index.ts"
+        }
+      },
+      "providers": {
+        "drizzle": {
+          "modules": [
+            {
+              "id": "adapters/database/drizzle",
+              "version": "1.0.0",
+              "targetPackage": "db"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "payments": {
+      "defaultProvider": "stripe",
+      "packageStructure": {
+        "name": "payments",
+        "directory": "packages/payments",
+        "dependencies": {},
+        "devDependencies": {
+          "typescript": "^5.0.0",
+          "@types/node": "^20.0.0"
+        },
+        "scripts": {
+          "build": "tsc",
+          "dev": "tsc --watch"
+        },
+        "exports": {
+          "./client": "./src/client.ts",
+          "./server": "./src/server.ts"
+        }
+      },
+      "providers": {
+        "stripe": {
+          "modules": [
+            {
+              "id": "adapters/payment/stripe",
+              "version": "1.0.0"
+            },
+            {
+              "id": "features/payments/frontend",
+              "version": "1.0.0"
+            },
+            {
+              "id": "features/payments/tech-stack",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": [
+              "database",
+              "auth"
+            ]
+          }
+        }
+      }
+    },
+    "emailing": {
+      "defaultProvider": "resend",
+      "providers": {
+        "resend": {
+          "modules": [
+            {
+              "id": "adapters/email/resend",
+              "version": "1.0.0"
+            },
+            {
+              "id": "connectors/email/resend-nextjs",
+              "version": "1.0.0",
+              "requiredFramework": "nextjs"
+            },
+            {
+              "id": "features/emailing/frontend",
+              "version": "1.0.0"
+            },
+            {
+              "id": "features/emailing/tech-stack",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "ai-chat": {
+      "defaultProvider": "custom",
+      "providers": {
+        "custom": {
+          "modules": [
+            {
+              "id": "features/ai-chat/frontend",
+              "version": "1.0.0"
+            },
+            {
+              "id": "features/ai-chat/tech-stack",
+              "version": "1.0.0"
+            },
+            {
+              "id": "features/ai-chat/backend/nextjs",
+              "version": "1.0.0",
+              "targetPackage": null,
+              "targetApps": ["api"],
+              "requiredFramework": "nextjs",
+              "requiredAppTypes": ["api"]
+            }
+          ],
+          "dependencies": {
+            "packages": [
+              "ui",
+              "database"
+            ]
+          }
+        }
+      }
+    },
+    "monorepo": {
+      "defaultProvider": "turborepo",
+      "providers": {
+        "turborepo": {
+          "modules": [
+            {
+              "id": "adapters/monorepo/turborepo",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        },
+        "nx": {
+          "modules": [
+            {
+              "id": "adapters/monorepo/nx",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "backend": {
+      "defaultProvider": "hono",
+      "providers": {
+        "hono": {
+          "modules": [
+            {
+              "id": "adapters/backend/api-hono",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "jobs": {
+      "defaultProvider": "inngest",
+      "providers": {
+        "inngest": {
+          "modules": [
+            {
+              "id": "adapters/jobs/inngest",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        },
+        "bullmq": {
+          "modules": [
+            {
+              "id": "adapters/jobs/bullmq",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "storage": {
+      "defaultProvider": "s3-compatible",
+      "providers": {
+        "s3-compatible": {
+          "modules": [
+            {
+              "id": "adapters/storage/s3-compatible",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "data-fetching": {
+      "defaultProvider": "trpc",
+      "providers": {
+        "trpc": {
+          "modules": [
+            {
+              "id": "adapters/data-fetching/trpc",
+              "version": "1.0.0"
+            },
+            {
+              "id": "connectors/trpc-hono",
+              "version": "1.0.0",
+              "requiredFramework": "hono"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        },
+        "tanstack-query": {
+          "modules": [
+            {
+              "id": "adapters/data-fetching/tanstack-query",
+              "version": "1.0.0"
+            },
+            {
+              "id": "connectors/infrastructure/tanstack-query-nextjs",
+              "version": "1.0.0",
+              "requiredFramework": "nextjs"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "ai": {
+      "defaultProvider": "vercel-ai-sdk",
+      "providers": {
+        "vercel-ai-sdk": {
+          "modules": [
+            {
+              "id": "adapters/ai/vercel-ai-sdk",
+              "version": "1.0.0"
+            },
+            {
+              "id": "connectors/ai/vercel-ai-nextjs",
+              "version": "1.0.0",
+              "requiredFramework": "nextjs"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "golden-stack": {
+      "defaultProvider": "default",
+      "providers": {
+        "default": {
+          "modules": [
+            {
+              "id": "adapters/core/golden-stack",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "deployment": {
+      "defaultProvider": "vercel",
+      "providers": {
+        "vercel": {
+          "modules": [
+            {
+              "id": "adapters/deployment/vercel",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "nextjs": {
+      "defaultProvider": "default",
+      "providers": {
+        "default": {
+          "modules": [
+            {
+              "id": "adapters/framework/nextjs",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "expo": {
+      "defaultProvider": "default",
+      "providers": {
+        "default": {
+          "modules": [
+            {
+              "id": "adapters/framework/expo",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    },
+    "hono": {
+      "defaultProvider": "default",
+      "providers": {
+        "default": {
+          "modules": [
+            {
+              "id": "adapters/framework/hono",
+              "version": "1.0.0"
+            }
+          ],
+          "dependencies": {
+            "packages": []
+          }
+        }
+      }
+    }
+  }
+}

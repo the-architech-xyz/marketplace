@@ -1,23 +1,10 @@
 /**
- * Stripe Payment Processing
+ * payment/stripe
  * 
- * Complete payment processing with Stripe including subscriptions and one-time payments
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface PaymentStripeParams {
-
-  /** Default currency for payments */
-  currency?: any;
-
-  /** Stripe mode (test or live) */
-  mode?: any;
-
-  /** Enable webhook handling */
-  webhooks?: boolean;
-
-  /** Enable Stripe Dashboard integration */
-  dashboard?: boolean;
-}
+export interface PaymentStripeParams {}
 
 export interface PaymentStripeFeatures {}
 

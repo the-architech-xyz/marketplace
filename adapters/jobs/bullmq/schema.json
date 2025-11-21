@@ -1,0 +1,62 @@
+{
+  "id": "bullmq",
+  "name": "BullMQ Job Queue",
+  "description": "Redis-based job queue client with BullMQ for adding jobs to queues",
+  "category": "jobs",
+  "version": "1.0.0",
+  "role": "adapter",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "provides": [
+    "jobs-queue-client",
+    "redis-connection",
+    "job-queue-management"
+  ],
+  "capabilities": {
+    "jobs": {
+      "version": "1.0.0",
+      "description": "Job queue client for adding jobs",
+      "provides": [
+        "queue-client",
+        "job-adding",
+        "job-status",
+        "redis-connection"
+      ]
+    }
+  },
+  "parameters": {
+    "redisUrl": {
+      "type": "string",
+      "default": "redis://localhost:6379",
+      "description": "Redis connection string",
+      "required": true
+    },
+    "defaultQueue": {
+      "type": "string",
+      "default": "default",
+      "description": "Default queue name",
+      "required": false
+    },
+    "features": {
+      "retry": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable job retry configuration"
+      },
+      "priorities": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable job priority support"
+      },
+      "delayed": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable delayed job scheduling"
+      }
+    }
+  },
+  "constraints": {
+    "note": "This is a CLIENT module only. It provides functions to ADD jobs to queues. Workers that CONSUME jobs should be separate services."
+  }
+}
+

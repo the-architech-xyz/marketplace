@@ -17,7 +17,7 @@ export default function generateBlueprint(
     // Core A/B testing configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}ab-testing/config.ts',
+      path: '${paths.packages.shared.src}ab-testing/config.ts',
       template: 'templates/config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -28,7 +28,7 @@ export default function generateBlueprint(
     // A/B testing types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}ab-testing/types.ts',
+      path: '${paths.packages.shared.src}ab-testing/types.ts',
       template: 'templates/types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -39,7 +39,7 @@ export default function generateBlueprint(
     // A/B testing utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}ab-testing/utils.ts',
+      path: '${paths.packages.shared.src}ab-testing/utils.ts',
       template: 'templates/utils.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -52,7 +52,7 @@ export default function generateBlueprint(
   if (features?.experimentManagement !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}ab-testing/experiments.ts',
+      path: '${paths.packages.shared.src}ab-testing/experiments.ts',
       template: 'templates/experiments.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -65,7 +65,7 @@ export default function generateBlueprint(
   if (features?.variantAssignment !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}ab-testing/variant-assignment.ts',
+      path: '${paths.packages.shared.src}ab-testing/variant-assignment.ts',
       template: 'templates/variant-assignment.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -76,6 +76,32 @@ export default function generateBlueprint(
 
   return actions;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

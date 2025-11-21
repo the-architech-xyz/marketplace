@@ -3,7 +3,7 @@
 /**
  * Blueprint Path Validation Script
  * 
- * Validates that all blueprint files use valid ${paths.*} variables
+ * Validates that all blueprint files use valid path tokens (e.g. paths.someKey)
  * that exist in the framework adapter configuration.
  */
 
@@ -152,7 +152,7 @@ async function validateAllBlueprints(): Promise<void> {
 }
 
 // Run the validation if this script is executed directly
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   validateAllBlueprints().catch(console.error);
 }
 

@@ -1,47 +1,12 @@
 /**
- * Next.js Internationalization
+ * content/i18n-nextjs
  * 
- * Complete internationalization solution with next-intl including advanced features like pluralization, rich text, and dynamic imports
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface ContentI18nNextjsParams {
+export interface ContentI18nNextjsParams {}
 
-  /** Supported locales */
-  locales?: string[];
-
-  /** Default locale */
-  defaultLocale?: string;
-
-  /** Enable locale-based routing */
-  routing?: boolean;
-
-  /** Enable SEO optimization */
-  seo?: boolean;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable locale-based routing */
-    routing?: boolean;
-
-    /** Enable date formatting features */
-    dateFormatting?: boolean;
-
-    /** Enable number formatting features */
-    numberFormatting?: boolean;
-  };
-}
-
-export interface ContentI18nNextjsFeatures {
-
-  /** Enable locale-based routing */
-  routing: boolean;
-
-  /** Enable date formatting features */
-  dateFormatting: boolean;
-
-  /** Enable number formatting features */
-  numberFormatting: boolean;
-}
+export interface ContentI18nNextjsFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const ContentI18nNextjsArtifacts: {

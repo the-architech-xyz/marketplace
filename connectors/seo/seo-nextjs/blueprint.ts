@@ -31,7 +31,7 @@ export default function generateBlueprint(
     actions.push(
       {
         type: BlueprintActionType.CREATE_FILE,
-        path: '${paths.app_root}sitemap.ts',
+        path: '${paths.apps.web.app}sitemap.ts',
         template: 'templates/sitemap.ts.tpl',
         conflictResolution: {
           strategy: ConflictResolutionStrategy.SKIP,
@@ -40,7 +40,7 @@ export default function generateBlueprint(
       },
       {
         type: BlueprintActionType.CREATE_FILE,
-        path: '${paths.config}next-sitemap.config.js',
+        path: '${paths.workspace.config}next-sitemap.config.js',
         template: 'templates/next-sitemap.config.js.tpl',
         conflictResolution: {
           strategy: ConflictResolutionStrategy.SKIP,
@@ -54,7 +54,7 @@ export default function generateBlueprint(
   if (params?.robots !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}robots.ts',
+      path: '${paths.apps.web.app}robots.ts',
       template: 'templates/robots.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -67,7 +67,7 @@ export default function generateBlueprint(
   if (params?.dynamicMetadata !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}seo/metadata.ts',
+      path: '${paths.packages.shared.src}seo/metadata.ts',
       template: 'templates/metadata.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -76,11 +76,11 @@ export default function generateBlueprint(
     });
   }
 
-  // Generate structured data component
+  // Generate structured data component - ALL FRONTEND (React component, universal)
   if (params?.structuredData !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}seo/StructuredData.tsx',
+      path: '${paths.apps.frontend.components}seo/StructuredData.tsx',
       template: 'templates/structured-data-component.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -93,7 +93,7 @@ export default function generateBlueprint(
   if (params?.defaultMetadata !== false) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.docs}seo-integration.md',
+      path: '${paths.workspace.docs}seo-integration.md',
       template: 'templates/layout-integration.md.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,

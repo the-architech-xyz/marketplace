@@ -36,7 +36,7 @@ export default config;`,
     // Create Tailwind CSS v4 globals.css
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: "${paths.app_root}globals.css",
+      path: "${paths.apps.web.app}globals.css",
       conflictResolution: { strategy: ConflictResolutionStrategy.REPLACE },
       content: `
 @import "tailwindcss";

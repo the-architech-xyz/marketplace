@@ -1,29 +1,10 @@
 /**
- * Forms
+ * core/forms
  * 
- * Golden Core form handling with validation using React Hook Form and Zod
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface CoreFormsParams {
-
-  /** Enable Zod for schema validation */
-  zod?: boolean;
-
-  /** Enable React Hook Form for form handling */
-  reactHookForm?: boolean;
-
-  /** Enable @hookform/resolvers for Zod integration */
-  resolvers?: boolean;
-
-  /** Enable accessibility features */
-  accessibility?: boolean;
-
-  /** Enable React Hook Form DevTools */
-  devtools?: boolean;
-
-  /** Enable advanced validation features */
-  advancedValidation?: boolean;
-}
+export interface CoreFormsParams {}
 
 export interface CoreFormsFeatures {}
 

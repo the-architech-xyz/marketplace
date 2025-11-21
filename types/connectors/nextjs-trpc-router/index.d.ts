@@ -1,14 +1,10 @@
 /**
- * Next.js tRPC Router Connector
+ * connectors/nextjs-trpc-router
  * 
- * Generates tRPC router and API route for Next.js (supports both single-app and monorepo)
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
-export interface ConnectorsNextjsTrpcRouterParams {
-
-  /** Template context with project structure information */
-  templateContext?: Record<string, any>;
-}
+export interface ConnectorsNextjsTrpcRouterParams {}
 
 export interface ConnectorsNextjsTrpcRouterFeatures {}
 

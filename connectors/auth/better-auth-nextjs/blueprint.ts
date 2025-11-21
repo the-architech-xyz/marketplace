@@ -26,9 +26,10 @@ export default function generateBlueprint(
     // We only add Next.js specific integration
     
     // Server-side Next.js config (nextCookies plugin)
+    // Use packages.auth.src (from recipe book targetPackage: "auth")
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.lib}/auth/config.ts',
+      path: '${paths.packages.auth.src}config.ts',
       template: 'templates/config.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -36,10 +37,10 @@ export default function generateBlueprint(
       }
     },
     
-    // Next.js API route handler
+    // Next.js API route handler - WEB-ONLY (Next.js API routes are web-specific)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/auth/[...all]/route.ts',
+      path: '${paths.apps.web.app}api/auth/[...all]/route.ts',
       template: 'templates/auth-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -47,10 +48,10 @@ export default function generateBlueprint(
       }
     },
     
-    // Next.js middleware for auth
+    // Next.js middleware for auth - WEB-ONLY (Next.js middleware is web-specific)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: 'src/middleware.ts',
+      path: '${paths.apps.web.middleware}middleware.ts',
       template: 'templates/middleware.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -58,10 +59,10 @@ export default function generateBlueprint(
       }
     },
     
-    // React Auth Provider (client-side)
+    // React Auth Provider (client-side) - semantic category
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}providers/AuthProvider.tsx',
+      path: '${paths.apps.frontend.components}providers/AuthProvider.tsx',
       template: 'templates/AuthProvider.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

@@ -20,63 +20,63 @@ export const githubApiBlueprint: Blueprint = {
     // Create GitHub client configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/github/config.ts',
+      path: '${paths.packages.shared.src}/github/config.ts',
       template: 'templates/github-config.ts.tpl',
     },
     
     // Create main GitHub client
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/github/client.ts',
+      path: '${paths.packages.shared.src}/github/client.ts',
       template: 'templates/github-client.ts.tpl',
     },
     
     // Create repository operations
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/github/repository.ts',
+      path: '${paths.packages.shared.src}/github/repository.ts',
       template: 'templates/github-repository.ts.tpl',
     },
     
     // Create file operations
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/github/files.ts',
+      path: '${paths.packages.shared.src}/github/files.ts',
       template: 'templates/github-files.ts.tpl',
     },
     
     // Create pull request operations
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/github/pull-requests.ts',
+      path: '${paths.packages.shared.src}/github/pull-requests.ts',
       template: 'templates/github-pull-requests.ts.tpl',
     },
     
     // Create secrets management
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/github/secrets.ts',
+      path: '${paths.packages.shared.src}/github/secrets.ts',
       template: 'templates/github-secrets.ts.tpl',
     },
     
     // Create workflow management
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/github/workflows.ts',
+      path: '${paths.packages.shared.src}/github/workflows.ts',
       template: 'templates/github-workflows.ts.tpl',
     },
     
     // Create types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/github/types.ts',
+      path: '${paths.packages.shared.src}/github/types.ts',
       template: 'templates/github-types.ts.tpl',
     },
     
     // Create main index file
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/github/index.ts',
+      path: '${paths.packages.shared.src}/github/index.ts',
       template: 'templates/github-index.ts.tpl',
     },
     

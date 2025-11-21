@@ -1,23 +1,10 @@
 /**
- * Git Version Control
+ * core/git
  * 
- * Local git repository management and operations
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface CoreGitParams {
-
-  /** Git user name for commits */
-  userName?: string;
-
-  /** Git user email for commits */
-  userEmail?: string;
-
-  /** Default branch name for new repositories */
-  defaultBranch?: string;
-
-  /** Automatically initialize git repository after project creation */
-  autoInit?: boolean;
-}
+export interface CoreGitParams {}
 
 export interface CoreGitFeatures {}
 

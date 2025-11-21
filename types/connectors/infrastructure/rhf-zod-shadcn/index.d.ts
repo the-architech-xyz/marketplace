@@ -1,20 +1,10 @@
 /**
- * React Hook Form + Zod + Shadcn Connector
+ * connectors/infrastructure/rhf-zod-shadcn
  * 
- * React Hook Form, Zod validation, and Shadcn form components setup for NextJS
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
-export interface ConnectorsInfrastructureRhfZodShadcnParams {
-
-  /** Zod schema validation */
-  validation?: boolean;
-
-  /** Form accessibility features */
-  accessibility?: boolean;
-
-  /** React Hook Form DevTools */
-  devtools?: boolean;
-}
+export interface ConnectorsInfrastructureRhfZodShadcnParams {}
 
 export interface ConnectorsInfrastructureRhfZodShadcnFeatures {}
 

@@ -57,12 +57,12 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.payment_config}/stripe.ts',
+      path: '${paths.packages.shared.src}payment/stripe.ts',
       template: 'templates/stripe.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.payment_config}/client.ts',
+      path: '${paths.packages.shared.src}payment/client.ts',
       template: 'templates/client.ts.tpl',
     },
     {
@@ -121,17 +121,17 @@ function generateCoreActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.payment_config}/webhook-verification.ts',
+      path: '${paths.packages.shared.src}payment/webhook-verification.ts',
       template: 'templates/webhook-verification.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}/payment/webhook/route.ts',
+      path: '${paths.apps.api.routes}/payment/webhook/route.ts',
       template: 'templates/webhook-route.ts.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.payment_config}/INTEGRATION_GUIDE.md',
+      path: '${paths.packages.shared.src}payment/INTEGRATION_GUIDE.md',
       template: 'templates/INTEGRATION_GUIDE.md.tpl'
     }
   ];

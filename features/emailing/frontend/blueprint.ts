@@ -19,7 +19,7 @@ export default function generateBlueprint(
     // Create email composer component (using UI marketplace template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}emailing/EmailComposer.tsx',
+      path: '${paths.apps.web.components}emailing/EmailComposer.tsx',
       template: 'ui/emailing/EmailComposer.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -30,7 +30,7 @@ export default function generateBlueprint(
     // Create email list component (using UI marketplace template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}emailing/EmailList.tsx',
+      path: '${paths.apps.web.components}emailing/EmailList.tsx',
       template: 'ui/emailing/EmailList.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -41,7 +41,7 @@ export default function generateBlueprint(
     // Create template manager component (using UI marketplace template)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}emailing/TemplateManager.tsx',
+      path: '${paths.apps.web.components}emailing/TemplateManager.tsx',
       template: 'ui/emailing/TemplateManager.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -49,11 +49,16 @@ export default function generateBlueprint(
       }
     },
 
-    // Create emailing dashboard page (using UI marketplace template)
+    // Create emailing dashboard page - Shared Route (auto-generates wrappers for web + mobile)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}emailing/page.tsx',
-      template: 'ui/emailing/emailing-page.tsx.tpl',
+      path: '${paths.packages.shared.src}routes/emailing/EmailingPage.tsx',
+      template: 'ui/emailing/EmailingPage.tsx.tpl',
+      sharedRoutes: {
+        enabled: true,
+        routePath: 'emailing',
+        componentName: 'EmailingPage'
+      },
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
         priority: 2

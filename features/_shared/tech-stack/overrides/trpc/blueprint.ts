@@ -29,7 +29,7 @@ export default function generateBlueprint(
   for (const feature of features) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: `\${paths.lib}/${feature}/hooks.ts`,
+      path: `\${paths.packages.shared.src}${feature}/hooks.ts`,
       template: 'templates/hooks.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -37,7 +37,7 @@ export default function generateBlueprint(
       },
       context: {
         feature,
-        routerPath: config.parameters?.routerPath || '${paths.lib}/trpc/router.ts'
+        routerPath: config.parameters?.routerPath || '${paths.packages.shared.src}trpc/router.ts'
       }
     });
   }

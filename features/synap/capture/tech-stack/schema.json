@@ -1,0 +1,80 @@
+{
+  "name": "synap-capture-tech-stack",
+  "version": "1.0.0",
+  "description": "Technology-agnostic stack layer for Synap Capture feature",
+  "category": "tech-stack",
+  "provides": [
+    "synap-capture-schemas",
+    "synap-capture-stores",
+    "synap-capture-hooks"
+  ],
+  "role": "tech-stack-layer",
+  "tags": [
+    "synap",
+    "capture",
+    "thoughts",
+    "ai",
+    "types",
+    "schemas",
+    "hooks",
+    "stores",
+    "tech-stack"
+  ],
+  "moduleType": "feature",
+  "blueprint": "./blueprint.ts",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "featureName": {
+        "type": "string",
+        "description": "The name of the feature",
+        "default": "synap-capture"
+      },
+      "featurePath": {
+        "type": "string",
+        "description": "The path to the feature",
+        "default": "synap-capture"
+      },
+      "hasTypes": {
+        "type": "boolean",
+        "description": "Whether to generate TypeScript types",
+        "default": true
+      },
+      "hasSchemas": {
+        "type": "boolean",
+        "description": "Whether to generate Zod schemas",
+        "default": true
+      },
+      "hasHooks": {
+        "type": "boolean",
+        "description": "Whether to generate TanStack Query hooks",
+        "default": true
+      },
+      "hasStores": {
+        "type": "boolean",
+        "description": "Whether to generate Zustand stores",
+        "default": true
+      }
+    },
+    "required": [
+      "featureName",
+      "featurePath"
+    ]
+  },
+  "dependencies": [
+    "zod",
+    "@tanstack/react-query",
+    "zustand",
+    "immer",
+    "sonner"
+  ],
+  "devDependencies": [
+    "@types/node",
+    "typescript"
+  ],
+  "id": "features/synap/capture/tech-stack",
+  "type": "feature"
+}
+
+
+

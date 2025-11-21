@@ -67,47 +67,47 @@ const dockerDrizzleIntegrationBlueprint: Blueprint = {
     // Create Drizzle-specific Database Management Scripts
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}drizzle-setup.sh',
+      path: '${paths.workspace.scripts}drizzle-setup.sh',
       template: 'templates/drizzle-setup.sh.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}drizzle-migrate.sh',
+      path: '${paths.workspace.scripts}drizzle-migrate.sh',
       template: 'templates/drizzle-migrate.sh.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}drizzle-seed.sh', 
+      path: '${paths.workspace.scripts}drizzle-seed.sh', 
       template: 'templates/drizzle-seed.sh.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}drizzle-backup.sh',
+      path: '${paths.workspace.scripts}drizzle-backup.sh',
       template: 'templates/drizzle-backup.sh.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}drizzle-restore.sh',
+      path: '${paths.workspace.scripts}drizzle-restore.sh',
       template: 'templates/drizzle-restore.sh.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}drizzle-reset.sh',
+      path: '${paths.workspace.scripts}drizzle-reset.sh',
       template: 'templates/drizzle-reset.sh.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}drizzle-health.sh',
+      path: '${paths.workspace.scripts}drizzle-health.sh',
       template: 'templates/drizzle-health.sh.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}drizzle-shell.sh',
+      path: '${paths.workspace.scripts}drizzle-shell.sh',
       template: 'templates/drizzle-shell.sh.tpl',
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}drizzle-logs.sh',
+      path: '${paths.workspace.scripts}drizzle-logs.sh',
       template: 'templates/drizzle-logs.sh.tpl',
     },
     // Create Drizzle-specific Monitoring Configuration

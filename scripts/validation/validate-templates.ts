@@ -59,11 +59,14 @@ class TemplateValidator {
       const blueprintContent = await fs.readFile(blueprintPath, 'utf-8');
       const templateReferences = this.extractTemplateReferences(blueprintContent);
       
+      // Filter out UI marketplace templates (templates starting with 'ui/' are in UI marketplaces)
+      const marketplaceTemplates = templateReferences.filter(ref => !ref.startsWith('ui/'));
+      
       // Check if templates exist
       const missingTemplates: string[] = [];
       const validTemplates: string[] = [];
       
-      for (const templateRef of templateReferences) {
+      for (const templateRef of marketplaceTemplates) {
         const templatePath = path.join(
           this.marketplaceRoot,
           path.dirname(blueprintFile),
@@ -77,6 +80,13 @@ class TemplateValidator {
           missingTemplates.push(templateRef);
         }
       }
+      
+      // UI marketplace templates are not validated (they're in separate packages)
+      const uiTemplates = templateReferences.filter(ref => ref.startsWith('ui/'));
+      if (uiTemplates.length > 0) {
+        // Count UI templates as valid since they're in UI marketplaces
+        validTemplates.push(...uiTemplates);
+      }
 
       this.results.push({
         moduleId,
@@ -84,7 +94,7 @@ class TemplateValidator {
         missingTemplates,
         totalTemplates: templateReferences.length,
         validTemplates: validTemplates.length,
-        isValid: missingTemplates.length === 0
+        isValid: missingTemplates.length === 0 // Only marketplace templates need to exist
       });
 
       if (missingTemplates.length > 0) {

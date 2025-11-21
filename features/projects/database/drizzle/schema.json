@@ -1,0 +1,19 @@
+{
+  "id": "features/projects/database/drizzle",
+  "name": "Projects Database Layer (Drizzle)",
+  "description": "Database schema for projects feature using Drizzle ORM. Stores projects, generations, and metadata.",
+  "type": "feature",
+  "version": "1.0.0",
+  "requires": [
+    "database/drizzle"
+  ],
+  "provides": [
+    "projects-database-schema",
+    "projects-migrations",
+    "project-generations-tracking"
+  ],
+  "role": "tech-stack-layer",
+  "pattern": "custom-logic",
+  "parameters": {}
+}
+

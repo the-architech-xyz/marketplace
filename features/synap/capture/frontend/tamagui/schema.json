@@ -1,0 +1,30 @@
+{
+  "id": "features/synap/capture/frontend/tamagui",
+  "name": "Synap Capture Frontend (Tamagui)",
+  "description": "Frontend UI components for Synap Capture feature using Tamagui",
+  "version": "1.0.0",
+  "category": "frontend-feature",
+  "provides": [
+    "synap-capture-ui",
+    "super-input-component"
+  ],
+  "role": "frontend-feature",
+  "pattern": "custom-logic",
+  "blueprint": "./blueprint.ts",
+  "dependencies": [
+    "ui/tamagui-core",
+    "features/synap/capture/tech-stack"
+  ],
+  "tags": [
+    "synap",
+    "capture",
+    "tamagui",
+    "ui",
+    "components",
+    "frontend"
+  ],
+  "type": "feature",
+  "prerequisites": [
+    "features/synap/tech-stack"
+  ]
+}

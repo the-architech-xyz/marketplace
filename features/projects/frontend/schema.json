@@ -1,0 +1,29 @@
+{
+  "id": "features/projects/frontend",
+  "name": "Projects Frontend",
+  "description": "Frontend UI components for Projects feature (works with any UI library)",
+  "version": "1.0.0",
+  "category": "frontend-feature",
+  "provides": [
+    "projects-ui",
+    "project-list-component",
+    "project-card-component",
+    "project-form-component"
+  ],
+  "role": "frontend-feature",
+  "pattern": "custom-logic",
+  "blueprint": "./blueprint.ts",
+  "dependencies": [
+    "features/projects/tech-stack"
+  ],
+  "tags": [
+    "projects",
+    "ui",
+    "components",
+    "frontend"
+  ],
+  "type": "feature",
+  "prerequisites": [
+    "features/projects/tech-stack"
+  ]
+}

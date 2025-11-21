@@ -1,68 +1,12 @@
 /**
- * Web3 Feature (Shadcn)
+ * features/web3/shadcn
  * 
- * Complete Web3 wallet connection and blockchain interaction UI using Shadcn components
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
-export interface FeaturesWeb3ShadcnParams {
-  /** Constitutional Architecture features configuration */
-  features?: {
+export interface FeaturesWeb3ShadcnParams {}
 
-    /** Enable wallet connection UI */
-    walletConnect?: boolean;
-
-    /** Enable network switching UI */
-    networkSwitch?: boolean;
-
-    /** Enable transaction history UI */
-    transactionHistory?: boolean;
-
-    /** Enable token balances UI */
-    tokenBalances?: boolean;
-
-    /** Enable NFT gallery UI */
-    nftGallery?: boolean;
-
-    /** Enable wallet connection UI */
-    walletConnection?: boolean;
-
-    /** Enable DeFi integration UI */
-    defiIntegration?: boolean;
-
-    /** Enable staking interface UI */
-    stakingInterface?: boolean;
-  };
-
-  /** UI theme variant */
-  theme?: string;
-}
-
-export interface FeaturesWeb3ShadcnFeatures {
-
-  /** Enable wallet connection UI */
-  walletConnect: boolean;
-
-  /** Enable network switching UI */
-  networkSwitch: boolean;
-
-  /** Enable transaction history UI */
-  transactionHistory: boolean;
-
-  /** Enable token balances UI */
-  tokenBalances: boolean;
-
-  /** Enable NFT gallery UI */
-  nftGallery: boolean;
-
-  /** Enable wallet connection UI */
-  walletConnection: boolean;
-
-  /** Enable DeFi integration UI */
-  defiIntegration: boolean;
-
-  /** Enable staking interface UI */
-  stakingInterface: boolean;
-}
+export interface FeaturesWeb3ShadcnFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesWeb3ShadcnArtifacts: {

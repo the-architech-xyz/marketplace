@@ -1,56 +1,12 @@
 /**
- * Architech Welcome Tech-Stack
+ * features/architech-welcome
  * 
- * Framework-agnostic welcome page logic and data extraction
+ * Auto-generated feature types with Constitutional Architecture support
  */
 
-export interface FeaturesArchitechWelcomeParams {
-  /** Constitutional Architecture features configuration */
-  features?: {
+export interface FeaturesArchitechWelcomeParams {}
 
-    /** Show technology stack visualization */
-    techStack?: boolean;
-
-    /** Show interactive component library showcase */
-    componentShowcase?: boolean;
-
-    /** Show project structure and architecture */
-    projectStructure?: boolean;
-
-    /** Show quick start guide */
-    quickStart?: boolean;
-
-    /** Show Architech branding and links */
-    architechBranding?: boolean;
-  };
-
-  /** Custom welcome page title */
-  customTitle?: string;
-
-  /** Custom welcome page description */
-  customDescription?: string;
-
-  /** Primary color theme for the welcome page */
-  primaryColor?: string;
-}
-
-export interface FeaturesArchitechWelcomeFeatures {
-
-  /** Show technology stack visualization */
-  techStack: boolean;
-
-  /** Show interactive component library showcase */
-  componentShowcase: boolean;
-
-  /** Show project structure and architecture */
-  projectStructure: boolean;
-
-  /** Show quick start guide */
-  quickStart: boolean;
-
-  /** Show Architech branding and links */
-  architechBranding: boolean;
-}
+export interface FeaturesArchitechWelcomeFeatures {}
 
 // 🚀 Auto-discovered artifacts with ownership info
 export declare const FeaturesArchitechWelcomeArtifacts: {

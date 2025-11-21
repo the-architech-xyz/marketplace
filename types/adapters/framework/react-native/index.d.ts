@@ -1,25 +1,10 @@
 /**
- * React Native
+ * framework/react-native
  * 
- * A framework for building native apps using React
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface FrameworkReactNativeParams {
-
-  /** Enable TypeScript support */
-  typescript?: boolean;
-
-  /** Use src/ directory */
-  srcDir?: boolean;
-
-  /** Import alias for absolute imports */
-  importAlias?: string;
-
-  /** React version to use */
-  reactVersion?: string;
-
-  platforms: any;
-}
+export interface FrameworkReactNativeParams {}
 
 export interface FrameworkReactNativeFeatures {}
 

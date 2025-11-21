@@ -24,7 +24,7 @@ export default function generateBlueprint(
     // Create NextJS-specific Sentry configuration files
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}sentry.client.config.ts',
+      path: '${paths.apps.web.app}sentry.client.config.ts',
       template: 'templates/sentry-api.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -33,7 +33,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}sentry.server.config.ts',
+      path: '${paths.apps.web.app}sentry.server.config.ts',
       template: 'templates/sentry-api.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -42,7 +42,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}sentry.edge.config.ts',
+      path: '${paths.apps.web.app}sentry.edge.config.ts',
       template: 'templates/sentry-api.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -51,7 +51,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.middleware}sentry.ts',
+      path: '${paths.apps.web.middleware}sentry.ts',
       template: 'templates/sentry-types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -62,7 +62,7 @@ export default function generateBlueprint(
     // Create NextJS-specific monitoring hooks using existing templates
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-sentry.ts',
+      path: '${paths.packages.shared.src.hooks}use-sentry.ts',
       template: 'templates/use-sentry.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -71,7 +71,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-error-tracking.ts',
+      path: '${paths.packages.shared.src.hooks}use-error-tracking.ts',
       template: 'templates/use-error-tracking.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -80,7 +80,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-performance-monitoring.ts',
+      path: '${paths.packages.shared.src.hooks}use-performance-monitoring.ts',
       template: 'templates/use-performance-monitoring.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -89,7 +89,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.hooks}use-user-feedback.ts',
+      path: '${paths.packages.shared.src.hooks}use-user-feedback.ts',
       template: 'templates/use-user-feedback.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,

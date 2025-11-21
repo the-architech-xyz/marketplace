@@ -39,32 +39,32 @@ export function extractModuleId(
   const pathParts = filePath.split('/').filter(part => part.length > 0);
   
   if (type === 'adapter') {
-    // adapters/auth/better-auth/adapter.json -> auth/better-auth
-    // Expected path: adapters/[category]/[provider]/adapter.json
+    // adapters/auth/better-auth/schema.json -> auth/better-auth
+    // Expected path: adapters/[category]/[provider]/schema.json
     if (pathParts.length < 3 || pathParts[0] !== 'adapters') {
       return null;
     }
-    // Skip 'adapters' prefix and 'adapter.json' suffix
+    // Skip 'adapters' prefix and 'schema.json' suffix
     return pathParts.slice(1, -1).join('/');
   } 
   
   if (type === 'connector') {
-    // connectors/auth/better-auth-nextjs/connector.json -> connectors/auth/better-auth-nextjs
-    // Expected path: connectors/[category]/[name]/connector.json
+    // connectors/auth/better-auth-nextjs/schema.json -> connectors/auth/better-auth-nextjs
+    // Expected path: connectors/[category]/[name]/schema.json
     if (pathParts.length < 3 || pathParts[0] !== 'connectors') {
       return null;
     }
-    // Keep 'connectors/' prefix, skip 'connector.json' suffix
+    // Keep 'connectors/' prefix, skip 'schema.json' suffix
     return `connectors/${pathParts.slice(1, -1).join('/')}`;
   } 
   
   if (type === 'feature') {
-    // features/auth/frontend/feature.json -> features/auth/frontend
-    // Expected path: features/[capability]/[layer]/feature.json
+    // features/auth/frontend/schema.json -> features/auth/frontend
+    // Expected path: features/[capability]/[layer]/schema.json
     if (pathParts.length < 3 || pathParts[0] !== 'features') {
       return null;
     }
-    // Keep 'features/' prefix, skip 'feature.json' suffix
+    // Keep 'features/' prefix, skip 'schema.json' suffix
     return `features/${pathParts.slice(1, -1).join('/')}`;
   }
   
@@ -78,6 +78,23 @@ export function extractModuleId(
  * @returns Object with moduleId and type, or null if path is invalid
  */
 export function extractModuleIdAuto(filePath: string): { moduleId: string; type: 'adapter' | 'connector' | 'feature' } | null {
+  // All modules use schema.json, infer type from directory structure
+  if (filePath.includes('/adapters/')) {
+    const moduleId = extractModuleId(filePath, 'adapter');
+    return moduleId ? { moduleId, type: 'adapter' as const } : null;
+  }
+  
+  if (filePath.includes('/connectors/')) {
+    const moduleId = extractModuleId(filePath, 'connector');
+    return moduleId ? { moduleId, type: 'connector' as const } : null;
+  }
+  
+  if (filePath.includes('/features/')) {
+    const moduleId = extractModuleId(filePath, 'feature');
+    return moduleId ? { moduleId, type: 'feature' as const } : null;
+  }
+  
+  // Fallback: check for old file names (backward compatibility)
   if (filePath.includes('/adapter.json')) {
     const moduleId = extractModuleId(filePath, 'adapter');
     return moduleId ? { moduleId, type: 'adapter' as const } : null;

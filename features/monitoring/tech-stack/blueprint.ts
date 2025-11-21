@@ -25,7 +25,7 @@ export default function generateBlueprint(
   // Types - Re-exported from contract (single source of truth)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/monitoring/types.ts',
+    path: '${paths.packages.shared.src}monitoring/types.ts',
     content: `/**
  * Monitoring Types
  * Re-exported from contract for convenience
@@ -46,7 +46,7 @@ export type {
   // Schemas - Zod validation schemas
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/monitoring/schemas.ts',
+    path: '${paths.packages.shared.src}monitoring/schemas.ts',
     template: 'templates/schemas.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -57,7 +57,7 @@ export type {
   // Stores - Zustand state management
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/monitoring/stores.ts',
+    path: '${paths.packages.shared.src}monitoring/stores.ts',
     template: 'templates/stores.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -72,7 +72,7 @@ export type {
   // Index file for easy imports
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/monitoring/index.ts',
+    path: '${paths.packages.shared.src}monitoring/index.ts',
     template: 'templates/index.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -87,7 +87,7 @@ export type {
   // README for the tech stack layer
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/monitoring/README.md',
+    path: '${paths.packages.shared.src}monitoring/README.md',
     content: `# Monitoring Feature - Technology Stack Layer
 
 This directory contains the technology-agnostic stack layer for the Monitoring feature. These files provide consistent types, validation, data fetching, and state management across all implementations.

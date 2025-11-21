@@ -1,0 +1,45 @@
+{
+  "id": "connectors/ui/tamagui-nextjs",
+  "name": "Tamagui + Next.js Connector",
+  "description": "Tamagui UI integration for Next.js applications with SSR support",
+  "type": "connector",
+  "version": "1.0.0",
+  "role": "framework-wiring-connector",
+  "pattern": "infrastructure",
+  "connects": [
+    "ui/tamagui",
+    "framework/nextjs"
+  ],
+  "provides": [
+    "tamagui-nextjs",
+    "tamagui-ssr",
+    "tamagui-provider",
+    "tamagui-config"
+  ],
+  "requires": [
+    "framework/nextjs",
+    "ui/tamagui"
+  ],
+  "parameters": {
+    "ssr": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable server-side rendering support"
+    },
+    "disableRootFontFamily": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable Tamagui root font family injection"
+    }
+  },
+  "prerequisites": [
+    "adapters/framework/nextjs",
+    "adapters/ui/tamagui"
+  ],
+  "dependencies": {
+    "required": ["ui"],
+    "framework": {
+      "nextjs": ["next", "react", "react-dom"]
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "id": "features/projects/backend/nextjs",
+  "name": "Projects Backend (Next.js)",
+  "description": "Backend API routes for Projects feature using Next.js",
+  "type": "feature",
+  "version": "1.0.0",
+  "provides": [
+    "projects-api",
+    "projects-crud",
+    "projects-generation"
+  ],
+  "role": "backend-feature",
+  "pattern": "custom-logic",
+  "blueprint": "./blueprint.ts",
+  "dependencies": [
+    "database/drizzle",
+    "features/projects/database/drizzle",
+    "features/projects/tech-stack",
+    "jobs/bullmq"
+  ],
+  "contract": {
+    "hooks": {
+      "useProjects": {
+        "parameters": [],
+        "returnType": "{\n    // Query operations\n    list: (filters?: ProjectFilters) => any; // UseQueryResult<Project[], Error>\n    get: (id: string) => any; // UseQueryResult<Project, Error>\n    getByOrganization: (organizationId: string) => any; // UseQueryResult<Project[], Error>\n    getByTeam: (teamId: string) => any; // UseQueryResult<Project[], Error>\n    \n    // Mutation operations\n    create: any; // UseMutationResult<ProjectResult, Error, CreateProjectData>\n    update: any; // UseMutationResult<ProjectResult, Error, { id: string; data: UpdateProjectData }>\n    delete: any; // UseMutationResult<void, Error, string>\n    duplicate: any; // UseMutationResult<ProjectResult, Error, string>\n  }",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useGeneration": {
+        "parameters": [],
+        "returnType": "{\n    // Query operations\n    getStatus: (projectId: string) => any; // UseQueryResult<ProjectGeneration, Error>\n    getProgress: (projectId: string) => any; // UseQueryResult<number, Error>\n    \n    // Mutation operations\n    generate: any; // UseMutationResult<GenerateProjectResult, Error, GenerateProjectData>\n    cancel: any; // UseMutationResult<void, Error, string>\n  }",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      },
+      "useSharing": {
+        "parameters": [],
+        "returnType": "{\n    // Query operations\n    getSharedWith: (projectId: string) => any; // UseQueryResult<{ users: string[]; teams: string[]; organizations: string[] }, Error>\n    \n    // Mutation operations\n    share: any; // UseMutationResult<void, Error, { projectId: string; userIds?: string[]; teamIds?: string[] }>\n    unshare: any; // UseMutationResult<void, Error, { projectId: string; userIds?: string[]; teamIds?: string[] }>\n    updateVisibility: any; // UseMutationResult<ProjectResult, Error, { projectId: string; visibility: ProjectVisibility }>\n  }",
+        "isAsync": true,
+        "isMutation": true,
+        "isQuery": true
+      }
+    },
+    "types": {
+      "ProjectStatus": {
+        "definition": "'draft' | 'generating' | 'ready' | 'error'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "ProjectVisibility": {
+        "definition": "'private' | 'team' | 'organization'",
+        "isEnum": false,
+        "isInterface": false,
+        "isTypeAlias": true
+      },
+      "Project": {
+        "definition": "export interface Project {\n  id: string;\n  name: string;\n  description?: string;\n  userId: string;\n  organizationId?: string;\n  teamId?: string;\n  genomeJson: string;\n  status: ProjectStatus;\n  version: string;\n  visibility: ProjectVisibility;\n  metadata?: {\n    framework?: string;\n    structure?: string;\n    modules?: string[];\n    generatedAt?: string;\n    generatedUrl?: string;\n    errorMessage?: string;\n    [key: string]: any;\n  };\n  createdAt: string;\n  updatedAt: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ProjectGeneration": {
+        "definition": "export interface ProjectGeneration {\n  id: string;\n  projectId: string;\n  status: ProjectStatus;\n  jobId?: string;\n  startedAt?: string;\n  completedAt?: string;\n  errorMessage?: string;\n  progress?: number;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "CreateProjectData": {
+        "definition": "export interface CreateProjectData {\n  name: string;\n  description?: string;\n  genomeJson: string;\n  organizationId?: string;\n  teamId?: string;\n  visibility?: ProjectVisibility;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "UpdateProjectData": {
+        "definition": "export interface UpdateProjectData {\n  name?: string;\n  description?: string;\n  genomeJson?: string;\n  visibility?: ProjectVisibility;\n  metadata?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "GenerateProjectData": {
+        "definition": "export interface GenerateProjectData {\n  projectId: string;\n  regenerate?: boolean;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ProjectResult": {
+        "definition": "export interface ProjectResult {\n  project: Project;\n  success: boolean;\n  message?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "GenerateProjectResult": {
+        "definition": "export interface GenerateProjectResult {\n  project: Project;\n  generation: ProjectGeneration;\n  success: boolean;\n  message?: string;\n  jobId?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ProjectFilters": {
+        "definition": "export interface ProjectFilters {\n  status?: ProjectStatus[];\n  organizationId?: string;\n  teamId?: string;\n  visibility?: ProjectVisibility[];\n  search?: string;\n  createdAfter?: string;\n  createdBefore?: string;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ProjectsError": {
+        "definition": "export interface ProjectsError {\n  code: string;\n  message: string;\n  type: 'validation_error' | 'permission_error' | 'not_found_error' | 'generation_error';\n  field?: string;\n  details?: Record<string, any>;\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "ProjectsConfig": {
+        "definition": "export interface ProjectsConfig {\n  features: {\n    generation: boolean;\n    sharing: boolean;\n    versioning: boolean;\n    analytics: boolean;\n  };\n  limits: {\n    maxProjectsPerUser: number;\n    maxProjectsPerOrganization: number;\n    maxGenomeSize: number;\n  };\n  generation: {\n    timeout: number;\n    maxRetries: number;\n    webhookUrl?: string;\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      },
+      "IProjectsService": {
+        "definition": "export interface IProjectsService {\n  useProjects: () => {\n    list: (filters?: ProjectFilters) => any;\n    get: (id: string) => any;\n    getByOrganization: (organizationId: string) => any;\n    getByTeam: (teamId: string) => any;\n    create: any;\n    update: any;\n    delete: any;\n    duplicate: any;\n  };\n  useGeneration: () => {\n    getStatus: (projectId: string) => any;\n    getProgress: (projectId: string) => any;\n    generate: any;\n    cancel: any;\n  };\n  useSharing: () => {\n    getSharedWith: (projectId: string) => any;\n    share: any;\n    unshare: any;\n    updateVisibility: any;\n  };\n}",
+        "isEnum": false,
+        "isInterface": true,
+        "isTypeAlias": false
+      }
+    }
+  },
+  "prerequisites": [
+    "adapters/framework/nextjs",
+    "features/projects/tech-stack"
+  ]
+}

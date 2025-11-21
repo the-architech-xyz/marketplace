@@ -40,7 +40,7 @@ export default function generateBlueprint(
   // Generate tRPC client setup
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/trpc/client.ts',
+    path: '${paths.packages.shared.src}trpc/client.ts',
     template: 'templates/client.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -51,7 +51,7 @@ export default function generateBlueprint(
   // Generate tRPC React hooks
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/trpc/react.tsx',
+    path: '${paths.packages.shared.src}trpc/react.tsx',
     template: 'templates/react.tsx.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -62,7 +62,7 @@ export default function generateBlueprint(
   // Generate tRPC Provider component
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/trpc/Provider.tsx',
+    path: '${paths.packages.shared.src}trpc/Provider.tsx',
     template: 'templates/Provider.tsx.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -73,7 +73,7 @@ export default function generateBlueprint(
   // Generate server-side tRPC client (for SSR)
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/trpc/server.ts',
+    path: '${paths.packages.shared.src}trpc/server.ts',
     template: 'templates/server.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,

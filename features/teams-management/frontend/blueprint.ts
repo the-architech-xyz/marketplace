@@ -50,7 +50,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Core Team Pages (only existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}(dashboard)/teams/page.tsx',
+      path: '${paths.apps.web.app}(dashboard)/teams/page.tsx',
       template: 'ui/teams-management/teams-page.tsx.tpl',
       context: { 
         features: ['core'],
@@ -65,7 +65,7 @@ function generateCoreActions(): BlueprintAction[] {
     // Core Team Components (only existing templates)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}teams/TeamsList.tsx',
+      path: '${paths.apps.web.components}teams/TeamsList.tsx',
       template: 'ui/teams-management/TeamsList.tsx.tpl',
       context: { 
         features: ['core'],
@@ -79,7 +79,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}teams/CreateTeamForm.tsx',
+      path: '${paths.apps.web.components}teams/CreateTeamForm.tsx',
       template: 'ui/teams-management/CreateTeamForm.tsx.tpl',
       context: { 
         features: ['core'],
@@ -93,7 +93,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}teams/MemberManagement.tsx',
+      path: '${paths.apps.web.components}teams/MemberManagement.tsx',
       template: 'ui/teams-management/MemberManagement.tsx.tpl',
       context: { 
         features: ['core'],
@@ -107,7 +107,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}teams/TeamSettings.tsx',
+      path: '${paths.apps.web.components}teams/TeamSettings.tsx',
       template: 'ui/teams-management/TeamSettings.tsx.tpl',
       context: { 
         features: ['core'],
@@ -121,7 +121,7 @@ function generateCoreActions(): BlueprintAction[] {
 
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}teams/TeamsDashboard.tsx',
+      path: '${paths.apps.web.components}teams/TeamsDashboard.tsx',
       template: 'ui/teams-management/TeamsDashboard.tsx.tpl',
       context: { 
         features: ['core'],
@@ -144,7 +144,7 @@ function generateAdvancedActions(): BlueprintAction[] {
     /*
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}(dashboard)/teams/settings/page.tsx',
+      path: '${paths.apps.web.app}(dashboard)/teams/settings/page.tsx',
       template: 'ui/teams-management/team-settings-page.tsx.tpl',
       context: { 
         features: ['advanced'],
@@ -166,7 +166,7 @@ function generateAnalyticsActions(): BlueprintAction[] {
     /*
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}teams/TeamMetrics.tsx',
+      path: '${paths.apps.web.components}teams/TeamMetrics.tsx',
       template: 'ui/teams-management/TeamMetrics.tsx.tpl',
       context: { 
         features: ['analytics'],
@@ -188,7 +188,7 @@ function generateBillingActions(): BlueprintAction[] {
     /*
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.components}teams/BillingDashboard.tsx',
+      path: '${paths.apps.web.components}teams/BillingDashboard.tsx',
       template: 'ui/teams-management/BillingDashboard.tsx.tpl',
       context: { 
         features: ['billing'],

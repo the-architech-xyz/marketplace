@@ -208,8 +208,17 @@ class FeatureManifestGenerator {
     const implementations: FeatureImplementation[] = [];
     const entries = await fs.readdir(implDir, { withFileTypes: true });
 
+    let hasDirectory = false;
+    let hasModuleFiles = false;
+
     for (const entry of entries) {
-      if (!entry.isDirectory()) continue;
+      if (!entry.isDirectory()) {
+        if (['feature.json', 'capability.json', 'integration.json', 'package.json', 'blueprint.ts', 'blueprint.js'].includes(entry.name)) {
+          hasModuleFiles = true;
+        }
+        continue;
+      }
+      hasDirectory = true;
 
       const implPath = path.join(implDir, entry.name);
       const moduleId = `features/${featureId}/${type}/${entry.name}`;
@@ -222,30 +231,82 @@ class FeatureManifestGenerator {
       }
     }
 
+    if (!hasDirectory && hasModuleFiles) {
+      const moduleId = `features/${featureId}/${type}`;
+      try {
+        const impl = await this.analyzeImplementation(moduleId, implDir, type);
+        implementations.push(impl);
+      } catch (error) {
+        console.warn(`⚠️  Skipping implementation ${moduleId}: ${error}`);
+      }
+    }
+
+    if (hasDirectory && hasModuleFiles) {
+      const moduleId = `features/${featureId}/${type}`;
+      try {
+        const impl = await this.analyzeImplementation(moduleId, implDir, type);
+        implementations.push(impl);
+      } catch (error) {
+        console.warn(`⚠️  Skipping implementation ${moduleId}: ${error}`);
+      }
+    }
+
     return implementations;
   }
 
   private async scanLegacyImplementations(featureId: string, featurePath: string): Promise<FeatureImplementation[]> {
     const implementations: FeatureImplementation[] = [];
-    const entries = await fs.readdir(featurePath, { withFileTypes: true });
+    const ignoreDirs = new Set(['templates', 'overrides']);
 
-    for (const entry of entries) {
-      if (!entry.isDirectory()) continue;
-      if (entry.name === 'backend' || entry.name === 'frontend') continue;
-      // Skip templates directory - it's not an implementation
-      if (entry.name === 'templates') continue;
+    const tryAddImplementation = async (relativeParts: string[], currentPath: string) => {
+      if (relativeParts.length === 0) {
+        return;
+      }
 
-      const implPath = path.join(featurePath, entry.name);
-      const moduleId = `features/${featureId}/${entry.name}`;
+      if (ignoreDirs.has(relativeParts[relativeParts.length - 1]!)) {
+        return;
+      }
 
-      // Try to determine if this is a frontend or backend implementation
-      const type = await this.determineImplementationType(implPath);
-      
+      const moduleId = `features/${featureId}/${relativeParts.join('/')}`;
+      if (implementations.some(impl => impl.moduleId === moduleId)) {
+        return;
+      }
+
+      const implType = await this.determineImplementationType(currentPath);
       try {
-        const impl = await this.analyzeImplementation(moduleId, implPath, type);
+        const impl = await this.analyzeImplementation(moduleId, currentPath, implType);
         implementations.push(impl);
       } catch (error) {
         console.warn(`⚠️  Skipping legacy implementation ${moduleId}: ${error}`);
+      }
+    };
+
+    const walk = async (currentPath: string, relativeParts: string[]): Promise<void> => {
+      const entries = await fs.readdir(currentPath, { withFileTypes: true });
+
+      await tryAddImplementation(relativeParts, currentPath);
+
+      for (const entry of entries) {
+        if (!entry.isDirectory()) continue;
+        if (entry.name === 'backend' || entry.name === 'frontend') continue;
+        if (ignoreDirs.has(entry.name)) continue;
+
+        await walk(path.join(currentPath, entry.name), [...relativeParts, entry.name]);
+      }
+    };
+
+    await walk(featurePath, []);
+
+    if (implementations.length === 0) {
+      const moduleId = `features/${featureId}`;
+      if (!implementations.some(impl => impl.moduleId === moduleId)) {
+        const implType = await this.determineImplementationType(featurePath);
+        try {
+          const impl = await this.analyzeImplementation(moduleId, featurePath, implType);
+          implementations.push(impl);
+        } catch (error) {
+          console.warn(`⚠️  Skipping legacy implementation ${moduleId}: ${error}`);
+        }
       }
     }
 
@@ -416,7 +477,11 @@ class FeatureManifestGenerator {
       }
     }
 
-    // Default to frontend for legacy implementations
+    // Fallback: inspect path segments
+    const segments = implPath.split(path.sep);
+    if (segments.includes('backend')) return 'backend';
+    if (segments.includes('frontend')) return 'frontend';
+
     return 'frontend';
   }
 
@@ -530,20 +595,20 @@ class FeatureManifestGenerator {
 // EXECUTION
 // ============================================================================
 
-async function main() {
-  try {
-    const generator = new FeatureManifestGenerator();
-    await generator.generateAllManifests();
-    process.exit(0);
-  } catch (error) {
-    console.error('❌ Manifest generation failed:', error);
-    process.exit(1);
-  }
+export async function generateFeatureManifests(): Promise<void> {
+  const generator = new FeatureManifestGenerator();
+  await generator.generateAllManifests();
 }
 
-// Run if called directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  main();
+if (process.argv[1]) {
+  const executedFromCli =
+    path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+  if (executedFromCli) {
+    generateFeatureManifests().catch(error => {
+      console.error('❌ Manifest generation failed:', error);
+      process.exit(1);
+    });
+  }
 }
 
 export { FeatureManifestGenerator };

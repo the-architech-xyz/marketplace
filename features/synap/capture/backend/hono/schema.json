@@ -1,0 +1,22 @@
+{
+  "id": "features/synap/capture/backend/hono",
+  "name": "Synap Capture Backend (Hono)",
+  "description": "Backend API endpoints for Synap Capture feature",
+  "type": "feature",
+  "version": "1.0.0",
+  "provides": [
+    "synap-capture-api",
+    "synap-capture-endpoints"
+  ],
+  "role": "backend-feature",
+  "pattern": "custom-logic",
+  "blueprint": "./blueprint.ts",
+  "dependencies": [
+    "database/drizzle",
+    "jobs/inngest"
+  ],
+  "prerequisites": [
+    "adapters/framework/hono",
+    "features/synap/tech-stack"
+  ]
+}

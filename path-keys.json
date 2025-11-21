@@ -1,0 +1,543 @@
+{
+  "version": "2.0.0",
+  "marketplace": "core",
+  "pathKeys": [
+    {
+      "key": "workspace.root",
+      "description": "Workspace root directory",
+      "required": true,
+      "structure": "both",
+      "defaultValue": "./",
+      "computed": false,
+      "group": "workspace"
+    },
+    {
+      "key": "workspace.scripts",
+      "description": "Workspace scripts directory",
+      "required": true,
+      "structure": "both",
+      "defaultValue": "./scripts/",
+      "computed": false,
+      "group": "workspace"
+    },
+    {
+      "key": "workspace.docs",
+      "description": "Workspace documentation directory",
+      "required": false,
+      "structure": "both",
+      "defaultValue": "./docs/",
+      "computed": false,
+      "group": "workspace"
+    },
+    {
+      "key": "workspace.env",
+      "description": "Workspace environment file",
+      "required": false,
+      "structure": "both",
+      "defaultValue": "./.env",
+      "computed": false,
+      "group": "workspace"
+    },
+    {
+      "key": "workspace.config",
+      "description": "Workspace configuration directory",
+      "required": false,
+      "structure": "both",
+      "defaultValue": "./config/",
+      "computed": false,
+      "group": "workspace"
+    },
+    {
+      "key": "apps.web.root",
+      "description": "Web app root directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "web-app"
+    },
+    {
+      "key": "apps.web.src",
+      "description": "Web app source directory",
+      "required": true,
+      "structure": "both",
+      "computed": true,
+      "group": "web-app"
+    },
+    {
+      "key": "apps.web.app",
+      "description": "Next.js app directory (App Router)",
+      "required": true,
+      "structure": "both",
+      "computed": true,
+      "group": "web-app"
+    },
+    {
+      "key": "apps.web.components",
+      "description": "Web app React components directory",
+      "required": true,
+      "structure": "both",
+      "computed": true,
+      "group": "web-app"
+    },
+    {
+      "key": "apps.web.public",
+      "description": "Web app public assets directory",
+      "required": false,
+      "structure": "both",
+      "defaultValue": "./public/",
+      "computed": true,
+      "group": "web-app"
+    },
+    {
+      "key": "apps.web.middleware",
+      "description": "Web app middleware directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "web-app"
+    },
+    {
+      "key": "apps.web.server",
+      "description": "Web app server-side code directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "web-app"
+    },
+    {
+      "key": "apps.web.collections",
+      "description": "Web app CMS collections directory (Payload, etc.)",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "web-app"
+    },
+    {
+      "key": "apps.api.root",
+      "description": "API app root directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "api-app"
+    },
+    {
+      "key": "apps.api.src",
+      "description": "API app source directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "api-app"
+    },
+    {
+      "key": "apps.api.routes",
+      "description": "API app routes directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "api-app"
+    },
+    {
+      "key": "apps.mobile.root",
+      "description": "Mobile app root directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "mobile-app"
+    },
+    {
+      "key": "apps.mobile.src",
+      "description": "Mobile app source directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "mobile-app"
+    },
+    {
+      "key": "apps.mobile.components",
+      "description": "Mobile app React components directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "mobile-app"
+    },
+    {
+      "key": "apps.all.root",
+      "description": "All apps root directory (semantic category - resolves to all apps)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": "all",
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.all.src",
+      "description": "All apps source directory (semantic category)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": "all",
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.all.components",
+      "description": "All apps components directory (semantic category)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": "all",
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.all.app",
+      "description": "All apps app directory (semantic category - Next.js only)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": "all",
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.all.middleware",
+      "description": "All apps middleware directory (semantic category - Next.js only)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": "all",
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.frontend.root",
+      "description": "Frontend apps root directory (semantic category - resolves to web + mobile)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": ["web", "mobile"],
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.frontend.src",
+      "description": "Frontend apps source directory (semantic category)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": ["web", "mobile"],
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.frontend.components",
+      "description": "Frontend apps components directory (semantic category)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": ["web", "mobile"],
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.frontend.app",
+      "description": "Frontend apps app directory (semantic category - Next.js only)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": ["web", "mobile"],
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.frontend.middleware",
+      "description": "Frontend apps middleware directory (semantic category - Next.js only)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": ["web", "mobile"],
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.backend.root",
+      "description": "Backend apps root directory (semantic category - resolves to api)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": ["api"],
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.backend.src",
+      "description": "Backend apps source directory (semantic category)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": ["api"],
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.backend.routes",
+      "description": "Backend apps routes directory (semantic category)",
+      "required": false,
+      "structure": "monorepo",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": ["api"],
+      "group": "semantic-apps"
+    },
+    {
+      "key": "apps.backend.api",
+      "description": "Backend API routes directory (semantic category - resolves to apps.api.routes or apps.web.app/api based on project structure)",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": ["api", "web"],
+      "resolutionStrategy": {
+        "priority": ["api", "web"],
+        "fallback": "web"
+      },
+      "group": "semantic-backend"
+    },
+    {
+      "key": "apps.backend.server",
+      "description": "Backend server-side code directory (semantic category - resolves to apps.api.src or apps.web.server based on project structure)",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "semantic": true,
+      "resolveToApps": ["api", "web"],
+      "resolutionStrategy": {
+        "priority": ["api", "web"],
+        "fallback": "web"
+      },
+      "group": "semantic-backend"
+    },
+    {
+      "key": "packages.shared.root",
+      "description": "Shared package root directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.shared.src",
+      "description": "Shared package source directory",
+      "required": true,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.shared.src.components",
+      "description": "Shared React components",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.shared.src.hooks",
+      "description": "Shared React hooks",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.shared.src.providers",
+      "description": "Shared React providers",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.shared.src.stores",
+      "description": "Shared state stores (Zustand, etc.)",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.shared.src.types",
+      "description": "Shared TypeScript types",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.shared.src.utils",
+      "description": "Shared utility functions",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.shared.src.scripts",
+      "description": "Shared scripts",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.shared.src.routes",
+      "description": "Shared route components (for multi-app routing)",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.shared.src.jobs",
+      "description": "Shared background jobs (Inngest, BullMQ, etc.)",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.database.root",
+      "description": "Database package root directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.database.src",
+      "description": "Database package source directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.ui.root",
+      "description": "UI package root directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.ui.src",
+      "description": "UI package source directory",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "shared-packages"
+    },
+    {
+      "key": "packages.{packageName}.root",
+      "description": "Package root directory (dynamic)",
+      "required": true,
+      "structure": "monorepo",
+      "defaultValue": "packages/{packageName}/",
+      "computed": false,
+      "variables": ["packageName"],
+      "group": "packages"
+    },
+    {
+      "key": "packages.{packageName}.src",
+      "description": "Package source directory (dynamic)",
+      "required": true,
+      "structure": "monorepo",
+      "defaultValue": "packages/{packageName}/src/",
+      "computed": false,
+      "variables": ["packageName"],
+      "group": "packages"
+    },
+    {
+      "key": "apps.{appId}.root",
+      "description": "App root directory (dynamic)",
+      "required": true,
+      "structure": "monorepo",
+      "defaultValue": "apps/{appId}/",
+      "computed": false,
+      "variables": ["appId"],
+      "group": "apps"
+    },
+    {
+      "key": "apps.{appId}.src",
+      "description": "App source directory (dynamic)",
+      "required": true,
+      "structure": "monorepo",
+      "defaultValue": "apps/{appId}/src/",
+      "computed": false,
+      "variables": ["appId"],
+      "group": "apps"
+    },
+    {
+      "key": "apps.{appId}.components",
+      "description": "App components directory (framework-specific)",
+      "required": false,
+      "structure": "monorepo",
+      "defaultValue": {
+        "nextjs": "apps/{appId}/src/components/",
+        "expo": "apps/{appId}/components/"
+      },
+      "computed": true,
+      "variables": ["appId"],
+      "group": "apps"
+    },
+    {
+      "key": "apps.{appId}.app",
+      "description": "Next.js app directory (App Router) - dynamic",
+      "required": false,
+      "structure": "monorepo",
+      "defaultValue": "apps/{appId}/src/app/",
+      "computed": false,
+      "variables": ["appId"],
+      "group": "apps"
+    },
+    {
+      "key": "ui.framework",
+      "description": "Active UI framework identifier (e.g., shadcn, tamagui, tailwind)",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "ui"
+    },
+    {
+      "key": "ui.marketplace",
+      "description": "Resolved UI marketplace path on disk (set by CLI)",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "group": "ui"
+    },
+    {
+      "key": "ui.path",
+      "description": "Legacy UI marketplace path key (backwards compatibility)",
+      "required": false,
+      "structure": "both",
+      "computed": true,
+      "deprecated": true,
+      "replacement": "ui.marketplace",
+      "group": "ui"
+    }
+  ],
+  "groups": {
+    "workspace": ["workspace.*"],
+    "web-app": ["apps.web.*"],
+    "api-app": ["apps.api.*"],
+    "semantic-apps": ["apps.frontend.*", "apps.backend.*", "apps.all.*"],
+    "semantic-backend": ["apps.backend.api", "apps.backend.server"],
+    "shared-packages": ["packages.shared.*", "packages.database.*", "packages.ui.*"],
+    "ui": ["ui.*"]
+  }
+}
+
+
+

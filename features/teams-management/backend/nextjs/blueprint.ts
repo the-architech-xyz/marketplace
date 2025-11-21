@@ -8,10 +8,10 @@ export default function generateBlueprint(
   const { params, features } = extractTypedModuleParameters(config);
 
   return [
-    // Create teams API routes
+    // Create teams API routes - BACKEND API (resolves to apps.api.routes or apps.web.app/api)
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/teams/route.ts',
+      path: '${paths.apps.backend.api}teams/route.ts',
       template: 'templates/api-teams-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -20,7 +20,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/teams/[id]/route.ts',
+      path: '${paths.apps.backend.api}teams/[id]/route.ts',
       template: 'templates/api-team-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -29,7 +29,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/teams/[id]/members/route.ts',
+      path: '${paths.apps.backend.api}teams/[id]/members/route.ts',
       template: 'templates/api-members-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -38,7 +38,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/teams/[id]/invites/route.ts',
+      path: '${paths.apps.backend.api}teams/[id]/invites/route.ts',
       template: 'templates/api-invites-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -47,7 +47,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.app_root}api/teams/[id]/analytics/route.ts',
+      path: '${paths.apps.backend.api}teams/[id]/analytics/route.ts',
       template: 'templates/api-analytics-route.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

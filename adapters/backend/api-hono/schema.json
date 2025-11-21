@@ -1,0 +1,48 @@
+{
+  "id": "api-hono",
+  "name": "Hono API",
+  "description": "Lightweight API framework optimized for Edge Functions",
+  "category": "backend",
+  "version": "1.0.0",
+  "role": "adapter",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "provides": [
+    "api-core",
+    "api-edge-runtime",
+    "api-middleware"
+  ],
+  "capabilities": {
+    "api": {
+      "version": "1.0.0",
+      "description": "Fast HTTP API framework",
+      "provides": [
+        "http-server",
+        "edge-runtime",
+        "middleware",
+        "routing"
+      ]
+    }
+  },
+  "parameters": {
+    "mode": {
+      "type": "string",
+      "default": "standalone",
+      "description": "Backend deployment mode",
+      "required": false,
+      "options": [
+        "standalone",
+        "vercel-edge",
+        "both"
+      ]
+    },
+    "port": {
+      "type": "number",
+      "default": 3001,
+      "description": "Port for standalone server",
+      "required": false
+    }
+  },
+  "constraints": {}
+}
+

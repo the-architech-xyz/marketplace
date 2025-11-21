@@ -1,23 +1,10 @@
 /**
- * Tailwind CSS
+ * ui/tailwind
  * 
- * Utility-first CSS framework with plugins and optimizations
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface UiTailwindParams {
-
-  /** Enable @tailwindcss/typography plugin */
-  typography?: boolean;
-
-  /** Enable @tailwindcss/forms plugin */
-  forms?: boolean;
-
-  /** Enable @tailwindcss/aspect-ratio plugin */
-  aspectRatio?: boolean;
-
-  /** Enable dark mode support */
-  darkMode?: boolean;
-}
+export interface UiTailwindParams {}
 
 export interface UiTailwindFeatures {}
 

@@ -1,50 +1,12 @@
 /**
- * TanStack Query
+ * data-fetching/tanstack-query
  * 
- * Powerful data synchronization for React applications with caching, background updates, and optimistic updates
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface DataFetchingTanstackQueryParams {
+export interface DataFetchingTanstackQueryParams {}
 
-  /** Enable TanStack Query DevTools */
-  devtools?: boolean;
-
-  /** Default query and mutation options */
-  defaultOptions?: Record<string, any>;
-
-  /** Enable Suspense mode for queries */
-  suspense?: boolean;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Basic query and mutation functionality */
-    core?: boolean;
-
-    /** Infinite scrolling and pagination support */
-    infinite?: boolean;
-
-    /** Optimistic UI updates for better UX */
-    optimistic?: boolean;
-
-    /** Offline-first data synchronization */
-    offline?: boolean;
-  };
-}
-
-export interface DataFetchingTanstackQueryFeatures {
-
-  /** Basic query and mutation functionality */
-  core: boolean;
-
-  /** Infinite scrolling and pagination support */
-  infinite: boolean;
-
-  /** Optimistic UI updates for better UX */
-  optimistic: boolean;
-
-  /** Offline-first data synchronization */
-  offline: boolean;
-}
+export interface DataFetchingTanstackQueryFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const DataFetchingTanstackQueryArtifacts: {

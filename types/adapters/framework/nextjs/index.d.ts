@@ -1,74 +1,12 @@
 /**
- * Next.js
+ * framework/nextjs
  * 
- * The React Framework for Production
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface FrameworkNextjsParams {
+export interface FrameworkNextjsParams {}
 
-  /** Enable TypeScript support */
-  typescript?: boolean;
-
-  /** Enable Tailwind CSS */
-  tailwind?: boolean;
-
-  /** Enable ESLint */
-  eslint?: boolean;
-
-  /** Use App Router (recommended) */
-  appRouter?: boolean;
-
-  /** Use src/ directory */
-  srcDir?: boolean;
-
-  /** Import alias for absolute imports */
-  importAlias?: string;
-
-  /** React version to use (18 for Radix UI compatibility, 19 for latest, or specify exact version like '18.2.0') */
-  reactVersion?: string;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Enable SEO optimization features */
-    seo?: boolean;
-
-    /** Enable Next.js image optimization */
-    imageOptimization?: boolean;
-
-    /** Enable MDX support for markdown content */
-    mdx?: boolean;
-
-    /** Enable performance optimization features */
-    performance?: boolean;
-
-    /** Enable streaming features */
-    streaming?: boolean;
-
-    /** Enable internationalization features */
-    i18n?: boolean;
-  };
-}
-
-export interface FrameworkNextjsFeatures {
-
-  /** Enable SEO optimization features */
-  seo: boolean;
-
-  /** Enable Next.js image optimization */
-  imageOptimization: boolean;
-
-  /** Enable MDX support for markdown content */
-  mdx: boolean;
-
-  /** Enable performance optimization features */
-  performance: boolean;
-
-  /** Enable streaming features */
-  streaming: boolean;
-
-  /** Enable internationalization features */
-  i18n: boolean;
-}
+export interface FrameworkNextjsFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const FrameworkNextjsArtifacts: {

@@ -1,62 +1,12 @@
 /**
- * Sentry Core (Tech-Agnostic)
+ * observability/sentry
  * 
- * Tech-agnostic Sentry types and utilities. Framework-specific implementations handled by Connectors.
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface ObservabilitySentryParams {
+export interface ObservabilitySentryParams {}
 
-  /** Sentry DSN (or set SENTRY_DSN env var) */
-  dsn?: string;
-
-  /** Environment name */
-  environment?: string;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Essential monitoring (error tracking, basic performance) */
-    core?: boolean;
-
-    /** Error tracking and reporting */
-    errorTracking?: boolean;
-
-    /** Advanced performance monitoring */
-    performance?: boolean;
-
-    /** Custom alerts and dashboard */
-    alerts?: boolean;
-
-    /** Enterprise features (profiling, custom metrics) */
-    enterprise?: boolean;
-
-    /** Session replay for debugging */
-    replay?: boolean;
-  };
-
-  /** Release version */
-  release?: string;
-}
-
-export interface ObservabilitySentryFeatures {
-
-  /** Essential monitoring (error tracking, basic performance) */
-  core: boolean;
-
-  /** Error tracking and reporting */
-  errorTracking: boolean;
-
-  /** Advanced performance monitoring */
-  performance: boolean;
-
-  /** Custom alerts and dashboard */
-  alerts: boolean;
-
-  /** Enterprise features (profiling, custom metrics) */
-  enterprise: boolean;
-
-  /** Session replay for debugging */
-  replay: boolean;
-}
+export interface ObservabilitySentryFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const ObservabilitySentryArtifacts: {

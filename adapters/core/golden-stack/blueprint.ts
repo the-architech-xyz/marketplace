@@ -60,7 +60,7 @@ function generateZustandActions(zustandParams: any): BlueprintAction[] {
   actions.push(
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.stores}/create-store.ts',
+      path: '${paths.packages.shared.src.stores}/create-store.ts',
       template: 'templates/zustand/create-store.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -69,7 +69,7 @@ function generateZustandActions(zustandParams: any): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.stores}/index.ts',
+      path: '${paths.packages.shared.src.stores}/index.ts',
       template: 'templates/zustand/index.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -78,7 +78,7 @@ function generateZustandActions(zustandParams: any): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.stores}/store-types.ts',
+      path: '${paths.packages.shared.src.stores}/store-types.ts',
       template: 'templates/zustand/store-types.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -87,7 +87,7 @@ function generateZustandActions(zustandParams: any): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.stores}/use-store.ts',
+      path: '${paths.packages.shared.src.stores}/use-store.ts',
       template: 'templates/zustand/use-store.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -96,7 +96,7 @@ function generateZustandActions(zustandParams: any): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.providers}/StoreProvider.tsx',
+      path: '${paths.packages.shared.src.providers}/StoreProvider.tsx',
       template: 'templates/zustand/StoreProvider.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -105,7 +105,7 @@ function generateZustandActions(zustandParams: any): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.stores}/use-app-store.ts',
+      path: '${paths.packages.shared.src.stores}/use-app-store.ts',
       template: 'templates/zustand/use-app-store.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -114,7 +114,7 @@ function generateZustandActions(zustandParams: any): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.stores}/use-ui-store.ts',
+      path: '${paths.packages.shared.src.stores}/use-ui-store.ts',
       template: 'templates/zustand/use-ui-store.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -127,7 +127,7 @@ function generateZustandActions(zustandParams: any): BlueprintAction[] {
   if (zustandParams?.persistence) {
     actions.push({
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.stores}/middleware/persistence.ts',
+      path: '${paths.packages.shared.src.stores}/middleware/persistence.ts',
       template: 'templates/zustand/persistence.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -139,7 +139,7 @@ function generateZustandActions(zustandParams: any): BlueprintAction[] {
   // Conditional: Middleware
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.stores}/middleware.ts',
+    path: '${paths.packages.shared.src.stores}/middleware.ts',
     template: 'templates/zustand/middleware.ts.tpl',
     conflictResolution: {
       strategy: ConflictResolutionStrategy.SKIP,
@@ -327,7 +327,7 @@ coverage
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}/lint-staged.js',
+      path: '${paths.workspace.scripts}/lint-staged.js',
       template: 'templates/eslint/lint-staged.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -336,7 +336,7 @@ coverage
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}/eslint-fix.js',
+      path: '${paths.workspace.scripts}/eslint-fix.js',
       template: 'templates/eslint/eslint-fix.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -430,7 +430,7 @@ yarn.lock
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}/format-all.js',
+      path: '${paths.workspace.scripts}/format-all.js',
       template: 'templates/prettier/format-all.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -439,7 +439,7 @@ yarn.lock
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.scripts}/format-staged.js',
+      path: '${paths.workspace.scripts}/format-staged.js',
       template: 'templates/prettier/format-staged.js.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

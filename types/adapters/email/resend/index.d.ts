@@ -1,47 +1,12 @@
 /**
- * Resend Email Service
+ * email/resend
  * 
- * Modern email API for transactional emails with Resend
+ * Auto-generated adapter types with Constitutional Architecture support
  */
 
-export interface EmailResendParams {
+export interface EmailResendParams {}
 
-  /** Resend API key (or set RESEND_API_KEY env var) */
-  apiKey?: string;
-
-  /** Default from email address (or set FROM_EMAIL env var) */
-  fromEmail?: string;
-  /** Constitutional Architecture features configuration */
-  features?: {
-
-    /** Essential email functionality (sending, basic templates) */
-    core?: boolean;
-
-    /** Advanced email template system */
-    templates?: boolean;
-
-    /** Email analytics and tracking */
-    analytics?: boolean;
-
-    /** Batch sending and campaign management */
-    campaigns?: boolean;
-  };
-}
-
-export interface EmailResendFeatures {
-
-  /** Essential email functionality (sending, basic templates) */
-  core: boolean;
-
-  /** Advanced email template system */
-  templates: boolean;
-
-  /** Email analytics and tracking */
-  analytics: boolean;
-
-  /** Batch sending and campaign management */
-  campaigns: boolean;
-}
+export interface EmailResendFeatures {}
 
 // 🚀 Auto-discovered artifacts
 export declare const EmailResendArtifacts: {

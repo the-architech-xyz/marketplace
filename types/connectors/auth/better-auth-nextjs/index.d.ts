@@ -1,26 +1,10 @@
 /**
- * Better Auth + Next.js Connector
+ * connectors/auth/better-auth-nextjs
  * 
- * Complete Better Auth integration for Next.js applications with React hooks
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
-export interface ConnectorsAuthBetterAuthNextjsParams {
-
-  /** Enable email verification */
-  emailVerification?: boolean;
-
-  /** Enabled OAuth providers */
-  oauthProviders?: string[];
-
-  /** Enable two-factor authentication */
-  twoFactor?: boolean;
-
-  /** Enable organization support */
-  organizations?: boolean;
-
-  /** Enable team support */
-  teams?: boolean;
-}
+export interface ConnectorsAuthBetterAuthNextjsParams {}
 
 export interface ConnectorsAuthBetterAuthNextjsFeatures {}
 

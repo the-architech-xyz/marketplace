@@ -1,23 +1,10 @@
 /**
- * TanStack Query NextJS Connector
+ * connectors/infrastructure/tanstack-query-nextjs
  * 
- * TanStack Query setup and configuration for NextJS applications
+ * Auto-generated connector types with Constitutional Architecture support
  */
 
-export interface ConnectorsInfrastructureTanstackQueryNextjsParams {
-
-  /** SSR support for TanStack Query */
-  ssr?: boolean;
-
-  /** Client-side hydration support */
-  hydration?: boolean;
-
-  /** Error boundary for query errors */
-  errorBoundary?: boolean;
-
-  /** TanStack Query DevTools integration */
-  devtools?: boolean;
-}
+export interface ConnectorsInfrastructureTanstackQueryNextjsParams {}
 
 export interface ConnectorsInfrastructureTanstackQueryNextjsFeatures {}
 

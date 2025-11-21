@@ -14,7 +14,7 @@ export default function generateBlueprint(
 
   actions.push({
     type: BlueprintActionType.CREATE_FILE,
-    path: '${paths.lib}/revenuecat/config.ts',
+    path: '${paths.packages.shared.src}revenuecat/config.ts',
     template: 'templates/config.ts.tpl',
     conflictResolution: { strategy: ConflictResolutionStrategy.SKIP, priority: 0 }
   });

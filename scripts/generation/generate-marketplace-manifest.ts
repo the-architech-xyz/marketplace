@@ -11,6 +11,43 @@
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import { glob } from 'glob';
+import { collectTemplatesForModule, resolveBlueprintForModule, toPosixPath } from '../lib/manifest.js';
+
+const MARKETPLACE_ROOT = process.cwd();
+
+/**
+ * Normalize provides field to string array
+ */
+function normalizeProvides(provides: any): string[] {
+  if (Array.isArray(provides)) {
+    // If array of objects with 'name' property, extract names
+    if (provides.length > 0 && typeof provides[0] === 'object' && 'name' in provides[0]) {
+      return provides.map((p: any) => p.name || p).filter(Boolean);
+    }
+    // If array of strings, return as-is
+    return provides.filter((p: any) => typeof p === 'string');
+  }
+
+  // Handle old format: { authentication: { provides: [...] } }
+  if (typeof provides === 'object' && provides !== null) {
+    const normalized: string[] = [];
+    for (const [key, value] of Object.entries(provides)) {
+      if (typeof value === 'object' && value !== null && 'provides' in value) {
+        const nestedProvides = (value as any).provides;
+        if (Array.isArray(nestedProvides)) {
+          normalized.push(...nestedProvides);
+        } else {
+          normalized.push(key);
+        }
+      } else {
+        normalized.push(key);
+      }
+    }
+    return normalized;
+  }
+
+  return [];
+}
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -41,36 +78,50 @@ interface EnhancedMarketplaceManifest {
 }
 
 interface ModuleEntry {
-    id: string;
+  id: string;
   name: string;
   description: string;
   category: string;
   type: 'adapter' | 'connector' | 'feature';
-    version: string;
-  
+  version: string;
+
   // Relationships
   requires?: string[];
   provides?: string[];
   connects?: string[];
-    dependencies?: string[];
+  dependencies?: string[];
+  prerequisites?: string[];  // V2: Module dependencies
   requiresCapabilities?: Array<{
     category: string;
     optional: boolean;
     reason: string;
   }>;
-  
+
   // Metadata
-    tags?: string[];
+  tags?: string[];
   complexity?: 'simple' | 'intermediate' | 'advanced';
-  role?: string;           // NEW: Architectural role
-  pattern?: string;        // NEW: Architectural pattern
-  
+  role?: string;
+  pattern?: string;
+
   // Parameters
   parameters?: Record<string, any>;
-  
-  // Paths
-  blueprint: string;
-  jsonFile: string;
+
+  // Marketplace + paths
+  marketplace: {
+    name: string;
+  };
+  source: {
+    root: string;
+    marketplace: string;
+  };
+  manifest: {
+    file: string;
+  };
+  blueprint: {
+    file: string;
+    runtime: 'source' | 'compiled';
+  };
+  templates: string[];
 }
 
 interface GenomeEntry {
@@ -250,7 +301,7 @@ async function generateEnhancedManifest(): Promise<void> {
   try {
     // Process Adapters
     console.log('📦 Processing adapters...');
-    const adapterFiles = await glob('adapters/**/adapter.json', { cwd: process.cwd() });
+    const adapterFiles = await glob('adapters/**/schema.json', { cwd: process.cwd() });
     for (const file of adapterFiles) {
       const moduleEntry = await processModuleFile(file, 'adapter');
       if (moduleEntry) {
@@ -261,7 +312,7 @@ async function generateEnhancedManifest(): Promise<void> {
 
     // Process Connectors
     console.log('🔗 Processing connectors...');
-    const connectorFiles = await glob('connectors/**/connector.json', { cwd: process.cwd() });
+    const connectorFiles = await glob('connectors/**/schema.json', { cwd: process.cwd() });
     for (const file of connectorFiles) {
       const moduleEntry = await processModuleFile(file, 'connector');
       if (moduleEntry) {
@@ -341,6 +392,17 @@ async function processFeatureManifest(manifestPath: string): Promise<ModuleEntry
     
     // Process each implementation as a separate module entry
     for (const impl of featureManifest.implementations || []) {
+      const featureJsonPath = path.join(MARKETPLACE_ROOT, impl.moduleId, 'feature.json');
+      let featureData: any = {};
+      
+      // Try to load actual feature.json to get prerequisites
+      try {
+        const featureJsonContent = await fs.readFile(featureJsonPath, 'utf-8');
+        featureData = JSON.parse(featureJsonContent);
+      } catch {
+        // Feature.json doesn't exist, use manifest data only
+      }
+      
       const entry: ModuleEntry = {
         id: impl.moduleId,
         name: `${featureManifest.name} (${impl.type})`,
@@ -348,23 +410,44 @@ async function processFeatureManifest(manifestPath: string): Promise<ModuleEntry
         category: 'features',
         type: 'feature',
         version: featureManifest.version || '1.0.0',
-        
-        // Dependencies from implementation
+        marketplace: { name: 'core' },
+        source: {
+          root: impl.moduleId,
+          marketplace: 'core'
+        },
+        manifest: {
+          file: path.posix.join(impl.moduleId, 'schema.json')
+        },
+        blueprint: await resolveBlueprintForModule(impl.moduleId, MARKETPLACE_ROOT),
+        templates: await collectTemplatesForModule(impl.moduleId, MARKETPLACE_ROOT),
         dependencies: impl.dependencies || [],
-        
-        // Feature-specific metadata
         tags: [featureManifest.id, impl.type, ...(impl.stack || [])],
-        
-        // Parameters from implementation
-        parameters: impl.parameters || {},
-        
-        // Paths
-        blueprint: `features/${featureManifest.id}/${impl.type}/${impl.moduleId.split('/').pop()}/blueprint.ts`,
-        jsonFile: manifestPath
+        parameters: impl.parameters || {}
       };
       
-      // Add feature-specific fields
-      if (impl.capabilities) entry.provides = impl.capabilities;
+      // Extract prerequisites from schema.json (V2)
+      if (featureData.prerequisites) {
+        if (Array.isArray(featureData.prerequisites)) {
+          entry.prerequisites = featureData.prerequisites;
+        } else if (typeof featureData.prerequisites === 'object') {
+          // Handle old format
+          const prereqs: string[] = [];
+          if (featureData.prerequisites.adapters && Array.isArray(featureData.prerequisites.adapters)) {
+            prereqs.push(...featureData.prerequisites.adapters.map((a: string) => 
+              a.startsWith('adapters/') ? a : `adapters/${a}`
+            ));
+          }
+          entry.prerequisites = prereqs;
+        }
+      }
+      
+      // Normalize provides
+      if (featureData.provides) {
+        entry.provides = normalizeProvides(featureData.provides);
+      } else if (impl.capabilities) {
+        entry.provides = normalizeProvides(impl.capabilities);
+      }
+      
       if (impl.constraints) entry.complexity = 'intermediate';
       
       entries.push(entry);
@@ -388,49 +471,76 @@ async function processModuleFile(
   try {
     const content = await fs.readFile(filePath, 'utf-8');
     const data = JSON.parse(content);
-    
-    // Extract category from path
+
     const pathParts = filePath.split('/');
     const categoryIndex = type === 'adapter' ? 1 : type === 'connector' ? 1 : 1;
-    const category = pathParts[categoryIndex] || 'uncategorized';
-    
-    // Build module ID from path
+    const category = data.category || pathParts[categoryIndex] || 'uncategorized';
+
     let moduleId: string;
     if (type === 'adapter') {
-      // adapters/framework/nextjs/adapter.json -> framework/nextjs
       moduleId = pathParts.slice(1, -1).join('/');
     } else if (type === 'connector') {
-      // connectors/tanstack-query-nextjs/connector.json -> connectors/tanstack-query-nextjs
       moduleId = `connectors/${pathParts.slice(1, -1).join('/')}`;
     } else {
-      // features/auth/tech-stack/feature.json -> features/auth/tech-stack
       moduleId = pathParts.slice(0, -1).join('/');
     }
-    
-    // Build blueprint path (assume blueprint.ts in same directory)
-    const blueprintPath = filePath.replace(/(adapter|connector|feature)\.json$/, 'blueprint.ts');
-    
+
+    const moduleDir = path.posix.dirname(filePath);
+    const blueprintInfo = await resolveBlueprintForModule(moduleDir, MARKETPLACE_ROOT);
+    const templates = await collectTemplatesForModule(moduleDir, MARKETPLACE_ROOT);
+
     const moduleEntry: ModuleEntry = {
       id: moduleId,
       name: data.name || moduleId,
       description: data.description || '',
-      category: data.category || category,
+      category,
       type,
       version: data.version || '1.0.0',
-      blueprint: blueprintPath,
-      jsonFile: filePath
+      marketplace: { name: 'core' },
+      source: {
+        root: moduleDir,
+        marketplace: 'core'
+      },
+      manifest: {
+        file: filePath
+      },
+      blueprint: blueprintInfo,
+      templates
     };
-    
-    // Add optional fields
+
     if (data.requires) moduleEntry.requires = data.requires;
-    if (data.provides) moduleEntry.provides = data.provides;
+    
+    // Normalize provides field (V2: should be string[])
+    if (data.provides) {
+      moduleEntry.provides = normalizeProvides(data.provides);
+    } else if (data.capabilities) {
+      // Extract provides from capabilities if provides not present
+      moduleEntry.provides = normalizeProvides(data.capabilities);
+    }
+    
     if (data.connects) moduleEntry.connects = data.connects;
     if (data.dependencies) moduleEntry.dependencies = data.dependencies;
+    
+    // Extract prerequisites (V2)
+    if (data.prerequisites) {
+      if (Array.isArray(data.prerequisites)) {
+        moduleEntry.prerequisites = data.prerequisites;
+      } else if (typeof data.prerequisites === 'object') {
+        // Handle old format: { capabilities: [...], adapters: [...] }
+        const prereqs: string[] = [];
+        if (data.prerequisites.adapters && Array.isArray(data.prerequisites.adapters)) {
+          prereqs.push(...data.prerequisites.adapters.map((a: string) => 
+            a.startsWith('adapters/') ? a : `adapters/${a}`
+          ));
+        }
+        moduleEntry.prerequisites = prereqs;
+      }
+    }
+    
     if (data.requiresCapabilities) moduleEntry.requiresCapabilities = data.requiresCapabilities;
     if (data.tags) moduleEntry.tags = data.tags;
     if (data.parameters) moduleEntry.parameters = data.parameters;
-    
-    // Infer complexity from module metadata
+
     if (data.complexity) {
       moduleEntry.complexity = data.complexity;
     } else if (moduleEntry.parameters && Object.keys(moduleEntry.parameters).length > 10) {
@@ -440,7 +550,7 @@ async function processModuleFile(
     } else {
       moduleEntry.complexity = 'simple';
     }
-    
+
     return moduleEntry;
   } catch (error) {
     console.warn(`   ⚠️  Failed to process ${filePath}:`, error);

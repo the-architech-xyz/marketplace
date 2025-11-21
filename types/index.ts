@@ -5,11 +5,11 @@
  * It re-exports from all type modules.
  */
 
-// Re-export genome types (includes ModuleId, ModuleParameters, Genome, TypedGenomeModule, TypedGenome)
-export * from './genome-types.js';
+// Re-export shared helpers (defineGenome, Module, etc.)
+export { defineGenome } from '@thearchitech.xyz/types';
 
-// Re-export defineGenome function
-export * from './define-genome.js';
+// Re-export genome-specific marketplace types (ModuleId, ModuleParameters, etc.)
+export * from './genome-types.js';
 
 // Re-export capability types
 export * from './capability-types.js';

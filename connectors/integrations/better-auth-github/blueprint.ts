@@ -20,61 +20,61 @@ export const betterAuthGitHubConnectorBlueprint: Blueprint = {
     // Create OAuth configuration
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/auth/github-oauth-config.ts',
+      path: '${paths.packages.shared.src}/auth/github-oauth-config.ts',
       template: 'templates/github-oauth-config.ts.tpl',
     },
     
     // Create OAuth service
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/auth/github-oauth-service.ts',
+      path: '${paths.packages.shared.src}/auth/github-oauth-service.ts',
       template: 'templates/github-oauth-service.ts.tpl',
     },
     
     // Create token management service
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/auth/github-token-manager.ts',
+      path: '${paths.packages.shared.src}/auth/github-token-manager.ts',
       template: 'templates/github-token-manager.ts.tpl',
     },
     
     // Create API routes for OAuth flow
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}/auth/github/authorize/route.ts',
+      path: '${paths.apps.api.routes}/auth/github/authorize/route.ts',
       template: 'templates/github-authorize-route.ts.tpl',
     },
     
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}/auth/github/callback/route.ts',
+      path: '${paths.apps.api.routes}/auth/github/callback/route.ts',
       template: 'templates/github-callback-route.ts.tpl',
     },
     
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.api_routes}/auth/github/revoke/route.ts',
+      path: '${paths.apps.api.routes}/auth/github/revoke/route.ts',
       template: 'templates/github-revoke-route.ts.tpl',
     },
     
     // Create GitHub client with OAuth
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/auth/github-oauth-client.ts',
+      path: '${paths.packages.shared.src}/auth/github-oauth-client.ts',
       template: 'templates/github-oauth-client.ts.tpl',
     },
     
     // Create types
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/auth/github-oauth-types.ts',
+      path: '${paths.packages.shared.src}/auth/github-oauth-types.ts',
       template: 'templates/github-oauth-types.ts.tpl',
     },
     
     // Create main index file
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}/auth/github-oauth-index.ts',
+      path: '${paths.packages.shared.src}/auth/github-oauth-index.ts',
       template: 'templates/github-oauth-index.ts.tpl',
     },
     

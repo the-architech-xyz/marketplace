@@ -17,7 +17,7 @@ export default function generateBlueprint(
     // Enhance the core store creation with Next.js optimizations
     {
       type: BlueprintActionType.ENHANCE_FILE,
-      path: '${paths.shared_library}store/create-store.ts',
+      path: '${paths.packages.shared.src}store/create-store.ts',
       modifier: ModifierType.TS_MODULE_ENHANCER,
       fallback: EnhanceFileFallbackStrategy.SKIP,
       params: {
@@ -80,7 +80,7 @@ export function useHydration<T>(store: any) {
     // Create Next.js-specific store utilities
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}store/nextjs-utils.ts',
+      path: '${paths.packages.shared.src}store/nextjs-utils.ts',
       template: 'templates/nextjs-utils.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -91,7 +91,7 @@ export function useHydration<T>(store: any) {
     // Create Next.js-specific store provider
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}store/NextJSStoreProvider.tsx',
+      path: '${paths.packages.shared.src}store/NextJSStoreProvider.tsx',
       template: 'templates/NextJSStoreProvider.tsx.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -102,7 +102,7 @@ export function useHydration<T>(store: any) {
     // Enhance the main store index with Next.js exports
     {
       type: BlueprintActionType.ENHANCE_FILE,
-      path: '${paths.shared_library}store/index.ts',
+      path: '${paths.packages.shared.src}store/index.ts',
       modifier: ModifierType.TS_MODULE_ENHANCER,
       fallback: EnhanceFileFallbackStrategy.SKIP,
       params: {

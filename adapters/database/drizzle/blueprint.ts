@@ -22,8 +22,8 @@ export default function generateBlueprint(
 
   const actions: BlueprintAction[] = [];
   
-  // Core is always generated
-  actions.push(...generateCoreActions());
+  // Core is always generated (with provider-specific logic)
+  actions.push(...generateCoreActions(params));
   
   // Optional features based on configuration
   if (features.migrations) {
@@ -49,63 +49,129 @@ export default function generateBlueprint(
 // CORE DATABASE FEATURES (Always Generated)
 // ============================================================================
 
-function generateCoreActions(): BlueprintAction[] {
-  return [
-    // Install core packages
-    {
+function generateCoreActions(params: any): BlueprintAction[] {
+  const provider = params?.provider || 'local';
+  const databaseType = params?.databaseType || 'postgresql';
+  const isNeon = provider === 'neon';
+  const isSQLite = databaseType === 'sqlite';
+  
+  const actions: BlueprintAction[] = [];
+  
+  // Install packages based on database type and provider
+  if (isSQLite) {
+    // SQLite uses better-sqlite3
+    actions.push({
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['drizzle-orm', 'better-sqlite3']
+    });
+    actions.push({
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['@types/better-sqlite3'],
+      isDev: true
+    });
+  } else if (isNeon) {
+    // Neon uses serverless driver
+    actions.push({
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['drizzle-orm', '@neondatabase/serverless']
+    });
+  } else {
+    // Standard PostgreSQL
+    actions.push({
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['drizzle-orm', 'postgres']
-    },
-    {
+    });
+  }
+  
+  // Dev dependencies
+  if (!isSQLite) {
+    actions.push({
       type: BlueprintActionType.INSTALL_PACKAGES,
       packages: ['drizzle-kit', '@types/pg'],
       isDev: true
-    },
+    });
+  } else {
+    actions.push({
+      type: BlueprintActionType.INSTALL_PACKAGES,
+      packages: ['drizzle-kit'],
+      isDev: true
+    });
+  }
 
-    // Core database files
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}db/index.ts',
-      template: 'templates/db-index.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}db/schema.ts',
-      template: 'templates/schema.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.SKIP,
-        priority: 0
-      }
-    },
+  // Core database files - use provider/database-specific template
+  let dbIndexTemplate = 'templates/db-index.ts.tpl';
+  if (isSQLite) {
+    dbIndexTemplate = 'templates/db-index-sqlite.ts.tpl';
+  } else if (isNeon) {
+    dbIndexTemplate = 'templates/db-index-neon.ts.tpl';
+  }
+  
+  // Use database_library for database modules (targets packages/database/lib/)
+  actions.push({
+    type: BlueprintActionType.CREATE_FILE,
+    path: '${paths.packages.database.src}db/index.ts',
+    template: dbIndexTemplate,
+    conflictResolution: {
+      strategy: ConflictResolutionStrategy.SKIP,
+      priority: 0
+    }
+  });
+  
+  actions.push({
+    type: BlueprintActionType.CREATE_FILE,
+    path: '${paths.packages.database.src}db/schema.ts',
+    template: 'templates/schema.ts.tpl',
+    conflictResolution: {
+      strategy: ConflictResolutionStrategy.SKIP,
+      priority: 0
+    }
+  });
 
-    // Core configuration
-    {
-      type: BlueprintActionType.CREATE_FILE,
-      path: 'drizzle.config.ts',
-      template: 'templates/drizzle.config.ts.tpl',
-      conflictResolution: {
-        strategy: ConflictResolutionStrategy.REPLACE,
-        priority: 0
-      }
-    },
-    {
+  // Core configuration
+  let drizzleConfigTemplate = 'templates/drizzle.config.ts.tpl';
+  if (isSQLite) {
+    drizzleConfigTemplate = 'templates/drizzle.config-sqlite.ts.tpl';
+  }
+  
+  actions.push({
+    type: BlueprintActionType.CREATE_FILE,
+    path: '${paths.packages.database.root}drizzle.config.ts',
+    template: drizzleConfigTemplate,
+    conflictResolution: {
+      strategy: ConflictResolutionStrategy.REPLACE,
+      priority: 0
+    }
+  });
+  
+  // Environment variable
+  if (isSQLite) {
+    actions.push({
+      type: BlueprintActionType.ADD_ENV_VAR,
+      key: 'DATABASE_PATH',
+      value: './local.db',
+      description: 'SQLite database file path'
+    });
+  } else {
+    const defaultUrl = isNeon 
+      ? 'postgresql://user:password@host.neon.tech/dbname?sslmode=require'
+      : 'postgresql://username:password@localhost:5432/${project.name}';
+      
+    actions.push({
       type: BlueprintActionType.ADD_ENV_VAR,
       key: 'DATABASE_URL',
-      value: 'postgresql://username:password@localhost:5432/${project.name}',
+      value: defaultUrl,
       description: 'Database connection string'
-    },
+    });
+  }
 
-    // Core scripts
-    {
-      type: BlueprintActionType.ADD_SCRIPT,
-      name: 'db:generate',
-      command: 'drizzle-kit generate'
-    }
-  ];
+  // Core scripts
+  actions.push({
+    type: BlueprintActionType.ADD_SCRIPT,
+    name: 'db:generate',
+    command: 'drizzle-kit generate'
+  });
+  
+  return actions;
 }
 
 // ============================================================================
@@ -116,7 +182,7 @@ function generateMigrationsActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}db/migrate.ts',
+      path: '${paths.packages.database.src}db/migrate.ts',
       template: 'templates/migrate.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -144,7 +210,7 @@ function generateStudioActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}db/studio.ts',
+      path: '${paths.packages.database.src}db/studio.ts',
       template: 'templates/studio.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -167,7 +233,7 @@ function generateRelationsActions(): BlueprintAction[] {
   return [
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}db/relations.ts',
+      path: '${paths.packages.database.src}db/relations.ts',
       template: 'templates/relations.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -190,7 +256,7 @@ function generateSeedingActions(): BlueprintAction[] {
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: '${paths.shared_library}db/seed.ts',
+      path: '${paths.packages.database.src}db/seed.ts',
       template: 'templates/seed.ts.tpl',
       conflictResolution: {
         strategy: ConflictResolutionStrategy.SKIP,
@@ -200,7 +266,7 @@ function generateSeedingActions(): BlueprintAction[] {
     {
       type: BlueprintActionType.ADD_SCRIPT,
       name: 'db:seed',
-      command: 'tsx ${paths.shared_library}db/seed.ts'
+      command: 'tsx ${paths.packages.database.src}db/seed.ts'
     }
   ];
 }

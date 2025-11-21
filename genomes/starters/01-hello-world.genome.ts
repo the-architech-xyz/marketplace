@@ -1,5 +1,5 @@
 /**
- * HELLO WORLD STARTER
+ * HELLO WORLD STARTER - V2 Format
  * 
  * The most minimal, production-ready Next.js application.
  * Perfect for learning The Architech or starting a simple project.
@@ -9,21 +9,54 @@
  * Use Case: First-time users, prototypes, simple landing pages
  */
 
-import { defineGenome } from '@thearchitech.xyz/marketplace/types';  
+import { defineV2Genome } from '@thearchitech.xyz/types';
 
-export default defineGenome({
-  version: '1.0.0',
-  project: {
+export default defineV2Genome({
+  workspace: {
     name: 'hello-world-starter',
-    description: 'A minimal, production-ready Next.js starter',
-    version: '1.0.0',
-    framework: 'nextjs',
+    description: 'A minimal, production-ready Next.js starter'
   },
-  
-  modules: [
-    // Core Framework with React 18 for Radix UI compatibility
-    {
-      id: 'framework/nextjs',
+
+  marketplaces: {
+    official: {
+      type: 'local',
+      path: '../marketplace'
+    }
+  },
+
+  packages: {
+    // UI Library - Shadcn UI
+    ui: {
+      from: 'official',
+      provider: 'shadcn',
+      parameters: {
+        theme: 'default',
+        components: ['button', 'card', 'input', 'label']
+      }
+    },
+
+    // Welcome Screen feature (auto-included)
+    'architech-welcome': {
+      from: 'official',
+      provider: 'default',
+      parameters: {
+        features: {
+          techStack: true,
+          componentShowcase: true,
+          projectStructure: true,
+          quickStart: true,
+          architechBranding: true
+        }
+      }
+    }
+  },
+
+  apps: {
+    web: {
+      type: 'web',
+      framework: 'nextjs',
+      package: 'apps/web',
+      dependencies: ['ui', 'architech-welcome'],
       parameters: {
         typescript: true,
         tailwind: true,
@@ -31,34 +64,8 @@ export default defineGenome({
         appRouter: true,
         srcDir: true,
         importAlias: '@',
-        reactVersion: '18', // Use React 18 for Radix UI compatibility
-      },
-    },
-
-    // UI Foundation
-    {
-      id: 'ui/shadcn-ui',
-      parameters: {
-        theme: 'default',
-        components: ['button', 'card', 'input', 'label'],
-      },
-    },
-    // Quality Tools (auto-included by marketplace defaults)
-    // No need to specify - they're automatically included for all Next.js projects
-
-    // Welcome Screen
-    {
-      id: 'features/architech-welcome',
-      parameters: {
-        features: {
-          techStack: true,
-          componentShowcase: true,
-          projectStructure: true,
-          quickStart: true,
-          architechBranding: true,
-        },
-      },
-    },
-  ],
+        reactVersion: '18' // Use React 18 for Radix UI compatibility
+      }
+    }
+  }
 });
-

@@ -17,7 +17,7 @@ export default function generateBlueprint(
     // Create consolidated testing hooks
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: "${paths.hooks}use-test.ts",
+      path: "${paths.packages.shared.src.hooks}use-test.ts",
       template: "templates/use-test.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -27,7 +27,7 @@ export default function generateBlueprint(
     // Create testing API service layer
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: "${paths.shared_library}testing/api.ts",
+      path: "${paths.packages.shared.src}testing/api.ts",
       template: "templates/testing-api.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,
@@ -36,7 +36,7 @@ export default function generateBlueprint(
     },
     {
       type: BlueprintActionType.CREATE_FILE,
-      path: "${paths.shared_library}testing/types.ts",
+      path: "${paths.packages.shared.src}testing/types.ts",
       template: "templates/testing-types.ts.tpl",
       conflictResolution: {
         strategy: ConflictResolutionStrategy.REPLACE,

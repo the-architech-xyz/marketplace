@@ -1,0 +1,53 @@
+{
+  "id": "s3-compatible",
+  "name": "S3-Compatible Storage",
+  "description": "Generic S3-compatible storage adapter supporting R2, S3, MinIO, and more",
+  "category": "storage",
+  "version": "1.0.0",
+  "role": "adapter",
+  "blueprint": "blueprint.ts",
+  "dependencies": [],
+  "provides": [
+    "storage-core",
+    "storage-presigned-urls",
+    "storage-upload",
+    "storage-download"
+  ],
+  "capabilities": {
+    "storage": {
+      "version": "1.0.0",
+      "description": "S3-compatible object storage",
+      "provides": [
+        "file-upload",
+        "file-download",
+        "presigned-urls",
+        "bucket-management"
+      ]
+    }
+  },
+  "parameters": {
+    "provider": {
+      "type": "string",
+      "default": "r2",
+      "description": "Storage provider",
+      "required": false,
+      "options": [
+        "r2",
+        "s3",
+        "minio",
+        "wasabi",
+        "digitalocean"
+      ]
+    },
+    "region": {
+      "type": "string",
+      "default": "auto",
+      "description": "Storage region (auto-detect for R2)",
+      "required": false
+    }
+  },
+  "constraints": {}
+}
+
+
+

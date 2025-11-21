@@ -94,3 +94,5 @@ test-*.ts
 debug-*.js
 debug-*.ts
 genomes/test/
+dist/
+dist/**/*
