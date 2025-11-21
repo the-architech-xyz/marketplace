@@ -241,7 +241,9 @@ ${blueprintParameterTypes}
     
     // Generate capability ID union type
     const capabilityIds = Array.from(analysis.keys());
-    const capabilityIdUnion = capabilityIds.map(id => `  | '${id}'`).join('\n');
+    const capabilityIdUnion = capabilityIds.length > 0 
+      ? capabilityIds.map(id => `  | '${id}'`).join('\n')
+      : 'never';
     
     const providerUnionTypes = this.generateCapabilityProviderUnions(analysis);
 
@@ -255,8 +257,7 @@ ${blueprintParameterTypes}
 import { Genome } from '@thearchitech.xyz/types';
 
 // Capability ID union type (for strict typing)
-export type CapabilityId = 
-${capabilityIdUnion};
+export type CapabilityId = ${capabilityIdUnion === 'never' ? 'never' : `\n${capabilityIdUnion}`};
 
 // Framework parameter types (for project.apps[])
 ${frameworkTypes.frameworkInterfaces}

@@ -757,6 +757,10 @@ ${moduleParameters.join('\n')}
     
     console.log(`🔍 Generated ${moduleTypes.length} discriminated union types`);
     
+    if (moduleTypes.length === 0) {
+      return `export type TypedGenomeModule = never;`;
+    }
+    
     return `export type TypedGenomeModule = 
 ${moduleTypes.join('\n')};`;
   }
